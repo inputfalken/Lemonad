@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 
 namespace Lemonad.ErrorHandling {
@@ -13,10 +14,10 @@ namespace Lemonad.ErrorHandling {
                 : throw new ArgumentNullException(nameof(predicate));
 
         [Pure]
-        //TODO USE THIS https://stackoverflow.com/a/864860/5384895
-        public static Maybe<TSource> Some<TSource>(this TSource item) => item == null
-            ? new Maybe<TSource>(default(TSource), false)
-            : new Maybe<TSource>(item, true);
+        public static Maybe<TSource> Some<TSource>(this TSource item) =>
+            EqualityComparer<TSource>.Default.Equals(item, default(TSource))
+                ? (item == null ? Maybe<TSource>.Identity : new Maybe<TSource>(item, true))
+                : new Maybe<TSource>(item, true);
 
         [Pure]
         public static Maybe<TSource> SomeWhen<TSource>(this TSource item, Func<TSource, bool> predicate) =>
@@ -71,7 +72,7 @@ namespace Lemonad.ErrorHandling {
                 throw new ArgumentNullException(nameof(someSelector));
             if (noneSelector == null)
                 throw new ArgumentNullException(nameof(noneSelector));
-            
+
             if (source.HasValue) someSelector(source.Value);
             else noneSelector();
         }
