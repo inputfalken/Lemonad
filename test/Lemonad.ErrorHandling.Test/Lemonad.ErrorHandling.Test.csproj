@@ -12,7 +12,4 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Lemonad.ErrorHandling\Lemonad.ErrorHandling.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Either.Tests" />
-  </ItemGroup>
 </Project>

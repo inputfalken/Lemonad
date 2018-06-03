@@ -1,16 +1,18 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Lemonad.ErrorHandling {
-    public struct Either<TLeft, TRight> : IEquatable<Either<TLeft, TRight>>, IComparable<Either<TLeft, TRight>> {
-        public bool HasValue { get; }
+    public struct Either<TLeft, TRight> : IEquatable<Either<TLeft, TRight>>, IComparable<Either<TLeft, TRight>>,
+        IEnumerable<TRight> {
+        public bool IsRight { get; }
+        public bool IsLeft { get; }
 
-        internal static Either<TLeft, TRight> Identity { get; } =
-            new Either<TLeft, TRight>(default(TLeft), default(TRight), false);
 
-        internal Either(TLeft left, TRight right, bool hasValue) {
+        internal Either(TLeft left, TRight right, bool isRight) {
+            IsRight = isRight;
+            IsLeft = !isRight;
             Left = left;
-            HasValue = hasValue;
             Right = right;
         }
 
@@ -18,10 +20,10 @@ namespace Lemonad.ErrorHandling {
         internal TLeft Left { get; }
 
         public bool Equals(Either<TLeft, TRight> other) {
-            if (!HasValue && !other.HasValue)
+            if (!IsRight && !other.IsRight)
                 return EqualityComparer<TLeft>.Default.Equals(Left, other.Left);
 
-            if (HasValue && other.HasValue)
+            if (IsRight && other.IsRight)
                 return EqualityComparer<TRight>.Default.Equals(Right, other.Right);
 
             return false;
@@ -42,16 +44,25 @@ namespace Lemonad.ErrorHandling {
         public static bool operator >=(Either<TLeft, TRight> left, Either<TLeft, TRight> right) =>
             left.CompareTo(right) >= 0;
 
+        private static IEnumerable<TRight> Yield(Either<TLeft, TRight> either) {
+            if (either.IsRight)
+                yield return either.Right;
+        }
+
+        public IEnumerator<TRight> GetEnumerator() => Yield(this).GetEnumerator();
+
         public override bool Equals(object obj) => obj is Either<TLeft, TRight> option && Equals(option);
 
         public override int GetHashCode() =>
-            !HasValue ? (Left == null ? 0 : Left.GetHashCode()) : (Right == null ? 1 : Right.GetHashCode());
+            !IsRight ? (Left == null ? 0 : Left.GetHashCode()) : (Right == null ? 1 : Right.GetHashCode());
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public int CompareTo(Either<TLeft, TRight> other) {
-            if (HasValue && !other.HasValue) return 1;
-            if (!HasValue && other.HasValue) return -1;
+            if (IsRight && !other.IsRight) return 1;
+            if (!IsRight && other.IsRight) return -1;
 
-            return HasValue
+            return IsRight
                 ? Comparer<TRight>.Default.Compare(Right, other.Right)
                 : Comparer<TLeft>.Default.Compare(Left, other.Left);
         }
