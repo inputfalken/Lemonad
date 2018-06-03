@@ -7,12 +7,18 @@ namespace Lemonad.ErrorHandling {
         internal static Maybe<TSource> None<TSource>() => Maybe<TSource>.Identity;
 
         [Pure]
+        public static Maybe<TSource> NoneWhen<TSource>(this TSource item, Func<TSource, bool> predicate) =>
+            predicate != null
+                ? Some(item).SomeWhen(x => !predicate(x))
+                : throw new ArgumentNullException(nameof(predicate));
+
+        [Pure]
         public static Maybe<TSource> Some<TSource>(this TSource item) => item == null
             ? new Maybe<TSource>(default(TSource), false)
             : new Maybe<TSource>(item, true);
 
         [Pure]
-        public static Maybe<TSource> Some<TSource>(this TSource item, Func<TSource, bool> predicate) =>
+        public static Maybe<TSource> SomeWhen<TSource>(this TSource item, Func<TSource, bool> predicate) =>
             predicate != null ? Some(item).SomeWhen(predicate) : throw new ArgumentNullException(nameof(predicate));
 
         [Pure]
@@ -66,17 +72,35 @@ namespace Lemonad.ErrorHandling {
             source.HasValue ? selector(source.Value).ConvertToMaybe() : None<TResult>();
 
         [Pure]
-        public static Maybe<TResultSelector> FlatMap<TSource, TSelector, TResultSelector>(
+        public static Maybe<TResult> FlatMap<TSource, TResult>(this Maybe<TSource> source,
+            TResult? nullable) where TResult : struct => source.FlatMap(_ => nullable);
+
+        [Pure]
+        public static Maybe<TResult> FlatMap<TSource, TSelector, TResult>(this Maybe<TSource> source,
+            TSelector? nullable, Func<TSource, TSelector, TResult> resultSelector) where TSelector : struct =>
+            source.FlatMap(_ => nullable, resultSelector);
+
+        [Pure]
+        public static Maybe<TResult> FlatMap<TSource, TResult>(this Maybe<TSource> source,
+            Maybe<TResult> nullable) => source.FlatMap(_ => nullable);
+
+        [Pure]
+        public static Maybe<TResult> FlatMap<TSource, TSelector, TResult>(this Maybe<TSource> source,
+            Maybe<TSelector> nullable, Func<TSource, TSelector, TResult> resultSelector) =>
+            source.FlatMap(_ => nullable, resultSelector);
+
+        [Pure]
+        public static Maybe<TResult> FlatMap<TSource, TSelector, TResult>(
             this Maybe<TSource> source,
             Func<TSource, Maybe<TSelector>> collectionSelector,
-            Func<TSource, TSelector, TResultSelector> resultSelector) => source.FlatMap(src =>
+            Func<TSource, TSelector, TResult> resultSelector) => source.FlatMap(src =>
             collectionSelector(src).Map(elem => resultSelector(src, elem)));
 
         [Pure]
-        public static Maybe<TResultSelector> FlatMap<TSource, TSelector, TResultSelector>(
+        public static Maybe<TResult> FlatMap<TSource, TSelector, TResult>(
             this Maybe<TSource> source,
             Func<TSource, TSelector?> collectionSelector,
-            Func<TSource, TSelector, TResultSelector> resultSelector) where TSelector : struct => source.FlatMap(
+            Func<TSource, TSelector, TResult> resultSelector) where TSelector : struct => source.FlatMap(
             src => collectionSelector(src).ConvertToMaybe().Map(elem => resultSelector(src, elem)));
     }
 }
