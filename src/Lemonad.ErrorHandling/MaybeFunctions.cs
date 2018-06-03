@@ -13,6 +13,7 @@ namespace Lemonad.ErrorHandling {
                 : throw new ArgumentNullException(nameof(predicate));
 
         [Pure]
+        //TODO USE THIS https://stackoverflow.com/a/864860/5384895
         public static Maybe<TSource> Some<TSource>(this TSource item) => item == null
             ? new Maybe<TSource>(default(TSource), false)
             : new Maybe<TSource>(item, true);
