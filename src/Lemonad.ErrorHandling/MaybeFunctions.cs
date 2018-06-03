@@ -82,25 +82,25 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public static Maybe<TResult> FlatMap<TSource, TResult>(this Maybe<TSource> source,
-            Maybe<TResult> nullable) => source.FlatMap(_ => nullable);
+            Maybe<TResult> maybe) => source.FlatMap(_ => maybe);
 
         [Pure]
         public static Maybe<TResult> FlatMap<TSource, TSelector, TResult>(this Maybe<TSource> source,
-            Maybe<TSelector> nullable, Func<TSource, TSelector, TResult> resultSelector) =>
-            source.FlatMap(_ => nullable, resultSelector);
+            Maybe<TSelector> maybe, Func<TSource, TSelector, TResult> resultSelector) =>
+            source.FlatMap(_ => maybe, resultSelector);
 
         [Pure]
         public static Maybe<TResult> FlatMap<TSource, TSelector, TResult>(
             this Maybe<TSource> source,
-            Func<TSource, Maybe<TSelector>> collectionSelector,
+            Func<TSource, Maybe<TSelector>> selector,
             Func<TSource, TSelector, TResult> resultSelector) => source.FlatMap(src =>
-            collectionSelector(src).Map(elem => resultSelector(src, elem)));
+            selector(src).Map(elem => resultSelector(src, elem)));
 
         [Pure]
         public static Maybe<TResult> FlatMap<TSource, TSelector, TResult>(
             this Maybe<TSource> source,
-            Func<TSource, TSelector?> collectionSelector,
+            Func<TSource, TSelector?> selector,
             Func<TSource, TSelector, TResult> resultSelector) where TSelector : struct => source.FlatMap(
-            src => collectionSelector(src).ConvertToMaybe().Map(elem => resultSelector(src, elem)));
+            src => selector(src).ConvertToMaybe().Map(elem => resultSelector(src, elem)));
     }
 }
