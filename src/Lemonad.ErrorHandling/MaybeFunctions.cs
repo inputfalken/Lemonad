@@ -4,7 +4,7 @@ using System.Diagnostics.Contracts;
 namespace Lemonad.ErrorHandling {
     public static class Maybe {
         [Pure]
-        internal static Maybe<TSource> None<TSource>() => Maybe<TSource>.Identity;
+        public static Maybe<TSource> None<TSource>() => Maybe<TSource>.Identity;
 
         [Pure]
         public static Maybe<TSource> NoneWhen<TSource>(this TSource item, Func<TSource, bool> predicate) =>
@@ -58,10 +58,19 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public static TResult Match<TSource, TResult>(this Maybe<TSource> source, Func<TSource, TResult> someSelector,
-            Func<TResult> noneSelector) => source.HasValue ? someSelector(source.Value) : noneSelector();
+            Func<TResult> noneSelector) => someSelector == null
+            ? throw new ArgumentNullException(nameof(someSelector))
+            : (noneSelector == null
+                ? throw new ArgumentNullException(nameof(noneSelector))
+                : (source.HasValue ? someSelector(source.Value) : noneSelector()));
 
         public static void Match<TSource>(this Maybe<TSource> source, Action<TSource> someSelector,
             Action noneSelector) {
+            if (someSelector == null)
+                throw new ArgumentNullException(nameof(someSelector));
+            if (noneSelector == null)
+                throw new ArgumentNullException(nameof(noneSelector));
+            
             if (source.HasValue) someSelector(source.Value);
             else noneSelector();
         }
