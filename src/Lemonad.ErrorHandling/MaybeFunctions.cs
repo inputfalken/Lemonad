@@ -4,14 +4,7 @@ using System.Diagnostics.Contracts;
 namespace Lemonad.ErrorHandling {
     public static class Maybe {
         [Pure]
-        private static Maybe<TSource> None<TSource>() => Maybe<TSource>.Identity;
-
-        [Pure]
-        private static Maybe<TSource> None<TSource>(this TSource item, Func<TSource, bool> predicate) =>
-            Some(item, x => !predicate(x));
-
-        [Pure]
-        private static Maybe<TSource> None<TSource>(this TSource item) => new Maybe<TSource>(item, false);
+        internal static Maybe<TSource> None<TSource>() => Maybe<TSource>.Identity;
 
         [Pure]
         public static Maybe<TSource> Some<TSource>(this TSource item) => item == null
@@ -24,7 +17,7 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public static Maybe<string> NoneWhenStringIsNullOrEmpty(this string item) =>
-            None(item, string.IsNullOrEmpty);
+            Some(item).SomeWhen(x => !string.IsNullOrEmpty(x));
 
         [Pure]
         public static Maybe<string> NoneWhenStringIsNullOrEmpty(this Maybe<string> item) =>

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace Lemonad.ErrorHandling {
     public struct Maybe<T> : IEquatable<Maybe<T>>, IComparable<Maybe<T>>, IEnumerable<T> {
         public bool HasValue { get; }
@@ -10,6 +11,7 @@ namespace Lemonad.ErrorHandling {
 
         internal T Value { get; }
 
+        // TODO add IEqualityComparer ctor overload.
         internal Maybe(T value, bool hasValue) {
             Value = value;
             HasValue = hasValue;
