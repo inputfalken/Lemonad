@@ -4,11 +4,14 @@ using static Lemonad.ErrorHandling.EquailtyFunctions;
 
 namespace Lemonad.ErrorHandling {
     public static class Either {
+        
+        // Consider using Left wen right is null & if TRight also got null as default value throw ArgumentNullException 
         [Pure]
         public static Either<TLeft, TRight> Right<TLeft, TRight>(TRight right) => IsNull(right)
             ? throw new ArgumentNullException(nameof(right))
             : new Either<TLeft, TRight>(default(TLeft), right, true);
 
+        // Consider using Right when left is null & if TRight also got null as default value throw ArgumentNullException 
         [Pure]
         public static Either<TLeft, TRight> Left<TLeft, TRight>(TLeft left) => IsNull(left)
             ? throw new ArgumentNullException(nameof(left))
