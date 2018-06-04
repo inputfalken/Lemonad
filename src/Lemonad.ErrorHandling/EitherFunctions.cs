@@ -30,15 +30,11 @@ namespace Lemonad.ErrorHandling {
             source == null ? Left<TLeft, TRight>(left) : Right<TLeft, TRight>(source);
 
         [Pure]
-        public static Either<TLeft, TRight> RightWhen<TLeft, TRight>(this Either<TLeft, TRight> source,
-            Func<TRight, bool> predicate, TLeft left) {
-            return source.IsRight
-                ? (predicate(source.Right) ? Right<TLeft, TRight>(source.Right) : Left<TLeft, TRight>(left))
-                : Left<TLeft, TRight>(left);
-        }
-
-        public static Either<TLeft, TRight> RightWhen<TLeft, TRight>(this Either<TLeft, TRight> source,
-            Func<TRight, bool> predicate) => RightWhen(source, predicate, source.Left);
+        public static Either<TLeftResult, TRight> RightWhen<TLeftSource, TRight, TLeftResult>(
+            this Either<TLeftSource, TRight> source,
+            Func<TRight, bool> predicate, TLeftResult left) => source.IsRight
+            ? (predicate(source.Right) ? Right<TLeftResult, TRight>(source.Right) : Left<TLeftResult, TRight>(left))
+            : Left<TLeftResult, TRight>(left);
 
         [Pure]
         public static Either<TLeftResult, TRightResult> Map<TLeftSource, TRightSource, TLeftResult, TRightResult>(
