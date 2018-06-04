@@ -53,6 +53,10 @@ namespace Lemonad.ErrorHandling {
         public static bool operator >=(Either<TLeft, TRight> left, Either<TLeft, TRight> right) =>
             left.CompareTo(right) >= 0;
 
+        // TODO Enable when Api more extension methods are in place.
+        // public static implicit operator Either<TLeft, TRight>(TRight right) => Either.Right<TLeft, TRight>(right);
+        //public static implicit operator Either<TLeft, TRight>(TLeft left) => Either.Left<TLeft, TRight>(left);
+
         private static IEnumerable<TRight> Yield(Either<TLeft, TRight> either) {
             if (either.IsRight)
                 yield return either.Right;
