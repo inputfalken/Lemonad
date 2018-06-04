@@ -1,37 +1,38 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace Lemonad.ErrorHandling {
     public struct Either<TLeft, TRight> : IEquatable<Either<TLeft, TRight>>, IComparable<Either<TLeft, TRight>>,
         IEnumerable<TRight> {
+        private readonly TRight _right;
+        private readonly TLeft _left;
+        private readonly Lazy<TRight> _lazyRight;
+        private Lazy<TLeft> _lazyLeft;
+
+        internal Either(TLeft left, TRight right, bool isRight) {
+            IsRight = isRight;
+            IsLeft = !isRight;
+            _left = left;
+            _right = right;
+            _lazyLeft = null;
+            _lazyRight = null;
+        }
+
         public bool IsRight { get; }
         public bool IsLeft { get; }
 
-        internal Either(Func<TLeft> left, Func<TRight> right, bool? isRight) {
-            if (isRight.HasValue) {
-                IsRight = isRight.Value;
-                IsLeft = !isRight.Value;
-                IsNeither = false;
-            }
-            else {
-                IsRight = false;
-                IsLeft = false;
-                IsNeither = true;
-            }
+        public TLeft Left => _lazyLeft != null ? _lazyLeft.Value : _left;
+        public TRight Right => _lazyRight != null ? _lazyRight.Value : _right;
 
-            LazyLeft = new Lazy<TLeft>(left, LazyThreadSafetyMode.None);
-            LazyRight = new Lazy<TRight>(right, LazyThreadSafetyMode.None);
+        internal Either(Func<TLeft> left, Func<TRight> right, bool isRight) {
+            IsRight = isRight;
+            IsLeft = !isRight;
+            _right = default(TRight);
+            _left = default(TLeft);
+            _lazyRight = new Lazy<TRight>(right);
+            _lazyLeft = new Lazy<TLeft>(left);
         }
-
-        internal bool IsNeither { get; }
-
-        private Lazy<TLeft> LazyLeft { get; }
-        private Lazy<TRight> LazyRight { get; }
-
-        internal TRight Right => LazyRight.Value;
-        internal TLeft Left => LazyLeft.Value;
 
         public bool Equals(Either<TLeft, TRight> other) {
             if (!IsRight && !other.IsRight)
