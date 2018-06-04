@@ -17,17 +17,24 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
             "Since int32? is a nullable type and the predicate is false; but is excplicitly set an exception will not be thrown.")]
         public void
             Explicitly_Set_Nullable_Int_String_Either_With_Falsy_Predicate_With_Chained_RightWhen__Expects__No_Exception() {
-            var exception = Record.Exception(() =>
-                "Hello".ToEitherRight<int?, string>()
+            var exception = Record.Exception(() => {
+                var either = "Hello".ToEitherRight<int?, string>()
                     .RightWhen(s => false, 1)
-                    .RightWhen(s => false));
+                    .RightWhen(s => false);
+                Assert.True(either.IsLeft, "Should have a right value.");
+                Assert.Equal(1, either.Left);
+            });
             Assert.Null(exception);
         }
 
         [Fact]
         [Description("Since the predicate is true and we have a right value. No exception will be thrown.")]
         public void Explicitly_Set_Nullable_Int_String_Either_With_Truthy_Predicate__Expects__No_Exception() {
-            var exception = Record.Exception(() => "Hello".ToEitherRight<int?, string>().RightWhen(s => true, 1));
+            var exception = Record.Exception(() => {
+                var either = "Hello".ToEitherRight<int?, string>().RightWhen(s => true, 1);
+                Assert.True(either.IsRight, "Should have a right value.");
+                Assert.Equal("Hello", either.Right);
+            });
             Assert.Null(exception);
         }
 
@@ -42,7 +49,11 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         [Fact]
         [Description("Since the predicate is true and we have a right value. No exception will be thrown.")]
         public void Int_String_Either_With_Truthy_Predicate__Expects__Expects_No_Exception() {
-            var exception = Record.Exception(() => "Hello".ToEitherRight<int, string>().RightWhen(s => true));
+            var exception = Record.Exception(() => {
+                var either = "Hello".ToEitherRight<int, string>().RightWhen(s => true);
+                Assert.True(either.IsRight, "Should have a right value.");
+                Assert.Equal("Hello", either.Right);
+            });
             Assert.Null(exception);
         }
 
@@ -55,7 +66,11 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         [Fact]
         [Description("Since the predicate is true and we have a right value. No exception will be thrown.")]
         public void Nullable_Int_String_Either_With_Truthy_Predicate__Expects__Exception() {
-            var exception = Record.Exception(() => "Hello".ToEitherRight<int?, string>().RightWhen(s => true));
+            var exception = Record.Exception(() => {
+                var either = "Hello".ToEitherRight<int?, string>().RightWhen(s => true);
+                Assert.True(either.IsRight, "Should have a right value.");
+                Assert.Equal("Hello", either.Right);
+            });
             Assert.Null(exception);
         }
 
@@ -89,8 +104,12 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
 
         [Fact]
         public void String_String_Either_With_Truthy_Predicate__Expects_No_Exception() {
-            var exception = Record.Exception(() => "Hello".ToEitherRight<string, string>()
-                .RightWhen(s => true));
+            var exception = Record.Exception(() => {
+                var either = "Hello".ToEitherRight<string, string>()
+                    .RightWhen(s => true);
+                Assert.True(either.IsRight, "Should have a right value.");
+                Assert.Equal("Hello", either.Right);
+            });
             Assert.Null(exception);
         }
     }
