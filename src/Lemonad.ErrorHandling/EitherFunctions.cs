@@ -6,12 +6,12 @@ namespace Lemonad.ErrorHandling {
     public static class Either {
         [Pure]
         public static Either<TLeft, TRight> Right<TLeft, TRight>(TRight right) => IsNull(right)
-            ? new Either<TLeft, TRight>(default(TLeft), right, null)
+            ? throw new ArgumentNullException(nameof(right))
             : new Either<TLeft, TRight>(default(TLeft), right, true);
 
         [Pure]
         public static Either<TLeft, TRight> Left<TLeft, TRight>(TLeft left) => IsNull(left)
-            ? new Either<TLeft, TRight>(left, default(TRight), null)
+            ? throw new ArgumentNullException(nameof(left))
             : new Either<TLeft, TRight>(left, default(TRight), false);
 
         [Pure]
@@ -32,13 +32,9 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static Either<TLeft, TRight> RightWhen<TLeft, TRight>(this Either<TLeft, TRight> source,
             Func<TRight, bool> predicate, TLeft left) {
-            var either = source.IsRight
+            return source.IsRight
                 ? (predicate(source.Right) ? Right<TLeft, TRight>(source.Right) : Left<TLeft, TRight>(left))
                 : Left<TLeft, TRight>(left);
-
-            return either.IsNeither
-                ? throw new ArgumentException("Neither Property Left or Right got a has a value.")
-                : either;
         }
 
         public static Either<TLeft, TRight> RightWhen<TLeft, TRight>(this Either<TLeft, TRight> source,

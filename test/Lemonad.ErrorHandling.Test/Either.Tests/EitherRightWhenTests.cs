@@ -60,7 +60,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         [Fact]
         [Description("Since int32? is a nullable type and the predicate is false; it will throw an exception.")]
         public void Nullable_Int_String_Either_With_Falsy_Predicate__Expects__Exception() {
-            Assert.Throws<ArgumentException>(() => "Hello".ToEitherRight<int?, string>().RightWhen(s => false));
+            Assert.Throws<ArgumentNullException>(() => "Hello".ToEitherRight<int?, string>().RightWhen(s => false));
         }
 
         [Fact]
@@ -96,7 +96,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
 
         [Fact]
         public void String_String_Either_With_Falsy_Predicate__Expects_Exception() {
-            Assert.Throws<ArgumentException>(() => {
+            Assert.Throws<ArgumentNullException>(() => {
                 "Hello".ToEitherRight<string, string>()
                     .RightWhen(s => false);
             });
