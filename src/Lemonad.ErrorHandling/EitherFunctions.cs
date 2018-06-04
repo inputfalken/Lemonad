@@ -5,12 +5,12 @@ using static Lemonad.ErrorHandling.EquailtyFunctions;
 namespace Lemonad.ErrorHandling {
     public static class Either {
         [Pure]
-        private static Either<TLeft, TRight> Right<TLeft, TRight>(TRight right) => IsNull(right)
+        public static Either<TLeft, TRight> Right<TLeft, TRight>(TRight right) => IsNull(right)
             ? new Either<TLeft, TRight>(default(TLeft), right, null)
             : new Either<TLeft, TRight>(default(TLeft), right, true);
 
         [Pure]
-        private static Either<TLeft, TRight> Left<TLeft, TRight>(TLeft left) => IsNull(left)
+        public static Either<TLeft, TRight> Left<TLeft, TRight>(TLeft left) => IsNull(left)
             ? new Either<TLeft, TRight>(left, default(TRight), null)
             : new Either<TLeft, TRight>(left, default(TRight), false);
 
