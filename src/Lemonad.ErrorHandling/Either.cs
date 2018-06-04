@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Lemonad.ErrorHandling {
     public struct Either<TLeft, TRight> : IEquatable<Either<TLeft, TRight>>, IComparable<Either<TLeft, TRight>>,
         IEnumerable<TRight> {
         public bool IsRight { get; }
         public bool IsLeft { get; }
-        internal bool IsNeither { get; }
 
-        internal Either(TLeft left, TRight right, bool? isRight) {
+        internal Either(Func<TLeft> left, Func<TRight> right, bool? isRight) {
             if (isRight.HasValue) {
                 IsRight = isRight.Value;
                 IsLeft = !isRight.Value;
@@ -21,12 +21,17 @@ namespace Lemonad.ErrorHandling {
                 IsNeither = true;
             }
 
-            Left = left;
-            Right = right;
+            LazyLeft = new Lazy<TLeft>(left, LazyThreadSafetyMode.None);
+            LazyRight = new Lazy<TRight>(right, LazyThreadSafetyMode.None);
         }
 
-        internal TRight Right { get; }
-        internal TLeft Left { get; }
+        internal bool IsNeither { get; }
+
+        private Lazy<TLeft> LazyLeft { get; }
+        private Lazy<TRight> LazyRight { get; }
+
+        internal TRight Right => LazyRight.Value;
+        internal TLeft Left => LazyLeft.Value;
 
         public bool Equals(Either<TLeft, TRight> other) {
             if (!IsRight && !other.IsRight)
