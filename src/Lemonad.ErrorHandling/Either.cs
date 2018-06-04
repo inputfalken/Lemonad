@@ -7,11 +7,20 @@ namespace Lemonad.ErrorHandling {
         IEnumerable<TRight> {
         public bool IsRight { get; }
         public bool IsLeft { get; }
+        internal bool IsNeither { get; }
 
+        internal Either(TLeft left, TRight right, bool? isRight) {
+            if (isRight.HasValue) {
+                IsRight = isRight.Value;
+                IsLeft = !isRight.Value;
+                IsNeither = false;
+            }
+            else {
+                IsRight = false;
+                IsLeft = false;
+                IsNeither = true;
+            }
 
-        internal Either(TLeft left, TRight right, bool isRight) {
-            IsRight = isRight;
-            IsLeft = !isRight;
             Left = left;
             Right = right;
         }

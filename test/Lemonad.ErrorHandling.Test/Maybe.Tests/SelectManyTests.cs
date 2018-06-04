@@ -15,7 +15,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Assert.Equal(6, list[1]);
             Assert.Equal(7, list[2]);
         }
-        
+
         [Fact]
         public void Enumerable_ResultSelector_SelectMany_FlatMap_Maybe_Without_Value() {
             const string input = "hello";

@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using static Lemonad.ErrorHandling.EquailtyFunctions;
 
 namespace Lemonad.ErrorHandling {
     public static class Either {
         [Pure]
-        private static Either<TLeft, TRight> Right<TLeft, TRight>(TRight right) =>
-            new Either<TLeft, TRight>(default(TLeft), right, true);
+        private static Either<TLeft, TRight> Right<TLeft, TRight>(TRight right) => IsNull(right)
+            ? new Either<TLeft, TRight>(default(TLeft), right, null)
+            : new Either<TLeft, TRight>(default(TLeft), right, true);
 
         [Pure]
-        private static Either<TLeft, TRight> Left<TLeft, TRight>(TLeft left) =>
-            new Either<TLeft, TRight>(left, default(TRight), false);
+        private static Either<TLeft, TRight> Left<TLeft, TRight>(TLeft left) => IsNull(left)
+            ? new Either<TLeft, TRight>(left, default(TRight), null)
+            : new Either<TLeft, TRight>(left, default(TRight), false);
 
         [Pure]
         public static Either<TLeft, TRight> ToEitherRight<TLeft, TRight>(this TRight right) =>
@@ -28,18 +31,18 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public static Either<TLeft, TRight> RightWhen<TLeft, TRight>(this Either<TLeft, TRight> source,
-            Func<TRight, bool> predicate, TLeft onPredicateFailure) => source.IsRight
-            ? (predicate(source.Right)
-                ? Right<TLeft, TRight>(source.Right)
-                : Left<TLeft, TRight>(onPredicateFailure))
-            : Left<TLeft, TRight>(onPredicateFailure);
+            Func<TRight, bool> predicate, TLeft left) {
+            var either = source.IsRight
+                ? (predicate(source.Right) ? Right<TLeft, TRight>(source.Right) : Left<TLeft, TRight>(left))
+                : Left<TLeft, TRight>(left);
+
+            return either.IsNeither
+                ? throw new ArgumentException("Neither Property Left or Right got a has a value.")
+                : either;
+        }
 
         public static Either<TLeft, TRight> RightWhen<TLeft, TRight>(this Either<TLeft, TRight> source,
-            Func<TRight, bool> predicate) {
-            if (source.Left.Equals(default(TLeft)))
-                throw new ArgumentException("The either does not have a Left value.");
-            return RightWhen(source, predicate, source.Left);
-        }
+            Func<TRight, bool> predicate) => RightWhen(source, predicate, source.Left);
 
         [Pure]
         public static Either<TLeftResult, TRightResult> Map<TLeftSource, TRightSource, TLeftResult, TRightResult>(

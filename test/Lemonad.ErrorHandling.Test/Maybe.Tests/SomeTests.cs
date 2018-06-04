@@ -30,18 +30,10 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         }
 
         [Fact]
-        public void Predicate_Overload__String_With_Content__Length_Is_Greather_Than_5__Expects_HasValue_To_Be_True() {
-            var maybe = "Foobar".SomeWhen(s => s.Length > 5);
-
-            Assert.True(maybe.HasValue, "This predicate should have a value.");
-            Assert.Equal("Foobar", maybe.Value);
-        }
-
-        [Fact]
         public void Predicate_Overload__Nullable_Bool_Whose_Value_Is_Null__Expects_HasValue_To_Be_False() {
             bool? foo = null;
             var maybe = foo.SomeWhen(_ => throw new ArgumentNullException());
-            
+
             Assert.False(maybe.HasValue, "This predicate should not be evaluated.");
             Assert.Equal(default(bool?), foo);
         }
@@ -52,6 +44,14 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
                 Func<string, bool> predicate = null;
                 "foo".SomeWhen(predicate);
             });
+        }
+
+        [Fact]
+        public void Predicate_Overload__String_With_Content__Length_Is_Greather_Than_5__Expects_HasValue_To_Be_True() {
+            var maybe = "Foobar".SomeWhen(s => s.Length > 5);
+
+            Assert.True(maybe.HasValue, "This predicate should have a value.");
+            Assert.Equal("Foobar", maybe.Value);
         }
     }
 }

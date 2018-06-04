@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using static Lemonad.ErrorHandling.EquailtyFunctions;
 
 namespace Lemonad.ErrorHandling {
     public static class Maybe {
@@ -15,9 +15,7 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public static Maybe<TSource> Some<TSource>(this TSource item) =>
-            EqualityComparer<TSource>.Default.Equals(item, default(TSource))
-                ? (item == null ? Maybe<TSource>.Identity : new Maybe<TSource>(item, true))
-                : new Maybe<TSource>(item, true);
+            IsNull(item) ? Maybe<TSource>.Identity : new Maybe<TSource>(item, true);
 
         [Pure]
         public static Maybe<TSource> SomeWhen<TSource>(this TSource item, Func<TSource, bool> predicate) =>
@@ -25,11 +23,11 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public static Maybe<string> NoneWhenStringIsNullOrEmpty(this string item) =>
-            Some(item).SomeWhen(x => !string.IsNullOrEmpty(x));
+            Some(item).SomeWhen<string>(x => !string.IsNullOrEmpty(x));
 
         [Pure]
         public static Maybe<string> NoneWhenStringIsNullOrEmpty(this Maybe<string> item) =>
-            item.SomeWhen(x => !string.IsNullOrEmpty(x));
+            item.SomeWhen<string>(x => !string.IsNullOrEmpty(x));
 
         [Pure]
         public static Maybe<TSource> ConvertToMaybe<TSource>(this TSource? item) where TSource : struct =>

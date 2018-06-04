@@ -4,18 +4,6 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     public class SomWhenTests {
         [Fact]
-        public void When_Predicate_Returns_False__Maybe_Is_Expected_To_HaveValue() {
-            var noneWhen = "".SomeWhen(s => false);
-            Assert.False(noneWhen.HasValue, "Maybe should have value.");
-        }
-
-        [Fact]
-        public void When_Predicate_Returns_True__Maybe_Is_Expected_To_HaveValue() {
-            var noneWhen = "".SomeWhen(s => true);
-            Assert.True(noneWhen.HasValue, "Maybe should not have value.");
-        }
-
-        [Fact]
         public void Null_Predicate__Throws_ArgumentNullException() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, bool> predicate = null;
@@ -28,6 +16,18 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             bool? foo = null;
             Assert.False(foo.SomeWhen(_ => throw new ArgumentNullException()).HasValue,
                 "This predicate should not be evaluated.");
+        }
+
+        [Fact]
+        public void When_Predicate_Returns_False__Maybe_Is_Expected_To_HaveValue() {
+            var noneWhen = "".SomeWhen(s => false);
+            Assert.False(noneWhen.HasValue, "Maybe should have value.");
+        }
+
+        [Fact]
+        public void When_Predicate_Returns_True__Maybe_Is_Expected_To_HaveValue() {
+            var noneWhen = "".SomeWhen(s => true);
+            Assert.True(noneWhen.HasValue, "Maybe should not have value.");
         }
     }
 }
