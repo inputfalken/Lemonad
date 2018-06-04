@@ -36,10 +36,10 @@ namespace Lemonad.ErrorHandling {
 
         public bool Equals(Either<TLeft, TRight> other) {
             if (!IsRight && !other.IsRight)
-                return EqualityComparer<TLeft>.Default.Equals(_left, other._left);
+                return EqualityComparer<TLeft>.Default.Equals(Left, other.Left);
 
             if (IsRight && other.IsRight)
-                return EqualityComparer<TRight>.Default.Equals(_right, other._right);
+                return EqualityComparer<TRight>.Default.Equals(Right, other.Right);
 
             return false;
         }
@@ -65,7 +65,7 @@ namespace Lemonad.ErrorHandling {
 
         private static IEnumerable<TRight> Yield(Either<TLeft, TRight> either) {
             if (either.IsRight)
-                yield return either._right;
+                yield return either.Right;
         }
 
         public IEnumerator<TRight> GetEnumerator() => Yield(this).GetEnumerator();
@@ -73,7 +73,7 @@ namespace Lemonad.ErrorHandling {
         public override bool Equals(object obj) => obj is Either<TLeft, TRight> option && Equals(option);
 
         public override int GetHashCode() =>
-            !IsRight ? (_left == null ? 0 : _left.GetHashCode()) : (_right == null ? 1 : _right.GetHashCode());
+            !IsRight ? (Left == null ? 0 : Left.GetHashCode()) : (Right == null ? 1 : Right.GetHashCode());
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
@@ -82,8 +82,8 @@ namespace Lemonad.ErrorHandling {
             if (!IsRight && other.IsRight) return -1;
 
             return IsRight
-                ? Comparer<TRight>.Default.Compare(_right, other._right)
-                : Comparer<TLeft>.Default.Compare(_left, other._left);
+                ? Comparer<TRight>.Default.Compare(Right, other.Right)
+                : Comparer<TLeft>.Default.Compare(Left, other.Left);
         }
     }
 }

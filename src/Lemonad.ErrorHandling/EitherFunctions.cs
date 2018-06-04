@@ -43,8 +43,12 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static Either<TLeftResult, TRightResult> Map<TLeftSource, TRightSource, TLeftResult, TRightResult>(
             this Either<TLeftSource, TRightSource> source, Func<TLeftSource, TLeftResult> leftSelector,
-            Func<TRightSource, TRightResult> rightSelector) => source.IsRight
-            ? Right<TLeftResult, TRightResult>(rightSelector(source.Right))
-            : Left<TLeftResult, TRightResult>(leftSelector(source.Left));
+            Func<TRightSource, TRightResult> rightSelector) => new Either<TLeftResult, TRightResult>(
+            Compose(leftSelector, source.Left),
+            Compose(rightSelector, source.Right),
+            source.IsRight);
+
+        private static Func<TResult> Compose<TSource, TResult>(Func<TSource, TResult> fn, TSource source) =>
+            () => fn(source);
     }
 }
