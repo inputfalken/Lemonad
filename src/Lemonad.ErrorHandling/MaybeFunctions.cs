@@ -12,23 +12,33 @@ namespace Lemonad.ErrorHandling {
                 ? Some(item).SomeWhen(x => !predicate(x))
                 : throw new ArgumentNullException(nameof(predicate));
 
+        public static Maybe<TSource> NoneWhen<TSource>(this Maybe<TSource> source,
+            Func<TSource, bool> predicate) => source.SomeWhen(x => !predicate(x));
+
         [Pure]
         public static Maybe<TSource> Some<TSource>(this TSource item) => new Maybe<TSource>(item, true);
 
         [Pure]
-        public static Maybe<TSource> SomeWhen<TSource>(this TSource item, Func<TSource, bool> predicate) {
-            return predicate != null
+        public static Maybe<TSource> NoneWhenNull<TSource>(this TSource item) =>
+            item.NoneWhen(EquailtyFunctions.IsNull);
+
+        [Pure]
+        public static Maybe<TSource> NoneWhenNull<TSource>(this Maybe<TSource> item) =>
+            item.NoneWhen<TSource>(EquailtyFunctions.IsNull);
+
+        [Pure]
+        public static Maybe<TSource> SomeWhen<TSource>(this TSource item, Func<TSource, bool> predicate) =>
+            predicate != null
                 ? Some(item).SomeWhen(predicate)
                 : throw new ArgumentNullException(nameof(predicate));
-        }
 
         [Pure]
-        public static Maybe<string> NoneWhenStringIsNullOrEmpty(this string item) =>
-            Some(item).SomeWhen<string>(x => !string.IsNullOrEmpty(x));
+        public static Maybe<string> NoneWhenStringIsNullOrWhiteSpace(this string item) =>
+            Some(item).NoneWhen(string.IsNullOrWhiteSpace);
 
         [Pure]
-        public static Maybe<string> NoneWhenStringIsNullOrEmpty(this Maybe<string> item) =>
-            item.SomeWhen<string>(x => !string.IsNullOrEmpty(x));
+        public static Maybe<string> NoneWhenStringIsNullOrWhiteSpace(this Maybe<string> item) =>
+            item.NoneWhen(string.IsNullOrWhiteSpace);
 
         [Pure]
         public static Maybe<TSource> ConvertToMaybe<TSource>(this TSource? item) where TSource : struct =>
