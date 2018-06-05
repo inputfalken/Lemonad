@@ -57,11 +57,14 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static Maybe<TResult>
             Map<TSource, TResult>(this Maybe<TSource> source, Func<TSource, TResult> selector) =>
-            source.HasValue ? Some(selector(source.Value)) : None<TResult>();
+            selector != null
+                ? source.HasValue ? Some(selector(source.Value)) : None<TResult>()
+                : throw new ArgumentNullException(nameof(selector));
 
         [Pure]
         public static Maybe<TResult> FlatMap<TSource, TResult>(this Maybe<TSource> source,
             Func<TSource, Maybe<TResult>> selector) {
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
             if (!source.HasValue) return None<TResult>();
             var result = selector(source.Value);
             return result.HasValue ? Some(result.Value) : None<TResult>();
@@ -75,15 +78,15 @@ namespace Lemonad.ErrorHandling {
                 ? throw new ArgumentNullException(nameof(noneSelector))
                 : (source.HasValue ? someSelector(source.Value) : noneSelector()));
 
-        public static void Match<TSource>(this Maybe<TSource> source, Action<TSource> someSelector,
-            Action noneSelector) {
-            if (someSelector == null)
-                throw new ArgumentNullException(nameof(someSelector));
-            if (noneSelector == null)
-                throw new ArgumentNullException(nameof(noneSelector));
+        public static void Match<TSource>(this Maybe<TSource> source, Action<TSource> someAction,
+            Action noneAction) {
+            if (someAction == null)
+                throw new ArgumentNullException(nameof(someAction));
+            if (noneAction == null)
+                throw new ArgumentNullException(nameof(noneAction));
 
-            if (source.HasValue) someSelector(source.Value);
-            else noneSelector();
+            if (source.HasValue) someAction(source.Value);
+            else noneAction();
         }
 
         [Pure]
@@ -113,8 +116,12 @@ namespace Lemonad.ErrorHandling {
         public static Maybe<TResult> FlatMap<TSource, TSelector, TResult>(
             this Maybe<TSource> source,
             Func<TSource, Maybe<TSelector>> selector,
-            Func<TSource, TSelector, TResult> resultSelector) => source.FlatMap(src =>
-            selector(src).Map(elem => resultSelector(src, elem)));
+            Func<TSource, TSelector, TResult> resultSelector) =>
+            resultSelector != null
+                ? selector != null
+                    ? source.FlatMap(src => selector(src).Map(elem => resultSelector(src, elem)))
+                    : throw new ArgumentNullException(nameof(selector))
+                : throw new ArgumentNullException(nameof(resultSelector));
 
         [Pure]
         public static Maybe<TResult> FlatMap<TSource, TSelector, TResult>(

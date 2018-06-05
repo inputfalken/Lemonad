@@ -1,7 +1,32 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     public class DelegateFlatMapTests {
+        [Fact]
+        public void Passing_Null_Selector_Function__Throws_ArgumentNullException() {
+            Assert.Throws<ArgumentNullException>(() => {
+                Func<string, Maybe<bool>> function = null;
+                "foo".Some().FlatMap(function, (s, b) => s);
+            });
+        }
+
+        [Fact]
+        public void Passing_Null_ResultSelector_Function__Throws_ArgumentNullException() {
+            Assert.Throws<ArgumentNullException>(() => {
+                Func<string, string, string> function = null;
+                "foo".Some().FlatMap(s => s.Some(), function);
+            });
+        }
+        
+        [Fact]
+        public void Passing_Both_Null_ResultSelector_Function_And_SelectorFunction__Throws_ArgumentNullException() {
+            Assert.Throws<ArgumentNullException>(() => {
+                Func<string, string, string> function = null;
+                "foo".Some().FlatMap(s => s.Some(), function);
+            });
+        }
+
         [Fact]
         public void
             Flattening_From_String_Maybe_With_value_To_Nullable_Int_With_Value__Expects_String_Maybe_With_Value() {

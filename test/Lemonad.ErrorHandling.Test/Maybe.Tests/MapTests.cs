@@ -1,7 +1,16 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     public class MapTests {
+        [Fact]
+        public void Passing_Null_Function__Throws_ArgumentNullException() {
+            Assert.Throws<ArgumentNullException>(() => {
+                Func<string, bool> function = null;
+                "foo".Some().Map(function);
+            });
+        }
+
         [Fact]
         public void Mapping_Integer_With_Multiplication() {
             var maybe = 20.Some().Map(s => s * 2);

@@ -4,6 +4,14 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     public class SomeTests {
         [Fact]
+        public void Predicate_Overload__Passing_Null_Predicate__Throws_ArgumentNullException() {
+            Assert.Throws<ArgumentNullException>(() => {
+                Func<string, bool> predicate = null;
+                "foo".SomeWhen(predicate);
+            });
+        }
+
+        [Fact]
         public void Lift_Overload__Some_Should_Always_Have_Value__Except_When_Null_Is_Passed() {
             Assert.True("".Some().HasValue, "Empty string should have value if called with some");
             Assert.True(0.Some().HasValue, "Integer '0'  should have value if called with some");
@@ -39,14 +47,6 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
                 Assert.Equal(default(bool?), maybe.Value);
             });
             Assert.Null(exception);
-        }
-
-        [Fact]
-        public void Predicate_Overload__Passing_Null_Predicate__Throws_ArgumentNullException() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, bool> predicate = null;
-                "foo".SomeWhen(predicate);
-            });
         }
 
         [Fact]
