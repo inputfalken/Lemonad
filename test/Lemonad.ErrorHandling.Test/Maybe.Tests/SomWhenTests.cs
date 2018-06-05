@@ -12,22 +12,47 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         }
 
         [Fact]
-        public void Nullable_Bool_Whose_Value_Is_Null__Expects_HasValue_To_Be_False() {
-            bool? foo = null;
-            Assert.False(foo.SomeWhen(_ => throw new ArgumentNullException()).HasValue,
-                "This predicate should not be evaluated.");
-        }
-
-        [Fact]
         public void When_Predicate_Returns_False__Maybe_Is_Expected_To_HaveValue() {
-            var noneWhen = "".SomeWhen(s => false);
-            Assert.False(noneWhen.HasValue, "Maybe should have value.");
+            var maybe = string.Empty.SomeWhen(s => false);
+            Assert.False(maybe.HasValue, "Maybe should not have value.");
+            Assert.Equal(default(string), maybe.Value);
         }
 
         [Fact]
         public void When_Predicate_Returns_True__Maybe_Is_Expected_To_HaveValue() {
-            var noneWhen = "".SomeWhen(s => true);
-            Assert.True(noneWhen.HasValue, "Maybe should not have value.");
+            var maybe = "".SomeWhen(s => true);
+            Assert.True(maybe.HasValue, "Maybe should have value.");
+            Assert.Equal(string.Empty, maybe.Value);
+        }
+
+        [Fact]
+        public void When_Predicate_Checks_For_Not_Null__Using_Type_With_Value__Maybe_Is_Expected_To_HaveValue() {
+            var maybe = "foobar".SomeWhen(s => s != null);
+            Assert.True(maybe.HasValue, "Maybe should have value.");
+            Assert.Equal("foobar", maybe.Value);
+        }
+
+        [Fact]
+        public void When_Predicate_Checks_For_Null__Using_Type_With_Value__Maybe_Is_Expected_To_Not_HaveValue() {
+            var maybe = "foobar".SomeWhen(s => s == null);
+            Assert.False(maybe.HasValue, "Maybe should not have value.");
+            Assert.Equal(default(string), maybe.Value);
+        }
+
+        [Fact]
+        public void When_Predicate_Checks_For_Null__Using_Type_Without_Value__Maybe_Is_Expected_To_HaveValue() {
+            string value = null;
+            var maybe = value.SomeWhen(s => s == null);
+            Assert.True(maybe.HasValue, "Maybe should have value.");
+            Assert.Equal(default(string), maybe.Value);
+        }
+
+        [Fact]
+        public void When_Predicate_Checks_For_Not_Null__Using_Type_Without_Value__Maybe_Is_Expected_To_Not_HaveValue() {
+            string value = null;
+            var maybe = value.SomeWhen(s => s != null);
+            Assert.False(maybe.HasValue, "Maybe should not have value.");
+            Assert.Equal(default(string), maybe.Value);
         }
     }
 }

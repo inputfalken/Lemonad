@@ -9,15 +9,15 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Assert.True(0.Some().HasValue, "Integer '0'  should have value if called with some");
             Assert.True(2.5d.Some().HasValue, "Double '2.5'  should have value if called with some");
             string isNullString = null;
-            Assert.False(isNullString.Some().HasValue,
+            Assert.True(isNullString.Some().HasValue,
                 "Strings with value null should always have no value if null is passed.");
 
             int? isNullInteger = null;
-            Assert.False(isNullInteger.Some().HasValue,
+            Assert.True(isNullInteger.Some().HasValue,
                 "Nullables with value null should always have no value if null is passed.");
 
             double? isNullDouble = null;
-            Assert.False(isNullDouble.Some().HasValue,
+            Assert.True(isNullDouble.Some().HasValue,
                 "Nullables with value null should always have no value if null is passed.");
         }
 
@@ -30,12 +30,15 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         }
 
         [Fact]
-        public void Predicate_Overload__Nullable_Bool_Whose_Value_Is_Null__Expects_HasValue_To_Be_False() {
+        public void Predicate_Overload__Nullable_Bool_Whose_Value_Is_Null__Expects_HasValue_To_Be_True() {
             bool? foo = null;
-            var maybe = foo.SomeWhen(_ => throw new ArgumentNullException());
+            var exception = Record.Exception(() => {
+                var maybe = foo.SomeWhen(_ => true);
 
-            Assert.False(maybe.HasValue, "This predicate should not be evaluated.");
-            Assert.Equal(default(bool?), foo);
+                Assert.True(maybe.HasValue, "This predicate should get evaluated");
+                Assert.Equal(default(bool?), maybe.Value);
+            });
+            Assert.Null(exception);
         }
 
         [Fact]

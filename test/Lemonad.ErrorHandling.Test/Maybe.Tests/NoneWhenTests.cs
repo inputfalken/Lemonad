@@ -12,13 +12,6 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         }
 
         [Fact]
-        public void Nullable_Bool_Whose_Value_Is_Null__Expects_HasValue_To_Be_False() {
-            bool? foo = null;
-            Assert.False(foo.NoneWhen(_ => throw new ArgumentNullException()).HasValue,
-                "This predicate should not be evaluated.");
-        }
-
-        [Fact]
         public void When_Predicate_Returns_False__Maybe_Is_Expected_To_HaveValue() {
             var noneWhen = "".NoneWhen(s => false);
             Assert.True(noneWhen.HasValue, "Maybe should have value.");

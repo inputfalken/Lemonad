@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
-using static Lemonad.ErrorHandling.EquailtyFunctions;
 
 namespace Lemonad.ErrorHandling {
     public static class Maybe {
@@ -14,12 +13,14 @@ namespace Lemonad.ErrorHandling {
                 : throw new ArgumentNullException(nameof(predicate));
 
         [Pure]
-        public static Maybe<TSource> Some<TSource>(this TSource item) =>
-            IsNull(item) ? Maybe<TSource>.Identity : new Maybe<TSource>(item, true);
+        public static Maybe<TSource> Some<TSource>(this TSource item) => new Maybe<TSource>(item, true);
 
         [Pure]
-        public static Maybe<TSource> SomeWhen<TSource>(this TSource item, Func<TSource, bool> predicate) =>
-            predicate != null ? Some(item).SomeWhen(predicate) : throw new ArgumentNullException(nameof(predicate));
+        public static Maybe<TSource> SomeWhen<TSource>(this TSource item, Func<TSource, bool> predicate) {
+            return predicate != null
+                ? Some(item).SomeWhen(predicate)
+                : throw new ArgumentNullException(nameof(predicate));
+        }
 
         [Pure]
         public static Maybe<string> NoneWhenStringIsNullOrEmpty(this string item) =>
