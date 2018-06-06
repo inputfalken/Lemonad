@@ -18,15 +18,15 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Assert.True(2.5d.Some().HasValue, "Double '2.5'  should have value if called with some");
             string isNullString = null;
             Assert.True(isNullString.Some().HasValue,
-                "Strings with value null should always have no value if null is passed.");
+                "Strings with value null should have a value since they have no explicitly checked for not null.");
 
             int? isNullInteger = null;
             Assert.True(isNullInteger.Some().HasValue,
-                "Nullables with value null should always have no value if null is passed.");
+                "Nullable<int> with value null should have a value since they have no explicitly checked for not null.");
 
             double? isNullDouble = null;
             Assert.True(isNullDouble.Some().HasValue,
-                "Nullables with value null should always have no value if null is passed.");
+                "Nullable<double> with value null should have a value since they have no explicitly checked for not null.");
         }
 
         [Fact]

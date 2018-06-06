@@ -7,6 +7,9 @@ namespace Lemonad.ErrorHandling {
         public static Maybe<TSource> None<TSource>() => Maybe<TSource>.Identity;
 
         [Pure]
+        public static Maybe<TSource> None<TSource>(this TSource item) => new Maybe<TSource>(item, false);
+
+        [Pure]
         public static Maybe<TSource> NoneWhen<TSource>(this TSource item, Func<TSource, bool> predicate) =>
             predicate != null
                 ? Some(item).SomeWhen(x => !predicate(x))

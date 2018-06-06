@@ -46,9 +46,19 @@ namespace Lemonad.ErrorHandling {
 
         public static bool operator >=(Maybe<T> left, Maybe<T> right) => left.CompareTo(right) >= 0;
 
-        // TODO wrap value with quotes if type is string.
-        public override string ToString() =>
-            !HasValue ? $"Maybe<{PrettyType()}> -> NONE" : $"Maybe<{PrettyType()}> -> SOME({Value})";
+        public override string ToString() {
+            var someOrNone = HasValue ? "Some" : "None";
+            var prettyType = $"{someOrNone} ==> Maybe<{PrettyType()}>";
+            var obj = (object) Value;
+            switch (obj) {
+                case null:
+                    return $"{prettyType}(null)";
+                case string str:
+                    return $"{prettyType}(\"{str}\")";
+                default:
+                    return $"{prettyType}({Value})";
+            }
+        }
 
         private static string PrettyType() {
             string BuildString(Type type) => type.IsGenericType
