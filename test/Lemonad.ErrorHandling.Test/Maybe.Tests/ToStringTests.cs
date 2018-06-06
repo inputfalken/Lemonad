@@ -3,6 +3,28 @@
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     public class ToStringTests {
         [Fact]
+        public void None_Maybe_String_With_Content__Expects_String_To_have__Doble_Quotes() {
+            var maybe = "hello".None();
+            Assert.False(maybe.HasValue, "Maybe Should not have value.");
+            Assert.Equal("None ==> Maybe<String>(\"hello\")", maybe.ToString());
+        }
+
+        [Fact]
+        public void None_Maybe_String_With_Null_String__Expects_String_To_Be_Empty() {
+            string hello = null;
+            var maybe = hello.None();
+            Assert.False(maybe.HasValue, "Maybe Should not have value.");
+            Assert.Equal("None ==> Maybe<String>(null)", maybe.ToString());
+        }
+
+        [Fact]
+        public void None_Maybe_String_Without_Content__Expects_String_To_have__Doble_Quotes() {
+            var maybe = string.Empty.None();
+            Assert.False(maybe.HasValue, "Maybe Should not have value.");
+            Assert.Equal("None ==> Maybe<String>(\"\")", maybe.ToString());
+        }
+
+        [Fact]
         public void Some_Maybe_Integer_With__Expects_Integer_Inside_Parantheses() {
             var maybe = 2.Some();
             Assert.True(maybe.HasValue, "Should have value.");
@@ -34,32 +56,10 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Some_Maybe_String_Without_Content__Expects_String_To_have__Doble_Quotes() {
-            string hello = string.Empty;
+            var hello = string.Empty;
             var maybe = hello.Some();
             Assert.True(maybe.HasValue, "Should have value.");
             Assert.Equal("Some ==> Maybe<String>(\"\")", maybe.ToString());
-        }
-
-        [Fact]
-        public void None_Maybe_String_With_Content__Expects_String_To_have__Doble_Quotes() {
-            var maybe = "hello".None();
-            Assert.False(maybe.HasValue, "Maybe Should not have value.");
-            Assert.Equal("None ==> Maybe<String>(\"hello\")", maybe.ToString());
-        }
-
-        [Fact]
-        public void None_Maybe_String_With_Null_String__Expects_String_To_Be_Empty() {
-            string hello = null;
-            var maybe = hello.None();
-            Assert.False(maybe.HasValue, "Maybe Should not have value.");
-            Assert.Equal("None ==> Maybe<String>(null)", maybe.ToString());
-        }
-
-        [Fact]
-        public void None_Maybe_String_Without_Content__Expects_String_To_have__Doble_Quotes() {
-            var maybe = string.Empty.None();
-            Assert.False(maybe.HasValue, "Maybe Should not have value.");
-            Assert.Equal("None ==> Maybe<String>(\"\")", maybe.ToString());
         }
     }
 }

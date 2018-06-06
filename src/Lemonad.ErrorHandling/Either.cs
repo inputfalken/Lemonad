@@ -8,7 +8,7 @@ namespace Lemonad.ErrorHandling {
         private readonly TRight _right;
         private readonly TLeft _left;
         private readonly Lazy<TRight> _lazyRight;
-        private Lazy<TLeft> _lazyLeft;
+        private readonly Lazy<TLeft> _lazyLeft;
 
         internal Either(TLeft left, TRight right, bool isRight) {
             IsRight = isRight;

@@ -4,14 +4,6 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     public class FlatMapTests {
         [Fact]
-        public void Passing_Null_Function__Throws_ArgumentNullException() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, Maybe<bool>> function = null;
-                "foo".Some().FlatMap(function);
-            });
-        }
-
-        [Fact]
         public void
             Flattening_From_String_Maybe_With_value_To_Nullable_Int_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
@@ -73,6 +65,14 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Assert.False(flatMappedMaybe.HasValue,
                 "Maybe should not have a value since one of the maybes will not pass.");
             Assert.Equal(default(string), flatMappedMaybe.Value);
+        }
+
+        [Fact]
+        public void Passing_Null_Function__Throws_ArgumentNullException() {
+            Assert.Throws<ArgumentNullException>(() => {
+                Func<string, Maybe<bool>> function = null;
+                "foo".Some().FlatMap(function);
+            });
         }
 
         [Fact]

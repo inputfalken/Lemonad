@@ -3,6 +3,17 @@ using System.Diagnostics.Contracts;
 
 namespace Lemonad.ErrorHandling {
     public static class Maybe {
+        public static void Match<TSource>(this Maybe<TSource> source, Action<TSource> someAction,
+            Action noneAction) {
+            if (someAction == null)
+                throw new ArgumentNullException(nameof(someAction));
+            if (noneAction == null)
+                throw new ArgumentNullException(nameof(noneAction));
+
+            if (source.HasValue) someAction(source.Value);
+            else noneAction();
+        }
+
         [Pure]
         public static Maybe<TSource> None<TSource>() => Maybe<TSource>.Identity;
 
@@ -15,6 +26,7 @@ namespace Lemonad.ErrorHandling {
                 ? Some(item).SomeWhen(x => !predicate(x))
                 : throw new ArgumentNullException(nameof(predicate));
 
+        [Pure]
         public static Maybe<TSource> NoneWhen<TSource>(this Maybe<TSource> source,
             Func<TSource, bool> predicate) => source.SomeWhen(x => !predicate(x));
 
@@ -72,17 +84,6 @@ namespace Lemonad.ErrorHandling {
             : (noneSelector == null
                 ? throw new ArgumentNullException(nameof(noneSelector))
                 : (source.HasValue ? someSelector(source.Value) : noneSelector()));
-
-        public static void Match<TSource>(this Maybe<TSource> source, Action<TSource> someAction,
-            Action noneAction) {
-            if (someAction == null)
-                throw new ArgumentNullException(nameof(someAction));
-            if (noneAction == null)
-                throw new ArgumentNullException(nameof(noneAction));
-
-            if (source.HasValue) someAction(source.Value);
-            else noneAction();
-        }
 
         [Pure]
         public static Maybe<TResult> FlatMap<TSource, TResult>(this Maybe<TSource> source,
