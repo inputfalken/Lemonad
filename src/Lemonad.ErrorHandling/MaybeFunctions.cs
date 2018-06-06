@@ -5,13 +5,16 @@ namespace Lemonad.ErrorHandling {
     public static class Maybe {
         public static void Match<TSource>(this Maybe<TSource> source, Action<TSource> someAction,
             Action noneAction) {
-            if (someAction == null)
-                throw new ArgumentNullException(nameof(someAction));
-            if (noneAction == null)
-                throw new ArgumentNullException(nameof(noneAction));
-
-            if (source.HasValue) someAction(source.Value);
-            else noneAction();
+            if (source.HasValue) {
+                if (someAction == null)
+                    throw new ArgumentNullException(nameof(someAction));
+                someAction(source.Value);
+            }
+            else {
+                if (noneAction == null)
+                    throw new ArgumentNullException(nameof(noneAction));
+                noneAction();
+            }
         }
 
         [Pure]
@@ -28,7 +31,13 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public static Maybe<TSource> NoneWhen<TSource>(this Maybe<TSource> source,
-            Func<TSource, bool> predicate) => source.SomeWhen(x => !predicate(x));
+            Func<TSource, bool> predicate) => source.HasValue
+            ? predicate != null
+                ? predicate(source.Value) == false
+                    ? source
+                    : Maybe<TSource>.Identity
+                : throw new ArgumentNullException(nameof(predicate))
+            : Maybe<TSource>.Identity;
 
         [Pure]
         public static Maybe<TSource> Some<TSource>(this TSource item) => new Maybe<TSource>(item, true);
@@ -53,29 +62,28 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public static Maybe<TSource> SomeWhen<TSource>(this Maybe<TSource> source,
-            Func<TSource, bool> predicate) => predicate != null
-            ? source.HasValue
+            Func<TSource, bool> predicate) => source.HasValue
+            ? predicate != null
                 ? predicate(source.Value)
                     ? Some(source.Value)
-                    : None<TSource>()
-                : None<TSource>()
-            : throw new ArgumentNullException(nameof(predicate));
+                    : Maybe<TSource>.Identity
+                : throw new ArgumentNullException()
+            : Maybe<TSource>.Identity;
 
         [Pure]
         public static Maybe<TResult>
             Map<TSource, TResult>(this Maybe<TSource> source, Func<TSource, TResult> selector) =>
-            selector != null
-                ? source.HasValue ? Some(selector(source.Value)) : None<TResult>()
-                : throw new ArgumentNullException(nameof(selector));
+            source.HasValue
+                ? selector != null
+                    ? Some(selector(source.Value))
+                    : throw new ArgumentNullException(nameof(selector))
+                : Maybe<TResult>.Identity;
 
         [Pure]
         public static Maybe<TResult> FlatMap<TSource, TResult>(this Maybe<TSource> source,
-            Func<TSource, Maybe<TResult>> selector) {
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-            if (!source.HasValue) return None<TResult>();
-            var result = selector(source.Value);
-            return result.HasValue ? Some(result.Value) : None<TResult>();
-        }
+            Func<TSource, Maybe<TResult>> selector) => source.HasValue
+            ? selector?.Invoke(source.Value) ?? throw new ArgumentNullException(nameof(selector))
+            : Maybe<TResult>.Identity;
 
         [Pure]
         public static TResult Match<TSource, TResult>(this Maybe<TSource> source, Func<TSource, TResult> someSelector,
@@ -112,12 +120,17 @@ namespace Lemonad.ErrorHandling {
         public static Maybe<TResult> FlatMap<TSource, TSelector, TResult>(
             this Maybe<TSource> source,
             Func<TSource, Maybe<TSelector>> selector,
-            Func<TSource, TSelector, TResult> resultSelector) =>
-            resultSelector != null
-                ? selector != null
-                    ? source.FlatMap(src => selector(src).Map(elem => resultSelector(src, elem)))
-                    : throw new ArgumentNullException(nameof(selector))
-                : throw new ArgumentNullException(nameof(resultSelector));
+            Func<TSource, TSelector, TResult> resultSelector) {
+            if (source.HasValue) {
+                return selector != null
+                    ? source.FlatMap(x => selector(x).Map(y => resultSelector != null
+                        ? resultSelector(x, y)
+                        : throw new ArgumentNullException(nameof(resultSelector))))
+                    : throw new ArgumentNullException(nameof(selector));
+            }
+
+            return Maybe<TResult>.Identity;
+        }
 
         [Pure]
         public static Maybe<TResult> FlatMap<TSource, TSelector, TResult>(

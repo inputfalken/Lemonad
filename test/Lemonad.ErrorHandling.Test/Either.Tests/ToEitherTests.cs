@@ -5,7 +5,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
     public class ToEitherTests {
         [Fact]
         public void
-            Convert_Maybe_Int_Whose_Property_HasValue_Is_False_Pass_Null_Left_Selector__Expects_Argument_Null_Exception() {
+            Convert_Maybe_Int_Whose_Property_HasValue_Is_False_Pass_Null_Left_Selector__Expects_ArgumentNullException_Thrown_Thrown() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<int> x = null;
                 2.None().ToEither(x);
@@ -14,31 +14,35 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
 
         [Fact]
         public void
-            Convert_Nullable_Int_Whose_Property_HasValue_Is_False_Pass_Null_Left_Selector__Expects_Argument_Null_Exception() {
+            Convert_Nullable_Int_Whose_Property_HasValue_Is_False_Pass_Null_Left_Selector__Expects_ArgumentNullException_Thrown() {
             Assert.Throws<ArgumentNullException>(() => {
-                Func<int> x = null;
+                Func<int> leftSelector = null;
                 int? nullable = null;
-                nullable.ToEither(x);
+                nullable.ToEither(leftSelector);
             });
         }
 
         [Fact]
         public void
-            Convert_Maybe_Int_Whose_Property_HasValue_Is_True_Pass_Null_Left_Selector__Expects_No_Argument_Null_Exception() {
+            Convert_Maybe_Int_Whose_Property_HasValue_Is_True_Pass_Null_Left_Selector__Expects_No_ArgumentNullException_Thrown() {
             var exception = Record.Exception(() => {
-                Func<int> x = null;
-                2.Some().ToEither(x);
+                Func<int> leftSelector = null;
+                var either = 2.Some().ToEither(leftSelector);
+                Assert.True(either.IsRight, "Either should have a right value.");
+                Assert.Equal(2, either.Right);
             });
             Assert.Null(exception);
         }
 
         [Fact]
         public void
-            Convert_Nullable_Int_Whose_Property_HasValue_Is_True_Pass_Null_Left_Selector__Expects_No_Argument_Null_Exception() {
+            Convert_Nullable_Int_Whose_Property_HasValue_Is_True_Pass_Null_Left_Selector__Expects_No_ArgumentNullException_Thrown() {
             var exception = Record.Exception(() => {
-                Func<int> x = null;
+                Func<int> leftSelector = null;
                 int? nullable = 2;
-                nullable.ToEither(x);
+                var either = nullable.ToEither(leftSelector);
+                Assert.True(either.IsRight, "Either should have a right value.");
+                Assert.Equal(2, either.Right);
             });
             Assert.Null(exception);
         }

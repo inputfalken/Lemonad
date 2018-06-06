@@ -4,6 +4,24 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     public class MatchTests {
         [Fact]
+        public void
+            Action_Overload_With_Null_None_Selector__Match_Maybe_With_Value__Expects_No_ArgumentNullException_Thrown() {
+            Action action = null;
+            var exception = Record.Exception(() =>
+                "hello".SomeWhen(s => true).Match(s => { Assert.Equal("hello", s); }, action));
+            Assert.Null(exception);
+        }
+
+        [Fact]
+        public void
+            Action_Overload_With_Null_Some_Selector__Match_Maybe_Without_Value__Expects_No_ArgumentNullException_Thrown() {
+            Action<string> action = null;
+            var exception = Record.Exception(() =>
+                "hello".SomeWhen(s => false).Match(action, () => Assert.True(true)));
+            Assert.Null(exception);
+        }
+
+        [Fact]
         public void Action_Overload__Match_Maybe_With_Value__Expects_Value_Of_SomeSelector() {
             "hello".SomeWhen(s => true).Match(s => { Assert.Equal("hello", s); }, () => { Assert.True(false); });
         }
@@ -25,13 +43,6 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Action noneSelector = null;
             Action<string> someSelector = null;
             Assert.Throws<ArgumentNullException>(() => "hello".SomeWhen(s => false).Match(someSelector, noneSelector));
-        }
-
-        [Fact]
-        public void Action_Overload__Null_SomeSelector__Throws() {
-            Action<string> someSelector = null;
-            Assert.Throws<ArgumentNullException>(() =>
-                "hello".SomeWhen(s => false).Match(someSelector, () => { Assert.True(false); }));
         }
 
         [Fact]
