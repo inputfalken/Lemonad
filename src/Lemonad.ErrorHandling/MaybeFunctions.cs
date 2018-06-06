@@ -36,14 +36,6 @@ namespace Lemonad.ErrorHandling {
                 : throw new ArgumentNullException(nameof(predicate));
 
         [Pure]
-        public static Maybe<string> NoneWhenStringIsNullOrWhiteSpace(this string item) =>
-            Some(item).NoneWhen(string.IsNullOrWhiteSpace);
-
-        [Pure]
-        public static Maybe<string> NoneWhenStringIsNullOrWhiteSpace(this Maybe<string> item) =>
-            item.NoneWhen(string.IsNullOrWhiteSpace);
-
-        [Pure]
         public static Maybe<TSource> ConvertToMaybe<TSource>(this TSource? item) where TSource : struct =>
             item.HasValue ? Some(item.Value) : None<TSource>();
 

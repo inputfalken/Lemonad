@@ -18,7 +18,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             const string input = "hello";
             var list = Enumerable
                 .Range(0, 3)
-                .SelectMany(_ => input.NoneWhenStringIsNullOrWhiteSpace(), (x, y) => x + y.Length)
+                .SelectMany(_ => input.NoneWhen(string.IsNullOrWhiteSpace), (x, y) => x + y.Length)
                 .ToList();
 
             Assert.Equal(5, list[0]);
