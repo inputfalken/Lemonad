@@ -47,20 +47,33 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static Either<TLeftResult, TRight> RightWhen<TLeftSource, TRight, TLeftResult>(
             this Either<TLeftSource, TRight> source,
-            Func<TRight, bool> predicate, Func<TLeftResult> leftSelector) {
-            if (source.IsRight) {
-                if (predicate == null) throw new ArgumentNullException(nameof(predicate));
-                return predicate(source.Right)
-                    ? Right<TLeftResult, TRight>(source.Right)
-                    : leftSelector != null
-                        ? Left<TLeftResult, TRight>(leftSelector())
-                        : throw new ArgumentNullException(nameof(leftSelector));
-            }
+            Func<TRight, bool> predicate, Func<TLeftResult> leftSelector) =>
+            source.IsRight
+                ? predicate == null
+                    ? throw new ArgumentNullException(nameof(predicate))
+                    : predicate(source.Right)
+                        ? Right<TLeftResult, TRight>(source.Right)
+                        : leftSelector == null
+                            ? throw new ArgumentNullException(nameof(leftSelector))
+                            : Left<TLeftResult, TRight>(leftSelector())
+                : leftSelector == null
+                    ? throw new ArgumentNullException(nameof(leftSelector))
+                    : Left<TLeftResult, TRight>(leftSelector());
 
-            return leftSelector != null
-                ? Left<TLeftResult, TRight>(leftSelector())
-                : throw new ArgumentNullException(nameof(leftSelector));
-        }
+        [Pure]
+        public static Either<TLeftResult, TRight> LeftWhen<TLeftSource, TRight, TLeftResult>(
+            this Either<TLeftSource, TRight> source, Func<TRight, bool> predicate, Func<TLeftResult> leftSelector) =>
+            source.IsRight
+                ? predicate == null
+                    ? throw new ArgumentNullException(nameof(predicate))
+                    : predicate(source.Right)
+                        ? leftSelector == null
+                            ? throw new ArgumentNullException(nameof(leftSelector))
+                            : Left<TLeftResult, TRight>(leftSelector())
+                        : Right<TLeftResult, TRight>(source.Right)
+                : leftSelector == null
+                    ? throw new ArgumentNullException(nameof(leftSelector))
+                    : Left<TLeftResult, TRight>(leftSelector());
 
         [Pure]
         public static Either<TLeftResult, TRight> LeftWhenNull<TLeftSource, TRight, TLeftResult>(
