@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Lemonad.ErrorHandling {
-    public struct Maybe<T> : IEquatable<Maybe<T>>, IComparable<Maybe<T>>, IEnumerable<T> {
-        public bool HasValue { get; }
+    public struct Maybe<T> : IEquatable<Maybe<T>>, IComparable<Maybe<T>> {
         internal static Maybe<T> Identity { get; } = new Maybe<T>(default(T), false);
-
+        
+        public bool HasValue { get; }
+        public IEnumerable<T> Enumerable => Yield(this);
+        
         internal T Value { get; }
 
         // TODO add IEqualityComparer ctor overload.
@@ -72,11 +73,5 @@ namespace Lemonad.ErrorHandling {
             if (maybe.HasValue)
                 yield return maybe.Value;
         }
-
-        IEnumerator<T> IEnumerable<T>.GetEnumerator() => Yield(this).GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() => (this as IEnumerable<T>).GetEnumerator();
     }
-
-    // TODO add null checks for all arguments...
 }

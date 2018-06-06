@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
-using static Lemonad.ErrorHandling.EquailtyFunctions;
 
 namespace Lemonad.ErrorHandling {
     public static class Either {
         [Pure]
         public static Either<TLeft, TRight> Right<TLeft, TRight>(TRight right) =>
-            new Either<TLeft, TRight>(default(TLeft), right, isLeft: false, isRight: true);
+            new Either<TLeft, TRight>(default(TLeft), right, false, true);
 
         [Pure]
         public static Either<TLeft, TRight> Left<TLeft, TRight>(TLeft left) =>
-            new Either<TLeft, TRight>(left, default(TRight), isLeft: true, isRight: false);
+            new Either<TLeft, TRight>(left, default(TRight), true, false);
 
         [Pure]
         public static Either<TLeft, TRight>

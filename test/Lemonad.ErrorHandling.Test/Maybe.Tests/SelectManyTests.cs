@@ -10,7 +10,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             const string input = "hello";
             var list = Enumerable
                 .Range(0, 3)
-                .SelectMany(_ => input.NoneWhen(string.IsNullOrWhiteSpace), (x, y) => x + y.Length)
+                .SelectMany(_ => input.NoneWhen(string.IsNullOrWhiteSpace).Enumerable, (x, y) => x + y.Length)
                 .ToList();
 
             Assert.Equal(5, list[0]);
@@ -23,7 +23,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             const string input = "hello";
             var list = Enumerable
                 .Range(0, 3)
-                .SelectMany(_ => input.SomeWhen(y => y.Length > 10), (x, y) => x + y.Length)
+                .SelectMany(_ => input.SomeWhen(y => y.Length > 10).Enumerable, (x, y) => x + y.Length)
                 .ToList();
 
             Assert.False(list.Any());
@@ -33,7 +33,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void Predicate_Overload__Passing_Null_Predicate__Throws_ArgumentNullException() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, IEnumerable<string>> func = null;
-                "foo".Some().SelectMany(func);
+                "foo".Some().Enumerable.SelectMany(func);
             });
         }
     }

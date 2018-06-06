@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Lemonad.ErrorHandling {
-    public struct Either<TLeft, TRight> : IEquatable<Either<TLeft, TRight>>, IComparable<Either<TLeft, TRight>>,
-        IEnumerable<TRight> {
+    public struct Either<TLeft, TRight> : IEquatable<Either<TLeft, TRight>>, IComparable<Either<TLeft, TRight>> {
         internal TRight Right { get; }
         internal TLeft Left { get; }
 
@@ -47,19 +45,23 @@ namespace Lemonad.ErrorHandling {
         // public static implicit operator Either<TLeft, TRight>(TRight right) => Either.Right<TLeft, TRight>(right);
         //public static implicit operator Either<TLeft, TRight>(TLeft left) => Either.Left<TLeft, TRight>(left);
 
-        private static IEnumerable<TRight> Yield(Either<TLeft, TRight> either) {
+        private static IEnumerable<TRight> YieldRight(Either<TLeft, TRight> either) {
             if (either.IsRight)
                 yield return either.Right;
         }
 
-        public IEnumerator<TRight> GetEnumerator() => Yield(this).GetEnumerator();
+        private static IEnumerable<TLeft> YieldLeft(Either<TLeft, TRight> either) {
+            if (either.IsLeft)
+                yield return either.Left;
+        }
+
+        public IEnumerable<TLeft> LeftEnumerable => YieldLeft(this);
+        public IEnumerable<TRight> RightEnumerable => YieldRight(this);
 
         public override bool Equals(object obj) => obj is Either<TLeft, TRight> option && Equals(option);
 
         public override int GetHashCode() =>
             !IsRight ? (Left == null ? 0 : Left.GetHashCode()) : (Right == null ? 1 : Right.GetHashCode());
-
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public int CompareTo(Either<TLeft, TRight> other) {
             if (IsRight && !other.IsRight) return 1;

@@ -121,13 +121,12 @@ namespace Lemonad.ErrorHandling {
             this Maybe<TSource> source,
             Func<TSource, Maybe<TSelector>> selector,
             Func<TSource, TSelector, TResult> resultSelector) {
-            if (source.HasValue) {
+            if (source.HasValue)
                 return selector != null
                     ? source.FlatMap(x => selector(x).Map(y => resultSelector != null
                         ? resultSelector(x, y)
                         : throw new ArgumentNullException(nameof(resultSelector))))
                     : throw new ArgumentNullException(nameof(selector));
-            }
 
             return Maybe<TResult>.Identity;
         }

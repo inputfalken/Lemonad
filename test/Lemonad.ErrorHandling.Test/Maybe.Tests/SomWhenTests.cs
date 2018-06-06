@@ -5,15 +5,6 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     public class SomWhenTests {
         [Fact]
         public void
-            Maybe_String_Whose_Property_HasValue_Is_True__Pasing_Null_Predicate__ArgumentNullReferenceException_Thrown() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, bool> predicate = null;
-                "foo".Some().SomeWhen(predicate);
-            });
-        }
-
-        [Fact]
-        public void
             Maybe_String_Whose_Property_HasValue_Is_False__Pasing_Null_Predicate__No_ArgumentNullReferenceException_Thrown() {
             var exception = Record.Exception(() => {
                 Func<string, bool> predicate = null;
@@ -22,6 +13,15 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
                 Assert.Equal(default(string), someWhen.Value);
             });
             Assert.Null(exception);
+        }
+
+        [Fact]
+        public void
+            Maybe_String_Whose_Property_HasValue_Is_True__Pasing_Null_Predicate__ArgumentNullReferenceException_Thrown() {
+            Assert.Throws<ArgumentNullException>(() => {
+                Func<string, bool> predicate = null;
+                "foo".Some().SomeWhen(predicate);
+            });
         }
 
         [Fact]

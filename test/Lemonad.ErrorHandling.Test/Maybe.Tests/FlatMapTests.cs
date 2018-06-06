@@ -1,74 +1,8 @@
 ﻿using System;
-using System.Linq;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     public class FlatMapTests {
-        [Fact]
-        public void
-            Maybe_String_Whose_Property_HasValue_Is_True__Pasing_Null_Selector__ArgumentNullReferenceException_Thrown() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, Maybe<string>> selector = null;
-                "foo".Some().FlatMap(selector);
-            });
-        }
-
-        [Fact]
-        public void
-            Maybe_String_Whose_Property_HasValue_Is_True_Flatmapping_None__Pasing_Null_ResultSelector__No_ArgumentNullReferenceException_Thrown() {
-            var exception = Record.Exception(() => {
-                Func<string, string, string> resultSelector = null;
-                var maybe = "foo".Some().FlatMap(s => s.None(), resultSelector);
-                Assert.False(maybe.HasValue, "Maybe should not have value.");
-                Assert.Equal(default(string), maybe.Value);
-            });
-            Assert.Null(exception);
-        }
-
-        [Fact]
-        public void
-            Maybe_String_Whose_Property_HasValue_Is_True_Flatmapping_Some__Pasing_Null_ResultSelector__ArgumentNullReferenceException_Thrown() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, string, string> resultSelector = null;
-                "foo".Some().FlatMap(s => s.Some(), resultSelector);
-            });
-        }
-
-        [Fact]
-        public void
-            Maybe_String_Whose_Property_HasValue_Is_True__Pasing_Null_Selector_And_ResultSelector_ArgumentNullReferenceException_Thrown() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, Maybe<string>> selector = null;
-                Func<string, string, string> resultSelector = null;
-                "foo".Some().FlatMap(selector, resultSelector);
-            });
-        }
-
-        [Fact]
-        public void
-            Maybe_String_Whose_Property_HasValue_Is_False__Pasing_Null_Selector__No_ArgumentNullReferenceException_Thrown() {
-            var exception = Record.Exception(() => {
-                Func<string, Maybe<string>> selector = null;
-                var maybe = "foo".None().FlatMap(selector);
-                Assert.False(maybe.HasValue, "Maybe should not have value.");
-                Assert.Equal(default(string), maybe.Value);
-            });
-            Assert.Null(exception);
-        }
-
-        [Fact]
-        public void
-            Maybe_String_Whose_Property_HasValue_Is_False__Pasing_Null_Selector_AndResultSelector__No_ArgumentNullReferenceException_Thrown() {
-            var exception = Record.Exception(() => {
-                Func<string, Maybe<string>> selector = null;
-                Func<string, string, string> resultSelector = null;
-                var maybe = "foo".None().FlatMap(selector, resultSelector);
-                Assert.False(maybe.HasValue, "Maybe should not have value.");
-                Assert.Equal(default(string), maybe.Value);
-            });
-            Assert.Null(exception);
-        }
-
         [Fact]
         public void
             Flattening_From_String_Maybe_With_value_To_Nullable_Int_With_Value__Expects_String_Maybe_With_Value() {
@@ -134,14 +68,6 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         }
 
         [Fact]
-        public void Passing_Null_Function__Throws_ArgumentNullException() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, Maybe<bool>> function = null;
-                "foo".Some().FlatMap(function);
-            });
-        }
-
-        [Fact]
         public void
             Maybe_String_Whose_Property_HasValue_Is_False__Pasing_Null_ResultSelector__No_ArgumentNullReferenceException_Thrown() {
             var exception = Record.Exception(() => {
@@ -151,6 +77,79 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
                 Assert.Equal(default(string), maybe.Value);
             });
             Assert.Null(exception);
+        }
+
+        [Fact]
+        public void
+            Maybe_String_Whose_Property_HasValue_Is_False__Pasing_Null_Selector__No_ArgumentNullReferenceException_Thrown() {
+            var exception = Record.Exception(() => {
+                Func<string, Maybe<string>> selector = null;
+                var maybe = "foo".None().FlatMap(selector);
+                Assert.False(maybe.HasValue, "Maybe should not have value.");
+                Assert.Equal(default(string), maybe.Value);
+            });
+            Assert.Null(exception);
+        }
+
+        [Fact]
+        public void
+            Maybe_String_Whose_Property_HasValue_Is_False__Pasing_Null_Selector_AndResultSelector__No_ArgumentNullReferenceException_Thrown() {
+            var exception = Record.Exception(() => {
+                Func<string, Maybe<string>> selector = null;
+                Func<string, string, string> resultSelector = null;
+                var maybe = "foo".None().FlatMap(selector, resultSelector);
+                Assert.False(maybe.HasValue, "Maybe should not have value.");
+                Assert.Equal(default(string), maybe.Value);
+            });
+            Assert.Null(exception);
+        }
+
+        [Fact]
+        public void
+            Maybe_String_Whose_Property_HasValue_Is_True__Pasing_Null_Selector__ArgumentNullReferenceException_Thrown() {
+            Assert.Throws<ArgumentNullException>(() => {
+                Func<string, Maybe<string>> selector = null;
+                "foo".Some().FlatMap(selector);
+            });
+        }
+
+        [Fact]
+        public void
+            Maybe_String_Whose_Property_HasValue_Is_True__Pasing_Null_Selector_And_ResultSelector_ArgumentNullReferenceException_Thrown() {
+            Assert.Throws<ArgumentNullException>(() => {
+                Func<string, Maybe<string>> selector = null;
+                Func<string, string, string> resultSelector = null;
+                "foo".Some().FlatMap(selector, resultSelector);
+            });
+        }
+
+        [Fact]
+        public void
+            Maybe_String_Whose_Property_HasValue_Is_True_Flatmapping_None__Pasing_Null_ResultSelector__No_ArgumentNullReferenceException_Thrown() {
+            var exception = Record.Exception(() => {
+                Func<string, string, string> resultSelector = null;
+                var maybe = "foo".Some().FlatMap(s => s.None(), resultSelector);
+                Assert.False(maybe.HasValue, "Maybe should not have value.");
+                Assert.Equal(default(string), maybe.Value);
+            });
+            Assert.Null(exception);
+        }
+
+        [Fact]
+        public void
+            Maybe_String_Whose_Property_HasValue_Is_True_Flatmapping_Some__Pasing_Null_ResultSelector__ArgumentNullReferenceException_Thrown() {
+            Assert.Throws<ArgumentNullException>(() => {
+                Func<string, string, string> resultSelector = null;
+                "foo".Some().FlatMap(s => s.Some(), resultSelector);
+            });
+        }
+
+        [Fact]
+        public void Passing_Null_Function__Throws_ArgumentNullException() {
+            Assert.Throws<ArgumentNullException>(() => {
+                Func<string, Maybe<bool>> function = null;
+                "foo".Some().FlatMap(function);
+            });
         }
 
         [Fact]
