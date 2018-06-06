@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Lemonad.ErrorHandling {
     public struct Either<TLeft, TRight> : IEquatable<Either<TLeft, TRight>>, IComparable<Either<TLeft, TRight>> {
@@ -25,6 +26,9 @@ namespace Lemonad.ErrorHandling {
 
             return false;
         }
+
+        public override string ToString() =>
+            $"{(IsRight ? "Right" : "Left")} ==> {typeof(Either<TLeft, TRight>).ToHumanString()}{StringFunctions.PrettyTypeString(IsRight ? (object) Right : Left)}";
 
         public static bool operator ==(Either<TLeft, TRight> left, Either<TLeft, TRight> right) => left.Equals(right);
         public static bool operator !=(Either<TLeft, TRight> left, Either<TLeft, TRight> right) => !left.Equals(right);

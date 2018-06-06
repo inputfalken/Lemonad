@@ -5,10 +5,10 @@ using System.Linq;
 namespace Lemonad.ErrorHandling {
     public struct Maybe<T> : IEquatable<Maybe<T>>, IComparable<Maybe<T>> {
         internal static Maybe<T> Identity { get; } = new Maybe<T>(default(T), false);
-        
+
         public bool HasValue { get; }
         public IEnumerable<T> Enumerable => Yield(this);
-        
+
         internal T Value { get; }
 
         // TODO add IEqualityComparer ctor overload.
@@ -47,27 +47,8 @@ namespace Lemonad.ErrorHandling {
 
         public static bool operator >=(Maybe<T> left, Maybe<T> right) => left.CompareTo(right) >= 0;
 
-        public override string ToString() {
-            var someOrNone = HasValue ? "Some" : "None";
-            var prettyType = $"{someOrNone} ==> Maybe<{PrettyType()}>";
-            var obj = (object) Value;
-            switch (obj) {
-                case null:
-                    return $"{prettyType}(null)";
-                case string str:
-                    return $"{prettyType}(\"{str}\")";
-                default:
-                    return $"{prettyType}({Value})";
-            }
-        }
-
-        private static string PrettyType() {
-            string BuildString(Type type) => type.IsGenericType
-                ? $"{type.Name.Substring(0, type.Name.LastIndexOf("`", StringComparison.InvariantCulture))}<{string.Join(", ", type.GetGenericArguments().Select(BuildString))}>"
-                : type.Name;
-
-            return BuildString(typeof(T));
-        }
+        public override string ToString() =>
+            $"{(HasValue ? "Some" : "None")} ==> {typeof(Maybe<T>).ToHumanString()}{StringFunctions.PrettyTypeString(Value)}";
 
         private static IEnumerable<T> Yield(Maybe<T> maybe) {
             if (maybe.HasValue)

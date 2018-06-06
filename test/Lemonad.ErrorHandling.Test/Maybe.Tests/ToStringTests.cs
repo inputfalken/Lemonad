@@ -25,6 +25,20 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         }
 
         [Fact]
+        public void Some_Maybe_Char_With__Expects_String_To_have__Doble_Quotes() {
+            var maybe = 'x'.Some();
+            Assert.True(maybe.HasValue, "Should have value.");
+            Assert.Equal("Some ==> Maybe<Char>(\'x\')", maybe.ToString());
+        }
+        
+        [Fact]
+        public void None_Maybe_Char_With__Expects_String_To_have__Doble_Quotes() {
+            var maybe = 'x'.None();
+            Assert.False(maybe.HasValue, "Maybe Should not have value.");
+            Assert.Equal("None ==> Maybe<Char>(\'x\')", maybe.ToString());
+        }
+        
+        [Fact]
         public void Some_Maybe_Integer_With__Expects_Integer_Inside_Parantheses() {
             var maybe = 2.Some();
             Assert.True(maybe.HasValue, "Should have value.");
@@ -61,5 +75,6 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Assert.True(maybe.HasValue, "Should have value.");
             Assert.Equal("Some ==> Maybe<String>(\"\")", maybe.ToString());
         }
+        
     }
 }

@@ -41,28 +41,23 @@ namespace Lemonad.ErrorHandling {
             this Either<TLeftSource, TRight> source,
             Func<TRight, bool> predicate, Func<TLeftResult> leftSelector) {
             if (source.IsRight) {
-                if (predicate != null) {
-                    if (predicate(source.Right))
-                        return Right<TLeftResult, TRight>(source.Right);
-                    if (leftSelector != null)
-                        return Left<TLeftResult, TRight>(leftSelector());
-                    throw new ArgumentNullException(nameof(leftSelector));
-                }
-
-                throw new ArgumentNullException(nameof(predicate));
+                if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+                return predicate(source.Right)
+                    ? Right<TLeftResult, TRight>(source.Right)
+                    : leftSelector != null
+                        ? Left<TLeftResult, TRight>(leftSelector())
+                        : throw new ArgumentNullException(nameof(leftSelector));
             }
 
-            return source.IsRight
-                ? (predicate(source.Right)
-                    ? Right<TLeftResult, TRight>(source.Right)
-                    : Left<TLeftResult, TRight>(leftSelector()))
-                : Left<TLeftResult, TRight>(leftSelector());
+            return leftSelector != null
+                ? Left<TLeftResult, TRight>(leftSelector())
+                : throw new ArgumentNullException(nameof(leftSelector));
         }
 
         [Pure]
         public static Either<TLeftResult, TRight> LeftWhenNull<TLeftSource, TRight, TLeftResult>(
             this Either<TLeftSource, TRight> source, Func<TLeftResult> leftSelector) =>
-            source.RightWhen(x => x != null, leftSelector);
+            source.RightWhen(x => !EquailtyFunctions.IsNull(x), leftSelector);
 
         [Pure]
         public static Either<TLeftResult, TRightResult> Map<TLeftSource, TRightSource, TLeftResult, TRightResult>(
