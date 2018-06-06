@@ -25,6 +25,8 @@ namespace Lemonad.ErrorHandling {
             return false;
         }
 
+        public static implicit operator Maybe<T>(T item) => item.Some();
+        
         public override bool Equals(object obj) => obj is Maybe<T> maybe && Equals(maybe);
 
         public static bool operator ==(Maybe<T> left, Maybe<T> right) => left.Equals(right);
