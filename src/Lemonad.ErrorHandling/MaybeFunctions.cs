@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Linq;
 
 namespace Lemonad.ErrorHandling {
     public static class Maybe {
@@ -16,6 +18,9 @@ namespace Lemonad.ErrorHandling {
                 noneAction();
             }
         }
+
+        public static IEnumerable<TSource> GetMaybeValues<TSource>(this IEnumerable<Maybe<TSource>> enumerable) =>
+            enumerable.SelectMany(x => x.Enumerable);
 
         [Pure]
         public static Maybe<TSource> None<TSource>() => Maybe<TSource>.Identity;

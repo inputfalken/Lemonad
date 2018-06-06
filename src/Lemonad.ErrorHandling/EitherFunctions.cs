@@ -1,8 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Linq;
 
 namespace Lemonad.ErrorHandling {
     public static class Either {
+        public static IEnumerable<TLeft> GetEitherLefts<TLeft, TRight>(
+            this IEnumerable<Either<TLeft, TRight>> enumerable) => enumerable.SelectMany(x => x.LeftEnumerable);
+
+        public static IEnumerable<TRight> GetEitherRights<TLeft, TRight>(
+            this IEnumerable<Either<TLeft, TRight>> enumerable) => enumerable.SelectMany(x => x.RightEnumerable);
+
         [Pure]
         public static Either<TLeft, TRight> Right<TLeft, TRight>(TRight right) =>
             new Either<TLeft, TRight>(default(TLeft), right, false, true);
