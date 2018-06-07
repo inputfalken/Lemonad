@@ -45,6 +45,10 @@ namespace Lemonad.ErrorHandling {
         public static Either<TLeft, TRight> ToEitherLeft<TLeft, TRight>(this TLeft left) => Left<TLeft, TRight>(left);
 
         [Pure]
+        public static Maybe<TRight> ConvertToMaybe<TLeft, TRight>(this Either<TLeft, TRight> source) =>
+            source.IsRight ? source.Right.Some() : Maybe<TRight>.Identity;
+
+        [Pure]
         public static Either<TLeftResult, TRight> RightWhen<TLeftSource, TRight, TLeftResult>(
             this Either<TLeftSource, TRight> source,
             Func<TRight, bool> predicate, Func<TLeftResult> leftSelector) =>
