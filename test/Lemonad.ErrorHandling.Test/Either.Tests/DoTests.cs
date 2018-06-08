@@ -45,8 +45,6 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
             Assert.True(either.IsLeft, "Either should be left.");
             Assert.Equal(default(int), either.Right);
             Assert.Equal("ERROR", either.Left);
-            var b = ErrorHandling.Either.Parse.Bool("foo");
-            Assert.Equal(b, "");
         }
 
         [Fact]
