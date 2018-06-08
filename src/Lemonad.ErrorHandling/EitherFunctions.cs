@@ -11,29 +11,25 @@ namespace Lemonad.ErrorHandling {
 
         public static IEnumerable<TRight> GetEitherRights<TLeft, TRight>(
             this IEnumerable<Either<TLeft, TRight>> enumerable) => enumerable.SelectMany(x => x.RightEnumerable);
-        
+
         public static Either<TLeft, TRight> DoWhenRight<TLeft, TRight>(this Either<TLeft, TRight> source,
             Action<TRight> action) {
-            if (source.IsRight) {
+            if (source.IsRight)
                 if (action != null)
                     action.Invoke(source.Right);
                 else
                     throw new ArgumentNullException(nameof(action));
-            }
 
             return source;
         }
 
         public static Either<TLeft, TRight> DoWhenLeft<TLeft, TRight>(this Either<TLeft, TRight> source,
             Action<TLeft> action) {
-            if (source.IsLeft) {
+            if (source.IsLeft)
                 if (action != null)
                     action.Invoke(source.Left);
                 else
                     throw new ArgumentNullException(nameof(action));
-
-                return source;
-            }
 
             return source;
         }
