@@ -24,7 +24,7 @@ namespace Lemonad.ErrorHandling {
             enumerable.SelectMany(x => x.Enumerable);
 
         [Pure]
-        public static Maybe<TSource> None<TSource>() => Maybe<TSource>.Identity;
+        public static Maybe<TSource> None<TSource>() => Maybe<TSource>.None;
 
         [Pure]
         public static Maybe<TSource> None<TSource>(this TSource item) => new Maybe<TSource>(item, false);
@@ -41,9 +41,9 @@ namespace Lemonad.ErrorHandling {
             ? predicate != null
                 ? predicate(source.Value) == false
                     ? source
-                    : Maybe<TSource>.Identity
+                    : Maybe<TSource>.None
                 : throw new ArgumentNullException(nameof(predicate))
-            : Maybe<TSource>.Identity;
+            : Maybe<TSource>.None;
 
         [Pure]
         public static Maybe<TSource> Some<TSource>(this TSource item) => new Maybe<TSource>(item, true);
@@ -72,9 +72,9 @@ namespace Lemonad.ErrorHandling {
             ? predicate != null
                 ? predicate(source.Value)
                     ? Some(source.Value)
-                    : Maybe<TSource>.Identity
+                    : Maybe<TSource>.None
                 : throw new ArgumentNullException()
-            : Maybe<TSource>.Identity;
+            : Maybe<TSource>.None;
 
         [Pure]
         public static Maybe<TResult>
@@ -83,13 +83,13 @@ namespace Lemonad.ErrorHandling {
                 ? selector != null
                     ? Some(selector(source.Value))
                     : throw new ArgumentNullException(nameof(selector))
-                : Maybe<TResult>.Identity;
+                : Maybe<TResult>.None;
 
         [Pure]
         public static Maybe<TResult> FlatMap<TSource, TResult>(this Maybe<TSource> source,
             Func<TSource, Maybe<TResult>> selector) => source.HasValue
             ? selector?.Invoke(source.Value) ?? throw new ArgumentNullException(nameof(selector))
-            : Maybe<TResult>.Identity;
+            : Maybe<TResult>.None;
 
         [Pure]
         public static TResult Match<TSource, TResult>(this Maybe<TSource> source, Func<TSource, TResult> someSelector,
@@ -134,7 +134,7 @@ namespace Lemonad.ErrorHandling {
                         : throw new ArgumentNullException(nameof(resultSelector))))
                     : throw new ArgumentNullException(nameof(selector));
 
-            return Maybe<TResult>.Identity;
+            return Maybe<TResult>.None;
         }
 
         [Pure]

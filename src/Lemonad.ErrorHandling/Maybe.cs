@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Lemonad.ErrorHandling {
     public struct Maybe<T> : IEquatable<Maybe<T>>, IComparable<Maybe<T>> {
-        internal static Maybe<T> Identity { get; } = new Maybe<T>(default(T), false);
+        public static Maybe<T> None { get; } = new Maybe<T>(default(T), false);
 
         public bool HasValue { get; }
         public IEnumerable<T> Enumerable => Yield(this);

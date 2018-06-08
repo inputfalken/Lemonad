@@ -9,7 +9,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Maybe<int> Divide(int left, int right) {
                 if (right != 0)
                     return left / right;
-                return ErrorHandling.Maybe.None<int>();
+                return Maybe<int>.None;
             }
 
             var maybes = new List<Maybe<int>> {

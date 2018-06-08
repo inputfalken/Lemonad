@@ -47,7 +47,7 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public static Maybe<TRight> ConvertToMaybe<TLeft, TRight>(this Either<TLeft, TRight> source) =>
-            source.IsRight ? source.Right.Some() : Maybe<TRight>.Identity;
+            source.IsRight ? source.Right.Some() : Maybe<TRight>.None;
 
         [Pure]
         public static Either<TLeftResult, TRight> RightWhen<TLeftSource, TRight, TLeftResult>(

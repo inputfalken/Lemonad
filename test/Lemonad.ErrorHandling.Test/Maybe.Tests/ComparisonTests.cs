@@ -48,8 +48,8 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             var second = ErrorHandling.Maybe.None<string>();
 
             Assert.Equal(first, second);
-            Assert.Equal(first, Maybe<string>.Identity);
-            Assert.Equal(second, Maybe<string>.Identity);
+            Assert.Equal(first, Maybe<string>.None);
+            Assert.Equal(second, Maybe<string>.None);
         }
     }
 }
