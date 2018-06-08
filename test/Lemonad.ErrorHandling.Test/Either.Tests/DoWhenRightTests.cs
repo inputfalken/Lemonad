@@ -35,7 +35,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
             Either_String_Int_Whose_Property_IsRight_Is_False__Expects_Action_Not_To_Be_Executed() {
             var either = "ERROR"
                 .ToEitherLeft<string, int>()
-                .DoWhenRight(_ => Assert.True(false, "This actions should never be exectued."));
+                .DoWhenRight(_ => throw new Exception("This actions should never be exectued."));
             Assert.False(either.IsRight, "Either should not be right.");
             Assert.True(either.IsLeft, "Either should be left.");
             Assert.Equal(default(int), either.Right);

@@ -2,29 +2,31 @@
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Either.Tests {
-    public class DoWhenLeftTests {
+    public class DoTests {
         [Fact]
         public void
-            Either_String_Int_Whose_Property_IsRight_Is_True_Null_Action__Expects_No_ArgumentNullException_Thrown() {
-            var exception = Record.Exception(() => {
-                Action<string> action = null;
+            Either_String_Int_Whose_Property_IsRight_Is_True_Null_Action__Expects_ArgumentNullException_Thrown() {
+            Assert.Throws<ArgumentNullException>(() => {
+                Action action = null;
                 var either = 10
                     .ToEitherRight<string, int>()
-                    .DoWhenLeft(action);
+                    .Do(action);
                 Assert.True(either.IsRight, "Either should be right.");
                 Assert.False(either.IsLeft, "Either should not be left.");
                 Assert.Equal(10, either.Right);
                 Assert.Equal(default(string), either.Left);
             });
-            Assert.Null(exception);
         }
 
         [Fact]
         public void
             Either_String_Int_Whose_Property_IsRight_Is_True__Expects_Action_To_Not_Be_Executed() {
+            var isExecuted = false;
             var either = 10
                 .ToEitherRight<string, int>()
-                .DoWhenLeft(_ => throw new Exception("This action should not get exectued."));
+                .Do(() => isExecuted = true);
+
+            Assert.True(isExecuted, "Should get exectued.");
             Assert.True(either.IsRight, "Either should be right.");
             Assert.False(either.IsLeft, "Either should not be left.");
             Assert.Equal(10, either.Right);
@@ -34,11 +36,11 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         [Fact]
         public void
             Either_String_Int_Whose_Property_IsRight_Is_False__Expects_Action_To_Be_Executed() {
-            string value = null;
+            var isExecuted = false;
             var either = "ERROR"
                 .ToEitherLeft<string, int>()
-                .DoWhenLeft(s => value = s);
-            Assert.Equal("ERROR", value);
+                .Do(() => isExecuted = true);
+            Assert.True(isExecuted, "Should get exectued.");
             Assert.False(either.IsRight, "Either should not be right.");
             Assert.True(either.IsLeft, "Either should be left.");
             Assert.Equal(default(int), either.Right);
@@ -49,10 +51,10 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         public void
             Either_String_Int_Whose_Property_IsRight_Is_False_Null_Action__Expects_ArgumentNullException_Thrown() {
             Assert.Throws<ArgumentNullException>(() => {
-                Action<string> action = null;
+                Action action = null;
                 var either = "ERROR"
                     .ToEitherLeft<string, int>()
-                    .DoWhenLeft(action);
+                    .Do(action);
                 Assert.False(either.IsRight, "Either should not be right.");
                 Assert.True(either.IsLeft, "Either should be left.");
                 Assert.Equal(default(int), either.Right);

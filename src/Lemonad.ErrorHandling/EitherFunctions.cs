@@ -23,6 +23,13 @@ namespace Lemonad.ErrorHandling {
             return source;
         }
 
+        public static Either<TLeft, TRight> Do<TLeft, TRight>(this Either<TLeft, TRight> source, Action action) {
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
+            action();
+            return source;
+        }
+
         public static Either<TLeft, TRight> DoWhenLeft<TLeft, TRight>(this Either<TLeft, TRight> source,
             Action<TLeft> action) {
             if (source.IsLeft)
