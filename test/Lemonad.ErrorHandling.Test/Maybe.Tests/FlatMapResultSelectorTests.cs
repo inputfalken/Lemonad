@@ -2,7 +2,7 @@
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
-    public class DelegateFlatMapTests {
+    public class FlatMapResultSelectorTests {
         [Fact]
         public void
             Flattening_From_String_Maybe_With_value_To_Nullable_Int_With_Value__Expects_String_Maybe_With_Value() {

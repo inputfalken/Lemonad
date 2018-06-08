@@ -121,6 +121,27 @@ namespace Lemonad.ErrorHandling {
             ? Left<TLeftResult, TRightResult>(leftSelector(source.Left))
             : Right<TLeftResult, TRightResult>(rightSelector(source.Right));
 
+        public static Either<TLeft, TRightResult> FlatMap<TLeft, TRight, TRightResult>(
+            this Either<TLeft, TRight> source,
+            Func<TRight, Either<TLeft, TRightResult>> selector) {
+            if (source.IsRight) {
+                if (selector == null)
+                    throw new ArgumentNullException(nameof(selector));
+                return selector(source.Right);
+            }
+
+            return Left<TLeft, TRightResult>(source.Left);
+        }
+
+        public static Either<TLeft, TRightResult> FlatMap<TLeft, TRight, TRightSelector, TRightResult>(
+            this Either<TLeft, TRight> source,
+            Func<TRight, Either<TLeft, TRightSelector>> selector,
+            Func<TRight, TRightSelector, TRightResult> resultSelector) => source.FlatMap(x =>
+            selector?.Invoke(x).Map(y => y, y => resultSelector == null
+                ? throw new ArgumentNullException(nameof(resultSelector))
+                : resultSelector(x, y)) ??
+            throw new ArgumentNullException(nameof(selector)));
+
         public static class Parse {
             private static string FormatStringParserMessage<TEnum>(string input) where TEnum : struct =>
                 $"Could not parse type {typeof(string)}(\"{input}\") into {typeof(TEnum)}.";
