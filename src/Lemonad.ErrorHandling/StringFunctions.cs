@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Lemonad.ErrorHandling {
     internal static class StringFunctions {
@@ -15,7 +16,7 @@ namespace Lemonad.ErrorHandling {
                 case null:
                     return "(null)";
                 case string str:
-                    return $"(\"{str}\")";
+                    return $"(\"{str.Replace("\\", "\\")}\")";
                 case char letter:
                     return $"('{letter}')";
                 default:
