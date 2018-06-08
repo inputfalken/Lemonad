@@ -9,6 +9,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
             Either<string, int> Divide(int left, int right) =>
                 right != 0 ? (Either<string, int>) (left / right) : "Cannot divide with zero";
 
+            int? foo = null;
             var eithers = new List<Either<string, int>> {
                 Divide(4, 2),
                 Divide(3, 0),

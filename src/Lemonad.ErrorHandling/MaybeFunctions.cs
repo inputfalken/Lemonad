@@ -98,7 +98,7 @@ namespace Lemonad.ErrorHandling {
             : (noneSelector == null
                 ? throw new ArgumentNullException(nameof(noneSelector))
                 : (source.HasValue ? someSelector(source.Value) : noneSelector()));
-
+        
         [Pure]
         public static Maybe<TResult> FlatMap<TSource, TResult>(this Maybe<TSource> source,
             Func<TSource, TResult?> selector) where TResult : struct =>
