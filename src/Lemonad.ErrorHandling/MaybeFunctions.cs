@@ -20,8 +20,29 @@ namespace Lemonad.ErrorHandling {
             }
         }
 
-        public static IEnumerable<TSource> GetMaybeValues<TSource>(this IEnumerable<Maybe<TSource>> enumerable) =>
-            enumerable.SelectMany(x => x.Enumerable);
+        public static IEnumerable<TSource> GetMaybeValues<TSource>(this IEnumerable<Maybe<TSource>> source) =>
+            source.SelectMany(x => x.Enumerable);
+
+        public static Maybe<TSource> FirstMaybe<TSource>(this IEnumerable<TSource> source) {
+            switch (source) {
+                case IList<TSource> list when list.Count > 0:
+                    return list[0];
+                case IReadOnlyList<TSource> readOnlyList when readOnlyList.Count > 0:
+                    return readOnlyList[0];
+                default:
+                    using (var e = source.GetEnumerator())
+                        return e.MoveNext() ? e.Current : Maybe<TSource>.None;
+            }
+        }
+
+        public static Maybe<TSource> FirstMaybe<TSource>(this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate) {
+            foreach (var element in source)
+                if (predicate(element))
+                    return element;
+
+            return Maybe<TSource>.None;
+        }
 
         [Pure]
         public static Maybe<TSource> None<TSource>() => Maybe<TSource>.None;
@@ -98,7 +119,7 @@ namespace Lemonad.ErrorHandling {
             : (noneSelector == null
                 ? throw new ArgumentNullException(nameof(noneSelector))
                 : (source.HasValue ? someSelector(source.Value) : noneSelector()));
-        
+
         [Pure]
         public static Maybe<TResult> FlatMap<TSource, TResult>(this Maybe<TSource> source,
             Func<TSource, TResult?> selector) where TResult : struct =>
