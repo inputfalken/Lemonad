@@ -3,7 +3,7 @@
 namespace Lemonad.ErrorHandling.Test.Either.Tests {
     public class ToEitherLeftTests {
         [Fact]
-        public void Convert_Int_To_EitherRight() {
+        public void Convert_Int_To_EitherLeft() {
             var either = 2.ToEitherLeft<int, string>();
 
             Assert.False(either.IsRight, "Either should not have a right value.");
@@ -13,7 +13,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         }
 
         [Fact]
-        public void Convert_Null_String_To_EitherRight() {
+        public void Convert_Null_String_To_EitherLeft() {
             string str = null;
             var either = str.ToEitherLeft<string, int>();
 
@@ -24,7 +24,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         }
 
         [Fact]
-        public void Convert_String_To_EitherRight() {
+        public void Convert_String_To_EitherLeft() {
             var either = "hello".ToEitherLeft<string, int>();
 
             Assert.False(either.IsRight, "Either should have a right value.");
