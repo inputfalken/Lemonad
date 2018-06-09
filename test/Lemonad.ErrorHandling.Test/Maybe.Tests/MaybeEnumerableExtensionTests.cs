@@ -24,7 +24,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
                 Divide(10, 2)
             };
 
-            var list = maybes.GetMaybeValues().ToList();
+            var list = maybes.MaybeSome().ToList();
             Assert.Equal(2, list[0]);
             Assert.Equal(1, list[1]);
             Assert.Equal(5, list[2]);

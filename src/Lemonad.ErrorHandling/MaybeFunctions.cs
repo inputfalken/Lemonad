@@ -37,8 +37,15 @@ namespace Lemonad.ErrorHandling {
             return Maybe<TSource>.None;
         }
 
-        public static IEnumerable<TSource> GetMaybeValues<TSource>(this IEnumerable<Maybe<TSource>> source) =>
+        public static IEnumerable<TSource> MaybeSome<TSource>(this IEnumerable<Maybe<TSource>> source) =>
             source.SelectMany(x => x.Enumerable);
+
+        public static IEnumerable<TResult> MaybeMatch<TSource, TResult>(this IEnumerable<Maybe<TSource>> source,
+            Func<TSource, TResult> someSelector, Func<TResult> noneSelector) =>
+            source.Select(x => x.Match(someSelector, noneSelector));
+
+        public static IEnumerable<TResult> MaybeNone<TSource, TResult>(this IEnumerable<Maybe<TSource>> source,
+            Func<TResult> selector) => source.Where(x => x.HasValue == false).Select(_ => selector());
 
         [Pure]
         public static Maybe<TSource> NoneWhen<TSource>(this TSource item, Func<TSource, bool> predicate) =>
