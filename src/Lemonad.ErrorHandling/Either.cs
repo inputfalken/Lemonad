@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics.Contracts;
 
 namespace Lemonad.ErrorHandling {
     public struct Either<TLeft, TRight> : IEquatable<Either<TLeft, TRight>>, IComparable<Either<TLeft, TRight>> {
@@ -45,7 +45,9 @@ namespace Lemonad.ErrorHandling {
         public static bool operator >=(Either<TLeft, TRight> left, Either<TLeft, TRight> right) =>
             left.CompareTo(right) >= 0;
 
-        public static implicit operator Either<TLeft, TRight>(TRight right) => Either.Right<TLeft, TRight>(right);
+        public static implicit operator Either<TLeft, TRight>(TRight right) =>
+            Either.Right<TLeft, TRight>(right);
+
         public static implicit operator Either<TLeft, TRight>(TLeft left) => Either.Left<TLeft, TRight>(left);
 
         private static IEnumerable<TRight> YieldRight(Either<TLeft, TRight> either) {
@@ -74,5 +76,125 @@ namespace Lemonad.ErrorHandling {
                 ? Comparer<TRight>.Default.Compare(Right, other.Right)
                 : Comparer<TLeft>.Default.Compare(Left, other.Left);
         }
+
+        public TResult Match<TResult>(
+            Func<TLeft, TResult> leftselector, Func<TRight, TResult> rightSelector) {
+            return IsRight ? rightSelector(Right) : leftselector(Left);
+        }
+
+        public Either<TLeft, TRight> DoWhenRight(Action<TRight> action) {
+            if (IsRight)
+                if (action != null)
+                    action.Invoke(Right);
+                else
+                    throw new ArgumentNullException(nameof(action));
+
+            return this;
+        }
+
+        public Either<TLeft, TRight> Do(Action action) {
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
+            action();
+            return this;
+        }
+
+        public Either<TLeft, TRight> DoWhenLeft(
+            Action<TLeft> action) {
+            if (IsLeft)
+                if (action != null)
+                    action.Invoke(Left);
+                else
+                    throw new ArgumentNullException(nameof(action));
+
+            return this;
+        }
+
+        [Pure]
+        public Either<TLeftResult, TRight> RightWhen<TLeftResult>(
+            Func<TRight, bool> predicate, Func<TLeftResult> leftSelector) =>
+            IsRight
+                ? predicate == null
+                    ? throw new ArgumentNullException(nameof(predicate))
+                    : predicate(Right)
+                        ? Either.Right<TLeftResult, TRight>(Right)
+                        : leftSelector == null
+                            ? throw new ArgumentNullException(nameof(leftSelector))
+                            : Either.Left<TLeftResult, TRight>(leftSelector())
+                : leftSelector == null
+                    ? throw new ArgumentNullException(nameof(leftSelector))
+                    : Either.Left<TLeftResult, TRight>(leftSelector());
+
+        [Pure]
+        public Either<TLeftResult, TRight> LeftWhen<TLeftResult>(
+            Func<TRight, bool> predicate, Func<TLeftResult> leftSelector) =>
+            IsRight
+                ? predicate == null
+                    ? throw new ArgumentNullException(nameof(predicate))
+                    : predicate(Right)
+                        ? leftSelector == null
+                            ? throw new ArgumentNullException(nameof(leftSelector))
+                            : Either.Left<TLeftResult, TRight>(leftSelector())
+                        : Either.Right<TLeftResult, TRight>(Right)
+                : leftSelector == null
+                    ? throw new ArgumentNullException(nameof(leftSelector))
+                    : Either.Left<TLeftResult, TRight>(leftSelector());
+
+        [Pure]
+        public Either<TLeftResult, TRight> LeftWhenNull<TLeftResult>(
+            Func<TLeftResult> leftSelector) => RightWhen(x => !EquailtyFunctions.IsNull(x), leftSelector);
+
+        [Pure]
+        public Either<TLeftResult, TRightResult> Map<TLeftResult, TRightResult>(
+            Func<TLeft, TLeftResult> leftSelector,
+            Func<TRight, TRightResult> rightSelector) => IsLeft
+            ? Either.Left<TLeftResult, TRightResult>(leftSelector(Left))
+            : Either.Right<TLeftResult, TRightResult>(rightSelector(Right));
+
+        public Either<TLeft, TRightResult> FlatMap<TRightResult>(
+            Func<TRight, Either<TLeft, TRightResult>> rightSelector) {
+            if (IsRight) {
+                if (rightSelector == null)
+                    throw new ArgumentNullException(nameof(rightSelector));
+                return rightSelector(Right);
+            }
+
+            return Either.Left<TLeft, TRightResult>(Left);
+        }
+
+        public Either<TLeftResult, TRightResult> LeftMapWithFlatMap<TLeftResult, TRightResult>(
+            Func<TLeft, TLeftResult> lefSelector,
+            Func<TRight, Either<TLeftResult, TRightResult>> rightSelector) {
+            if (IsRight) {
+                return rightSelector?.Invoke(Right) ?? throw new ArgumentNullException(nameof(rightSelector));
+            }
+
+            return lefSelector == null
+                ? throw new ArgumentNullException(nameof(lefSelector))
+                : Either.Left<TLeftResult, TRightResult>(lefSelector(Left));
+        }
+
+        public Either<TLeftResult, TRightResult> LeftMapWithFlatMap<TRightSelector, TLeftResult,
+            TRightResult>(
+            Func<TLeft, TLeftResult> lefSelector,
+            Func<TRight, Either<TLeftResult, TRightSelector>> rightSelector,
+            Func<TRight, TRightSelector, TRightResult> resultSelector) {
+            if (IsRight) {
+                return Map(lefSelector, x => rightSelector(x).Map(_ => _, y => resultSelector(x, y)))
+                    .FlatMap(x => x);
+            }
+
+            return lefSelector == null
+                ? throw new ArgumentNullException(nameof(lefSelector))
+                : Either.Left<TLeftResult, TRightResult>(lefSelector(Left));
+        }
+
+        public Either<TLeft, TRightResult> FlatMap<TRightSelector, TRightResult>(
+            Func<TRight, Either<TLeft, TRightSelector>> rightSelector,
+            Func<TRight, TRightSelector, TRightResult> resultSelector) => FlatMap(x =>
+            rightSelector?.Invoke(x).Map(y => y, y => resultSelector == null
+                ? throw new ArgumentNullException(nameof(resultSelector))
+                : resultSelector(x, y)) ??
+            throw new ArgumentNullException(nameof(rightSelector)));
     }
 }
