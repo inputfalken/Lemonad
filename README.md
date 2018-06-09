@@ -4,6 +4,8 @@
 
 ### WIP (A lot may change)
 
+There's currently no nuget package available to download this.
+
 ## Summary
 
 A functional **C#** library with data structures and functions whose main goal
