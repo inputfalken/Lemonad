@@ -5,6 +5,26 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
     public class FlatMapTests {
         [Fact]
         public void
+            Either_String_Int__Whose_Property_IsRight_Is_False_With_Null_Selector__Expects_No_ArgumentNullException_Thrown() {
+            Func<int, Either<string, int>> selector = null;
+            var exception = Record.Exception(() => {
+                var result = ErrorHandling.Either.Parse.Int("foo").FlatMap(selector);
+                Assert.False(result.IsRight, "Either should not have a right value.");
+                Assert.True(result.IsLeft, "Either should have a left value.");
+                Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Left);
+            });
+            Assert.Null(exception);
+        }
+        
+        [Fact]
+        public void
+            Either_String_Int__Whose_Property_IsRight_Is_True_With_Null_Selector__Expects_ArgumentNullException_Thrown() {
+            Func<int, Either<string, int>> selector = null;
+            Assert.Throws<ArgumentNullException>(() => ErrorHandling.Either.Parse.Int("2").FlatMap(selector));
+        }
+
+        [Fact]
+        public void
             Either_String_Int_Whose_Property_IsRight_Is_False__FLatmaps_Either_String_Double_Whose_Property_IsRight_Is_False__Expects_Selector_To_Never_Be_Invoked() {
             var intParse = ErrorHandling.Either.Parse.Int("foo");
             var doubleParse = ErrorHandling.Either.Parse.Double("foo");
