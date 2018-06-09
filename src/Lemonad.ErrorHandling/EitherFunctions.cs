@@ -128,36 +128,52 @@ namespace Lemonad.ErrorHandling {
 
         public static Either<TLeft, TRightResult> FlatMap<TLeft, TRight, TRightResult>(
             this Either<TLeft, TRight> source,
-            Func<TRight, Either<TLeft, TRightResult>> selector) {
+            Func<TRight, Either<TLeft, TRightResult>> rightSelector) {
             if (source.IsRight) {
-                if (selector == null)
-                    throw new ArgumentNullException(nameof(selector));
-                return selector(source.Right);
+                if (rightSelector == null)
+                    throw new ArgumentNullException(nameof(rightSelector));
+                return rightSelector(source.Right);
             }
 
             return Left<TLeft, TRightResult>(source.Left);
         }
-        
-        public static Either<TLeftResult, TRightResult> FlatmapDuo<TLeft, TRight,TLeftResult, TRightResult>(
-            this Either<TLeft, TRight> source,
-            Func<TRight, Either<TLeftResult, TRightResult>> selector, Func<TLeft, TLeftResult> lefSelector) {
+
+        public static Either<TLeftResult, TRightResult> LeftMapWithFlatMap<TLeft, TRight, TLeftResult, TRightResult>(
+            this Either<TLeft, TRight> source, Func<TLeft, TLeftResult> lefSelector,
+            Func<TRight, Either<TLeftResult, TRightResult>> rightSelector) {
             if (source.IsRight) {
-                if (selector == null)
-                    throw new ArgumentNullException(nameof(selector));
-                return selector(source.Right);
+                return rightSelector?.Invoke(source.Right) ?? throw new ArgumentNullException(nameof(rightSelector));
             }
 
-            return Left<TLeftResult, TRightResult>(lefSelector(source.Left));
+            return lefSelector == null
+                ? throw new ArgumentNullException(nameof(lefSelector))
+                : Left<TLeftResult, TRightResult>(lefSelector(source.Left));
+        }
+
+        public static Either<TLeftResult, TRightResult> LeftMapWithFlatMap<TLeft, TRight, TRightSelector, TLeftResult,
+            TRightResult>(
+            this Either<TLeft, TRight> source, Func<TLeft, TLeftResult> lefSelector,
+            Func<TRight, Either<TLeftResult, TRightSelector>> rightSelector,
+            Func<TRight, TRightSelector, TRightResult> resultSelector) {
+            if (source.IsRight) {
+                return source
+                    .Map(lefSelector, x => rightSelector(x).Map(_ => _, y => resultSelector(x, y)))
+                    .FlatMap(x => x);
+            }
+
+            return lefSelector == null
+                ? throw new ArgumentNullException(nameof(lefSelector))
+                : Left<TLeftResult, TRightResult>(lefSelector(source.Left));
         }
 
         public static Either<TLeft, TRightResult> FlatMap<TLeft, TRight, TRightSelector, TRightResult>(
             this Either<TLeft, TRight> source,
-            Func<TRight, Either<TLeft, TRightSelector>> selector,
+            Func<TRight, Either<TLeft, TRightSelector>> rightSelector,
             Func<TRight, TRightSelector, TRightResult> resultSelector) => source.FlatMap(x =>
-            selector?.Invoke(x).Map(y => y, y => resultSelector == null
+            rightSelector?.Invoke(x).Map(y => y, y => resultSelector == null
                 ? throw new ArgumentNullException(nameof(resultSelector))
                 : resultSelector(x, y)) ??
-            throw new ArgumentNullException(nameof(selector)));
+            throw new ArgumentNullException(nameof(rightSelector)));
 
         public static class Parse {
             private static string FormatStringParserMessage<TEnum>(string input) where TEnum : struct =>
