@@ -74,7 +74,7 @@ does except that you can use this with reference
 types (`string`, `object`…) as well.
 
 The following example illustrates how you can perform a division
-and instead of throwing an exception; you could return `None<T>.None`
+and instead of throwing an exception; you could return `Maybe<T>.None`
 
 ``` csharp
 Maybe<int> Divide(int x, int y) {
