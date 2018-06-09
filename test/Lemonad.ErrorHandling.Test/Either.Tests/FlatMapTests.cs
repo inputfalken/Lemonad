@@ -12,7 +12,6 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
             var isInvoked = false;
             var result = intParse.FlatMap(_ => {
                 isInvoked = true;
-                throw new Exception("I should never get invoked.");
                 return doubleParse;
             });
 
@@ -28,7 +27,6 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
             var isInvoked = false;
             var result = intParse.FlatMap(_ => {
                 isInvoked = true;
-                throw new Exception("I should never get invoked.");
                 return doubleParse;
             });
 

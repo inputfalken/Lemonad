@@ -30,7 +30,6 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         public void
             Either_Int_Whose_Property_IsRight_Is_True_With_False_Predicate_And_Null_LeftSelector__Expects_No_ArgumentNullException_Thrown() {
             var exception = Record.Exception(() => {
-                Func<int, bool> predicate = null;
                 Func<string> leftSelector = null;
                 var either = 20.ToEitherRight<string, int>();
                 var result = either.LeftWhen(_ => false, leftSelector);
@@ -78,7 +77,6 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         public void
             Either_Int_Whose_Property_IsRight_Is_True_With_True_Predicate_And_Null_LeftSelector__Expects_ArgumentNullException_Thrown() {
             Assert.Throws<ArgumentNullException>(() => {
-                Func<int, bool> predicate = null;
                 Func<string> leftSelector = null;
                 var either = 20.ToEitherRight<string, int>();
                 var result = either.LeftWhen(_ => true, leftSelector);
@@ -89,7 +87,6 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         public void
             Either_String_Int__Whose_Property_IsRight_Is_False_With_FalsePredicate_And_Null_LeftSelector__Expects_ArgumentNullException_Thrown() {
             Assert.Throws<ArgumentNullException>(() => {
-                Func<int, bool> predicate = null;
                 Func<string> leftSelector = null;
                 var either = "ERROR".ToEitherLeft<string, int>();
                 // Leftselector is mandatory if  it's a left either from the start.
@@ -144,7 +141,6 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         public void
             Either_String_Int__Whose_Property_IsRight_Is_False_With_True_Predicate_And_Null_LeftSelector__Expects_No_ArgumentNullException_Thrown() {
             Assert.Throws<ArgumentNullException>(() => {
-                Func<int, bool> predicate = null;
                 Func<string> leftSelector = null;
                 var either = "ERROR".ToEitherLeft<string, int>();
                 var result = either.LeftWhen(_ => true, leftSelector);

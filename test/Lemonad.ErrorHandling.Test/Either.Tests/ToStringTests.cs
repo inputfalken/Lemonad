@@ -31,7 +31,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
 
             Assert.True(either.IsLeft, "Either should have a left value.");
             Assert.False(either.IsRight, "Either should not have a Right value.");
-            Assert.Equal(either.Left, "hello");
+            Assert.Equal("hello", either.Left);
             Assert.Equal(default(int), either.Right);
             Assert.Equal("Left ==> Either<String, Int32>(\"hello\")", either.ToString());
         }
@@ -53,7 +53,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
 
             Assert.False(either.IsLeft, "Either should not have a left value.");
             Assert.True(either.IsRight, "Either should have a Right value.");
-            Assert.Equal(either.Right, "hello");
+            Assert.Equal("hello", either.Right);
             Assert.Equal(default(int), either.Left);
             Assert.Equal("Right ==> Either<Int32, String>(\"hello\")", either.ToString());
         }
@@ -64,7 +64,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
 
             Assert.False(either.IsLeft, "Either should not have a left value.");
             Assert.True(either.IsRight, "Either should have a Right value.");
-            Assert.Equal(either.Right, "hello\\");
+            Assert.Equal("hello\\", either.Right);
             Assert.Equal(default(int), either.Left);
             Assert.Equal("Right ==> Either<Int32, String>(\"hello\\\")", either.ToString());
         }
@@ -75,7 +75,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
 
             Assert.False(either.IsLeft, "Either should not have a left value.");
             Assert.True(either.IsRight, "Either should have a Right value.");
-            Assert.Equal(either.Right, "hello\r\nfoo");
+            Assert.Equal("hello\r\nfoo", either.Right);
             Assert.Equal(default(int), either.Left);
             Assert.Equal("Right ==> Either<Int32, String>(\"hello\r\nfoo\")", either.ToString());
         }
@@ -86,7 +86,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
 
             Assert.False(either.IsLeft, "Either should not have a left value.");
             Assert.True(either.IsRight, "Either should have a Right value.");
-            Assert.Equal(either.Right, "hello\tfoo");
+            Assert.Equal("hello\tfoo", either.Right);
             Assert.Equal(default(int), either.Left);
             Assert.Equal("Right ==> Either<Int32, String>(\"hello\tfoo\")", either.ToString());
         }
