@@ -50,10 +50,18 @@ List<Either<string, int>> eithers = new List<Either<string, int>> {
 List<int> successFulDivisions = eithers.EitherRights().ToList();
 IEnumerable<string> failedDivisions = eithers.EitherLefts();
 
-Assert.All(failedDivisions, s => { Assert.Equal("Cannot divide with zero", s); });
-Assert.Equal(2, successFulDivisions[0]);
-Assert.Equal(1, successFulDivisions[1]);
-Assert.Equal(5, successFulDivisions[2]);
+// Prints all the numbers where the 'y' parameter from the function is not 0.
+// 2
+// 1
+// 5
+foreach (int division in successFulDivisions) { Console.WriteLine(division); }
+
+// Prints all the messages where the 'y' parameter from the function is 0.
+// Cannot divide with zero
+// Cannot divide with zero
+// …
+foreach (int message in failedDivisions) { Console.WriteLine(message); }
+
 
 ```
 
@@ -89,10 +97,14 @@ List<Maybe<int>> maybes = new List<Maybe<int>> {
     Divide(10, 2)
 };
 
-List<int> successFulDivisions = maybes.GetMaybeValues().ToList();
-Assert.Equal(2, list[0]);
-Assert.Equal(1, list[1]);
-Assert.Equal(5, list[2]);
+List<int> successFulDivisions = maybes.MaybeSome().ToList();
+
+// Prints all the numbers where the 'y' parameter from the function is not 0.
+// 2
+// 1
+// 5
+foreach (int division in successFulDivisions) { Console.WriteLine(division); }
+
 
 ```
 
