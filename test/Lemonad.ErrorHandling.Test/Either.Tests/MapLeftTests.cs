@@ -19,6 +19,15 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         }
 
         [Fact]
+        public void
+            Either_String_Int_Whose_Property_IsRight_Is_False__Null_Selector__Expects_ArgumentNullExcetpion() {
+            Assert.Throws<ArgumentNullException>(() => {
+                Func<string, string> selector = null;
+                var mapRight = ErrorHandling.Either.Parse.Int("foo").MapLeft(selector);
+            });
+        }
+
+        [Fact]
         public void Either_String_Int_Whose_Property_IsRight_Is_True() {
             var isExectued = false;
             var mapRight = ErrorHandling.Either.Parse.Int("2").MapLeft(i => {
@@ -45,15 +54,6 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
                 Assert.Equal(default(string), mapRight.Left);
             });
             Assert.Null(exception);
-        }
-
-        [Fact]
-        public void
-            Either_String_Int_Whose_Property_IsRight_Is_False__Null_Selector__Expects_ArgumentNullExcetpion() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, string> selector = null;
-                var mapRight = ErrorHandling.Either.Parse.Int("foo").MapLeft(selector);
-            });
         }
     }
 }
