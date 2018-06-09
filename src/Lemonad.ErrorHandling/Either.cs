@@ -160,7 +160,11 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public Either<TLeftResult, TRight> LeftWhenNull<TLeftResult>(
-            Func<TLeftResult> leftSelector) => RightWhen(x => !EquailtyFunctions.IsNull(x), leftSelector);
+            Func<TLeftResult> leftSelector) => LeftWhen(EquailtyFunctions.IsNull, leftSelector);
+
+        [Pure]
+        public Either<TLeftResult, TRight> RightWhenNull<TLeftResult>(
+            Func<TLeftResult> leftSelector) => RightWhen(EquailtyFunctions.IsNull, leftSelector);
 
         [Pure]
         public Either<TLeftResult, TRightResult> Map<TLeftResult, TRightResult>(
