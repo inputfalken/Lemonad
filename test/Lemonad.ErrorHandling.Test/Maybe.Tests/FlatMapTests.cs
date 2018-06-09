@@ -159,7 +159,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             var lengthMaybe = input.SomeWhen(s => s.Length > 4);
             int? nullabelInt = 2;
 
-            var flatMappedMaybe = lengthMaybe.FlatMap(x =>nullabelInt, (s, s1) => s.Length + s1);
+            var flatMappedMaybe = lengthMaybe.FlatMap(x => nullabelInt, (s, s1) => s.Length + s1);
 
             Assert.True(lengthMaybe.HasValue, "Maybe should have value.");
             Assert.True(nullabelInt.HasValue, "Maybe should have value.");
@@ -207,7 +207,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             var lengthMaybe = input.SomeWhen(s => s.Length > 5);
             var stringMaybe = input.NoneWhen(string.IsNullOrEmpty);
 
-            var flatMappedMaybe = stringMaybe.FlatMap(x =>lengthMaybe, (x, y) => x.Length + y.Length);
+            var flatMappedMaybe = stringMaybe.FlatMap(x => lengthMaybe, (x, y) => x.Length + y.Length);
 
             Assert.True(stringMaybe.HasValue, "Maybe should have value.");
             Assert.False(lengthMaybe.HasValue, "Maybe should not have value");
@@ -253,7 +253,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             const string input = "hello";
             var lengthMaybe = input.SomeWhen(s => s.Length > 5);
             var stringMaybe = input.NoneWhen(string.IsNullOrEmpty);
-            var flatMappedMaybe = lengthMaybe.FlatMap(x =>stringMaybe, (x, y) => x.Length + y.Length);
+            var flatMappedMaybe = lengthMaybe.FlatMap(x => stringMaybe, (x, y) => x.Length + y.Length);
 
             Assert.True(stringMaybe.HasValue, "Maybe should have value");
             Assert.False(lengthMaybe.HasValue, "Maybe should not have value");

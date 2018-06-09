@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Linq;
 
 namespace Lemonad.ErrorHandling {
     public struct Maybe<T> : IEquatable<Maybe<T>>, IComparable<Maybe<T>> {

@@ -78,9 +78,8 @@ namespace Lemonad.ErrorHandling {
         }
 
         public TResult Match<TResult>(
-            Func<TLeft, TResult> leftselector, Func<TRight, TResult> rightSelector) {
-            return IsRight ? rightSelector(Right) : leftselector(Left);
-        }
+            Func<TLeft, TResult> leftselector, Func<TRight, TResult> rightSelector) =>
+            IsRight ? rightSelector(Right) : leftselector(Left);
 
         public Either<TLeft, TRight> DoWhenRight(Action<TRight> action) {
             if (IsRight)
@@ -165,9 +164,7 @@ namespace Lemonad.ErrorHandling {
         public Either<TLeftResult, TRightResult> LeftMapWithFlatMap<TLeftResult, TRightResult>(
             Func<TLeft, TLeftResult> lefSelector,
             Func<TRight, Either<TLeftResult, TRightResult>> rightSelector) {
-            if (IsRight) {
-                return rightSelector?.Invoke(Right) ?? throw new ArgumentNullException(nameof(rightSelector));
-            }
+            if (IsRight) return rightSelector?.Invoke(Right) ?? throw new ArgumentNullException(nameof(rightSelector));
 
             return lefSelector == null
                 ? throw new ArgumentNullException(nameof(lefSelector))
@@ -179,10 +176,9 @@ namespace Lemonad.ErrorHandling {
             Func<TLeft, TLeftResult> lefSelector,
             Func<TRight, Either<TLeftResult, TRightSelector>> rightSelector,
             Func<TRight, TRightSelector, TRightResult> resultSelector) {
-            if (IsRight) {
+            if (IsRight)
                 return Map(lefSelector, x => rightSelector(x).Map(_ => _, y => resultSelector(x, y)))
                     .FlatMap(x => x);
-            }
 
             return lefSelector == null
                 ? throw new ArgumentNullException(nameof(lefSelector))
