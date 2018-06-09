@@ -45,7 +45,8 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         public void
             Either_String_Int_Whose_Property_IsRight_Is_False__Null_Selector__Expects_No_ArgumentNullExcetpion() {
             var exception = Record.Exception(() => {
-                var mapRight = ErrorHandling.Either.Parse.Int("foo").MapRight(i => i * 2);
+                Func<int, int> selector = null;
+                var mapRight = ErrorHandling.Either.Parse.Int("foo").MapRight(selector);
                 Assert.True(mapRight.IsLeft, "Either should have a left value.");
                 Assert.False(mapRight.IsRight, "Either should not have a right value.");
                 Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", mapRight.Left);

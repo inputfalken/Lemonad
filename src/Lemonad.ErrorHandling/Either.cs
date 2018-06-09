@@ -79,14 +79,25 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public TResult Match<TResult>(
-            Func<TLeft, TResult> leftselector, Func<TRight, TResult> rightSelector) =>
-            IsRight ? rightSelector(Right) : leftselector(Left);
+            Func<TLeft, TResult> leftselector, Func<TRight, TResult> rightSelector) {
+            if (IsRight)
+                return rightSelector != null
+                    ? rightSelector(Right)
+                    : throw new ArgumentNullException(nameof(rightSelector));
+
+            return leftselector != null ? leftselector(Left) : throw new ArgumentNullException(nameof(leftselector));
+        }
 
         public void Match(Action<TLeft> leftAction, Action<TRight> rightAction) {
             if (IsRight)
-                rightAction(Right);
-            else
+                if (rightAction != null)
+                    rightAction(Right);
+                else
+                    throw new ArgumentNullException(nameof(rightAction));
+            else if (leftAction != null)
                 leftAction(Left);
+            else
+                throw new ArgumentNullException(nameof(leftAction));
         }
 
         public Either<TLeft, TRight> DoWhenRight(Action<TRight> action) {
