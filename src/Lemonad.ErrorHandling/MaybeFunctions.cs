@@ -59,6 +59,15 @@ namespace Lemonad.ErrorHandling {
         public static Maybe<TSource> ConvertToMaybe<TSource>(this TSource? item) where TSource : struct =>
             item.HasValue ? Some(item.Value) : None<TSource>();
 
+        [Pure]
+        public static Either<TLeft, TRight>
+            ToEither<TLeft, TRight>(this Maybe<TRight> source, Func<TLeft> leftSelector) =>
+            source.HasValue
+                ? Either.Right<TLeft, TRight>(source.Value)
+                : (leftSelector != null
+                    ? Either.Left<TLeft, TRight>(leftSelector())
+                    : throw new ArgumentNullException(nameof(leftSelector)));
+
         public static class Parse {
             [Pure]
             private static string FormatMessage(string input) => $"Could not parse string '{input}'.";

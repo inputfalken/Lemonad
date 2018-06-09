@@ -19,15 +19,6 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static Either<TLeft, TRight> Left<TLeft, TRight>(TLeft left) =>
             new Either<TLeft, TRight>(left, default(TRight), true, false);
-        
-        [Pure]
-        public static Either<TLeft, TRight>
-            ToEither<TLeft, TRight>(this Maybe<TRight> source, Func<TLeft> leftSelector) =>
-            source.HasValue
-                ? Right<TLeft, TRight>(source.Value)
-                : (leftSelector != null
-                    ? Left<TLeft, TRight>(leftSelector())
-                    : throw new ArgumentNullException(nameof(leftSelector)));
 
         [Pure]
         public static Either<TLeft, TRight>
