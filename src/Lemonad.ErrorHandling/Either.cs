@@ -77,9 +77,17 @@ namespace Lemonad.ErrorHandling {
                 : Comparer<TLeft>.Default.Compare(Left, other.Left);
         }
 
+        [Pure]
         public TResult Match<TResult>(
             Func<TLeft, TResult> leftselector, Func<TRight, TResult> rightSelector) =>
             IsRight ? rightSelector(Right) : leftselector(Left);
+
+        public void Match(Action<TLeft> leftAction, Action<TRight> rightAction) {
+            if (IsRight)
+                rightAction(Right);
+            else
+                leftAction(Left);
+        }
 
         public Either<TLeft, TRight> DoWhenRight(Action<TRight> action) {
             if (IsRight)
@@ -168,11 +176,13 @@ namespace Lemonad.ErrorHandling {
                 : throw new ArgumentNullException(nameof(leftSelector))
             : Either.Right<TLeftResult, TRight>(Right);
 
+        [Pure]
         public Either<TLeft, TRightResult> FlatMap<TRightResult>(
             Func<TRight, Either<TLeft, TRightResult>> rightSelector) => IsRight
             ? rightSelector?.Invoke(Right) ?? throw new ArgumentNullException(nameof(rightSelector))
             : Either.Left<TLeft, TRightResult>(Left);
 
+        [Pure]
         public Either<TLeftResult, TRightResult> MapLeftWithFlatMap<TLeftResult, TRightResult>(
             Func<TLeft, TLeftResult> lefSelector,
             Func<TRight, Either<TLeftResult, TRightResult>> rightSelector) {
@@ -183,6 +193,7 @@ namespace Lemonad.ErrorHandling {
                 : Either.Left<TLeftResult, TRightResult>(lefSelector(Left));
         }
 
+        [Pure]
         public Either<TLeftResult, TRightResult> MapLeftWithFlatMap<TRightSelector, TLeftResult,
             TRightResult>(
             Func<TLeft, TLeftResult> lefSelector,
@@ -197,6 +208,7 @@ namespace Lemonad.ErrorHandling {
                 : Either.Left<TLeftResult, TRightResult>(lefSelector(Left));
         }
 
+        [Pure]
         public Either<TLeft, TRightResult> FlatMap<TRightSelector, TRightResult>(
             Func<TRight, Either<TLeft, TRightSelector>> rightSelector,
             Func<TRight, TRightSelector, TRightResult> resultSelector) => FlatMap(x =>
