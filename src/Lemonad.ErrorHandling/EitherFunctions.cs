@@ -12,6 +12,11 @@ namespace Lemonad.ErrorHandling {
         public static IEnumerable<TRight> EitherRights<TLeft, TRight>(
             this IEnumerable<Either<TLeft, TRight>> enumerable) => enumerable.SelectMany(x => x.RightEnumerable);
 
+        public static TResult Match<TLeft, TRight, TResult>(this Either<TLeft, TRight> source,
+            Func<TLeft, TResult> leftselector, Func<TRight, TResult> rightSelector) {
+            return source.IsRight ? rightSelector(source.Right) : leftselector(source.Left);
+        }
+
         public static Either<TLeft, TRight> DoWhenRight<TLeft, TRight>(this Either<TLeft, TRight> source,
             Action<TRight> action) {
             if (source.IsRight)
@@ -131,6 +136,18 @@ namespace Lemonad.ErrorHandling {
             }
 
             return Left<TLeft, TRightResult>(source.Left);
+        }
+        
+        public static Either<TLeftResult, TRightResult> FlatmapDuo<TLeft, TRight,TLeftResult, TRightResult>(
+            this Either<TLeft, TRight> source,
+            Func<TRight, Either<TLeftResult, TRightResult>> selector, Func<TLeft, TLeftResult> lefSelector) {
+            if (source.IsRight) {
+                if (selector == null)
+                    throw new ArgumentNullException(nameof(selector));
+                return selector(source.Right);
+            }
+
+            return Left<TLeftResult, TRightResult>(lefSelector(source.Left));
         }
 
         public static Either<TLeft, TRightResult> FlatMap<TLeft, TRight, TRightSelector, TRightResult>(
