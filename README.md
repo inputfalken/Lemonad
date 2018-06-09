@@ -96,5 +96,6 @@ Assert.Equal(5, list[2]);
 
 ## Current supported data types
 
-* `Either<TLeft, TRight>`
-* `Maybe<T>`
+* ErrorHandling
+  * `Either<TLeft, TRight>`
+  * `Maybe<T>`
