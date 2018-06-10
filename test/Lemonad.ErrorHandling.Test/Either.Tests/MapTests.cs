@@ -5,7 +5,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
     public class MapTests {
         [Fact]
         public void Either_String_Int_Whose_Property_IsRight_Is_False() {
-            var result = ErrorHandling.Either.Parse.Int("foo").Map(s => $"ERROR: {s}", i => i * 2);
+            var result = EitherParsers.Int("foo").Map(s => $"ERROR: {s}", i => i * 2);
 
             Assert.True(result.IsLeft, "Either should have a left value.");
             Assert.False(result.IsRight, "Either should not have a right value.");
@@ -19,7 +19,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
             var exception = Record.Exception(() => {
                 Func<string, string> leftselector = null;
                 Func<int, int> rightSelector = null;
-                var result = ErrorHandling.Either.Parse.Int("foo").Map(s => $"ERROR: {s}", rightSelector);
+                var result = EitherParsers.Int("foo").Map(s => $"ERROR: {s}", rightSelector);
 
                 Assert.True(result.IsLeft, "Either should have a left value.");
                 Assert.False(result.IsRight, "Either should not have a right value.");
@@ -34,7 +34,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
             Either_String_Int_Whose_Property_IsRight_Is_False__Null_LeftSelector__Expects_ArgumentNullExceptiion() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, string> leftselector = null;
-                var result = ErrorHandling.Either.Parse.Int("foo").Map(leftselector, i => i * 2);
+                var result = EitherParsers.Int("foo").Map(leftselector, i => i * 2);
 
                 Assert.False(result.IsLeft, "Either should not have a left value.");
                 Assert.True(result.IsRight, "Either should have a right value.");
@@ -49,7 +49,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, string> leftselector = null;
                 Func<int, int> rightSelector = null;
-                var result = ErrorHandling.Either.Parse.Int("foo").Map(leftselector, rightSelector);
+                var result = EitherParsers.Int("foo").Map(leftselector, rightSelector);
 
                 Assert.False(result.IsLeft, "Either should not have a left value.");
                 Assert.True(result.IsRight, "Either should have a right value.");
@@ -61,7 +61,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         [Fact]
         public void Either_String_Int_Whose_Property_IsRight_Is_False__Should_Not_Execute_RightSelector() {
             var isExectued = false;
-            var result = ErrorHandling.Either.Parse.Int("foo").Map(s => $"ERROR: {s}", i => {
+            var result = EitherParsers.Int("foo").Map(s => $"ERROR: {s}", i => {
                 isExectued = true;
                 return i * 2;
             });
@@ -75,7 +75,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
 
         [Fact]
         public void Either_String_Int_Whose_Property_IsRight_Is_True() {
-            var result = ErrorHandling.Either.Parse.Int("2").Map(s => $"ERROR: {s}", i => i * 2);
+            var result = EitherParsers.Int("2").Map(s => $"ERROR: {s}", i => i * 2);
 
             Assert.False(result.IsLeft, "Either should not have a left value.");
             Assert.True(result.IsRight, "Either should have a right value.");
@@ -89,7 +89,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, string> leftselector = null;
                 Func<int, int> rightSelector = null;
-                var result = ErrorHandling.Either.Parse.Int("2").Map(s => $"ERROR: {s}", rightSelector);
+                var result = EitherParsers.Int("2").Map(s => $"ERROR: {s}", rightSelector);
 
                 Assert.False(result.IsLeft, "Either should not have a left value.");
                 Assert.True(result.IsRight, "Either should have a right value.");
@@ -103,7 +103,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
             Either_String_Int_Whose_Property_IsRight_Is_True__Null_LeftSelector__Expects_No_ArgumentNullExceptiion() {
             var exception = Record.Exception(() => {
                 Func<string, string> leftselector = null;
-                var result = ErrorHandling.Either.Parse.Int("2").Map(leftselector, i => i * 2);
+                var result = EitherParsers.Int("2").Map(leftselector, i => i * 2);
 
                 Assert.False(result.IsLeft, "Either should not have a left value.");
                 Assert.True(result.IsRight, "Either should have a right value.");
@@ -119,7 +119,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, string> leftselector = null;
                 Func<int, int> rightSelector = null;
-                var result = ErrorHandling.Either.Parse.Int("2").Map(leftselector, rightSelector);
+                var result = EitherParsers.Int("2").Map(leftselector, rightSelector);
 
                 Assert.False(result.IsLeft, "Either should not have a left value.");
                 Assert.True(result.IsRight, "Either should have a right value.");
@@ -131,7 +131,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         [Fact]
         public void Either_String_Int_Whose_Property_IsRight_Is_True__Should_Not_Execute_LeftSelector() {
             var isExectued = false;
-            var result = ErrorHandling.Either.Parse.Int("2").Map(s => {
+            var result = EitherParsers.Int("2").Map(s => {
                 isExectued = true;
                 return $"ERROR: {s}";
             }, i => i * 2);

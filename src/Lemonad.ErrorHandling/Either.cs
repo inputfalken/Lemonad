@@ -198,7 +198,8 @@ namespace Lemonad.ErrorHandling {
             : Either.Left<TLeft, TRightResult>(Left);
 
         [Pure]
-        public Either<TLeft, TRight> RightWhen<TLeftResult, TRightResult>(Func<TRight, Either<TLeftResult, TRightResult>> rightSelector, Func<TLeftResult, TLeft> leftSelector) {
+        public Either<TLeft, TRight> RightWhen<TLeftResult, TRightResult>(
+            Func<TRight, Either<TLeftResult, TRightResult>> rightSelector, Func<TLeftResult, TLeft> leftSelector) {
             if (IsRight) {
                 var selector = rightSelector(Right);
                 if (selector.IsRight)
@@ -209,9 +210,10 @@ namespace Lemonad.ErrorHandling {
 
             return Either.Left<TLeft, TRight>(Left);
         }
-        
+
         [Pure]
-        public Either<TLeft, TRightResult> FlatMapRight<TLeftResult, TRightResult>(Func<TRight, Either<TLeftResult, TRightResult>> rightSelector, Func<TLeftResult, TLeft> leftSelector) {
+        public Either<TLeft, TRightResult> FlatMapRight<TLeftResult, TRightResult>(
+            Func<TRight, Either<TLeftResult, TRightResult>> rightSelector, Func<TLeftResult, TLeft> leftSelector) {
             if (IsRight) {
                 var selector = rightSelector(Right);
                 if (selector.IsRight)

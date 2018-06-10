@@ -6,7 +6,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         [Fact]
         public void Either_String_Int_Whose_Property_IsRight_Is_False() {
             var isExectued = false;
-            var mapRight = ErrorHandling.Either.Parse.Int("foo").MapRight(i => {
+            var mapRight = EitherParsers.Int("foo").MapRight(i => {
                 isExectued = true;
                 return i * 2;
             });
@@ -23,7 +23,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
             Either_String_Int_Whose_Property_IsRight_Is_False__Null_Selector__Expects_No_ArgumentNullExcetpion() {
             var exception = Record.Exception(() => {
                 Func<int, int> selector = null;
-                var mapRight = ErrorHandling.Either.Parse.Int("foo").MapRight(selector);
+                var mapRight = EitherParsers.Int("foo").MapRight(selector);
                 Assert.True(mapRight.IsLeft, "Either should have a left value.");
                 Assert.False(mapRight.IsRight, "Either should not have a right value.");
                 Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", mapRight.Left);
@@ -35,7 +35,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         [Fact]
         public void Either_String_Int_Whose_Property_IsRight_Is_True() {
             var isExectued = false;
-            var mapRight = ErrorHandling.Either.Parse.Int("2").MapRight(i => {
+            var mapRight = EitherParsers.Int("2").MapRight(i => {
                 isExectued = true;
                 return i * 2;
             });
@@ -51,7 +51,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         public void Either_String_Int_Whose_Property_IsRight_Is_True__Null_Selector__Expects_ArgumentNullExcetpion() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<int, int> selector = null;
-                var mapRight = ErrorHandling.Either.Parse.Int("2").MapRight(selector);
+                var mapRight = EitherParsers.Int("2").MapRight(selector);
             });
         }
     }

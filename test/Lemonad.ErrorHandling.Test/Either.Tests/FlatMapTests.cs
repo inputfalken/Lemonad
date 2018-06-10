@@ -8,7 +8,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
             Either_String_Int__Whose_Property_IsRight_Is_False_With_Null_Selector__Expects_No_ArgumentNullException_Thrown() {
             Func<int, Either<string, int>> selector = null;
             var exception = Record.Exception(() => {
-                var result = ErrorHandling.Either.Parse.Int("foo").FlatMap(selector);
+                var result = EitherParsers.Int("foo").FlatMap(selector);
                 Assert.False(result.IsRight, "Either should not have a right value.");
                 Assert.True(result.IsLeft, "Either should have a left value.");
                 Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Left);
@@ -20,14 +20,14 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         public void
             Either_String_Int__Whose_Property_IsRight_Is_True_With_Null_Selector__Expects_ArgumentNullException_Thrown() {
             Func<int, Either<string, int>> selector = null;
-            Assert.Throws<ArgumentNullException>(() => ErrorHandling.Either.Parse.Int("2").FlatMap(selector));
+            Assert.Throws<ArgumentNullException>(() => EitherParsers.Int("2").FlatMap(selector));
         }
 
         [Fact]
         public void
             Either_String_Int_Whose_Property_IsRight_Is_False__FLatmaps_Either_String_Double_Whose_Property_IsRight_Is_False__Expects_Selector_To_Never_Be_Invoked() {
-            var intParse = ErrorHandling.Either.Parse.Int("foo");
-            var doubleParse = ErrorHandling.Either.Parse.Double("foo");
+            var intParse = EitherParsers.Int("foo");
+            var doubleParse = EitherParsers.Double("foo");
 
             var isInvoked = false;
             var result = intParse.FlatMap(_ => {
@@ -41,8 +41,8 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         [Fact]
         public void
             Either_String_Int_Whose_Property_IsRight_Is_False__FLatmaps_Either_String_Double_Whose_Property_IsRight_Is_False__Expects_String_Double_Whose_Property_IsRight_Is_False() {
-            var intParse = ErrorHandling.Either.Parse.Int("foo");
-            var doubleParse = ErrorHandling.Either.Parse.Double("foo");
+            var intParse = EitherParsers.Int("foo");
+            var doubleParse = EitherParsers.Double("foo");
 
             var result = intParse.FlatMap(x => doubleParse);
             Assert.False(result.IsRight, "Either should not have a right value.");
@@ -54,8 +54,8 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         [Fact]
         public void
             Either_String_Int_Whose_Property_IsRight_Is_False__FLatmaps_Either_String_Double_Whose_Property_IsRight_Is_True__Expects_Selector_To_Never_Be_Invoked() {
-            var intParse = ErrorHandling.Either.Parse.Int("foo");
-            var doubleParse = ErrorHandling.Either.Parse.Double("2");
+            var intParse = EitherParsers.Int("foo");
+            var doubleParse = EitherParsers.Double("2");
 
             var isInvoked = false;
             var result = intParse.FlatMap(_ => {
@@ -69,8 +69,8 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         [Fact]
         public void
             Either_String_Int_Whose_Property_IsRight_Is_False__FLatmaps_Either_String_Double_Whose_Property_IsRight_Is_True__Expects_String_Double_Whose_Property_IsRight_Is_False() {
-            var intParse = ErrorHandling.Either.Parse.Int("foo");
-            var doubleParse = ErrorHandling.Either.Parse.Double("2");
+            var intParse = EitherParsers.Int("foo");
+            var doubleParse = EitherParsers.Double("2");
 
             var result = intParse.FlatMap(x => doubleParse);
             Assert.False(result.IsRight, "Either should not have a right value.");
@@ -82,8 +82,8 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         [Fact]
         public void
             Either_String_Int_Whose_Property_IsRight_Is_True__FLatmaps_Either_String_Double_Whose_Property_IsRight_Is_False__Expects_Selector_To_Be_Invoked() {
-            var intParse = ErrorHandling.Either.Parse.Int("2");
-            var doubleParse = ErrorHandling.Either.Parse.Double("2");
+            var intParse = EitherParsers.Int("2");
+            var doubleParse = EitherParsers.Double("2");
 
             var isInvoked = false;
             var result = intParse.FlatMap(_ => {
@@ -97,8 +97,8 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         [Fact]
         public void
             Either_String_Int_Whose_Property_IsRight_Is_True__FLatmaps_Either_String_Double_Whose_Property_IsRight_Is_False__Expects_String_Double_Whose_Property_IsRight_Is_False() {
-            var intParse = ErrorHandling.Either.Parse.Int("2");
-            var doubleParse = ErrorHandling.Either.Parse.Double("foo");
+            var intParse = EitherParsers.Int("2");
+            var doubleParse = EitherParsers.Double("foo");
 
             var result = intParse.FlatMap(x => doubleParse);
             Assert.False(result.IsRight, "Either should not have a right value.");
@@ -110,8 +110,8 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         [Fact]
         public void
             Either_String_Int_Whose_Property_IsRight_Is_True__FLatmaps_Either_String_Double_Whose_Property_IsRight_Is_True__Expects_Selector_To_Be_Invoked() {
-            var intParse = ErrorHandling.Either.Parse.Int("2");
-            var doubleParse = ErrorHandling.Either.Parse.Double("2");
+            var intParse = EitherParsers.Int("2");
+            var doubleParse = EitherParsers.Double("2");
 
             var isInvoked = false;
             var result = intParse.FlatMap(_ => {
@@ -125,8 +125,8 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
         [Fact]
         public void
             Either_String_Int_Whose_Property_IsRight_Is_True__FLatmaps_Either_String_Double_Whose_Property_IsRight_Is_True__Expects_String_Double_Whose_Property_IsRight_Is_True() {
-            var intParse = ErrorHandling.Either.Parse.Int("2");
-            var doubleParse = ErrorHandling.Either.Parse.Double("2.2");
+            var intParse = EitherParsers.Int("2");
+            var doubleParse = EitherParsers.Double("2.2");
 
             var result = intParse.FlatMap(x => doubleParse);
             Assert.True(result.IsRight, "Either should have a right value.");
