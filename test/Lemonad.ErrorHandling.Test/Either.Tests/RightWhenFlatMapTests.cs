@@ -2,7 +2,7 @@
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Either.Tests {
-    public class FlatMapRightTests {
+    public class RightWhenFlatMap {
         [Fact]
         public void
             Either_String_Int__Whose_Property_IsRight_Is_False__Flatmaps__Either_String_Double__Whose_Property_IsRight_Is_False__Expects_Either_String_Double__Whose_Property_IsRight_Is_False__With_Left_Message_From_First_either() {
@@ -10,7 +10,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
             var doubleParse = EitherParsers.Double("foo");
             var rightExecuted = false;
             var leftExectued = false;
-            var result = intParse.FlatMapRight(i => {
+            var result = intParse.RightWhen(i => {
                 rightExecuted = true;
                 return doubleParse;
             }, s => {
@@ -33,7 +33,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
             var leftExectued = false;
             var intParse = EitherParsers.Int("foo");
             var doubleParse = EitherParsers.Double("2");
-            var result = intParse.FlatMapRight(i => {
+            var result = intParse.RightWhen(i => {
                 rightExecuted = true;
                 return doubleParse;
             }, s => {
@@ -56,7 +56,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
                 var intParse = EitherParsers.Int("foo");
                 var doubleParse = EitherParsers.Double("foo");
                 Func<string, string> leftSelector = null;
-                var result = intParse.FlatMapRight(i => { return doubleParse; }, leftSelector);
+                var result = intParse.RightWhen(i => { return doubleParse; }, leftSelector);
 
                 Assert.True(result.IsLeft, "Either should have a left value.");
                 Assert.False(result.IsRight, "Either should not have a right value.");
@@ -73,7 +73,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
                 var intParse = EitherParsers.Int("foo");
                 var doubleParse = EitherParsers.Double("foo");
                 Func<int, Either<string, double>> rightselector = null;
-                var result = intParse.FlatMapRight(rightselector, s => { return "Failure" + s; });
+                var result = intParse.RightWhen(rightselector, s => { return "Failure" + s; });
 
                 Assert.True(result.IsLeft, "Either should have a left value.");
                 Assert.False(result.IsRight, "Either should not have a right value.");
@@ -89,7 +89,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
             var intParse = EitherParsers.Int("foo");
             Func<int, Either<string, double>> rightselector = null;
             Func<string, string> leftSelector = null;
-            var result = intParse.FlatMapRight(rightselector, leftSelector);
+            var result = intParse.RightWhen(rightselector, leftSelector);
 
             Assert.True(result.IsLeft, "Either should have a left value.");
             Assert.False(result.IsRight, "Either should not have a right value.");
@@ -105,7 +105,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
                 var doubleParse = EitherParsers.Double("2");
                 Func<int, Either<string, double>> rightselector = null;
                 Func<string, string> leftSelector = null;
-                var result = intParse.FlatMapRight(x => doubleParse, leftSelector);
+                var result = intParse.RightWhen(x => doubleParse, leftSelector);
 
                 Assert.True(result.IsLeft, "Either should have a left value.");
                 Assert.False(result.IsRight, "Either should not have a right value.");
@@ -123,7 +123,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
                 var doubleParse = EitherParsers.Double("2");
                 Func<int, Either<string, double>> rightselector = null;
                 Func<string, string> leftSelector = null;
-                var result = intParse.FlatMapRight(rightselector, s => s);
+                var result = intParse.RightWhen(rightselector, s => s);
 
                 Assert.True(result.IsLeft, "Either should have a left value.");
                 Assert.False(result.IsRight, "Either should not have a right value.");
@@ -141,7 +141,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
                 var doubleParse = EitherParsers.Double("2");
                 Func<int, Either<string, double>> rightselector = null;
                 Func<string, string> leftSelector = null;
-                var result = intParse.FlatMapRight(rightselector, leftSelector);
+                var result = intParse.RightWhen(rightselector, leftSelector);
 
                 Assert.True(result.IsLeft, "Either should have a left value.");
                 Assert.False(result.IsRight, "Either should not have a right value.");
@@ -158,7 +158,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
             var leftExectued = false;
             var intParse = EitherParsers.Int("2");
             var doubleParse = EitherParsers.Double("2");
-            var result = intParse.FlatMapRight(i => {
+            var result = intParse.RightWhen(i => {
                 rightExecuted = true;
                 return doubleParse;
             }, s => {
@@ -181,7 +181,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
             var doubleParse = EitherParsers.Double("foo");
             var rightExecuted = false;
             var leftExectued = false;
-            var result = intParse.FlatMapRight(i => {
+            var result = intParse.RightWhen(i => {
                 rightExecuted = true;
                 return doubleParse;
             }, s => {
@@ -205,7 +205,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
                 var doubleParse = EitherParsers.Double("foo");
                 Func<int, Either<string, double>> rightselector = null;
                 Func<string, string> leftSelector = null;
-                var result = intParse.FlatMapRight(i => doubleParse, leftSelector);
+                var result = intParse.RightWhen(i => doubleParse, leftSelector);
 
                 Assert.True(result.IsLeft, "Either should have a left value.");
                 Assert.False(result.IsRight, "Either should not have a right value.");
@@ -221,7 +221,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
                 var intParse = EitherParsers.Int("2");
                 Func<int, Either<string, double>> rightselector = null;
                 Func<string, string> leftSelector = null;
-                intParse.FlatMapRight(rightselector, s => s);
+                intParse.RightWhen(rightselector, s => s);
             });
         }
 
@@ -232,7 +232,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
                 var intParse = EitherParsers.Int("2");
                 Func<int, Either<string, double>> rightselector = null;
                 Func<string, string> leftSelector = null;
-                intParse.FlatMapRight(rightselector, leftSelector);
+                intParse.RightWhen(rightselector, leftSelector);
             });
         }
 
@@ -245,7 +245,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
                 var intParse = EitherParsers.Int("2");
                 var doubleParse = EitherParsers.Double("2");
                 Func<string, string> leftSelector = null;
-                var result = intParse.FlatMapRight(i => {
+                var result = intParse.RightWhen(i => {
                     rightExecuted = true;
                     return doubleParse;
                 }, leftSelector);
@@ -268,7 +268,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
                 var doubleParse = EitherParsers.Double("2");
                 Func<int, Either<string, double>> rightselector = null;
                 Func<string, string> leftSelector = null;
-                var result = intParse.FlatMapRight(rightselector, s => s);
+                var result = intParse.RightWhen(rightselector, s => s);
 
                 Assert.True(result.IsLeft, "Either should have a left value.");
                 Assert.False(result.IsRight, "Either should not have a right value.");
@@ -285,7 +285,7 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
                 var doubleParse = EitherParsers.Double("2");
                 Func<int, Either<string, double>> rightselector = null;
                 Func<string, string> leftSelector = null;
-                var result = intParse.FlatMapRight(rightselector, leftSelector);
+                var result = intParse.RightWhen(rightselector, leftSelector);
 
                 Assert.True(result.IsLeft, "Either should have a left value.");
                 Assert.False(result.IsRight, "Either should not have a right value.");
@@ -293,6 +293,5 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
                 Assert.Equal(default(double), result.Right);
             });
         }
-        
     }
 }
