@@ -4,7 +4,7 @@
 
 ### WIP (A lot may change)
 
-There's currently no nuget package available to download this.
+There's currently no nuget package available.
 
 ## Summary
 
