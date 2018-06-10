@@ -215,12 +215,12 @@ namespace Lemonad.ErrorHandling {
         public Either<TLeft, TRightResult> FlatMapRight<TLeftResult, TRightResult>(
             Func<TRight, Either<TLeftResult, TRightResult>> rightSelector, Func<TLeftResult, TLeft> leftSelector) {
             if (IsRight) {
+                if (rightSelector == null) throw new ArgumentNullException(nameof(rightSelector));
                 var selector = rightSelector(Right);
-                if (selector.IsRight)
-                    return Either.Right<TLeft, TRightResult>(selector.Right);
-                return selector.MapLeft(leftSelector);
+                return selector.IsRight
+                    ? Either.Right<TLeft, TRightResult>(selector.Right)
+                    : selector.MapLeft(leftSelector);
             }
-
             return Either.Left<TLeft, TRightResult>(Left);
         }
 
