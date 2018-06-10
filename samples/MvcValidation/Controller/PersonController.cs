@@ -20,7 +20,6 @@ namespace WebApp.Controller {
 
         private static Either<PersonPostApiError, PersonPostApiModel> ApiValidation(PersonPostApiModel model) {
             var either = model.ToEitherRight<PersonPostApiError, PersonPostApiModel>();
-            // Surely there needs to be a shorter syntax in order to achieve this!
             var apiValidation = new List<Either<PersonPostApiError, PersonPostApiModel>> {
                 either.RightWhen(x => x.Age > 10, () => new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
                 either.RightWhen(x => ValidateName(x.FirstName), s => new PersonPostApiError {Message = s, Model = model}),
