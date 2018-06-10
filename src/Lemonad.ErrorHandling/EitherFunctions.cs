@@ -41,8 +41,8 @@ namespace Lemonad.ErrorHandling {
             source.IsRight ? source.Right.Some() : Maybe<TRight>.None;
 
         public static class Parse {
-            private static string FormatStringParserMessage<TEnum>(string input) where TEnum : struct =>
-                $"Could not parse type {typeof(string)}(\"{input}\") into {typeof(TEnum)}.";
+            private static string FormatStringParserMessage<T>(string input) where T : struct =>
+                $"Could not parse type {typeof(string)}(\"{input}\") into {typeof(T)}.";
 
             public static Either<string, TEnum> Enum<TEnum>(string input) where TEnum : struct =>
                 System.Enum.TryParse<TEnum>(input, out var value)
