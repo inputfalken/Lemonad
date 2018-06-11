@@ -1,3 +1,9 @@
+param (
+  [Parameter(Position = 1, Mandatory = 1)]
+  [ValidateSet('Release','Debug')] 
+  $Configuration
+)
+
 function Is-InsideGitRepository {
   if (Get-Command -Name 'git' -ErrorAction SilentlyContinue) {
     if (git rev-parse --is-inside-work-tree 2>$null) { $true } else { $false }
@@ -40,30 +46,33 @@ function List-Files {
 
 function Build-Solution {
   param(
-    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $Solution
+    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $Solution,
+    [Parameter(Position = 1, Mandatory = 1)] [string] $Configuration
   )
-  dotnet build $solution --configuration Release
+  dotnet build $solution --configuration $Configuration
   if (!$?) { throw "Could not build solution '$Solution'." }
 }
 
 function Test-Projects {
   param(
-    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $TestDirectory
+    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $Directory,
+    [Parameter(Position = 1, Mandatory = 1)] [string] $Configuration
   )
-  List-Files "$TestDirectory*.csproj" `
+  List-Files "$Directory*.csproj" `
     | ForEach-Object {
-      dotnet test $_ --configuration Release --no-build --no-restore
+      dotnet test $_ --configuration $Configuration --no-build --no-restore
       if (!$?) { throw "Failed executing tests for project '$_'." }
     }
 }
 
 function Pack-Projects {
   param(
-    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $SourceDirectory
+    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $Directory,
+    [Parameter(Position = 1, Mandatory = 1)] [string] $Configuration
   )
-  List-Files "$SourceDirectory*.csproj" `
+  List-Files "$Directory*.csproj" `
     | ForEach-Object {
-      dotnet pack $_ --configuration Release --no-build --no-restore
+      dotnet pack $_ --configuration $Configuration --no-build --no-restore
       if (!$?) { throw "Failed creating NuGet package from project '$_'." }
     }
 }
@@ -85,6 +94,6 @@ $solution = Get-ChildItem -Filter '*.sln' `
   -Process { if ($result) { throw "More than 1 solution was found in '$(Get-Location)'" } else { $result = $_ } } `
   -End { Get-Item $result }
 
-Build-Solution -Solution $solution
-Test-Projects $testDirectory
-Pack-Projects $srcDiretory
+Build-Solution -Solution $solution -Configuration $Configuration
+Test-Projects -Directory $testDirectory -Configuration $Configuration
+Pack-Projects -Directory $srcDiretory -Configuration $Configuration
