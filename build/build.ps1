@@ -1,6 +1,6 @@
 param (
   [Parameter(Position = 1, Mandatory = 1)]
-  [ValidateSet('Release','Debug')] 
+  [ValidateSet('Release','Debug')]
   $Configuration
 )
 
@@ -96,4 +96,9 @@ $solution = Get-ChildItem -Filter '*.sln' `
 
 Build-Solution -Solution $solution -Configuration $Configuration
 Test-Projects -Directory $testDirectory -Configuration $Configuration
-Pack-Projects -Directory $srcDiretory -Configuration $Configuration
+
+if (!($IsMacOS -or $IsLinux)) {
+  Pack-Projects -Directory $srcDiretory -Configuration $Configuration
+}else {
+  Write-Output 'Skipping deployment for none windows platform.'
+}
