@@ -1,6 +1,6 @@
 param (
   [Parameter(Position = 1, Mandatory = 1)]
-  [ValidateSet('Release','Debug')]
+  [ValidateSet('Release', 'Debug')]
   $Configuration
 )
 
@@ -60,9 +60,9 @@ function Test-Projects {
   )
   List-Files "$Directory*.csproj" `
     | ForEach-Object {
-      dotnet test $_ --configuration $Configuration --no-build --no-restore
-      if (!$?) { throw "Failed executing tests for project '$_'." }
-    }
+    dotnet test $_ --configuration $Configuration --no-build --no-restore
+    if (!$?) { throw "Failed executing tests for project '$_'." }
+  }
 }
 
 function Pack-Projects {
@@ -72,9 +72,9 @@ function Pack-Projects {
   )
   List-Files "$Directory*.csproj" `
     | ForEach-Object {
-      dotnet pack $_ --configuration $Configuration --no-build --no-restore
-      if (!$?) { throw "Failed creating NuGet package from project '$_'." }
-    }
+    dotnet pack $_ --configuration $Configuration --no-build --no-restore
+    if (!$?) { throw "Failed creating NuGet package from project '$_'." }
+  }
 }
 
 #-------------------------------------------------------------------------------------------------------------------------------------
@@ -97,8 +97,8 @@ $solution = Get-ChildItem -Filter '*.sln' `
 Build-Solution -Solution $solution -Configuration $Configuration
 Test-Projects -Directory $testDirectory -Configuration $Configuration
 
-if (!($IsMacOS -or $IsLinux)) {
+$isWindows = !($IsMacOS -or $IsLinux)
+
+if ($isWindows) {
   Pack-Projects -Directory $srcDiretory -Configuration $Configuration
-}else {
-  Write-Output 'Skipping deployment for none windows platform.'
 }
