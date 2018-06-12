@@ -97,7 +97,10 @@ $solution = Get-ChildItem -Filter '*.sln' `
 Build-Solution -Solution $solution -Configuration $Configuration
 Test-Projects -Directory $testDirectory -Configuration $Configuration
 
-$isWindows = !($IsMacOS -or $IsLinux)
+# Automatic OS boolean environmental variables:
+  # * $isWindows
+  # * $IsMacOS 
+  # * $IsLinux
 
 if ($isWindows) {
   Pack-Projects -Directory $srcDiretory -Configuration $Configuration
