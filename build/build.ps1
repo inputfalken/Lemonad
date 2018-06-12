@@ -77,6 +77,10 @@ function Pack-Projects {
   }
 }
 
+function Upload-Packages {
+  Write-Host "TODO, deploy to Nuget."
+}
+
 #-------------------------------------------------------------------------------------------------------------------------------------
 $rootDirectory = Get-RootDirectory
 $testDirectory = Join-Path -Path $rootDirectory -ChildPath 'test' `
@@ -98,10 +102,27 @@ Build-Solution -Solution $solution -Configuration $Configuration
 Test-Projects -Directory $testDirectory -Configuration $Configuration
 
 # Automatic OS boolean environmental variables:
-  # * $isWindows
-  # * $IsMacOS 
-  # * $IsLinux
+# * $isWindows
+# * $IsMacOS
+# * $IsLinux
 
 if ($isWindows) {
   Pack-Projects -Directory $srcDiretory -Configuration $Configuration
+
+  if ($env:APPVEYOR) {
+    switch ($env:APPVEYOR_REPO_BRANCH) {
+      'master' {
+        Upload-Packages
+      }
+      [string]::Empty {
+        throw 'Branch can not be empty'
+      }
+      $null {
+        throw 'Branch can not be null'
+      }
+      default {
+        exit
+      }
+    }
+  }
 }
