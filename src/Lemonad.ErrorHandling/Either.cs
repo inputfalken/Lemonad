@@ -198,7 +198,7 @@ namespace Lemonad.ErrorHandling {
             : Either.Left<TLeft, TRightResult>(Left);
 
         [Pure]
-        public Either<TLeft, TRight> RightWhen<TLeftResult, TRightResult>(
+        public Either<TLeft, TRight> Flatten<TLeftResult, TRightResult>(
             Func<TRight, Either<TLeftResult, TRightResult>> rightSelector, Func<TLeftResult, TLeft> leftSelector) {
             if (IsRight) {
                 if (rightSelector == null) throw new ArgumentNullException(nameof(rightSelector));

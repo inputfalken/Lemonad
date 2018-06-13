@@ -13,7 +13,7 @@ namespace WebApp.Controller {
         public IActionResult EitherValidationSummarized([FromBody] PersonPostApiModel model) {
             return ApiValidation(model)
                 .MapRight(x => new PersonModel {FirstName = x.FirstName, LastName = x.LastName})
-                .RightWhen(LastNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
+                .Flatten(LastNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
                 .FlatMapRight(FirstNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
                 .Match<IActionResult>(BadRequest, Ok);
         }
@@ -22,8 +22,8 @@ namespace WebApp.Controller {
             var either = model.ToEitherRight<PersonPostApiError, PersonPostApiModel>();
             var apiValidation = new List<Either<PersonPostApiError, PersonPostApiModel>> {
                 either.RightWhen(x => x.Age > 10, () => new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
-                either.RightWhen(x => ValidateName(x.FirstName), s => new PersonPostApiError {Message = s, Model = model}),
-                either.RightWhen(x => ValidateName(x.LastName), s => new PersonPostApiError {Message = s, Model = model})
+                either.Flatten(x => ValidateName(x.FirstName), s => new PersonPostApiError {Message = s, Model = model}),
+                either.Flatten(x => ValidateName(x.LastName), s => new PersonPostApiError {Message = s, Model = model})
             };
 
             var errors = apiValidation
