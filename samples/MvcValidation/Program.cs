@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace WebApp {
+namespace MvcValidation {
     public class Program {
         public static void Main(string[] args) {
             CreateWebHostBuilder(args).Build().Run();

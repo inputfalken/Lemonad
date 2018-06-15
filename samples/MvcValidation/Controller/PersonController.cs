@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Lemonad.ErrorHandling;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using WebApp.ApiModels;
-using WebApp.Models;
+using MvcValidation.ApiModels;
+using MvcValidation.Models;
 
-namespace WebApp.Controller {
+namespace MvcValidation.Controller {
     [Route("people")]
     public class PersonController : Microsoft.AspNetCore.Mvc.Controller {
         [HttpPost, Route("eitherSummarized")]

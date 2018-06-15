@@ -1,4 +1,4 @@
-﻿namespace WebApp.ApiModels {
+﻿namespace MvcValidation.ApiModels {
     public class PersonPostApiModel {
         public string FirstName { get; set; }
         public string LastName { get; set; }
