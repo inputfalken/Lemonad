@@ -128,6 +128,7 @@ namespace Lemonad.ErrorHandling {
             return this;
         }
 
+        // TODO handle old left
         [Pure]
         public Either<TLeftResult, TRight> RightWhen<TLeftResult>(
             Func<TRight, bool> predicate, Func<TLeftResult> leftSelector) =>
@@ -143,6 +144,7 @@ namespace Lemonad.ErrorHandling {
                     ? throw new ArgumentNullException(nameof(leftSelector))
                     : Either.Left<TLeftResult, TRight>(leftSelector());
 
+        // TODO handle old left
         [Pure]
         public Either<TLeftResult, TRight> LeftWhen<TLeftResult>(
             Func<TRight, bool> predicate, Func<TLeftResult> leftSelector) =>
