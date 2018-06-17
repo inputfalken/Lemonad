@@ -12,7 +12,7 @@ before_build:
   # Display minimal restore text
 build_script:
   # Build scripts.
-  - pwsh: .\build\build.ps1 -Configuration Release -GenerateDocs $true -UserName 'Byggare-Rob' -UserEmail 'byggare.rob.ci@gmail.com'
+  - pwsh: .\build\build.ps1 -Configuration Release -GenerateDocs -UserName 'Byggare-Rob' -UserEmail 'byggare.rob.ci@gmail.com'
 after_build:
   # For once the build has completed
 clone_depth: 1
