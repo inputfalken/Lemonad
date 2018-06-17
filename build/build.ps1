@@ -121,8 +121,11 @@ function Push-Documentation {
   Push-Location $docsSiteDirectory
 
   git add -A 2>&1
+  if (!$?) { throw 'Failed adding generated documentation.' }
   git commit -m "Documentation updated" -q
+  if (!$?) { throw 'Failed commiting generatated documentation.' }
   git push origin gh-pages -q
+  if (!$?) { throw 'Failed pushing generated documentation.' }
   Pop-Location
   Remove-Item $ghPagesDirectory -Force -Recurse -ErrorAction Stop
   Remove-Item $docsSiteDirectory -Force -Recurse -ErrorAction Stop
