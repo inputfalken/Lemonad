@@ -159,11 +159,11 @@ namespace Lemonad.ErrorHandling {
                     : Either.Left<TLeft, TRight>(Left);
 
         [Pure]
-        public Either<TLeft, TRight> LeftWhenNull(
+        public Either<TLeft, TRight> IsLeftWhenNull(
             Func<TLeft> leftSelector) => IsLeftWhen(EquailtyFunctions.IsNull, leftSelector);
 
         [Pure]
-        public Either<TLeft, TRight> RightWhenNull(
+        public Either<TLeft, TRight> IsRightWhenNull(
             Func<TLeft> leftSelector) => IsRightWhen(EquailtyFunctions.IsNull, leftSelector);
 
         [Pure]
