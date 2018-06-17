@@ -5,10 +5,10 @@ using System.Linq;
 
 namespace Lemonad.ErrorHandling {
     public static class Either {
-        public static IEnumerable<TLeft> EitherLefts<TLeft, TRight>(
+        public static IEnumerable<TLeft> LeftValues<TLeft, TRight>(
             this IEnumerable<Either<TLeft, TRight>> enumerable) => enumerable.SelectMany(x => x.LeftEnumerable);
 
-        public static IEnumerable<TRight> EitherRights<TLeft, TRight>(
+        public static IEnumerable<TRight> RightValues<TLeft, TRight>(
             this IEnumerable<Either<TLeft, TRight>> enumerable) => enumerable.SelectMany(x => x.RightEnumerable);
 
         [Pure]

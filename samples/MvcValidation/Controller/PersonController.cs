@@ -26,7 +26,7 @@ namespace MvcValidation.Controller {
             };
 
             var errors = apiValidation
-                .EitherLefts()
+                .LeftValues()
                 .Select(x => x.Message)
                 .ToArray();
             return errors.Any()
