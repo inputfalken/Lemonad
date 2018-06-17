@@ -20,7 +20,7 @@ namespace MvcValidation.Controller {
         private static Either<PersonPostApiError, PersonPostApiModel> ApiValidation(PersonPostApiModel model) {
             var either = model.ToEitherRight<PersonPostApiError, PersonPostApiModel>();
             var apiValidation = new List<Either<PersonPostApiError, PersonPostApiModel>> {
-                either.RightWhen(x => x.Age > 10, () => new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
+                either.IsRightWhen(x => x.Age > 10, () => new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
                 either.Flatten(x => ValidateName(x.FirstName), s => new PersonPostApiError {Message = s, Model = model}),
                 either.Flatten(x => ValidateName(x.LastName), s => new PersonPostApiError {Message = s, Model = model})
             };
@@ -48,9 +48,9 @@ namespace MvcValidation.Controller {
 
         private static Either<string, string> ValidateName(string name) {
             return name.ToEitherRight<string, string>()
-                .LeftWhen(string.IsNullOrWhiteSpace, () => "Name cannot be empty.")
-                .RightWhen(s => s.All(char.IsLetter), () => "Name can only contain letters.")
-                .RightWhen(s => char.IsUpper(s[0]), () => "Name must start with capital letter.");
+                .IsLeftWhen(string.IsNullOrWhiteSpace, () => "Name cannot be empty.")
+                .IsRightWhen(s => s.All(char.IsLetter), () => "Name can only contain letters.")
+                .IsRightWhen(s => char.IsUpper(s[0]), () => "Name must start with capital letter.");
         }
     }
 }

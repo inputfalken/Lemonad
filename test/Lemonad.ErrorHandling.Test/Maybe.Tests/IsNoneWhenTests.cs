@@ -8,7 +8,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Maybe_String_Whose_Property_HasValue_Is_False__Pasing_Null_Predicate__No_ArgumentNullReferenceException_Thrown() {
             var exception = Record.Exception(() => {
                 Func<string, bool> predicate = null;
-                var someWhen = "foo".None().NoneWhen(predicate);
+                var someWhen = "foo".None().IsNoneWhen(predicate);
                 Assert.False(someWhen.HasValue, "Maybe should not have value.");
                 Assert.Equal(default(string), someWhen.Value);
             });
@@ -20,7 +20,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Maybe_String_Whose_Property_HasValue_Is_True__Pasing_Null_Predicate__ArgumentNullReferenceException_Thrown() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, bool> predicate = null;
-                "foo".Some().NoneWhen(predicate);
+                "foo".Some().IsNoneWhen(predicate);
             });
         }
 
@@ -28,19 +28,19 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void Null_Predicate__Throws_ArgumentNullException() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, bool> predicate = null;
-                "foo".NoneWhen(predicate);
+                "foo".None(predicate);
             });
         }
 
         [Fact]
         public void When_Predicate_Returns_False__Maybe_Is_Expected_To_HaveValue() {
-            var noneWhen = "".NoneWhen(s => false);
+            var noneWhen = "".None(s => false);
             Assert.True(noneWhen.HasValue, "Maybe should have value.");
         }
 
         [Fact]
         public void When_Predicate_Returns_True__Maybe_Is_Expected_To_HaveValue() {
-            var noneWhen = "".NoneWhen(s => true);
+            var noneWhen = "".None(s => true);
             Assert.False(noneWhen.HasValue, "Maybe should not have value.");
         }
     }

@@ -47,19 +47,15 @@ namespace Lemonad.ErrorHandling {
             Func<TResult> selector) => source.Where(x => x.HasValue == false).Select(_ => selector());
 
         [Pure]
-        public static Maybe<TSource> NoneWhen<TSource>(this TSource item, Func<TSource, bool> predicate) =>
+        public static Maybe<TSource> None<TSource>(this TSource item, Func<TSource, bool> predicate) =>
             predicate != null
-                ? Some(item).SomeWhen(x => !predicate(x))
+                ? Some(item).IsSomeWhen(x => !predicate(x))
                 : throw new ArgumentNullException(nameof(predicate));
 
         [Pure]
-        public static Maybe<TSource> NoneWhenNull<TSource>(this TSource item) =>
-            item.NoneWhen(EquailtyFunctions.IsNull);
-
-        [Pure]
-        public static Maybe<TSource> SomeWhen<TSource>(this TSource item, Func<TSource, bool> predicate) =>
+        public static Maybe<TSource> Some<TSource>(this TSource item, Func<TSource, bool> predicate) =>
             predicate != null
-                ? Some(item).SomeWhen(predicate)
+                ? Some(item).IsSomeWhen(predicate)
                 : throw new ArgumentNullException(nameof(predicate));
 
         [Pure]

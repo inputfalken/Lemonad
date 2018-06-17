@@ -129,7 +129,7 @@ namespace Lemonad.ErrorHandling {
         }
 
         [Pure]
-        public Either<TLeft, TRight> RightWhen(
+        public Either<TLeft, TRight> IsRightWhen(
             Func<TRight, bool> predicate, Func<TLeft> leftSelector) =>
             IsRight
                 ? predicate == null
@@ -144,7 +144,7 @@ namespace Lemonad.ErrorHandling {
                     : Either.Left<TLeft, TRight>(Left);
 
         [Pure]
-        public Either<TLeft, TRight> LeftWhen(
+        public Either<TLeft, TRight> IsLeftWhen(
             Func<TRight, bool> predicate, Func<TLeft> leftSelector) =>
             IsRight
                 ? predicate == null
@@ -160,11 +160,11 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public Either<TLeft, TRight> LeftWhenNull(
-            Func<TLeft> leftSelector) => LeftWhen(EquailtyFunctions.IsNull, leftSelector);
+            Func<TLeft> leftSelector) => IsLeftWhen(EquailtyFunctions.IsNull, leftSelector);
 
         [Pure]
         public Either<TLeft, TRight> RightWhenNull(
-            Func<TLeft> leftSelector) => RightWhen(EquailtyFunctions.IsNull, leftSelector);
+            Func<TLeft> leftSelector) => IsRightWhen(EquailtyFunctions.IsNull, leftSelector);
 
         [Pure]
         public Either<TLeftResult, TRightResult> Map<TLeftResult, TRightResult>(

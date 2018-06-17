@@ -89,7 +89,7 @@ namespace Lemonad.ErrorHandling {
                 : Maybe<TResult>.None;
 
         [Pure]
-        public Maybe<T> SomeWhen(
+        public Maybe<T> IsSomeWhen(
             Func<T, bool> predicate) => HasValue
             ? predicate != null
                 ? predicate(Value)
@@ -124,11 +124,11 @@ namespace Lemonad.ErrorHandling {
             HasValue ? selector(Value).ConvertToMaybe() : Maybe<TResult>.None;
 
         [Pure]
-        public Maybe<T> NoneWhenNull() =>
-            NoneWhen(EquailtyFunctions.IsNull);
+        public Maybe<T> IsNoneWhenNull() =>
+            IsNoneWhen(EquailtyFunctions.IsNull);
 
         [Pure]
-        public Maybe<T> NoneWhen(
+        public Maybe<T> IsNoneWhen(
             Func<T, bool> predicate) => HasValue
             ? predicate != null
                 ? predicate(Value) == false
