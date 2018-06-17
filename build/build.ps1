@@ -1,7 +1,9 @@
 param (
-  [Parameter(Position = 1, Mandatory = 1)]
-  [ValidateSet('Release', 'Debug')]
-  $Configuration
+  [Parameter(Position = 0, Mandatory = 1)] [ValidateSet('Release', 'Debug')] $Configuration,
+  [Parameter(Position = 1, Mandatory = 0)] [switch] $GenerateDocs = $false,
+  [Parameter(Position = 2, Mandatory = 0)] [string] $UserName = 'User',
+  [Parameter(Position = 3, Mandatory = 0)] [string] $UserEmail = 'UserEmail'
+
 )
 
 function Is-InsideGitRepository {
@@ -81,6 +83,52 @@ function Upload-Packages {
   Write-Host "TODO, deploy to Nuget."
 }
 
+function Build-Documentation {
+  param(
+    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $Directory
+  )
+  if (!(Get-Command -DocFx -ErrorAction SilentlyContinue)) {
+    choco install docfx -y
+    if (!$?) { throw 'Could not install DocFx by chocolatey.' }
+  }
+  Push-Location $Directory
+  & docfx docfx.json
+  if (!$?) { throw 'Could not generate documentation with DocFx.' }
+  Pop-Location
+}
+
+function Push-Documentation {
+  param(
+      [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $Directory
+    )
+    git config --global credential.helper store
+    if (!$?) { throw "Could not set git command 'config --global credential.helper store'." }
+
+    Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:GITHUB_ACCESS_TOKEN):x-oauth-basic@github.com`n" -ErrorAction Stop
+
+    git config --global user.email $UserEmail
+    if (!$?) { throw 'Could not set email for git config.' }
+
+    git config --global user.name $UserName
+    if (!$?) { throw 'Could not set name for git config.' }
+
+    $ghPagesDirectory = 'gh_pages'
+    git clone https://github.com/docascode/docfx-seed.git -b gh-pages $ghPagesDirectory -q
+    if (!$?) { throw "Could not clone 'gh-pages'." }
+    $docsSiteDirectory = Join-Path -Path $Directory -ChildPath '_site' -ErrorAction Stop | Get-Item -ErrorAction Stop
+    $ghPagesDirectoryGitDirectory = Join-Path -Path $ghPagesDirectory -ChildPath '.git' -ErrorAction Stop | Get-Item -ErrorAction Stop -Force
+    Copy-Item $ghPagesDirectoryGitDirectory _site -Recurse -ErrorAction Stop
+    Push-Location _site
+
+    git add -A 2>&1
+    if (!$?) { throw 'Could not add generated documentation.' }
+    git commit -m "CI Updates" -q
+    if (!$?) { throw 'Could not commit generated documentation changes.' }
+    git push origin gh-pages -q
+    if (!$?) { throw 'Could not push generated documentation.' }
+    Pop-Location
+}
+
 #-------------------------------------------------------------------------------------------------------------------------------------
 $rootDirectory = Get-RootDirectory
 $testDirectory = Join-Path -Path $rootDirectory -ChildPath 'test' `
@@ -106,9 +154,14 @@ Test-Projects -Directory $testDirectory -Configuration $Configuration
 # * $IsMacOS
 # * $IsLinux
 
+if (!$env:APPVEYOR_PULL_REQUEST_TITLE -and $GenerateDocs) {
+  $documentationDirectory = (Join-Path -Path $rootDirectory -ChildPath 'docs' -ErrorAction Stop ) | Get-Item -ErrorAction Stop
+  Build-Documentation -Directory $documentationDirectory
+  Push-Documentation -Directory $documentationDirectory
+}
+
 if ($isWindows) {
   Pack-Projects -Directory $srcDiretory -Configuration $Configuration
-
   if ($env:APPVEYOR) {
     switch ($env:APPVEYOR_REPO_BRANCH) {
       'master' {
@@ -126,3 +179,4 @@ if ($isWindows) {
     }
   }
 }
+
