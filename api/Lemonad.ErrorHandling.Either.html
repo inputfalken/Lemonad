@@ -1,0 +1,696 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Either
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Either
+   ">
+    <meta name="generator" content="docfx 2.36.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Lemonad.ErrorHandling.Either">
+  
+  
+  <h1 id="Lemonad_ErrorHandling_Either" data-uid="Lemonad.ErrorHandling.Either" class="text-break">Class Either
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">Either</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Lemonad.ErrorHandling.html">Lemonad.ErrorHandling</a></h6>
+  <h6><strong>Assembly</strong>: Lemonad.ErrorHandling.dll</h6>
+  <h5 id="Lemonad_ErrorHandling_Either_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class Either</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/addDocFx/apiSpec/new?filename=Lemonad_ErrorHandling_Either_ConvertToMaybe__2_Lemonad_ErrorHandling_Either___0___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Either.ConvertToMaybe%60%602(Lemonad.ErrorHandling.Either%7B%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/addDocFx/src/Lemonad.ErrorHandling/EitherFunctions.cs/#L38">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_Either_ConvertToMaybe_" data-uid="Lemonad.ErrorHandling.Either.ConvertToMaybe*"></a>
+  <h4 id="Lemonad_ErrorHandling_Either_ConvertToMaybe__2_Lemonad_ErrorHandling_Either___0___1__" data-uid="Lemonad.ErrorHandling.Either.ConvertToMaybe``2(Lemonad.ErrorHandling.Either{``0,``1})">ConvertToMaybe&lt;TLeft, TRight&gt;(Either&lt;TLeft, TRight&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static Maybe&lt;TRight&gt; ConvertToMaybe&lt;TLeft, TRight&gt;(this Either&lt;TLeft, TRight&gt; source)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.Either-2.html">Either</a>&lt;TLeft, TRight&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe</a>&lt;TRight&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TLeft</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRight</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/addDocFx/apiSpec/new?filename=Lemonad_ErrorHandling_Either_Left__2___0_.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Either.Left%60%602(%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/addDocFx/src/Lemonad.ErrorHandling/EitherFunctions.cs/#L18">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_Either_Left_" data-uid="Lemonad.ErrorHandling.Either.Left*"></a>
+  <h4 id="Lemonad_ErrorHandling_Either_Left__2___0_" data-uid="Lemonad.ErrorHandling.Either.Left``2(``0)">Left&lt;TLeft, TRight&gt;(TLeft)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static Either&lt;TLeft, TRight&gt; Left&lt;TLeft, TRight&gt;(TLeft left)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TLeft</span></td>
+        <td><span class="parametername">left</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.Either-2.html">Either</a>&lt;TLeft, TRight&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TLeft</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRight</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/addDocFx/apiSpec/new?filename=Lemonad_ErrorHandling_Either_LeftValues__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_Either___0___1___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Either.LeftValues%60%602(System.Collections.Generic.IEnumerable%7BLemonad.ErrorHandling.Either%7B%60%600%2C%60%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/addDocFx/src/Lemonad.ErrorHandling/EitherFunctions.cs/#L8">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_Either_LeftValues_" data-uid="Lemonad.ErrorHandling.Either.LeftValues*"></a>
+  <h4 id="Lemonad_ErrorHandling_Either_LeftValues__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_Either___0___1___" data-uid="Lemonad.ErrorHandling.Either.LeftValues``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.Either{``0,``1}})">LeftValues&lt;TLeft, TRight&gt;(IEnumerable&lt;Either&lt;TLeft, TRight&gt;&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TLeft&gt; LeftValues&lt;TLeft, TRight&gt;(this IEnumerable&lt;Either&lt;TLeft, TRight&gt;&gt; enumerable)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Lemonad.ErrorHandling.Either-2.html">Either</a>&lt;TLeft, TRight&gt;&gt;</td>
+        <td><span class="parametername">enumerable</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TLeft&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TLeft</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRight</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/addDocFx/apiSpec/new?filename=Lemonad_ErrorHandling_Either_Right__2___1_.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Either.Right%60%602(%60%601)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/addDocFx/src/Lemonad.ErrorHandling/EitherFunctions.cs/#L14">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_Either_Right_" data-uid="Lemonad.ErrorHandling.Either.Right*"></a>
+  <h4 id="Lemonad_ErrorHandling_Either_Right__2___1_" data-uid="Lemonad.ErrorHandling.Either.Right``2(``1)">Right&lt;TLeft, TRight&gt;(TRight)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static Either&lt;TLeft, TRight&gt; Right&lt;TLeft, TRight&gt;(TRight right)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TRight</span></td>
+        <td><span class="parametername">right</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.Either-2.html">Either</a>&lt;TLeft, TRight&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TLeft</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRight</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/addDocFx/apiSpec/new?filename=Lemonad_ErrorHandling_Either_RightValues__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_Either___0___1___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Either.RightValues%60%602(System.Collections.Generic.IEnumerable%7BLemonad.ErrorHandling.Either%7B%60%600%2C%60%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/addDocFx/src/Lemonad.ErrorHandling/EitherFunctions.cs/#L11">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_Either_RightValues_" data-uid="Lemonad.ErrorHandling.Either.RightValues*"></a>
+  <h4 id="Lemonad_ErrorHandling_Either_RightValues__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_Either___0___1___" data-uid="Lemonad.ErrorHandling.Either.RightValues``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.Either{``0,``1}})">RightValues&lt;TLeft, TRight&gt;(IEnumerable&lt;Either&lt;TLeft, TRight&gt;&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TRight&gt; RightValues&lt;TLeft, TRight&gt;(this IEnumerable&lt;Either&lt;TLeft, TRight&gt;&gt; enumerable)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Lemonad.ErrorHandling.Either-2.html">Either</a>&lt;TLeft, TRight&gt;&gt;</td>
+        <td><span class="parametername">enumerable</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TRight&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TLeft</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRight</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/addDocFx/apiSpec/new?filename=Lemonad_ErrorHandling_Either_ToEither__2_System_Nullable___1__System_Func___0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Either.ToEither%60%602(System.Nullable%7B%60%601%7D%2CSystem.Func%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/addDocFx/src/Lemonad.ErrorHandling/EitherFunctions.cs/#L22">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_Either_ToEither_" data-uid="Lemonad.ErrorHandling.Either.ToEither*"></a>
+  <h4 id="Lemonad_ErrorHandling_Either_ToEither__2_System_Nullable___1__System_Func___0__" data-uid="Lemonad.ErrorHandling.Either.ToEither``2(System.Nullable{``1},System.Func{``0})">ToEither&lt;TLeft, TRight&gt;(Nullable&lt;TRight&gt;, Func&lt;TLeft&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static Either&lt;TLeft, TRight&gt; ToEither&lt;TLeft, TRight&gt;(this TRight? source, Func&lt;TLeft&gt; leftSelector)
+    where TRight : struct</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;TRight&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TLeft&gt;</td>
+        <td><span class="parametername">leftSelector</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.Either-2.html">Either</a>&lt;TLeft, TRight&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TLeft</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRight</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/addDocFx/apiSpec/new?filename=Lemonad_ErrorHandling_Either_ToEitherLeft__2___0_.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Either.ToEitherLeft%60%602(%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/addDocFx/src/Lemonad.ErrorHandling/EitherFunctions.cs/#L35">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_Either_ToEitherLeft_" data-uid="Lemonad.ErrorHandling.Either.ToEitherLeft*"></a>
+  <h4 id="Lemonad_ErrorHandling_Either_ToEitherLeft__2___0_" data-uid="Lemonad.ErrorHandling.Either.ToEitherLeft``2(``0)">ToEitherLeft&lt;TLeft, TRight&gt;(TLeft)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static Either&lt;TLeft, TRight&gt; ToEitherLeft&lt;TLeft, TRight&gt;(this TLeft left)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TLeft</span></td>
+        <td><span class="parametername">left</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.Either-2.html">Either</a>&lt;TLeft, TRight&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TLeft</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRight</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/addDocFx/apiSpec/new?filename=Lemonad_ErrorHandling_Either_ToEitherRight__2___1_.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Either.ToEitherRight%60%602(%60%601)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/addDocFx/src/Lemonad.ErrorHandling/EitherFunctions.cs/#L31">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_Either_ToEitherRight_" data-uid="Lemonad.ErrorHandling.Either.ToEitherRight*"></a>
+  <h4 id="Lemonad_ErrorHandling_Either_ToEitherRight__2___1_" data-uid="Lemonad.ErrorHandling.Either.ToEitherRight``2(``1)">ToEitherRight&lt;TLeft, TRight&gt;(TRight)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static Either&lt;TLeft, TRight&gt; ToEitherRight&lt;TLeft, TRight&gt;(this TRight right)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TRight</span></td>
+        <td><span class="parametername">right</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.Either-2.html">Either</a>&lt;TLeft, TRight&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TLeft</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRight</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/inputfalken/Lemonad/new/addDocFx/apiSpec/new?filename=Lemonad_ErrorHandling_Either.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Either%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/inputfalken/Lemonad/blob/addDocFx/src/Lemonad.ErrorHandling/EitherFunctions.cs/#L7" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
