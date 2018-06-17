@@ -115,3 +115,10 @@ foreach (int division in successFulDivisions) { Console.WriteLine(division); }
 * ErrorHandling
   * `Either<TLeft, TRight>`
   * `Maybe<T>`
+
+## To be added
+
+* Async error handlers.
+  * `EitherAsync<TLeft, TRight>`
+  * `MaybeAsync<T>`
+
