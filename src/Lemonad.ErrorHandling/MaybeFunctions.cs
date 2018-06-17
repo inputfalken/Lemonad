@@ -63,12 +63,13 @@ namespace Lemonad.ErrorHandling {
             item.HasValue ? Some(item.Value) : None<TSource>();
 
         [Pure]
-        public static Either<TLeft, TRight>
-            ToEither<TLeft, TRight>(this Maybe<TRight> source, Func<TLeft> leftSelector) =>
-            source.HasValue
-                ? Either.Right<TLeft, TRight>(source.Value)
-                : (leftSelector != null
-                    ? Either.Left<TLeft, TRight>(leftSelector())
-                    : throw new ArgumentNullException(nameof(leftSelector)));
+        public static Result<T, TError>
+            ToResult<T, TError>(this Maybe<T> source, Func<TError> leftSelector) {
+            if (source.HasValue)
+                return source.Value;
+            return leftSelector != null
+                ? leftSelector()
+                : throw new ArgumentNullException(nameof(leftSelector));
+        }
     }
 }

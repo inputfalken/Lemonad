@@ -8,49 +8,54 @@ using MvcValidation.Models;
 namespace MvcValidation.Controller {
     [Route("people")]
     public class PersonController : Microsoft.AspNetCore.Mvc.Controller {
-        [HttpPost, Route("eitherSummarized")]
+        [HttpPost]
+        [Route("eitherSummarized")]
         public IActionResult EitherValidationSummarized([FromBody] PersonPostApiModel model) {
-            return ApiValidation(model)
-                .MapRight(x => new PersonModel {FirstName = x.FirstName, LastName = x.LastName})
+            var result = ApiValidation(model)
+                .Map(x => new PersonModel {FirstName = x.FirstName, LastName = x.LastName})
                 .Flatten(LastNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
-                .FlatMapRight(FirstNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
-                .Match<IActionResult>(BadRequest, Ok);
+                .FlatMap(FirstNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model});
+            return result.Match<IActionResult>(BadRequest, Ok);
         }
 
-        private static Either<PersonPostApiError, PersonPostApiModel> ApiValidation(PersonPostApiModel model) {
-            var either = model.ToEitherRight<PersonPostApiError, PersonPostApiModel>();
-            var apiValidation = new List<Either<PersonPostApiError, PersonPostApiModel>> {
-                either.IsRightWhen(x => x.Age > 10, () => new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
-                either.Flatten(x => ValidateName(x.FirstName), s => new PersonPostApiError {Message = s, Model = model}),
+        private static Result<PersonPostApiModel, PersonPostApiError> ApiValidation(PersonPostApiModel model) {
+            var either = model.ToResult<PersonPostApiModel, PersonPostApiError>();
+            var apiValidation = new List<Result<PersonPostApiModel, PersonPostApiError>> {
+                either.Filter(x => x.Age > 10,
+                    () => new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
+                either.Flatten(x => ValidateName(x.FirstName),
+                    s => new PersonPostApiError {Message = s, Model = model}),
                 either.Flatten(x => ValidateName(x.LastName), s => new PersonPostApiError {Message = s, Model = model})
             };
 
             var errors = apiValidation
-                .LeftValues()
+                .ErrorValues()
                 .Select(x => x.Message)
                 .ToArray();
             return errors.Any()
-                ? (Either<PersonPostApiError, PersonPostApiModel>) new PersonPostApiError {Errors = errors, Message = "Invalid Api Validation.", Model = model}
+                ? (Result<PersonPostApiModel, PersonPostApiError>) new PersonPostApiError {
+                    Errors = errors,
+                    Message = "Invalid Api Validation.",
+                    Model = model
+                }
                 : model;
         }
 
-        public static Either<ErrorModel, SuccessModel> LastNameAppService(PersonModel person) {
-            return person.LastName == "Bar"
-                ? (Either<ErrorModel, SuccessModel>) new SuccessModel {Count = 4711}
+        public static Result<SuccessModel, ErrorModel> LastNameAppService(PersonModel person) =>
+            person.LastName == "Bar"
+                ? (Result<SuccessModel, ErrorModel>) new SuccessModel {Count = 4711}
                 : new ErrorModel {Message = "Expected a 'Bar'"};
-        }
 
-        public static Either<ErrorModel, SuccessModel> FirstNameAppService(PersonModel person) {
-            return person.FirstName == "Foo"
-                ? (Either<ErrorModel, SuccessModel>) new SuccessModel {Count = 4711}
+        public static Result<SuccessModel, ErrorModel> FirstNameAppService(PersonModel person) =>
+            person.FirstName == "Foo"
+                ? (Result<SuccessModel, ErrorModel>) new SuccessModel {Count = 4711}
                 : new ErrorModel {Message = "Expected a 'Foo'"};
-        }
 
-        private static Either<string, string> ValidateName(string name) {
-            return name.ToEitherRight<string, string>()
-                .IsLeftWhen(string.IsNullOrWhiteSpace, () => "Name cannot be empty.")
-                .IsRightWhen(s => s.All(char.IsLetter), () => "Name can only contain letters.")
-                .IsRightWhen(s => char.IsUpper(s[0]), () => "Name must start with capital letter.");
+        private static Result<string, string> ValidateName(string name) {
+            return name.ToResult<string, string>()
+                .IsErrorWhen(string.IsNullOrWhiteSpace, () => "Name cannot be empty.")
+                .Filter(s => s.All(char.IsLetter), () => "Name can only contain letters.")
+                .Filter(s => char.IsUpper(s[0]), () => "Name must start with capital letter.");
         }
     }
 }
