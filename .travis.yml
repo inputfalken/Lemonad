@@ -18,4 +18,5 @@ matrix:
 
 
 script:
-  - pwsh -File "${env:TRAVIS_BUILD_DIR}build/build.ps1" 'Release'
+  - pwsh "${env:TRAVIS_BUILD_DIR}build/build.ps1" '-Configuration:Release' '-GenerateDocs:$False' '-UserName:Byggare-Rob' '-UserEmail:byggare.rob.ci@gmail.com'
+
