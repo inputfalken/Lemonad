@@ -172,8 +172,11 @@ if ($isWindows) {
       'master' {
         if (!$env:APPVEYOR_PULL_REQUEST_TITLE -and $GenerateDocs) {
           $documentationDirectory = (Join-Path -Path $rootDirectory -ChildPath 'docs' -ErrorAction Stop ) | Get-Item -ErrorAction Stop
+          Write-Host 'Generating documentation.'
           Build-Documentation -Directory $documentationDirectory
+          Write-Host 'Pushing  to gh-pages.'
           Push-Documentation -Directory $documentationDirectory
+          Write-Host 'Uploading packages to NuGet.'
           Upload-Packages
         }
       }
