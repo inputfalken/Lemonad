@@ -10,7 +10,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             const string input = "hello";
             var list = Enumerable
                 .Range(0, 3)
-                .SelectMany(_ => input.NoneWhen(string.IsNullOrWhiteSpace).Enumerable, (x, y) => x + y.Length)
+                .SelectMany(_ => input.None(string.IsNullOrWhiteSpace).Enumerable, (x, y) => x + y.Length)
                 .ToList();
 
             Assert.Equal(5, list[0]);
@@ -23,7 +23,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             const string input = "hello";
             var list = Enumerable
                 .Range(0, 3)
-                .SelectMany(_ => input.SomeWhen(y => y.Length > 10).Enumerable, (x, y) => x + y.Length)
+                .SelectMany(_ => input.Some(y => y.Length > 10).Enumerable, (x, y) => x + y.Length)
                 .ToList();
 
             Assert.False(list.Any());
