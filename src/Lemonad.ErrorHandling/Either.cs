@@ -128,45 +128,43 @@ namespace Lemonad.ErrorHandling {
             return this;
         }
 
-        // TODO handle old left
         [Pure]
-        public Either<TLeftResult, TRight> RightWhen<TLeftResult>(
-            Func<TRight, bool> predicate, Func<TLeftResult> leftSelector) =>
+        public Either<TLeft, TRight> RightWhen(
+            Func<TRight, bool> predicate, Func<TLeft> leftSelector) =>
             IsRight
                 ? predicate == null
                     ? throw new ArgumentNullException(nameof(predicate))
                     : predicate(Right)
-                        ? Either.Right<TLeftResult, TRight>(Right)
+                        ? Either.Right<TLeft, TRight>(Right)
                         : leftSelector == null
                             ? throw new ArgumentNullException(nameof(leftSelector))
-                            : Either.Left<TLeftResult, TRight>(leftSelector())
+                            : Either.Left<TLeft, TRight>(leftSelector())
                 : leftSelector == null
                     ? throw new ArgumentNullException(nameof(leftSelector))
-                    : Either.Left<TLeftResult, TRight>(leftSelector());
+                    : Either.Left<TLeft, TRight>(Left);
 
-        // TODO handle old left
         [Pure]
-        public Either<TLeftResult, TRight> LeftWhen<TLeftResult>(
-            Func<TRight, bool> predicate, Func<TLeftResult> leftSelector) =>
+        public Either<TLeft, TRight> LeftWhen(
+            Func<TRight, bool> predicate, Func<TLeft> leftSelector) =>
             IsRight
                 ? predicate == null
                     ? throw new ArgumentNullException(nameof(predicate))
                     : predicate(Right)
                         ? leftSelector == null
                             ? throw new ArgumentNullException(nameof(leftSelector))
-                            : Either.Left<TLeftResult, TRight>(leftSelector())
-                        : Either.Right<TLeftResult, TRight>(Right)
+                            : Either.Left<TLeft, TRight>(leftSelector())
+                        : Either.Right<TLeft, TRight>(Right)
                 : leftSelector == null
                     ? throw new ArgumentNullException(nameof(leftSelector))
-                    : Either.Left<TLeftResult, TRight>(leftSelector());
+                    : Either.Left<TLeft, TRight>(Left);
 
         [Pure]
-        public Either<TLeftResult, TRight> LeftWhenNull<TLeftResult>(
-            Func<TLeftResult> leftSelector) => LeftWhen(EquailtyFunctions.IsNull, leftSelector);
+        public Either<TLeft, TRight> LeftWhenNull(
+            Func<TLeft> leftSelector) => LeftWhen(EquailtyFunctions.IsNull, leftSelector);
 
         [Pure]
-        public Either<TLeftResult, TRight> RightWhenNull<TLeftResult>(
-            Func<TLeftResult> leftSelector) => RightWhen(EquailtyFunctions.IsNull, leftSelector);
+        public Either<TLeft, TRight> RightWhenNull(
+            Func<TLeft> leftSelector) => RightWhen(EquailtyFunctions.IsNull, leftSelector);
 
         [Pure]
         public Either<TLeftResult, TRightResult> Map<TLeftResult, TRightResult>(
