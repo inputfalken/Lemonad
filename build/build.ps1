@@ -113,19 +113,16 @@ function Push-Documentation {
 
   $ghPagesDirectory = 'gh_pages'
   git clone https://github.com/inputfalken/Lemonad.git -b gh-pages $ghPagesDirectory -q
-  $ghPagesDirectory = $ghPagesDirectory | Get-Item -ErrorAction Stop
   if (!$?) { throw "Could not clone 'gh-pages'." }
+  $ghPagesDirectory = $ghPagesDirectory | Get-Item -ErrorAction Stop
   $docsSiteDirectory = Join-Path -Path $Directory -ChildPath '_site' -ErrorAction Stop | Get-Item -ErrorAction Stop
   $ghPagesDirectoryGitDirectory = Join-Path -Path $ghPagesDirectory -ChildPath '.git' -ErrorAction Stop | Get-Item -ErrorAction Stop -Force
   Copy-Item $ghPagesDirectoryGitDirectory $docsSiteDirectory -Recurse -ErrorAction Stop -Force
   Push-Location $docsSiteDirectory
 
   git add -A 2>&1
-  #if (!$?) { throw 'Could not add generated documentation site to git.' }
-  git commit -m "Documentation Updated" -q
-  #if (!$?) { throw 'Could not commit generated documentation changes.' }
+  git commit -m "Documentation updated" -q
   git push origin gh-pages -q
-  #if (!$?) { throw 'Could not push generated documentation.' }
   Pop-Location
   Remove-Item $ghPagesDirectory -Force -Recurse -ErrorAction Stop
   Remove-Item $docsSiteDirectory -Force -Recurse -ErrorAction Stop
