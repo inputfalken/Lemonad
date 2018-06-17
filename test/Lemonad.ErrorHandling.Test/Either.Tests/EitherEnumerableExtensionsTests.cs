@@ -20,9 +20,9 @@ namespace Lemonad.ErrorHandling.Test.Either.Tests {
                 Divide(8, 0),
                 Divide(10, 2)
             };
-            var list = eithers.EitherRights().ToList();
+            var list = eithers.RightValues().ToList();
 
-            Assert.All(eithers.EitherLefts(), s => { Assert.Equal("Cannot divide with zero", s); });
+            Assert.All(eithers.LeftValues(), s => { Assert.Equal("Cannot divide with zero", s); });
             Assert.Equal(2, list[0]);
             Assert.Equal(1, list[1]);
             Assert.Equal(5, list[2]);
