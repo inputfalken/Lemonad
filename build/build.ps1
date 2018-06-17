@@ -123,9 +123,9 @@ function Push-Documentation {
   git add -A 2>&1
   #if (!$?) { throw 'Could not add generated documentation site to git.' }
   git commit -m "Documentation Updated" -q
-  if (!$?) { throw 'Could not commit generated documentation changes.' }
+  #if (!$?) { throw 'Could not commit generated documentation changes.' }
   git push origin gh-pages -q
-  if (!$?) { throw 'Could not push generated documentation.' }
+  #if (!$?) { throw 'Could not push generated documentation.' }
   Pop-Location
   Remove-Item $ghPagesDirectory -Force -Recurse -ErrorAction Stop
   Remove-Item $docsSiteDirectory -Force -Recurse -ErrorAction Stop
@@ -192,4 +192,3 @@ if ($isWindows) {
     }
   }
 }
-
