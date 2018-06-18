@@ -19,26 +19,21 @@ namespace MvcValidation.Controller {
         }
 
         private static Result<PersonPostApiModel, PersonPostApiError> ApiValidation(PersonPostApiModel model) {
-            var either = model.ToResult<PersonPostApiModel, PersonPostApiError>();
-            var apiValidation = new List<Result<PersonPostApiModel, PersonPostApiError>> {
-                either.Filter(x => x.Age > 10,
-                    () => new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
-                either.Flatten(x => ValidateName(x.FirstName),
-                    s => new PersonPostApiError {Message = s, Model = model}),
-                either.Flatten(x => ValidateName(x.LastName), s => new PersonPostApiError {Message = s, Model = model})
-            };
+            var apiValidation = model
+                .ToResult<PersonPostApiModel, PersonPostApiError>()
+                .Multiple(
+                    x => x.Filter(y => y.Age > 10, () => new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
+                    x => x.Flatten(y => ValidateName(y.FirstName), s => new PersonPostApiError {Message = s, Model = model}),
+                    x => x.Flatten(y => ValidateName(y.LastName), s => new PersonPostApiError {Message = s, Model = model})
+                );
 
-            var errors = apiValidation
-                .Errors()
-                .Select(x => x.Message)
-                .ToArray();
-            return errors.Any()
-                ? (Result<PersonPostApiModel, PersonPostApiError>) new PersonPostApiError {
-                    Errors = errors,
+            return apiValidation.Match(x => x, x => {
+                return (Result<PersonPostApiModel, PersonPostApiError>) new PersonPostApiError {
+                    Errors = x.Select(y => y.Message).ToArray(),
                     Message = "Invalid Api Validation.",
                     Model = model
-                }
-                : model;
+                };
+            });
         }
 
         public static Result<SuccessModel, ErrorModel> LastNameAppService(PersonModel person) =>
