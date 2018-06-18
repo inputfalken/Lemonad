@@ -29,7 +29,7 @@ namespace MvcValidation.Controller {
             };
 
             var errors = apiValidation
-                .ErrorValues()
+                .Errors()
                 .Select(x => x.Message)
                 .ToArray();
             return errors.Any()

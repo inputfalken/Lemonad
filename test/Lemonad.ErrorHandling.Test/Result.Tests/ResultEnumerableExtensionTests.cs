@@ -26,7 +26,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             };
             var list = eithers.Values().ToList();
 
-            Assert.All(eithers.ErrorValues(), s => { Assert.Equal("Cannot divide with zero", s); });
+            Assert.All(eithers.Errors(), s => { Assert.Equal("Cannot divide with zero", s); });
             Assert.Equal(2, list[0]);
             Assert.Equal(1, list[1]);
             Assert.Equal(5, list[2]);
