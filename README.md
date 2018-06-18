@@ -16,13 +16,13 @@ approach to problem solving by using various
 [HOF's](https://en.wikipedia.org/wiki/Higher-order_function#C#)
 to achieve cleaner code bases & code which is easier to think about.
 
-For example the `Either<TLeft, TRight>` type,
+For example the `Result<T, TError>` type,
 which enables you to skip using exceptions for error handling.
-The way `Either<TLeft, TRight>` works is that there's
-always one value present. **Either** it's the
-value to the **left** or the value to the **right**.
-In this library, the value to the right is considered **successfull**
-and the left value is considered to be a **failure**.
+The way `Result<T, TError>` works is that there's
+always one value present. Either it's the
+value to the **left** or the value to the **right** (`TError`).
+In this library, the value to the Left is considered **successfull**
+and the right value is considered to be a **failure**.
 
 The following example illustrates how you can perform a division
 and return a string with an error message rather
@@ -30,7 +30,7 @@ than throwing an exception using a similiar message.
 
 ```csharp
 
-Either<string, int> Divide(int x, int y) {
+Either<int, string> Divide(int x, int y) {
     if (y != 0)
         return  x / y;
     else
@@ -38,7 +38,7 @@ Either<string, int> Divide(int x, int y) {
 }
 
 
-List<Either<string, int>> eithers = new List<Either<string, int>> {
+List<Either<int, string>> eithers = new List<Either<int, string>> {
   Divide(4, 2),
   Divide(3, 0),
   Divide(3, 3),
@@ -49,8 +49,8 @@ List<Either<string, int>> eithers = new List<Either<string, int>> {
   Divide(8, 0),
   Divide(10, 2)
 };
-List<int> successFulDivisions = eithers.EitherRights().ToList();
-IEnumerable<string> failedDivisions = eithers.EitherLefts();
+List<int> successFulDivisions = eithers.Values().ToList();
+IEnumerable<string> failedDivisions = eithers.Errors();
 
 // Prints all the numbers where the 'y' parameter from the function is not 0.
 // 2
@@ -69,8 +69,8 @@ foreach (int message in failedDivisions) { Console.WriteLine(message); }
 
 Or if you do not care about handling a **failure** type,
 you could use the `Maybe<T>` type. The maybe type works
-just like `Either<TLeft, TRight>` except that there's
-no **failure** (TLeft) type available.
+just like `Result<T, TError>` except that there's
+no **failure** (TError) type available.
 It's works exactly as `Nullable<T>` (aka `T?`)
 does except that you can use this with reference
 types (`string`, `object`…) as well.
