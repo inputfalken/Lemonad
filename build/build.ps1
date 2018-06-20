@@ -19,7 +19,7 @@ function Get-RootDirectory {
       | Resolve-Path `
       | Get-Item
     if (!$?) { throw 'could not move to git root directory.' }
-    if ((Get-Location).Path -eq $location) { return Get-Location }
+    if ((Get-Location).Path -eq $location) { return Get-Location | Get-Item }
     else { return $location }
   } else { throw "'$(Get-Location)' is not a git directory/repository." }
 }
@@ -78,8 +78,22 @@ function Pack-Projects {
   }
 }
 
-function Upload-Packages {
-  Write-Host "TODO, deploy to Nuget."
+function Pack-Packages {
+  param (
+    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $ArtifactPath,
+    [Parameter(Position = 1, Mandatory = 1)] [System.IO.FileSystemInfo] $SourceCodePath,
+    [Parameter(Position = 2, Mandatory = 0)] [string] $ArtifactName = 'artifacts'
+  )
+  $ArtifactDirectory = Join-Path -Path $ArtifactPath -ChildPath $ArtifactName -ErrorAction Stop `
+    | New-Item -Type Directory -Name $ArtifactName -Force -ErrorAction Stop
+  Push-Location $SourceCodePath
+  List-Files '*.csproj' | ForEach-Object {
+    dotnet pack $_ --configuration $Configuration --no-build --output $ArtifactDirectory
+    if (!$?) { throw "Could not pack project" }
+  }
+  Pop-Location
+
+  Write-Output $ArtifactDirectory
 }
 
 function Build-Documentation {
@@ -94,6 +108,18 @@ function Build-Documentation {
   & docfx docfx.json 
   if (!$?) { throw 'Could not generate documentation.' }
   Pop-Location
+}
+
+function Upload-Packages {
+  param (
+    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $ArtifactDirectory
+  )
+
+  $ArtifactDirectory | Get-ChildItem -Filter '*.nupkg' | ForEach-Object {
+    $source = 'https://www.nuget.org/api/v2/package'
+    dotnet nuget push $_ --api-key $env:NUGET_API_KEY --source $source
+    if (!$?) { throw "Could not push package '$package' to NuGet (source : '$source')." }
+  }
 }
 
 function Push-Documentation {
@@ -180,7 +206,8 @@ if ($isWindows) {
           Write-Host 'Pushing to gh-pages.'
           Push-Documentation -Directory $documentationDirectory
           Write-Host 'Uploading packages to NuGet.'
-          Upload-Packages
+          $ArtifactDirectory = Pack-Packages -ArtifactPath $rootDirectory -SourceCodePath $srcDiretory
+          Upload-Packages -ArtifactDirectory $ArtifactDirectory
         }
       }
       [string]::Empty {
