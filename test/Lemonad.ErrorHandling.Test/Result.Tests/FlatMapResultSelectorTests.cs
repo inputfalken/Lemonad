@@ -9,7 +9,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Func<int, bool, int> resultSelector = null;
             var exception = Record.Exception(() => {
                 var result = ResultParsers.Int("foo")
-                    .FlatMap(i => ResultParsers.Bool("x"), resultSelector);
+                    .FlatMap(i => ResultParsers.Bool("x"), resultSelector, s => s);
                 Assert.False(result.HasValue, "Result should have error.");
                 Assert.True(result.HasError, "Result should have a error value.");
                 Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
@@ -22,7 +22,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Result_String_Int__Whose_Property_HasValue_Is_False_With_Null_Selector__Expects_No_ArgumentNullException_Thrown() {
             Func<int, Result<int, string>> selector = null;
             var exception = Record.Exception(() => {
-                var result = ResultParsers.Int("foo").FlatMap(selector, (x, y) => x + y);
+                var result = ResultParsers.Int("foo").FlatMap(selector, (x, y) => x + y, s => s);
                 Assert.False(result.HasValue, "Result should have error.");
                 Assert.True(result.HasError, "Result should have a error value.");
                 Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
@@ -36,7 +36,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Func<int, Result<int, string>> selector = null;
             Func<int, int, int> resultSelector = null;
             var exception = Record.Exception(() => {
-                var result = ResultParsers.Int("foo").FlatMap(selector, resultSelector);
+                var result = ResultParsers.Int("foo").FlatMap(selector, resultSelector, s => s);
                 Assert.False(result.HasValue, "Result should have error.");
                 Assert.True(result.HasError, "Result should have a error value.");
                 Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
@@ -50,7 +50,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Func<int, int, int> resultSelector = null;
             var exception = Record.Exception(() => {
                 var result = ResultParsers.Int("2")
-                    .FlatMap(i => ResultParsers.Int("foo"), resultSelector);
+                    .FlatMap(i => ResultParsers.Int("foo"), resultSelector, s => s);
                 Assert.False(result.HasValue, "Result should have error.");
                 Assert.True(result.HasError, "Result should have a error value.");
                 Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
@@ -63,7 +63,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Result_String_Int__Whose_Property_HasValue_Is_True_With_Null_Selector__Expects_ArgumentNullException_Thrown() {
             Func<int, Result<int, string>> selector = null;
             Assert.Throws<ArgumentNullException>(() => {
-                var result = ResultParsers.Int("2").FlatMap(selector, (x, y) => x + y);
+                var result = ResultParsers.Int("2").FlatMap(selector, (x, y) => x + y, s => s);
                 Assert.False(result.HasValue, "Result should have error.");
                 Assert.True(result.HasError, "Result should have a error value.");
                 Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
@@ -73,10 +73,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         [Fact]
         public void
             Result_String_Int__Whose_Property_HasValue_Is_True_With_Null_Selector_And_Null_ResultSelector__Expects_ArgumentNullException_Thrown() {
-            Func<int, Result< int, string>> selector = null;
+            Func<int, Result<int, string>> selector = null;
             Func<int, int, int> resultSelector = null;
             Assert.Throws<ArgumentNullException>(() => {
-                var result = ResultParsers.Int("2").FlatMap(selector, resultSelector);
+                var result = ResultParsers.Int("2").FlatMap(selector, resultSelector, s => s);
                 Assert.False(result.HasValue, "Result should have error.");
                 Assert.True(result.HasError, "Result should have a error value.");
                 Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
@@ -89,7 +89,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var intParse = ResultParsers.Int("foo");
             var doubleParse = ResultParsers.Double("foo");
 
-            var result = intParse.FlatMap(x => doubleParse, (i, d) => i + d);
+            var result = intParse.FlatMap(x => doubleParse, (i, d) => i + d, s => s);
             Assert.False(result.HasValue, "Result should have have error value.");
             Assert.True(result.HasError, "Result should have a error value.");
             Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
@@ -102,7 +102,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var intParse = ResultParsers.Int("foo");
             var doubleParse = ResultParsers.Double("2.2");
 
-            var result = intParse.FlatMap(x => doubleParse, (i, d) => i + d);
+            var result = intParse.FlatMap(x => doubleParse, (i, d) => i + d, s => s);
             Assert.False(result.HasValue, "Result should have have error value.");
             Assert.True(result.HasError, "Result should have a error value.");
             Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
@@ -115,7 +115,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var intParse = ResultParsers.Int("2");
             var doubleParse = ResultParsers.Double("foo");
 
-            var result = intParse.FlatMap(x => doubleParse, (i, d) => i + d);
+            var result = intParse.FlatMap(x => doubleParse, (i, d) => i + d, s => s);
             Assert.False(result.HasValue, "Result should have have error value.");
             Assert.True(result.HasError, "Result should have a error value.");
             Assert.Equal("Could not parse type System.String(\"foo\") into System.Double.", result.Error);
@@ -128,7 +128,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var intParse = ResultParsers.Int("2");
             var doubleParse = ResultParsers.Double("2.2");
 
-            var result = intParse.FlatMap(x => doubleParse, (i, d) => i + d);
+            var result = intParse.FlatMap(x => doubleParse, (i, d) => i + d, s => s);
             Assert.True(result.HasValue, "Result should have value.");
             Assert.False(result.HasError, "Result should not have a error value.");
             Assert.Equal(default(string), result.Error);

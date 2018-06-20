@@ -194,13 +194,13 @@ namespace Lemonad.ErrorHandling {
             : Result.Ok<T, TErrorResult>(Value);
 
         [Pure]
-        public Result<TResult, TError> FlatMap<TResult>(
+        private Result<TResult, TError> FlatMap<TResult>(
             Func<T, Result<TResult, TError>> selector) => HasValue
             ? selector?.Invoke(Value) ?? throw new ArgumentNullException(nameof(selector))
             : Result.Error<TResult, TError>(Error);
 
         [Pure]
-        public Result<TResult, TError> FlatMap<TSelector, TResult>(
+        private Result<TResult, TError> FlatMap<TSelector, TResult>(
             Func<T, Result<TSelector, TError>> selector,
             Func<T, TSelector, TResult> resultSelector) => FlatMap(x =>
             selector?.Invoke(x).Map(y => resultSelector == null
@@ -224,17 +224,16 @@ namespace Lemonad.ErrorHandling {
         }
 
         [Pure]
-        public Result<TResult, TError> FlatMap<TErrorResult, TResult>(
-            Func<T, Result<TResult, TErrorResult>> selector, Func<TErrorResult, TError> errorSelector) {
+        public Result<T, TError> Flatten<TResult>(Func<T, Result<TResult, TError>> selector) {
             if (HasValue) {
                 if (selector == null) throw new ArgumentNullException(nameof(selector));
                 var okSelector = selector(Value);
-                return okSelector.HasValue
-                    ? Result.Ok<TResult, TError>(okSelector.Value)
-                    : okSelector.MapError(errorSelector);
+                if (okSelector.HasValue)
+                    return Result.Ok<T, TError>(Value);
+                return Value;
             }
 
-            return Result.Error<TResult, TError>(Error);
+            return Result.Error<T, TError>(Error);
         }
 
         public Result<T, IReadOnlyList<TError>> Multiple(
@@ -248,9 +247,29 @@ namespace Lemonad.ErrorHandling {
         }
 
         [Pure]
+        public Result<TResult, TError> FlatMap<TErrorResult, TResult>(
+            Func<T, Result<TResult, TErrorResult>> selector, Func<TErrorResult, TError> errorSelector) {
+            if (HasValue) {
+                if (selector == null) throw new ArgumentNullException(nameof(selector));
+                var okSelector = selector(Value);
+
+                return okSelector.HasValue
+                    ? Result.Ok<TResult, TError>(okSelector.Value)
+                    : okSelector.MapError(errorSelector);
+            }
+
+            return Result.Error<TResult, TError>(Error);
+        }
+
+        [Pure]
         public Result<TResult, TError> FlatMap<TErrorResult, TSelect, TResult>(
-            Func<T, Result<TSelect, TErrorResult>> selector, Func<T, TSelect, TResult> resultSelecotr,
+            Func<T, Result<TSelect, TErrorResult>> selector, Func<T, TSelect, TResult> resultSelector,
             Func<TErrorResult, TError> errorSelector) =>
-            FlatMap(x => selector(x).Map(y => resultSelecotr(x, y)), errorSelector);
+            FlatMap(x => selector?.Invoke(x).Map(y => {
+                    if (resultSelector == null)
+                        throw new ArgumentNullException(nameof(resultSelector));
+                    return resultSelector(x, y);
+                }) ?? throw new ArgumentNullException(nameof(selector)),
+                errorSelector);
     }
 }
