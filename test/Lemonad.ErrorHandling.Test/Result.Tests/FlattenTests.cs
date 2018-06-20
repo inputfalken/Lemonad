@@ -5,7 +5,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class OkWhenFlatMap {
         [Fact]
         public void
-            Result_String_Int__Whose_Property_HasValue_Is_False__Flatmaps__Result_String_Double__Whose_Property_HasValue_Is_False__Expects_Result_String_Double__Whose_Property_HasValue_Is_False__With_error_Message_From_First_either() {
+            Result_String_Int__Whose_Property_HasValue_Is_False__Flatmaps__Result_String_Double__Whose_Property_HasValue_Is_False__Expects_Result_String_Double__Whose_Property_HasValue_Is_False__With_error_Message_From_First_result() {
             var intParse = ResultParsers.Int("foo");
             var doubleParse = ResultParsers.Double("foo");
             var rightExecuted = false;
@@ -21,14 +21,14 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.False(rightExecuted, "Ok should not get exectued since intparse did not succeed.");
             Assert.False(errorExectued, "error should not be exectued since intparse did not succeed.");
             Assert.True(result.HasError, "Result should have a error value.");
-            Assert.False(result.HasValue, "Result should not have a right value.");
+            Assert.False(result.HasValue, "Result should have error.");
             Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
             Assert.Equal(default(double), result.Value);
         }
 
         [Fact]
         public void
-            Result_String_Int__Whose_Property_HasValue_Is_False__Flatmaps__Result_String_Double__Whose_Property_HasValue_Is_False__Expects_Result_String_Double__Whose_Property_HasValue_Is_True__With_error_Message_From_Second_either() {
+            Result_String_Int__Whose_Property_HasValue_Is_False__Flatmaps__Result_String_Double__Whose_Property_HasValue_Is_False__Expects_Result_String_Double__Whose_Property_HasValue_Is_True__With_error_Message_From_Second_result() {
             var rightExecuted = false;
             var errorExectued = false;
             var intParse = ResultParsers.Int("foo");
@@ -44,7 +44,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.False(rightExecuted, "Ok should not get exectued since intparse did not succeed.");
             Assert.False(errorExectued, "error should not be exectued since intparse did not succeed.");
             Assert.True(result.HasError, "Result should have a error value.");
-            Assert.False(result.HasValue, "Result should not have a right value.");
+            Assert.False(result.HasValue, "Result should have error.");
             Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
             Assert.Equal(default(double), result.Value);
         }
@@ -59,7 +59,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 var result = intParse.Flatten(i => { return doubleParse; }, errorSelector);
 
                 Assert.True(result.HasError, "Result should have a error value.");
-                Assert.False(result.HasValue, "Result should not have a right value.");
+                Assert.False(result.HasValue, "Result should have error.");
                 Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
                 Assert.Equal(default(double), result.Value);
             });
@@ -76,7 +76,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 var result = intParse.Flatten(rightselector, s => { return "Failure" + s; });
 
                 Assert.True(result.HasError, "Result should have a error value.");
-                Assert.False(result.HasValue, "Result should not have a right value.");
+                Assert.False(result.HasValue, "Result should have error.");
                 Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
                 Assert.Equal(default(double), result.Value);
             });
@@ -92,7 +92,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var result = intParse.Flatten(rightselector, errorSelector);
 
             Assert.True(result.HasError, "Result should have a error value.");
-            Assert.False(result.HasValue, "Result should not have a right value.");
+            Assert.False(result.HasValue, "Result should have error.");
             Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
             Assert.Equal(default(double), result.Value);
         }
@@ -108,7 +108,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 var result = intParse.Flatten(x => doubleParse, errorSelector);
 
                 Assert.True(result.HasError, "Result should have a error value.");
-                Assert.False(result.HasValue, "Result should not have a right value.");
+                Assert.False(result.HasValue, "Result should have error.");
                 Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
                 Assert.Equal(default(double), result.Value);
             });
@@ -126,7 +126,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 var result = intParse.Flatten(rightselector, s => s);
 
                 Assert.True(result.HasError, "Result should have a error value.");
-                Assert.False(result.HasValue, "Result should not have a right value.");
+                Assert.False(result.HasValue, "Result should have error.");
                 Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
                 Assert.Equal(default(double), result.Value);
             });
@@ -144,7 +144,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 var result = intParse.Flatten(rightselector, errorSelector);
 
                 Assert.True(result.HasError, "Result should have a error value.");
-                Assert.False(result.HasValue, "Result should not have a right value.");
+                Assert.False(result.HasValue, "Result should have error.");
                 Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
                 Assert.Equal(default(double), result.Value);
             });
@@ -153,7 +153,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
         [Fact]
         public void
-            Result_String_Int__Whose_Property_HasValue_Is_False__Flatmaps__Result_String_Double__Whose_Property_True_Is_False__Expects_Result_String_Double__Whose_Property_HasValue_Is_True__With_error_Message_From_Second_either() {
+            Result_String_Int__Whose_Property_HasValue_Is_False__Flatmaps__Result_String_Double__Whose_Property_True_Is_False__Expects_Result_String_Double__Whose_Property_HasValue_Is_True__With_error_Message_From_Second_result() {
             var rightExecuted = false;
             var errorExectued = false;
             var intParse = ResultParsers.Int("2");
@@ -169,14 +169,14 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.True(rightExecuted, "Ok should get exectued since intparse succeded..");
             Assert.False(errorExectued, "error should not be exectued since both intparse and doubleparse succeded.");
             Assert.False(result.HasError, "Result should not have a error value.");
-            Assert.True(result.HasValue, "Result should have a right value.");
+            Assert.True(result.HasValue, "Result should have value.");
             Assert.Equal(default(string), result.Error);
             Assert.Equal(2, result.Value);
         }
 
         [Fact]
         public void
-            Result_String_Int__Whose_Property_HasValue_Is_True__Flatmaps__Result_String_Double__Whose_Property_HasValue_Is_False__Expects_Result_String_Double__Whose_Property_HasValue_Is_False__With_error_Message_From_Second_either() {
+            Result_String_Int__Whose_Property_HasValue_Is_True__Flatmaps__Result_String_Double__Whose_Property_HasValue_Is_False__Expects_Result_String_Double__Whose_Property_HasValue_Is_False__With_error_Message_From_Second_result() {
             var intParse = ResultParsers.Int("2");
             var doubleParse = ResultParsers.Double("foo");
             var rightExecuted = false;
@@ -192,7 +192,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.True(rightExecuted, "Ok should get exectued since intparse did succeed.");
             Assert.True(errorExectued, "error should get exectued since intparse did succeed.");
             Assert.True(result.HasError, "Result should have a error value.");
-            Assert.False(result.HasValue, "Result should not have a right value.");
+            Assert.False(result.HasValue, "Result should have error.");
             Assert.Equal("Failure Could not parse type System.String(\"foo\") into System.Double.", result.Error);
             Assert.Equal(default(double), result.Value);
         }
@@ -208,7 +208,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 var result = intParse.Flatten(i => doubleParse, errorSelector);
 
                 Assert.True(result.HasError, "Result should have a error value.");
-                Assert.False(result.HasValue, "Result should not have a right value.");
+                Assert.False(result.HasValue, "Result should have error.");
                 Assert.Equal("Failure Could not parse type System.String(\"foo\") into System.Double.", result.Error);
                 Assert.Equal(default(double), result.Value);
             });
@@ -253,7 +253,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 Assert.True(rightExecuted, "Ok should get exectued since intparse succeded..");
                 Assert.False(errorExectued, "error should not be exectued since both intparse and doubleparse succeded.");
                 Assert.False(result.HasError, "Result should not have a error value.");
-                Assert.True(result.HasValue, "Result should have a right value.");
+                Assert.True(result.HasValue, "Result should have value.");
                 Assert.Equal(default(string), result.Error);
                 Assert.Equal(2, result.Value);
             });
@@ -271,7 +271,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 var result = intParse.Flatten(rightselector, s => s);
 
                 Assert.True(result.HasError, "Result should have a error value.");
-                Assert.False(result.HasValue, "Result should not have a right value.");
+                Assert.False(result.HasValue, "Result should have error.");
                 Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
                 Assert.Equal(default(double), result.Value);
             });
@@ -288,7 +288,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 var result = intParse.Flatten(rightselector, errorSelector);
 
                 Assert.True(result.HasError, "Result should have a error value.");
-                Assert.False(result.HasValue, "Result should not have a right value.");
+                Assert.False(result.HasValue, "Result should have error.");
                 Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
                 Assert.Equal(default(double), result.Value);
             });

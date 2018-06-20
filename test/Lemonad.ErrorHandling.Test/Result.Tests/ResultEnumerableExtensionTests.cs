@@ -13,7 +13,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                     return "Cannot divide with zero";
             }
 
-            var eithers = new List<Result<int, string>> {
+            var results = new List<Result<int, string>> {
                 Divide(4, 2),
                 Divide(3, 0),
                 Divide(3, 3),
@@ -24,9 +24,9 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 Divide(8, 0),
                 Divide(10, 2)
             };
-            var list = eithers.Values().ToList();
+            var list = results.Values().ToList();
 
-            Assert.All(eithers.Errors(), s => { Assert.Equal("Cannot divide with zero", s); });
+            Assert.All(results.Errors(), s => { Assert.Equal("Cannot divide with zero", s); });
             Assert.Equal(2, list[0]);
             Assert.Equal(1, list[1]);
             Assert.Equal(5, list[2]);

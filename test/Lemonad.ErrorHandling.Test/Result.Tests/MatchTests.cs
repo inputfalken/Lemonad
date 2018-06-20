@@ -7,14 +7,14 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         public void Result_String_Int_Whose_Property_HasValue_Is_False() {
             var errorExecuted = false;
             var rightExectuted = false;
-            var either = ResultParsers.Int("foo").Match(i => {
+            var result = ResultParsers.Int("foo").Match(i => {
                 rightExectuted = true;
                 return "Success";
             }, s => {
                 errorExecuted = true;
                 return s;
             });
-            Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", either);
+            Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result);
             Assert.True(errorExecuted, "error should be exectued");
             Assert.False(rightExectuted, "Ok should not be exectued");
         }
@@ -24,7 +24,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Result_String_Int_Whose_Property_HasValue_Is_False__Null_errorSelector__Expects_ArgumentNulLException() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, string> errorSelector = null;
-                var either = ResultParsers.Int("foo").Match(i => "Success", errorSelector);
+                var result = ResultParsers.Int("foo").Match(i => "Success", errorSelector);
             });
         }
 
@@ -43,7 +43,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, string> errorSelector = null;
                 Func<int, string> leftSelector = null;
-                var either = ResultParsers.Int("foo")
+                var result = ResultParsers.Int("foo")
                     .Match(leftSelector, errorSelector);
             });
         }
@@ -65,11 +65,11 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var exception = Record.Exception(() => {
                 Func<int, string> leftSelector = null;
                 var errorExecuted = false;
-                var either = ResultParsers.Int("foo").Match(leftSelector, s => {
+                var result = ResultParsers.Int("foo").Match(leftSelector, s => {
                     errorExecuted = true;
                     return s;
                 });
-                Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", either);
+                Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result);
                 Assert.True(errorExecuted, "error should be exectued");
             });
             Assert.Null(exception);
@@ -98,14 +98,14 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         public void Result_String_Int_Whose_Property_HasValue_Is_True() {
             var errorExecuted = false;
             var rightExectuted = false;
-            var either = ResultParsers.Int("2").Match(i => {
+            var result = ResultParsers.Int("2").Match(i => {
                 rightExectuted = true;
                 return "Success" + i;
             }, s => {
                 errorExecuted = true;
                 return s;
             });
-            Assert.Equal("Success2", either);
+            Assert.Equal("Success2", result);
             Assert.False(errorExecuted, "error should not be exectued");
             Assert.True(rightExectuted, "Ok should be exectued");
         }
@@ -115,8 +115,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Result_String_Int_Whose_Property_HasValue_Is_True__Null_errorSelector__Expects_No_ArgumentNulLException() {
             var exception = Record.Exception(() => {
                 Func<string, string> errorSelector = null;
-                var either = ResultParsers.Int("2").Match(i => "Success" + i, errorSelector);
-                Assert.Equal("Success2", either);
+                var result = ResultParsers.Int("2").Match(i => "Success" + i, errorSelector);
+                Assert.Equal("Success2", result);
             });
             Assert.Null(exception);
         }
@@ -137,7 +137,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, string> errorSelector = null;
                 Func<int, string> leftSelector = null;
-                var either = ResultParsers.Int("2")
+                var result = ResultParsers.Int("2")
                     .Match(leftSelector, errorSelector);
             });
         }

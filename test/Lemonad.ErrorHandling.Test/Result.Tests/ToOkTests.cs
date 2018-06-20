@@ -4,32 +4,32 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class ToResultOkTests {
         [Fact]
         public void Convert_Int_To_ResultOk() {
-            var either = 2.ToResult<int, string>();
+            var result = 2.ToResult<int, string>();
 
-            Assert.True(either.HasValue, "Result should have a right value.");
-            Assert.False(either.HasError, "Result should not have a error value.");
-            Assert.Equal(2, either.Value);
-            Assert.Equal(default(string), either.Error);
+            Assert.True(result.HasValue, "Result should have value.");
+            Assert.False(result.HasError, "Result should not have a error value.");
+            Assert.Equal(2, result.Value);
+            Assert.Equal(default(string), result.Error);
         }
 
         [Fact]
         public void Convert_Null_String_To_ResultOk() {
             string str = null;
-            var either = str.ToResult<string, int>();
+            var result = str.ToResult<string, int>();
 
-            Assert.True(either.HasValue, "Result should have a right value.");
-            Assert.False(either.HasError, "Result should not have a error value.");
-            Assert.Null(either.Value);
+            Assert.True(result.HasValue, "Result should have value.");
+            Assert.False(result.HasError, "Result should not have a error value.");
+            Assert.Null(result.Value);
         }
 
         [Fact]
         public void Convert_String_To_ResultOk() {
-            var either = "hello".ToResult<string, int>();
+            var result = "hello".ToResult<string, int>();
 
-            Assert.True(either.HasValue, "Result should have a right value.");
-            Assert.False(either.HasError, "Result should not have a error value.");
-            Assert.Equal("hello", either.Value);
-            Assert.Equal(default(int), either.Error);
+            Assert.True(result.HasValue, "Result should have value.");
+            Assert.False(result.HasError, "Result should not have a error value.");
+            Assert.Equal("hello", result.Value);
+            Assert.Equal(default(int), result.Error);
         }
     }
 }

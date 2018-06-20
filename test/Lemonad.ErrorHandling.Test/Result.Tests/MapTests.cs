@@ -8,7 +8,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var result = ResultParsers.Int("foo").FullMap(i => i * 2, s => $"ERROR: {s}");
 
             Assert.True(result.HasError, "Result should have a error value.");
-            Assert.False(result.HasValue, "Result should not have a right value.");
+            Assert.False(result.HasValue, "Result should have error.");
             Assert.Equal("ERROR: Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
             Assert.Equal(default(int), result.Value);
         }
@@ -22,7 +22,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 var result = ResultParsers.Int("foo").FullMap(leftSelector, s => $"ERROR: {s}");
 
                 Assert.True(result.HasError, "Result should have a error value.");
-                Assert.False(result.HasValue, "Result should not have a right value.");
+                Assert.False(result.HasValue, "Result should have error.");
                 Assert.Equal("ERROR: Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
                 Assert.Equal(default(int), result.Value);
             });
@@ -37,7 +37,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 var result = ResultParsers.Int("foo").FullMap(i => i * 2, errorselector);
 
                 Assert.False(result.HasError, "Result should not have a error value.");
-                Assert.True(result.HasValue, "Result should have a right value.");
+                Assert.True(result.HasValue, "Result should have value.");
                 Assert.Equal(default(string), result.Error);
                 Assert.Equal(4, result.Value);
             });
@@ -52,7 +52,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 var result = ResultParsers.Int("foo").FullMap(leftselector, errorselector);
 
                 Assert.False(result.HasError, "Result should not have a error value.");
-                Assert.True(result.HasValue, "Result should have a right value.");
+                Assert.True(result.HasValue, "Result should have value.");
                 Assert.Equal(default(string), result.Error);
                 Assert.Equal(4, result.Value);
             });
@@ -68,7 +68,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
             Assert.False(isExectued, "Okselector should not be exectued.");
             Assert.True(result.HasError, "Result should have a error value.");
-            Assert.False(result.HasValue, "Result should not have a right value.");
+            Assert.False(result.HasValue, "Result should have error.");
             Assert.Equal("ERROR: Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
             Assert.Equal(default(int), result.Value);
         }
@@ -78,7 +78,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var result = ResultParsers.Int("2").FullMap(i => i * 2, s => $"ERROR: {s}");
 
             Assert.False(result.HasError, "Result should not have a error value.");
-            Assert.True(result.HasValue, "Result should have a right value.");
+            Assert.True(result.HasValue, "Result should have value.");
             Assert.Equal(default(string), result.Error);
             Assert.Equal(4, result.Value);
         }
@@ -92,7 +92,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 var result = ResultParsers.Int("2").FullMap(leftSelector, s => $"ERROR: {s}");
 
                 Assert.False(result.HasError, "Result should not have a error value.");
-                Assert.True(result.HasValue, "Result should have a right value.");
+                Assert.True(result.HasValue, "Result should have value.");
                 Assert.Equal(default(string), result.Error);
                 Assert.Equal(4, result.Value);
             });
@@ -106,7 +106,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 var result = ResultParsers.Int("2").FullMap(i => i * 2, errorselector);
 
                 Assert.False(result.HasError, "Result should not have a error value.");
-                Assert.True(result.HasValue, "Result should have a right value.");
+                Assert.True(result.HasValue, "Result should have value.");
                 Assert.Equal(default(string), result.Error);
                 Assert.Equal(4, result.Value);
             });
@@ -122,7 +122,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 var result = ResultParsers.Int("2").FullMap(leftSelector, errorselector);
 
                 Assert.False(result.HasError, "Result should not have a error value.");
-                Assert.True(result.HasValue, "Result should have a right value.");
+                Assert.True(result.HasValue, "Result should have value.");
                 Assert.Equal(default(string), result.Error);
                 Assert.Equal(4, result.Value);
             });
@@ -138,7 +138,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
             Assert.False(isExectued, "errorselector should not be exectued.");
             Assert.False(result.HasError, "Result should not have a error value.");
-            Assert.True(result.HasValue, "Result should have a right value.");
+            Assert.True(result.HasValue, "Result should have value.");
             Assert.Equal(default(string), result.Error);
             Assert.Equal(4, result.Value);
         }
