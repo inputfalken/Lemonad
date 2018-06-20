@@ -4,11 +4,11 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Lemonad.ErrorHandling {
-    public struct Result<T, TError> : IEquatable<Result<T, TError>>, IComparable<Result<T, TError>> {
+    public readonly struct Result<T, TError> : IEquatable<Result<T, TError>>, IComparable<Result<T, TError>> {
         internal TError Error { get; }
         internal T Value { get; }
 
-        internal Result(T value, TError error, bool hasError, bool hasValue) {
+        internal Result(in T value, in TError error, in bool hasError, in bool hasValue) {
             HasValue = hasValue;
             HasError = hasError;
             Value = value;
@@ -237,7 +237,8 @@ namespace Lemonad.ErrorHandling {
             return Result.Error<TResult, TError>(Error);
         }
 
-        public Result<T, IReadOnlyList<TError>> Multiple(params Func<Result<T, TError>, Result<T, TError>>[] validations) {
+        public Result<T, IReadOnlyList<TError>> Multiple(
+            params Func<Result<T, TError>, Result<T, TError>>[] validations) {
             var result = this;
             var errors = validations.Select(x => x(result)).ToList().Errors().ToList();
             if (errors.Any())
