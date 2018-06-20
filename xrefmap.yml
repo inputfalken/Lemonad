@@ -7,861 +7,6 @@ references:
   commentId: N:Lemonad.ErrorHandling
   fullName: Lemonad.ErrorHandling
   nameWithType: Lemonad.ErrorHandling
-- uid: Lemonad.ErrorHandling.Either
-  name: Either
-  href: api/Lemonad.ErrorHandling.Either.html
-  commentId: T:Lemonad.ErrorHandling.Either
-  fullName: Lemonad.ErrorHandling.Either
-  nameWithType: Either
-- uid: Lemonad.ErrorHandling.Either.ConvertToMaybe*
-  name: ConvertToMaybe
-  href: api/Lemonad.ErrorHandling.Either.html#Lemonad_ErrorHandling_Either_ConvertToMaybe_
-  commentId: Overload:Lemonad.ErrorHandling.Either.ConvertToMaybe
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either.ConvertToMaybe
-  nameWithType: Either.ConvertToMaybe
-- uid: Lemonad.ErrorHandling.Either.ConvertToMaybe``2(Lemonad.ErrorHandling.Either{``0,``1})
-  name: ConvertToMaybe<TLeft, TRight>(Either<TLeft, TRight>)
-  href: api/Lemonad.ErrorHandling.Either.html#Lemonad_ErrorHandling_Either_ConvertToMaybe__2_Lemonad_ErrorHandling_Either___0___1__
-  commentId: M:Lemonad.ErrorHandling.Either.ConvertToMaybe``2(Lemonad.ErrorHandling.Either{``0,``1})
-  name.vb: ConvertToMaybe(Of TLeft, TRight)(Either(Of TLeft, TRight))
-  fullName: Lemonad.ErrorHandling.Either.ConvertToMaybe<TLeft, TRight>(Lemonad.ErrorHandling.Either<TLeft, TRight>)
-  fullName.vb: Lemonad.ErrorHandling.Either.ConvertToMaybe(Of TLeft, TRight)(Lemonad.ErrorHandling.Either(Of TLeft, TRight))
-  nameWithType: Either.ConvertToMaybe<TLeft, TRight>(Either<TLeft, TRight>)
-  nameWithType.vb: Either.ConvertToMaybe(Of TLeft, TRight)(Either(Of TLeft, TRight))
-- uid: Lemonad.ErrorHandling.Either.Left*
-  name: Left
-  href: api/Lemonad.ErrorHandling.Either.html#Lemonad_ErrorHandling_Either_Left_
-  commentId: Overload:Lemonad.ErrorHandling.Either.Left
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either.Left
-  nameWithType: Either.Left
-- uid: Lemonad.ErrorHandling.Either.Left``2(``0)
-  name: Left<TLeft, TRight>(TLeft)
-  href: api/Lemonad.ErrorHandling.Either.html#Lemonad_ErrorHandling_Either_Left__2___0_
-  commentId: M:Lemonad.ErrorHandling.Either.Left``2(``0)
-  name.vb: Left(Of TLeft, TRight)(TLeft)
-  fullName: Lemonad.ErrorHandling.Either.Left<TLeft, TRight>(TLeft)
-  fullName.vb: Lemonad.ErrorHandling.Either.Left(Of TLeft, TRight)(TLeft)
-  nameWithType: Either.Left<TLeft, TRight>(TLeft)
-  nameWithType.vb: Either.Left(Of TLeft, TRight)(TLeft)
-- uid: Lemonad.ErrorHandling.Either.LeftValues*
-  name: LeftValues
-  href: api/Lemonad.ErrorHandling.Either.html#Lemonad_ErrorHandling_Either_LeftValues_
-  commentId: Overload:Lemonad.ErrorHandling.Either.LeftValues
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either.LeftValues
-  nameWithType: Either.LeftValues
-- uid: Lemonad.ErrorHandling.Either.LeftValues``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.Either{``0,``1}})
-  name: LeftValues<TLeft, TRight>(IEnumerable<Either<TLeft, TRight>>)
-  href: api/Lemonad.ErrorHandling.Either.html#Lemonad_ErrorHandling_Either_LeftValues__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_Either___0___1___
-  commentId: M:Lemonad.ErrorHandling.Either.LeftValues``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.Either{``0,``1}})
-  name.vb: LeftValues(Of TLeft, TRight)(IEnumerable(Of Either(Of TLeft, TRight)))
-  fullName: Lemonad.ErrorHandling.Either.LeftValues<TLeft, TRight>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.Either<TLeft, TRight>>)
-  fullName.vb: Lemonad.ErrorHandling.Either.LeftValues(Of TLeft, TRight)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.Either(Of TLeft, TRight)))
-  nameWithType: Either.LeftValues<TLeft, TRight>(IEnumerable<Either<TLeft, TRight>>)
-  nameWithType.vb: Either.LeftValues(Of TLeft, TRight)(IEnumerable(Of Either(Of TLeft, TRight)))
-- uid: Lemonad.ErrorHandling.Either.Right*
-  name: Right
-  href: api/Lemonad.ErrorHandling.Either.html#Lemonad_ErrorHandling_Either_Right_
-  commentId: Overload:Lemonad.ErrorHandling.Either.Right
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either.Right
-  nameWithType: Either.Right
-- uid: Lemonad.ErrorHandling.Either.Right``2(``1)
-  name: Right<TLeft, TRight>(TRight)
-  href: api/Lemonad.ErrorHandling.Either.html#Lemonad_ErrorHandling_Either_Right__2___1_
-  commentId: M:Lemonad.ErrorHandling.Either.Right``2(``1)
-  name.vb: Right(Of TLeft, TRight)(TRight)
-  fullName: Lemonad.ErrorHandling.Either.Right<TLeft, TRight>(TRight)
-  fullName.vb: Lemonad.ErrorHandling.Either.Right(Of TLeft, TRight)(TRight)
-  nameWithType: Either.Right<TLeft, TRight>(TRight)
-  nameWithType.vb: Either.Right(Of TLeft, TRight)(TRight)
-- uid: Lemonad.ErrorHandling.Either.RightValues*
-  name: RightValues
-  href: api/Lemonad.ErrorHandling.Either.html#Lemonad_ErrorHandling_Either_RightValues_
-  commentId: Overload:Lemonad.ErrorHandling.Either.RightValues
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either.RightValues
-  nameWithType: Either.RightValues
-- uid: Lemonad.ErrorHandling.Either.RightValues``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.Either{``0,``1}})
-  name: RightValues<TLeft, TRight>(IEnumerable<Either<TLeft, TRight>>)
-  href: api/Lemonad.ErrorHandling.Either.html#Lemonad_ErrorHandling_Either_RightValues__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_Either___0___1___
-  commentId: M:Lemonad.ErrorHandling.Either.RightValues``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.Either{``0,``1}})
-  name.vb: RightValues(Of TLeft, TRight)(IEnumerable(Of Either(Of TLeft, TRight)))
-  fullName: Lemonad.ErrorHandling.Either.RightValues<TLeft, TRight>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.Either<TLeft, TRight>>)
-  fullName.vb: Lemonad.ErrorHandling.Either.RightValues(Of TLeft, TRight)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.Either(Of TLeft, TRight)))
-  nameWithType: Either.RightValues<TLeft, TRight>(IEnumerable<Either<TLeft, TRight>>)
-  nameWithType.vb: Either.RightValues(Of TLeft, TRight)(IEnumerable(Of Either(Of TLeft, TRight)))
-- uid: Lemonad.ErrorHandling.Either.ToEither*
-  name: ToEither
-  href: api/Lemonad.ErrorHandling.Either.html#Lemonad_ErrorHandling_Either_ToEither_
-  commentId: Overload:Lemonad.ErrorHandling.Either.ToEither
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either.ToEither
-  nameWithType: Either.ToEither
-- uid: Lemonad.ErrorHandling.Either.ToEither``2(System.Nullable{``1},System.Func{``0})
-  name: ToEither<TLeft, TRight>(Nullable<TRight>, Func<TLeft>)
-  href: api/Lemonad.ErrorHandling.Either.html#Lemonad_ErrorHandling_Either_ToEither__2_System_Nullable___1__System_Func___0__
-  commentId: M:Lemonad.ErrorHandling.Either.ToEither``2(System.Nullable{``1},System.Func{``0})
-  name.vb: ToEither(Of TLeft, TRight)(Nullable(Of TRight), Func(Of TLeft))
-  fullName: Lemonad.ErrorHandling.Either.ToEither<TLeft, TRight>(System.Nullable<TRight>, System.Func<TLeft>)
-  fullName.vb: Lemonad.ErrorHandling.Either.ToEither(Of TLeft, TRight)(System.Nullable(Of TRight), System.Func(Of TLeft))
-  nameWithType: Either.ToEither<TLeft, TRight>(Nullable<TRight>, Func<TLeft>)
-  nameWithType.vb: Either.ToEither(Of TLeft, TRight)(Nullable(Of TRight), Func(Of TLeft))
-- uid: Lemonad.ErrorHandling.Either.ToEitherLeft*
-  name: ToEitherLeft
-  href: api/Lemonad.ErrorHandling.Either.html#Lemonad_ErrorHandling_Either_ToEitherLeft_
-  commentId: Overload:Lemonad.ErrorHandling.Either.ToEitherLeft
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either.ToEitherLeft
-  nameWithType: Either.ToEitherLeft
-- uid: Lemonad.ErrorHandling.Either.ToEitherLeft``2(``0)
-  name: ToEitherLeft<TLeft, TRight>(TLeft)
-  href: api/Lemonad.ErrorHandling.Either.html#Lemonad_ErrorHandling_Either_ToEitherLeft__2___0_
-  commentId: M:Lemonad.ErrorHandling.Either.ToEitherLeft``2(``0)
-  name.vb: ToEitherLeft(Of TLeft, TRight)(TLeft)
-  fullName: Lemonad.ErrorHandling.Either.ToEitherLeft<TLeft, TRight>(TLeft)
-  fullName.vb: Lemonad.ErrorHandling.Either.ToEitherLeft(Of TLeft, TRight)(TLeft)
-  nameWithType: Either.ToEitherLeft<TLeft, TRight>(TLeft)
-  nameWithType.vb: Either.ToEitherLeft(Of TLeft, TRight)(TLeft)
-- uid: Lemonad.ErrorHandling.Either.ToEitherRight*
-  name: ToEitherRight
-  href: api/Lemonad.ErrorHandling.Either.html#Lemonad_ErrorHandling_Either_ToEitherRight_
-  commentId: Overload:Lemonad.ErrorHandling.Either.ToEitherRight
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either.ToEitherRight
-  nameWithType: Either.ToEitherRight
-- uid: Lemonad.ErrorHandling.Either.ToEitherRight``2(``1)
-  name: ToEitherRight<TLeft, TRight>(TRight)
-  href: api/Lemonad.ErrorHandling.Either.html#Lemonad_ErrorHandling_Either_ToEitherRight__2___1_
-  commentId: M:Lemonad.ErrorHandling.Either.ToEitherRight``2(``1)
-  name.vb: ToEitherRight(Of TLeft, TRight)(TRight)
-  fullName: Lemonad.ErrorHandling.Either.ToEitherRight<TLeft, TRight>(TRight)
-  fullName.vb: Lemonad.ErrorHandling.Either.ToEitherRight(Of TLeft, TRight)(TRight)
-  nameWithType: Either.ToEitherRight<TLeft, TRight>(TRight)
-  nameWithType.vb: Either.ToEitherRight(Of TLeft, TRight)(TRight)
-- uid: Lemonad.ErrorHandling.Either`2
-  name: Either<TLeft, TRight>
-  href: api/Lemonad.ErrorHandling.Either-2.html
-  commentId: T:Lemonad.ErrorHandling.Either`2
-  name.vb: Either(Of TLeft, TRight)
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight)
-  nameWithType: Either<TLeft, TRight>
-  nameWithType.vb: Either(Of TLeft, TRight)
-- uid: Lemonad.ErrorHandling.Either`2.CompareTo(Lemonad.ErrorHandling.Either{`0,`1})
-  name: CompareTo(Either<TLeft, TRight>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_CompareTo_Lemonad_ErrorHandling_Either__0__1__
-  commentId: M:Lemonad.ErrorHandling.Either`2.CompareTo(Lemonad.ErrorHandling.Either{`0,`1})
-  name.vb: CompareTo(Either(Of TLeft, TRight))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.CompareTo(Lemonad.ErrorHandling.Either<TLeft, TRight>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).CompareTo(Lemonad.ErrorHandling.Either(Of TLeft, TRight))
-  nameWithType: Either<TLeft, TRight>.CompareTo(Either<TLeft, TRight>)
-  nameWithType.vb: Either(Of TLeft, TRight).CompareTo(Either(Of TLeft, TRight))
-- uid: Lemonad.ErrorHandling.Either`2.CompareTo*
-  name: CompareTo
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_CompareTo_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.CompareTo
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.CompareTo
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).CompareTo
-  nameWithType: Either<TLeft, TRight>.CompareTo
-  nameWithType.vb: Either(Of TLeft, TRight).CompareTo
-- uid: Lemonad.ErrorHandling.Either`2.Do(System.Action)
-  name: Do(Action)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_Do_System_Action_
-  commentId: M:Lemonad.ErrorHandling.Either`2.Do(System.Action)
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.Do(System.Action)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).Do(System.Action)
-  nameWithType: Either<TLeft, TRight>.Do(Action)
-  nameWithType.vb: Either(Of TLeft, TRight).Do(Action)
-- uid: Lemonad.ErrorHandling.Either`2.Do*
-  name: Do
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_Do_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.Do
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.Do
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).Do
-  nameWithType: Either<TLeft, TRight>.Do
-  nameWithType.vb: Either(Of TLeft, TRight).Do
-- uid: Lemonad.ErrorHandling.Either`2.DoWhenLeft(System.Action{`0})
-  name: DoWhenLeft(Action<TLeft>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_DoWhenLeft_System_Action__0__
-  commentId: M:Lemonad.ErrorHandling.Either`2.DoWhenLeft(System.Action{`0})
-  name.vb: DoWhenLeft(Action(Of TLeft))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.DoWhenLeft(System.Action<TLeft>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).DoWhenLeft(System.Action(Of TLeft))
-  nameWithType: Either<TLeft, TRight>.DoWhenLeft(Action<TLeft>)
-  nameWithType.vb: Either(Of TLeft, TRight).DoWhenLeft(Action(Of TLeft))
-- uid: Lemonad.ErrorHandling.Either`2.DoWhenLeft*
-  name: DoWhenLeft
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_DoWhenLeft_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.DoWhenLeft
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.DoWhenLeft
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).DoWhenLeft
-  nameWithType: Either<TLeft, TRight>.DoWhenLeft
-  nameWithType.vb: Either(Of TLeft, TRight).DoWhenLeft
-- uid: Lemonad.ErrorHandling.Either`2.DoWhenRight(System.Action{`1})
-  name: DoWhenRight(Action<TRight>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_DoWhenRight_System_Action__1__
-  commentId: M:Lemonad.ErrorHandling.Either`2.DoWhenRight(System.Action{`1})
-  name.vb: DoWhenRight(Action(Of TRight))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.DoWhenRight(System.Action<TRight>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).DoWhenRight(System.Action(Of TRight))
-  nameWithType: Either<TLeft, TRight>.DoWhenRight(Action<TRight>)
-  nameWithType.vb: Either(Of TLeft, TRight).DoWhenRight(Action(Of TRight))
-- uid: Lemonad.ErrorHandling.Either`2.DoWhenRight*
-  name: DoWhenRight
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_DoWhenRight_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.DoWhenRight
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.DoWhenRight
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).DoWhenRight
-  nameWithType: Either<TLeft, TRight>.DoWhenRight
-  nameWithType.vb: Either(Of TLeft, TRight).DoWhenRight
-- uid: Lemonad.ErrorHandling.Either`2.Equals(Lemonad.ErrorHandling.Either{`0,`1})
-  name: Equals(Either<TLeft, TRight>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_Equals_Lemonad_ErrorHandling_Either__0__1__
-  commentId: M:Lemonad.ErrorHandling.Either`2.Equals(Lemonad.ErrorHandling.Either{`0,`1})
-  name.vb: Equals(Either(Of TLeft, TRight))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.Equals(Lemonad.ErrorHandling.Either<TLeft, TRight>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).Equals(Lemonad.ErrorHandling.Either(Of TLeft, TRight))
-  nameWithType: Either<TLeft, TRight>.Equals(Either<TLeft, TRight>)
-  nameWithType.vb: Either(Of TLeft, TRight).Equals(Either(Of TLeft, TRight))
-- uid: Lemonad.ErrorHandling.Either`2.Equals(System.Object)
-  name: Equals(Object)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_Equals_System_Object_
-  commentId: M:Lemonad.ErrorHandling.Either`2.Equals(System.Object)
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.Equals(System.Object)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).Equals(System.Object)
-  nameWithType: Either<TLeft, TRight>.Equals(Object)
-  nameWithType.vb: Either(Of TLeft, TRight).Equals(Object)
-- uid: Lemonad.ErrorHandling.Either`2.Equals*
-  name: Equals
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_Equals_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.Equals
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.Equals
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).Equals
-  nameWithType: Either<TLeft, TRight>.Equals
-  nameWithType.vb: Either(Of TLeft, TRight).Equals
-- uid: Lemonad.ErrorHandling.Either`2.FlatMap*
-  name: FlatMap
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_FlatMap_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.FlatMap
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.FlatMap
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).FlatMap
-  nameWithType: Either<TLeft, TRight>.FlatMap
-  nameWithType.vb: Either(Of TLeft, TRight).FlatMap
-- uid: Lemonad.ErrorHandling.Either`2.FlatMap``1(System.Func{`1,Lemonad.ErrorHandling.Either{`0,``0}})
-  name: FlatMap<TRightResult>(Func<TRight, Either<TLeft, TRightResult>>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_FlatMap__1_System_Func__1_Lemonad_ErrorHandling_Either__0___0___
-  commentId: M:Lemonad.ErrorHandling.Either`2.FlatMap``1(System.Func{`1,Lemonad.ErrorHandling.Either{`0,``0}})
-  name.vb: FlatMap(Of TRightResult)(Func(Of TRight, Either(Of TLeft, TRightResult)))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.FlatMap<TRightResult>(System.Func<TRight, Lemonad.ErrorHandling.Either<TLeft, TRightResult>>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).FlatMap(Of TRightResult)(System.Func(Of TRight, Lemonad.ErrorHandling.Either(Of TLeft, TRightResult)))
-  nameWithType: Either<TLeft, TRight>.FlatMap<TRightResult>(Func<TRight, Either<TLeft, TRightResult>>)
-  nameWithType.vb: Either(Of TLeft, TRight).FlatMap(Of TRightResult)(Func(Of TRight, Either(Of TLeft, TRightResult)))
-- uid: Lemonad.ErrorHandling.Either`2.FlatMap``2(System.Func{`1,Lemonad.ErrorHandling.Either{`0,``0}},System.Func{`1,``0,``1})
-  name: FlatMap<TRightSelector, TRightResult>(Func<TRight, Either<TLeft, TRightSelector>>, Func<TRight, TRightSelector, TRightResult>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_FlatMap__2_System_Func__1_Lemonad_ErrorHandling_Either__0___0___System_Func__1___0___1__
-  commentId: M:Lemonad.ErrorHandling.Either`2.FlatMap``2(System.Func{`1,Lemonad.ErrorHandling.Either{`0,``0}},System.Func{`1,``0,``1})
-  name.vb: FlatMap(Of TRightSelector, TRightResult)(Func(Of TRight, Either(Of TLeft, TRightSelector)), Func(Of TRight, TRightSelector, TRightResult))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.FlatMap<TRightSelector, TRightResult>(System.Func<TRight, Lemonad.ErrorHandling.Either<TLeft, TRightSelector>>, System.Func<TRight, TRightSelector, TRightResult>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).FlatMap(Of TRightSelector, TRightResult)(System.Func(Of TRight, Lemonad.ErrorHandling.Either(Of TLeft, TRightSelector)), System.Func(Of TRight, TRightSelector, TRightResult))
-  nameWithType: Either<TLeft, TRight>.FlatMap<TRightSelector, TRightResult>(Func<TRight, Either<TLeft, TRightSelector>>, Func<TRight, TRightSelector, TRightResult>)
-  nameWithType.vb: Either(Of TLeft, TRight).FlatMap(Of TRightSelector, TRightResult)(Func(Of TRight, Either(Of TLeft, TRightSelector)), Func(Of TRight, TRightSelector, TRightResult))
-- uid: Lemonad.ErrorHandling.Either`2.FlatMapRight*
-  name: FlatMapRight
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_FlatMapRight_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.FlatMapRight
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.FlatMapRight
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).FlatMapRight
-  nameWithType: Either<TLeft, TRight>.FlatMapRight
-  nameWithType.vb: Either(Of TLeft, TRight).FlatMapRight
-- uid: Lemonad.ErrorHandling.Either`2.FlatMapRight``2(System.Func{`1,Lemonad.ErrorHandling.Either{``0,``1}},System.Func{``0,`0})
-  name: FlatMapRight<TLeftResult, TRightResult>(Func<TRight, Either<TLeftResult, TRightResult>>, Func<TLeftResult, TLeft>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_FlatMapRight__2_System_Func__1_Lemonad_ErrorHandling_Either___0___1___System_Func___0__0__
-  commentId: M:Lemonad.ErrorHandling.Either`2.FlatMapRight``2(System.Func{`1,Lemonad.ErrorHandling.Either{``0,``1}},System.Func{``0,`0})
-  name.vb: FlatMapRight(Of TLeftResult, TRightResult)(Func(Of TRight, Either(Of TLeftResult, TRightResult)), Func(Of TLeftResult, TLeft))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.FlatMapRight<TLeftResult, TRightResult>(System.Func<TRight, Lemonad.ErrorHandling.Either<TLeftResult, TRightResult>>, System.Func<TLeftResult, TLeft>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).FlatMapRight(Of TLeftResult, TRightResult)(System.Func(Of TRight, Lemonad.ErrorHandling.Either(Of TLeftResult, TRightResult)), System.Func(Of TLeftResult, TLeft))
-  nameWithType: Either<TLeft, TRight>.FlatMapRight<TLeftResult, TRightResult>(Func<TRight, Either<TLeftResult, TRightResult>>, Func<TLeftResult, TLeft>)
-  nameWithType.vb: Either(Of TLeft, TRight).FlatMapRight(Of TLeftResult, TRightResult)(Func(Of TRight, Either(Of TLeftResult, TRightResult)), Func(Of TLeftResult, TLeft))
-- uid: Lemonad.ErrorHandling.Either`2.Flatten*
-  name: Flatten
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_Flatten_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.Flatten
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.Flatten
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).Flatten
-  nameWithType: Either<TLeft, TRight>.Flatten
-  nameWithType.vb: Either(Of TLeft, TRight).Flatten
-- uid: Lemonad.ErrorHandling.Either`2.Flatten``2(System.Func{`1,Lemonad.ErrorHandling.Either{``0,``1}},System.Func{``0,`0})
-  name: Flatten<TLeftResult, TRightResult>(Func<TRight, Either<TLeftResult, TRightResult>>, Func<TLeftResult, TLeft>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_Flatten__2_System_Func__1_Lemonad_ErrorHandling_Either___0___1___System_Func___0__0__
-  commentId: M:Lemonad.ErrorHandling.Either`2.Flatten``2(System.Func{`1,Lemonad.ErrorHandling.Either{``0,``1}},System.Func{``0,`0})
-  name.vb: Flatten(Of TLeftResult, TRightResult)(Func(Of TRight, Either(Of TLeftResult, TRightResult)), Func(Of TLeftResult, TLeft))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.Flatten<TLeftResult, TRightResult>(System.Func<TRight, Lemonad.ErrorHandling.Either<TLeftResult, TRightResult>>, System.Func<TLeftResult, TLeft>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).Flatten(Of TLeftResult, TRightResult)(System.Func(Of TRight, Lemonad.ErrorHandling.Either(Of TLeftResult, TRightResult)), System.Func(Of TLeftResult, TLeft))
-  nameWithType: Either<TLeft, TRight>.Flatten<TLeftResult, TRightResult>(Func<TRight, Either<TLeftResult, TRightResult>>, Func<TLeftResult, TLeft>)
-  nameWithType.vb: Either(Of TLeft, TRight).Flatten(Of TLeftResult, TRightResult)(Func(Of TRight, Either(Of TLeftResult, TRightResult)), Func(Of TLeftResult, TLeft))
-- uid: Lemonad.ErrorHandling.Either`2.GetHashCode
-  name: GetHashCode()
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_GetHashCode
-  commentId: M:Lemonad.ErrorHandling.Either`2.GetHashCode
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.GetHashCode()
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).GetHashCode()
-  nameWithType: Either<TLeft, TRight>.GetHashCode()
-  nameWithType.vb: Either(Of TLeft, TRight).GetHashCode()
-- uid: Lemonad.ErrorHandling.Either`2.GetHashCode*
-  name: GetHashCode
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_GetHashCode_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.GetHashCode
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.GetHashCode
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).GetHashCode
-  nameWithType: Either<TLeft, TRight>.GetHashCode
-  nameWithType.vb: Either(Of TLeft, TRight).GetHashCode
-- uid: Lemonad.ErrorHandling.Either`2.IsLeft
-  name: IsLeft
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_IsLeft
-  commentId: P:Lemonad.ErrorHandling.Either`2.IsLeft
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.IsLeft
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).IsLeft
-  nameWithType: Either<TLeft, TRight>.IsLeft
-  nameWithType.vb: Either(Of TLeft, TRight).IsLeft
-- uid: Lemonad.ErrorHandling.Either`2.IsLeft*
-  name: IsLeft
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_IsLeft_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.IsLeft
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.IsLeft
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).IsLeft
-  nameWithType: Either<TLeft, TRight>.IsLeft
-  nameWithType.vb: Either(Of TLeft, TRight).IsLeft
-- uid: Lemonad.ErrorHandling.Either`2.IsLeftWhen(System.Func{`1,System.Boolean},System.Func{`0})
-  name: IsLeftWhen(Func<TRight, Boolean>, Func<TLeft>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_IsLeftWhen_System_Func__1_System_Boolean__System_Func__0__
-  commentId: M:Lemonad.ErrorHandling.Either`2.IsLeftWhen(System.Func{`1,System.Boolean},System.Func{`0})
-  name.vb: IsLeftWhen(Func(Of TRight, Boolean), Func(Of TLeft))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.IsLeftWhen(System.Func<TRight, System.Boolean>, System.Func<TLeft>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).IsLeftWhen(System.Func(Of TRight, System.Boolean), System.Func(Of TLeft))
-  nameWithType: Either<TLeft, TRight>.IsLeftWhen(Func<TRight, Boolean>, Func<TLeft>)
-  nameWithType.vb: Either(Of TLeft, TRight).IsLeftWhen(Func(Of TRight, Boolean), Func(Of TLeft))
-- uid: Lemonad.ErrorHandling.Either`2.IsLeftWhen*
-  name: IsLeftWhen
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_IsLeftWhen_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.IsLeftWhen
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.IsLeftWhen
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).IsLeftWhen
-  nameWithType: Either<TLeft, TRight>.IsLeftWhen
-  nameWithType.vb: Either(Of TLeft, TRight).IsLeftWhen
-- uid: Lemonad.ErrorHandling.Either`2.IsLeftWhenNull(System.Func{`0})
-  name: IsLeftWhenNull(Func<TLeft>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_IsLeftWhenNull_System_Func__0__
-  commentId: M:Lemonad.ErrorHandling.Either`2.IsLeftWhenNull(System.Func{`0})
-  name.vb: IsLeftWhenNull(Func(Of TLeft))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.IsLeftWhenNull(System.Func<TLeft>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).IsLeftWhenNull(System.Func(Of TLeft))
-  nameWithType: Either<TLeft, TRight>.IsLeftWhenNull(Func<TLeft>)
-  nameWithType.vb: Either(Of TLeft, TRight).IsLeftWhenNull(Func(Of TLeft))
-- uid: Lemonad.ErrorHandling.Either`2.IsLeftWhenNull*
-  name: IsLeftWhenNull
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_IsLeftWhenNull_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.IsLeftWhenNull
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.IsLeftWhenNull
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).IsLeftWhenNull
-  nameWithType: Either<TLeft, TRight>.IsLeftWhenNull
-  nameWithType.vb: Either(Of TLeft, TRight).IsLeftWhenNull
-- uid: Lemonad.ErrorHandling.Either`2.IsRight
-  name: IsRight
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_IsRight
-  commentId: P:Lemonad.ErrorHandling.Either`2.IsRight
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.IsRight
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).IsRight
-  nameWithType: Either<TLeft, TRight>.IsRight
-  nameWithType.vb: Either(Of TLeft, TRight).IsRight
-- uid: Lemonad.ErrorHandling.Either`2.IsRight*
-  name: IsRight
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_IsRight_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.IsRight
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.IsRight
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).IsRight
-  nameWithType: Either<TLeft, TRight>.IsRight
-  nameWithType.vb: Either(Of TLeft, TRight).IsRight
-- uid: Lemonad.ErrorHandling.Either`2.IsRightWhen(System.Func{`1,System.Boolean},System.Func{`0})
-  name: IsRightWhen(Func<TRight, Boolean>, Func<TLeft>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_IsRightWhen_System_Func__1_System_Boolean__System_Func__0__
-  commentId: M:Lemonad.ErrorHandling.Either`2.IsRightWhen(System.Func{`1,System.Boolean},System.Func{`0})
-  name.vb: IsRightWhen(Func(Of TRight, Boolean), Func(Of TLeft))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.IsRightWhen(System.Func<TRight, System.Boolean>, System.Func<TLeft>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).IsRightWhen(System.Func(Of TRight, System.Boolean), System.Func(Of TLeft))
-  nameWithType: Either<TLeft, TRight>.IsRightWhen(Func<TRight, Boolean>, Func<TLeft>)
-  nameWithType.vb: Either(Of TLeft, TRight).IsRightWhen(Func(Of TRight, Boolean), Func(Of TLeft))
-- uid: Lemonad.ErrorHandling.Either`2.IsRightWhen*
-  name: IsRightWhen
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_IsRightWhen_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.IsRightWhen
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.IsRightWhen
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).IsRightWhen
-  nameWithType: Either<TLeft, TRight>.IsRightWhen
-  nameWithType.vb: Either(Of TLeft, TRight).IsRightWhen
-- uid: Lemonad.ErrorHandling.Either`2.IsRightWhenNull(System.Func{`0})
-  name: IsRightWhenNull(Func<TLeft>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_IsRightWhenNull_System_Func__0__
-  commentId: M:Lemonad.ErrorHandling.Either`2.IsRightWhenNull(System.Func{`0})
-  name.vb: IsRightWhenNull(Func(Of TLeft))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.IsRightWhenNull(System.Func<TLeft>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).IsRightWhenNull(System.Func(Of TLeft))
-  nameWithType: Either<TLeft, TRight>.IsRightWhenNull(Func<TLeft>)
-  nameWithType.vb: Either(Of TLeft, TRight).IsRightWhenNull(Func(Of TLeft))
-- uid: Lemonad.ErrorHandling.Either`2.IsRightWhenNull*
-  name: IsRightWhenNull
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_IsRightWhenNull_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.IsRightWhenNull
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.IsRightWhenNull
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).IsRightWhenNull
-  nameWithType: Either<TLeft, TRight>.IsRightWhenNull
-  nameWithType.vb: Either(Of TLeft, TRight).IsRightWhenNull
-- uid: Lemonad.ErrorHandling.Either`2.LeftEnumerable
-  name: LeftEnumerable
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_LeftEnumerable
-  commentId: P:Lemonad.ErrorHandling.Either`2.LeftEnumerable
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.LeftEnumerable
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).LeftEnumerable
-  nameWithType: Either<TLeft, TRight>.LeftEnumerable
-  nameWithType.vb: Either(Of TLeft, TRight).LeftEnumerable
-- uid: Lemonad.ErrorHandling.Either`2.LeftEnumerable*
-  name: LeftEnumerable
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_LeftEnumerable_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.LeftEnumerable
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.LeftEnumerable
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).LeftEnumerable
-  nameWithType: Either<TLeft, TRight>.LeftEnumerable
-  nameWithType.vb: Either(Of TLeft, TRight).LeftEnumerable
-- uid: Lemonad.ErrorHandling.Either`2.Map*
-  name: Map
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_Map_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.Map
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.Map
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).Map
-  nameWithType: Either<TLeft, TRight>.Map
-  nameWithType.vb: Either(Of TLeft, TRight).Map
-- uid: Lemonad.ErrorHandling.Either`2.Map``2(System.Func{`0,``0},System.Func{`1,``1})
-  name: Map<TLeftResult, TRightResult>(Func<TLeft, TLeftResult>, Func<TRight, TRightResult>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_Map__2_System_Func__0___0__System_Func__1___1__
-  commentId: M:Lemonad.ErrorHandling.Either`2.Map``2(System.Func{`0,``0},System.Func{`1,``1})
-  name.vb: Map(Of TLeftResult, TRightResult)(Func(Of TLeft, TLeftResult), Func(Of TRight, TRightResult))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.Map<TLeftResult, TRightResult>(System.Func<TLeft, TLeftResult>, System.Func<TRight, TRightResult>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).Map(Of TLeftResult, TRightResult)(System.Func(Of TLeft, TLeftResult), System.Func(Of TRight, TRightResult))
-  nameWithType: Either<TLeft, TRight>.Map<TLeftResult, TRightResult>(Func<TLeft, TLeftResult>, Func<TRight, TRightResult>)
-  nameWithType.vb: Either(Of TLeft, TRight).Map(Of TLeftResult, TRightResult)(Func(Of TLeft, TLeftResult), Func(Of TRight, TRightResult))
-- uid: Lemonad.ErrorHandling.Either`2.MapLeft*
-  name: MapLeft
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_MapLeft_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.MapLeft
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.MapLeft
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).MapLeft
-  nameWithType: Either<TLeft, TRight>.MapLeft
-  nameWithType.vb: Either(Of TLeft, TRight).MapLeft
-- uid: Lemonad.ErrorHandling.Either`2.MapLeft``1(System.Func{`0,``0})
-  name: MapLeft<TLeftResult>(Func<TLeft, TLeftResult>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_MapLeft__1_System_Func__0___0__
-  commentId: M:Lemonad.ErrorHandling.Either`2.MapLeft``1(System.Func{`0,``0})
-  name.vb: MapLeft(Of TLeftResult)(Func(Of TLeft, TLeftResult))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.MapLeft<TLeftResult>(System.Func<TLeft, TLeftResult>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).MapLeft(Of TLeftResult)(System.Func(Of TLeft, TLeftResult))
-  nameWithType: Either<TLeft, TRight>.MapLeft<TLeftResult>(Func<TLeft, TLeftResult>)
-  nameWithType.vb: Either(Of TLeft, TRight).MapLeft(Of TLeftResult)(Func(Of TLeft, TLeftResult))
-- uid: Lemonad.ErrorHandling.Either`2.MapRight*
-  name: MapRight
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_MapRight_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.MapRight
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.MapRight
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).MapRight
-  nameWithType: Either<TLeft, TRight>.MapRight
-  nameWithType.vb: Either(Of TLeft, TRight).MapRight
-- uid: Lemonad.ErrorHandling.Either`2.MapRight``1(System.Func{`1,``0})
-  name: MapRight<TRightResult>(Func<TRight, TRightResult>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_MapRight__1_System_Func__1___0__
-  commentId: M:Lemonad.ErrorHandling.Either`2.MapRight``1(System.Func{`1,``0})
-  name.vb: MapRight(Of TRightResult)(Func(Of TRight, TRightResult))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.MapRight<TRightResult>(System.Func<TRight, TRightResult>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).MapRight(Of TRightResult)(System.Func(Of TRight, TRightResult))
-  nameWithType: Either<TLeft, TRight>.MapRight<TRightResult>(Func<TRight, TRightResult>)
-  nameWithType.vb: Either(Of TLeft, TRight).MapRight(Of TRightResult)(Func(Of TRight, TRightResult))
-- uid: Lemonad.ErrorHandling.Either`2.Match(System.Action{`0},System.Action{`1})
-  name: Match(Action<TLeft>, Action<TRight>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_Match_System_Action__0__System_Action__1__
-  commentId: M:Lemonad.ErrorHandling.Either`2.Match(System.Action{`0},System.Action{`1})
-  name.vb: Match(Action(Of TLeft), Action(Of TRight))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.Match(System.Action<TLeft>, System.Action<TRight>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).Match(System.Action(Of TLeft), System.Action(Of TRight))
-  nameWithType: Either<TLeft, TRight>.Match(Action<TLeft>, Action<TRight>)
-  nameWithType.vb: Either(Of TLeft, TRight).Match(Action(Of TLeft), Action(Of TRight))
-- uid: Lemonad.ErrorHandling.Either`2.Match*
-  name: Match
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_Match_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.Match
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.Match
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).Match
-  nameWithType: Either<TLeft, TRight>.Match
-  nameWithType.vb: Either(Of TLeft, TRight).Match
-- uid: Lemonad.ErrorHandling.Either`2.Match``1(System.Func{`0,``0},System.Func{`1,``0})
-  name: Match<TResult>(Func<TLeft, TResult>, Func<TRight, TResult>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_Match__1_System_Func__0___0__System_Func__1___0__
-  commentId: M:Lemonad.ErrorHandling.Either`2.Match``1(System.Func{`0,``0},System.Func{`1,``0})
-  name.vb: Match(Of TResult)(Func(Of TLeft, TResult), Func(Of TRight, TResult))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.Match<TResult>(System.Func<TLeft, TResult>, System.Func<TRight, TResult>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).Match(Of TResult)(System.Func(Of TLeft, TResult), System.Func(Of TRight, TResult))
-  nameWithType: Either<TLeft, TRight>.Match<TResult>(Func<TLeft, TResult>, Func<TRight, TResult>)
-  nameWithType.vb: Either(Of TLeft, TRight).Match(Of TResult)(Func(Of TLeft, TResult), Func(Of TRight, TResult))
-- uid: Lemonad.ErrorHandling.Either`2.op_Equality(Lemonad.ErrorHandling.Either{`0,`1},Lemonad.ErrorHandling.Either{`0,`1})
-  name: Equality(Either<TLeft, TRight>, Either<TLeft, TRight>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_op_Equality_Lemonad_ErrorHandling_Either__0__1__Lemonad_ErrorHandling_Either__0__1__
-  commentId: M:Lemonad.ErrorHandling.Either`2.op_Equality(Lemonad.ErrorHandling.Either{`0,`1},Lemonad.ErrorHandling.Either{`0,`1})
-  name.vb: Equality(Either(Of TLeft, TRight), Either(Of TLeft, TRight))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.Equality(Lemonad.ErrorHandling.Either<TLeft, TRight>, Lemonad.ErrorHandling.Either<TLeft, TRight>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).Equality(Lemonad.ErrorHandling.Either(Of TLeft, TRight), Lemonad.ErrorHandling.Either(Of TLeft, TRight))
-  nameWithType: Either<TLeft, TRight>.Equality(Either<TLeft, TRight>, Either<TLeft, TRight>)
-  nameWithType.vb: Either(Of TLeft, TRight).Equality(Either(Of TLeft, TRight), Either(Of TLeft, TRight))
-- uid: Lemonad.ErrorHandling.Either`2.op_Equality*
-  name: Equality
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_op_Equality_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.op_Equality
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.Equality
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).Equality
-  nameWithType: Either<TLeft, TRight>.Equality
-  nameWithType.vb: Either(Of TLeft, TRight).Equality
-- uid: Lemonad.ErrorHandling.Either`2.op_GreaterThan(Lemonad.ErrorHandling.Either{`0,`1},Lemonad.ErrorHandling.Either{`0,`1})
-  name: GreaterThan(Either<TLeft, TRight>, Either<TLeft, TRight>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_op_GreaterThan_Lemonad_ErrorHandling_Either__0__1__Lemonad_ErrorHandling_Either__0__1__
-  commentId: M:Lemonad.ErrorHandling.Either`2.op_GreaterThan(Lemonad.ErrorHandling.Either{`0,`1},Lemonad.ErrorHandling.Either{`0,`1})
-  name.vb: GreaterThan(Either(Of TLeft, TRight), Either(Of TLeft, TRight))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.GreaterThan(Lemonad.ErrorHandling.Either<TLeft, TRight>, Lemonad.ErrorHandling.Either<TLeft, TRight>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).GreaterThan(Lemonad.ErrorHandling.Either(Of TLeft, TRight), Lemonad.ErrorHandling.Either(Of TLeft, TRight))
-  nameWithType: Either<TLeft, TRight>.GreaterThan(Either<TLeft, TRight>, Either<TLeft, TRight>)
-  nameWithType.vb: Either(Of TLeft, TRight).GreaterThan(Either(Of TLeft, TRight), Either(Of TLeft, TRight))
-- uid: Lemonad.ErrorHandling.Either`2.op_GreaterThan*
-  name: GreaterThan
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_op_GreaterThan_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.op_GreaterThan
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.GreaterThan
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).GreaterThan
-  nameWithType: Either<TLeft, TRight>.GreaterThan
-  nameWithType.vb: Either(Of TLeft, TRight).GreaterThan
-- uid: Lemonad.ErrorHandling.Either`2.op_GreaterThanOrEqual(Lemonad.ErrorHandling.Either{`0,`1},Lemonad.ErrorHandling.Either{`0,`1})
-  name: GreaterThanOrEqual(Either<TLeft, TRight>, Either<TLeft, TRight>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_op_GreaterThanOrEqual_Lemonad_ErrorHandling_Either__0__1__Lemonad_ErrorHandling_Either__0__1__
-  commentId: M:Lemonad.ErrorHandling.Either`2.op_GreaterThanOrEqual(Lemonad.ErrorHandling.Either{`0,`1},Lemonad.ErrorHandling.Either{`0,`1})
-  name.vb: GreaterThanOrEqual(Either(Of TLeft, TRight), Either(Of TLeft, TRight))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.GreaterThanOrEqual(Lemonad.ErrorHandling.Either<TLeft, TRight>, Lemonad.ErrorHandling.Either<TLeft, TRight>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).GreaterThanOrEqual(Lemonad.ErrorHandling.Either(Of TLeft, TRight), Lemonad.ErrorHandling.Either(Of TLeft, TRight))
-  nameWithType: Either<TLeft, TRight>.GreaterThanOrEqual(Either<TLeft, TRight>, Either<TLeft, TRight>)
-  nameWithType.vb: Either(Of TLeft, TRight).GreaterThanOrEqual(Either(Of TLeft, TRight), Either(Of TLeft, TRight))
-- uid: Lemonad.ErrorHandling.Either`2.op_GreaterThanOrEqual*
-  name: GreaterThanOrEqual
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_op_GreaterThanOrEqual_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.op_GreaterThanOrEqual
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.GreaterThanOrEqual
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).GreaterThanOrEqual
-  nameWithType: Either<TLeft, TRight>.GreaterThanOrEqual
-  nameWithType.vb: Either(Of TLeft, TRight).GreaterThanOrEqual
-- uid: Lemonad.ErrorHandling.Either`2.op_Implicit(`0)~Lemonad.ErrorHandling.Either{`0,`1}
-  name: Implicit(TLeft to Either<TLeft, TRight>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_op_Implicit__0__Lemonad_ErrorHandling_Either__0__1_
-  commentId: M:Lemonad.ErrorHandling.Either`2.op_Implicit(`0)~Lemonad.ErrorHandling.Either{`0,`1}
-  name.vb: Widening(TLeft to Either(Of TLeft, TRight))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.Implicit(TLeft to Lemonad.ErrorHandling.Either<TLeft, TRight>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).Widening(TLeft to Lemonad.ErrorHandling.Either(Of TLeft, TRight))
-  nameWithType: Either<TLeft, TRight>.Implicit(TLeft to Either<TLeft, TRight>)
-  nameWithType.vb: Either(Of TLeft, TRight).Widening(TLeft to Either(Of TLeft, TRight))
-- uid: Lemonad.ErrorHandling.Either`2.op_Implicit(`1)~Lemonad.ErrorHandling.Either{`0,`1}
-  name: Implicit(TRight to Either<TLeft, TRight>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_op_Implicit__1__Lemonad_ErrorHandling_Either__0__1_
-  commentId: M:Lemonad.ErrorHandling.Either`2.op_Implicit(`1)~Lemonad.ErrorHandling.Either{`0,`1}
-  name.vb: Widening(TRight to Either(Of TLeft, TRight))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.Implicit(TRight to Lemonad.ErrorHandling.Either<TLeft, TRight>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).Widening(TRight to Lemonad.ErrorHandling.Either(Of TLeft, TRight))
-  nameWithType: Either<TLeft, TRight>.Implicit(TRight to Either<TLeft, TRight>)
-  nameWithType.vb: Either(Of TLeft, TRight).Widening(TRight to Either(Of TLeft, TRight))
-- uid: Lemonad.ErrorHandling.Either`2.op_Implicit*
-  name: Implicit
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_op_Implicit_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.op_Implicit
-  isSpec: "True"
-  name.vb: Widening
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.Implicit
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).Widening
-  nameWithType: Either<TLeft, TRight>.Implicit
-  nameWithType.vb: Either(Of TLeft, TRight).Widening
-- uid: Lemonad.ErrorHandling.Either`2.op_Inequality(Lemonad.ErrorHandling.Either{`0,`1},Lemonad.ErrorHandling.Either{`0,`1})
-  name: Inequality(Either<TLeft, TRight>, Either<TLeft, TRight>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_op_Inequality_Lemonad_ErrorHandling_Either__0__1__Lemonad_ErrorHandling_Either__0__1__
-  commentId: M:Lemonad.ErrorHandling.Either`2.op_Inequality(Lemonad.ErrorHandling.Either{`0,`1},Lemonad.ErrorHandling.Either{`0,`1})
-  name.vb: Inequality(Either(Of TLeft, TRight), Either(Of TLeft, TRight))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.Inequality(Lemonad.ErrorHandling.Either<TLeft, TRight>, Lemonad.ErrorHandling.Either<TLeft, TRight>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).Inequality(Lemonad.ErrorHandling.Either(Of TLeft, TRight), Lemonad.ErrorHandling.Either(Of TLeft, TRight))
-  nameWithType: Either<TLeft, TRight>.Inequality(Either<TLeft, TRight>, Either<TLeft, TRight>)
-  nameWithType.vb: Either(Of TLeft, TRight).Inequality(Either(Of TLeft, TRight), Either(Of TLeft, TRight))
-- uid: Lemonad.ErrorHandling.Either`2.op_Inequality*
-  name: Inequality
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_op_Inequality_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.op_Inequality
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.Inequality
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).Inequality
-  nameWithType: Either<TLeft, TRight>.Inequality
-  nameWithType.vb: Either(Of TLeft, TRight).Inequality
-- uid: Lemonad.ErrorHandling.Either`2.op_LessThan(Lemonad.ErrorHandling.Either{`0,`1},Lemonad.ErrorHandling.Either{`0,`1})
-  name: LessThan(Either<TLeft, TRight>, Either<TLeft, TRight>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_op_LessThan_Lemonad_ErrorHandling_Either__0__1__Lemonad_ErrorHandling_Either__0__1__
-  commentId: M:Lemonad.ErrorHandling.Either`2.op_LessThan(Lemonad.ErrorHandling.Either{`0,`1},Lemonad.ErrorHandling.Either{`0,`1})
-  name.vb: LessThan(Either(Of TLeft, TRight), Either(Of TLeft, TRight))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.LessThan(Lemonad.ErrorHandling.Either<TLeft, TRight>, Lemonad.ErrorHandling.Either<TLeft, TRight>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).LessThan(Lemonad.ErrorHandling.Either(Of TLeft, TRight), Lemonad.ErrorHandling.Either(Of TLeft, TRight))
-  nameWithType: Either<TLeft, TRight>.LessThan(Either<TLeft, TRight>, Either<TLeft, TRight>)
-  nameWithType.vb: Either(Of TLeft, TRight).LessThan(Either(Of TLeft, TRight), Either(Of TLeft, TRight))
-- uid: Lemonad.ErrorHandling.Either`2.op_LessThan*
-  name: LessThan
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_op_LessThan_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.op_LessThan
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.LessThan
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).LessThan
-  nameWithType: Either<TLeft, TRight>.LessThan
-  nameWithType.vb: Either(Of TLeft, TRight).LessThan
-- uid: Lemonad.ErrorHandling.Either`2.op_LessThanOrEqual(Lemonad.ErrorHandling.Either{`0,`1},Lemonad.ErrorHandling.Either{`0,`1})
-  name: LessThanOrEqual(Either<TLeft, TRight>, Either<TLeft, TRight>)
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_op_LessThanOrEqual_Lemonad_ErrorHandling_Either__0__1__Lemonad_ErrorHandling_Either__0__1__
-  commentId: M:Lemonad.ErrorHandling.Either`2.op_LessThanOrEqual(Lemonad.ErrorHandling.Either{`0,`1},Lemonad.ErrorHandling.Either{`0,`1})
-  name.vb: LessThanOrEqual(Either(Of TLeft, TRight), Either(Of TLeft, TRight))
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.LessThanOrEqual(Lemonad.ErrorHandling.Either<TLeft, TRight>, Lemonad.ErrorHandling.Either<TLeft, TRight>)
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).LessThanOrEqual(Lemonad.ErrorHandling.Either(Of TLeft, TRight), Lemonad.ErrorHandling.Either(Of TLeft, TRight))
-  nameWithType: Either<TLeft, TRight>.LessThanOrEqual(Either<TLeft, TRight>, Either<TLeft, TRight>)
-  nameWithType.vb: Either(Of TLeft, TRight).LessThanOrEqual(Either(Of TLeft, TRight), Either(Of TLeft, TRight))
-- uid: Lemonad.ErrorHandling.Either`2.op_LessThanOrEqual*
-  name: LessThanOrEqual
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_op_LessThanOrEqual_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.op_LessThanOrEqual
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.LessThanOrEqual
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).LessThanOrEqual
-  nameWithType: Either<TLeft, TRight>.LessThanOrEqual
-  nameWithType.vb: Either(Of TLeft, TRight).LessThanOrEqual
-- uid: Lemonad.ErrorHandling.Either`2.RightEnumerable
-  name: RightEnumerable
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_RightEnumerable
-  commentId: P:Lemonad.ErrorHandling.Either`2.RightEnumerable
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.RightEnumerable
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).RightEnumerable
-  nameWithType: Either<TLeft, TRight>.RightEnumerable
-  nameWithType.vb: Either(Of TLeft, TRight).RightEnumerable
-- uid: Lemonad.ErrorHandling.Either`2.RightEnumerable*
-  name: RightEnumerable
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_RightEnumerable_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.RightEnumerable
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.RightEnumerable
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).RightEnumerable
-  nameWithType: Either<TLeft, TRight>.RightEnumerable
-  nameWithType.vb: Either(Of TLeft, TRight).RightEnumerable
-- uid: Lemonad.ErrorHandling.Either`2.ToString
-  name: ToString()
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_ToString
-  commentId: M:Lemonad.ErrorHandling.Either`2.ToString
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.ToString()
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).ToString()
-  nameWithType: Either<TLeft, TRight>.ToString()
-  nameWithType.vb: Either(Of TLeft, TRight).ToString()
-- uid: Lemonad.ErrorHandling.Either`2.ToString*
-  name: ToString
-  href: api/Lemonad.ErrorHandling.Either-2.html#Lemonad_ErrorHandling_Either_2_ToString_
-  commentId: Overload:Lemonad.ErrorHandling.Either`2.ToString
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Either<TLeft, TRight>.ToString
-  fullName.vb: Lemonad.ErrorHandling.Either(Of TLeft, TRight).ToString
-  nameWithType: Either<TLeft, TRight>.ToString
-  nameWithType.vb: Either(Of TLeft, TRight).ToString
-- uid: Lemonad.ErrorHandling.EitherParsers
-  name: EitherParsers
-  href: api/Lemonad.ErrorHandling.EitherParsers.html
-  commentId: T:Lemonad.ErrorHandling.EitherParsers
-  fullName: Lemonad.ErrorHandling.EitherParsers
-  nameWithType: EitherParsers
-- uid: Lemonad.ErrorHandling.EitherParsers.Bool(System.String)
-  name: Bool(String)
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_Bool_System_String_
-  commentId: M:Lemonad.ErrorHandling.EitherParsers.Bool(System.String)
-  fullName: Lemonad.ErrorHandling.EitherParsers.Bool(System.String)
-  nameWithType: EitherParsers.Bool(String)
-- uid: Lemonad.ErrorHandling.EitherParsers.Bool*
-  name: Bool
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_Bool_
-  commentId: Overload:Lemonad.ErrorHandling.EitherParsers.Bool
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.EitherParsers.Bool
-  nameWithType: EitherParsers.Bool
-- uid: Lemonad.ErrorHandling.EitherParsers.DateTime(System.String)
-  name: DateTime(String)
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_DateTime_System_String_
-  commentId: M:Lemonad.ErrorHandling.EitherParsers.DateTime(System.String)
-  fullName: Lemonad.ErrorHandling.EitherParsers.DateTime(System.String)
-  nameWithType: EitherParsers.DateTime(String)
-- uid: Lemonad.ErrorHandling.EitherParsers.DateTime(System.String,System.Globalization.DateTimeStyles,System.IFormatProvider)
-  name: DateTime(String, DateTimeStyles, IFormatProvider)
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_DateTime_System_String_System_Globalization_DateTimeStyles_System_IFormatProvider_
-  commentId: M:Lemonad.ErrorHandling.EitherParsers.DateTime(System.String,System.Globalization.DateTimeStyles,System.IFormatProvider)
-  fullName: Lemonad.ErrorHandling.EitherParsers.DateTime(System.String, System.Globalization.DateTimeStyles, System.IFormatProvider)
-  nameWithType: EitherParsers.DateTime(String, DateTimeStyles, IFormatProvider)
-- uid: Lemonad.ErrorHandling.EitherParsers.DateTime*
-  name: DateTime
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_DateTime_
-  commentId: Overload:Lemonad.ErrorHandling.EitherParsers.DateTime
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.EitherParsers.DateTime
-  nameWithType: EitherParsers.DateTime
-- uid: Lemonad.ErrorHandling.EitherParsers.DateTimeExact(System.String,System.String,System.Globalization.DateTimeStyles,System.IFormatProvider)
-  name: DateTimeExact(String, String, DateTimeStyles, IFormatProvider)
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_DateTimeExact_System_String_System_String_System_Globalization_DateTimeStyles_System_IFormatProvider_
-  commentId: M:Lemonad.ErrorHandling.EitherParsers.DateTimeExact(System.String,System.String,System.Globalization.DateTimeStyles,System.IFormatProvider)
-  fullName: Lemonad.ErrorHandling.EitherParsers.DateTimeExact(System.String, System.String, System.Globalization.DateTimeStyles, System.IFormatProvider)
-  nameWithType: EitherParsers.DateTimeExact(String, String, DateTimeStyles, IFormatProvider)
-- uid: Lemonad.ErrorHandling.EitherParsers.DateTimeExact(System.String,System.String[],System.Globalization.DateTimeStyles,System.IFormatProvider)
-  name: DateTimeExact(String, String[], DateTimeStyles, IFormatProvider)
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_DateTimeExact_System_String_System_String___System_Globalization_DateTimeStyles_System_IFormatProvider_
-  commentId: M:Lemonad.ErrorHandling.EitherParsers.DateTimeExact(System.String,System.String[],System.Globalization.DateTimeStyles,System.IFormatProvider)
-  name.vb: DateTimeExact(String, String(), DateTimeStyles, IFormatProvider)
-  fullName: Lemonad.ErrorHandling.EitherParsers.DateTimeExact(System.String, System.String[], System.Globalization.DateTimeStyles, System.IFormatProvider)
-  fullName.vb: Lemonad.ErrorHandling.EitherParsers.DateTimeExact(System.String, System.String(), System.Globalization.DateTimeStyles, System.IFormatProvider)
-  nameWithType: EitherParsers.DateTimeExact(String, String[], DateTimeStyles, IFormatProvider)
-  nameWithType.vb: EitherParsers.DateTimeExact(String, String(), DateTimeStyles, IFormatProvider)
-- uid: Lemonad.ErrorHandling.EitherParsers.DateTimeExact*
-  name: DateTimeExact
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_DateTimeExact_
-  commentId: Overload:Lemonad.ErrorHandling.EitherParsers.DateTimeExact
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.EitherParsers.DateTimeExact
-  nameWithType: EitherParsers.DateTimeExact
-- uid: Lemonad.ErrorHandling.EitherParsers.Decimal(System.String)
-  name: Decimal(String)
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_Decimal_System_String_
-  commentId: M:Lemonad.ErrorHandling.EitherParsers.Decimal(System.String)
-  fullName: Lemonad.ErrorHandling.EitherParsers.Decimal(System.String)
-  nameWithType: EitherParsers.Decimal(String)
-- uid: Lemonad.ErrorHandling.EitherParsers.Decimal(System.String,System.Globalization.NumberStyles,System.IFormatProvider)
-  name: Decimal(String, NumberStyles, IFormatProvider)
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_Decimal_System_String_System_Globalization_NumberStyles_System_IFormatProvider_
-  commentId: M:Lemonad.ErrorHandling.EitherParsers.Decimal(System.String,System.Globalization.NumberStyles,System.IFormatProvider)
-  fullName: Lemonad.ErrorHandling.EitherParsers.Decimal(System.String, System.Globalization.NumberStyles, System.IFormatProvider)
-  nameWithType: EitherParsers.Decimal(String, NumberStyles, IFormatProvider)
-- uid: Lemonad.ErrorHandling.EitherParsers.Decimal*
-  name: Decimal
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_Decimal_
-  commentId: Overload:Lemonad.ErrorHandling.EitherParsers.Decimal
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.EitherParsers.Decimal
-  nameWithType: EitherParsers.Decimal
-- uid: Lemonad.ErrorHandling.EitherParsers.Double(System.String)
-  name: Double(String)
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_Double_System_String_
-  commentId: M:Lemonad.ErrorHandling.EitherParsers.Double(System.String)
-  fullName: Lemonad.ErrorHandling.EitherParsers.Double(System.String)
-  nameWithType: EitherParsers.Double(String)
-- uid: Lemonad.ErrorHandling.EitherParsers.Double(System.String,System.Globalization.NumberStyles,System.IFormatProvider)
-  name: Double(String, NumberStyles, IFormatProvider)
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_Double_System_String_System_Globalization_NumberStyles_System_IFormatProvider_
-  commentId: M:Lemonad.ErrorHandling.EitherParsers.Double(System.String,System.Globalization.NumberStyles,System.IFormatProvider)
-  fullName: Lemonad.ErrorHandling.EitherParsers.Double(System.String, System.Globalization.NumberStyles, System.IFormatProvider)
-  nameWithType: EitherParsers.Double(String, NumberStyles, IFormatProvider)
-- uid: Lemonad.ErrorHandling.EitherParsers.Double*
-  name: Double
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_Double_
-  commentId: Overload:Lemonad.ErrorHandling.EitherParsers.Double
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.EitherParsers.Double
-  nameWithType: EitherParsers.Double
-- uid: Lemonad.ErrorHandling.EitherParsers.Enum*
-  name: Enum
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_Enum_
-  commentId: Overload:Lemonad.ErrorHandling.EitherParsers.Enum
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.EitherParsers.Enum
-  nameWithType: EitherParsers.Enum
-- uid: Lemonad.ErrorHandling.EitherParsers.Enum``1(System.String)
-  name: Enum<TEnum>(String)
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_Enum__1_System_String_
-  commentId: M:Lemonad.ErrorHandling.EitherParsers.Enum``1(System.String)
-  name.vb: Enum(Of TEnum)(String)
-  fullName: Lemonad.ErrorHandling.EitherParsers.Enum<TEnum>(System.String)
-  fullName.vb: Lemonad.ErrorHandling.EitherParsers.Enum(Of TEnum)(System.String)
-  nameWithType: EitherParsers.Enum<TEnum>(String)
-  nameWithType.vb: EitherParsers.Enum(Of TEnum)(String)
-- uid: Lemonad.ErrorHandling.EitherParsers.Enum``1(System.String,System.Boolean)
-  name: Enum<TEnum>(String, Boolean)
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_Enum__1_System_String_System_Boolean_
-  commentId: M:Lemonad.ErrorHandling.EitherParsers.Enum``1(System.String,System.Boolean)
-  name.vb: Enum(Of TEnum)(String, Boolean)
-  fullName: Lemonad.ErrorHandling.EitherParsers.Enum<TEnum>(System.String, System.Boolean)
-  fullName.vb: Lemonad.ErrorHandling.EitherParsers.Enum(Of TEnum)(System.String, System.Boolean)
-  nameWithType: EitherParsers.Enum<TEnum>(String, Boolean)
-  nameWithType.vb: EitherParsers.Enum(Of TEnum)(String, Boolean)
-- uid: Lemonad.ErrorHandling.EitherParsers.Int(System.String)
-  name: Int(String)
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_Int_System_String_
-  commentId: M:Lemonad.ErrorHandling.EitherParsers.Int(System.String)
-  fullName: Lemonad.ErrorHandling.EitherParsers.Int(System.String)
-  nameWithType: EitherParsers.Int(String)
-- uid: Lemonad.ErrorHandling.EitherParsers.Int(System.String,System.Globalization.NumberStyles,System.IFormatProvider)
-  name: Int(String, NumberStyles, IFormatProvider)
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_Int_System_String_System_Globalization_NumberStyles_System_IFormatProvider_
-  commentId: M:Lemonad.ErrorHandling.EitherParsers.Int(System.String,System.Globalization.NumberStyles,System.IFormatProvider)
-  fullName: Lemonad.ErrorHandling.EitherParsers.Int(System.String, System.Globalization.NumberStyles, System.IFormatProvider)
-  nameWithType: EitherParsers.Int(String, NumberStyles, IFormatProvider)
-- uid: Lemonad.ErrorHandling.EitherParsers.Int*
-  name: Int
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_Int_
-  commentId: Overload:Lemonad.ErrorHandling.EitherParsers.Int
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.EitherParsers.Int
-  nameWithType: EitherParsers.Int
-- uid: Lemonad.ErrorHandling.EitherParsers.Long(System.String)
-  name: Long(String)
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_Long_System_String_
-  commentId: M:Lemonad.ErrorHandling.EitherParsers.Long(System.String)
-  fullName: Lemonad.ErrorHandling.EitherParsers.Long(System.String)
-  nameWithType: EitherParsers.Long(String)
-- uid: Lemonad.ErrorHandling.EitherParsers.Long(System.String,System.Globalization.NumberStyles,System.IFormatProvider)
-  name: Long(String, NumberStyles, IFormatProvider)
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_Long_System_String_System_Globalization_NumberStyles_System_IFormatProvider_
-  commentId: M:Lemonad.ErrorHandling.EitherParsers.Long(System.String,System.Globalization.NumberStyles,System.IFormatProvider)
-  fullName: Lemonad.ErrorHandling.EitherParsers.Long(System.String, System.Globalization.NumberStyles, System.IFormatProvider)
-  nameWithType: EitherParsers.Long(String, NumberStyles, IFormatProvider)
-- uid: Lemonad.ErrorHandling.EitherParsers.Long*
-  name: Long
-  href: api/Lemonad.ErrorHandling.EitherParsers.html#Lemonad_ErrorHandling_EitherParsers_Long_
-  commentId: Overload:Lemonad.ErrorHandling.EitherParsers.Long
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.EitherParsers.Long
-  nameWithType: EitherParsers.Long
 - uid: Lemonad.ErrorHandling.EquailtyFunctions
   name: EquailtyFunctions
   href: api/Lemonad.ErrorHandling.EquailtyFunctions.html
@@ -1022,22 +167,22 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Maybe.Some(Of TSource)(TSource, System.Func(Of TSource, System.Boolean))
   nameWithType: Maybe.Some<TSource>(TSource, Func<TSource, Boolean>)
   nameWithType.vb: Maybe.Some(Of TSource)(TSource, Func(Of TSource, Boolean))
-- uid: Lemonad.ErrorHandling.Maybe.ToEither*
-  name: ToEither
-  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToEither_
-  commentId: Overload:Lemonad.ErrorHandling.Maybe.ToEither
+- uid: Lemonad.ErrorHandling.Maybe.ToResult*
+  name: ToResult
+  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToResult_
+  commentId: Overload:Lemonad.ErrorHandling.Maybe.ToResult
   isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Maybe.ToEither
-  nameWithType: Maybe.ToEither
-- uid: Lemonad.ErrorHandling.Maybe.ToEither``2(Lemonad.ErrorHandling.Maybe{``1},System.Func{``0})
-  name: ToEither<TLeft, TRight>(Maybe<TRight>, Func<TLeft>)
-  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToEither__2_Lemonad_ErrorHandling_Maybe___1__System_Func___0__
-  commentId: M:Lemonad.ErrorHandling.Maybe.ToEither``2(Lemonad.ErrorHandling.Maybe{``1},System.Func{``0})
-  name.vb: ToEither(Of TLeft, TRight)(Maybe(Of TRight), Func(Of TLeft))
-  fullName: Lemonad.ErrorHandling.Maybe.ToEither<TLeft, TRight>(Lemonad.ErrorHandling.Maybe<TRight>, System.Func<TLeft>)
-  fullName.vb: Lemonad.ErrorHandling.Maybe.ToEither(Of TLeft, TRight)(Lemonad.ErrorHandling.Maybe(Of TRight), System.Func(Of TLeft))
-  nameWithType: Maybe.ToEither<TLeft, TRight>(Maybe<TRight>, Func<TLeft>)
-  nameWithType.vb: Maybe.ToEither(Of TLeft, TRight)(Maybe(Of TRight), Func(Of TLeft))
+  fullName: Lemonad.ErrorHandling.Maybe.ToResult
+  nameWithType: Maybe.ToResult
+- uid: Lemonad.ErrorHandling.Maybe.ToResult``2(Lemonad.ErrorHandling.Maybe{``0},System.Func{``1})
+  name: ToResult<T, TError>(Maybe<T>, Func<TError>)
+  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToResult__2_Lemonad_ErrorHandling_Maybe___0__System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.Maybe.ToResult``2(Lemonad.ErrorHandling.Maybe{``0},System.Func{``1})
+  name.vb: ToResult(Of T, TError)(Maybe(Of T), Func(Of TError))
+  fullName: Lemonad.ErrorHandling.Maybe.ToResult<T, TError>(Lemonad.ErrorHandling.Maybe<T>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.Maybe.ToResult(Of T, TError)(Lemonad.ErrorHandling.Maybe(Of T), System.Func(Of TError))
+  nameWithType: Maybe.ToResult<T, TError>(Maybe<T>, Func<TError>)
+  nameWithType.vb: Maybe.ToResult(Of T, TError)(Maybe(Of T), Func(Of TError))
 - uid: Lemonad.ErrorHandling.Maybe.Values*
   name: Values
   href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_Values_
@@ -1632,3 +777,851 @@ references:
   isSpec: "True"
   fullName: Lemonad.ErrorHandling.MaybeParsers.Long
   nameWithType: MaybeParsers.Long
+- uid: Lemonad.ErrorHandling.Result
+  name: Result
+  href: api/Lemonad.ErrorHandling.Result.html
+  commentId: T:Lemonad.ErrorHandling.Result
+  fullName: Lemonad.ErrorHandling.Result
+  nameWithType: Result
+- uid: Lemonad.ErrorHandling.Result.ConvertToMaybe*
+  name: ConvertToMaybe
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ConvertToMaybe_
+  commentId: Overload:Lemonad.ErrorHandling.Result.ConvertToMaybe
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.ConvertToMaybe
+  nameWithType: Result.ConvertToMaybe
+- uid: Lemonad.ErrorHandling.Result.ConvertToMaybe``2(Lemonad.ErrorHandling.Result{``1,``0})
+  name: ConvertToMaybe<T, TError>(Result<TError, T>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ConvertToMaybe__2_Lemonad_ErrorHandling_Result___1___0__
+  commentId: M:Lemonad.ErrorHandling.Result.ConvertToMaybe``2(Lemonad.ErrorHandling.Result{``1,``0})
+  name.vb: ConvertToMaybe(Of T, TError)(Result(Of TError, T))
+  fullName: Lemonad.ErrorHandling.Result.ConvertToMaybe<T, TError>(Lemonad.ErrorHandling.Result<TError, T>)
+  fullName.vb: Lemonad.ErrorHandling.Result.ConvertToMaybe(Of T, TError)(Lemonad.ErrorHandling.Result(Of TError, T))
+  nameWithType: Result.ConvertToMaybe<T, TError>(Result<TError, T>)
+  nameWithType.vb: Result.ConvertToMaybe(Of T, TError)(Result(Of TError, T))
+- uid: Lemonad.ErrorHandling.Result.Error*
+  name: Error
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_Error_
+  commentId: Overload:Lemonad.ErrorHandling.Result.Error
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.Error
+  nameWithType: Result.Error
+- uid: Lemonad.ErrorHandling.Result.Error``2(``1)
+  name: Error<T, TError>(TError)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_Error__2___1_
+  commentId: M:Lemonad.ErrorHandling.Result.Error``2(``1)
+  name.vb: Error(Of T, TError)(TError)
+  fullName: Lemonad.ErrorHandling.Result.Error<T, TError>(TError)
+  fullName.vb: Lemonad.ErrorHandling.Result.Error(Of T, TError)(TError)
+  nameWithType: Result.Error<T, TError>(TError)
+  nameWithType.vb: Result.Error(Of T, TError)(TError)
+- uid: Lemonad.ErrorHandling.Result.Errors*
+  name: Errors
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_Errors_
+  commentId: Overload:Lemonad.ErrorHandling.Result.Errors
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.Errors
+  nameWithType: Result.Errors
+- uid: Lemonad.ErrorHandling.Result.Errors``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.Result{``0,``1}})
+  name: Errors<T, TError>(IEnumerable<Result<T, TError>>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_Errors__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_Result___0___1___
+  commentId: M:Lemonad.ErrorHandling.Result.Errors``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.Result{``0,``1}})
+  name.vb: Errors(Of T, TError)(IEnumerable(Of Result(Of T, TError)))
+  fullName: Lemonad.ErrorHandling.Result.Errors<T, TError>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.Result<T, TError>>)
+  fullName.vb: Lemonad.ErrorHandling.Result.Errors(Of T, TError)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.Result(Of T, TError)))
+  nameWithType: Result.Errors<T, TError>(IEnumerable<Result<T, TError>>)
+  nameWithType.vb: Result.Errors(Of T, TError)(IEnumerable(Of Result(Of T, TError)))
+- uid: Lemonad.ErrorHandling.Result.Ok*
+  name: Ok
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_Ok_
+  commentId: Overload:Lemonad.ErrorHandling.Result.Ok
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.Ok
+  nameWithType: Result.Ok
+- uid: Lemonad.ErrorHandling.Result.Ok``2(``0)
+  name: Ok<T, TError>(T)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_Ok__2___0_
+  commentId: M:Lemonad.ErrorHandling.Result.Ok``2(``0)
+  name.vb: Ok(Of T, TError)(T)
+  fullName: Lemonad.ErrorHandling.Result.Ok<T, TError>(T)
+  fullName.vb: Lemonad.ErrorHandling.Result.Ok(Of T, TError)(T)
+  nameWithType: Result.Ok<T, TError>(T)
+  nameWithType.vb: Result.Ok(Of T, TError)(T)
+- uid: Lemonad.ErrorHandling.Result.ToResult*
+  name: ToResult
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ToResult_
+  commentId: Overload:Lemonad.ErrorHandling.Result.ToResult
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.ToResult
+  nameWithType: Result.ToResult
+- uid: Lemonad.ErrorHandling.Result.ToResult``2(``0)
+  name: ToResult<T, TError>(T)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ToResult__2___0_
+  commentId: M:Lemonad.ErrorHandling.Result.ToResult``2(``0)
+  name.vb: ToResult(Of T, TError)(T)
+  fullName: Lemonad.ErrorHandling.Result.ToResult<T, TError>(T)
+  fullName.vb: Lemonad.ErrorHandling.Result.ToResult(Of T, TError)(T)
+  nameWithType: Result.ToResult<T, TError>(T)
+  nameWithType.vb: Result.ToResult(Of T, TError)(T)
+- uid: Lemonad.ErrorHandling.Result.ToResult``2(System.Nullable{``0},System.Func{``1})
+  name: ToResult<T, TError>(Nullable<T>, Func<TError>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ToResult__2_System_Nullable___0__System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.Result.ToResult``2(System.Nullable{``0},System.Func{``1})
+  name.vb: ToResult(Of T, TError)(Nullable(Of T), Func(Of TError))
+  fullName: Lemonad.ErrorHandling.Result.ToResult<T, TError>(System.Nullable<T>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result.ToResult(Of T, TError)(System.Nullable(Of T), System.Func(Of TError))
+  nameWithType: Result.ToResult<T, TError>(Nullable<T>, Func<TError>)
+  nameWithType.vb: Result.ToResult(Of T, TError)(Nullable(Of T), Func(Of TError))
+- uid: Lemonad.ErrorHandling.Result.ToResultError*
+  name: ToResultError
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ToResultError_
+  commentId: Overload:Lemonad.ErrorHandling.Result.ToResultError
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.ToResultError
+  nameWithType: Result.ToResultError
+- uid: Lemonad.ErrorHandling.Result.ToResultError``2(``1)
+  name: ToResultError<T, TError>(TError)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ToResultError__2___1_
+  commentId: M:Lemonad.ErrorHandling.Result.ToResultError``2(``1)
+  name.vb: ToResultError(Of T, TError)(TError)
+  fullName: Lemonad.ErrorHandling.Result.ToResultError<T, TError>(TError)
+  fullName.vb: Lemonad.ErrorHandling.Result.ToResultError(Of T, TError)(TError)
+  nameWithType: Result.ToResultError<T, TError>(TError)
+  nameWithType.vb: Result.ToResultError(Of T, TError)(TError)
+- uid: Lemonad.ErrorHandling.Result.Values*
+  name: Values
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_Values_
+  commentId: Overload:Lemonad.ErrorHandling.Result.Values
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.Values
+  nameWithType: Result.Values
+- uid: Lemonad.ErrorHandling.Result.Values``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.Result{``0,``1}})
+  name: Values<T, TError>(IEnumerable<Result<T, TError>>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_Values__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_Result___0___1___
+  commentId: M:Lemonad.ErrorHandling.Result.Values``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.Result{``0,``1}})
+  name.vb: Values(Of T, TError)(IEnumerable(Of Result(Of T, TError)))
+  fullName: Lemonad.ErrorHandling.Result.Values<T, TError>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.Result<T, TError>>)
+  fullName.vb: Lemonad.ErrorHandling.Result.Values(Of T, TError)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.Result(Of T, TError)))
+  nameWithType: Result.Values<T, TError>(IEnumerable<Result<T, TError>>)
+  nameWithType.vb: Result.Values(Of T, TError)(IEnumerable(Of Result(Of T, TError)))
+- uid: Lemonad.ErrorHandling.Result`2
+  name: Result<T, TError>
+  href: api/Lemonad.ErrorHandling.Result-2.html
+  commentId: T:Lemonad.ErrorHandling.Result`2
+  name.vb: Result(Of T, TError)
+  fullName: Lemonad.ErrorHandling.Result<T, TError>
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError)
+  nameWithType: Result<T, TError>
+  nameWithType.vb: Result(Of T, TError)
+- uid: Lemonad.ErrorHandling.Result`2.CompareTo(Lemonad.ErrorHandling.Result{`0,`1})
+  name: CompareTo(Result<T, TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_CompareTo_Lemonad_ErrorHandling_Result__0__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.CompareTo(Lemonad.ErrorHandling.Result{`0,`1})
+  name.vb: CompareTo(Result(Of T, TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.CompareTo(Lemonad.ErrorHandling.Result<T, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).CompareTo(Lemonad.ErrorHandling.Result(Of T, TError))
+  nameWithType: Result<T, TError>.CompareTo(Result<T, TError>)
+  nameWithType.vb: Result(Of T, TError).CompareTo(Result(Of T, TError))
+- uid: Lemonad.ErrorHandling.Result`2.CompareTo*
+  name: CompareTo
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_CompareTo_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.CompareTo
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.CompareTo
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).CompareTo
+  nameWithType: Result<T, TError>.CompareTo
+  nameWithType.vb: Result(Of T, TError).CompareTo
+- uid: Lemonad.ErrorHandling.Result`2.Do(System.Action)
+  name: Do(Action)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Do_System_Action_
+  commentId: M:Lemonad.ErrorHandling.Result`2.Do(System.Action)
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Do(System.Action)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Do(System.Action)
+  nameWithType: Result<T, TError>.Do(Action)
+  nameWithType.vb: Result(Of T, TError).Do(Action)
+- uid: Lemonad.ErrorHandling.Result`2.Do*
+  name: Do
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Do_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.Do
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Do
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Do
+  nameWithType: Result<T, TError>.Do
+  nameWithType.vb: Result(Of T, TError).Do
+- uid: Lemonad.ErrorHandling.Result`2.DoWhenError(System.Action{`1})
+  name: DoWhenError(Action<TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_DoWhenError_System_Action__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.DoWhenError(System.Action{`1})
+  name.vb: DoWhenError(Action(Of TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.DoWhenError(System.Action<TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).DoWhenError(System.Action(Of TError))
+  nameWithType: Result<T, TError>.DoWhenError(Action<TError>)
+  nameWithType.vb: Result(Of T, TError).DoWhenError(Action(Of TError))
+- uid: Lemonad.ErrorHandling.Result`2.DoWhenError*
+  name: DoWhenError
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_DoWhenError_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.DoWhenError
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.DoWhenError
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).DoWhenError
+  nameWithType: Result<T, TError>.DoWhenError
+  nameWithType.vb: Result(Of T, TError).DoWhenError
+- uid: Lemonad.ErrorHandling.Result`2.DoWhenOk(System.Action{`0})
+  name: DoWhenOk(Action<T>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_DoWhenOk_System_Action__0__
+  commentId: M:Lemonad.ErrorHandling.Result`2.DoWhenOk(System.Action{`0})
+  name.vb: DoWhenOk(Action(Of T))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.DoWhenOk(System.Action<T>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).DoWhenOk(System.Action(Of T))
+  nameWithType: Result<T, TError>.DoWhenOk(Action<T>)
+  nameWithType.vb: Result(Of T, TError).DoWhenOk(Action(Of T))
+- uid: Lemonad.ErrorHandling.Result`2.DoWhenOk*
+  name: DoWhenOk
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_DoWhenOk_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.DoWhenOk
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.DoWhenOk
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).DoWhenOk
+  nameWithType: Result<T, TError>.DoWhenOk
+  nameWithType.vb: Result(Of T, TError).DoWhenOk
+- uid: Lemonad.ErrorHandling.Result`2.Equals(Lemonad.ErrorHandling.Result{`0,`1})
+  name: Equals(Result<T, TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Equals_Lemonad_ErrorHandling_Result__0__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.Equals(Lemonad.ErrorHandling.Result{`0,`1})
+  name.vb: Equals(Result(Of T, TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Equals(Lemonad.ErrorHandling.Result<T, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Equals(Lemonad.ErrorHandling.Result(Of T, TError))
+  nameWithType: Result<T, TError>.Equals(Result<T, TError>)
+  nameWithType.vb: Result(Of T, TError).Equals(Result(Of T, TError))
+- uid: Lemonad.ErrorHandling.Result`2.Equals(System.Object)
+  name: Equals(Object)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Equals_System_Object_
+  commentId: M:Lemonad.ErrorHandling.Result`2.Equals(System.Object)
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Equals(System.Object)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Equals(System.Object)
+  nameWithType: Result<T, TError>.Equals(Object)
+  nameWithType.vb: Result(Of T, TError).Equals(Object)
+- uid: Lemonad.ErrorHandling.Result`2.Equals*
+  name: Equals
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Equals_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.Equals
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Equals
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Equals
+  nameWithType: Result<T, TError>.Equals
+  nameWithType.vb: Result(Of T, TError).Equals
+- uid: Lemonad.ErrorHandling.Result`2.Errors
+  name: Errors
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Errors
+  commentId: P:Lemonad.ErrorHandling.Result`2.Errors
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Errors
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Errors
+  nameWithType: Result<T, TError>.Errors
+  nameWithType.vb: Result(Of T, TError).Errors
+- uid: Lemonad.ErrorHandling.Result`2.Errors*
+  name: Errors
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Errors_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.Errors
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Errors
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Errors
+  nameWithType: Result<T, TError>.Errors
+  nameWithType.vb: Result(Of T, TError).Errors
+- uid: Lemonad.ErrorHandling.Result`2.Filter(System.Func{`0,System.Boolean},System.Func{`1})
+  name: Filter(Func<T, Boolean>, Func<TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Filter_System_Func__0_System_Boolean__System_Func__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.Filter(System.Func{`0,System.Boolean},System.Func{`1})
+  name.vb: Filter(Func(Of T, Boolean), Func(Of TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Filter(System.Func<T, System.Boolean>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Filter(System.Func(Of T, System.Boolean), System.Func(Of TError))
+  nameWithType: Result<T, TError>.Filter(Func<T, Boolean>, Func<TError>)
+  nameWithType.vb: Result(Of T, TError).Filter(Func(Of T, Boolean), Func(Of TError))
+- uid: Lemonad.ErrorHandling.Result`2.Filter*
+  name: Filter
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Filter_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.Filter
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Filter
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Filter
+  nameWithType: Result<T, TError>.Filter
+  nameWithType.vb: Result(Of T, TError).Filter
+- uid: Lemonad.ErrorHandling.Result`2.FlatMap*
+  name: FlatMap
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FlatMap_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.FlatMap
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.FlatMap
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FlatMap
+  nameWithType: Result<T, TError>.FlatMap
+  nameWithType.vb: Result(Of T, TError).FlatMap
+- uid: Lemonad.ErrorHandling.Result`2.FlatMap``1(System.Func{`0,Lemonad.ErrorHandling.Result{``0,`1}})
+  name: FlatMap<TResult>(Func<T, Result<TResult, TError>>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FlatMap__1_System_Func__0_Lemonad_ErrorHandling_Result___0__1___
+  commentId: M:Lemonad.ErrorHandling.Result`2.FlatMap``1(System.Func{`0,Lemonad.ErrorHandling.Result{``0,`1}})
+  name.vb: FlatMap(Of TResult)(Func(Of T, Result(Of TResult, TError)))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.FlatMap<TResult>(System.Func<T, Lemonad.ErrorHandling.Result<TResult, TError>>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FlatMap(Of TResult)(System.Func(Of T, Lemonad.ErrorHandling.Result(Of TResult, TError)))
+  nameWithType: Result<T, TError>.FlatMap<TResult>(Func<T, Result<TResult, TError>>)
+  nameWithType.vb: Result(Of T, TError).FlatMap(Of TResult)(Func(Of T, Result(Of TResult, TError)))
+- uid: Lemonad.ErrorHandling.Result`2.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Result{``0,`1}},System.Func{`0,``0,``1})
+  name: FlatMap<TSelector, TResult>(Func<T, Result<TSelector, TError>>, Func<T, TSelector, TResult>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_Result___0__1___System_Func__0___0___1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Result{``0,`1}},System.Func{`0,``0,``1})
+  name.vb: FlatMap(Of TSelector, TResult)(Func(Of T, Result(Of TSelector, TError)), Func(Of T, TSelector, TResult))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.FlatMap<TSelector, TResult>(System.Func<T, Lemonad.ErrorHandling.Result<TSelector, TError>>, System.Func<T, TSelector, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FlatMap(Of TSelector, TResult)(System.Func(Of T, Lemonad.ErrorHandling.Result(Of TSelector, TError)), System.Func(Of T, TSelector, TResult))
+  nameWithType: Result<T, TError>.FlatMap<TSelector, TResult>(Func<T, Result<TSelector, TError>>, Func<T, TSelector, TResult>)
+  nameWithType.vb: Result(Of T, TError).FlatMap(Of TSelector, TResult)(Func(Of T, Result(Of TSelector, TError)), Func(Of T, TSelector, TResult))
+- uid: Lemonad.ErrorHandling.Result`2.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Result{``1,``0}},System.Func{``0,`1})
+  name: FlatMap<TErrorResult, TResult>(Func<T, Result<TResult, TErrorResult>>, Func<TErrorResult, TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_Result___1___0___System_Func___0__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Result{``1,``0}},System.Func{``0,`1})
+  name.vb: FlatMap(Of TErrorResult, TResult)(Func(Of T, Result(Of TResult, TErrorResult)), Func(Of TErrorResult, TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.FlatMap<TErrorResult, TResult>(System.Func<T, Lemonad.ErrorHandling.Result<TResult, TErrorResult>>, System.Func<TErrorResult, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FlatMap(Of TErrorResult, TResult)(System.Func(Of T, Lemonad.ErrorHandling.Result(Of TResult, TErrorResult)), System.Func(Of TErrorResult, TError))
+  nameWithType: Result<T, TError>.FlatMap<TErrorResult, TResult>(Func<T, Result<TResult, TErrorResult>>, Func<TErrorResult, TError>)
+  nameWithType.vb: Result(Of T, TError).FlatMap(Of TErrorResult, TResult)(Func(Of T, Result(Of TResult, TErrorResult)), Func(Of TErrorResult, TError))
+- uid: Lemonad.ErrorHandling.Result`2.FlatMap``3(System.Func{`0,Lemonad.ErrorHandling.Result{``1,``0}},System.Func{`0,``1,``2},System.Func{``0,`1})
+  name: FlatMap<TErrorResult, TSelect, TResult>(Func<T, Result<TSelect, TErrorResult>>, Func<T, TSelect, TResult>, Func<TErrorResult, TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FlatMap__3_System_Func__0_Lemonad_ErrorHandling_Result___1___0___System_Func__0___1___2__System_Func___0__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.FlatMap``3(System.Func{`0,Lemonad.ErrorHandling.Result{``1,``0}},System.Func{`0,``1,``2},System.Func{``0,`1})
+  name.vb: FlatMap(Of TErrorResult, TSelect, TResult)(Func(Of T, Result(Of TSelect, TErrorResult)), Func(Of T, TSelect, TResult), Func(Of TErrorResult, TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.FlatMap<TErrorResult, TSelect, TResult>(System.Func<T, Lemonad.ErrorHandling.Result<TSelect, TErrorResult>>, System.Func<T, TSelect, TResult>, System.Func<TErrorResult, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FlatMap(Of TErrorResult, TSelect, TResult)(System.Func(Of T, Lemonad.ErrorHandling.Result(Of TSelect, TErrorResult)), System.Func(Of T, TSelect, TResult), System.Func(Of TErrorResult, TError))
+  nameWithType: Result<T, TError>.FlatMap<TErrorResult, TSelect, TResult>(Func<T, Result<TSelect, TErrorResult>>, Func<T, TSelect, TResult>, Func<TErrorResult, TError>)
+  nameWithType.vb: Result(Of T, TError).FlatMap(Of TErrorResult, TSelect, TResult)(Func(Of T, Result(Of TSelect, TErrorResult)), Func(Of T, TSelect, TResult), Func(Of TErrorResult, TError))
+- uid: Lemonad.ErrorHandling.Result`2.Flatten*
+  name: Flatten
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Flatten_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.Flatten
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Flatten
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Flatten
+  nameWithType: Result<T, TError>.Flatten
+  nameWithType.vb: Result(Of T, TError).Flatten
+- uid: Lemonad.ErrorHandling.Result`2.Flatten``2(System.Func{`0,Lemonad.ErrorHandling.Result{``0,``1}},System.Func{``1,`1})
+  name: Flatten<TResult, TErrorResult>(Func<T, Result<TResult, TErrorResult>>, Func<TErrorResult, TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Flatten__2_System_Func__0_Lemonad_ErrorHandling_Result___0___1___System_Func___1__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.Flatten``2(System.Func{`0,Lemonad.ErrorHandling.Result{``0,``1}},System.Func{``1,`1})
+  name.vb: Flatten(Of TResult, TErrorResult)(Func(Of T, Result(Of TResult, TErrorResult)), Func(Of TErrorResult, TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Flatten<TResult, TErrorResult>(System.Func<T, Lemonad.ErrorHandling.Result<TResult, TErrorResult>>, System.Func<TErrorResult, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Flatten(Of TResult, TErrorResult)(System.Func(Of T, Lemonad.ErrorHandling.Result(Of TResult, TErrorResult)), System.Func(Of TErrorResult, TError))
+  nameWithType: Result<T, TError>.Flatten<TResult, TErrorResult>(Func<T, Result<TResult, TErrorResult>>, Func<TErrorResult, TError>)
+  nameWithType.vb: Result(Of T, TError).Flatten(Of TResult, TErrorResult)(Func(Of T, Result(Of TResult, TErrorResult)), Func(Of TErrorResult, TError))
+- uid: Lemonad.ErrorHandling.Result`2.FullMap*
+  name: FullMap
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FullMap_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.FullMap
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.FullMap
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FullMap
+  nameWithType: Result<T, TError>.FullMap
+  nameWithType.vb: Result(Of T, TError).FullMap
+- uid: Lemonad.ErrorHandling.Result`2.FullMap``2(System.Func{`0,``1},System.Func{`1,``0})
+  name: FullMap<TErrorResult, TResult>(Func<T, TResult>, Func<TError, TErrorResult>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FullMap__2_System_Func__0___1__System_Func__1___0__
+  commentId: M:Lemonad.ErrorHandling.Result`2.FullMap``2(System.Func{`0,``1},System.Func{`1,``0})
+  name.vb: FullMap(Of TErrorResult, TResult)(Func(Of T, TResult), Func(Of TError, TErrorResult))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.FullMap<TErrorResult, TResult>(System.Func<T, TResult>, System.Func<TError, TErrorResult>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FullMap(Of TErrorResult, TResult)(System.Func(Of T, TResult), System.Func(Of TError, TErrorResult))
+  nameWithType: Result<T, TError>.FullMap<TErrorResult, TResult>(Func<T, TResult>, Func<TError, TErrorResult>)
+  nameWithType.vb: Result(Of T, TError).FullMap(Of TErrorResult, TResult)(Func(Of T, TResult), Func(Of TError, TErrorResult))
+- uid: Lemonad.ErrorHandling.Result`2.GetHashCode
+  name: GetHashCode()
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_GetHashCode
+  commentId: M:Lemonad.ErrorHandling.Result`2.GetHashCode
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.GetHashCode()
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).GetHashCode()
+  nameWithType: Result<T, TError>.GetHashCode()
+  nameWithType.vb: Result(Of T, TError).GetHashCode()
+- uid: Lemonad.ErrorHandling.Result`2.GetHashCode*
+  name: GetHashCode
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_GetHashCode_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.GetHashCode
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.GetHashCode
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).GetHashCode
+  nameWithType: Result<T, TError>.GetHashCode
+  nameWithType.vb: Result(Of T, TError).GetHashCode
+- uid: Lemonad.ErrorHandling.Result`2.HasError
+  name: HasError
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_HasError
+  commentId: P:Lemonad.ErrorHandling.Result`2.HasError
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.HasError
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).HasError
+  nameWithType: Result<T, TError>.HasError
+  nameWithType.vb: Result(Of T, TError).HasError
+- uid: Lemonad.ErrorHandling.Result`2.HasError*
+  name: HasError
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_HasError_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.HasError
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.HasError
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).HasError
+  nameWithType: Result<T, TError>.HasError
+  nameWithType.vb: Result(Of T, TError).HasError
+- uid: Lemonad.ErrorHandling.Result`2.HasValue
+  name: HasValue
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_HasValue
+  commentId: P:Lemonad.ErrorHandling.Result`2.HasValue
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.HasValue
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).HasValue
+  nameWithType: Result<T, TError>.HasValue
+  nameWithType.vb: Result(Of T, TError).HasValue
+- uid: Lemonad.ErrorHandling.Result`2.HasValue*
+  name: HasValue
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_HasValue_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.HasValue
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.HasValue
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).HasValue
+  nameWithType: Result<T, TError>.HasValue
+  nameWithType.vb: Result(Of T, TError).HasValue
+- uid: Lemonad.ErrorHandling.Result`2.IsErrorWhen(System.Func{`0,System.Boolean},System.Func{`1})
+  name: IsErrorWhen(Func<T, Boolean>, Func<TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_IsErrorWhen_System_Func__0_System_Boolean__System_Func__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.IsErrorWhen(System.Func{`0,System.Boolean},System.Func{`1})
+  name.vb: IsErrorWhen(Func(Of T, Boolean), Func(Of TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.IsErrorWhen(System.Func<T, System.Boolean>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).IsErrorWhen(System.Func(Of T, System.Boolean), System.Func(Of TError))
+  nameWithType: Result<T, TError>.IsErrorWhen(Func<T, Boolean>, Func<TError>)
+  nameWithType.vb: Result(Of T, TError).IsErrorWhen(Func(Of T, Boolean), Func(Of TError))
+- uid: Lemonad.ErrorHandling.Result`2.IsErrorWhen*
+  name: IsErrorWhen
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_IsErrorWhen_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.IsErrorWhen
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.IsErrorWhen
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).IsErrorWhen
+  nameWithType: Result<T, TError>.IsErrorWhen
+  nameWithType.vb: Result(Of T, TError).IsErrorWhen
+- uid: Lemonad.ErrorHandling.Result`2.IsErrorWhenNull(System.Func{`1})
+  name: IsErrorWhenNull(Func<TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_IsErrorWhenNull_System_Func__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.IsErrorWhenNull(System.Func{`1})
+  name.vb: IsErrorWhenNull(Func(Of TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.IsErrorWhenNull(System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).IsErrorWhenNull(System.Func(Of TError))
+  nameWithType: Result<T, TError>.IsErrorWhenNull(Func<TError>)
+  nameWithType.vb: Result(Of T, TError).IsErrorWhenNull(Func(Of TError))
+- uid: Lemonad.ErrorHandling.Result`2.IsErrorWhenNull*
+  name: IsErrorWhenNull
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_IsErrorWhenNull_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.IsErrorWhenNull
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.IsErrorWhenNull
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).IsErrorWhenNull
+  nameWithType: Result<T, TError>.IsErrorWhenNull
+  nameWithType.vb: Result(Of T, TError).IsErrorWhenNull
+- uid: Lemonad.ErrorHandling.Result`2.Map*
+  name: Map
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Map_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.Map
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Map
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Map
+  nameWithType: Result<T, TError>.Map
+  nameWithType.vb: Result(Of T, TError).Map
+- uid: Lemonad.ErrorHandling.Result`2.Map``1(System.Func{`0,``0})
+  name: Map<TResult>(Func<T, TResult>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Map__1_System_Func__0___0__
+  commentId: M:Lemonad.ErrorHandling.Result`2.Map``1(System.Func{`0,``0})
+  name.vb: Map(Of TResult)(Func(Of T, TResult))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Map<TResult>(System.Func<T, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Map(Of TResult)(System.Func(Of T, TResult))
+  nameWithType: Result<T, TError>.Map<TResult>(Func<T, TResult>)
+  nameWithType.vb: Result(Of T, TError).Map(Of TResult)(Func(Of T, TResult))
+- uid: Lemonad.ErrorHandling.Result`2.MapError*
+  name: MapError
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_MapError_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.MapError
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.MapError
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).MapError
+  nameWithType: Result<T, TError>.MapError
+  nameWithType.vb: Result(Of T, TError).MapError
+- uid: Lemonad.ErrorHandling.Result`2.MapError``1(System.Func{`1,``0})
+  name: MapError<TErrorResult>(Func<TError, TErrorResult>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_MapError__1_System_Func__1___0__
+  commentId: M:Lemonad.ErrorHandling.Result`2.MapError``1(System.Func{`1,``0})
+  name.vb: MapError(Of TErrorResult)(Func(Of TError, TErrorResult))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.MapError<TErrorResult>(System.Func<TError, TErrorResult>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).MapError(Of TErrorResult)(System.Func(Of TError, TErrorResult))
+  nameWithType: Result<T, TError>.MapError<TErrorResult>(Func<TError, TErrorResult>)
+  nameWithType.vb: Result(Of T, TError).MapError(Of TErrorResult)(Func(Of TError, TErrorResult))
+- uid: Lemonad.ErrorHandling.Result`2.Match(System.Action{`0},System.Action{`1})
+  name: Match(Action<T>, Action<TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Match_System_Action__0__System_Action__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.Match(System.Action{`0},System.Action{`1})
+  name.vb: Match(Action(Of T), Action(Of TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Match(System.Action<T>, System.Action<TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Match(System.Action(Of T), System.Action(Of TError))
+  nameWithType: Result<T, TError>.Match(Action<T>, Action<TError>)
+  nameWithType.vb: Result(Of T, TError).Match(Action(Of T), Action(Of TError))
+- uid: Lemonad.ErrorHandling.Result`2.Match*
+  name: Match
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Match_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.Match
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Match
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Match
+  nameWithType: Result<T, TError>.Match
+  nameWithType.vb: Result(Of T, TError).Match
+- uid: Lemonad.ErrorHandling.Result`2.Match``1(System.Func{`0,``0},System.Func{`1,``0})
+  name: Match<TResult>(Func<T, TResult>, Func<TError, TResult>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Match__1_System_Func__0___0__System_Func__1___0__
+  commentId: M:Lemonad.ErrorHandling.Result`2.Match``1(System.Func{`0,``0},System.Func{`1,``0})
+  name.vb: Match(Of TResult)(Func(Of T, TResult), Func(Of TError, TResult))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Match<TResult>(System.Func<T, TResult>, System.Func<TError, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Match(Of TResult)(System.Func(Of T, TResult), System.Func(Of TError, TResult))
+  nameWithType: Result<T, TError>.Match<TResult>(Func<T, TResult>, Func<TError, TResult>)
+  nameWithType.vb: Result(Of T, TError).Match(Of TResult)(Func(Of T, TResult), Func(Of TError, TResult))
+- uid: Lemonad.ErrorHandling.Result`2.Multiple(System.Func{Lemonad.ErrorHandling.Result{`0,`1},Lemonad.ErrorHandling.Result{`0,`1}}[])
+  name: Multiple(Func<Result<T, TError>, Result<T, TError>>[])
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Multiple_System_Func_Lemonad_ErrorHandling_Result__0__1__Lemonad_ErrorHandling_Result__0__1_____
+  commentId: M:Lemonad.ErrorHandling.Result`2.Multiple(System.Func{Lemonad.ErrorHandling.Result{`0,`1},Lemonad.ErrorHandling.Result{`0,`1}}[])
+  name.vb: Multiple(Func(Of Result(Of T, TError), Result(Of T, TError))())
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Multiple(System.Func<Lemonad.ErrorHandling.Result<T, TError>, Lemonad.ErrorHandling.Result<T, TError>>[])
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Multiple(System.Func(Of Lemonad.ErrorHandling.Result(Of T, TError), Lemonad.ErrorHandling.Result(Of T, TError))())
+  nameWithType: Result<T, TError>.Multiple(Func<Result<T, TError>, Result<T, TError>>[])
+  nameWithType.vb: Result(Of T, TError).Multiple(Func(Of Result(Of T, TError), Result(Of T, TError))())
+- uid: Lemonad.ErrorHandling.Result`2.Multiple*
+  name: Multiple
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Multiple_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.Multiple
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Multiple
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Multiple
+  nameWithType: Result<T, TError>.Multiple
+  nameWithType.vb: Result(Of T, TError).Multiple
+- uid: Lemonad.ErrorHandling.Result`2.op_Equality(Lemonad.ErrorHandling.Result{`0,`1},Lemonad.ErrorHandling.Result{`0,`1})
+  name: Equality(Result<T, TError>, Result<T, TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_op_Equality_Lemonad_ErrorHandling_Result__0__1__Lemonad_ErrorHandling_Result__0__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.op_Equality(Lemonad.ErrorHandling.Result{`0,`1},Lemonad.ErrorHandling.Result{`0,`1})
+  name.vb: Equality(Result(Of T, TError), Result(Of T, TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Equality(Lemonad.ErrorHandling.Result<T, TError>, Lemonad.ErrorHandling.Result<T, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Equality(Lemonad.ErrorHandling.Result(Of T, TError), Lemonad.ErrorHandling.Result(Of T, TError))
+  nameWithType: Result<T, TError>.Equality(Result<T, TError>, Result<T, TError>)
+  nameWithType.vb: Result(Of T, TError).Equality(Result(Of T, TError), Result(Of T, TError))
+- uid: Lemonad.ErrorHandling.Result`2.op_Equality*
+  name: Equality
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_op_Equality_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.op_Equality
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Equality
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Equality
+  nameWithType: Result<T, TError>.Equality
+  nameWithType.vb: Result(Of T, TError).Equality
+- uid: Lemonad.ErrorHandling.Result`2.op_GreaterThan(Lemonad.ErrorHandling.Result{`0,`1},Lemonad.ErrorHandling.Result{`0,`1})
+  name: GreaterThan(Result<T, TError>, Result<T, TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_op_GreaterThan_Lemonad_ErrorHandling_Result__0__1__Lemonad_ErrorHandling_Result__0__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.op_GreaterThan(Lemonad.ErrorHandling.Result{`0,`1},Lemonad.ErrorHandling.Result{`0,`1})
+  name.vb: GreaterThan(Result(Of T, TError), Result(Of T, TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.GreaterThan(Lemonad.ErrorHandling.Result<T, TError>, Lemonad.ErrorHandling.Result<T, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).GreaterThan(Lemonad.ErrorHandling.Result(Of T, TError), Lemonad.ErrorHandling.Result(Of T, TError))
+  nameWithType: Result<T, TError>.GreaterThan(Result<T, TError>, Result<T, TError>)
+  nameWithType.vb: Result(Of T, TError).GreaterThan(Result(Of T, TError), Result(Of T, TError))
+- uid: Lemonad.ErrorHandling.Result`2.op_GreaterThan*
+  name: GreaterThan
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_op_GreaterThan_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.op_GreaterThan
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.GreaterThan
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).GreaterThan
+  nameWithType: Result<T, TError>.GreaterThan
+  nameWithType.vb: Result(Of T, TError).GreaterThan
+- uid: Lemonad.ErrorHandling.Result`2.op_GreaterThanOrEqual(Lemonad.ErrorHandling.Result{`0,`1},Lemonad.ErrorHandling.Result{`0,`1})
+  name: GreaterThanOrEqual(Result<T, TError>, Result<T, TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_op_GreaterThanOrEqual_Lemonad_ErrorHandling_Result__0__1__Lemonad_ErrorHandling_Result__0__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.op_GreaterThanOrEqual(Lemonad.ErrorHandling.Result{`0,`1},Lemonad.ErrorHandling.Result{`0,`1})
+  name.vb: GreaterThanOrEqual(Result(Of T, TError), Result(Of T, TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.GreaterThanOrEqual(Lemonad.ErrorHandling.Result<T, TError>, Lemonad.ErrorHandling.Result<T, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).GreaterThanOrEqual(Lemonad.ErrorHandling.Result(Of T, TError), Lemonad.ErrorHandling.Result(Of T, TError))
+  nameWithType: Result<T, TError>.GreaterThanOrEqual(Result<T, TError>, Result<T, TError>)
+  nameWithType.vb: Result(Of T, TError).GreaterThanOrEqual(Result(Of T, TError), Result(Of T, TError))
+- uid: Lemonad.ErrorHandling.Result`2.op_GreaterThanOrEqual*
+  name: GreaterThanOrEqual
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_op_GreaterThanOrEqual_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.op_GreaterThanOrEqual
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.GreaterThanOrEqual
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).GreaterThanOrEqual
+  nameWithType: Result<T, TError>.GreaterThanOrEqual
+  nameWithType.vb: Result(Of T, TError).GreaterThanOrEqual
+- uid: Lemonad.ErrorHandling.Result`2.op_Implicit(`0)~Lemonad.ErrorHandling.Result{`0,`1}
+  name: Implicit(T to Result<T, TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_op_Implicit__0__Lemonad_ErrorHandling_Result__0__1_
+  commentId: M:Lemonad.ErrorHandling.Result`2.op_Implicit(`0)~Lemonad.ErrorHandling.Result{`0,`1}
+  name.vb: Widening(T to Result(Of T, TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Implicit(T to Lemonad.ErrorHandling.Result<T, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Widening(T to Lemonad.ErrorHandling.Result(Of T, TError))
+  nameWithType: Result<T, TError>.Implicit(T to Result<T, TError>)
+  nameWithType.vb: Result(Of T, TError).Widening(T to Result(Of T, TError))
+- uid: Lemonad.ErrorHandling.Result`2.op_Implicit(`1)~Lemonad.ErrorHandling.Result{`0,`1}
+  name: Implicit(TError to Result<T, TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_op_Implicit__1__Lemonad_ErrorHandling_Result__0__1_
+  commentId: M:Lemonad.ErrorHandling.Result`2.op_Implicit(`1)~Lemonad.ErrorHandling.Result{`0,`1}
+  name.vb: Widening(TError to Result(Of T, TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Implicit(TError to Lemonad.ErrorHandling.Result<T, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Widening(TError to Lemonad.ErrorHandling.Result(Of T, TError))
+  nameWithType: Result<T, TError>.Implicit(TError to Result<T, TError>)
+  nameWithType.vb: Result(Of T, TError).Widening(TError to Result(Of T, TError))
+- uid: Lemonad.ErrorHandling.Result`2.op_Implicit*
+  name: Implicit
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_op_Implicit_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.op_Implicit
+  isSpec: "True"
+  name.vb: Widening
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Implicit
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Widening
+  nameWithType: Result<T, TError>.Implicit
+  nameWithType.vb: Result(Of T, TError).Widening
+- uid: Lemonad.ErrorHandling.Result`2.op_Inequality(Lemonad.ErrorHandling.Result{`0,`1},Lemonad.ErrorHandling.Result{`0,`1})
+  name: Inequality(Result<T, TError>, Result<T, TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_op_Inequality_Lemonad_ErrorHandling_Result__0__1__Lemonad_ErrorHandling_Result__0__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.op_Inequality(Lemonad.ErrorHandling.Result{`0,`1},Lemonad.ErrorHandling.Result{`0,`1})
+  name.vb: Inequality(Result(Of T, TError), Result(Of T, TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Inequality(Lemonad.ErrorHandling.Result<T, TError>, Lemonad.ErrorHandling.Result<T, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Inequality(Lemonad.ErrorHandling.Result(Of T, TError), Lemonad.ErrorHandling.Result(Of T, TError))
+  nameWithType: Result<T, TError>.Inequality(Result<T, TError>, Result<T, TError>)
+  nameWithType.vb: Result(Of T, TError).Inequality(Result(Of T, TError), Result(Of T, TError))
+- uid: Lemonad.ErrorHandling.Result`2.op_Inequality*
+  name: Inequality
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_op_Inequality_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.op_Inequality
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Inequality
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Inequality
+  nameWithType: Result<T, TError>.Inequality
+  nameWithType.vb: Result(Of T, TError).Inequality
+- uid: Lemonad.ErrorHandling.Result`2.op_LessThan(Lemonad.ErrorHandling.Result{`0,`1},Lemonad.ErrorHandling.Result{`0,`1})
+  name: LessThan(Result<T, TError>, Result<T, TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_op_LessThan_Lemonad_ErrorHandling_Result__0__1__Lemonad_ErrorHandling_Result__0__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.op_LessThan(Lemonad.ErrorHandling.Result{`0,`1},Lemonad.ErrorHandling.Result{`0,`1})
+  name.vb: LessThan(Result(Of T, TError), Result(Of T, TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.LessThan(Lemonad.ErrorHandling.Result<T, TError>, Lemonad.ErrorHandling.Result<T, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).LessThan(Lemonad.ErrorHandling.Result(Of T, TError), Lemonad.ErrorHandling.Result(Of T, TError))
+  nameWithType: Result<T, TError>.LessThan(Result<T, TError>, Result<T, TError>)
+  nameWithType.vb: Result(Of T, TError).LessThan(Result(Of T, TError), Result(Of T, TError))
+- uid: Lemonad.ErrorHandling.Result`2.op_LessThan*
+  name: LessThan
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_op_LessThan_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.op_LessThan
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.LessThan
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).LessThan
+  nameWithType: Result<T, TError>.LessThan
+  nameWithType.vb: Result(Of T, TError).LessThan
+- uid: Lemonad.ErrorHandling.Result`2.op_LessThanOrEqual(Lemonad.ErrorHandling.Result{`0,`1},Lemonad.ErrorHandling.Result{`0,`1})
+  name: LessThanOrEqual(Result<T, TError>, Result<T, TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_op_LessThanOrEqual_Lemonad_ErrorHandling_Result__0__1__Lemonad_ErrorHandling_Result__0__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.op_LessThanOrEqual(Lemonad.ErrorHandling.Result{`0,`1},Lemonad.ErrorHandling.Result{`0,`1})
+  name.vb: LessThanOrEqual(Result(Of T, TError), Result(Of T, TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.LessThanOrEqual(Lemonad.ErrorHandling.Result<T, TError>, Lemonad.ErrorHandling.Result<T, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).LessThanOrEqual(Lemonad.ErrorHandling.Result(Of T, TError), Lemonad.ErrorHandling.Result(Of T, TError))
+  nameWithType: Result<T, TError>.LessThanOrEqual(Result<T, TError>, Result<T, TError>)
+  nameWithType.vb: Result(Of T, TError).LessThanOrEqual(Result(Of T, TError), Result(Of T, TError))
+- uid: Lemonad.ErrorHandling.Result`2.op_LessThanOrEqual*
+  name: LessThanOrEqual
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_op_LessThanOrEqual_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.op_LessThanOrEqual
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.LessThanOrEqual
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).LessThanOrEqual
+  nameWithType: Result<T, TError>.LessThanOrEqual
+  nameWithType.vb: Result(Of T, TError).LessThanOrEqual
+- uid: Lemonad.ErrorHandling.Result`2.ToString
+  name: ToString()
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_ToString
+  commentId: M:Lemonad.ErrorHandling.Result`2.ToString
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.ToString()
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).ToString()
+  nameWithType: Result<T, TError>.ToString()
+  nameWithType.vb: Result(Of T, TError).ToString()
+- uid: Lemonad.ErrorHandling.Result`2.ToString*
+  name: ToString
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_ToString_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.ToString
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.ToString
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).ToString
+  nameWithType: Result<T, TError>.ToString
+  nameWithType.vb: Result(Of T, TError).ToString
+- uid: Lemonad.ErrorHandling.Result`2.Values
+  name: Values
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Values
+  commentId: P:Lemonad.ErrorHandling.Result`2.Values
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Values
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Values
+  nameWithType: Result<T, TError>.Values
+  nameWithType.vb: Result(Of T, TError).Values
+- uid: Lemonad.ErrorHandling.Result`2.Values*
+  name: Values
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Values_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.Values
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Values
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Values
+  nameWithType: Result<T, TError>.Values
+  nameWithType.vb: Result(Of T, TError).Values
+- uid: Lemonad.ErrorHandling.ResultParsers
+  name: ResultParsers
+  href: api/Lemonad.ErrorHandling.ResultParsers.html
+  commentId: T:Lemonad.ErrorHandling.ResultParsers
+  fullName: Lemonad.ErrorHandling.ResultParsers
+  nameWithType: ResultParsers
+- uid: Lemonad.ErrorHandling.ResultParsers.Bool(System.String)
+  name: Bool(String)
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_Bool_System_String_
+  commentId: M:Lemonad.ErrorHandling.ResultParsers.Bool(System.String)
+  fullName: Lemonad.ErrorHandling.ResultParsers.Bool(System.String)
+  nameWithType: ResultParsers.Bool(String)
+- uid: Lemonad.ErrorHandling.ResultParsers.Bool*
+  name: Bool
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_Bool_
+  commentId: Overload:Lemonad.ErrorHandling.ResultParsers.Bool
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.ResultParsers.Bool
+  nameWithType: ResultParsers.Bool
+- uid: Lemonad.ErrorHandling.ResultParsers.DateTime(System.String)
+  name: DateTime(String)
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_DateTime_System_String_
+  commentId: M:Lemonad.ErrorHandling.ResultParsers.DateTime(System.String)
+  fullName: Lemonad.ErrorHandling.ResultParsers.DateTime(System.String)
+  nameWithType: ResultParsers.DateTime(String)
+- uid: Lemonad.ErrorHandling.ResultParsers.DateTime(System.String,System.Globalization.DateTimeStyles,System.IFormatProvider)
+  name: DateTime(String, DateTimeStyles, IFormatProvider)
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_DateTime_System_String_System_Globalization_DateTimeStyles_System_IFormatProvider_
+  commentId: M:Lemonad.ErrorHandling.ResultParsers.DateTime(System.String,System.Globalization.DateTimeStyles,System.IFormatProvider)
+  fullName: Lemonad.ErrorHandling.ResultParsers.DateTime(System.String, System.Globalization.DateTimeStyles, System.IFormatProvider)
+  nameWithType: ResultParsers.DateTime(String, DateTimeStyles, IFormatProvider)
+- uid: Lemonad.ErrorHandling.ResultParsers.DateTime*
+  name: DateTime
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_DateTime_
+  commentId: Overload:Lemonad.ErrorHandling.ResultParsers.DateTime
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.ResultParsers.DateTime
+  nameWithType: ResultParsers.DateTime
+- uid: Lemonad.ErrorHandling.ResultParsers.DateTimeExact(System.String,System.String,System.Globalization.DateTimeStyles,System.IFormatProvider)
+  name: DateTimeExact(String, String, DateTimeStyles, IFormatProvider)
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_DateTimeExact_System_String_System_String_System_Globalization_DateTimeStyles_System_IFormatProvider_
+  commentId: M:Lemonad.ErrorHandling.ResultParsers.DateTimeExact(System.String,System.String,System.Globalization.DateTimeStyles,System.IFormatProvider)
+  fullName: Lemonad.ErrorHandling.ResultParsers.DateTimeExact(System.String, System.String, System.Globalization.DateTimeStyles, System.IFormatProvider)
+  nameWithType: ResultParsers.DateTimeExact(String, String, DateTimeStyles, IFormatProvider)
+- uid: Lemonad.ErrorHandling.ResultParsers.DateTimeExact(System.String,System.String[],System.Globalization.DateTimeStyles,System.IFormatProvider)
+  name: DateTimeExact(String, String[], DateTimeStyles, IFormatProvider)
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_DateTimeExact_System_String_System_String___System_Globalization_DateTimeStyles_System_IFormatProvider_
+  commentId: M:Lemonad.ErrorHandling.ResultParsers.DateTimeExact(System.String,System.String[],System.Globalization.DateTimeStyles,System.IFormatProvider)
+  name.vb: DateTimeExact(String, String(), DateTimeStyles, IFormatProvider)
+  fullName: Lemonad.ErrorHandling.ResultParsers.DateTimeExact(System.String, System.String[], System.Globalization.DateTimeStyles, System.IFormatProvider)
+  fullName.vb: Lemonad.ErrorHandling.ResultParsers.DateTimeExact(System.String, System.String(), System.Globalization.DateTimeStyles, System.IFormatProvider)
+  nameWithType: ResultParsers.DateTimeExact(String, String[], DateTimeStyles, IFormatProvider)
+  nameWithType.vb: ResultParsers.DateTimeExact(String, String(), DateTimeStyles, IFormatProvider)
+- uid: Lemonad.ErrorHandling.ResultParsers.DateTimeExact*
+  name: DateTimeExact
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_DateTimeExact_
+  commentId: Overload:Lemonad.ErrorHandling.ResultParsers.DateTimeExact
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.ResultParsers.DateTimeExact
+  nameWithType: ResultParsers.DateTimeExact
+- uid: Lemonad.ErrorHandling.ResultParsers.Decimal(System.String)
+  name: Decimal(String)
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_Decimal_System_String_
+  commentId: M:Lemonad.ErrorHandling.ResultParsers.Decimal(System.String)
+  fullName: Lemonad.ErrorHandling.ResultParsers.Decimal(System.String)
+  nameWithType: ResultParsers.Decimal(String)
+- uid: Lemonad.ErrorHandling.ResultParsers.Decimal(System.String,System.Globalization.NumberStyles,System.IFormatProvider)
+  name: Decimal(String, NumberStyles, IFormatProvider)
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_Decimal_System_String_System_Globalization_NumberStyles_System_IFormatProvider_
+  commentId: M:Lemonad.ErrorHandling.ResultParsers.Decimal(System.String,System.Globalization.NumberStyles,System.IFormatProvider)
+  fullName: Lemonad.ErrorHandling.ResultParsers.Decimal(System.String, System.Globalization.NumberStyles, System.IFormatProvider)
+  nameWithType: ResultParsers.Decimal(String, NumberStyles, IFormatProvider)
+- uid: Lemonad.ErrorHandling.ResultParsers.Decimal*
+  name: Decimal
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_Decimal_
+  commentId: Overload:Lemonad.ErrorHandling.ResultParsers.Decimal
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.ResultParsers.Decimal
+  nameWithType: ResultParsers.Decimal
+- uid: Lemonad.ErrorHandling.ResultParsers.Double(System.String)
+  name: Double(String)
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_Double_System_String_
+  commentId: M:Lemonad.ErrorHandling.ResultParsers.Double(System.String)
+  fullName: Lemonad.ErrorHandling.ResultParsers.Double(System.String)
+  nameWithType: ResultParsers.Double(String)
+- uid: Lemonad.ErrorHandling.ResultParsers.Double(System.String,System.Globalization.NumberStyles,System.IFormatProvider)
+  name: Double(String, NumberStyles, IFormatProvider)
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_Double_System_String_System_Globalization_NumberStyles_System_IFormatProvider_
+  commentId: M:Lemonad.ErrorHandling.ResultParsers.Double(System.String,System.Globalization.NumberStyles,System.IFormatProvider)
+  fullName: Lemonad.ErrorHandling.ResultParsers.Double(System.String, System.Globalization.NumberStyles, System.IFormatProvider)
+  nameWithType: ResultParsers.Double(String, NumberStyles, IFormatProvider)
+- uid: Lemonad.ErrorHandling.ResultParsers.Double*
+  name: Double
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_Double_
+  commentId: Overload:Lemonad.ErrorHandling.ResultParsers.Double
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.ResultParsers.Double
+  nameWithType: ResultParsers.Double
+- uid: Lemonad.ErrorHandling.ResultParsers.Enum*
+  name: Enum
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_Enum_
+  commentId: Overload:Lemonad.ErrorHandling.ResultParsers.Enum
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.ResultParsers.Enum
+  nameWithType: ResultParsers.Enum
+- uid: Lemonad.ErrorHandling.ResultParsers.Enum``1(System.String)
+  name: Enum<TEnum>(String)
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_Enum__1_System_String_
+  commentId: M:Lemonad.ErrorHandling.ResultParsers.Enum``1(System.String)
+  name.vb: Enum(Of TEnum)(String)
+  fullName: Lemonad.ErrorHandling.ResultParsers.Enum<TEnum>(System.String)
+  fullName.vb: Lemonad.ErrorHandling.ResultParsers.Enum(Of TEnum)(System.String)
+  nameWithType: ResultParsers.Enum<TEnum>(String)
+  nameWithType.vb: ResultParsers.Enum(Of TEnum)(String)
+- uid: Lemonad.ErrorHandling.ResultParsers.Enum``1(System.String,System.Boolean)
+  name: Enum<TEnum>(String, Boolean)
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_Enum__1_System_String_System_Boolean_
+  commentId: M:Lemonad.ErrorHandling.ResultParsers.Enum``1(System.String,System.Boolean)
+  name.vb: Enum(Of TEnum)(String, Boolean)
+  fullName: Lemonad.ErrorHandling.ResultParsers.Enum<TEnum>(System.String, System.Boolean)
+  fullName.vb: Lemonad.ErrorHandling.ResultParsers.Enum(Of TEnum)(System.String, System.Boolean)
+  nameWithType: ResultParsers.Enum<TEnum>(String, Boolean)
+  nameWithType.vb: ResultParsers.Enum(Of TEnum)(String, Boolean)
+- uid: Lemonad.ErrorHandling.ResultParsers.Int(System.String)
+  name: Int(String)
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_Int_System_String_
+  commentId: M:Lemonad.ErrorHandling.ResultParsers.Int(System.String)
+  fullName: Lemonad.ErrorHandling.ResultParsers.Int(System.String)
+  nameWithType: ResultParsers.Int(String)
+- uid: Lemonad.ErrorHandling.ResultParsers.Int(System.String,System.Globalization.NumberStyles,System.IFormatProvider)
+  name: Int(String, NumberStyles, IFormatProvider)
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_Int_System_String_System_Globalization_NumberStyles_System_IFormatProvider_
+  commentId: M:Lemonad.ErrorHandling.ResultParsers.Int(System.String,System.Globalization.NumberStyles,System.IFormatProvider)
+  fullName: Lemonad.ErrorHandling.ResultParsers.Int(System.String, System.Globalization.NumberStyles, System.IFormatProvider)
+  nameWithType: ResultParsers.Int(String, NumberStyles, IFormatProvider)
+- uid: Lemonad.ErrorHandling.ResultParsers.Int*
+  name: Int
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_Int_
+  commentId: Overload:Lemonad.ErrorHandling.ResultParsers.Int
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.ResultParsers.Int
+  nameWithType: ResultParsers.Int
+- uid: Lemonad.ErrorHandling.ResultParsers.Long(System.String)
+  name: Long(String)
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_Long_System_String_
+  commentId: M:Lemonad.ErrorHandling.ResultParsers.Long(System.String)
+  fullName: Lemonad.ErrorHandling.ResultParsers.Long(System.String)
+  nameWithType: ResultParsers.Long(String)
+- uid: Lemonad.ErrorHandling.ResultParsers.Long(System.String,System.Globalization.NumberStyles,System.IFormatProvider)
+  name: Long(String, NumberStyles, IFormatProvider)
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_Long_System_String_System_Globalization_NumberStyles_System_IFormatProvider_
+  commentId: M:Lemonad.ErrorHandling.ResultParsers.Long(System.String,System.Globalization.NumberStyles,System.IFormatProvider)
+  fullName: Lemonad.ErrorHandling.ResultParsers.Long(System.String, System.Globalization.NumberStyles, System.IFormatProvider)
+  nameWithType: ResultParsers.Long(String, NumberStyles, IFormatProvider)
+- uid: Lemonad.ErrorHandling.ResultParsers.Long*
+  name: Long
+  href: api/Lemonad.ErrorHandling.ResultParsers.html#Lemonad_ErrorHandling_ResultParsers_Long_
+  commentId: Overload:Lemonad.ErrorHandling.ResultParsers.Long
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.ResultParsers.Long
+  nameWithType: ResultParsers.Long

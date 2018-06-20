@@ -5,42 +5,6 @@
   "files": [
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.Either-2.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.Either-2.html",
-          "hash": "BHCLuUHT1GmOQMFGm5M9ZA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.Either.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.Either.html",
-          "hash": "0b3MR2eeHLG+5bXc+eiZNw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.EitherParsers.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.EitherParsers.html",
-          "hash": "ZCozXwNjefPCPSnXFZwQig=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/Lemonad.ErrorHandling.EquailtyFunctions.yml",
       "output": {
         ".html": {
@@ -57,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Maybe-1.html",
-          "hash": "5IiNhRH8XwqH+R/cjeMrsg=="
+          "hash": "x1hZrRY2Y3Q705b+ZxyOpQ=="
         }
       },
       "is_incremental": false,
@@ -69,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Maybe.html",
-          "hash": "jFFhVuRHFOzFea72uFjwSg=="
+          "hash": "qlnAY8JkIK95shSTl7IPeQ=="
         }
       },
       "is_incremental": false,
@@ -89,11 +53,47 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.Result-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.Result-2.html",
+          "hash": "TMHCMr387BZ82iTAGTrX9A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.Result.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.Result.html",
+          "hash": "PojsJgZdo0Z6E/4A6lTE3g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.ResultParsers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.ResultParsers.html",
+          "hash": "B0rw/Wzw33K+0Oqk38q3cA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Lemonad.ErrorHandling.yml",
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.html",
-          "hash": "1f/BZudAv8lpV1awsVOE9Q=="
+          "hash": "zOoaMmu66s26ccdalWkndg=="
         }
       },
       "is_incremental": false,
@@ -117,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "5lTvPrSCxZ95sfBe5VbY6A=="
+          "hash": "c89puy4vtrBOqe2EzFIJsg=="
         }
       },
       "is_incremental": false,
@@ -180,17 +180,17 @@
         "incrementalPhase": "build"
       },
       "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build"
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
-          "incrementalPhase": "build"
-        },
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         }
       }
