@@ -1054,24 +1054,6 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FlatMap
   nameWithType: Result<T, TError>.FlatMap
   nameWithType.vb: Result(Of T, TError).FlatMap
-- uid: Lemonad.ErrorHandling.Result`2.FlatMap``1(System.Func{`0,Lemonad.ErrorHandling.Result{``0,`1}})
-  name: FlatMap<TResult>(Func<T, Result<TResult, TError>>)
-  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FlatMap__1_System_Func__0_Lemonad_ErrorHandling_Result___0__1___
-  commentId: M:Lemonad.ErrorHandling.Result`2.FlatMap``1(System.Func{`0,Lemonad.ErrorHandling.Result{``0,`1}})
-  name.vb: FlatMap(Of TResult)(Func(Of T, Result(Of TResult, TError)))
-  fullName: Lemonad.ErrorHandling.Result<T, TError>.FlatMap<TResult>(System.Func<T, Lemonad.ErrorHandling.Result<TResult, TError>>)
-  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FlatMap(Of TResult)(System.Func(Of T, Lemonad.ErrorHandling.Result(Of TResult, TError)))
-  nameWithType: Result<T, TError>.FlatMap<TResult>(Func<T, Result<TResult, TError>>)
-  nameWithType.vb: Result(Of T, TError).FlatMap(Of TResult)(Func(Of T, Result(Of TResult, TError)))
-- uid: Lemonad.ErrorHandling.Result`2.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Result{``0,`1}},System.Func{`0,``0,``1})
-  name: FlatMap<TSelector, TResult>(Func<T, Result<TSelector, TError>>, Func<T, TSelector, TResult>)
-  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_Result___0__1___System_Func__0___0___1__
-  commentId: M:Lemonad.ErrorHandling.Result`2.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Result{``0,`1}},System.Func{`0,``0,``1})
-  name.vb: FlatMap(Of TSelector, TResult)(Func(Of T, Result(Of TSelector, TError)), Func(Of T, TSelector, TResult))
-  fullName: Lemonad.ErrorHandling.Result<T, TError>.FlatMap<TSelector, TResult>(System.Func<T, Lemonad.ErrorHandling.Result<TSelector, TError>>, System.Func<T, TSelector, TResult>)
-  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FlatMap(Of TSelector, TResult)(System.Func(Of T, Lemonad.ErrorHandling.Result(Of TSelector, TError)), System.Func(Of T, TSelector, TResult))
-  nameWithType: Result<T, TError>.FlatMap<TSelector, TResult>(Func<T, Result<TSelector, TError>>, Func<T, TSelector, TResult>)
-  nameWithType.vb: Result(Of T, TError).FlatMap(Of TSelector, TResult)(Func(Of T, Result(Of TSelector, TError)), Func(Of T, TSelector, TResult))
 - uid: Lemonad.ErrorHandling.Result`2.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Result{``1,``0}},System.Func{``0,`1})
   name: FlatMap<TErrorResult, TResult>(Func<T, Result<TResult, TErrorResult>>, Func<TErrorResult, TError>)
   href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_Result___1___0___System_Func___0__1__
@@ -1099,6 +1081,15 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Flatten
   nameWithType: Result<T, TError>.Flatten
   nameWithType.vb: Result(Of T, TError).Flatten
+- uid: Lemonad.ErrorHandling.Result`2.Flatten``1(System.Func{`0,Lemonad.ErrorHandling.Result{``0,`1}})
+  name: Flatten<TResult>(Func<T, Result<TResult, TError>>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Flatten__1_System_Func__0_Lemonad_ErrorHandling_Result___0__1___
+  commentId: M:Lemonad.ErrorHandling.Result`2.Flatten``1(System.Func{`0,Lemonad.ErrorHandling.Result{``0,`1}})
+  name.vb: Flatten(Of TResult)(Func(Of T, Result(Of TResult, TError)))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Flatten<TResult>(System.Func<T, Lemonad.ErrorHandling.Result<TResult, TError>>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Flatten(Of TResult)(System.Func(Of T, Lemonad.ErrorHandling.Result(Of TResult, TError)))
+  nameWithType: Result<T, TError>.Flatten<TResult>(Func<T, Result<TResult, TError>>)
+  nameWithType.vb: Result(Of T, TError).Flatten(Of TResult)(Func(Of T, Result(Of TResult, TError)))
 - uid: Lemonad.ErrorHandling.Result`2.Flatten``2(System.Func{`0,Lemonad.ErrorHandling.Result{``0,``1}},System.Func{``1,`1})
   name: Flatten<TResult, TErrorResult>(Func<T, Result<TResult, TErrorResult>>, Func<TErrorResult, TError>)
   href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Flatten__2_System_Func__0_Lemonad_ErrorHandling_Result___0___1___System_Func___1__1__
