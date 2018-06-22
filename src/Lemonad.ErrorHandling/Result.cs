@@ -94,7 +94,7 @@ namespace Lemonad.ErrorHandling {
         /// <returns>
         ///     Either <typeparamref name="T" /> or <typeparamref name="TError" />.
         /// </returns>
-        [Pure
+        [Pure]
         public TResult Match<TResult>(
             Func<T, TResult> selector, Func<TError, TResult> errorSelector) {
             if (HasError)
