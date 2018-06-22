@@ -424,6 +424,12 @@ namespace Lemonad.ErrorHandling {
             return Result.Error<T, TError>(Error);
         }
 
+        /// <summary>
+        /// Executes each function and saves all potential errors to a list which will be the <typeparamref name="TError"/>.
+        /// </summary>
+        /// <param name="validations">
+        /// A <see cref="IReadOnlyList{T}"/> containining <typeparamref name="TError"/>.
+        /// </param>
         public Result<T, IReadOnlyList<TError>> Multiple(
             params Func<Result<T, TError>, Result<T, TError>>[] validations) {
             var result = this;
