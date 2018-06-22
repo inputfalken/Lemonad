@@ -258,6 +258,24 @@ namespace Lemonad.ErrorHandling {
         public Result<T, TError> IsErrorWhenNull(Func<TError> errorSelector) =>
             IsErrorWhen(EquailtyFunctions.IsNull, errorSelector);
 
+        /// <summary>
+        /// Maps both <typeparamref name="T"/> and <typeparamref name="TError"/> but only one is executed.
+        /// </summary>
+        /// <param name="selector">
+        /// Is executed if <typeparamref name="T"/> is the active type.
+        /// </param>
+        /// <param name="errorSelector">
+        /// Is executed if <typeparamref name="TError"/> is the active type.
+        /// </param>
+        /// <typeparam name="TErrorResult">
+        /// The result from the function <paramref name="errorSelector"/>.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// The result from the function <paramref name="selector"/>.
+        /// </typeparam>
+        /// <returns>
+        /// A mapped <see cref="Result{T,TError}"/>.
+        /// </returns>
         [Pure]
         public Result<TResult, TErrorResult> FullMap<TErrorResult, TResult>(
             Func<T, TResult> selector,
@@ -270,6 +288,18 @@ namespace Lemonad.ErrorHandling {
                 ? selector(Value)
                 : throw new ArgumentNullException(nameof(selector)));
 
+        /// <summary>
+        /// Maps <typeparamref name="T"/>.
+        /// </summary>
+        /// <param name="selector">
+        /// Is executed if <typeparamref name="T"/> is the active type.
+        /// </param>
+        /// <typeparam name="TResult">
+        /// The result from the function <paramref name="selector"/>.
+        /// </typeparam>
+        /// <returns>
+        /// A <see cref="Result{T,TError}"/>  with its <typeparamref name="T"/> mapped.
+        /// </returns>
         [Pure]
         public Result<TResult, TError> Map<TResult>(Func<T, TResult> selector) => HasValue
             ? selector != null
@@ -277,11 +307,23 @@ namespace Lemonad.ErrorHandling {
                 : throw new ArgumentNullException(nameof(selector))
             : Result.Error<TResult, TError>(Error);
 
+        /// <summary>
+        /// Maps <typeparamref name="TError"/>.
+        /// </summary>
+        /// <param name="selector">
+        /// Is executed if <typeparamref name="TError"/> is the active type.
+        /// </param>
+        /// <typeparam name="TErrorResult">
+        /// The result from the function <paramref name="selector"/>.
+        /// </typeparam>
+        /// <returns>
+        /// A <see cref="Result{T,TError}"/>  with its <typeparamref name="TError"/> mapped.
+        /// </returns>
         [Pure]
-        public Result<T, TErrorResult> MapError<TErrorResult>(Func<TError, TErrorResult> errorSelector) => HasError
-            ? errorSelector != null
-                ? Result.Error<T, TErrorResult>(errorSelector(Error))
-                : throw new ArgumentNullException(nameof(errorSelector))
+        public Result<T, TErrorResult> MapError<TErrorResult>(Func<TError, TErrorResult> selector) => HasError
+            ? selector != null
+                ? Result.Error<T, TErrorResult>(selector(Error))
+                : throw new ArgumentNullException(nameof(selector))
             : Result.Ok<T, TErrorResult>(Value);
 
         [Pure]
