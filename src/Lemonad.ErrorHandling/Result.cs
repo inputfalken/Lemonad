@@ -326,12 +326,38 @@ namespace Lemonad.ErrorHandling {
                 : throw new ArgumentNullException(nameof(selector))
             : Result.Ok<T, TErrorResult>(Value);
 
+        /// <summary>
+        /// Flatten another <see cref="Result{T,TError}"/> who shares the same <typeparamref name="TError"/>.
+        /// And maps <typeparamref name="T"/> to <typeparamref name="TResult"/>.
+        /// </summary>
+        /// <param name="flatSelector">
+        /// A function who expects a <see cref="Result{T,TError}"/> as an return type.
+        /// </param>
+        /// <typeparam name="TResult">
+        /// The return type of the function <paramref name="flatSelector"/>.
+        /// </typeparam>
         [Pure]
         private Result<TResult, TError> FlatMap<TResult>(
             Func<T, Result<TResult, TError>> selector) => HasValue
             ? selector?.Invoke(Value) ?? throw new ArgumentNullException(nameof(selector))
             : Result.Error<TResult, TError>(Error);
 
+        /// <summary>
+        /// Flatten another <see cref="Result{T,TError}"/> who shares the same <typeparamref name="TError"/>.
+        /// And maps <typeparamref name="T"/> together with <typeparamref name="TSelector"/> to <typeparamref name="TResult"/>.
+        /// </summary>
+        /// <param name="flatSelector">
+        /// A function who expects a <see cref="Result{T,TError}"/> as an return type.
+        /// </param>
+        /// <param name="resultSelector">
+        /// A function whose in-parameters are <typeparamref name="T"/> and  <typeparamref name="TSelector"/>  which can return any type.
+        /// </param>
+        /// <typeparam name="TSelector">
+        /// The value retrieved from the the <see cref="Result{T,TError}"/> given by the <paramref name="flatSelector"/>.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// The return type of the function  <paramref name="resultSelector"/>.
+        /// </typeparam>
         [Pure]
         private Result<TResult, TError> FlatMap<TSelector, TResult>(
             Func<T, Result<TSelector, TError>> selector,
