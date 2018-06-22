@@ -96,14 +96,14 @@ function Build-Documentation {
   Pop-Location
 }
 
-function Push-Documentation {
+function Generate-DocumentationPages {
   param(
-    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $Directory,
+    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $DocumentationDirectory,
     [Parameter(Position = 1, Mandatory = 1)] [System.IO.FileSystemInfo] $SrcDirectory
   )
 
   function Configure-Git {
-    if($env:GITHUB_ACCESS_TOKEN) {
+    if ($env:GITHUB_ACCESS_TOKEN) {
       git config --global credential.helper store
       if (!$?) { throw "Could not set git command 'config --global credential.helper store'." }
       Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:GITHUB_ACCESS_TOKEN):x-oauth-basic@github.com`n" -ErrorAction Stop
@@ -124,31 +124,30 @@ function Push-Documentation {
     } else { Write-Host "Found '$email' for 'git config --global user.email', skipping assignment." -ForegroundColor Yellow }
   }
 
-  Configure-Git
-
-  $ghPagesDirectory = 'gh_pages'
-  git clone https://github.com/inputfalken/Lemonad.git -b gh-pages $ghPagesDirectory -q
-  if (!$?) { throw "Could not clone 'gh-pages'." }
-  $ghPagesDirectory = $ghPagesDirectory | Get-Item -ErrorAction Stop
-  $docsSiteDirectory = Join-Path -Path $Directory -ChildPath '_site' -ErrorAction Stop | Get-Item -ErrorAction Stop
-  $ghPagesDirectoryGitDirectory = Join-Path -Path $ghPagesDirectory -ChildPath '.git' -ErrorAction Stop | Get-Item -ErrorAction Stop -Force
-  Copy-Item $ghPagesDirectoryGitDirectory $docsSiteDirectory -Recurse -ErrorAction Stop -Force
-  Push-Location $docsSiteDirectory
-
   # TODO SrcDirectory parameter should be a list for all directories the diff needs to be checked with.
-  git diff --exit-code $Directory $SrcDirectory | Out-Null
+  git diff --exit-code $DocumentationDirectory $SrcDirectory | Out-Null
   if ($LASTEXITCODE -eq 1) {
+    Build-Documentation -Directory $DocumentationDirectory
+    Configure-Git
+    $ghPagesDirectory = 'gh_pages'
+    git clone https://github.com/inputfalken/Lemonad.git -b gh-pages $ghPagesDirectory -q
+    if (!$?) { throw "Could not clone 'gh-pages'." }
+    $ghPagesDirectory = $ghPagesDirectory | Get-Item -ErrorAction Stop
+    $docsSiteDirectory = Join-Path -Path $DocumentationDirectory -ChildPath '_site' -ErrorAction Stop | Get-Item -ErrorAction Stop
+    $ghPagesDirectoryGitDirectory = Join-Path -Path $ghPagesDirectory -ChildPath '.git' -ErrorAction Stop | Get-Item -ErrorAction Stop -Force
+    Copy-Item $ghPagesDirectoryGitDirectory $docsSiteDirectory -Recurse -ErrorAction Stop -Force
+    Push-Location $docsSiteDirectory
     git add -A 2>&1
     if (!$?) { throw 'Failed adding generated documentation.' }
     git commit -m "Documentation updated" -q
     if (!$?) { throw 'Failed commiting generatated documentation.' }
     git push origin gh-pages -q
     if (!$?) { throw 'Failed pushing generated documentation.' }
+    Pop-Location
+    Remove-Item $ghPagesDirectory -Force -Recurse -ErrorAction Stop
+    Remove-Item $docsSiteDirectory -Force -Recurse -ErrorAction Stop
   } elseif ($LASTEXITCODE -eq 0) { Write-Host 'No changes found when generating documentation for gh-pages' -ForegroundColor Yellow }
   else { throw 'Unhandled exit code for command ''git diff --exit-code''' }
-  Pop-Location
-  Remove-Item $ghPagesDirectory -Force -Recurse -ErrorAction Stop
-  Remove-Item $docsSiteDirectory -Force -Recurse -ErrorAction Stop
 }
 
 #-------------------------------------------------------------------------------------------------------------------------------------
@@ -186,8 +185,7 @@ if ($isWindows) {
       'master' {
         if (!$env:APPVEYOR_PULL_REQUEST_TITLE -and $GenerateDocs) {
           $documentationDirectory = (Join-Path -Path $rootDirectory -ChildPath 'docs' -ErrorAction Stop ) | Get-Item -ErrorAction Stop
-          Build-Documentation -Directory $documentationDirectory
-          Push-Documentation -Directory $documentationDirectory -SrcDirectory $srcDiretory
+          Generate-DocumentationPages -DocumentationDirectory $documentationDirectory -SrcDirectory $srcDiretory
           Upload-Packages
         }
       }
