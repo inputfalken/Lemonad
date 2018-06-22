@@ -136,7 +136,7 @@ function Push-Documentation {
   Push-Location $docsSiteDirectory
 
   # TODO SrcDirectory parameter should be a list for all directories the diff needs to be checked with.
-  git diff $Directory $SrcDirectory --exit-code | Out-Null
+  git diff --exit-code $Directory $SrcDirectory | Out-Null
   if ($LASTEXITCODE -eq 1) {
     git add -A 2>&1
     if (!$?) { throw 'Failed adding generated documentation.' }
