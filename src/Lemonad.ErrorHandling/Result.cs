@@ -367,6 +367,28 @@ namespace Lemonad.ErrorHandling {
                 : resultSelector(x, y)) ??
             throw new ArgumentNullException(nameof(selector)));
 
+        /// <summary>
+        /// Flatten another <see cref="Result{T,TError}"/> 
+        /// </summary>
+        /// <param name="selector">
+        /// A function who expects a <see cref="Result{T,TError}"/> as an return type.
+        /// </param>
+        /// <param name="errorSelector">
+        ///  Maps the error to from <typeparamref name="TErrorResult"/> to <typeparamref name="TError"/>.
+        /// </param>
+        /// <typeparam name="TResult">
+        /// The value of the <see cref="Result{T,TError}"/> returned by the function <paramref name="selector"/>.
+        /// </typeparam>
+        /// <typeparam name="TErrorResult">
+        /// The error of the <see cref="Result{T,TError}"/> returned by the function <paramref name="selector"/>.
+        /// </typeparam>
+        /// <returns>
+        /// The same <see cref="Result{T,TError}"/> but it's state is dependant on the <see cref="Result{T,TError}"/>
+        /// returned by the <paramref name="selector"/>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// When any of the function parameters are null and needs to be exectued.
+        /// </exception>
         [Pure]
         public Result<T, TError> Flatten<TResult, TErrorResult>(
             Func<T, Result<TResult, TErrorResult>> selector, Func<TErrorResult, TError> errorSelector) {
@@ -382,6 +404,13 @@ namespace Lemonad.ErrorHandling {
             return Result.Error<T, TError>(Error);
         }
 
+        /// <summary>
+        /// Flatten another <see cref="Result{T,TError}"/>  who shares the same <typeparamref name="TError"/>.
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <typeparam name="TResult"></typeparam>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         [Pure]
         public Result<T, TError> Flatten<TResult>(Func<T, Result<TResult, TError>> selector) {
             if (HasValue) {
