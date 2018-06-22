@@ -193,6 +193,15 @@ namespace Lemonad.ErrorHandling {
             return this;
         }
 
+        /// <summary>
+        ///  Filters the <typeparamref name="T"/> if <typeparamref name="T"/> is the active type.
+        /// </summary>
+        /// <param name="predicate">
+        /// A function to test <typeparamref name="T"/>.
+        /// </param>
+        /// <param name="errorSelector">
+        /// Is executed when the <paramref name="predicate"/> function returns false.
+        /// </param>
         [Pure]
         public Result<T, TError> Filter(
             Func<T, bool> predicate, Func<TError> errorSelector) {
@@ -209,6 +218,18 @@ namespace Lemonad.ErrorHandling {
                     : Result.Error<T, TError>(Error);
         }
 
+        /// <summary>
+        ///  Filters the <typeparamref name="T"/> if <typeparamref name="T"/> is the active type.
+        /// </summary>
+        /// <param name="predicate">
+        /// A function to test <typeparamref name="T"/>.
+        /// </param>
+        /// <param name="errorSelector">
+        /// Is executed when the <paramref name="predicate"/> function is true.
+        /// </param>
+        /// <returns>
+        /// A filtered <see cref="Result{T,TError}"/>.
+        /// </returns>
         [Pure]
         public Result<T, TError> IsErrorWhen(
             Func<T, bool> predicate, Func<TError> errorSelector) =>
@@ -224,6 +245,15 @@ namespace Lemonad.ErrorHandling {
                     ? throw new ArgumentNullException(nameof(errorSelector))
                     : Result.Error<T, TError>(Error);
 
+        /// <summary>
+        ///  Filters the <typeparamref name="T"/> by checking for null if <typeparamref name="T"/> is the active type.
+        /// </summary>
+        /// <param name="errorSelector">
+        /// Is executed when <typeparamref name="T"/> is null.
+        /// </param>
+        /// <returns>
+        /// A filtered <see cref="Result{T,TError}"/>.
+        /// </returns>
         [Pure]
         public Result<T, TError> IsErrorWhenNull(Func<TError> errorSelector) =>
             IsErrorWhen(EquailtyFunctions.IsNull, errorSelector);
