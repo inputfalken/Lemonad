@@ -1,8 +1,8 @@
 param (
   [Parameter(Position = 0, Mandatory = 1)] [ValidateSet('Release', 'Debug')] $Configuration,
   [Parameter(Position = 1, Mandatory = 0)] [switch] $GenerateDocs = $false,
-  [Parameter(Position = 2, Mandatory = 1)] [string] $UserName,
-  [Parameter(Position = 3, Mandatory = 1)] [string] $UserEmail
+  [Parameter(Position = 2, Mandatory = 0)] [string] $UserName,
+  [Parameter(Position = 3, Mandatory = 0)] [string] $UserEmail
 )
 
 function Is-InsideGitRepository {
@@ -91,25 +91,40 @@ function Build-Documentation {
     if (!$?) { throw 'Could not install DocFx by chocolatey.' }
   }
   Push-Location $Directory
-  & docfx docfx.json 
+  & docfx docfx.json
   if (!$?) { throw 'Could not generate documentation.' }
   Pop-Location
 }
 
 function Push-Documentation {
   param(
-    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $Directory
+    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $Directory,
+    [Parameter(Position = 1, Mandatory = 1)] [System.IO.FileSystemInfo] $SrcDirectory
   )
-  git config --global credential.helper store
-  if (!$?) { throw "Could not set git command 'config --global credential.helper store'." }
 
-  Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:GITHUB_ACCESS_TOKEN):x-oauth-basic@github.com`n" -ErrorAction Stop
+  function Configure-Git {
+    if($env:GITHUB_ACCESS_TOKEN) {
+      git config --global credential.helper store
+      if (!$?) { throw "Could not set git command 'config --global credential.helper store'." }
+      Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:GITHUB_ACCESS_TOKEN):x-oauth-basic@github.com`n" -ErrorAction Stop
+    } else { Write-Host 'Could not find an access token for github, continuing by assuming push rights exists anyway.' -ForegroundColor Yellow }
 
-  git config --global user.email $UserEmail
-  if (!$?) { throw 'Could not set email for git config.' }
+    $name = git config --global user.name
+    if (!$?) {
+      if ([string]::IsNullOrWhiteSpace($UserEmail)) { throw "Invalid email parameter." }
+      git config --global user.name $UserName
+      if (!$?) { throw 'Could not set name for git config.' }
+    } else { Write-Host "Found '$name' for 'git config --global user.name', skipping assignment." -ForegroundColor Yellow }
 
-  git config --global user.name $UserName
-  if (!$?) { throw 'Could not set name for git config.' }
+    $email = git config --global user.email
+    if (!$?) {
+      if ([string]::IsNullOrWhiteSpace($UserName)) { throw "Invalid parameter username parameter." }
+      git config --global user.email $UserEmail
+      if (!$?) { throw 'Could not set email for git config.' }
+    } else { Write-Host "Found '$email' for 'git config --global user.email', skipping assignment." -ForegroundColor Yellow }
+  }
+
+  Configure-Git
 
   $ghPagesDirectory = 'gh_pages'
   git clone https://github.com/inputfalken/Lemonad.git -b gh-pages $ghPagesDirectory -q
@@ -120,27 +135,23 @@ function Push-Documentation {
   Copy-Item $ghPagesDirectoryGitDirectory $docsSiteDirectory -Recurse -ErrorAction Stop -Force
   Push-Location $docsSiteDirectory
 
-  # If any git changes
-  if (git diff --exit-code) {
+  # TODO SrcDirectory parameter should be a list for all directories the diff needs to be checked with.
+  git diff $Directory $SrcDirectory --exit-code | Out-Null
+  if ($LASTEXITCODE -eq 1) {
     git add -A 2>&1
     if (!$?) { throw 'Failed adding generated documentation.' }
     git commit -m "Documentation updated" -q
     if (!$?) { throw 'Failed commiting generatated documentation.' }
     git push origin gh-pages -q
     if (!$?) { throw 'Failed pushing generated documentation.' }
-  } else { Write-Host 'No changes found when generating documentation for gh-pages' -ForegroundColor Magenta }
+  } elseif ($LASTEXITCODE -eq 0) { Write-Host 'No changes found when generating documentation for gh-pages' -ForegroundColor Yellow }
+  else { throw 'Unhandled exit code for command ''git diff --exit-code''' }
   Pop-Location
   Remove-Item $ghPagesDirectory -Force -Recurse -ErrorAction Stop
   Remove-Item $docsSiteDirectory -Force -Recurse -ErrorAction Stop
 }
 
 #-------------------------------------------------------------------------------------------------------------------------------------
-if ([string]::IsNullOrWhiteSpace($UserName)) {
-  throw "Invalid parameter username parameter."
-}
-if ([string]::IsNullOrWhiteSpace($UserEmail)) {
-  throw "Invalid email parameter."
-}
 
 
 $rootDirectory = Get-RootDirectory
@@ -175,11 +186,8 @@ if ($isWindows) {
       'master' {
         if (!$env:APPVEYOR_PULL_REQUEST_TITLE -and $GenerateDocs) {
           $documentationDirectory = (Join-Path -Path $rootDirectory -ChildPath 'docs' -ErrorAction Stop ) | Get-Item -ErrorAction Stop
-          Write-Host 'Generating documentation.'
           Build-Documentation -Directory $documentationDirectory
-          Write-Host 'Pushing to gh-pages.'
-          Push-Documentation -Directory $documentationDirectory
-          Write-Host 'Uploading packages to NuGet.'
+          Push-Documentation -Directory $documentationDirectory -SrcDirectory $srcDiretory
           Upload-Packages
         }
       }
