@@ -79,7 +79,22 @@ namespace Lemonad.ErrorHandling {
                 : Comparer<TError>.Default.Compare(Error, other.Error);
         }
 
-        [Pure]
+        /// <summary>
+        /// Evaluates the <see cref="Result{T,TError}"/>.
+        /// </summary>
+        /// <param name="selector">
+        ///     Is exectued when the <see cref="Result{T,TError}"/> contains <see cref="T"/>.
+        /// </param>
+        /// <param name="errorSelector">
+        /// Is exectued when the <see cref="Result{T,TError}"/> contains <see cref="TError"/>.
+        /// </param>
+        /// <typeparam name="TResult">
+        /// The return type of <paramref name="selector" /> and <paramref name="errorSelector" />
+        /// </typeparam>
+        /// <returns>
+        ///     Either <typeparamref name="T" /> or <typeparamref name="TError" />.
+        /// </returns>
+        [Pure
         public TResult Match<TResult>(
             Func<T, TResult> selector, Func<TError, TResult> errorSelector) {
             if (HasError)
@@ -92,6 +107,18 @@ namespace Lemonad.ErrorHandling {
                 : throw new ArgumentNullException(nameof(selector));
         }
 
+        /// <summary>
+        /// Evaluates the <see cref="Result{T,TError}"/>.
+        /// </summary>
+        /// <param name="action">
+        /// Is exectued when the <see cref="Result{T,TError}"/> contains <see cref="T"/>.
+        /// </param>
+        /// <param name="errorAction">
+        /// Is exectued when the <see cref="Result{T,TError}"/> contains <see cref="TError"/>.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// When either <paramref name="action"/> or <paramref name="errorAction"/> and needs to be executed.
+        /// </exception>
         public void Match(Action<T> action, Action<TError> errorAction) {
             if (HasError)
                 if (errorAction != null)
