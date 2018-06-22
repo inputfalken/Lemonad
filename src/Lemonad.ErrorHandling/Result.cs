@@ -131,6 +131,17 @@ namespace Lemonad.ErrorHandling {
                 throw new ArgumentNullException(nameof(action));
         }
 
+        /// <summary>
+        /// Executes the <paramref name="action" /> if <typeparamref name="T" /> is the active type.
+        /// </summary>
+        /// <param name="action">
+        /// </param>
+        /// <returns>
+        /// <see cref="Result{T,TError}"/> with side effects.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// When <paramref name="action"/> is null and needs to be exectued.
+        /// </exception>
         public Result<T, TError> DoWhenOk(Action<T> action) {
             if (HasValue)
                 if (action != null)
@@ -141,6 +152,18 @@ namespace Lemonad.ErrorHandling {
             return this;
         }
 
+        /// <summary>
+        /// Exectues  <paramref name="action"/>.
+        /// </summary>
+        /// <param name="action">
+        ///  Is executed no matter what state <see cref="Result{T,TError}"/> is in.
+        /// </param>
+        /// <returns>
+        /// <see cref="Result{T,TError}"/> with side effects.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// When <paramref name="action"/> is null.
+        /// </exception>
         public Result<T, TError> Do(Action action) {
             if (action == null)
                 throw new ArgumentNullException(nameof(action));
@@ -148,13 +171,24 @@ namespace Lemonad.ErrorHandling {
             return this;
         }
 
+        /// <summary>
+        /// Executes the <paramref name="action" /> if <typeparamref name="TError" /> is the active type.
+        /// </summary>
+        /// <param name="action">
+        /// </param>
+        /// <returns>
+        /// <see cref="Result{T,TError}"/> with side effects.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// When <paramref name="action"/> is null and needs to be exectued.
+        /// </exception>
         public Result<T, TError> DoWhenError(
-            Action<TError> errorAction) {
+            Action<TError> action) {
             if (HasError)
-                if (errorAction != null)
-                    errorAction.Invoke(Error);
+                if (action != null)
+                    action.Invoke(Error);
                 else
-                    throw new ArgumentNullException(nameof(errorAction));
+                    throw new ArgumentNullException(nameof(action));
 
             return this;
         }
