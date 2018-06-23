@@ -115,6 +115,15 @@ namespace Lemonad.ErrorHandling {
                 ? throw new ArgumentNullException(nameof(noneSelector))
                 : (HasValue ? someSelector(Value) : noneSelector()));
 
+        /// <summary>
+        /// Maps <typeparamref name="T"/>.
+        /// </summary>
+        /// <param name="selector">
+        /// Is executed if <see cref="Maybe{T}"/> has a value.
+        /// </param>
+        /// <typeparam name="TResult">
+        /// The type returned from the function <paramref name="selector"/>.
+        /// </typeparam>
         [Pure]
         public Maybe<TResult>
             Map<TResult>(Func<T, TResult> selector) =>
