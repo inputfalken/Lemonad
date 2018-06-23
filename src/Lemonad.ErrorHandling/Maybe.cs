@@ -140,30 +140,63 @@ namespace Lemonad.ErrorHandling {
                 : throw new ArgumentNullException()
             : None;
 
+        /// <summary>
+        /// Flamaps another <see cref="Maybe{T}"/>.
+        /// </summary>
+        /// <param name="flatMapSelector">
+        /// A function who expects a <see cref="Maybe{T}"/> as its return type.
+        /// </param>
+        /// <typeparam name="TResult">
+        /// The type <typeparamref name="T"/> returned from the <paramref name="flatMapSelector"/> function.
+        /// </typeparam>
         [Pure]
         public Maybe<TResult> FlatMap<TResult>(
-            Func<T, Maybe<TResult>> selector) => HasValue
-            ? selector?.Invoke(Value) ?? throw new ArgumentNullException(nameof(selector))
+            Func<T, Maybe<TResult>> flatMapSelector) => HasValue
+            ? flatMapSelector?.Invoke(Value) ?? throw new ArgumentNullException(nameof(flatMapSelector))
             : Maybe<TResult>.None;
 
+        /// <summary>
+        /// Flamaps another <see cref="Maybe{T}"/>.
+        /// </summary>
+        /// <param name="flatMapSelector">
+        /// A function who expects a <see cref="Maybe{T}"/> as its return type.
+        /// </param>
+        /// <param name="resultSelector">
+        /// A function whose in-parameters are <typeparamref name="T"/> and <typeparamref name="TFlatMap"/> which can return any type.
+        /// </param>
+        /// <typeparam name="TFlatMap">
+        /// The value type of the <see cref="Result{T,TError}"/> returned by the <paramref name="flatMapSelector"/>.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// The type returned by the function <paramref name="resultSelector"/>.
+        /// </typeparam>
         [Pure]
-        public Maybe<TResult> FlatMap<TSelector, TResult>(
-            Func<T, Maybe<TSelector>> selector,
-            Func<T, TSelector, TResult> resultSelector) {
+        public Maybe<TResult> FlatMap<TFlatMap, TResult>(
+            Func<T, Maybe<TFlatMap>> flatMapSelector,
+            Func<T, TFlatMap, TResult> resultSelector) {
             if (HasValue)
-                return selector != null
-                    ? FlatMap(x => selector(x).Map(y => resultSelector != null
+                return flatMapSelector != null
+                    ? FlatMap(x => flatMapSelector(x).Map(y => resultSelector != null
                         ? resultSelector(x, y)
                         : throw new ArgumentNullException(nameof(resultSelector))))
-                    : throw new ArgumentNullException(nameof(selector));
+                    : throw new ArgumentNullException(nameof(flatMapSelector));
 
             return Maybe<TResult>.None;
         }
 
+        /// <summary>
+        /// Flamaps a <see cref="Nullable{T}"/>.
+        /// </summary>
+        /// <param name="flatSelector">
+        /// A function who expects a <see cref="Nullable{T}"/> as its return type.
+        /// </param>
+        /// <typeparam name="TResult">
+        /// The type <typeparamref name="T"/> returned from the <paramref name="flatSelector"/> function.
+        /// </typeparam>
         [Pure]
         public Maybe<TResult> FlatMap<TResult>(
-            Func<T, TResult?> selector) where TResult : struct =>
-            HasValue ? selector(Value).ConvertToMaybe() : Maybe<TResult>.None;
+            Func<T, TResult?> flatSelector) where TResult : struct =>
+            HasValue ? flatSelector(Value).ConvertToMaybe() : Maybe<TResult>.None;
 
         [Pure]
         public Maybe<T> IsNoneWhenNull() =>
