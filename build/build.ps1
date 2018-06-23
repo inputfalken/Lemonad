@@ -134,7 +134,7 @@ function Generate-DocumentationPages {
     | Where-Object { $_.pullRequestId -eq $null } ` # Make sure to diff against a commit which is not from a pull request.
     | Sort-Object buildNumber -Descending `
     | Select-Object -ExpandProperty commitId `
-    | Where-Object {$_ -ne $currentSha1}
+    | Where-Object {$_ -ne $currentSha1} `
     | Select-Object -First 1
   Write-Host "Comparing diffs with '$currentSha1' '$previousSha1'."
   # TODO SrcDirectory parameter should be a list for all directories the diff needs to be checked with.
