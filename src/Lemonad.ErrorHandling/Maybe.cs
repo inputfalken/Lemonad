@@ -198,6 +198,12 @@ namespace Lemonad.ErrorHandling {
             Func<T, TResult?> flatSelector) where TResult : struct =>
             HasValue ? flatSelector(Value).ConvertToMaybe() : Maybe<TResult>.None;
 
+        /// <summary>
+        /// Filters the <see cref="Maybe{T}"/> to see if <typeparamref name="T"/> is null.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="Maybe{T}"/> whose <typeparamref name="T"/> has value if <typeparamref name="T"/> is not null.
+        /// </returns>
         [Pure]
         public Maybe<T> IsNoneWhenNull() =>
             IsNoneWhen(EquailtyFunctions.IsNull);
