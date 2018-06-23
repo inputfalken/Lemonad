@@ -69,6 +69,18 @@ namespace Lemonad.ErrorHandling {
                 yield return maybe.Value;
         }
 
+        /// <summary>
+        /// Evaluates the <see cref="Maybe{T}"/>.
+        /// </summary>
+        /// <param name="someAction">
+        /// Is executed when the <see cref="Maybe{T}"/> has a value.
+        /// </param>
+        /// <param name="noneAction">
+        /// Is executed when he <see cref="Maybe{T}"/> has no value.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// When either <paramref name="someAction"/> or <paramref name="noneAction"/> needs to be executed.
+        /// </exception>
         public void Match(Action<T> someAction,
             Action noneAction) {
             if (HasValue) {
@@ -83,6 +95,18 @@ namespace Lemonad.ErrorHandling {
             }
         }
 
+        /// <summary>
+        /// Evaluates the <see cref="Maybe{T}"/>.
+        /// </summary>
+        /// <param name="someSelector">
+        /// Is executed when the <see cref="Maybe{T}"/> has a value.
+        /// </param>
+        /// <param name="noneSelector">
+        /// Is executed when he <see cref="Maybe{T}"/> has no value.
+        /// </param>
+        /// <typeparam name="TResult">
+        /// The type returned by the functions <paramref name="someSelector"/> and <paramref name="noneSelector"/>.
+        /// </typeparam>
         [Pure]
         public TResult Match<TResult>(Func<T, TResult> someSelector,
             Func<TResult> noneSelector) => someSelector == null
