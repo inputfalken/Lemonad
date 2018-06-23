@@ -217,6 +217,12 @@ namespace Lemonad.ErrorHandling {
         public Maybe<T> IsNoneWhenNull() =>
             IsNoneWhen(EquailtyFunctions.IsNull);
 
+        /// <summary>
+        ///  Filters the <typeparamref name="T"/> if <see cref="Maybe{T}"/> has a value.
+        /// </summary>
+        /// <param name="predicate">
+        /// A function to test <typeparamref name="T"/>.
+        /// </param>
         [Pure]
         public Maybe<T> IsNoneWhen(
             Func<T, bool> predicate) => HasValue
