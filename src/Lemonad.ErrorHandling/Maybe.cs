@@ -249,9 +249,9 @@ namespace Lemonad.ErrorHandling {
         /// The type returned by the function <paramref name="resultSelector"/>.
         /// </typeparam>
         [Pure]
-        public Maybe<TResult> FlatMap<TSelector, TResult>(
-            Func<T, TSelector?> selector,
-            Func<T, TSelector, TResult> resultSelector) where TSelector : struct => FlatMap(
-            src => selector(src).ConvertToMaybe().Map(elem => resultSelector(src, elem)));
+        public Maybe<TResult> FlatMap<TFlatMap, TResult>(
+            Func<T, TFlatMap?> flatMapSelector,
+            Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct => FlatMap(
+            src => flatMapSelector(src).ConvertToMaybe().Map(elem => resultSelector(src, elem)));
     }
 }
