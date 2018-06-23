@@ -207,7 +207,6 @@ Test-Projects -Directory $testDirectory -Configuration $Configuration
 
 
 if ($isWindows) {
-  Pack-Projects -Directory $srcDiretory -Configuration $Configuration
   if ($env:APPVEYOR -and $env:CI) {
     switch ($env:APPVEYOR_REPO_BRANCH) {
       'master' {
