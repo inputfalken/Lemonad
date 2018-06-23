@@ -125,7 +125,7 @@ namespace Lemonad.ErrorHandling {
                 : Maybe<TResult>.None;
 
         [Pure]
-        public Maybe<T> IsSomeWhen(
+        public Maybe<T> Filter(
             Func<T, bool> predicate) => HasValue
             ? predicate != null
                 ? predicate(Value)

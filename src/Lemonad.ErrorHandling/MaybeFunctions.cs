@@ -49,13 +49,13 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static Maybe<TSource> None<TSource>(this TSource item, Func<TSource, bool> predicate) =>
             predicate != null
-                ? Some(item).IsSomeWhen(x => !predicate(x))
+                ? Some(item).Filter(x => !predicate(x))
                 : throw new ArgumentNullException(nameof(predicate));
 
         [Pure]
         public static Maybe<TSource> Some<TSource>(this TSource item, Func<TSource, bool> predicate) =>
             predicate != null
-                ? Some(item).IsSomeWhen(predicate)
+                ? Some(item).Filter(predicate)
                 : throw new ArgumentNullException(nameof(predicate));
 
         [Pure]
