@@ -25,6 +25,7 @@ namespace Lemonad.ErrorHandling {
             HasValue = hasValue;
         }
 
+        /// <inheritdoc />
         public bool Equals(Maybe<T> other) {
             if (!HasValue && !other.HasValue)
                 return true;
@@ -41,8 +42,10 @@ namespace Lemonad.ErrorHandling {
 
         public static bool operator !=(Maybe<T> left, Maybe<T> right) => !left.Equals(right);
 
+        /// <inheritdoc />
         public override int GetHashCode() => !HasValue ? 0 : (Value == null ? 1 : Value.GetHashCode());
 
+        /// <inheritdoc />
         public int CompareTo(Maybe<T> other) {
             if (HasValue && !other.HasValue) return 1;
             if (!HasValue && other.HasValue) return -1;
@@ -57,6 +60,7 @@ namespace Lemonad.ErrorHandling {
 
         public static bool operator >=(Maybe<T> left, Maybe<T> right) => left.CompareTo(right) >= 0;
 
+        /// <inheritdoc />
         public override string ToString() =>
             $"{(HasValue ? "Some" : "None")} ==> {typeof(Maybe<T>).ToHumanString()}{StringFunctions.PrettyTypeString(Value)}";
 
