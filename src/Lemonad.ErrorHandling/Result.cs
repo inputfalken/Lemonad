@@ -465,5 +465,68 @@ namespace Lemonad.ErrorHandling {
                     return resultSelector(x, y);
                 }) ?? throw new ArgumentNullException(nameof(selector)),
                 errorSelector);
+        
+        /// <summary>
+        /// Fully flatmaps another <see cref="Result{T,TError}"/>.
+        /// </summary>
+        /// <param name="flatMapSelector">
+        /// A function who expects a <see cref="Result{T,TError}"/> as its return type.
+        /// </param>
+        /// <param name="errorSelector">
+        /// A function which maps <typeparamref name="TError"/> to <typeparamref name="TErrorResult"/>.
+        /// </param>
+        /// <typeparam name="TErrorResult">
+        /// The error type of the <see cref="Result{T,TError}"/> returned by the <paramref name="flatMapSelector"/>.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// The value type of the <see cref="Result{T,TError}"/> returned by the <paramref name="flatMapSelector"/>.
+        /// </typeparam>
+        /// <exception cref="ArgumentNullException">
+        /// When any of the function parameters are null and needs to be exectued.
+        /// </exception>
+        [Pure]
+        public Result<TResult, TErrorResult> FullFlatMap<TErrorResult, TResult>(
+            Func<T, Result<TResult, TErrorResult>> flatMapSelector, Func<TError, TErrorResult> errorSelector) {
+            if (HasValue) {
+                return flatMapSelector?.Invoke(Value) ?? throw new ArgumentNullException(nameof(flatMapSelector));
+            }
+
+            return errorSelector != null
+                ? errorSelector(Error)
+                : throw new ArgumentNullException(nameof(errorSelector));
+        }
+
+        /// <summary>
+        /// Fully flatmaps another <see cref="Result{T,TError}"/>.
+        /// </summary>
+        /// <param name="flatMapSelector">
+        /// A function who expects a <see cref="Result{T,TError}"/> as its return type.
+        /// </param>
+        /// <param name="resultSelector">
+        /// A function whose in-parameters are <typeparamref name="T"/> and <typeparamref name="TFlatMap"/> which can return any type.
+        /// </param>
+        /// <param name="errorSelector">
+        /// A function which maps <typeparamref name="TError"/> to <typeparamref name="TErrorResult"/>.
+        /// </param>
+        /// <typeparam name="TErrorResult">
+        /// The error type of the <see cref="Result{T,TError}"/> returned by the <paramref name="flatMapSelector"/>.
+        /// </typeparam>
+        /// <typeparam name="TFlatMap">
+        /// The value type of the <see cref="Result{T,TError}"/> returned by the <paramref name="flatMapSelector"/>.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// The type returned by the function <paramref name="resultSelector"/>.
+        /// </typeparam>
+        /// <returns></returns>
+        [Pure]
+        public Result<TResult, TErrorResult> FullFlatMap<TErrorResult, TFlatMap, TResult>(
+            Func<T, Result<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
+            Func<TError, TErrorResult> errorSelector) =>
+            FullFlatMap(x => flatMapSelector?.Invoke(x).Map(y => {
+                    if (resultSelector == null)
+                        throw new ArgumentNullException(nameof(resultSelector));
+                    return resultSelector(x, y);
+                }) ?? throw new ArgumentNullException(nameof(flatMapSelector)),
+                errorSelector);
     }
 }
