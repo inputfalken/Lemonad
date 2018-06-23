@@ -4,6 +4,8 @@ init:
   # Good practise, because Windows line endings are different from Unix/Linux ones
   - pwsh: git config --global core.autocrlf false
   - pwsh: git config --global core.safecrlf false
+    # Enables remote desktop debugging
+    #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 install:
   # Install repo specific stuff here
 before_build:
@@ -15,7 +17,6 @@ build_script:
   - pwsh: .\build\build.ps1 -Configuration Release -GenerateDocs -UserName 'Byggare-Rob' -UserEmail 'byggare.rob.ci@gmail.com'
 after_build:
   # For once the build has completed
-clone_depth: 1
 test_script:
   # run the unit tests.
 on_finish :

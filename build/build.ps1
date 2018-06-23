@@ -19,7 +19,7 @@ function Get-RootDirectory {
       | Resolve-Path `
       | Get-Item
     if (!$?) { throw 'could not move to git root directory.' }
-    if ((Get-Location).Path -eq $location) { return Get-Location | Get-Item }
+    if ((Get-Location).Path -eq $location) { return Get-Location }
     else { return $location }
   } else { throw "'$(Get-Location)' is not a git directory/repository." }
 }
@@ -66,18 +66,6 @@ function Test-Projects {
   }
 }
 
-function Pack-Projects {
-  param(
-    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $Directory,
-    [Parameter(Position = 1, Mandatory = 1)] [string] $Configuration
-  )
-  List-Files "$Directory*.csproj" `
-    | ForEach-Object {
-    dotnet pack $_ --configuration $Configuration --no-build --no-restore
-    if (!$?) { throw "Failed creating NuGet package from project '$_'." }
-  }
-}
-
 function Pack-Packages {
   param (
     [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $ArtifactPath,
@@ -96,6 +84,18 @@ function Pack-Packages {
   Write-Output $ArtifactDirectory
 }
 
+function Upload-Packages {
+  param (
+    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $ArtifactDirectory
+  )
+
+  $ArtifactDirectory | Get-ChildItem -Filter '*.nupkg' | ForEach-Object {
+    $source = 'https://www.nuget.org/api/v2/package'
+    dotnet nuget push $_ --api-key $env:NUGET_API_KEY --source $source
+    if (!$?) { throw "Could not push package '$package' to NuGet (source : '$source')." }
+  }
+}
+
 function Build-Documentation {
   param(
     [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $Directory
@@ -110,26 +110,14 @@ function Build-Documentation {
   Pop-Location
 }
 
-function Upload-Packages {
-  param (
-    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $ArtifactDirectory
-  )
-
-  $ArtifactDirectory | Get-ChildItem -Filter '*.nupkg' | ForEach-Object {
-    $source = 'https://www.nuget.org/api/v2/package'
-    dotnet nuget push $_ --api-key $env:NUGET_API_KEY --source $source
-    if (!$?) { throw "Could not push package '$package' to NuGet (source : '$source')." }
-  }
-}
-
-function Push-Documentation {
+function Generate-DocumentationPages {
   param(
-    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $Directory,
+    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $DocumentationDirectory,
     [Parameter(Position = 1, Mandatory = 1)] [System.IO.FileSystemInfo] $SrcDirectory
   )
 
   function Configure-Git {
-    if($env:GITHUB_ACCESS_TOKEN) {
+    if ($env:GITHUB_ACCESS_TOKEN) {
       git config --global credential.helper store
       if (!$?) { throw "Could not set git command 'config --global credential.helper store'." }
       Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:GITHUB_ACCESS_TOKEN):x-oauth-basic@github.com`n" -ErrorAction Stop
@@ -150,31 +138,44 @@ function Push-Documentation {
     } else { Write-Host "Found '$email' for 'git config --global user.email', skipping assignment." -ForegroundColor Yellow }
   }
 
-  Configure-Git
-
-  $ghPagesDirectory = 'gh_pages'
-  git clone https://github.com/inputfalken/Lemonad.git -b gh-pages $ghPagesDirectory -q
-  if (!$?) { throw "Could not clone 'gh-pages'." }
-  $ghPagesDirectory = $ghPagesDirectory | Get-Item -ErrorAction Stop
-  $docsSiteDirectory = Join-Path -Path $Directory -ChildPath '_site' -ErrorAction Stop | Get-Item -ErrorAction Stop
-  $ghPagesDirectoryGitDirectory = Join-Path -Path $ghPagesDirectory -ChildPath '.git' -ErrorAction Stop | Get-Item -ErrorAction Stop -Force
-  Copy-Item $ghPagesDirectoryGitDirectory $docsSiteDirectory -Recurse -ErrorAction Stop -Force
-  Push-Location $docsSiteDirectory
-
+  $currentSha1 = git rev-parse HEAD
+  if (!$?) { throw "Could not obtain the SHA-1 for the current commit by running command 'git rev-parse HEAD'" }
+  $appveyorBuildUri = "https://ci.appveyor.com/api/projects/$($env:APPVEYOR_ACCOUNT_NAME)/$($env:APPVEYOR_PROJECT_SLUG)/history?recordsNumber=10&startBuildId=$($env:APPVEYOR_BUILD_ID)&branch=$($env:APPVEYOR_REPO_BRANCH)" 
+  Write-Host "Requesting previous build from uri '$appveyorBuildUri'."
+  $previousSha1 = Invoke-RestMethod -Uri $appveyorBuildUri -ErrorAction Stop `
+    | Select-Object -ExpandProperty builds `
+    | Select-Object buildNumber, commitId, pullRequestId `
+    | Where-Object { $_.pullRequestId -eq $null } `
+    | Sort-Object buildNumber -Descending `
+    | Select-Object -ExpandProperty commitId `
+    | Where-Object {$_ -ne $currentSha1} `
+    | Select-Object -First 1
+  Write-Host "Comparing diffs with '$currentSha1' '$previousSha1'."
   # TODO SrcDirectory parameter should be a list for all directories the diff needs to be checked with.
-  git diff $Directory $SrcDirectory --exit-code | Out-Null
+
+  git diff --quiet --exit-code $previousSha1 $currentSha1 $SrcDirectory $DocumentationDirectory
   if ($LASTEXITCODE -eq 1) {
+    Build-Documentation -Directory $DocumentationDirectory
+    Configure-Git
+    $ghPagesDirectory = 'gh_pages'
+    git clone https://github.com/inputfalken/Lemonad.git -b gh-pages $ghPagesDirectory -q
+    if (!$?) { throw "Could not clone 'gh-pages'." }
+    $ghPagesDirectory = $ghPagesDirectory | Get-Item -ErrorAction Stop
+    $docsSiteDirectory = Join-Path -Path $DocumentationDirectory -ChildPath '_site' -ErrorAction Stop | Get-Item -ErrorAction Stop
+    $ghPagesDirectoryGitDirectory = Join-Path -Path $ghPagesDirectory -ChildPath '.git' -ErrorAction Stop | Get-Item -ErrorAction Stop -Force
+    Copy-Item $ghPagesDirectoryGitDirectory $docsSiteDirectory -Recurse -ErrorAction Stop -Force
+    Push-Location $docsSiteDirectory
     git add -A 2>&1
     if (!$?) { throw 'Failed adding generated documentation.' }
     git commit -m "Documentation updated" -q
     if (!$?) { throw 'Failed commiting generatated documentation.' }
     git push origin gh-pages -q
     if (!$?) { throw 'Failed pushing generated documentation.' }
+    Pop-Location
+    Remove-Item $ghPagesDirectory -Force -Recurse -ErrorAction Stop
+    Remove-Item $docsSiteDirectory -Force -Recurse -ErrorAction Stop
   } elseif ($LASTEXITCODE -eq 0) { Write-Host 'No changes found when generating documentation for gh-pages' -ForegroundColor Yellow }
   else { throw 'Unhandled exit code for command ''git diff --exit-code''' }
-  Pop-Location
-  Remove-Item $ghPagesDirectory -Force -Recurse -ErrorAction Stop
-  Remove-Item $docsSiteDirectory -Force -Recurse -ErrorAction Stop
 }
 
 #-------------------------------------------------------------------------------------------------------------------------------------
@@ -212,8 +213,7 @@ if ($isWindows) {
       'master' {
         if (!$env:APPVEYOR_PULL_REQUEST_TITLE -and $GenerateDocs) {
           $documentationDirectory = (Join-Path -Path $rootDirectory -ChildPath 'docs' -ErrorAction Stop ) | Get-Item -ErrorAction Stop
-          Build-Documentation -Directory $documentationDirectory
-          Push-Documentation -Directory $documentationDirectory
+          Generate-DocumentationPages -DocumentationDirectory $documentationDirectory -SrcDirectory $srcDiretory
           $ArtifactDirectory = Pack-Packages -ArtifactPath $rootDirectory -SourceCodePath $srcDiretory
           Upload-Packages -ArtifactDirectory $ArtifactDirectory
         }

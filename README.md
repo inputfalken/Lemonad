@@ -30,7 +30,7 @@ than throwing an exception using a similiar message.
 
 ```csharp
 
-Either<int, string> Divide(int x, int y) {
+Result<int, string> Divide(int x, int y) {
     if (y != 0)
         return  x / y;
     else
@@ -38,7 +38,7 @@ Either<int, string> Divide(int x, int y) {
 }
 
 
-List<Either<int, string>> eithers = new List<Either<int, string>> {
+List<Result<int, string>> eithers = new List<Result<int, string>> {
   Divide(4, 2),
   Divide(3, 0),
   Divide(3, 3),
@@ -113,12 +113,12 @@ foreach (int division in successFulDivisions) { Console.WriteLine(division); }
 ## Current supported data types
 
 * ErrorHandling
-  * `Either<TLeft, TRight>`
+  * `Result<TLeft, TRight>`
   * `Maybe<T>`
 
 ## To be added
 
 * Async error handlers.
-  * `EitherAsync<TLeft, TRight>`
+  * `ResultAsyc<TLeft, TRight>`
   * `MaybeAsync<T>`
 
