@@ -233,13 +233,25 @@ namespace Lemonad.ErrorHandling {
                 : throw new ArgumentNullException(nameof(predicate))
             : None;
 
+        /// <summary>
+        /// Flamaps another <see cref="Maybe{T}"/>.
+        /// </summary>
+        /// <param name="flatMapSelector">
+        /// A function who expects a <see cref="Nullable{T}"/> as its return type.
+        /// </param>
+        /// <param name="resultSelector">
+        /// A function whose in-parameters are <typeparamref name="T"/> and <typeparamref name="TFlatMap"/> which can return any type.
+        /// </param>
+        /// <typeparam name="TFlatMap">
+        /// The value type of the <see cref="Nullable{T}"/> returned by the <paramref name="flatMapSelector"/>.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// The type returned by the function <paramref name="resultSelector"/>.
+        /// </typeparam>
         [Pure]
-        public Maybe<TResult> FlatMap<TResult>(Maybe<TResult> maybe) => FlatMap(_ => maybe);
-
-        [Pure]
-        public Maybe<TResult> FlatMap<TSelector, TResult>(
-            Func<T, TSelector?> selector,
-            Func<T, TSelector, TResult> resultSelector) where TSelector : struct => FlatMap(
-            src => selector(src).ConvertToMaybe().Map(elem => resultSelector(src, elem)));
+        public Maybe<TResult> FlatMap<TFlatMap, TResult>(
+            Func<T, TFlatMap?> flatMapSelector,
+            Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct => FlatMap(
+            src => flatMapSelector(src).ConvertToMaybe().Map(elem => resultSelector(src, elem)));
     }
 }
