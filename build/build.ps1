@@ -133,6 +133,7 @@ function Generate-DocumentationPages {
     Write-Host "Comparing diffs with SHA-1 '$previousBuildCommitId'."
   # TODO SrcDirectory parameter should be a list for all directories the diff needs to be checked with.
 
+  iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   git diff --quiet --exit-code $previousBuildCommitId $SrcDirectory $DocumentationDirectory
   if ($LASTEXITCODE -eq 1) {
     Build-Documentation -Directory $DocumentationDirectory
