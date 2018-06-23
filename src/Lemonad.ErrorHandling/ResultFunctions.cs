@@ -5,9 +5,33 @@ using System.Linq;
 
 namespace Lemonad.ErrorHandling {
     public static class Result {
+        /// <summary>
+        /// Covnerts an <see cref="IEnumerable{T}"/> of <see cref="Result{T,TError}"/> to an <see cref="IEnumerable{T}"/> of <typeparamref name="TError"/>.
+        /// </summary>
+        /// <param name="enumerable">
+        /// The <see cref="IEnumerable{T}"/> of <see cref="Result{T,TError}"/>.
+        /// </param>
+        /// <typeparam name="T">
+        /// The type of the values in <see cref="Result{T,TError}"/>.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        /// The type of the errors in <see cref="Result{T,TError}"/>.
+        /// </typeparam>
         public static IEnumerable<TError> Errors<T, TError>(
             this IEnumerable<Result<T, TError>> enumerable) => enumerable.SelectMany(x => x.Errors);
 
+        /// <summary>
+        /// Covnerts an <see cref="IEnumerable{T}"/> of <see cref="Result{T,TError}"/> to an <see cref="IEnumerable{T}"/> of <typeparamref name="T"/>.
+        /// </summary>
+        /// <param name="enumerable">
+        /// The <see cref="IEnumerable{T}"/> of <see cref="Result{T,TError}"/>.
+        /// </param>
+        /// <typeparam name="T">
+        /// The type of the values in <see cref="Result{T,TError}"/>.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        /// The type of the errors in <see cref="Result{T,TError}"/>.
+        /// </typeparam>
         public static IEnumerable<T> Values<T, TError>(
             this IEnumerable<Result<T, TError>> enumerable) => enumerable.SelectMany(x => x.Values);
 
