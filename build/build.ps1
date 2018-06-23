@@ -124,8 +124,11 @@ function Generate-DocumentationPages {
     } else { Write-Host "Found '$email' for 'git config --global user.email', skipping assignment." -ForegroundColor Yellow }
   }
 
+  $previousBuild = Invoke-RestMethod -Uri "https://ci.appveyor.com/api/projects/$($env:APPVEYOR_ACCOUNT_NAME)/$($env:APPVEYOR_PROJECT_SLUG)/branch/$($env:APPVEYOR_REPO_BRANCH)" -ErrorAction Stop `
+    | Select-Object -ExpandProperty build `
+    | Select-Object -ExpandProperty commitID
   # TODO SrcDirectory parameter should be a list for all directories the diff needs to be checked with.
-  git diff --exit-code $DocumentationDirectory $SrcDirectory | Out-Null
+  git diff --exit-code $previousBuild $DocumentationDirectory $SrcDirectory | Out-Null
   if ($LASTEXITCODE -eq 1) {
     Build-Documentation -Directory $DocumentationDirectory
     Configure-Git
