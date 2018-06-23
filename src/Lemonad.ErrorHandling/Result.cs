@@ -36,6 +36,7 @@ namespace Lemonad.ErrorHandling {
         /// </summary>
         public bool HasError { get; }
 
+        /// <inheritdoc />
         public bool Equals(Result<T, TError> other) {
             if (!HasValue && !other.HasValue) {
                 return EqualityComparer<TError>.Default.Equals(Error, other.Error);
@@ -48,6 +49,7 @@ namespace Lemonad.ErrorHandling {
             return false;
         }
 
+        /// <inheritdoc />
         public override string ToString() =>
             $"{(HasValue ? "Ok" : "Error")} ==> {typeof(Result<T, TError>).ToHumanString()}{StringFunctions.PrettyTypeString(HasValue ? (object) Value : Error)}";
 
@@ -83,11 +85,14 @@ namespace Lemonad.ErrorHandling {
         public IEnumerable<TError> Errors => YieldErrors(this);
         public IEnumerable<T> Values => YieldValues(this);
 
+        /// <inheritdoc />
         public override bool Equals(object obj) => obj is Result<T, TError> option && Equals(option);
 
+        /// <inheritdoc />
         public override int GetHashCode() =>
             HasValue ? (Value == null ? 1 : Value.GetHashCode()) : (Error == null ? 0 : Error.GetHashCode());
 
+        /// <inheritdoc />
         public int CompareTo(Result<T, TError> other) {
             if (HasValue && !other.HasValue) return 1;
             if (!HasValue && other.HasValue) return -1;
