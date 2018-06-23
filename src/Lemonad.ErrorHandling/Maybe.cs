@@ -6,8 +6,16 @@ namespace Lemonad.ErrorHandling {
     public struct Maybe<T> : IEquatable<Maybe<T>>, IComparable<Maybe<T>> {
         public static Maybe<T> None { get; } = new Maybe<T>(default(T), false);
 
+        /// <summary>
+        /// Is true if there's a <typeparamref name="T"/> in the current state of the <see cref="Maybe{T}"/>.
+        /// </summary>
         public bool HasValue { get; }
-        public IEnumerable<T> Enumerable => Yield(this);
+
+        /// <summary>
+        /// Treat <typeparamref name="T"/> as enumerable with 0-1 elements in.
+        /// This is handy when combining <see cref="Result{T,TError}"/> with LINQ's API.
+        /// </summary>
+        public IEnumerable<T> AsEnumerable => Yield(this);
 
         internal T Value { get; }
 

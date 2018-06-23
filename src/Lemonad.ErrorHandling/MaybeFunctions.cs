@@ -37,7 +37,7 @@ namespace Lemonad.ErrorHandling {
         }
 
         public static IEnumerable<TSource> Values<TSource>(this IEnumerable<Maybe<TSource>> source) =>
-            source.SelectMany(x => x.Enumerable);
+            source.SelectMany(x => x.AsEnumerable);
 
         public static IEnumerable<TResult> Match<TSource, TResult>(this IEnumerable<Maybe<TSource>> source,
             Func<TSource, TResult> someSelector, Func<TResult> noneSelector) =>
