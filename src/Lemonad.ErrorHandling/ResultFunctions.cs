@@ -6,10 +6,10 @@ using System.Linq;
 namespace Lemonad.ErrorHandling {
     public static class Result {
         public static IEnumerable<TError> Errors<T, TError>(
-            this IEnumerable<Result<T, TError>> enumerable) => enumerable.SelectMany(x => x.Errors);
+            this IEnumerable<Result<T, TError>> enumerable) => enumerable.SelectMany(x => x.AsErrorEnumerable);
 
         public static IEnumerable<T> Values<T, TError>(
-            this IEnumerable<Result<T, TError>> enumerable) => enumerable.SelectMany(x => x.Values);
+            this IEnumerable<Result<T, TError>> enumerable) => enumerable.SelectMany(x => x.AsEnumerable);
 
         [Pure]
         public static Result<T, TError> Ok<T, TError>(T element) =>

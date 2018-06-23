@@ -62,8 +62,17 @@ namespace Lemonad.ErrorHandling {
                 yield return result.Value;
         }
 
-        public IEnumerable<TError> Errors => YieldErrors(this);
-        public IEnumerable<T> Values => YieldValues(this);
+        /// <summary>
+        /// Treat <typeparamref name="TError"/> as enumerable with 0-1 elements in.
+        /// This is handy when combining <see cref="Result{T,TError}"/> with LINQs API.
+        /// </summary>
+        public IEnumerable<TError> AsErrorEnumerable => YieldErrors(this);
+        
+        /// <summary>
+        /// Treat <typeparamref name="T"/> as enumerable with 0-1 elements in.
+        /// This is handy when combining <see cref="Result{T,TError}"/> with LINQ's API.
+        /// </summary>
+        public IEnumerable<T> AsEnumerable => YieldValues(this);
 
         public override bool Equals(object obj) => obj is Result<T, TError> option && Equals(option);
 
