@@ -124,11 +124,19 @@ function Generate-DocumentationPages {
     } else { Write-Host "Found '$email' for 'git config --global user.email', skipping assignment." -ForegroundColor Yellow }
   }
 
-  $previousBuild = Invoke-RestMethod -Uri "https://ci.appveyor.com/api/projects/$($env:APPVEYOR_ACCOUNT_NAME)/$($env:APPVEYOR_PROJECT_SLUG)/branch/$($env:APPVEYOR_REPO_BRANCH)" -ErrorAction Stop `
-    | Select-Object -ExpandProperty build `
-    | Select-Object -ExpandProperty commitID
+  $currentCommitId = git rev-parse HEAD
+  if (!$?) { throw "Could not obtain the SHA-1 for the current commit by running command 'git rev-parse HEAD'" }
+  $appveyorBuildUri = "https://ci.appveyor.com/api/projects/$($env:APPVEYOR_ACCOUNT_NAME)/$($env:APPVEYOR_PROJECT_SLUG)/history?recordsNumber=2&branch=$($env:APPVEYOR_REPO_BRANCH)" 
+  Write-Host "Requesting latest builds from uri '$appveyorBuildUri'."
+  $previousBuildCommitId = Invoke-RestMethod -Uri $appveyorBuildUri -ErrorAction Stop `
+    | Select-Object -ExpandProperty builds `
+    | Select-Object -Last 1 -ExpandProperty commitId
+    Write-Host "Comparing diffs with SHA-1 '$previousBuildCommitId' and '$currentCommitId'."
   # TODO SrcDirectory parameter should be a list for all directories the diff needs to be checked with.
-  git diff --exit-code $previousBuild $DocumentationDirectory $SrcDirectory | Out-Null
+  
+  $command = "git diff --quiet --exit-code $previousBuildCommitId $currentCommitId -- $SrcDirectory $DocumentationDirectory"
+  Write-Host "Executing command '$command'."
+  $command | Invoke-Expression
   if ($LASTEXITCODE -eq 1) {
     Build-Documentation -Directory $DocumentationDirectory
     Configure-Git
