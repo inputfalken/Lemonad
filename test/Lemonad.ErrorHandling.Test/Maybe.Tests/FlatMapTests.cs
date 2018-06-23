@@ -42,7 +42,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             var lengthMaybe = input.Some(s => s.Length > 4);
             var stringMaybe = input.None(string.IsNullOrEmpty);
 
-            var flatMappedMaybe = lengthMaybe.FlatMap(stringMaybe);
+            var flatMappedMaybe = lengthMaybe.FlatMap(_ => stringMaybe);
 
             Assert.True(lengthMaybe.HasValue, "Maybe should have value.");
             Assert.True(stringMaybe.HasValue, "Maybe should have value.");
@@ -58,7 +58,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             var lengthMaybe = input.Some(s => s.Length > 5);
             var stringMaybe = input.None(string.IsNullOrEmpty);
 
-            var flatMappedMaybe = stringMaybe.FlatMap(lengthMaybe);
+            var flatMappedMaybe = stringMaybe.FlatMap(_ => lengthMaybe);
 
             Assert.True(stringMaybe.HasValue, "Maybe should have value.");
             Assert.False(lengthMaybe.HasValue, "Maybe should not have value");

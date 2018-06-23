@@ -4,6 +4,17 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Lemonad.ErrorHandling {
+    /// <summary>
+    ///  A data-structure commonly used for error-handling where only one value can be present.
+    ///  Either it's <typeparamref name="TError" /> or it's <typeparamref name="T" />. Which makes it possible to handle error without throwing exceptions.
+    ///  Inspired by 'Haskells Either a b' and FSharps 'Result&lt;T, TError&gt;'.
+    /// </summary>
+    /// <typeparam name="T">
+    /// The type which is considered as successfull.
+    /// </typeparam>
+    /// <typeparam name="TError">
+    /// The type which is considered as failure.
+    /// </typeparam>
     public readonly struct Result<T, TError> : IEquatable<Result<T, TError>>, IComparable<Result<T, TError>> {
         internal TError Error { get; }
         internal T Value { get; }
@@ -15,9 +26,17 @@ namespace Lemonad.ErrorHandling {
             Error = error;
         }
 
+        /// <summary>
+        /// Is true if there's a <typeparamref name="T"/> in the current state of the <see cref="Result{T,TError}"/>.
+        /// </summary>
         public bool HasValue { get; }
+
+        /// <summary>
+        /// Is true if there's a <typeparamref name="TError"/> in the current state of the <see cref="Result{T,TError}"/>.
+        /// </summary>
         public bool HasError { get; }
 
+        /// <inheritdoc />
         public bool Equals(Result<T, TError> other) {
             if (!HasValue && !other.HasValue) {
                 return EqualityComparer<TError>.Default.Equals(Error, other.Error);
@@ -30,6 +49,7 @@ namespace Lemonad.ErrorHandling {
             return false;
         }
 
+        /// <inheritdoc />
         public override string ToString() =>
             $"{(HasValue ? "Ok" : "Error")} ==> {typeof(Result<T, TError>).ToHumanString()}{StringFunctions.PrettyTypeString(HasValue ? (object) Value : Error)}";
 
@@ -74,11 +94,14 @@ namespace Lemonad.ErrorHandling {
         /// </summary>
         public IEnumerable<T> AsEnumerable => YieldValues(this);
 
+        /// <inheritdoc />
         public override bool Equals(object obj) => obj is Result<T, TError> option && Equals(option);
 
+        /// <inheritdoc />
         public override int GetHashCode() =>
             HasValue ? (Value == null ? 1 : Value.GetHashCode()) : (Error == null ? 0 : Error.GetHashCode());
 
+        /// <inheritdoc />
         public int CompareTo(Result<T, TError> other) {
             if (HasValue && !other.HasValue) return 1;
             if (!HasValue && other.HasValue) return -1;
