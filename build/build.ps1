@@ -1,10 +1,3 @@
-param (
-  [Parameter(Position = 0, Mandatory = 1)] [ValidateSet('Release', 'Debug')] $Configuration,
-  [Parameter(Position = 1, Mandatory = 0)] [switch] $GenerateDocs = $false,
-  [Parameter(Position = 2, Mandatory = 0)] [string] $UserName,
-  [Parameter(Position = 3, Mandatory = 0)] [string] $UserEmail
-)
-
 function Is-InsideGitRepository {
   if (Get-Command -Name 'git' -ErrorAction SilentlyContinue) {
     if (git rev-parse --is-inside-work-tree 2>$null) { $true } else { $false }
@@ -124,16 +117,17 @@ function Generate-DocumentationPages {
     } else { Write-Host "Found '$email' for 'git config --global user.email', skipping assignment." -ForegroundColor Yellow }
   }
 
+  $currentSha1 = git rev-parse HEAD
   if (!$?) { throw "Could not obtain the SHA-1 for the current commit by running command 'git rev-parse HEAD'" }
   $appveyorBuildUri = "https://ci.appveyor.com/api/projects/$($env:APPVEYOR_ACCOUNT_NAME)/$($env:APPVEYOR_PROJECT_SLUG)/history?recordsNumber=2&branch=$($env:APPVEYOR_REPO_BRANCH)" 
-  Write-Host "Requesting latest builds from uri '$appveyorBuildUri'."
-  $previousBuildCommitId = Invoke-RestMethod -Uri $appveyorBuildUri -ErrorAction Stop `
+  Write-Host "Requesting previous build from uri '$appveyorBuildUri'."
+  $previousSha1 = Invoke-RestMethod -Uri $appveyorBuildUri -ErrorAction Stop `
     | Select-Object -ExpandProperty builds `
     | Select-Object -Last 1 -ExpandProperty commitId
-    Write-Host "Comparing diffs with SHA-1 '$previousBuildCommitId'."
+    Write-Host "Comparing diffs with '$currentSha1' '$previousSha1'."
   # TODO SrcDirectory parameter should be a list for all directories the diff needs to be checked with.
 
-  git diff --quiet --exit-code $previousBuildCommitId $SrcDirectory $DocumentationDirectory
+  git diff --quiet --exit-code $previousSha1 $currentSha1 $SrcDirectory $DocumentationDirectory
   if ($LASTEXITCODE -eq 1) {
     Build-Documentation -Directory $DocumentationDirectory
     Configure-Git
