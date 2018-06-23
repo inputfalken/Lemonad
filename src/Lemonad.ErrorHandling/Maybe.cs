@@ -124,6 +124,12 @@ namespace Lemonad.ErrorHandling {
                     : throw new ArgumentNullException(nameof(selector))
                 : Maybe<TResult>.None;
 
+        /// <summary>
+        ///  Filters the <typeparamref name="T"/> if <see cref="Maybe{T}"/> has a value.
+        /// </summary>
+        /// <param name="predicate">
+        /// A function to test <typeparamref name="T"/>.
+        /// </param>
         [Pure]
         public Maybe<T> Filter(
             Func<T, bool> predicate) => HasValue
