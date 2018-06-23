@@ -4,6 +4,17 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Lemonad.ErrorHandling {
+    /// <summary>
+    ///  A data-structure commonly used for error-handling where only one value can be present.
+    ///  Either it's <typeparamref name="TError" /> or it's <typeparamref name="T" />. Which makes it possible to handle error without throwing exceptions.
+    ///  Inspired by 'Haskells Either a b' and FSharps 'Result&lt;T, TError&gt;'.
+    /// </summary>
+    /// <typeparam name="T">
+    /// The type which is considered as successfull.
+    /// </typeparam>
+    /// <typeparam name="TError">
+    /// The type which is considered as failure.
+    /// </typeparam>
     public readonly struct Result<T, TError> : IEquatable<Result<T, TError>>, IComparable<Result<T, TError>> {
         internal TError Error { get; }
         internal T Value { get; }
