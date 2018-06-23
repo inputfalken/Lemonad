@@ -133,7 +133,7 @@ function Generate-DocumentationPages {
     Write-Host "Comparing diffs with SHA-1 '$previousBuildCommitId'."
   # TODO SrcDirectory parameter should be a list for all directories the diff needs to be checked with.
 
-  git diff --quiet --exit-code $previousBuildCommitId $SrcDirectory $DocumentationDirectory
+  git diff --quiet --exit-code $previousBuildCommitId ($SrcDirectory.FullName | Resolve-Path -Relative) ($DocumentationDirectory.FullName | Resolve-Path -Relative)
   if ($LASTEXITCODE -eq 1) {
     Build-Documentation -Directory $DocumentationDirectory
     Configure-Git
