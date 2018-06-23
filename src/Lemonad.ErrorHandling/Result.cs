@@ -338,8 +338,8 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         [Pure]
         private Result<TResult, TError> FlatMap<TResult>(
-            Func<T, Result<TResult, TError>> selector) => HasValue
-            ? selector?.Invoke(Value) ?? throw new ArgumentNullException(nameof(selector))
+            Func<T, Result<TResult, TError>> flatSelector) => HasValue
+            ? flatSelector?.Invoke(Value) ?? throw new ArgumentNullException(nameof(flatSelector))
             : Result.Error<TResult, TError>(Error);
 
         /// <summary>
@@ -360,12 +360,12 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         [Pure]
         private Result<TResult, TError> FlatMap<TSelector, TResult>(
-            Func<T, Result<TSelector, TError>> selector,
+            Func<T, Result<TSelector, TError>> flatSelector,
             Func<T, TSelector, TResult> resultSelector) => FlatMap(x =>
-            selector?.Invoke(x).Map(y => resultSelector == null
+            flatSelector?.Invoke(x).Map(y => resultSelector == null
                 ? throw new ArgumentNullException(nameof(resultSelector))
                 : resultSelector(x, y)) ??
-            throw new ArgumentNullException(nameof(selector)));
+            throw new ArgumentNullException(nameof(flatSelector)));
 
         /// <summary>
         /// Flatten another <see cref="Result{T,TError}"/> 
