@@ -26,7 +26,14 @@ namespace Lemonad.ErrorHandling {
             Error = error;
         }
 
+        /// <summary>
+        /// Is true if there's a <typeparamref name="T"/> in the current state of the <see cref="Result{T,TError}"/>.
+        /// </summary>
         public bool HasValue { get; }
+
+        /// <summary>
+        /// Is true if there's a <typeparamref name="TError"/> in the current state of the <see cref="Result{T,TError}"/>.
+        /// </summary>
         public bool HasError { get; }
 
         public bool Equals(Result<T, TError> other) {
