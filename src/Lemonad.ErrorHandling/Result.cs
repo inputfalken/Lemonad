@@ -62,8 +62,8 @@ namespace Lemonad.ErrorHandling {
                 yield return result.Value;
         }
 
-        public IEnumerable<TError> Errors => YieldErrors(this);
-        public IEnumerable<T> Values => YieldValues(this);
+        public IEnumerable<TError> AsErrorEnumerable => YieldErrors(this);
+        public IEnumerable<T> AsEnumerable => YieldValues(this);
 
         public override bool Equals(object obj) => obj is Result<T, TError> option && Equals(option);
 
