@@ -126,11 +126,16 @@ function Generate-DocumentationPages {
 
   $currentSha1 = git rev-parse HEAD
   if (!$?) { throw "Could not obtain the SHA-1 for the current commit by running command 'git rev-parse HEAD'" }
-  $appveyorBuildUri = "https://ci.appveyor.com/api/projects/$($env:APPVEYOR_ACCOUNT_NAME)/$($env:APPVEYOR_PROJECT_SLUG)/history?recordsNumber=2&branch=$($env:APPVEYOR_REPO_BRANCH)" 
+  $appveyorBuildUri = "https://ci.appveyor.com/api/projects/$($env:APPVEYOR_ACCOUNT_NAME)/$($env:APPVEYOR_PROJECT_SLUG)/history?recordsNumber=10&startBuildId=$($env:APPVEYOR_BUILD_ID)&branch=$($env:APPVEYOR_REPO_BRANCH)" 
   Write-Host "Requesting previous build from uri '$appveyorBuildUri'."
   $previousSha1 = Invoke-RestMethod -Uri $appveyorBuildUri -ErrorAction Stop `
     | Select-Object -ExpandProperty builds `
-    | Select-Object -Last 1 -ExpandProperty commitId
+    | Select-Object buildNumber, commitId, pullRequestId `
+    | Where-Object { $_.pullRequestId -eq $null } ` # Make sure to diff against a commit which is not from a pull request.
+    | Sort-Object buildNumber -Descending `
+    | Select-Object -ExpandProperty commitId `
+    | Where-Object {$_ -ne $currentSha1}
+    | Select-Object -First 1
   Write-Host "Comparing diffs with '$currentSha1' '$previousSha1'."
   # TODO SrcDirectory parameter should be a list for all directories the diff needs to be checked with.
 
