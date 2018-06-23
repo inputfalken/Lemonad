@@ -117,18 +117,20 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_Enumerable.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.Enumerable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_AsEnumerable.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.AsEnumerable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L10">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L18">View Source</a>
   </span>
-  <a id="Lemonad_ErrorHandling_Maybe_1_Enumerable_" data-uid="Lemonad.ErrorHandling.Maybe`1.Enumerable*"></a>
-  <h4 id="Lemonad_ErrorHandling_Maybe_1_Enumerable" data-uid="Lemonad.ErrorHandling.Maybe`1.Enumerable">Enumerable</h4>
-  <div class="markdown level1 summary"></div>
+  <a id="Lemonad_ErrorHandling_Maybe_1_AsEnumerable_" data-uid="Lemonad.ErrorHandling.Maybe`1.AsEnumerable*"></a>
+  <h4 id="Lemonad_ErrorHandling_Maybe_1_AsEnumerable" data-uid="Lemonad.ErrorHandling.Maybe`1.AsEnumerable">AsEnumerable</h4>
+  <div class="markdown level1 summary"><p>Treat <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> as enumerable with 0-1 elements in.
+This is handy when combining <a class="xref" href="Lemonad.ErrorHandling.Result-2.html">Result&lt;T, TError&gt;</a> with LINQ's API.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IEnumerable&lt;T&gt; Enumerable { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;T&gt; AsEnumerable { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -150,11 +152,12 @@
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_HasValue.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.HasValue%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L9">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L12">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_HasValue_" data-uid="Lemonad.ErrorHandling.Maybe`1.HasValue*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_HasValue" data-uid="Lemonad.ErrorHandling.Maybe`1.HasValue">HasValue</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Is true if there's a <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> in the current state of the <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -212,7 +215,7 @@
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_CompareTo_Lemonad_ErrorHandling_Maybe__0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.CompareTo(Lemonad.ErrorHandling.Maybe%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L38">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L49">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_CompareTo_" data-uid="Lemonad.ErrorHandling.Maybe`1.CompareTo*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_CompareTo_Lemonad_ErrorHandling_Maybe__0__" data-uid="Lemonad.ErrorHandling.Maybe`1.CompareTo(Lemonad.ErrorHandling.Maybe{`0})">CompareTo(Maybe&lt;T&gt;)</h4>
@@ -259,7 +262,7 @@
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_Equals_Lemonad_ErrorHandling_Maybe__0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.Equals(Lemonad.ErrorHandling.Maybe%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L20">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L29">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_Equals_" data-uid="Lemonad.ErrorHandling.Maybe`1.Equals*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_Equals_Lemonad_ErrorHandling_Maybe__0__" data-uid="Lemonad.ErrorHandling.Maybe`1.Equals(Lemonad.ErrorHandling.Maybe{`0})">Equals(Maybe&lt;T&gt;)</h4>
@@ -306,7 +309,7 @@
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L30">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L39">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_Equals_" data-uid="Lemonad.ErrorHandling.Maybe`1.Equals*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_Equals_System_Object_" data-uid="Lemonad.ErrorHandling.Maybe`1.Equals(System.Object)">Equals(Object)</h4>
@@ -352,19 +355,20 @@
   <div><span class="xref">System.ValueType.Equals(System.Object)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_FlatMap__1_Lemonad_ErrorHandling_Maybe___0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.FlatMap%60%601(Lemonad.ErrorHandling.Maybe%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_Filter_System_Func__0_System_Boolean__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.Filter(System.Func%7B%600%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L140">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L142">View Source</a>
   </span>
-  <a id="Lemonad_ErrorHandling_Maybe_1_FlatMap_" data-uid="Lemonad.ErrorHandling.Maybe`1.FlatMap*"></a>
-  <h4 id="Lemonad_ErrorHandling_Maybe_1_FlatMap__1_Lemonad_ErrorHandling_Maybe___0__" data-uid="Lemonad.ErrorHandling.Maybe`1.FlatMap``1(Lemonad.ErrorHandling.Maybe{``0})">FlatMap&lt;TResult&gt;(Maybe&lt;TResult&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <a id="Lemonad_ErrorHandling_Maybe_1_Filter_" data-uid="Lemonad.ErrorHandling.Maybe`1.Filter*"></a>
+  <h4 id="Lemonad_ErrorHandling_Maybe_1_Filter_System_Func__0_System_Boolean__" data-uid="Lemonad.ErrorHandling.Maybe`1.Filter(System.Func{`0,System.Boolean})">Filter(Func&lt;T, Boolean&gt;)</h4>
+  <div class="markdown level1 summary"><p>Filters the <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> if <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a> has a value.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[Pure]
-public Maybe&lt;TResult&gt; FlatMap&lt;TResult&gt;(Maybe&lt;TResult&gt; maybe)</code></pre>
+public Maybe&lt;T&gt; Filter(Func&lt;T, bool&gt; predicate)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -377,9 +381,10 @@ public Maybe&lt;TResult&gt; FlatMap&lt;TResult&gt;(Maybe&lt;TResult&gt; maybe)</
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe</a>&lt;TResult&gt;</td>
-        <td><span class="parametername">maybe</span></td>
-        <td></td>
+        <td><span class="xref">System.Func</span>&lt;T, <span class="xref">System.Boolean</span>&gt;</td>
+        <td><span class="parametername">predicate</span></td>
+        <td><p>A function to test <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -393,22 +398,7 @@ public Maybe&lt;TResult&gt; FlatMap&lt;TResult&gt;(Maybe&lt;TResult&gt; maybe)</
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe</a>&lt;TResult&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TResult</span></td>
+        <td><a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe</a>&lt;T&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -418,16 +408,17 @@ public Maybe&lt;TResult&gt; FlatMap&lt;TResult&gt;(Maybe&lt;TResult&gt; maybe)</
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_FlatMap__1_System_Func__0_Lemonad_ErrorHandling_Maybe___0___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.FlatMap%60%601(System.Func%7B%600%2CLemonad.ErrorHandling.Maybe%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L101">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L161">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_FlatMap_" data-uid="Lemonad.ErrorHandling.Maybe`1.FlatMap*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_FlatMap__1_System_Func__0_Lemonad_ErrorHandling_Maybe___0___" data-uid="Lemonad.ErrorHandling.Maybe`1.FlatMap``1(System.Func{`0,Lemonad.ErrorHandling.Maybe{``0}})">FlatMap&lt;TResult&gt;(Func&lt;T, Maybe&lt;TResult&gt;&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Flamaps another <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[Pure]
-public Maybe&lt;TResult&gt; FlatMap&lt;TResult&gt;(Func&lt;T, Maybe&lt;TResult&gt;&gt; selector)</code></pre>
+public Maybe&lt;TResult&gt; FlatMap&lt;TResult&gt;(Func&lt;T, Maybe&lt;TResult&gt;&gt; flatMapSelector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -441,8 +432,9 @@ public Maybe&lt;TResult&gt; FlatMap&lt;TResult&gt;(Func&lt;T, Maybe&lt;TResult&g
     <tbody>
       <tr>
         <td><span class="xref">System.Func</span>&lt;T, <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe</a>&lt;TResult&gt;&gt;</td>
-        <td><span class="parametername">selector</span></td>
-        <td></td>
+        <td><span class="parametername">flatMapSelector</span></td>
+        <td><p>A function who expects a <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a> as its return type.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -472,7 +464,8 @@ public Maybe&lt;TResult&gt; FlatMap&lt;TResult&gt;(Func&lt;T, Maybe&lt;TResult&g
     <tbody>
       <tr>
         <td><span class="parametername">TResult</span></td>
-        <td></td>
+        <td><p>The type <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> returned from the <code data-dev-comment-type="paramref" class="paramref">flatMapSelector</code> function.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -481,16 +474,17 @@ public Maybe&lt;TResult&gt; FlatMap&lt;TResult&gt;(Func&lt;T, Maybe&lt;TResult&g
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_FlatMap__1_System_Func__0_System_Nullable___0___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.FlatMap%60%601(System.Func%7B%600%2CSystem.Nullable%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L121">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L205">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_FlatMap_" data-uid="Lemonad.ErrorHandling.Maybe`1.FlatMap*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_FlatMap__1_System_Func__0_System_Nullable___0___" data-uid="Lemonad.ErrorHandling.Maybe`1.FlatMap``1(System.Func{`0,System.Nullable{``0}})">FlatMap&lt;TResult&gt;(Func&lt;T, Nullable&lt;TResult&gt;&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Flamaps a <span class="xref">System.Nullable&lt;T&gt;</span>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[Pure]
-public Maybe&lt;TResult&gt; FlatMap&lt;TResult&gt;(Func&lt;T, TResult? &gt; selector)
+public Maybe&lt;TResult&gt; FlatMap&lt;TResult&gt;(Func&lt;T, TResult? &gt; flatSelector)
     where TResult : struct</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -505,8 +499,9 @@ public Maybe&lt;TResult&gt; FlatMap&lt;TResult&gt;(Func&lt;T, TResult? &gt; sele
     <tbody>
       <tr>
         <td><span class="xref">System.Func</span>&lt;T, <span class="xref">System.Nullable</span>&lt;TResult&gt;&gt;</td>
-        <td><span class="parametername">selector</span></td>
-        <td></td>
+        <td><span class="parametername">flatSelector</span></td>
+        <td><p>A function who expects a <span class="xref">System.Nullable&lt;T&gt;</span> as its return type.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -536,7 +531,8 @@ public Maybe&lt;TResult&gt; FlatMap&lt;TResult&gt;(Func&lt;T, TResult? &gt; sele
     <tbody>
       <tr>
         <td><span class="parametername">TResult</span></td>
-        <td></td>
+        <td><p>The type <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> returned from the <code data-dev-comment-type="paramref" class="paramref">flatSelector</code> function.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -545,16 +541,17 @@ public Maybe&lt;TResult&gt; FlatMap&lt;TResult&gt;(Func&lt;T, TResult? &gt; sele
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_Maybe___0___System_Func__0___0___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.FlatMap%60%602(System.Func%7B%600%2CLemonad.ErrorHandling.Maybe%7B%60%600%7D%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L107">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L182">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_FlatMap_" data-uid="Lemonad.ErrorHandling.Maybe`1.FlatMap*"></a>
-  <h4 id="Lemonad_ErrorHandling_Maybe_1_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_Maybe___0___System_Func__0___0___1__" data-uid="Lemonad.ErrorHandling.Maybe`1.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Maybe{``0}},System.Func{`0,``0,``1})">FlatMap&lt;TSelector, TResult&gt;(Func&lt;T, Maybe&lt;TSelector&gt;&gt;, Func&lt;T, TSelector, TResult&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Lemonad_ErrorHandling_Maybe_1_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_Maybe___0___System_Func__0___0___1__" data-uid="Lemonad.ErrorHandling.Maybe`1.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Maybe{``0}},System.Func{`0,``0,``1})">FlatMap&lt;TFlatMap, TResult&gt;(Func&lt;T, Maybe&lt;TFlatMap&gt;&gt;, Func&lt;T, TFlatMap, TResult&gt;)</h4>
+  <div class="markdown level1 summary"><p>Flamaps another <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[Pure]
-public Maybe&lt;TResult&gt; FlatMap&lt;TSelector, TResult&gt;(Func&lt;T, Maybe&lt;TSelector&gt;&gt; selector, Func&lt;T, TSelector, TResult&gt; resultSelector)</code></pre>
+public Maybe&lt;TResult&gt; FlatMap&lt;TFlatMap, TResult&gt;(Func&lt;T, Maybe&lt;TFlatMap&gt;&gt; flatMapSelector, Func&lt;T, TFlatMap, TResult&gt; resultSelector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -567,14 +564,16 @@ public Maybe&lt;TResult&gt; FlatMap&lt;TSelector, TResult&gt;(Func&lt;T, Maybe&l
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;T, <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe</a>&lt;TSelector&gt;&gt;</td>
-        <td><span class="parametername">selector</span></td>
-        <td></td>
+        <td><span class="xref">System.Func</span>&lt;T, <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe</a>&lt;TFlatMap&gt;&gt;</td>
+        <td><span class="parametername">flatMapSelector</span></td>
+        <td><p>A function who expects a <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a> as its return type.</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;T, TSelector, TResult&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;T, TFlatMap, TResult&gt;</td>
         <td><span class="parametername">resultSelector</span></td>
-        <td></td>
+        <td><p>A function whose in-parameters are <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> and <code data-dev-comment-type="typeparamref" class="typeparamref">TFlatMap</code> which can return any type.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -603,12 +602,14 @@ public Maybe&lt;TResult&gt; FlatMap&lt;TSelector, TResult&gt;(Func&lt;T, Maybe&l
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">TSelector</span></td>
-        <td></td>
+        <td><span class="parametername">TFlatMap</span></td>
+        <td><p>The value type of the <a class="xref" href="Lemonad.ErrorHandling.Result-2.html">Result&lt;T, TError&gt;</a> returned by the <code data-dev-comment-type="paramref" class="paramref">flatMapSelector</code>.</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TResult</span></td>
-        <td></td>
+        <td><p>The type returned by the function <code data-dev-comment-type="paramref" class="paramref">resultSelector</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -617,17 +618,18 @@ public Maybe&lt;TResult&gt; FlatMap&lt;TSelector, TResult&gt;(Func&lt;T, Maybe&l
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_FlatMap__2_System_Func__0_System_Nullable___0___System_Func__0___0___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.FlatMap%60%602(System.Func%7B%600%2CSystem.Nullable%7B%60%600%7D%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L143">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L251">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_FlatMap_" data-uid="Lemonad.ErrorHandling.Maybe`1.FlatMap*"></a>
-  <h4 id="Lemonad_ErrorHandling_Maybe_1_FlatMap__2_System_Func__0_System_Nullable___0___System_Func__0___0___1__" data-uid="Lemonad.ErrorHandling.Maybe`1.FlatMap``2(System.Func{`0,System.Nullable{``0}},System.Func{`0,``0,``1})">FlatMap&lt;TSelector, TResult&gt;(Func&lt;T, Nullable&lt;TSelector&gt;&gt;, Func&lt;T, TSelector, TResult&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Lemonad_ErrorHandling_Maybe_1_FlatMap__2_System_Func__0_System_Nullable___0___System_Func__0___0___1__" data-uid="Lemonad.ErrorHandling.Maybe`1.FlatMap``2(System.Func{`0,System.Nullable{``0}},System.Func{`0,``0,``1})">FlatMap&lt;TFlatMap, TResult&gt;(Func&lt;T, Nullable&lt;TFlatMap&gt;&gt;, Func&lt;T, TFlatMap, TResult&gt;)</h4>
+  <div class="markdown level1 summary"><p>Flamaps another <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[Pure]
-public Maybe&lt;TResult&gt; FlatMap&lt;TSelector, TResult&gt;(Func&lt;T, TSelector? &gt; selector, Func&lt;T, TSelector, TResult&gt; resultSelector)
-    where TSelector : struct</code></pre>
+public Maybe&lt;TResult&gt; FlatMap&lt;TFlatMap, TResult&gt;(Func&lt;T, TFlatMap? &gt; flatMapSelector, Func&lt;T, TFlatMap, TResult&gt; resultSelector)
+    where TFlatMap : struct</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -640,14 +642,16 @@ public Maybe&lt;TResult&gt; FlatMap&lt;TSelector, TResult&gt;(Func&lt;T, TSelect
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;T, <span class="xref">System.Nullable</span>&lt;TSelector&gt;&gt;</td>
-        <td><span class="parametername">selector</span></td>
-        <td></td>
+        <td><span class="xref">System.Func</span>&lt;T, <span class="xref">System.Nullable</span>&lt;TFlatMap&gt;&gt;</td>
+        <td><span class="parametername">flatMapSelector</span></td>
+        <td><p>A function who expects a <span class="xref">System.Nullable&lt;T&gt;</span> as its return type.</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;T, TSelector, TResult&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;T, TFlatMap, TResult&gt;</td>
         <td><span class="parametername">resultSelector</span></td>
-        <td></td>
+        <td><p>A function whose in-parameters are <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> and <code data-dev-comment-type="typeparamref" class="typeparamref">TFlatMap</code> which can return any type.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -676,12 +680,14 @@ public Maybe&lt;TResult&gt; FlatMap&lt;TSelector, TResult&gt;(Func&lt;T, TSelect
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">TSelector</span></td>
-        <td></td>
+        <td><span class="parametername">TFlatMap</span></td>
+        <td><p>The value type of the <span class="xref">System.Nullable&lt;T&gt;</span> returned by the <code data-dev-comment-type="paramref" class="paramref">flatMapSelector</code>.</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TResult</span></td>
-        <td></td>
+        <td><p>The type returned by the function <code data-dev-comment-type="paramref" class="paramref">resultSelector</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -690,7 +696,7 @@ public Maybe&lt;TResult&gt; FlatMap&lt;TSelector, TResult&gt;(Func&lt;T, TSelect
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_GetHashCode.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L36">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L46">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_GetHashCode_" data-uid="Lemonad.ErrorHandling.Maybe`1.GetHashCode*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_GetHashCode" data-uid="Lemonad.ErrorHandling.Maybe`1.GetHashCode">GetHashCode()</h4>
@@ -722,11 +728,12 @@ public Maybe&lt;TResult&gt; FlatMap&lt;TSelector, TResult&gt;(Func&lt;T, TSelect
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_IsNoneWhen_System_Func__0_System_Boolean__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.IsNoneWhen(System.Func%7B%600%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L130">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L226">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_IsNoneWhen_" data-uid="Lemonad.ErrorHandling.Maybe`1.IsNoneWhen*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_IsNoneWhen_System_Func__0_System_Boolean__" data-uid="Lemonad.ErrorHandling.Maybe`1.IsNoneWhen(System.Func{`0,System.Boolean})">IsNoneWhen(Func&lt;T, Boolean&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Filters the <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> if <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a> has a value.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -746,7 +753,8 @@ public Maybe&lt;T&gt; IsNoneWhen(Func&lt;T, bool&gt; predicate)</code></pre>
       <tr>
         <td><span class="xref">System.Func</span>&lt;T, <span class="xref">System.Boolean</span>&gt;</td>
         <td><span class="parametername">predicate</span></td>
-        <td></td>
+        <td><p>A function to test <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -770,11 +778,12 @@ public Maybe&lt;T&gt; IsNoneWhen(Func&lt;T, bool&gt; predicate)</code></pre>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_IsNoneWhenNull.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.IsNoneWhenNull%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L126">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L216">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_IsNoneWhenNull_" data-uid="Lemonad.ErrorHandling.Maybe`1.IsNoneWhenNull*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_IsNoneWhenNull" data-uid="Lemonad.ErrorHandling.Maybe`1.IsNoneWhenNull">IsNoneWhenNull()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Filters the <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a> to see if <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> is null.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -792,55 +801,8 @@ public Maybe&lt;T&gt; IsNoneWhenNull()</code></pre>
     <tbody>
       <tr>
         <td><a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe</a>&lt;T&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_IsSomeWhen_System_Func__0_System_Boolean__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.IsSomeWhen(System.Func%7B%600%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L91">View Source</a>
-  </span>
-  <a id="Lemonad_ErrorHandling_Maybe_1_IsSomeWhen_" data-uid="Lemonad.ErrorHandling.Maybe`1.IsSomeWhen*"></a>
-  <h4 id="Lemonad_ErrorHandling_Maybe_1_IsSomeWhen_System_Func__0_System_Boolean__" data-uid="Lemonad.ErrorHandling.Maybe`1.IsSomeWhen(System.Func{`0,System.Boolean})">IsSomeWhen(Func&lt;T, Boolean&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[Pure]
-public Maybe&lt;T&gt; IsSomeWhen(Func&lt;T, bool&gt; predicate)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Func</span>&lt;T, <span class="xref">System.Boolean</span>&gt;</td>
-        <td><span class="parametername">predicate</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe</a>&lt;T&gt;</td>
-        <td></td>
+        <td><p>A <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a> whose <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> has value if <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> is not null.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -849,11 +811,12 @@ public Maybe&lt;T&gt; IsSomeWhen(Func&lt;T, bool&gt; predicate)</code></pre>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_Map__1_System_Func__0___0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.Map%60%601(System.Func%7B%600%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L82">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L127">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_Map_" data-uid="Lemonad.ErrorHandling.Maybe`1.Map*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_Map__1_System_Func__0___0__" data-uid="Lemonad.ErrorHandling.Maybe`1.Map``1(System.Func{`0,``0})">Map&lt;TResult&gt;(Func&lt;T, TResult&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Maps <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -873,7 +836,8 @@ public Maybe&lt;TResult&gt; Map&lt;TResult&gt;(Func&lt;T, TResult&gt; selector)<
       <tr>
         <td><span class="xref">System.Func</span>&lt;T, TResult&gt;</td>
         <td><span class="parametername">selector</span></td>
-        <td></td>
+        <td><p>Is executed if <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a> has a value.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -903,7 +867,8 @@ public Maybe&lt;TResult&gt; Map&lt;TResult&gt;(Func&lt;T, TResult&gt; selector)<
     <tbody>
       <tr>
         <td><span class="parametername">TResult</span></td>
-        <td></td>
+        <td><p>The type returned from the function <code data-dev-comment-type="paramref" class="paramref">selector</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -912,11 +877,12 @@ public Maybe&lt;TResult&gt; Map&lt;TResult&gt;(Func&lt;T, TResult&gt; selector)<
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_Match_System_Action__0__System_Action_.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.Match(System.Action%7B%600%7D%2CSystem.Action)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L60">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L84">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_Match_" data-uid="Lemonad.ErrorHandling.Maybe`1.Match*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_Match_System_Action__0__System_Action_" data-uid="Lemonad.ErrorHandling.Maybe`1.Match(System.Action{`0},System.Action)">Match(Action&lt;T&gt;, Action)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Evaluates the <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -935,12 +901,30 @@ public Maybe&lt;TResult&gt; Map&lt;TResult&gt;(Func&lt;T, TResult&gt; selector)<
       <tr>
         <td><span class="xref">System.Action</span>&lt;T&gt;</td>
         <td><span class="parametername">someAction</span></td>
-        <td></td>
+        <td><p>Is executed when the <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a> has a value.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Action</span></td>
         <td><span class="parametername">noneAction</span></td>
-        <td></td>
+        <td><p>Is executed when he <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a> has no value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>When either <code data-dev-comment-type="paramref" class="paramref">someAction</code> or <code data-dev-comment-type="paramref" class="paramref">noneAction</code> needs to be executed.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -949,11 +933,12 @@ public Maybe&lt;TResult&gt; Map&lt;TResult&gt;(Func&lt;T, TResult&gt; selector)<
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_Match__1_System_Func__0___0__System_Func___0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.Match%60%601(System.Func%7B%600%2C%60%600%7D%2CSystem.Func%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L74">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L110">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_Match_" data-uid="Lemonad.ErrorHandling.Maybe`1.Match*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_Match__1_System_Func__0___0__System_Func___0__" data-uid="Lemonad.ErrorHandling.Maybe`1.Match``1(System.Func{`0,``0},System.Func{``0})">Match&lt;TResult&gt;(Func&lt;T, TResult&gt;, Func&lt;TResult&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Evaluates the <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -973,12 +958,14 @@ public TResult Match&lt;TResult&gt;(Func&lt;T, TResult&gt; someSelector, Func&lt
       <tr>
         <td><span class="xref">System.Func</span>&lt;T, TResult&gt;</td>
         <td><span class="parametername">someSelector</span></td>
-        <td></td>
+        <td><p>Is executed when the <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a> has a value.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Func</span>&lt;TResult&gt;</td>
         <td><span class="parametername">noneSelector</span></td>
-        <td></td>
+        <td><p>Is executed when he <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a> has no value.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1008,7 +995,8 @@ public TResult Match&lt;TResult&gt;(Func&lt;T, TResult&gt; someSelector, Func&lt
     <tbody>
       <tr>
         <td><span class="parametername">TResult</span></td>
-        <td></td>
+        <td><p>The type returned by the functions <code data-dev-comment-type="paramref" class="paramref">someSelector</code> and <code data-dev-comment-type="paramref" class="paramref">noneSelector</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1017,7 +1005,7 @@ public TResult Match&lt;TResult&gt;(Func&lt;T, TResult&gt; someSelector, Func&lt
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_ToString.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L52">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L64">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_ToString_" data-uid="Lemonad.ErrorHandling.Maybe`1.ToString*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_ToString" data-uid="Lemonad.ErrorHandling.Maybe`1.ToString">ToString()</h4>
@@ -1051,7 +1039,7 @@ public TResult Match&lt;TResult&gt;(Func&lt;T, TResult&gt; someSelector, Func&lt
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_op_Equality_Lemonad_ErrorHandling_Maybe__0__Lemonad_ErrorHandling_Maybe__0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.op_Equality(Lemonad.ErrorHandling.Maybe%7B%600%7D%2CLemonad.ErrorHandling.Maybe%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L32">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L41">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_op_Equality_" data-uid="Lemonad.ErrorHandling.Maybe`1.op_Equality*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_op_Equality_Lemonad_ErrorHandling_Maybe__0__Lemonad_ErrorHandling_Maybe__0__" data-uid="Lemonad.ErrorHandling.Maybe`1.op_Equality(Lemonad.ErrorHandling.Maybe{`0},Lemonad.ErrorHandling.Maybe{`0})">Equality(Maybe&lt;T&gt;, Maybe&lt;T&gt;)</h4>
@@ -1103,7 +1091,7 @@ public TResult Match&lt;TResult&gt;(Func&lt;T, TResult&gt; someSelector, Func&lt
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_op_GreaterThan_Lemonad_ErrorHandling_Maybe__0__Lemonad_ErrorHandling_Maybe__0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.op_GreaterThan(Lemonad.ErrorHandling.Maybe%7B%600%7D%2CLemonad.ErrorHandling.Maybe%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L48">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L59">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_op_GreaterThan_" data-uid="Lemonad.ErrorHandling.Maybe`1.op_GreaterThan*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_op_GreaterThan_Lemonad_ErrorHandling_Maybe__0__Lemonad_ErrorHandling_Maybe__0__" data-uid="Lemonad.ErrorHandling.Maybe`1.op_GreaterThan(Lemonad.ErrorHandling.Maybe{`0},Lemonad.ErrorHandling.Maybe{`0})">GreaterThan(Maybe&lt;T&gt;, Maybe&lt;T&gt;)</h4>
@@ -1155,7 +1143,7 @@ public TResult Match&lt;TResult&gt;(Func&lt;T, TResult&gt; someSelector, Func&lt
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_op_GreaterThanOrEqual_Lemonad_ErrorHandling_Maybe__0__Lemonad_ErrorHandling_Maybe__0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.op_GreaterThanOrEqual(Lemonad.ErrorHandling.Maybe%7B%600%7D%2CLemonad.ErrorHandling.Maybe%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L50">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L61">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_op_GreaterThanOrEqual_" data-uid="Lemonad.ErrorHandling.Maybe`1.op_GreaterThanOrEqual*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_op_GreaterThanOrEqual_Lemonad_ErrorHandling_Maybe__0__Lemonad_ErrorHandling_Maybe__0__" data-uid="Lemonad.ErrorHandling.Maybe`1.op_GreaterThanOrEqual(Lemonad.ErrorHandling.Maybe{`0},Lemonad.ErrorHandling.Maybe{`0})">GreaterThanOrEqual(Maybe&lt;T&gt;, Maybe&lt;T&gt;)</h4>
@@ -1207,7 +1195,7 @@ public TResult Match&lt;TResult&gt;(Func&lt;T, TResult&gt; someSelector, Func&lt
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_op_Implicit__0__Lemonad_ErrorHandling_Maybe__0_.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.op_Implicit(%600)~Lemonad.ErrorHandling.Maybe%7B%600%7D%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L28">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L37">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_op_Implicit_" data-uid="Lemonad.ErrorHandling.Maybe`1.op_Implicit*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_op_Implicit__0__Lemonad_ErrorHandling_Maybe__0_" data-uid="Lemonad.ErrorHandling.Maybe`1.op_Implicit(`0)~Lemonad.ErrorHandling.Maybe{`0}">Implicit(T to Maybe&lt;T&gt;)</h4>
@@ -1254,7 +1242,7 @@ public TResult Match&lt;TResult&gt;(Func&lt;T, TResult&gt; someSelector, Func&lt
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_op_Inequality_Lemonad_ErrorHandling_Maybe__0__Lemonad_ErrorHandling_Maybe__0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.op_Inequality(Lemonad.ErrorHandling.Maybe%7B%600%7D%2CLemonad.ErrorHandling.Maybe%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L34">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L43">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_op_Inequality_" data-uid="Lemonad.ErrorHandling.Maybe`1.op_Inequality*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_op_Inequality_Lemonad_ErrorHandling_Maybe__0__Lemonad_ErrorHandling_Maybe__0__" data-uid="Lemonad.ErrorHandling.Maybe`1.op_Inequality(Lemonad.ErrorHandling.Maybe{`0},Lemonad.ErrorHandling.Maybe{`0})">Inequality(Maybe&lt;T&gt;, Maybe&lt;T&gt;)</h4>
@@ -1306,7 +1294,7 @@ public TResult Match&lt;TResult&gt;(Func&lt;T, TResult&gt; someSelector, Func&lt
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_op_LessThan_Lemonad_ErrorHandling_Maybe__0__Lemonad_ErrorHandling_Maybe__0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.op_LessThan(Lemonad.ErrorHandling.Maybe%7B%600%7D%2CLemonad.ErrorHandling.Maybe%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L44">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L55">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_op_LessThan_" data-uid="Lemonad.ErrorHandling.Maybe`1.op_LessThan*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_op_LessThan_Lemonad_ErrorHandling_Maybe__0__Lemonad_ErrorHandling_Maybe__0__" data-uid="Lemonad.ErrorHandling.Maybe`1.op_LessThan(Lemonad.ErrorHandling.Maybe{`0},Lemonad.ErrorHandling.Maybe{`0})">LessThan(Maybe&lt;T&gt;, Maybe&lt;T&gt;)</h4>
@@ -1358,7 +1346,7 @@ public TResult Match&lt;TResult&gt;(Func&lt;T, TResult&gt; someSelector, Func&lt
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Maybe_1_op_LessThanOrEqual_Lemonad_ErrorHandling_Maybe__0__Lemonad_ErrorHandling_Maybe__0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Maybe%601.op_LessThanOrEqual(Lemonad.ErrorHandling.Maybe%7B%600%7D%2CLemonad.ErrorHandling.Maybe%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L46">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Maybe.cs/#L57">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Maybe_1_op_LessThanOrEqual_" data-uid="Lemonad.ErrorHandling.Maybe`1.op_LessThanOrEqual*"></a>
   <h4 id="Lemonad_ErrorHandling_Maybe_1_op_LessThanOrEqual_Lemonad_ErrorHandling_Maybe__0__Lemonad_ErrorHandling_Maybe__0__" data-uid="Lemonad.ErrorHandling.Maybe`1.op_LessThanOrEqual(Lemonad.ErrorHandling.Maybe{`0},Lemonad.ErrorHandling.Maybe{`0})">LessThanOrEqual(Maybe&lt;T&gt;, Maybe&lt;T&gt;)</h4>
