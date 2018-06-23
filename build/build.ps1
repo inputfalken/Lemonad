@@ -1,3 +1,10 @@
+param (
+  [Parameter(Position = 0, Mandatory = 1)] [ValidateSet('Release', 'Debug')] $Configuration,
+  [Parameter(Position = 1, Mandatory = 0)] [switch] $GenerateDocs = $false,
+  [Parameter(Position = 2, Mandatory = 0)] [string] $UserName,
+  [Parameter(Position = 3, Mandatory = 0)] [string] $UserEmail
+)
+
 function Is-InsideGitRepository {
   if (Get-Command -Name 'git' -ErrorAction SilentlyContinue) {
     if (git rev-parse --is-inside-work-tree 2>$null) { $true } else { $false }
@@ -124,7 +131,7 @@ function Generate-DocumentationPages {
   $previousSha1 = Invoke-RestMethod -Uri $appveyorBuildUri -ErrorAction Stop `
     | Select-Object -ExpandProperty builds `
     | Select-Object -Last 1 -ExpandProperty commitId
-    Write-Host "Comparing diffs with '$currentSha1' '$previousSha1'."
+  Write-Host "Comparing diffs with '$currentSha1' '$previousSha1'."
   # TODO SrcDirectory parameter should be a list for all directories the diff needs to be checked with.
 
   git diff --quiet --exit-code $previousSha1 $currentSha1 $SrcDirectory $DocumentationDirectory
