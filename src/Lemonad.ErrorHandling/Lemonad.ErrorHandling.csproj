@@ -8,5 +8,8 @@
     <PackageLicenseUrl>https://github.com/inputfalken/Lemonad/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://inputfalken.github.io/Lemonad/</PackageProjectUrl>
     <PackageReleaseNotes>Initial version</PackageReleaseNotes>
+    <AssemblyName>Lemonad.ErrorHandling</AssemblyName>
+    <Authors>Robert Andersson</Authors>
+    <Product>Lemonad.ErrorHandling</Product>
   </PropertyGroup>
 </Project>
