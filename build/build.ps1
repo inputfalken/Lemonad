@@ -68,28 +68,24 @@ function Test-Projects {
 
 function Pack-Packages {
   param (
-    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $ArtifactPath,
-    [Parameter(Position = 1, Mandatory = 1)] [System.IO.FileSystemInfo] $SourceCodePath,
-    [Parameter(Position = 2, Mandatory = 0)] [string] $ArtifactName = 'artifacts'
+    [Parameter(Position = 0, Mandatory = 1, ValueFromPipeline)] [ValidateNotNull()] $InputObject,
+    [Parameter(Position = 1, Mandatory = 1)] [System.IO.FileSystemInfo] $ArtifactPath,
+    [Parameter(Position = 2, Mandatory = 1)] [System.IO.FileSystemInfo] $SourceCodePath,
+    [Parameter(Position = 3, Mandatory = 0)] [string] $ArtifactName = 'artifacts'
   )
+  if ($Input) { $InputObject = $Input }
   $ArtifactDirectory = Join-Path -Path $ArtifactPath -ChildPath $ArtifactName -ErrorAction Stop `
     | New-Item -Type Directory -Name $ArtifactName -Force -ErrorAction Stop
-  Push-Location $SourceCodePath
-  List-Files '*.csproj' | ForEach-Object {
-    dotnet pack $_ --configuration $Configuration --no-build --output $ArtifactDirectory
+  $InputObject | ForEach-Object {
+    Write-Host $_
+    dotnet pack $_.Path --configuration $Configuration --no-build --output $ArtifactDirectory
     if (!$?) { throw "Could not pack project" }
+    Join-Path -Path $ArtifactDirectory -ChildPath "$($_.Path.BaseName).$($_.Version).nupkg" | Get-Item -ErrorAction Stop
   }
-  Pop-Location
-
-  Write-Output $ArtifactDirectory
 }
 
 function Upload-Packages {
-  param (
-    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $ArtifactDirectory
-  )
-
-  $ArtifactDirectory | Get-ChildItem -Filter '*.nupkg' | ForEach-Object {
+  $Input | ForEach-Object {
     $source = 'https://www.nuget.org/api/v2/package'
     dotnet nuget push $_ --api-key $env:NUGET_API_KEY --source $source
     if (!$?) { throw "Could not push package '$package' to NuGet (source : '$source')." }
@@ -140,7 +136,7 @@ function Generate-DocumentationPages {
 
   $currentSha1 = git rev-parse HEAD
   if (!$?) { throw "Could not obtain the SHA-1 for the current commit by running command 'git rev-parse HEAD'" }
-  $appveyorBuildUri = "https://ci.appveyor.com/api/projects/$($env:APPVEYOR_ACCOUNT_NAME)/$($env:APPVEYOR_PROJECT_SLUG)/history?recordsNumber=10&startBuildId=$($env:APPVEYOR_BUILD_ID)&branch=$($env:APPVEYOR_REPO_BRANCH)" 
+  $appveyorBuildUri = "https://ci.appveyor.com/api/projects/$($env:APPVEYOR_ACCOUNT_NAME)/$($env:APPVEYOR_PROJECT_SLUG)/history?recordsNumber=10&startBuildId=$($env:APPVEYOR_BUILD_ID)&branch=$($env:APPVEYOR_REPO_BRANCH)"
   Write-Host "Requesting previous build from uri '$appveyorBuildUri'."
   $previousSha1 = Invoke-RestMethod -Uri $appveyorBuildUri -ErrorAction Stop `
     | Select-Object -ExpandProperty builds `
@@ -178,6 +174,29 @@ function Generate-DocumentationPages {
   else { throw 'Unhandled exit code for command ''git diff --exit-code''' }
 }
 
+function Get-ProjectInformation () {
+  $input `
+    | Select-Xml -XPath  '//AssemblyName|//Version' `
+    | Sort-Object -Property Node `
+    | Group-Object Path  `
+    | Select-Object -Property `
+    @{Name = 'Project'; Expression =  { $_.Group[0].Node.InnerText} }, `
+    @{Name = 'Version'; Expression =  { [version]$_.Group[1].Node.InnerText} }, `
+    @{Name = 'Path'; Expression =  { $_.Name | Get-Item -ErrorAction Stop } }
+}
+
+# Fetch the online version
+function Get-OnlineVersion ([string] $Source, [string] $PackageName) {
+  $packageName = NuGet list $PackageName -Source $Source -NonInteractive
+  if (!$?) { throw "Something went wrong when retrieving package '$PackageName'." }
+  # If no pacakge is found, it's assumed that it's the first release.
+  if ($packageName -like 'No packages found.') { return [version] '0.0.0' }
+  else {
+    Write-Host "Found package '$packageName'." -ForegroundColor Green
+    return [version] (($packageName | Select-Object -First 1).Split(" ") | Select-Object -Last 1)
+  }
+}
+
 #-------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -213,8 +232,11 @@ if ($isWindows) {
         if (!$env:APPVEYOR_PULL_REQUEST_TITLE -and $GenerateDocs) {
           $documentationDirectory = (Join-Path -Path $rootDirectory -ChildPath 'docs' -ErrorAction Stop ) | Get-Item -ErrorAction Stop
           Generate-DocumentationPages -DocumentationDirectory $documentationDirectory -SrcDirectory $srcDiretory
-          $ArtifactDirectory = Pack-Packages -ArtifactPath $rootDirectory -SourceCodePath $srcDiretory
-          Upload-Packages -ArtifactDirectory $ArtifactDirectory
+          List-Files "$srcDiretory*.csproj" `
+            | Get-ProjectInformation `
+            | Where-Object { (Get-OnlineVersion -Source 'https://nuget.org/api/v2/' -PackageName $_.Project) -gt $_.Version } `
+            | Pack-Packages -ArtifactPath $rootDirectory -SourceCodePath $srcDiretory `
+            | Upload-Packages 
         }
       }
       [string]::Empty {
