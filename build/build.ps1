@@ -3,7 +3,7 @@ param (
   [Parameter(Position = 1, Mandatory = 0)] [switch] $GenerateDocs = $false,
   [Parameter(Position = 2, Mandatory = 0)] [string] $UserName,
   [Parameter(Position = 3, Mandatory = 0)] [string] $UserEmail,
-  [Parameter(Position = 4, Mandatory = 0)] [string] $Source = 'https://www.nuget.org/api/v2/package'
+  [Parameter(Position = 4, Mandatory = 0)] [string] $Source = 'https://api.nuget.org/v3/index.json'
 )
 
 function Is-InsideGitRepository {
@@ -83,10 +83,12 @@ function Pack-Package {
       if (!$?) { throw "Could not pack project" }
     }
     @{
-      Path    = $_.Path
-      Project = $_.Project
-      Version = $_.Version
+      Path          = $_.Path
+      Project       = $_.Project
+      LocalVersion  = $_.LocalVersion
+      OnlineVersion = $_.OnlineVersion
       PackageOrNull = (Join-Path -Path $ArtifactDirectory -ChildPath "$($_.Path.BaseName).$($_.Version).nupkg" | Get-Item -ErrorAction SilentlyContinue)
+      IsRelease  = $_.IsRelease
     }
   }
 }
@@ -204,9 +206,11 @@ function Get-ProjectInfo () {
     | Group-Object Path  `
     | Select-Object -Property `
   @{Name = 'Project'; Expression = { $_.Group[0].Node.InnerText} }, `
-  @{Name = 'Version'; Expression = { [version]$_.Group[1].Node.InnerText} }, `
-  @{Name = 'Path'; Expression = { $_.Name | Get-Item -ErrorAction Stop } }, `
-  @{Name = 'IsRelease'; Expression = { (Get-OnlineVersion -PackageName  $_.Group[0].Node.InnerText) -lt $_.Version } }
+  @{Name = 'LocalVersion'; Expression = { [version]$_.Group[1].Node.InnerText} }, `
+  @{Name = 'Path'; Expression = { $_.Name | Get-Item -ErrorAction Stop } } `
+    | Select-Object -Property Project, LocalVersion , Path, @{Name = 'OnlineVersion'; Expression = { Get-OnlineVersion -PackageName  $_.Project} } `
+    | Select-Object -Property Project, LocalVersion , Path, OnlineVersion, @{Name = 'IsRelease'; Expression = { $_.LocalVersion -gt $_.OnlineVersion } } `
+
 }
 
 
