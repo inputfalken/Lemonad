@@ -95,9 +95,9 @@ function Pack-Package {
 
 function Upload-Package {
   $Input | ForEach-Object {
-    if ($_PackageOrNull -ne $null) {
+    if ($_PackageOrNull -ne $null -and $_.IsRelease) {
       Write-Host "Releasing Package '$($_.PackageOrNull)'."
-      dotnet nuget push $_.Package --api-key $env:NUGET_API_KEY --source $Source
+      dotnet nuget push $_._PackageOrNull --api-key $env:NUGET_API_KEY --source $Source
       if (!$?) { throw "Could not push package '$package' to NuGet (source : '$Source')." }
     } else {
       Write-Host "Project '$($_.Project)' is not ready for release."
