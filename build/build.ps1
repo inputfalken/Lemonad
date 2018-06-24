@@ -87,7 +87,7 @@ function Pack-Package {
       Project       = $_.Project
       LocalVersion  = $_.LocalVersion
       OnlineVersion = $_.OnlineVersion
-      PackageOrNull = (Join-Path -Path $ArtifactDirectory -ChildPath "$($_.Path.BaseName).$($_.Version).nupkg" | Get-Item -ErrorAction SilentlyContinue)
+      PackageOrNull = (Join-Path -Path $ArtifactDirectory -ChildPath "$($_.Path.BaseName).$($_.LocalVersion).nupkg" | Get-Item -ErrorAction SilentlyContinue)
       IsRelease  = $_.IsRelease
     }
   }
