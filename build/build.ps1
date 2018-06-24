@@ -76,28 +76,25 @@ function Pack-Package {
     | New-Item -Type Directory -Name $ArtifactName -Force -ErrorAction Stop
 
   if ($Input) { $InputObject = $Input }
+  # For some reason this pipe spits out bad elements which is filtered out below.
   $InputObject `
     | ForEach-Object {
-    if ($_.IsRelease) {
-      dotnet pack $_.Path --configuration $Configuration --no-build --output $ArtifactDirectory
-      if (!$?) { throw "Could not pack project" }
-    }
-    @{
-      Path          = $_.Path
-      Project       = $_.Project
-      LocalVersion  = $_.LocalVersion
-      OnlineVersion = $_.OnlineVersion
-      PackageOrNull = (Join-Path -Path $ArtifactDirectory -ChildPath "$($_.Path.BaseName).$($_.LocalVersion).nupkg" | Get-Item -ErrorAction SilentlyContinue)
-      IsRelease  = $_.IsRelease
-    }
-  }
+      if ($_.IsRelease) {
+        dotnet pack $_.Path --configuration $Configuration --no-build --output $ArtifactDirectory
+        if (!$?) { throw "Could not pack project" }
+      }
+      $_
+    } `
+    | Select-Object Path, Project, LocalVersion, OnlineVersion, IsRelease, @{Name = 'PackageOrNull'; Expression = {Join-Path -Path $ArtifactDirectory -ChildPath "$($_.Path.BaseName).$($_.LocalVersion).nupkg" | Get-Item -ErrorAction SilentlyContinue} } `
+    | Where-Object {$_.Path -ne $null}
 }
 
 function Upload-Package {
   $Input | ForEach-Object {
-    if ($_PackageOrNull -ne $null -and $_.IsRelease) {
+    # Check if path exists and if 'IsRelease' is true.
+    if ([bool](Get-Item $_.PackageOrNull -ErrorAction SilentlyContinue) -and $_.IsRelease) {
       Write-Host "Releasing Package '$($_.PackageOrNull)'."
-      dotnet nuget push $_._PackageOrNull --api-key $env:NUGET_API_KEY --source $Source
+      dotnet nuget push $_.PackageOrNull --api-key $env:NUGET_API_KEY --source $Source
       if (!$?) { throw "Could not push package '$package' to NuGet (source : '$Source')." }
     } else {
       Write-Host "Project '$($_.Project)' is not ready for release."
@@ -249,7 +246,7 @@ if ($isWindows) {
         if (!$env:APPVEYOR_PULL_REQUEST_TITLE -and $GenerateDocs) {
           $documentationDirectory = (Join-Path -Path $rootDirectory -ChildPath 'docs' -ErrorAction Stop ) | Get-Item -ErrorAction Stop
           Generate-Documentation -DocumentationDirectory $documentationDirectory -SrcDirectory $srcDiretory
-          List-Files "$srcDiretory*.csproj" `
+          List-Files (Join-Path -Path $srcDiretory -ChildPath '*.csproj') `
             | Get-ProjectInfo `
             | Pack-Package -ArtifactPath $rootDirectory -SourceCodePath $srcDiretory `
             | Upload-Package
