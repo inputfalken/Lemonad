@@ -75,7 +75,6 @@ function Pack-Package {
   $ArtifactDirectory = Join-Path -Path $ArtifactPath -ChildPath $ArtifactName -ErrorAction Stop `
     | New-Item -Type Directory -Name $ArtifactName -Force -ErrorAction Stop
   $InputObject | ForEach-Object {
-    Write-Host $_
     dotnet pack $_.Path --configuration $Configuration --no-build --output $ArtifactDirectory
     if (!$?) { throw "Could not pack project" }
 
@@ -238,7 +237,8 @@ if ($isWindows) {
           $documentationDirectory = (Join-Path -Path $rootDirectory -ChildPath 'docs' -ErrorAction Stop ) | Get-Item -ErrorAction Stop
           Generate-Documentation -DocumentationDirectory $documentationDirectory -SrcDirectory $srcDiretory
           List-Files "$srcDiretory*.csproj" `
-            | Get-ProjectInfo `
+            | Get-ProjectInfo ` 
+            | Where-Object { $_.Version -ne $null } `
             | Where-Object { (Get-OnlineVersion -Source 'https://nuget.org/api/v2/' -PackageName $_.Project) -gt $_.Version } `
             | Pack-Package -ArtifactPath $rootDirectory -SourceCodePath $srcDiretory `
             | Upload-Package
