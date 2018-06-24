@@ -369,7 +369,7 @@ namespace Lemonad.ErrorHandling {
         /// The return type of the function <paramref name="flatSelector"/>.
         /// </typeparam>
         [Pure]
-        private Result<TResult, TError> FlatMap<TResult>(
+        public Result<TResult, TError> FlatMap<TResult>(
             Func<T, Result<TResult, TError>> flatSelector) => HasValue
             ? flatSelector?.Invoke(Value) ?? throw new ArgumentNullException(nameof(flatSelector))
             : Result.Error<TResult, TError>(Error);
@@ -391,7 +391,7 @@ namespace Lemonad.ErrorHandling {
         /// The return type of the function  <paramref name="resultSelector"/>.
         /// </typeparam>
         [Pure]
-        private Result<TResult, TError> FlatMap<TSelector, TResult>(
+        public Result<TResult, TError> FlatMap<TSelector, TResult>(
             Func<T, Result<TSelector, TError>> flatSelector,
             Func<T, TSelector, TResult> resultSelector) => FlatMap(x =>
             flatSelector?.Invoke(x).Map(y => resultSelector == null
