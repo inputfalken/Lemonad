@@ -66,7 +66,7 @@ function Test-Projects {
   }
 }
 
-function Pack-Packages {
+function Pack-Package {
   param (
     [Parameter(Position = 0, Mandatory = 1, ValueFromPipeline)] [ValidateNotNull()] $InputObject,
     [Parameter(Position = 1, Mandatory = 1)] [System.IO.FileSystemInfo] $ArtifactPath,
@@ -80,15 +80,22 @@ function Pack-Packages {
     Write-Host $_
     dotnet pack $_.Path --configuration $Configuration --no-build --output $ArtifactDirectory
     if (!$?) { throw "Could not pack project" }
-    Join-Path -Path $ArtifactDirectory -ChildPath "$($_.Path.BaseName).$($_.Version).nupkg" | Get-Item -ErrorAction Stop
+
+    @{
+      package = Join-Path -Path $ArtifactDirectory -ChildPath "$($_.Path.BaseName).$($_.Version).nupkg" | Get-Item -ErrorAction Stop
+      Path = $_.Path
+      Project = $_.Project
+      Version = $_.Version
+    }
   }
 }
 
-function Upload-Packages {
+function Upload-Package {
   $Input | ForEach-Object {
     $source = 'https://www.nuget.org/api/v2/package'
-    dotnet nuget push $_ --api-key $env:NUGET_API_KEY --source $source
+    dotnet nuget push $_.Package --api-key $env:NUGET_API_KEY --source $source
     if (!$?) { throw "Could not push package '$package' to NuGet (source : '$source')." }
+    $_
   }
 }
 
@@ -106,7 +113,7 @@ function Build-Documentation {
   Pop-Location
 }
 
-function Generate-DocumentationPages {
+function Generate-Documentation {
   param(
     [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $DocumentationDirectory,
     [Parameter(Position = 1, Mandatory = 1)] [System.IO.FileSystemInfo] $SrcDirectory
@@ -174,7 +181,7 @@ function Generate-DocumentationPages {
   else { throw 'Unhandled exit code for command ''git diff --exit-code''' }
 }
 
-function Get-ProjectInformation () {
+function Get-ProjectInfo () {
   $input `
     | Select-Xml -XPath  '//AssemblyName|//Version' `
     | Sort-Object -Property Node `
@@ -231,12 +238,12 @@ if ($isWindows) {
       'master' {
         if (!$env:APPVEYOR_PULL_REQUEST_TITLE -and $GenerateDocs) {
           $documentationDirectory = (Join-Path -Path $rootDirectory -ChildPath 'docs' -ErrorAction Stop ) | Get-Item -ErrorAction Stop
-          Generate-DocumentationPages -DocumentationDirectory $documentationDirectory -SrcDirectory $srcDiretory
+          Generate-Documentation -DocumentationDirectory $documentationDirectory -SrcDirectory $srcDiretory
           List-Files "$srcDiretory*.csproj" `
-            | Get-ProjectInformation `
+            | Get-ProjectInfo `
             | Where-Object { (Get-OnlineVersion -Source 'https://nuget.org/api/v2/' -PackageName $_.Project) -gt $_.Version } `
-            | Pack-Packages -ArtifactPath $rootDirectory -SourceCodePath $srcDiretory `
-            | Upload-Packages 
+            | Pack-Package -ArtifactPath $rootDirectory -SourceCodePath $srcDiretory `
+            | Upload-Package
         }
       }
       [string]::Empty {
