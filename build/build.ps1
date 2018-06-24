@@ -15,12 +15,10 @@ function Is-InsideGitRepository {
 
 function Get-RootDirectory {
   if (Is-InsideGitRepository) {
-    $location = git rev-parse --show-toplevel `
+    git rev-parse --show-toplevel `
       | Resolve-Path `
       | Get-Item
     if (!$?) { throw 'could not move to git root directory.' }
-    if ((Get-Location).Path -eq $location) { return Get-Location }
-    else { return $location }
   } else { throw "'$(Get-Location)' is not a git directory/repository." }
 }
 
@@ -83,7 +81,7 @@ function Pack-Package {
 
     @{
       package = Join-Path -Path $ArtifactDirectory -ChildPath "$($_.Path.BaseName).$($_.Version).nupkg" | Get-Item -ErrorAction Stop
-      Path = $_.Path
+      Path    = $_.Path
       Project = $_.Project
       Version = $_.Version
     }
@@ -187,9 +185,9 @@ function Get-ProjectInfo () {
     | Sort-Object -Property Node `
     | Group-Object Path  `
     | Select-Object -Property `
-    @{Name = 'Project'; Expression =  { $_.Group[0].Node.InnerText} }, `
-    @{Name = 'Version'; Expression =  { [version]$_.Group[1].Node.InnerText} }, `
-    @{Name = 'Path'; Expression =  { $_.Name | Get-Item -ErrorAction Stop } }
+  @{Name = 'Project'; Expression = { $_.Group[0].Node.InnerText} }, `
+  @{Name = 'Version'; Expression = { [version]$_.Group[1].Node.InnerText} }, `
+  @{Name = 'Path'; Expression = { $_.Name | Get-Item -ErrorAction Stop } }
 }
 
 # Fetch the online version
