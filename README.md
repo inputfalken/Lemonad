@@ -6,7 +6,7 @@
 
 ### WIP (A lot may change)
 
-There's currently no nuget package available.
+[NuGet Package](https://www.nuget.org/packages/Lemonad.ErrorHandling/)
 
 ## Summary
 
