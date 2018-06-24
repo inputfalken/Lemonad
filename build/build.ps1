@@ -2,7 +2,8 @@ param (
   [Parameter(Position = 0, Mandatory = 1)] [ValidateSet('Release', 'Debug')] $Configuration,
   [Parameter(Position = 1, Mandatory = 0)] [switch] $GenerateDocs = $false,
   [Parameter(Position = 2, Mandatory = 0)] [string] $UserName,
-  [Parameter(Position = 3, Mandatory = 0)] [string] $UserEmail
+  [Parameter(Position = 3, Mandatory = 0)] [string] $UserEmail,
+  [Parameter(Position = 4, Mandatory = 0)] [string] $Source = 'https://www.nuget.org/api/v2/package'
 )
 
 function Is-InsideGitRepository {
@@ -66,32 +67,39 @@ function Test-Projects {
 
 function Pack-Package {
   param (
-    [Parameter(Position = 0, Mandatory = 1, ValueFromPipeline)] [ValidateNotNull()] $InputObject,
+    [Parameter(Position = 0, Mandatory = 0, ValueFromPipeline)] $InputObject,
     [Parameter(Position = 1, Mandatory = 1)] [System.IO.FileSystemInfo] $ArtifactPath,
     [Parameter(Position = 2, Mandatory = 1)] [System.IO.FileSystemInfo] $SourceCodePath,
     [Parameter(Position = 3, Mandatory = 0)] [string] $ArtifactName = 'artifacts'
   )
-  if ($Input) { $InputObject = $Input }
   $ArtifactDirectory = Join-Path -Path $ArtifactPath -ChildPath $ArtifactName -ErrorAction Stop `
     | New-Item -Type Directory -Name $ArtifactName -Force -ErrorAction Stop
-  $InputObject | ForEach-Object {
-    dotnet pack $_.Path --configuration $Configuration --no-build --output $ArtifactDirectory
-    if (!$?) { throw "Could not pack project" }
 
+  if ($Input) { $InputObject = $Input }
+  $InputObject `
+    | ForEach-Object {
+    if ($_.IsRelease) {
+      dotnet pack $_.Path --configuration $Configuration --no-build --output $ArtifactDirectory
+      if (!$?) { throw "Could not pack project" }
+    }
     @{
-      package = Join-Path -Path $ArtifactDirectory -ChildPath "$($_.Path.BaseName).$($_.Version).nupkg" | Get-Item -ErrorAction Stop
       Path    = $_.Path
       Project = $_.Project
       Version = $_.Version
+      PackageOrNull = (Join-Path -Path $ArtifactDirectory -ChildPath "$($_.Path.BaseName).$($_.Version).nupkg" | Get-Item -ErrorAction SilentlyContinue)
     }
   }
 }
 
 function Upload-Package {
   $Input | ForEach-Object {
-    $source = 'https://www.nuget.org/api/v2/package'
-    dotnet nuget push $_.Package --api-key $env:NUGET_API_KEY --source $source
-    if (!$?) { throw "Could not push package '$package' to NuGet (source : '$source')." }
+    if ($_PackageOrNull -ne $null) {
+      Write-Host "Releasing Package '$($_.PackageOrNull)'."
+      dotnet nuget push $_.Package --api-key $env:NUGET_API_KEY --source $Source
+      if (!$?) { throw "Could not push package '$package' to NuGet (source : '$Source')." }
+    } else {
+      Write-Host "Project '$($_.Project)' is not ready for release."
+    }
     $_
   }
 }
@@ -179,6 +187,17 @@ function Generate-Documentation {
 }
 
 function Get-ProjectInfo () {
+  # Fetch the online version
+  function Get-OnlineVersion ([string] $PackageName) {
+    $packageName = NuGet list $PackageName -Source $Source -NonInteractive
+    if (!$?) { throw "Something went wrong when retrieving package '$PackageName'." }
+    # If no pacakge is found, it's assumed that it's the first release.
+    if ($packageName -like 'No packages found.') { return [version] '0.0.0' }
+    else {
+      Write-Host "Found package '$packageName'." -ForegroundColor Green
+      return [version] (($packageName | Select-Object -First 1).Split(" ") | Select-Object -Last 1)
+    }
+  }
   $input `
     | Select-Xml -XPath  '//AssemblyName|//Version' `
     | Sort-Object -Property Node `
@@ -186,20 +205,10 @@ function Get-ProjectInfo () {
     | Select-Object -Property `
   @{Name = 'Project'; Expression = { $_.Group[0].Node.InnerText} }, `
   @{Name = 'Version'; Expression = { [version]$_.Group[1].Node.InnerText} }, `
-  @{Name = 'Path'; Expression = { $_.Name | Get-Item -ErrorAction Stop } }
+  @{Name = 'Path'; Expression = { $_.Name | Get-Item -ErrorAction Stop } }, `
+  @{Name = 'IsRelease'; Expression = { (Get-OnlineVersion -PackageName  $_.Group[0].Node.InnerText) -lt $_.Version } }
 }
 
-# Fetch the online version
-function Get-OnlineVersion ([string] $Source, [string] $PackageName) {
-  $packageName = NuGet list $PackageName -Source $Source -NonInteractive
-  if (!$?) { throw "Something went wrong when retrieving package '$PackageName'." }
-  # If no pacakge is found, it's assumed that it's the first release.
-  if ($packageName -like 'No packages found.') { return [version] '0.0.0' }
-  else {
-    Write-Host "Found package '$packageName'." -ForegroundColor Green
-    return [version] (($packageName | Select-Object -First 1).Split(" ") | Select-Object -Last 1)
-  }
-}
 
 #-------------------------------------------------------------------------------------------------------------------------------------
 
@@ -237,9 +246,7 @@ if ($isWindows) {
           $documentationDirectory = (Join-Path -Path $rootDirectory -ChildPath 'docs' -ErrorAction Stop ) | Get-Item -ErrorAction Stop
           Generate-Documentation -DocumentationDirectory $documentationDirectory -SrcDirectory $srcDiretory
           List-Files "$srcDiretory*.csproj" `
-            | Get-ProjectInfo ` 
-            | Where-Object { $_.Version -ne $null } `
-            | Where-Object { (Get-OnlineVersion -Source 'https://nuget.org/api/v2/' -PackageName $_.Project) -gt $_.Version } `
+            | Get-ProjectInfo `
             | Pack-Package -ArtifactPath $rootDirectory -SourceCodePath $srcDiretory `
             | Upload-Package
         }
