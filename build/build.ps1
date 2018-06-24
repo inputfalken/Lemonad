@@ -92,7 +92,7 @@ function Pack-Package {
 function Upload-Package {
   $Input | ForEach-Object {
     # Check if path exists and if 'IsRelease' is true.
-    if ([bool](Get-Item $_.PackageOrNull -ErrorAction SilentlyContinue) -and $_.IsRelease) {
+    if (($_.PackageOrNull -ne $null) -and [bool](Get-Item $_.PackageOrNull -ErrorAction SilentlyContinue) -and ($_.IsRelease)) {
       Write-Host "Releasing Package '$($_.PackageOrNull)'."
       dotnet nuget push $_.PackageOrNull --api-key $env:NUGET_API_KEY --source $Source
       if (!$?) { throw "Could not push package '$package' to NuGet (source : '$Source')." }
