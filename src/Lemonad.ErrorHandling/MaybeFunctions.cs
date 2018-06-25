@@ -5,12 +5,45 @@ using System.Linq;
 
 namespace Lemonad.ErrorHandling {
     public static class Maybe {
+        /// <summary>
+        /// Creates a <see cref="Maybe{T}"/> who will have the value <paramref name="item"/>.
+        /// </summary>
+        /// <param name="item">
+        /// The value of <see cref="Maybe{T}"/>.
+        /// </param>
+        /// <typeparam name="TSource">
+        /// The type of the <see cref="Maybe{T}"/>.
+        /// </typeparam>
+        /// <returns>
+        /// A <see cref="Maybe{T}"/> whose value will be <paramref name="item"/>.
+        /// </returns>
         [Pure]
         public static Maybe<TSource> Some<TSource>(this TSource item) => new Maybe<TSource>(item, true);
 
+        /// <summary>
+        /// Creates a <see cref="Maybe{T}"/> who will have no value.
+        /// </summary>
+        /// <typeparam name="TSource">
+        /// The type of the <see cref="Maybe{T}"/>.
+        /// </typeparam>
+        /// <returns>
+        /// A <see cref="Maybe{T}"/> who will have no value.
+        /// </returns>
         [Pure]
         public static Maybe<TSource> None<TSource>() => Maybe<TSource>.None;
 
+        /// <summary>
+        /// Creates a <see cref="Maybe{T}"/> who will have no value.
+        /// </summary>
+        /// <param name="item">
+        /// The value that will be considered to not have a value.
+        /// </param>
+        /// <typeparam name="TSource">
+        /// The type of the <see cref="Maybe{T}"/>.
+        /// </typeparam>
+        /// <returns>
+        /// A <see cref="Maybe{T}"/> who will have no value.
+        /// </returns>
         [Pure]
         public static Maybe<TSource> None<TSource>(this TSource item) => new Maybe<TSource>(item, false);
 
