@@ -92,11 +92,9 @@ function Upload-Package {
   $Input | ForEach-Object {
     # Check if path exists and if 'IsRelease' is true.
     if (($_.PackageOrNull -ne $null) -and [bool](Get-Item $_.PackageOrNull -ErrorAction SilentlyContinue) -and ($_.IsRelease)) {
-      Write-Host "Releasing Package '$($_.PackageOrNull)'."
-      dotnet nuget push $_.PackageOrNull --api-key $env:NUGET_API_KEY --source $Source
+      Write-Host "Pushing Package '$($_.PackageOrNull)' to '$Source'."
+      dotnet nuget push $_.PackageOrNull --api-key $env:NUGET_API_KEY --source $Source | Out-Null
       if (!$?) { throw "Could not push package '$($_.PackageOrNull)' to NuGet (source : '$Source')." }
-    } else {
-      Write-Host "Project '$($_.Project)' is not ready for release."
     }
     $_
   }
@@ -147,7 +145,7 @@ function Generate-Documentation {
   $currentSha1 = git rev-parse HEAD
   if (!$?) { throw "Could not obtain the SHA-1 for the current commit by running command 'git rev-parse HEAD'" }
   $appveyorBuildUri = "https://ci.appveyor.com/api/projects/$($env:APPVEYOR_ACCOUNT_NAME)/$($env:APPVEYOR_PROJECT_SLUG)/history?recordsNumber=10&startBuildId=$($env:APPVEYOR_BUILD_ID)&branch=$($env:APPVEYOR_REPO_BRANCH)"
-  Write-Host "Requesting previous build from uri '$appveyorBuildUri'."
+  Write-Host "Requesting previous builds from uri '$appveyorBuildUri'." -ForegroundColor Yellow
   $previousSha1 = Invoke-RestMethod -Uri $appveyorBuildUri -ErrorAction Stop `
     | Select-Object -ExpandProperty builds `
     | Select-Object buildNumber, commitId, pullRequestId `
@@ -156,7 +154,7 @@ function Generate-Documentation {
     | Select-Object -ExpandProperty commitId `
     | Where-Object {$_ -ne $currentSha1} `
     | Select-Object -First 1
-  Write-Host "Comparing diffs with '$currentSha1' '$previousSha1'."
+  Write-Host "Comparing diffs with '$currentSha1' '$previousSha1'." -ForegroundColor Yellow
   # TODO SrcDirectory parameter should be a list for all directories the diff needs to be checked with.
 
   git diff --quiet --exit-code $previousSha1 $currentSha1 $SrcDirectory $DocumentationDirectory
@@ -191,10 +189,7 @@ function Get-ProjectInfo () {
     if (!$?) { throw "Something went wrong when retrieving package '$PackageName'." }
     # If no pacakge is found, it's assumed that it's the first release.
     if ($packageName -like 'No packages found.') { return [version] '0.0.0' }
-    else {
-      Write-Host "Found package '$packageName'." -ForegroundColor Green
-      return [version] (($packageName | Select-Object -First 1).Split(" ") | Select-Object -Last 1)
-    }
+    else { return [version] (($packageName | Select-Object -First 1).Split(" ") | Select-Object -Last 1) }
   }
   $input `
     | Select-Xml -XPath  '//AssemblyName|//Version' `
