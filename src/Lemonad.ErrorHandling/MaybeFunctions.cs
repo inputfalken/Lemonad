@@ -47,6 +47,18 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static Maybe<TSource> None<TSource>(this TSource item) => new Maybe<TSource>(item, false);
 
+        /// <summary>
+        /// Works just like <see cref="Enumerable.FirstOrDefault{TSource}(System.Collections.Generic.IEnumerable{TSource})"/> but returns a <see cref="Maybe{T}"/>.
+        /// </summary>
+        /// <param name="source">
+        /// The <see cref="IEnumerable{T}"/>.
+        /// </param>
+        /// <typeparam name="TSource">
+        /// The type of the <see cref="IEnumerable{T}"/>.
+        /// </typeparam>
+        /// <returns>
+        /// Returns the first element of a sequence inside a <see cref="Maybe{T}"/>.
+        /// </returns>
         public static Maybe<TSource> FirstMaybe<TSource>(this IEnumerable<TSource> source) {
             switch (source) {
                 case IList<TSource> list when list.Count > 0:
@@ -60,6 +72,21 @@ namespace Lemonad.ErrorHandling {
             }
         }
 
+        /// <summary>
+        /// Works just like <see cref="Enumerable.FirstOrDefault{TSource}(System.Collections.Generic.IEnumerable{TSource})"/> but returns a <see cref="Maybe{T}"/>.
+        /// </summary>
+        /// <param name="source">
+        /// The <see cref="IEnumerable{T}"/>.
+        /// </param>
+        /// <param name="predicate">
+        /// A function to test each element for a condition.
+        /// </param>
+        /// <typeparam name="TSource">
+        /// The type of the <see cref="IEnumerable{T}"/>.
+        /// </typeparam>
+        /// <returns>
+        /// Returns the first element of a sequence who matches the <paramref name="predicate"/> inside a <see cref="Maybe{T}"/>.
+        /// </returns>
         public static Maybe<TSource> FirstMaybe<TSource>(this IEnumerable<TSource> source,
             Func<TSource, bool> predicate) {
             foreach (var element in source)
