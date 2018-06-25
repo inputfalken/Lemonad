@@ -3,136 +3,213 @@ using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class FlatMapTests {
+        private static Result<double, string> Division(double left, double right) {
+            if (right == 0)
+                return $"Can not divide '{left}' with '{right}'.";
+
+            return left / right;
+        }
+
         [Fact]
-        public void
-            Result_String_Int__Whose_Property_HasValue_Is_False_With_Null_Selector__Expects_No_ArgumentNullException_Thrown() {
-            Func<int, Result<int, string>> selector = null;
-            var exception = Record.Exception(() => {
-                var result = ResultParsers.Int("foo").FlatMap(selector, x => x);
-                Assert.False(result.HasValue, "Result should have error.");
-                Assert.True(result.HasError, "Result should have a error value.");
-                Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
+        public void Result_With_Error_Flatmaps_Result_with_Error__Expects_Result_With_Value() {
+            var flatSelectorExecuted = false;
+            var errorSelectorExecuted = false;
+            var result = Division(2, 0).FlatMap(x => {
+                flatSelectorExecuted = true;
+                return Division(x, 0);
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
             });
-            Assert.Null(exception);
-        }
 
-        [Fact]
-        public void
-            Result_String_Int__Whose_Property_HasValue_Is_True_With_Null_Selector__Expects_ArgumentNullException_Thrown() {
-            Func<int, Result<int, string>> selector = null;
-            Assert.Throws<ArgumentNullException>(() => ResultParsers.Int("2").FlatMap(selector, x => x));
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_False__FLatmaps_Result_String_Double_Whose_Property_HasValue_Is_False__Expects_Selector_To_Never_Be_Invoked() {
-            var intParse = ResultParsers.Int("foo");
-            var doubleParse = ResultParsers.Double("foo");
-
-            var isInvoked = false;
-            var result = intParse.FlatMap(_ => {
-                isInvoked = true;
-                return doubleParse;
-            }, x => x);
-
-            Assert.False(isInvoked, "Selector should never have been invoked.");
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_False__FLatmaps_Result_String_Double_Whose_Property_HasValue_Is_False__Expects_String_Double_Whose_Property_HasValue_Is_False() {
-            var intParse = ResultParsers.Int("foo");
-            var doubleParse = ResultParsers.Double("foo");
-
-            var result = intParse.FlatMap(x => doubleParse, s => s);
-            Assert.False(result.HasValue, "Result should have error.");
-            Assert.True(result.HasError, "Result should have a error value.");
-            Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
+            Assert.False(errorSelectorExecuted,
+                "Errorselector should not get exeuted since there is an error in the source.");
+            Assert.False(flatSelectorExecuted,
+                "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
+            Assert.False(result.HasValue, "Result should not have a value.");
+            Assert.True(result.HasError, "Result should have a error.");
             Assert.Equal(default(double), result.Value);
+            Assert.Equal("Can not divide '2' with '0'.", result.Error);
         }
 
         [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_False__FLatmaps_Result_String_Double_Whose_Property_HasValue_Is_True__Expects_Selector_To_Never_Be_Invoked() {
-            var intParse = ResultParsers.Int("foo");
-            var doubleParse = ResultParsers.Double("2");
+        public void Result_With_Error_Flatmaps_Result_with_Value__Expects_Result_With_Value() {
+            var flatSelectorExecuted = false;
+            var errorSelectorExecuted = false;
+            var result = Division(2, 0).FlatMap(x => {
+                flatSelectorExecuted = true;
+                return Division(x, 2);
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
+            });
 
-            var isInvoked = false;
-            var result = intParse.FlatMap(_ => {
-                isInvoked = true;
-                return doubleParse;
-            }, s => s);
-
-            Assert.False(isInvoked, "Selector should never have been invoked.");
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_False__FLatmaps_Result_String_Double_Whose_Property_HasValue_Is_True__Expects_String_Double_Whose_Property_HasValue_Is_False() {
-            var intParse = ResultParsers.Int("foo");
-            var doubleParse = ResultParsers.Double("2");
-
-            var result = intParse.FlatMap(x => doubleParse, s => s);
-            Assert.False(result.HasValue, "Result should have error.");
-            Assert.True(result.HasError, "Result should have a error value.");
-            Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
+            Assert.False(errorSelectorExecuted,
+                "Errorselector should not get exeuted since there is an error in the source.");
+            Assert.False(flatSelectorExecuted,
+                "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
+            Assert.False(result.HasValue, "Result should not have a value.");
+            Assert.True(result.HasError, "Result should have a error.");
             Assert.Equal(default(double), result.Value);
+            Assert.Equal("Can not divide '2' with '0'.", result.Error);
         }
 
         [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_True__FLatmaps_Result_String_Double_Whose_Property_HasValue_Is_False__Expects_Selector_To_Be_Invoked() {
-            var intParse = ResultParsers.Int("2");
-            var doubleParse = ResultParsers.Double("2");
+        public void Result_With_Error_FlatmapsRS_Result_with_Error__Expects_Result_With_Value() {
+            var flatSelectorExecuted = false;
+            var resultSelectorExectued = false;
+            var errorSelectorExecuted = false;
+            var result = Division(2, 0).FlatMap(x => {
+                flatSelectorExecuted = true;
+                return Division(x, 0);
+            }, (y, x) => {
+                resultSelectorExectued = true;
+                return y + x;
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
+            });
 
-            var isInvoked = false;
-            var result = intParse.FlatMap(_ => {
-                isInvoked = true;
-                return doubleParse;
-            }, s => s);
-
-            Assert.True(isInvoked, "Selector should be invoked.");
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_True__FLatmaps_Result_String_Double_Whose_Property_HasValue_Is_False__Expects_String_Double_Whose_Property_HasValue_Is_False() {
-            var intParse = ResultParsers.Int("2");
-            var doubleParse = ResultParsers.Double("foo");
-
-            var result = intParse.FlatMap(x => doubleParse, s => s);
-            Assert.False(result.HasValue, "Result should have error.");
-            Assert.True(result.HasError, "Result should have a error value.");
-            Assert.Equal("Could not parse type System.String(\"foo\") into System.Double.", result.Error);
+            Assert.False(errorSelectorExecuted,
+                "Errorselector should not get exeuted since there is an error in the source.");
+            Assert.False(flatSelectorExecuted,
+                "The flatmapSelector should not get exectued if the source Result<T, TError> contains error.");
+            Assert.False(resultSelectorExectued,
+                "The resultSelector should not get exectued if the source Result<T, TError> contains error.");
+            Assert.False(result.HasValue, "Result should not have a value.");
+            Assert.True(result.HasError, "Result should have a error.");
             Assert.Equal(default(double), result.Value);
+            Assert.Equal("Can not divide '2' with '0'.", result.Error);
         }
 
         [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_True__FLatmaps_Result_String_Double_Whose_Property_HasValue_Is_True__Expects_Selector_To_Be_Invoked() {
-            var intParse = ResultParsers.Int("2");
-            var doubleParse = ResultParsers.Double("2");
+        public void Result_With_Error_FlatmapsRS_Result_with_Value__Expects_Result_With_Value() {
+            var flatSelectorExecuted = false;
+            var resultSelectorExectued = false;
+            var errorSelectorExecuted = false;
+            var result = Division(2, 0).FlatMap(x => {
+                flatSelectorExecuted = true;
+                return Division(x, 2);
+            }, (y, x) => {
+                resultSelectorExectued = true;
+                return y + x;
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
+            });
 
-            var isInvoked = false;
-            var result = intParse.FlatMap(_ => {
-                isInvoked = true;
-                return doubleParse;
-            }, s => s);
-
-            Assert.True(isInvoked, "Selector should be invoked.");
+            Assert.False(errorSelectorExecuted,
+                "Errorselector should not get exeuted since there is an error in the source.");
+            Assert.False(flatSelectorExecuted,
+                "The flatmapSelector should not get exectued if the source Result<T, TError> contains error.");
+            Assert.False(resultSelectorExectued,
+                "The resultSelector should not get exectued if the source Result<T, TError> contains error.");
+            Assert.False(result.HasValue, "Result should not have a value.");
+            Assert.True(result.HasError, "Result should have a error.");
+            Assert.Equal(default(double), result.Value);
+            Assert.Equal("Can not divide '2' with '0'.", result.Error);
         }
 
         [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_True__FLatmaps_Result_String_Double_Whose_Property_HasValue_Is_True__Expects_String_Double_Whose_Property_HasValue_Is_True() {
-            var intParse = ResultParsers.Int("2");
-            var doubleParse = ResultParsers.Double("2.2");
+        public void Result_With_Value_Flatmaps_Result_with_Error__Expects_Result_With_Value() {
+            var flatSelectorExecuted = false;
+            var resultSelectorExectued = false;
+            var errorSelectorExecuted = false;
+            var result = Division(2, 2).FlatMap(x => {
+                flatSelectorExecuted = true;
+                return Division(x, 0);
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
+            });
 
-            var result = intParse.FlatMap(x => doubleParse, x => x);
-            Assert.True(result.HasValue, "Result should have value.");
-            Assert.False(result.HasError, "Result should not have a error value.");
+            Assert.True(errorSelectorExecuted,
+                "Errorselector should not exeuted since the errror came from the result given to the flatselector.");
+            Assert.True(flatSelectorExecuted,
+                "The flatmapSelector should get exectued.");
+            Assert.False(resultSelectorExectued,
+                "The resultSelector should not get executed since flatselector result failed.");
+            Assert.False(result.HasValue, "Result should not have a value.");
+            Assert.True(result.HasError, "Result should have a error.");
+            Assert.Equal(default(double), result.Value);
+            Assert.Equal("Can not divide '1' with '0'.", result.Error);
+        }
+
+        [Fact]
+        public void Result_With_Value_Flatmaps_Result_with_Value__Expects_Result_With_Value() {
+            var flatSelectorExecuted = false;
+            var errorSelectorExecuted = false;
+            var result = Division(2, 2).FlatMap(x => {
+                flatSelectorExecuted = true;
+                return Division(x, 2);
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
+            });
+            Assert.True(flatSelectorExecuted, "flatmapselector should get executed.");
+            Assert.False(errorSelectorExecuted, "Errorselector should not get exeuted.");
+            Assert.True(result.HasValue, "Result should have a value.");
+            Assert.False(result.HasError, "Result should not have a error.");
+            Assert.Equal(0.5d, result.Value);
             Assert.Equal(default(string), result.Error);
-            Assert.Equal(2.2, result.Value);
+        }
+
+        [Fact]
+        public void Result_With_Value_FlatmapsRS_Result_with_Error__Expects_Result_With_Value() {
+            var flatSelectorExecuted = false;
+            var resultSelectorExectued = false;
+            var errorSelectorExecuted = false;
+            var result = Division(2, 2).FlatMap(x => {
+                flatSelectorExecuted = true;
+                return Division(x, 0);
+            }, (y, x) => {
+                resultSelectorExectued = true;
+                return y + x;
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
+            });
+
+            Assert.True(errorSelectorExecuted,
+                "Errorselector should get exeuted since the errror came from the result given to the flatselector.");
+            Assert.True(flatSelectorExecuted,
+                "The flatmapSelector should get exectued.");
+            Assert.False(resultSelectorExectued,
+                "The resultSelector should not get executed since flatselector result failed.");
+            Assert.False(result.HasValue, "Result should not have a value.");
+            Assert.True(result.HasError, "Result should have a error.");
+            Assert.Equal(default(double), result.Value);
+            Assert.Equal("Can not divide '1' with '0'.", result.Error);
+            Assert.False(result.HasValue, "Result should not have a value.");
+            Assert.True(result.HasError, "Result should have a error.");
+            Assert.Equal(default(double), result.Value);
+            Assert.Equal("Can not divide '1' with '0'.", result.Error);
+        }
+
+        [Fact]
+        public void Result_With_Value_FlatmapsRS_Result_with_Value__Expects_Result_With_Value() {
+            var flatSelectorExecuted = false;
+            var resultSelectorExectued = false;
+            var errorSelectorExecuted = false;
+            var result = Division(2, 2).FlatMap(x => {
+                flatSelectorExecuted = true;
+                return Division(x, 2);
+            }, (y, x) => {
+                resultSelectorExectued = true;
+                return y + x;
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
+            });
+            Assert.True(flatSelectorExecuted, "Flatmapselecotr should get executed.");
+            Assert.True(resultSelectorExectued,
+                "ResultSelector should get executed since both source and the result from flatmapselector contains values.");
+            Assert.False(errorSelectorExecuted,
+                "Erroselector should not get executed since both source and the result from flatmapselector contains values.");
+            Assert.True(result.HasValue, "Result should have a value.");
+            Assert.False(result.HasError, "Result should not have a error.");
+            Assert.Equal(1.5d, result.Value);
+            Assert.Equal(default(string), result.Error);
         }
     }
 }
