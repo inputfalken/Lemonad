@@ -80,13 +80,12 @@ function Pack-Package {
   $InputObject `
     | ForEach-Object {
       if ($_.IsRelease) {
-        dotnet pack $_.Path --configuration $Configuration --no-build --output $ArtifactDirectory
+        dotnet pack $_.Path --configuration $Configuration --no-build --output $ArtifactDirectory | Out-Null
         if (!$?) { throw "Could not pack project" }
       }
       $_
     } `
-    | Select-Object Path, Project, LocalVersion, OnlineVersion, IsRelease, @{Name = 'PackageOrNull'; Expression = {Join-Path -Path $ArtifactDirectory -ChildPath "$($_.Path.BaseName).$($_.LocalVersion).nupkg" | Get-Item -ErrorAction SilentlyContinue} } `
-    | Where-Object {$_.Path -ne $null}
+    | Select-Object Path, Project, LocalVersion, OnlineVersion, IsRelease, @{Name = 'PackageOrNull'; Expression = {Join-Path -Path $ArtifactDirectory -ChildPath "$($_.Path.BaseName).$($_.LocalVersion).nupkg" | Get-Item -ErrorAction SilentlyContinue} }
 }
 
 function Upload-Package {
@@ -95,7 +94,7 @@ function Upload-Package {
     if (($_.PackageOrNull -ne $null) -and [bool](Get-Item $_.PackageOrNull -ErrorAction SilentlyContinue) -and ($_.IsRelease)) {
       Write-Host "Releasing Package '$($_.PackageOrNull)'."
       dotnet nuget push $_.PackageOrNull --api-key $env:NUGET_API_KEY --source $Source
-      if (!$?) { throw "Could not push package '$package' to NuGet (source : '$Source')." }
+      if (!$?) { throw "Could not push package '$($_.PackageOrNull)' to NuGet (source : '$Source')." }
     } else {
       Write-Host "Project '$($_.Project)' is not ready for release."
     }
