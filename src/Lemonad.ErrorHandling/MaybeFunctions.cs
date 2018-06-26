@@ -186,14 +186,30 @@ namespace Lemonad.ErrorHandling {
         public static Maybe<TSource> ConvertToMaybe<TSource>(this TSource? source) where TSource : struct =>
             source.HasValue ? Some(source.Value) : None<TSource>();
 
+        /// <summary>
+        /// Converts an <see cref="Maybe{T}"/> to an <see cref="Result{T,TError}"/>.
+        /// </summary>
+        /// <param name="source">
+        /// The element from the <see cref="Maybe{T}"/> to be passed into <see cref="Result{T,TError}"/>.
+        /// </param>
+        /// <param name="errorSelector">
+        /// A function to be executed if there is no value inside the <see cref="Maybe{T}"/>.
+        /// </param>
+        /// <typeparam name="T">
+        /// The type inside the <see cref="Maybe{T}"/>.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        /// The type representing an error for the <see cref="Result{T,TError}"/>.
+        /// </typeparam>
+        /// <returns></returns>
         [Pure]
         public static Result<T, TError>
-            ToResult<T, TError>(this Maybe<T> source, Func<TError> leftSelector) {
+            ToResult<T, TError>(this Maybe<T> source, Func<TError> errorSelector) {
             if (source.HasValue)
                 return source.Value;
-            return leftSelector != null
-                ? leftSelector()
-                : throw new ArgumentNullException(nameof(leftSelector));
+            return errorSelector != null
+                ? errorSelector()
+                : throw new ArgumentNullException(nameof(errorSelector));
         }
     }
 }
