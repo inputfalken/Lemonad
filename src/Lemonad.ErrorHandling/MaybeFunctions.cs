@@ -137,10 +137,22 @@ namespace Lemonad.ErrorHandling {
         public static IEnumerable<TResult> NoValues<TSource, TResult>(this IEnumerable<Maybe<TSource>> source,
             Func<TResult> selector) => source.Where(x => x.HasValue == false).Select(_ => selector());
 
+        /// <summary>
+        /// Works like <see cref="None{TSource}(TSource)"/> but with an <paramref name="predicate"/> to test the element.
+        /// </summary>
+        /// <param name="source">
+        /// The element to be passed into <see cref="Maybe{T}"/>.
+        /// </param>
+        /// <param name="predicate">
+        /// A function to test the element.
+        /// </param>
+        /// <typeparam name="TSource">
+        /// The type of the <paramref name="source"/>.
+        /// </typeparam>
         [Pure]
-        public static Maybe<TSource> None<TSource>(this TSource item, Func<TSource, bool> predicate) =>
+        public static Maybe<TSource> None<TSource>(this TSource source, Func<TSource, bool> predicate) =>
             predicate != null
-                ? Some(item).Filter(x => !predicate(x))
+                ? Some(source).Filter(x => !predicate(x))
                 : throw new ArgumentNullException(nameof(predicate));
 
         [Pure]
