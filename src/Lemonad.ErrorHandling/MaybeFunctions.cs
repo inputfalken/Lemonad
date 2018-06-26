@@ -119,6 +119,21 @@ namespace Lemonad.ErrorHandling {
             Func<TSource, TResult> someSelector, Func<TResult> noneSelector) =>
             source.Select(x => x.Match(someSelector, noneSelector));
 
+        /// <summary>
+        /// Converts an <see cref="IEnumerable{T}"/> of <see cref="Maybe{T}"/> into an <see cref="IEnumerable{T}"/> of <typeparamref name="TResult"/> for each element which do not have a value.
+        /// </summary>
+        /// <param name="source">
+        /// The <see cref="IEnumerable{T}"/> of <see cref="Maybe{T}"/>.
+        /// </param>
+        /// <param name="selector">
+        /// A function to return a value for each <see cref="Maybe{T}"/>.
+        /// </param>
+        /// <typeparam name="TSource">
+        /// The type of the <see cref="Maybe{T}"/>.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// The return type of cuntion <paramref name="selector"/>.
+        /// </typeparam>
         public static IEnumerable<TResult> NoValues<TSource, TResult>(this IEnumerable<Maybe<TSource>> source,
             Func<TResult> selector) => source.Where(x => x.HasValue == false).Select(_ => selector());
 
