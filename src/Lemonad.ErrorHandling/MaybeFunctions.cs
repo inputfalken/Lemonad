@@ -173,9 +173,18 @@ namespace Lemonad.ErrorHandling {
                 ? Some(source).Filter(predicate)
                 : throw new ArgumentNullException(nameof(predicate));
 
+        /// <summary>
+        /// Converts an <see cref="Nullable{T}"/> to an <see cref="Maybe{T}"/>.
+        /// </summary>
+        /// <param name="source">
+        /// The element from the <see cref="Nullable{T}"/> to be passed into <see cref="Maybe{T}"/>.
+        /// </param>
+        /// <typeparam name="TSource">
+        /// The type of the <paramref name="source"/>.
+        /// </typeparam>
         [Pure]
-        public static Maybe<TSource> ConvertToMaybe<TSource>(this TSource? item) where TSource : struct =>
-            item.HasValue ? Some(item.Value) : None<TSource>();
+        public static Maybe<TSource> ConvertToMaybe<TSource>(this TSource? source) where TSource : struct =>
+            source.HasValue ? Some(source.Value) : None<TSource>();
 
         [Pure]
         public static Result<T, TError>
