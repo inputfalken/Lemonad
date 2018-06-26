@@ -155,10 +155,22 @@ namespace Lemonad.ErrorHandling {
                 ? Some(source).Filter(x => !predicate(x))
                 : throw new ArgumentNullException(nameof(predicate));
 
+        /// <summary>
+        /// Works like <see cref="Some{TSource}(TSource)"/> but with an <paramref name="predicate"/> to test the element.
+        /// </summary>
+        /// <param name="source">
+        /// The element to be passed into <see cref="Maybe{T}"/>.
+        /// </param>
+        /// <param name="predicate">
+        /// A function to test the element.
+        /// </param>
+        /// <typeparam name="TSource">
+        /// The type of the <paramref name="source"/>.
+        /// </typeparam>
         [Pure]
-        public static Maybe<TSource> Some<TSource>(this TSource item, Func<TSource, bool> predicate) =>
+        public static Maybe<TSource> Some<TSource>(this TSource source, Func<TSource, bool> predicate) =>
             predicate != null
-                ? Some(item).Filter(predicate)
+                ? Some(source).Filter(predicate)
                 : throw new ArgumentNullException(nameof(predicate));
 
         [Pure]
