@@ -11,7 +11,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Error_Flatmaps_Result_with_Error__Expects_Result_With_Value() {
+        public void Result_With_Error_Flatmaps_Result_with_Error__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
             var result = Division(2, 0).FlatMap(x => {
@@ -33,7 +33,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Error_Flatmaps_Result_with_Value__Expects_Result_With_Value() {
+        public void Result_With_Error_Flatmaps_Result_with_Value__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
             var result = Division(2, 0).FlatMap(x => {
@@ -55,7 +55,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Error_FlatmapsRS_Result_with_Error__Expects_Result_With_Value() {
+        public void Result_With_Error_FlatmapsRS_Result_with_Error__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
             var errorSelectorExecuted = false;
@@ -83,7 +83,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Error_FlatmapsRS_Result_with_Value__Expects_Result_With_Value() {
+        public void Result_With_Error_FlatmapsRS_Result_with_Value__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
             var errorSelectorExecuted = false;
@@ -155,7 +155,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Value_FlatmapsRS_Result_with_Error__Expects_Result_With_Value() {
+        public void Result_With_Value_FlatmapsRS_Result_with_Error__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
             var errorSelectorExecuted = false;
