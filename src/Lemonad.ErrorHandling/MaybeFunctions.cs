@@ -183,7 +183,7 @@ namespace Lemonad.ErrorHandling {
         /// The type of the <paramref name="source"/>.
         /// </typeparam>
         [Pure]
-        public static Maybe<TSource> ConvertToMaybe<TSource>(this TSource? source) where TSource : struct =>
+        public static Maybe<TSource> ToMaybe<TSource>(this TSource? source) where TSource : struct =>
             source.HasValue ? Some(source.Value) : None<TSource>();
 
         /// <summary>
