@@ -35,22 +35,6 @@ references:
   commentId: T:Lemonad.ErrorHandling.Maybe
   fullName: Lemonad.ErrorHandling.Maybe
   nameWithType: Maybe
-- uid: Lemonad.ErrorHandling.Maybe.ConvertToMaybe*
-  name: ConvertToMaybe
-  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ConvertToMaybe_
-  commentId: Overload:Lemonad.ErrorHandling.Maybe.ConvertToMaybe
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Maybe.ConvertToMaybe
-  nameWithType: Maybe.ConvertToMaybe
-- uid: Lemonad.ErrorHandling.Maybe.ConvertToMaybe``1(System.Nullable{``0})
-  name: ConvertToMaybe<TSource>(Nullable<TSource>)
-  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ConvertToMaybe__1_System_Nullable___0__
-  commentId: M:Lemonad.ErrorHandling.Maybe.ConvertToMaybe``1(System.Nullable{``0})
-  name.vb: ConvertToMaybe(Of TSource)(Nullable(Of TSource))
-  fullName: Lemonad.ErrorHandling.Maybe.ConvertToMaybe<TSource>(System.Nullable<TSource>)
-  fullName.vb: Lemonad.ErrorHandling.Maybe.ConvertToMaybe(Of TSource)(System.Nullable(Of TSource))
-  nameWithType: Maybe.ConvertToMaybe<TSource>(Nullable<TSource>)
-  nameWithType.vb: Maybe.ConvertToMaybe(Of TSource)(Nullable(Of TSource))
 - uid: Lemonad.ErrorHandling.Maybe.FirstMaybe*
   name: FirstMaybe
   href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_FirstMaybe_
@@ -167,6 +151,22 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Maybe.Some(Of TSource)(TSource, System.Func(Of TSource, System.Boolean))
   nameWithType: Maybe.Some<TSource>(TSource, Func<TSource, Boolean>)
   nameWithType.vb: Maybe.Some(Of TSource)(TSource, Func(Of TSource, Boolean))
+- uid: Lemonad.ErrorHandling.Maybe.ToMaybe*
+  name: ToMaybe
+  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToMaybe_
+  commentId: Overload:Lemonad.ErrorHandling.Maybe.ToMaybe
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Maybe.ToMaybe
+  nameWithType: Maybe.ToMaybe
+- uid: Lemonad.ErrorHandling.Maybe.ToMaybe``1(System.Nullable{``0})
+  name: ToMaybe<TSource>(Nullable<TSource>)
+  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToMaybe__1_System_Nullable___0__
+  commentId: M:Lemonad.ErrorHandling.Maybe.ToMaybe``1(System.Nullable{``0})
+  name.vb: ToMaybe(Of TSource)(Nullable(Of TSource))
+  fullName: Lemonad.ErrorHandling.Maybe.ToMaybe<TSource>(System.Nullable<TSource>)
+  fullName.vb: Lemonad.ErrorHandling.Maybe.ToMaybe(Of TSource)(System.Nullable(Of TSource))
+  nameWithType: Maybe.ToMaybe<TSource>(Nullable<TSource>)
+  nameWithType.vb: Maybe.ToMaybe(Of TSource)(Nullable(Of TSource))
 - uid: Lemonad.ErrorHandling.Maybe.ToResult*
   name: ToResult
   href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToResult_
