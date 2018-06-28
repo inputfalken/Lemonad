@@ -205,7 +205,7 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public Maybe<TResult> FlatMap<TResult>(
             Func<T, TResult?> flatSelector) where TResult : struct =>
-            HasValue ? flatSelector(Value).ConvertToMaybe() : Maybe<TResult>.None;
+            HasValue ? flatSelector(Value).ToMaybe() : Maybe<TResult>.None;
 
         /// <summary>
         /// Filters the <see cref="Maybe{T}"/> to see if <typeparamref name="T"/> is null.
@@ -252,6 +252,6 @@ namespace Lemonad.ErrorHandling {
         public Maybe<TResult> FlatMap<TFlatMap, TResult>(
             Func<T, TFlatMap?> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct => FlatMap(
-            src => flatMapSelector(src).ConvertToMaybe().Map(elem => resultSelector(src, elem)));
+            src => flatMapSelector(src).ToMaybe().Map(elem => resultSelector(src, elem)));
     }
 }
