@@ -1,59 +1,44 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
-    public class MaperrorTests {
-        [Fact]
-        public void Result_String_Int_Whose_Property_HasValue_Is_False() {
-            var isExectued = false;
-            var mapOk = ResultParsers.Int("foo").MapError(i => {
-                isExectued = true;
-                return i;
-            });
+    public class MapErrorTests {
+        private static Result<double, string> Division(double left, double right) {
+            if (right == 0)
+                return $"Can not divide '{left}' with '{right}'.";
 
-            Assert.True(isExectued, "Should get exectued.");
-            Assert.True(mapOk.HasError, "Result should have a error value.");
-            Assert.False(mapOk.HasValue, "Result should have error.");
-            Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", mapOk.Error);
-            Assert.Equal(default(int), mapOk.Value);
+            return left / right;
         }
 
         [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_False__Null_Selector__Expects_ArgumentNullExcetpion() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, string> selector = null;
-                var mapOk = ResultParsers.Int("foo").MapError(selector);
+        public void Result_With_Error_Maps__Expects_Error_To_Be_Mapped() {
+            var errorSelectorInvoked = false;
+            var result = Division(10, 0).MapError(s => {
+                errorSelectorInvoked = true;
+                return s.ToUpper();
             });
+
+            Assert.True(errorSelectorInvoked,
+                "Errorselector should get exeuted since there is an error in the result.");
+            Assert.False(result.HasValue, "Result should not have a value.");
+            Assert.True(result.HasError, "Result should have a error.");
+            Assert.Equal(default(double), result.Value);
+            Assert.Equal("CAN NOT DIVIDE '10' WITH '0'.", result.Error);
         }
 
         [Fact]
-        public void Result_String_Int_Whose_Property_HasValue_Is_True() {
-            var isExectued = false;
-            var mapOk = ResultParsers.Int("2").MapError(i => {
-                isExectued = true;
-                return i;
+        public void Result_With_Value_Maps__Expects_Error_To_Not_Be_Mapped() {
+            var errorSelectorInvoked = false;
+            var result = Division(10, 2).MapError(s => {
+                errorSelectorInvoked = true;
+                return s.ToUpper();
             });
 
-            Assert.False(isExectued, "Should not get exectued.");
-            Assert.True(mapOk.HasValue, "Result should have value.");
-            Assert.False(mapOk.HasError, "Result should not have a error value.");
-            Assert.Equal(default(string), mapOk.Error);
-            Assert.Equal(2, mapOk.Value);
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_True__Null_Selector__Expects_No_ArgumentNullExcetpion() {
-            var exception = Record.Exception(() => {
-                Func<string, string> selector = null;
-                var mapOk = ResultParsers.Int("2").MapError(selector);
-                Assert.True(mapOk.HasValue, "Result should have value.");
-                Assert.False(mapOk.HasError, "Result should not have a error value.");
-                Assert.Equal(2, mapOk.Value);
-                Assert.Equal(default(string), mapOk.Error);
-            });
-            Assert.Null(exception);
+            Assert.False(errorSelectorInvoked,
+                "Errorselector not should get exeuted since there is an value in the result.");
+            Assert.True(result.HasValue, "Result should have a value.");
+            Assert.False(result.HasError, "Result should not have a error.");
+            Assert.Equal(5d, result.Value);
+            Assert.Equal(default(string), result.Error);
         }
     }
 }
