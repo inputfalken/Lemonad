@@ -5,142 +5,54 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class MapTests {
         [Fact]
         public void Result_String_Int_Whose_Property_HasValue_Is_False() {
-            var result = ResultParsers.Int("foo").FullMap(i => i * 2, s => $"ERROR: {s}");
-
-            Assert.True(result.HasError, "Result should have a error value.");
-            Assert.False(result.HasValue, "Result should have error.");
-            Assert.Equal("ERROR: Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
-            Assert.Equal(default(int), result.Value);
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_False__Null__OkSelector__Expects_No__ArgumentNullExceptiion() {
-            var exception = Record.Exception(() => {
-                Func<string, string> errorselector = null;
-                Func<int, int> leftSelector = null;
-                var result = ResultParsers.Int("foo").FullMap(leftSelector, s => $"ERROR: {s}");
-
-                Assert.True(result.HasError, "Result should have a error value.");
-                Assert.False(result.HasValue, "Result should have error.");
-                Assert.Equal("ERROR: Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
-                Assert.Equal(default(int), result.Value);
-            });
-            Assert.Null(exception);
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_False__Null_errorSelector__Expects_ArgumentNullExceptiion() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, string> errorselector = null;
-                var result = ResultParsers.Int("foo").FullMap(i => i * 2, errorselector);
-
-                Assert.False(result.HasError, "Result should not have a error value.");
-                Assert.True(result.HasValue, "Result should have value.");
-                Assert.Equal(default(string), result.Error);
-                Assert.Equal(4, result.Value);
-            });
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_False__Null_errorSelector_And_Null_OkSelector__Expects_ArgumentNullExceptiion() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, string> errorselector = null;
-                Func<int, int> leftselector = null;
-                var result = ResultParsers.Int("foo").FullMap(leftselector, errorselector);
-
-                Assert.False(result.HasError, "Result should not have a error value.");
-                Assert.True(result.HasValue, "Result should have value.");
-                Assert.Equal(default(string), result.Error);
-                Assert.Equal(4, result.Value);
-            });
-        }
-
-        [Fact]
-        public void Result_String_Int_Whose_Property_HasValue_Is_False__Should_Not_Execute_OkSelector() {
             var isExectued = false;
-            var result = ResultParsers.Int("foo").FullMap(i => {
+            var mapOk = ResultParsers.Int("foo").Map(i => {
                 isExectued = true;
                 return i * 2;
-            }, s => $"ERROR: {s}");
+            });
 
-            Assert.False(isExectued, "Okselector should not be exectued.");
-            Assert.True(result.HasError, "Result should have a error value.");
-            Assert.False(result.HasValue, "Result should have error.");
-            Assert.Equal("ERROR: Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
-            Assert.Equal(default(int), result.Value);
+            Assert.False(isExectued, "Should not get exectued.");
+            Assert.True(mapOk.HasError, "Result should have a error value.");
+            Assert.False(mapOk.HasValue, "Result should have error.");
+            Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", mapOk.Error);
+            Assert.Equal(default(int), mapOk.Value);
+        }
+
+        [Fact]
+        public void
+            Result_String_Int_Whose_Property_HasValue_Is_False__Null_Selector__Expects_No_ArgumentNullExcetpion() {
+            var exception = Record.Exception(() => {
+                Func<int, int> selector = null;
+                var mapOk = ResultParsers.Int("foo").Map(selector);
+                Assert.True(mapOk.HasError, "Result should have a error value.");
+                Assert.False(mapOk.HasValue, "Result should have error.");
+                Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", mapOk.Error);
+                Assert.Equal(default(int), mapOk.Value);
+            });
+            Assert.Null(exception);
         }
 
         [Fact]
         public void Result_String_Int_Whose_Property_HasValue_Is_True() {
-            var result = ResultParsers.Int("2").FullMap(i => i * 2, s => $"ERROR: {s}");
-
-            Assert.False(result.HasError, "Result should not have a error value.");
-            Assert.True(result.HasValue, "Result should have value.");
-            Assert.Equal(default(string), result.Error);
-            Assert.Equal(4, result.Value);
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_True__Null__OkSelector__Expects_ArgumentNullExceptiion() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, string> errorselector = null;
-                Func<int, int> leftSelector = null;
-                var result = ResultParsers.Int("2").FullMap(leftSelector, s => $"ERROR: {s}");
-
-                Assert.False(result.HasError, "Result should not have a error value.");
-                Assert.True(result.HasValue, "Result should have value.");
-                Assert.Equal(default(string), result.Error);
-                Assert.Equal(4, result.Value);
-            });
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_True__Null_errorSelector__Expects_No_ArgumentNullExceptiion() {
-            var exception = Record.Exception(() => {
-                Func<string, string> errorselector = null;
-                var result = ResultParsers.Int("2").FullMap(i => i * 2, errorselector);
-
-                Assert.False(result.HasError, "Result should not have a error value.");
-                Assert.True(result.HasValue, "Result should have value.");
-                Assert.Equal(default(string), result.Error);
-                Assert.Equal(4, result.Value);
-            });
-            Assert.Null(exception);
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_True__Null_errorSelector_And_Null_OkSelector__Expects_ArgumentNullExceptiion() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, string> errorselector = null;
-                Func<int, int> leftSelector = null;
-                var result = ResultParsers.Int("2").FullMap(leftSelector, errorselector);
-
-                Assert.False(result.HasError, "Result should not have a error value.");
-                Assert.True(result.HasValue, "Result should have value.");
-                Assert.Equal(default(string), result.Error);
-                Assert.Equal(4, result.Value);
-            });
-        }
-
-        [Fact]
-        public void Result_String_Int_Whose_Property_HasValue_Is_True__Should_Not_Execute_errorSelector() {
             var isExectued = false;
-            var result = ResultParsers.Int("2").FullMap( i => i * 2, s => {
+            var mapOk = ResultParsers.Int("2").Map(i => {
                 isExectued = true;
-                return $"ERROR: {s}";
+                return i * 2;
             });
 
-            Assert.False(isExectued, "errorselector should not be exectued.");
-            Assert.False(result.HasError, "Result should not have a error value.");
-            Assert.True(result.HasValue, "Result should have value.");
-            Assert.Equal(default(string), result.Error);
-            Assert.Equal(4, result.Value);
+            Assert.True(isExectued, "Should get exectued.");
+            Assert.True(mapOk.HasValue, "Result should have value.");
+            Assert.False(mapOk.HasError, "Result should not have a error value.");
+            Assert.Equal(default(string), mapOk.Error);
+            Assert.Equal(4, mapOk.Value);
+        }
+
+        [Fact]
+        public void Result_String_Int_Whose_Property_HasValue_Is_True__Null_Selector__Expects_ArgumentNullExcetpion() {
+            Assert.Throws<ArgumentNullException>(() => {
+                Func<int, int> selector = null;
+                var mapOk = ResultParsers.Int("2").Map(selector);
+            });
         }
     }
 }
