@@ -1,58 +1,50 @@
 ﻿using System;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Test.Result.Tests {
-    public class MapTests {
-        [Fact]
-        public void Result_String_Int_Whose_Property_HasValue_Is_False() {
-            var isExectued = false;
-            var mapOk = ResultParsers.Int("foo").Map(i => {
-                isExectued = true;
-                return i * 2;
-            });
+namespace Lemonad.ErrorHandling.Test.Result.Tests
+{
+    public class MapTests
+    {
+        private static Result<double, string> Division(double left, double right)
+        {
+            if (right == 0)
+                return $"Can not divide '{left}' with '{right}'.";
 
-            Assert.False(isExectued, "Should not get exectued.");
-            Assert.True(mapOk.HasError, "Result should have a error value.");
-            Assert.False(mapOk.HasValue, "Result should have error.");
-            Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", mapOk.Error);
-            Assert.Equal(default(int), mapOk.Value);
+            return left / right;
         }
 
         [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_False__Null_Selector__Expects_No_ArgumentNullExcetpion() {
-            var exception = Record.Exception(() => {
-                Func<int, int> selector = null;
-                var mapOk = ResultParsers.Int("foo").Map(selector);
-                Assert.True(mapOk.HasError, "Result should have a error value.");
-                Assert.False(mapOk.HasValue, "Result should have error.");
-                Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", mapOk.Error);
-                Assert.Equal(default(int), mapOk.Value);
+        public void Result_With_Error_Maps__Expects_Selector_Never_Be_Executed()
+        {
+            var selectorExectued = false;
+            var division = Division(2, 0).Map(x =>
+            {
+                selectorExectued = true;
+                return x * 8;
             });
-            Assert.Null(exception);
+            
+            Assert.False(selectorExectued, "The selector function should never get executed if there's no value in the Result<T, TError>.");
+            Assert.True(division.HasError, "Result should have error.");
+            Assert.False(division.HasValue, "Result should not have a value.");
+            Assert.Equal(default(double), division.Value);
+            Assert.Equal("Can not divide '2' with '0'.", division.Error);
         }
-
+        
         [Fact]
-        public void Result_String_Int_Whose_Property_HasValue_Is_True() {
-            var isExectued = false;
-            var mapOk = ResultParsers.Int("2").Map(i => {
-                isExectued = true;
-                return i * 2;
+        public void Result_With_Value_Maps__Expects_Selector_Be_Executed_And_Value_To_Be_Mapped()
+        {
+            var selectorExectued = false;
+            var division = Division(10, 2).Map(x =>
+            {
+                selectorExectued = true;
+                return x * 4;
             });
-
-            Assert.True(isExectued, "Should get exectued.");
-            Assert.True(mapOk.HasValue, "Result should have value.");
-            Assert.False(mapOk.HasError, "Result should not have a error value.");
-            Assert.Equal(default(string), mapOk.Error);
-            Assert.Equal(4, mapOk.Value);
-        }
-
-        [Fact]
-        public void Result_String_Int_Whose_Property_HasValue_Is_True__Null_Selector__Expects_ArgumentNullExcetpion() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<int, int> selector = null;
-                var mapOk = ResultParsers.Int("2").Map(selector);
-            });
+            
+            Assert.True(selectorExectued, "The selector function should get executed since the result has value.");
+            Assert.False(division.HasError, "Result not should have error.");
+            Assert.True(division.HasValue, "Result should have a value.");
+            Assert.Equal(20d, division.Value);
+            Assert.Equal(default(string), division.Error);
         }
     }
 }
