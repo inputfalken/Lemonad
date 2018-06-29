@@ -1,146 +1,53 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class FullMapTests {
-        [Fact]
-        public void Result_String_Int_Whose_Property_HasValue_Is_False() {
-            var result = ResultParsers.Int("foo").FullMap(i => i * 2, s => $"ERROR: {s}");
+        private static Result<double, string> Division(double left, double right) {
+            if (right == 0)
+                return $"Can not divide '{left}' with '{right}'.";
 
-            Assert.True(result.HasError, "Result should have a error value.");
-            Assert.False(result.HasValue, "Result should have error.");
-            Assert.Equal("ERROR: Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
-            Assert.Equal(default(int), result.Value);
+            return left / right;
         }
 
         [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_False__Null__OkSelector__Expects_No__ArgumentNullExceptiion() {
-            var exception = Record.Exception(() => {
-                Func<string, string> errorselector = null;
-                Func<int, int> leftSelector = null;
-                var result = ResultParsers.Int("foo").FullMap(leftSelector, s => $"ERROR: {s}");
-
-                Assert.True(result.HasError, "Result should have a error value.");
-                Assert.False(result.HasValue, "Result should have error.");
-                Assert.Equal("ERROR: Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
-                Assert.Equal(default(int), result.Value);
+        public void Result_With_Error_Maps__Expects_Selector_Never__To_Be_Executed_And_ErrorSelector_To_Be_Invoked() {
+            var selectorExectued = false;
+            var errorSelectorExectued = false;
+            var result = Division(10, 0).FullMap(d => {
+                selectorExectued = true;
+                return d * 2;
+            }, s => {
+                errorSelectorExectued = true;
+                return s.ToUpper();
             });
-            Assert.Null(exception);
+
+            Assert.False(selectorExectued, "Should not get exectued since there's an error from the result.");
+            Assert.True(errorSelectorExectued, "Should get exectued since there's an error from the result.");
+            Assert.Equal(default, result.Value);
+            Assert.Equal("CAN NOT DIVIDE '10' WITH '0'.", result.Error);
+            Assert.True(result.HasError, "Result should have error.");
+            Assert.False(result.HasValue, "Result should not have value.");
         }
 
         [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_False__Null_errorSelector__Expects_ArgumentNullExceptiion() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, string> errorselector = null;
-                var result = ResultParsers.Int("foo").FullMap(i => i * 2, errorselector);
-
-                Assert.False(result.HasError, "Result should not have a error value.");
-                Assert.True(result.HasValue, "Result should have value.");
-                Assert.Equal(default(string), result.Error);
-                Assert.Equal(4, result.Value);
+        public void Result_With_Value_Maps__Expects_Selector_To_Be_Executed_And_ErrorSelector_To_Never_Be_Invoked() {
+            var selectorExectued = false;
+            var errorSelectorExectued = false;
+            var result = Division(10, 2).FullMap(d => {
+                selectorExectued = true;
+                return d * 10;
+            }, s => {
+                errorSelectorExectued = true;
+                return s.ToUpper();
             });
-        }
 
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_False__Null_errorSelector_And_Null_OkSelector__Expects_ArgumentNullExceptiion() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, string> errorselector = null;
-                Func<int, int> leftselector = null;
-                var result = ResultParsers.Int("foo").FullMap(leftselector, errorselector);
-
-                Assert.False(result.HasError, "Result should not have a error value.");
-                Assert.True(result.HasValue, "Result should have value.");
-                Assert.Equal(default(string), result.Error);
-                Assert.Equal(4, result.Value);
-            });
-        }
-
-        [Fact]
-        public void Result_String_Int_Whose_Property_HasValue_Is_False__Should_Not_Execute_OkSelector() {
-            var isExectued = false;
-            var result = ResultParsers.Int("foo").FullMap(i => {
-                isExectued = true;
-                return i * 2;
-            }, s => $"ERROR: {s}");
-
-            Assert.False(isExectued, "Okselector should not be exectued.");
-            Assert.True(result.HasError, "Result should have a error value.");
-            Assert.False(result.HasValue, "Result should have error.");
-            Assert.Equal("ERROR: Could not parse type System.String(\"foo\") into System.Int32.", result.Error);
-            Assert.Equal(default(int), result.Value);
-        }
-
-        [Fact]
-        public void Result_String_Int_Whose_Property_HasValue_Is_True() {
-            var result = ResultParsers.Int("2").FullMap(i => i * 2, s => $"ERROR: {s}");
-
-            Assert.False(result.HasError, "Result should not have a error value.");
+            Assert.True(selectorExectued, "Should get exectued since there's an value from the result.");
+            Assert.False(errorSelectorExectued, "Should not get exectued since there's an value from the result.");
+            Assert.Equal(50, result.Value);
+            Assert.Equal(default, result.Error);
+            Assert.False(result.HasError, "Result should not have error.");
             Assert.True(result.HasValue, "Result should have value.");
-            Assert.Equal(default(string), result.Error);
-            Assert.Equal(4, result.Value);
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_True__Null__OkSelector__Expects_ArgumentNullExceptiion() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, string> errorselector = null;
-                Func<int, int> leftSelector = null;
-                var result = ResultParsers.Int("2").FullMap(leftSelector, s => $"ERROR: {s}");
-
-                Assert.False(result.HasError, "Result should not have a error value.");
-                Assert.True(result.HasValue, "Result should have value.");
-                Assert.Equal(default(string), result.Error);
-                Assert.Equal(4, result.Value);
-            });
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_True__Null_errorSelector__Expects_No_ArgumentNullExceptiion() {
-            var exception = Record.Exception(() => {
-                Func<string, string> errorselector = null;
-                var result = ResultParsers.Int("2").FullMap(i => i * 2, errorselector);
-
-                Assert.False(result.HasError, "Result should not have a error value.");
-                Assert.True(result.HasValue, "Result should have value.");
-                Assert.Equal(default(string), result.Error);
-                Assert.Equal(4, result.Value);
-            });
-            Assert.Null(exception);
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_True__Null_errorSelector_And_Null_OkSelector__Expects_ArgumentNullExceptiion() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, string> errorselector = null;
-                Func<int, int> leftSelector = null;
-                var result = ResultParsers.Int("2").FullMap(leftSelector, errorselector);
-
-                Assert.False(result.HasError, "Result should not have a error value.");
-                Assert.True(result.HasValue, "Result should have value.");
-                Assert.Equal(default(string), result.Error);
-                Assert.Equal(4, result.Value);
-            });
-        }
-
-        [Fact]
-        public void Result_String_Int_Whose_Property_HasValue_Is_True__Should_Not_Execute_errorSelector() {
-            var isExectued = false;
-            var result = ResultParsers.Int("2").FullMap( i => i * 2, s => {
-                isExectued = true;
-                return $"ERROR: {s}";
-            });
-
-            Assert.False(isExectued, "errorselector should not be exectued.");
-            Assert.False(result.HasError, "Result should not have a error value.");
-            Assert.True(result.HasValue, "Result should have value.");
-            Assert.Equal(default(string), result.Error);
-            Assert.Equal(4, result.Value);
+            
         }
     }
 }
