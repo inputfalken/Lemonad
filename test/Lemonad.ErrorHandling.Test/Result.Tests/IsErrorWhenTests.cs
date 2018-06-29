@@ -2,7 +2,7 @@
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
-    public class errorWhenTests {
+    public class ErrorWhenTests {
         [Fact]
         public void
             Result_Int_Whose_Property_HasValue_Is_True_With_False_Predicate_And_Null_errorSelector__Expects_No_ArgumentNullException_Thrown() {
