@@ -10,7 +10,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Error_Maps__Expects_Selector_Never__To_Be_Executed_And_ErrorSelector_To_Be_Invoked() {
+        public void Result_With_Error_Expects__Selector_Never__To_Be_Executed_And_ErrorSelector_To_Be_Invoked() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
             var result = Division(10, 0).FullMap(d => {
@@ -30,7 +30,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Value_Maps__Expects_Selector_To_Be_Executed_And_ErrorSelector_To_Never_Be_Invoked() {
+        public void Result_With_Value_Expects__Selector_To_Be_Executed_And_ErrorSelector_To_Never_Be_Invoked() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
             var result = Division(10, 2).FullMap(d => {

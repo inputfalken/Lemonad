@@ -10,7 +10,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Error_Maps__Expects_Error_To_Be_Mapped() {
+        public void Result_With_Error__Expects_Error_To_Be_Mapped() {
             var errorSelectorInvoked = false;
             var result = Division(10, 0).MapError(s => {
                 errorSelectorInvoked = true;
@@ -26,7 +26,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Value_Maps__Expects_Error_To_Not_Be_Mapped() {
+        public void Result_With_Value__Expects_Error_To_Not_Be_Mapped() {
             var errorSelectorInvoked = false;
             var result = Division(10, 2).MapError(s => {
                 errorSelectorInvoked = true;
