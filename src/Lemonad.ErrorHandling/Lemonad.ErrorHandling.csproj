@@ -12,4 +12,7 @@
     <Authors>Robert Andersson</Authors>
     <Product>Lemonad.ErrorHandling</Product>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\Lemonad.ErrorHandling.xml</DocumentationFile>
+  </PropertyGroup>
 </Project>
