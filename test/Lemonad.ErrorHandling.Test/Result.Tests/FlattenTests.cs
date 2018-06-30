@@ -1,5 +1,4 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class FlattenTests {
@@ -8,88 +7,6 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 return $"Can not divide '{left}' with '{right}'.";
 
             return left / right;
-        }
-
-        [Fact]
-        public void Result_With_Error_Flatmaps_Result_with_Error_Without_ErrorSelector__Expects_Result_With_Error() {
-            var flatSelectorExecuted = false;
-            var result = Division(2, 0).Flatten(x => {
-                flatSelectorExecuted = true;
-                return Division(x, 0);
-            });
-
-            Assert.False(flatSelectorExecuted,
-                "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default(double), result.Value);
-            Assert.Equal("Can not divide '2' with '0'.", result.Error);
-        }
-
-        [Fact]
-        public void Result_With_Error_Flatmaps_Result_with_Value_Without_ErrorSelector__Expects_Result_With_Error() {
-            var flatSelectorExecuted = false;
-            var result = Division(2, 0).Flatten(x => {
-                flatSelectorExecuted = true;
-                return Division(x, 2);
-            });
-
-            Assert.False(flatSelectorExecuted,
-                "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default(double), result.Value);
-            Assert.Equal("Can not divide '2' with '0'.", result.Error);
-        }
-
-        [Fact]
-        public void Result_With_Value_Flatmaps_Result_with_Error_Without_ErrorSelector__Expects_Result_With_Error() {
-            var flatSelectorExecuted = false;
-            var result = Division(2, 2).FlatMap(x => {
-                flatSelectorExecuted = true;
-                return Division(x, 0);
-            });
-
-            Assert.True(flatSelectorExecuted,
-                "The flatmapSelector should get exectued.");
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default(double), result.Value);
-            Assert.Equal("Can not divide '1' with '0'.", result.Error);
-        }
-
-        [Fact]
-        public void Result_With_Value_Flatmaps_Result_with_Value_Without_ErrorSelector__Expects_Result_With_Value() {
-            var flatSelectorExecuted = false;
-            var result = Division(2, 2).Flatten(x => {
-                flatSelectorExecuted = true;
-                return Division(x, 2);
-            });
-            Assert.True(flatSelectorExecuted, "flatmapselector should get executed.");
-            Assert.True(result.HasValue, "Result should have a value.");
-            Assert.False(result.HasError, "Result should not have a error.");
-            Assert.Equal(1, result.Value);
-            Assert.Equal(default(string), result.Error);
-        }
-
-        [Fact]
-        public void Result_With_Value_FlatmapsRS_Result_with_Error_Without_ErrorSelector__Expects_Result_With_Error() {
-            var flatSelectorExecuted = false;
-            var result = Division(2, 2).Flatten(x => {
-                flatSelectorExecuted = true;
-                return Division(x, 0);
-            });
-
-            Assert.True(flatSelectorExecuted,
-                "The flatselector should not get executed since flatselector result failed.");
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default(double), result.Value);
-            Assert.Equal("Can not divide '1' with '0'.", result.Error);
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default(double), result.Value);
-            Assert.Equal("Can not divide '1' with '0'.", result.Error);
         }
 
         [Fact]
@@ -110,7 +27,23 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
             Assert.False(result.HasValue, "Result should not have a value.");
             Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default(double), result.Value);
+            Assert.Equal(default, result.Value);
+            Assert.Equal("Can not divide '2' with '0'.", result.Error);
+        }
+
+        [Fact]
+        public void Result_With_Error_Flatmaps_Result_with_Error_Without_ErrorSelector__Expects_Result_With_Error() {
+            var flatSelectorExecuted = false;
+            var result = Division(2, 0).Flatten(x => {
+                flatSelectorExecuted = true;
+                return Division(x, 0);
+            });
+
+            Assert.False(flatSelectorExecuted,
+                "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
+            Assert.False(result.HasValue, "Result should not have a value.");
+            Assert.True(result.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Value);
             Assert.Equal("Can not divide '2' with '0'.", result.Error);
         }
 
@@ -132,7 +65,23 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
             Assert.False(result.HasValue, "Result should not have a value.");
             Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default(double), result.Value);
+            Assert.Equal(default, result.Value);
+            Assert.Equal("Can not divide '2' with '0'.", result.Error);
+        }
+
+        [Fact]
+        public void Result_With_Error_Flatmaps_Result_with_Value_Without_ErrorSelector__Expects_Result_With_Error() {
+            var flatSelectorExecuted = false;
+            var result = Division(2, 0).Flatten(x => {
+                flatSelectorExecuted = true;
+                return Division(x, 2);
+            });
+
+            Assert.False(flatSelectorExecuted,
+                "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
+            Assert.False(result.HasValue, "Result should not have a value.");
+            Assert.True(result.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Value);
             Assert.Equal("Can not divide '2' with '0'.", result.Error);
         }
 
@@ -154,7 +103,23 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 "The flatmapSelector should get exectued.");
             Assert.False(result.HasValue, "Result should not have a value.");
             Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default(double), result.Value);
+            Assert.Equal(default, result.Value);
+            Assert.Equal("Can not divide '1' with '0'.", result.Error);
+        }
+
+        [Fact]
+        public void Result_With_Value_Flatmaps_Result_with_Error_Without_ErrorSelector__Expects_Result_With_Error() {
+            var flatSelectorExecuted = false;
+            var result = Division(2, 2).FlatMap(x => {
+                flatSelectorExecuted = true;
+                return Division(x, 0);
+            });
+
+            Assert.True(flatSelectorExecuted,
+                "The flatmapSelector should get exectued.");
+            Assert.False(result.HasValue, "Result should not have a value.");
+            Assert.True(result.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Value);
             Assert.Equal("Can not divide '1' with '0'.", result.Error);
         }
 
@@ -174,7 +139,21 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.True(result.HasValue, "Result should have a value.");
             Assert.False(result.HasError, "Result should not have a error.");
             Assert.Equal(1, result.Value);
-            Assert.Equal(default(string), result.Error);
+            Assert.Equal(default, result.Error);
+        }
+
+        [Fact]
+        public void Result_With_Value_Flatmaps_Result_with_Value_Without_ErrorSelector__Expects_Result_With_Value() {
+            var flatSelectorExecuted = false;
+            var result = Division(2, 2).Flatten(x => {
+                flatSelectorExecuted = true;
+                return Division(x, 2);
+            });
+            Assert.True(flatSelectorExecuted, "flatmapselector should get executed.");
+            Assert.True(result.HasValue, "Result should have a value.");
+            Assert.False(result.HasError, "Result should not have a error.");
+            Assert.Equal(1, result.Value);
+            Assert.Equal(default, result.Error);
         }
 
         [Fact]
@@ -195,11 +174,31 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 "The flatselector should not get executed since flatselector result failed.");
             Assert.False(result.HasValue, "Result should not have a value.");
             Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default(double), result.Value);
+            Assert.Equal(default, result.Value);
             Assert.Equal("Can not divide '1' with '0'.", result.Error);
             Assert.False(result.HasValue, "Result should not have a value.");
             Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default(double), result.Value);
+            Assert.Equal(default, result.Value);
+            Assert.Equal("Can not divide '1' with '0'.", result.Error);
+        }
+
+        [Fact]
+        public void Result_With_Value_FlatmapsRS_Result_with_Error_Without_ErrorSelector__Expects_Result_With_Error() {
+            var flatSelectorExecuted = false;
+            var result = Division(2, 2).Flatten(x => {
+                flatSelectorExecuted = true;
+                return Division(x, 0);
+            });
+
+            Assert.True(flatSelectorExecuted,
+                "The flatselector should not get executed since flatselector result failed.");
+            Assert.False(result.HasValue, "Result should not have a value.");
+            Assert.True(result.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Value);
+            Assert.Equal("Can not divide '1' with '0'.", result.Error);
+            Assert.False(result.HasValue, "Result should not have a value.");
+            Assert.True(result.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Value);
             Assert.Equal("Can not divide '1' with '0'.", result.Error);
         }
     }

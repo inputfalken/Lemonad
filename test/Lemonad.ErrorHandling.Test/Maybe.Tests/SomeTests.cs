@@ -26,7 +26,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             var maybe = string.Empty.Some(s => s.Length > 5);
 
             Assert.False(maybe.HasValue, "This predicate should not have a value.");
-            Assert.Equal(default(string), maybe.Value);
+            Assert.Equal(default, maybe.Value);
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
                 var maybe = foo.Some(_ => true);
 
                 Assert.True(maybe.HasValue, "This predicate should get evaluated");
-                Assert.Equal(default(bool?), maybe.Value);
+                Assert.Equal(default, maybe.Value);
             });
             Assert.Null(exception);
         }

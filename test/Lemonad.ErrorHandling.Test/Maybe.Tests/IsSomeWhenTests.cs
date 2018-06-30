@@ -10,7 +10,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
                 Func<string, bool> predicate = null;
                 var someWhen = "foo".None().Filter(predicate);
                 Assert.False(someWhen.HasValue, "Maybe should not have value.");
-                Assert.Equal(default(string), someWhen.Value);
+                Assert.Equal(default, someWhen.Value);
             });
             Assert.Null(exception);
         }
@@ -44,14 +44,14 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             string value = null;
             var maybe = value.Some(s => s != null);
             Assert.False(maybe.HasValue, "Maybe should not have value.");
-            Assert.Equal(default(string), maybe.Value);
+            Assert.Equal(default, maybe.Value);
         }
 
         [Fact]
         public void When_Predicate_Checks_For_Null__Using_Type_With_Value__Maybe_Is_Expected_To_Not_HaveValue() {
             var maybe = "foobar".Some(s => s == null);
             Assert.False(maybe.HasValue, "Maybe should not have value.");
-            Assert.Equal(default(string), maybe.Value);
+            Assert.Equal(default, maybe.Value);
         }
 
         [Fact]
@@ -59,14 +59,14 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             string value = null;
             var maybe = value.Some(s => s == null);
             Assert.True(maybe.HasValue, "Maybe should have value.");
-            Assert.Equal(default(string), maybe.Value);
+            Assert.Equal(default, maybe.Value);
         }
 
         [Fact]
         public void When_Predicate_Returns_False__Maybe_Is_Expected_To_HaveValue() {
             var maybe = string.Empty.Some(s => false);
             Assert.False(maybe.HasValue, "Maybe should not have value.");
-            Assert.Equal(default(string), maybe.Value);
+            Assert.Equal(default, maybe.Value);
         }
 
         [Fact]

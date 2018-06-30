@@ -10,7 +10,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
                 Func<string, bool> predicate = null;
                 var someWhen = "foo".None().IsNoneWhen(predicate);
                 Assert.False(someWhen.HasValue, "Maybe should not have value.");
-                Assert.Equal(default(string), someWhen.Value);
+                Assert.Equal(default, someWhen.Value);
             });
             Assert.Null(exception);
         }

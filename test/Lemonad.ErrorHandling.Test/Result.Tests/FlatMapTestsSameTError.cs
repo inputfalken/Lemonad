@@ -21,7 +21,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
             Assert.False(result.HasValue, "Result should not have a value.");
             Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default(double), result.Value);
+            Assert.Equal(default, result.Value);
             Assert.Equal("Can not divide '2' with '0'.", result.Error);
         }
 
@@ -37,7 +37,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
             Assert.False(result.HasValue, "Result should not have a value.");
             Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default(double), result.Value);
+            Assert.Equal(default, result.Value);
             Assert.Equal("Can not divide '2' with '0'.", result.Error);
         }
 
@@ -59,7 +59,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 "The resultSelector should not get exectued if the source Result<T, TError> contains error.");
             Assert.False(result.HasValue, "Result should not have a value.");
             Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default(double), result.Value);
+            Assert.Equal(default, result.Value);
             Assert.Equal("Can not divide '2' with '0'.", result.Error);
         }
 
@@ -80,7 +80,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 "The resultSelector should not get exectued if the source Result<T, TError> contains error.");
             Assert.False(result.HasValue, "Result should not have a value.");
             Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default(double), result.Value);
+            Assert.Equal(default, result.Value);
             Assert.Equal("Can not divide '2' with '0'.", result.Error);
         }
 
@@ -99,7 +99,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 "The resultSelector should not get executed since flatselector result failed.");
             Assert.False(result.HasValue, "Result should not have a value.");
             Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default(double), result.Value);
+            Assert.Equal(default, result.Value);
             Assert.Equal("Can not divide '1' with '0'.", result.Error);
         }
 
@@ -116,7 +116,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.True(result.HasValue, "Result should have a value.");
             Assert.False(result.HasError, "Result should not have a error.");
             Assert.Equal(0.5d, result.Value);
-            Assert.Equal(default(string), result.Error);
+            Assert.Equal(default, result.Error);
         }
 
         [Fact]
@@ -137,11 +137,11 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 "The resultSelector should not get executed since flatselector result failed.");
             Assert.False(result.HasValue, "Result should not have a value.");
             Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default(double), result.Value);
+            Assert.Equal(default, result.Value);
             Assert.Equal("Can not divide '1' with '0'.", result.Error);
             Assert.False(result.HasValue, "Result should not have a value.");
             Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default(double), result.Value);
+            Assert.Equal(default, result.Value);
             Assert.Equal("Can not divide '1' with '0'.", result.Error);
         }
 
@@ -162,7 +162,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.True(result.HasValue, "Result should have a value.");
             Assert.False(result.HasError, "Result should not have a error.");
             Assert.Equal(1.5d, result.Value);
-            Assert.Equal(default(string), result.Error);
+            Assert.Equal(default, result.Error);
         }
     }
 }

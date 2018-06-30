@@ -13,7 +13,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.Equal("ERROR", value);
             Assert.False(result.HasValue, "Result should not be error.");
             Assert.True(result.HasError, "Result should be error.");
-            Assert.Equal(default(int), result.Value);
+            Assert.Equal(default, result.Value);
             Assert.Equal("ERROR", result.Error);
         }
 
@@ -27,7 +27,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                     .DoWhenError(action);
                 Assert.False(result.HasValue, "Result should not be error.");
                 Assert.True(result.HasError, "Result should be error.");
-                Assert.Equal(default(int), result.Value);
+                Assert.Equal(default, result.Value);
                 Assert.Equal("ERROR", result.Error);
             });
         }
@@ -41,7 +41,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.True(result.HasValue, "Result should be right.");
             Assert.False(result.HasError, "Result should not be error.");
             Assert.Equal(10, result.Value);
-            Assert.Equal(default(string), result.Error);
+            Assert.Equal(default, result.Error);
         }
 
         [Fact]
@@ -55,7 +55,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 Assert.True(result.HasValue, "Result should be right.");
                 Assert.False(result.HasError, "Result should not be error.");
                 Assert.Equal(10, result.Value);
-                Assert.Equal(default(string), result.Error);
+                Assert.Equal(default, result.Error);
             });
             Assert.Null(exception);
         }
