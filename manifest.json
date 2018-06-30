@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.EquailtyFunctions.html",
-          "hash": "cprab+36rm4gBPFaHJ7Iog=="
+          "hash": "/oi0i0gfXgdCqjjPg0CLCQ=="
         }
       },
       "is_incremental": false,
@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Maybe-1.html",
-          "hash": "dBMenipmc6iKN5edZimZfw=="
+          "hash": "psg02o0/jV0nE+xRsXJALA=="
         }
       },
       "is_incremental": false,
@@ -33,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Maybe.html",
-          "hash": "MvwIsNkky4BYpN2Zjtwz0g=="
+          "hash": "T8LlZ+WGvf9dt8Cm1NtgaA=="
         }
       },
       "is_incremental": false,
@@ -45,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.MaybeParsers.html",
-          "hash": "1Sus2UA9XDEmondqrB7uQw=="
+          "hash": "92WauJyHTNbiHDF9LszX8A=="
         }
       },
       "is_incremental": false,
@@ -57,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Result-2.html",
-          "hash": "vhl6SAZWHEk6JJZaaKV4nA=="
+          "hash": "89ta8A0R6BK/2cCTSoT/6A=="
         }
       },
       "is_incremental": false,
@@ -69,7 +69,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Result.html",
-          "hash": "GXbbVZAq7apM0Jf1u2xNXg=="
+          "hash": "j5RLCy2Mp0KWOV/eUjsm1g=="
         }
       },
       "is_incremental": false,
@@ -81,7 +81,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.ResultParsers.html",
-          "hash": "B0rw/Wzw33K+0Oqk38q3cA=="
+          "hash": "2mbp8wTSNa4sfba+3TxOGQ=="
         }
       },
       "is_incremental": false,
@@ -93,7 +93,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.html",
-          "hash": "jlJ969c3VubPFDO4YkQSBg=="
+          "hash": "1IB0Br/eQHPjH6sny2uxRQ=="
         }
       },
       "is_incremental": false,
@@ -105,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "fcrSHpq19kvX5nvACdCMBw=="
+          "hash": "KrEadXGXQXB7F7Rp29szeA=="
         }
       },
       "is_incremental": false,
@@ -129,7 +129,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "D03BPvfJMHboKzfw13dRwA=="
+          "hash": "6QIw7bnptXn0Brnn6RpzqQ=="
         }
       },
       "is_incremental": false,
@@ -153,7 +153,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "gh1oiGGen3pbqYfW9wPQ3A=="
+          "hash": "Yyl9ps4ySRY5Y3ZGKDx8gQ=="
         }
       },
       "is_incremental": false,
@@ -180,17 +180,17 @@
         "incrementalPhase": "build"
       },
       "processors": {
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
-        },
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build"
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
+          "incrementalPhase": "build"
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         }
       }
