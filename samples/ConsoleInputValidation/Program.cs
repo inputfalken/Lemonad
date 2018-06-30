@@ -10,7 +10,8 @@ namespace ConsoleInputValidation {
                 .ToResult<string, ExitCode>()
                 .IsErrorWhen(string.IsNullOrWhiteSpace, () => ExitCode.EmptyName)
                 .Flatten(OnlyContainsAlphaNumericChars)
-                .FullMap(_ => (int) ExitCode.Success, code => (int) code)
+                .FullMap(_ => ExitCode.Success, code => (int) code)
+                .Cast<int>()
                 .DoWithError(x => Console.WriteLine($"Bad input, exiting with code: {x}"))
                 .DoWith(x => Console.WriteLine($"Good input, exitiing with code: {x}"))
                 .Match(x => x, x => x);
