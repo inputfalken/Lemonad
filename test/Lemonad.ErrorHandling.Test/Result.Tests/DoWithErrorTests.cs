@@ -2,7 +2,7 @@
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
-    public class DoTests {
+    public class DoWithErrorTests {
         private static Result<double, string> Division(double left, double right) {
             if (right == 0)
                 return $"Can not divide '{left}' with '{right}'.";
@@ -14,7 +14,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         public void
             Result_With_Error__Expects_Action_To_Be_Invoked() {
             var actionExectued = false;
-            var result = Division(10, 0).Do(() => actionExectued = true);
+            var result = Division(10, 0).DoWithError(d => actionExectued = true);
 
             Assert.True(actionExectued, "Should not get exectued since there's an error.");
             Assert.Equal(default, result.Value);
@@ -24,11 +24,12 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Value__Expects_Action_To_be_Invoked() {
+        public void
+            Result_With_Value__Expects_Action_Not_To_Be_Invoked() {
             var actionExectued = false;
-            var result = Division(10, 2).Do(() => actionExectued = true);
+            var result = Division(10, 2).DoWithError(d => actionExectued = true);
 
-            Assert.True(actionExectued, "Should not get exectued since there's an error.");
+            Assert.False(actionExectued, "Should not get exectued since there's an error.");
             Assert.Equal(5, result.Value);
             Assert.Equal(default, result.Error);
             Assert.False(result.HasError, "Result should not have error.");

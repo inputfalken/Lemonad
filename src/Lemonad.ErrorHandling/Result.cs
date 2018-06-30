@@ -174,7 +174,7 @@ namespace Lemonad.ErrorHandling {
         /// <exception cref="ArgumentNullException">
         /// When <paramref name="action"/> is null and needs to be exectued.
         /// </exception>
-        public Result<T, TError> DoWhenOk(Action<T> action) {
+        public Result<T, TError> DoWith(Action<T> action) {
             if (HasValue)
                 if (action != null)
                     action.Invoke(Value);
@@ -214,7 +214,7 @@ namespace Lemonad.ErrorHandling {
         /// <exception cref="ArgumentNullException">
         /// When <paramref name="action"/> is null and needs to be exectued.
         /// </exception>
-        public Result<T, TError> DoWhenError(
+        public Result<T, TError> DoWithError(
             Action<TError> action) {
             if (HasError)
                 if (action != null)
