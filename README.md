@@ -6,8 +6,8 @@
 [![Build Status](https://lemonad-ci.visualstudio.com/_apis/public/build/definitions/99c63ac5-7b1f-436d-b755-fbfa106c1853/2/badge)](https://lemonad-ci.visualstudio.com/Lemonad/_build/index?definitionId=2)
 
 ### WIP (A lot may change)
+[![NuGet](https://img.shields.io/nuget/v/Lemonad.ErrorHandling.svg)](https://www.nuget.org/packages/Lemonad.ErrorHandling/)
 
-[NuGet Package](https://www.nuget.org/packages/Lemonad.ErrorHandling/)
 
 ## Summary
 
