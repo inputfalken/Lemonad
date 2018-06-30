@@ -1,183 +1,68 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class MatchTests {
+        private static Result<double, string> Division(double left, double right) {
+            if (right == 0)
+                return $"Can not divide '{left}' with '{right}'.";
+
+            return left / right;
+        }
+
         [Fact]
-        public void Result_String_Int_Whose_Property_HasValue_Is_False() {
-            var errorExecuted = false;
-            var rightExectuted = false;
-            var result = ResultParsers.Int("foo").Match(i => {
-                rightExectuted = true;
-                return "Success";
+        public void Result_With_Error__Expect_ErrorAction() {
+            var selectorExectued = false;
+            var errorSelectorExectued = false;
+            Division(10, 0).Match(d => { selectorExectued = true; }, s => { errorSelectorExectued = true; });
+
+            Assert.False(selectorExectued, "Selector should not get executed.");
+            Assert.True(errorSelectorExectued, "Error selector should get exectued.");
+        }
+
+        [Fact]
+        public void Result_With_Error__Expect_ErrorSelector() {
+            var selectorExectued = false;
+            var errorSelectorExectued = false;
+            var result = Division(10, 0).Match(d => {
+                selectorExectued = true;
+                return d;
             }, s => {
-                errorExecuted = true;
-                return s;
+                errorSelectorExectued = true;
+                return -1;
             });
-            Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result);
-            Assert.True(errorExecuted, "error should be exectued");
-            Assert.False(rightExectuted, "Ok should not be exectued");
+
+            Assert.False(selectorExectued, "Selector should not get executed.");
+            Assert.True(errorSelectorExectued, "Error selector should get exectued.");
+            Assert.Equal(-1, result);
         }
 
         [Fact]
         public void
-            Result_String_Int_Whose_Property_HasValue_Is_False__Null_errorSelector__Expects_ArgumentNulLException() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, string> errorSelector = null;
-                var result = ResultParsers.Int("foo").Match(i => "Success", errorSelector);
-            });
+            Result_With_Value__Expect_Action() {
+            var selectorExectued = false;
+            var errorSelectorExectued = false;
+            Division(10, 2).Match(d => { selectorExectued = true; }, s => { errorSelectorExectued = true; });
+
+            Assert.True(selectorExectued, "Selector should get executed.");
+            Assert.False(errorSelectorExectued, "Error selector not should get exectued.");
         }
 
         [Fact]
         public void
-            Result_String_Int_Whose_Property_HasValue_Is_False__Null_errorSelector__Void__Expects_ArgumentNulLException() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Action<string> errorSelector = null;
-                ResultParsers.Int("foo").Match(i => { }, errorSelector);
-            });
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_False__Null_errorSelector_And_Null_OkSelector__Expects_ArgumentNullException() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, string> errorSelector = null;
-                Func<int, string> leftSelector = null;
-                var result = ResultParsers.Int("foo")
-                    .Match(leftSelector, errorSelector);
-            });
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_False__Null_errorSelector_And_Null_OkSelector__Void__Expects_ArgumentNullException() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Action<string> errorSelector = null;
-                Action<int> leftSelector = null;
-                ResultParsers.Int("foo")
-                    .Match(leftSelector, errorSelector);
-            });
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_False__Null_OkSelector__Expects_Not_ArgumentNulLException() {
-            var exception = Record.Exception(() => {
-                Func<int, string> leftSelector = null;
-                var errorExecuted = false;
-                var result = ResultParsers.Int("foo").Match(leftSelector, s => {
-                    errorExecuted = true;
-                    return s;
-                });
-                Assert.Equal("Could not parse type System.String(\"foo\") into System.Int32.", result);
-                Assert.True(errorExecuted, "error should be exectued");
-            });
-            Assert.Null(exception);
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_False__Null_OkSelector__Void__Expects_Not_ArgumentNulLException() {
-            var exception = Record.Exception(() => {
-                Action<int> leftSelector = null;
-                ResultParsers.Int("foo").Match(leftSelector, s => { });
-            });
-            Assert.Null(exception);
-        }
-
-        [Fact]
-        public void Result_String_Int_Whose_Property_HasValue_Is_False__Void_Match() {
-            var errorExecuted = false;
-            var valueExecuted = false;
-            ResultParsers.Int("foo").Match(x => { valueExecuted = true; }, x => { errorExecuted = true; });
-            Assert.True(errorExecuted, "error should be exectued");
-            Assert.False(valueExecuted, "Ok should not be exectued");
-        }
-
-        [Fact]
-        public void Result_String_Int_Whose_Property_HasValue_Is_True() {
-            var errorExecuted = false;
-            var rightExectuted = false;
-            var result = ResultParsers.Int("2").Match(i => {
-                rightExectuted = true;
-                return "Success" + i;
+            Result_With_Value__Expect_Selector() {
+            var selectorExectued = false;
+            var errorSelectorExectued = false;
+            var result = Division(10, 2).Match(d => {
+                selectorExectued = true;
+                return d;
             }, s => {
-                errorExecuted = true;
-                return s;
+                errorSelectorExectued = true;
+                return -1;
             });
-            Assert.Equal("Success2", result);
-            Assert.False(errorExecuted, "error should not be exectued");
-            Assert.True(rightExectuted, "Ok should be exectued");
-        }
 
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_True__Null_errorSelector__Expects_No_ArgumentNulLException() {
-            var exception = Record.Exception(() => {
-                Func<string, string> errorSelector = null;
-                var result = ResultParsers.Int("2").Match(i => "Success" + i, errorSelector);
-                Assert.Equal("Success2", result);
-            });
-            Assert.Null(exception);
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_True__Null_errorSelector__Void__Expects_No_ArgumentNulLException() {
-            var exception = Record.Exception(() => {
-                Action<string> errorSelector = null;
-                ResultParsers.Int("2").Match(i => { }, errorSelector);
-            });
-            Assert.Null(exception);
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_True__Null_errorSelector_And_Null_OkSelector__Expects_ArgumentNullException() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, string> errorSelector = null;
-                Func<int, string> leftSelector = null;
-                var result = ResultParsers.Int("2")
-                    .Match(leftSelector, errorSelector);
-            });
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_True__Null_errorSelector_And_Null_OkSelector__Void__Expects_ArgumentNullException() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Action<string> errorSelector = null;
-                Action<int> leftSelector = null;
-                ResultParsers.Int("2")
-                    .Match(leftSelector, errorSelector);
-            });
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_True__Null_OkSelector__Expects_Not_ArgumentNulLException() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<int, string> leftSelector = null;
-                ResultParsers.Int("2").Match(leftSelector, s => s);
-            });
-        }
-
-        [Fact]
-        public void
-            Result_String_Int_Whose_Property_HasValue_Is_True__Null_OkSelector__Void__Expects_Not_ArgumentNulLException() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Action<int> leftSelector = null;
-                ResultParsers.Int("2").Match(leftSelector, s => { });
-            });
-        }
-
-        [Fact]
-        public void Result_String_Int_Whose_Property_HasValue_Is_True__Void_Match() {
-            var errorExecuted = false;
-            var valueExecuted = false;
-            ResultParsers.Int("2").Match(i => { valueExecuted = true; }, s => { errorExecuted = true; });
-            Assert.False(errorExecuted, "error should not be exectued");
-            Assert.True(valueExecuted, "Ok should be exectued");
+            Assert.True(selectorExectued, "Selector should get executed.");
+            Assert.False(errorSelectorExectued, "Error selector not should get exectued.");
+            Assert.Equal(5, result);
         }
     }
 }
