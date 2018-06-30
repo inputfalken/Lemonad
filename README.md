@@ -120,6 +120,6 @@ foreach (int division in successFulDivisions) { Console.WriteLine(division); }
 ## To be added
 
 * Async error handlers.
-  * `ResultAsyc<TLeft, TRight>`
+  * `ResultAsyc<T, TError>`
   * `MaybeAsync<T>`
 
