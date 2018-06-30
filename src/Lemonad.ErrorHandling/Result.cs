@@ -576,6 +576,21 @@ namespace Lemonad.ErrorHandling {
         }
 
         /// <summary>
+        /// Casts <typeparamref name="TError"/> into <typeparamref name="TResult"/>.
+        /// </summary>
+        /// <typeparam name="TResult">
+        /// The type to <typeparamref name="TError"/> cast to.
+        /// </typeparam>
+        /// <returns>
+        /// A <see cref="Result{T,TError}"/> whose <typeparamref name="TError"/> has been casted to <typeparamref name="TResult"/>.
+        /// </returns>
+        [Pure]
+        public Result<T, TResult> CastError<TResult>() {
+            if (HasValue) return Value;
+            return (TResult) (object) Error;
+        }
+
+        /// <summary>
         /// Casts <typeparamref name="T"/> into <typeparamref name="TResult"/>.
         /// </summary>
         /// <typeparam name="TResult">
