@@ -11,8 +11,7 @@ namespace ConsoleInputValidation {
                 .IsErrorWhen(string.IsNullOrWhiteSpace, () => ExitCode.EmptyName)
                 .Flatten(OnlyContainsAlphaNumericChars)
                 .Map(_ => ExitCode.Success)
-                .Cast<int>()
-                .CastError<int>()
+                .FullCast<int>()
                 .DoWithError(x => Console.WriteLine($"Bad input, exiting with code: {x}"))
                 .DoWith(x => Console.WriteLine($"Good input, exiting with code: {x}"))
                 .Match(x => x, x => x);
