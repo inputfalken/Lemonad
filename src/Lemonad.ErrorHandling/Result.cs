@@ -573,6 +573,16 @@ namespace Lemonad.ErrorHandling {
             return (TResult) (object) Value;
         }
 
+        [Pure]
+        public Result<TResult, TError> OfType<TResult>(Func<TError> errorSelector) {
+            if (HasError) return Error;
+            if ((object)Value is TResult) {
+                return (TResult) (object) Value;
+            }
+
+            return errorSelector();
+        }
+
         /// <summary>
         /// Fully flatmaps another <see cref="Result{T,TError}"/>.
         /// </summary>
