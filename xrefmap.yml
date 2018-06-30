@@ -956,6 +956,24 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Cast(Of TResult)()
   nameWithType: Result<T, TError>.Cast<TResult>()
   nameWithType.vb: Result(Of T, TError).Cast(Of TResult)()
+- uid: Lemonad.ErrorHandling.Result`2.CastError*
+  name: CastError
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_CastError_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.CastError
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.CastError
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).CastError
+  nameWithType: Result<T, TError>.CastError
+  nameWithType.vb: Result(Of T, TError).CastError
+- uid: Lemonad.ErrorHandling.Result`2.CastError``1
+  name: CastError<TResult>()
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_CastError__1
+  commentId: M:Lemonad.ErrorHandling.Result`2.CastError``1
+  name.vb: CastError(Of TResult)()
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.CastError<TResult>()
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).CastError(Of TResult)()
+  nameWithType: Result<T, TError>.CastError<TResult>()
+  nameWithType.vb: Result(Of T, TError).CastError(Of TResult)()
 - uid: Lemonad.ErrorHandling.Result`2.CompareTo(Lemonad.ErrorHandling.Result{`0,`1})
   name: CompareTo(Result<T, TError>)
   href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_CompareTo_Lemonad_ErrorHandling_Result__0__1__
