@@ -568,7 +568,7 @@ namespace Lemonad.ErrorHandling {
         }
 
         /// <summary>
-        /// Casts <typeparamref name="T"/> to <typeparamref name="TResult"/>.
+        /// Casts <typeparamref name="T"/> into <typeparamref name="TResult"/>.
         /// </summary>
         /// <typeparam name="TResult">
         /// The type to cast to.
@@ -583,7 +583,7 @@ namespace Lemonad.ErrorHandling {
         }
 
         /// <summary>
-        /// Attempt to <typeparamref name="T"/> to <typeparamref name="TResult"/>.
+        /// Attempts to cast <typeparamref name="T"/> into <typeparamref name="TResult"/>.
         /// </summary>
         /// <param name="errorSelector">
         /// Is executed if the cast would fail.
