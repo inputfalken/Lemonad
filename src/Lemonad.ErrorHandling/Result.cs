@@ -87,7 +87,7 @@ namespace Lemonad.ErrorHandling {
         /// This is handy when combining <see cref="Result{T,TError}"/> with LINQs API.
         /// </summary>
         public IEnumerable<TError> AsErrorEnumerable => YieldErrors(this);
-        
+
         /// <summary>
         /// Treat <typeparamref name="T"/> as enumerable with 0-1 elements in.
         /// This is handy when combining <see cref="Result{T,TError}"/> with LINQ's API.
@@ -565,6 +565,12 @@ namespace Lemonad.ErrorHandling {
             return errorSelector != null
                 ? errorSelector(Error)
                 : throw new ArgumentNullException(nameof(errorSelector));
+        }
+
+        [Pure]
+        public Result<TResult, TError> Cast<TResult>() {
+            if (HasError) return Error;
+            return (TResult) (object) Value;
         }
 
         /// <summary>
