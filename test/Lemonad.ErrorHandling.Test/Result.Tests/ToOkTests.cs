@@ -9,7 +9,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.True(result.HasValue, "Result should have value.");
             Assert.False(result.HasError, "Result should not have a error value.");
             Assert.Equal(2, result.Value);
-            Assert.Equal(default(string), result.Error);
+            Assert.Equal(default, result.Error);
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.True(result.HasValue, "Result should have value.");
             Assert.False(result.HasError, "Result should not have a error value.");
             Assert.Equal("hello", result.Value);
-            Assert.Equal(default(int), result.Error);
+            Assert.Equal(default, result.Error);
         }
     }
 }

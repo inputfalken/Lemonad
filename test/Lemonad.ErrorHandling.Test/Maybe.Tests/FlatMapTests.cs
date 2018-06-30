@@ -32,7 +32,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Assert.False(nullableInt.HasValue, "Maybe should not have value");
             Assert.False(flatMappedMaybe.HasValue,
                 "Maybe should not have a value since one of the maybes will not pass.");
-            Assert.Equal(default(int), flatMappedMaybe.Value);
+            Assert.Equal(default, flatMappedMaybe.Value);
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Assert.False(lengthMaybe.HasValue, "Maybe should not have value");
             Assert.False(flatMappedMaybe.HasValue,
                 "Maybe should not have a value since one of the maybes will not pass.");
-            Assert.Equal(default(string), flatMappedMaybe.Value);
+            Assert.Equal(default, flatMappedMaybe.Value);
         }
 
         [Fact]
@@ -74,7 +74,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
                 Func<string, string, string> resultSelector = null;
                 var maybe = "foo".None().FlatMap(s => s.None(), resultSelector);
                 Assert.False(maybe.HasValue, "Maybe should not have value.");
-                Assert.Equal(default(string), maybe.Value);
+                Assert.Equal(default, maybe.Value);
             });
             Assert.Null(exception);
         }
@@ -86,7 +86,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
                 Func<string, Maybe<string>> selector = null;
                 var maybe = "foo".None().FlatMap(selector);
                 Assert.False(maybe.HasValue, "Maybe should not have value.");
-                Assert.Equal(default(string), maybe.Value);
+                Assert.Equal(default, maybe.Value);
             });
             Assert.Null(exception);
         }
@@ -99,7 +99,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
                 Func<string, string, string> resultSelector = null;
                 var maybe = "foo".None().FlatMap(selector, resultSelector);
                 Assert.False(maybe.HasValue, "Maybe should not have value.");
-                Assert.Equal(default(string), maybe.Value);
+                Assert.Equal(default, maybe.Value);
             });
             Assert.Null(exception);
         }
@@ -130,7 +130,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
                 Func<string, string, string> resultSelector = null;
                 var maybe = "foo".Some().FlatMap(s => s.None(), resultSelector);
                 Assert.False(maybe.HasValue, "Maybe should not have value.");
-                Assert.Equal(default(string), maybe.Value);
+                Assert.Equal(default, maybe.Value);
             });
             Assert.Null(exception);
         }
@@ -181,7 +181,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Assert.False(nullableInt.HasValue, "Maybe should not have value");
             Assert.False(flatMappedMaybe.HasValue,
                 "Maybe should not have a value since one of the maybes will not pass.");
-            Assert.Equal(default(int), flatMappedMaybe.Value);
+            Assert.Equal(default, flatMappedMaybe.Value);
         }
 
         [Fact]
@@ -213,7 +213,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Assert.False(lengthMaybe.HasValue, "Maybe should not have value");
             Assert.False(flatMappedMaybe.HasValue,
                 "Maybe should not have a value since one of the maybes will not pass.");
-            Assert.Equal(default(int), flatMappedMaybe.Value);
+            Assert.Equal(default, flatMappedMaybe.Value);
         }
 
         [Fact]
@@ -228,7 +228,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Assert.False(lengthMaybe.HasValue, "Maybe should not have value");
             Assert.False(flatMappedMaybe.HasValue,
                 "Maybe should not have a value since one of the maybes will not pass.");
-            Assert.Equal(default(int), flatMappedMaybe.Value);
+            Assert.Equal(default, flatMappedMaybe.Value);
         }
 
         [Fact]
@@ -244,7 +244,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Assert.False(nullableInt.HasValue, "Maybe should not have value");
             Assert.False(flatMappedMaybe.HasValue,
                 "Maybe should not have a value since both of the maybes will not pass.");
-            Assert.Equal(default(int), flatMappedMaybe.Value);
+            Assert.Equal(default, flatMappedMaybe.Value);
         }
 
         [Fact]
@@ -259,7 +259,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Assert.False(lengthMaybe.HasValue, "Maybe should not have value");
             Assert.False(flatMappedMaybe.HasValue,
                 "Maybe should not have a value since one of the maybes will not pass.");
-            Assert.Equal(default(int), flatMappedMaybe.Value);
+            Assert.Equal(default, flatMappedMaybe.Value);
         }
 
         [Fact]
@@ -275,7 +275,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Assert.False(lengthMaybe.HasValue, "Maybe should not have value");
             Assert.False(flatMappedMaybe.HasValue,
                 "Maybe should not have a value since both of the maybes will not pass.");
-            Assert.Equal(default(int), flatMappedMaybe.Value);
+            Assert.Equal(default, flatMappedMaybe.Value);
         }
     }
 }

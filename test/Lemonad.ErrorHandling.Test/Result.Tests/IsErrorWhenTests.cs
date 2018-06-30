@@ -1,194 +1,79 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
-    public class errorWhenTests {
+    public class ErrorWhenTests {
+        private static Result<double, string> Division(double left, double right) {
+            if (right == 0)
+                return $"Can not divide '{left}' with '{right}'.";
+
+            return left / right;
+        }
+
         [Fact]
         public void
-            Result_Int_Whose_Property_HasValue_Is_True_With_False_Predicate_And_Null_errorSelector__Expects_No_ArgumentNullException_Thrown() {
-            var exception = Record.Exception(() => {
-                Func<string> errorSelector = null;
-                var result = 20.ToResult<int, string>().IsErrorWhen(_ => false, errorSelector);
-                Assert.True(result.HasValue, "Result should have value");
-                Assert.Equal(20, result.Value);
-                Assert.Equal(default(string), result.Error);
+            Result_With_Error__Expects_Predicate_Never_To_Be_Executed_And_ErrorSelector_Never_To_Be_Invoked() {
+            var predicateExectued = false;
+            var errorSelectorExectued = false;
+            var result = Division(10, 0).IsErrorWhen(d => {
+                predicateExectued = true;
+                return d == 2;
+            }, () => {
+                errorSelectorExectued = true;
+                return "Bad";
             });
-            Assert.Null(exception);
+
+            Assert.False(predicateExectued,
+                "Should not get exectued since there's an error before the predicate was applied.");
+            Assert.False(errorSelectorExectued,
+                "Should not get exectued since there's an error before the predicate was applied.");
+            Assert.Equal(default, result.Value);
+            Assert.Equal("Can not divide '10' with '0'.", result.Error);
+            Assert.True(result.HasError, "Result should have error.");
+            Assert.False(result.HasValue, "Result should not have value.");
         }
 
         [Fact]
         public void
-            Result_Int_Whose_Property_HasValue_Is_True_With_Null_Predicate__Expects_ArgumentNullException_Thrown() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<int, bool> predicate = null;
-                var result = 20.ToResult<int, string>().IsErrorWhen(predicate, () => "");
+            Result_With_Value_With_Falsy_Predicate__Expects_Predicate_To_Be_Executed_And_ErrorSelector_To_Never_Be_Invoked() {
+            var predicateExectued = false;
+            var errorSelectorExectued = false;
+            var result = Division(10, 2).IsErrorWhen(d => {
+                predicateExectued = true;
+                return false;
+            }, () => {
+                errorSelectorExectued = true;
+                return "Bad";
             });
-        }
 
-        [Fact]
-        public void
-            Result_Int_Whose_Property_HasValue_Is_True_With_Null_Predicate_And_errorSelector__Expects_ArgumentNullException_Thrown() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<int, bool> predicate = null;
-                Func<string> errorSelector = null;
-                var result = 20.ToResult<int, string>().IsErrorWhen(predicate, errorSelector);
-            });
-        }
-
-        [Fact]
-        public void
-            Result_Int_Whose_Property_HasValue_Is_True_With_True_Predicate() {
-            var result = 20.ToResult<int, string>().IsErrorWhen(x => true, () => "ERROR");
-
-            Assert.False(result.HasValue, "Result should have error value.");
-            Assert.True(result.HasError, "Result should have error value.");
-            Assert.Equal("ERROR", result.Error);
-            Assert.Equal(default(int), result.Value);
-        }
-
-        [Fact]
-        public void
-            Result_Int_Whose_Property_HasValue_Is_True_With_True_Predicate_And_Null_errorSelector__Expects_ArgumentNullException_Thrown() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string> errorSelector = null;
-                var result = 20.ToResult<int, string>().IsErrorWhen(_ => true, errorSelector);
-            });
-        }
-
-        [Fact]
-        public void
-            Result_String_int___Whose_Property_HasValue_Is_False_With_True_Predicate() {
-            var result = "ERROR".ToResultError<int, string>().IsErrorWhen(x => true, () => "foo");
-
-            Assert.False(result.HasValue, "Result should have error value.");
-            Assert.True(result.HasError, "Result should have error value.");
-            Assert.Equal(default(int), result.Value);
-            Assert.Equal("ERROR", result.Error);
-        }
-
-        [Fact]
-        public void
-            Result_String_Int__Whose_Property_HasValue_Is_False_With_FalsePredicate_And_Null_errorSelector__Expects_ArgumentNullException_Thrown() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string> errorSelector = null;
-                var result = "ERROR".ToResultError<int, string>().IsErrorWhen(_ => false, errorSelector);
-                // errorselector is mandatory if  it's a error result from the start.
-                Assert.True(result.HasValue, "Result should have value");
-                Assert.Equal(20, result.Value);
-                Assert.Equal(default(string), result.Error);
-            });
-        }
-
-        [Fact]
-        public void
-            Result_String_Int__Whose_Property_HasValue_Is_False_With_Null_Predicate__Expects_No_ArgumentNullException_Thrown() {
-            var exception = Record.Exception(() => {
-                Func<int, bool> predicate = null;
-                var result = "ERROR".ToResultError<int, string>().IsErrorWhen(predicate, () => "ERROR FROM errorSELECTOR");
-
-                // Predicate is not mandatory if  it's a error result from the start.
-                Assert.True(result.HasError, "Result should have error value.");
-                Assert.False(result.HasValue, "Result should have error value.");
-                Assert.Equal("ERROR", result.Error);
-                Assert.Equal(default(int), result.Value);
-            });
-            Assert.Null(exception);
-        }
-
-        [Fact]
-        public void
-            Result_String_Int__Whose_Property_HasValue_Is_False_With_Null_Predicate_And_errorSelector__Expects_ArgumentNullException_Thrown() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<int, bool> predicate = null;
-                Func<string> errorSelector = null;
-                var result = "ERROR".ToResultError<int, string>().IsErrorWhen(predicate, errorSelector);
-                // errorselector is mandatory if  it's a error result from the start.
-            });
-        }
-
-        [Fact]
-        public void
-            Result_String_Int__Whose_Property_HasValue_Is_False_With_Null_Predicate_And_Null_errorSelector__Expects_ArgumentNullException_Thrown() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<int, bool> predicate = null;
-                Func<string> errorSelector = null;
-                var result = "ERROR".ToResultError<int, string>().IsErrorWhen(predicate, errorSelector);
-            });
-        }
-
-        [Fact]
-        public void
-            Result_String_Int__Whose_Property_HasValue_Is_False_With_True_Predicate_And_Null_errorSelector__Expects_No_ArgumentNullException_Thrown() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string> errorSelector = null;
-                var result = "ERROR".ToResultError<int, string>().IsErrorWhen(_ => true, errorSelector);
-            });
-        }
-
-        [Fact]
-        public void
-            Result_String_Int__Whose_Property_HasValue_Is_True_With_False_Predicate() {
-            var result = 20.ToResult<int, string>().IsErrorWhen(x => false, () => "ERROR");
-
+            Assert.True(predicateExectued,
+                "Should get exectued since there's a value from the result.");
+            Assert.False(errorSelectorExectued,
+                "Should not get exectued since the predicate was falsy.");
+            Assert.Equal(5, result.Value);
+            Assert.Equal(default, result.Error);
+            Assert.False(result.HasError, "Result should not have error.");
             Assert.True(result.HasValue, "Result should have value.");
-            Assert.False(result.HasError, "Result should have value.");
-            Assert.Equal(20, result.Value);
-            Assert.Equal(default(string), result.Error);
         }
 
         [Fact]
         public void
-            Result_String_int_Whose_Property_HasValue_Is_False__Expected_To_Not_Be_Mapped_To_StringEmpty__With_False_Predicate() {
-            var result = "foo".ToResultError<int, string>().IsErrorWhen(i => false, () => string.Empty);
+            Result_With_Value_With_Truthy_Predicate__Expects_Predicate_To_Be_Executed_And_ErrorSelector_To_Be_Invoked() {
+            var predicateExectued = false;
+            var errorSelectorExectued = false;
+            var result = Division(10, 2).IsErrorWhen(d => {
+                predicateExectued = true;
+                return true;
+            }, () => {
+                errorSelectorExectued = true;
+                return "Bad";
+            });
 
-            Assert.False(result.HasValue, "Result should have error value.");
-            Assert.True(result.HasError, "Result should have error value.");
-            Assert.Equal(default(int), result.Value);
-            Assert.Equal("foo", result.Error);
-        }
-
-        [Fact]
-        public void
-            Result_String_int_Whose_Property_HasValue_Is_False__Expected_To_Not_Be_Mapped_To_StringEmpty__With_True_Predicate() {
-            var result = "foo".ToResultError<int, string>().IsErrorWhen(i => true, () => string.Empty);
-
-            Assert.False(result.HasValue, "Result should have error value.");
-            Assert.True(result.HasError, "Result should have error value.");
-            Assert.Equal(default(int), result.Value);
-            Assert.Equal("foo", result.Error);
-        }
-
-        [Fact]
-        public void
-            Result_String_int_Whose_Property_HasValue_Is_False_With_False_Predicate() {
-            var result = "ERROR".ToResultError<int, string>().IsErrorWhen(x => true, () => "Foo");
-
-            Assert.False(result.HasValue, "Result should have error value.");
-            Assert.True(result.HasError, "Result should have error value.");
-            Assert.Equal(default(int), result.Value);
-            Assert.Equal("ERROR", result.Error);
-        }
-
-        [Fact]
-        public void
-            Result_String_int_Whose_Property_HasValue_Is_True__Expected_Not_To__Be_Mapped_To_String__With_False_Predicate() {
-            var result = 2.ToResult<int, string>().IsErrorWhen(i => false, () => "foo");
-
-            Assert.True(result.HasValue, "Result should have value.");
-            Assert.False(result.HasError, "Result should not have error value.");
-            Assert.Equal(2, result.Value);
-            Assert.Equal(default(string), result.Error);
-        }
-
-        [Fact]
-        public void
-            Result_String_int_Whose_Property_HasValue_Is_True__Expected_To_Be_Mapped_To_String__With_True_Predicate() {
-            var result = 2.ToResult<int, string>().IsErrorWhen(i => true, () => "foo");
-
-            Assert.False(result.HasValue, "Result should have error value.");
-            Assert.True(result.HasError, "Result should have error value.");
-            Assert.Equal(default(int), result.Value);
-            Assert.Equal("foo", result.Error);
+            Assert.True(predicateExectued, "Should get exectued since there's a value from the result.");
+            Assert.True(errorSelectorExectued, "Should get exectued since the predicate was truthy.");
+            Assert.Equal(default, result.Value);
+            Assert.Equal("Bad", result.Error);
+            Assert.True(result.HasError, "Result should have error.");
+            Assert.False(result.HasValue, "Result should not have value.");
         }
     }
 }

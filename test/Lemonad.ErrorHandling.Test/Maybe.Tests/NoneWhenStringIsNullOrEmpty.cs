@@ -7,7 +7,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             var noneWhenStringIsNullOrEmpty = string.Empty.None(string.IsNullOrWhiteSpace);
 
             Assert.False(noneWhenStringIsNullOrEmpty.HasValue);
-            Assert.Equal(default(string), noneWhenStringIsNullOrEmpty.Value);
+            Assert.Equal(default, noneWhenStringIsNullOrEmpty.Value);
         }
 
         [Fact]
@@ -16,7 +16,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             var noneWhenStringIsNullOrEmpty = f.None(string.IsNullOrWhiteSpace);
 
             Assert.False(noneWhenStringIsNullOrEmpty.HasValue);
-            Assert.Equal(default(string), noneWhenStringIsNullOrEmpty.Value);
+            Assert.Equal(default, noneWhenStringIsNullOrEmpty.Value);
         }
 
         [Fact]

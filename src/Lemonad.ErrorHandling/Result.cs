@@ -174,7 +174,7 @@ namespace Lemonad.ErrorHandling {
         /// <exception cref="ArgumentNullException">
         /// When <paramref name="action"/> is null and needs to be exectued.
         /// </exception>
-        public Result<T, TError> DoWhenOk(Action<T> action) {
+        public Result<T, TError> DoWith(Action<T> action) {
             if (HasValue)
                 if (action != null)
                     action.Invoke(Value);
@@ -214,7 +214,7 @@ namespace Lemonad.ErrorHandling {
         /// <exception cref="ArgumentNullException">
         /// When <paramref name="action"/> is null and needs to be exectued.
         /// </exception>
-        public Result<T, TError> DoWhenError(
+        public Result<T, TError> DoWithError(
             Action<TError> action) {
             if (HasError)
                 if (action != null)
@@ -400,8 +400,12 @@ namespace Lemonad.ErrorHandling {
             throw new ArgumentNullException(nameof(flatSelector)));
 
         /// <summary>
-        /// Flatten another <see cref="Result{T,TError}"/> 
+        /// Flatten another <see cref="Result{T,TError}"/>.
         /// </summary>
+        /// <remarks>
+        /// The <see cref="Result{T,TError}"/> returned is not the the result from <paramref name="selector"/>.
+        /// Use <see cref="FlatMap{TResult}"/> in order to the get the result from <paramref name="selector"/>.
+        /// </remarks>
         /// <param name="selector">
         /// A function who expects a <see cref="Result{T,TError}"/> as an return type.
         /// </param>
@@ -439,6 +443,10 @@ namespace Lemonad.ErrorHandling {
         /// <summary>
         /// Flatten another <see cref="Result{T,TError}"/>  who shares the same <typeparamref name="TError"/>.
         /// </summary>
+        /// <remarks>
+        /// The <see cref="Result{T,TError}"/> returned is not the the result from <paramref name="selector"/>.
+        /// Use <see cref="FlatMap{TResult}"/> in order to the get the result from <paramref name="selector"/>.
+        /// </remarks>
         /// <param name="selector"></param>
         /// <typeparam name="TResult"></typeparam>
         /// <returns></returns>
@@ -449,8 +457,8 @@ namespace Lemonad.ErrorHandling {
                 if (selector == null) throw new ArgumentNullException(nameof(selector));
                 var okSelector = selector(Value);
                 if (okSelector.HasValue)
-                    return Result.Ok<T, TError>(Value);
-                return Value;
+                    return Value;
+                return okSelector.Error;
             }
 
             return Result.Error<T, TError>(Error);
