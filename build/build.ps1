@@ -215,6 +215,8 @@ $srcDiretory = Join-Path -Path $rootDirectory -ChildPath 'src' `
   | Get-Item -ErrorAction Stop
 $buildDirectory = Join-Path -Path $rootDirectory -ChildPath 'build' `
   | Get-Item -ErrorAction Stop
+$documentationDirectory = Join-Path -Path $rootDirectory -ChildPath 'docs' -ErrorAction Stop `
+  | Get-Item -ErrorAction Stop
 
 Set-Location -Path $rootDirectory -ErrorAction Stop
 
@@ -238,7 +240,6 @@ if ($isWindows) {
     switch ($env:APPVEYOR_REPO_BRANCH) {
       'master' {
         if (!$env:APPVEYOR_PULL_REQUEST_TITLE -and $GenerateDocs) {
-          $documentationDirectory = (Join-Path -Path $rootDirectory -ChildPath 'docs' -ErrorAction Stop ) | Get-Item -ErrorAction Stop
           Generate-Documentation -DocumentationDirectory $documentationDirectory -SrcDirectory $srcDiretory
           List-Files (Join-Path -Path $srcDiretory -ChildPath '*.csproj') `
             | Get-ProjectInfo `
