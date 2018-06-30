@@ -973,42 +973,42 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Do
   nameWithType: Result<T, TError>.Do
   nameWithType.vb: Result(Of T, TError).Do
-- uid: Lemonad.ErrorHandling.Result`2.DoWhenError(System.Action{`1})
-  name: DoWhenError(Action<TError>)
-  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_DoWhenError_System_Action__1__
-  commentId: M:Lemonad.ErrorHandling.Result`2.DoWhenError(System.Action{`1})
-  name.vb: DoWhenError(Action(Of TError))
-  fullName: Lemonad.ErrorHandling.Result<T, TError>.DoWhenError(System.Action<TError>)
-  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).DoWhenError(System.Action(Of TError))
-  nameWithType: Result<T, TError>.DoWhenError(Action<TError>)
-  nameWithType.vb: Result(Of T, TError).DoWhenError(Action(Of TError))
-- uid: Lemonad.ErrorHandling.Result`2.DoWhenError*
-  name: DoWhenError
-  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_DoWhenError_
-  commentId: Overload:Lemonad.ErrorHandling.Result`2.DoWhenError
+- uid: Lemonad.ErrorHandling.Result`2.DoWith(System.Action{`0})
+  name: DoWith(Action<T>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_DoWith_System_Action__0__
+  commentId: M:Lemonad.ErrorHandling.Result`2.DoWith(System.Action{`0})
+  name.vb: DoWith(Action(Of T))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.DoWith(System.Action<T>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).DoWith(System.Action(Of T))
+  nameWithType: Result<T, TError>.DoWith(Action<T>)
+  nameWithType.vb: Result(Of T, TError).DoWith(Action(Of T))
+- uid: Lemonad.ErrorHandling.Result`2.DoWith*
+  name: DoWith
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_DoWith_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.DoWith
   isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Result<T, TError>.DoWhenError
-  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).DoWhenError
-  nameWithType: Result<T, TError>.DoWhenError
-  nameWithType.vb: Result(Of T, TError).DoWhenError
-- uid: Lemonad.ErrorHandling.Result`2.DoWhenOk(System.Action{`0})
-  name: DoWhenOk(Action<T>)
-  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_DoWhenOk_System_Action__0__
-  commentId: M:Lemonad.ErrorHandling.Result`2.DoWhenOk(System.Action{`0})
-  name.vb: DoWhenOk(Action(Of T))
-  fullName: Lemonad.ErrorHandling.Result<T, TError>.DoWhenOk(System.Action<T>)
-  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).DoWhenOk(System.Action(Of T))
-  nameWithType: Result<T, TError>.DoWhenOk(Action<T>)
-  nameWithType.vb: Result(Of T, TError).DoWhenOk(Action(Of T))
-- uid: Lemonad.ErrorHandling.Result`2.DoWhenOk*
-  name: DoWhenOk
-  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_DoWhenOk_
-  commentId: Overload:Lemonad.ErrorHandling.Result`2.DoWhenOk
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.DoWith
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).DoWith
+  nameWithType: Result<T, TError>.DoWith
+  nameWithType.vb: Result(Of T, TError).DoWith
+- uid: Lemonad.ErrorHandling.Result`2.DoWithError(System.Action{`1})
+  name: DoWithError(Action<TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_DoWithError_System_Action__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.DoWithError(System.Action{`1})
+  name.vb: DoWithError(Action(Of TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.DoWithError(System.Action<TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).DoWithError(System.Action(Of TError))
+  nameWithType: Result<T, TError>.DoWithError(Action<TError>)
+  nameWithType.vb: Result(Of T, TError).DoWithError(Action(Of TError))
+- uid: Lemonad.ErrorHandling.Result`2.DoWithError*
+  name: DoWithError
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_DoWithError_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.DoWithError
   isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Result<T, TError>.DoWhenOk
-  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).DoWhenOk
-  nameWithType: Result<T, TError>.DoWhenOk
-  nameWithType.vb: Result(Of T, TError).DoWhenOk
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.DoWithError
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).DoWithError
+  nameWithType: Result<T, TError>.DoWithError
+  nameWithType.vb: Result(Of T, TError).DoWithError
 - uid: Lemonad.ErrorHandling.Result`2.Equals(Lemonad.ErrorHandling.Result{`0,`1})
   name: Equals(Result<T, TError>)
   href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Equals_Lemonad_ErrorHandling_Result__0__1__
