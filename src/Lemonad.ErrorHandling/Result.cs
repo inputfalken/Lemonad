@@ -87,7 +87,7 @@ namespace Lemonad.ErrorHandling {
         /// This is handy when combining <see cref="Result{T,TError}"/> with LINQs API.
         /// </summary>
         public IEnumerable<TError> AsErrorEnumerable => YieldErrors(this);
-        
+
         /// <summary>
         /// Treat <typeparamref name="T"/> as enumerable with 0-1 elements in.
         /// This is handy when combining <see cref="Result{T,TError}"/> with LINQ's API.
@@ -573,6 +573,42 @@ namespace Lemonad.ErrorHandling {
             return errorSelector != null
                 ? errorSelector(Error)
                 : throw new ArgumentNullException(nameof(errorSelector));
+        }
+
+        /// <summary>
+        /// Casts <typeparamref name="T"/> into <typeparamref name="TResult"/>.
+        /// </summary>
+        /// <typeparam name="TResult">
+        /// The type to cast to.
+        /// </typeparam>
+        /// <returns>
+        /// A <see cref="Result{T,TError}"/> whose <typeparamref name="T"/> has been casted to <typeparamref name="TResult"/>.
+        /// </returns>
+        [Pure]
+        public Result<TResult, TError> Cast<TResult>() {
+            if (HasError) return Error;
+            return (TResult) (object) Value;
+        }
+
+        /// <summary>
+        /// Attempts to cast <typeparamref name="T"/> into <typeparamref name="TResult"/>.
+        /// </summary>
+        /// <param name="errorSelector">
+        /// Is executed if the cast would fail.
+        /// </param>
+        /// <typeparam name="TResult">
+        /// The type to cast to.
+        /// </typeparam>
+        /// <returns>
+        /// A <see cref="Result{T,TError}"/> whose <typeparamref name="T"/> has been casted to <typeparamref name="TResult"/>.
+        /// </returns>
+        [Pure]
+        public Result<TResult, TError> SafeCast<TResult>(Func<TError> errorSelector) {
+            if (HasError) return Error;
+            if (Value is TResult result)
+                return result;
+
+            return errorSelector();
         }
 
         /// <summary>
