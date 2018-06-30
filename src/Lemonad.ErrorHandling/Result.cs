@@ -567,18 +567,38 @@ namespace Lemonad.ErrorHandling {
                 : throw new ArgumentNullException(nameof(errorSelector));
         }
 
+        /// <summary>
+        /// Casts <typeparamref name="T"/> to <typeparamref name="TResult"/>.
+        /// </summary>
+        /// <typeparam name="TResult">
+        /// The type to cast to.
+        /// </typeparam>
+        /// <returns>
+        /// A <see cref="Result{T,TError}"/> whose <typeparamref name="T"/> has been casted to <typeparamref name="TResult"/>.
+        /// </returns>
         [Pure]
         public Result<TResult, TError> Cast<TResult>() {
             if (HasError) return Error;
             return (TResult) (object) Value;
         }
 
+        /// <summary>
+        /// Attempt to <typeparamref name="T"/> to <typeparamref name="TResult"/>.
+        /// </summary>
+        /// <param name="errorSelector">
+        /// Is executed if the cast would fail.
+        /// </param>
+        /// <typeparam name="TResult">
+        /// The type to cast to.
+        /// </typeparam>
+        /// <returns>
+        /// A <see cref="Result{T,TError}"/> whose <typeparamref name="T"/> has been casted to <typeparamref name="TResult"/>.
+        /// </returns>
         [Pure]
-        public Result<TResult, TError> OfType<TResult>(Func<TError> errorSelector) {
+        public Result<TResult, TError> SafeCast<TResult>(Func<TError> errorSelector) {
             if (HasError) return Error;
-            if ((object)Value is TResult) {
-                return (TResult) (object) Value;
-            }
+            if (Value is TResult result)
+                return result;
 
             return errorSelector();
         }

@@ -29,7 +29,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.Equal(default(string), collectionResult.Error);
 
             var errorSelectorExectued = false;
-            var castResult = collectionResult.OfType<int[]>(() => {
+            var castResult = collectionResult.SafeCast<int[]>(() => {
                 errorSelectorExectued = true;
                 return "Could not cast collection to int array.";
             });
@@ -50,7 +50,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.Equal(default(string), collectionResult.Error);
 
             var errorSelectorExectued = false;
-            var castResult = collectionResult.OfType<double>(() => {
+            var castResult = collectionResult.SafeCast<double>(() => {
                 errorSelectorExectued = true;
                 return "Could not cast collection to double.";
             });
@@ -71,7 +71,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.Equal("Could not obtain a collection.", collectionResult.Error);
 
             var errorSelectorExectued = false;
-            var castResult = collectionResult.OfType<int[]>(() => {
+            var castResult = collectionResult.SafeCast<int[]>(() => {
                 errorSelectorExectued = true;
                 return "Could not cast collection to int array.";
             });
@@ -92,7 +92,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.Equal("Could not obtain a collection.", collectionResult.Error);
 
             var errorSelectorExectued = false;
-            var castResult = collectionResult.OfType<double>(() => {
+            var castResult = collectionResult.SafeCast<double>(() => {
                 errorSelectorExectued = true;
                 return "Could not cast collection to double.";
             });
