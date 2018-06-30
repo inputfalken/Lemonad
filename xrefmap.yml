@@ -938,6 +938,24 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).AsErrorEnumerable
   nameWithType: Result<T, TError>.AsErrorEnumerable
   nameWithType.vb: Result(Of T, TError).AsErrorEnumerable
+- uid: Lemonad.ErrorHandling.Result`2.Cast*
+  name: Cast
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Cast_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.Cast
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Cast
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Cast
+  nameWithType: Result<T, TError>.Cast
+  nameWithType.vb: Result(Of T, TError).Cast
+- uid: Lemonad.ErrorHandling.Result`2.Cast``1
+  name: Cast<TResult>()
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Cast__1
+  commentId: M:Lemonad.ErrorHandling.Result`2.Cast``1
+  name.vb: Cast(Of TResult)()
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.Cast<TResult>()
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).Cast(Of TResult)()
+  nameWithType: Result<T, TError>.Cast<TResult>()
+  nameWithType.vb: Result(Of T, TError).Cast(Of TResult)()
 - uid: Lemonad.ErrorHandling.Result`2.CompareTo(Lemonad.ErrorHandling.Result{`0,`1})
   name: CompareTo(Result<T, TError>)
   href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_CompareTo_Lemonad_ErrorHandling_Result__0__1__
@@ -1474,6 +1492,24 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).LessThanOrEqual
   nameWithType: Result<T, TError>.LessThanOrEqual
   nameWithType.vb: Result(Of T, TError).LessThanOrEqual
+- uid: Lemonad.ErrorHandling.Result`2.SafeCast*
+  name: SafeCast
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_SafeCast_
+  commentId: Overload:Lemonad.ErrorHandling.Result`2.SafeCast
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.SafeCast
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).SafeCast
+  nameWithType: Result<T, TError>.SafeCast
+  nameWithType.vb: Result(Of T, TError).SafeCast
+- uid: Lemonad.ErrorHandling.Result`2.SafeCast``1(System.Func{`1})
+  name: SafeCast<TResult>(Func<TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_SafeCast__1_System_Func__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.SafeCast``1(System.Func{`1})
+  name.vb: SafeCast(Of TResult)(Func(Of TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.SafeCast<TResult>(System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).SafeCast(Of TResult)(System.Func(Of TError))
+  nameWithType: Result<T, TError>.SafeCast<TResult>(Func<TError>)
+  nameWithType.vb: Result(Of T, TError).SafeCast(Of TResult)(Func(Of TError))
 - uid: Lemonad.ErrorHandling.Result`2.ToString
   name: ToString()
   href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_ToString

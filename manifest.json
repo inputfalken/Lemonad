@@ -57,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Result-2.html",
-          "hash": "Xdq+vHIx9U09RWCgIuwkFw=="
+          "hash": "zqu6OJEBTNMPxL4COypDnw=="
         }
       },
       "is_incremental": false,
@@ -180,17 +180,17 @@
         "incrementalPhase": "build"
       },
       "processors": {
-        "ConceptualDocumentProcessor": {
+        "TocDocumentProcessor": {
           "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build"
         },
-        "TocDocumentProcessor": {
+        "ConceptualDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         }
       }

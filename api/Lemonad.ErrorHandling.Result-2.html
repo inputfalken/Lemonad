@@ -254,6 +254,55 @@ This is handy when combining <a class="xref" href="Lemonad.ErrorHandling.Result-
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Result_2_Cast__1.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Result%602.Cast%60%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Result.cs/#L587">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_Result_2_Cast_" data-uid="Lemonad.ErrorHandling.Result`2.Cast*"></a>
+  <h4 id="Lemonad_ErrorHandling_Result_2_Cast__1" data-uid="Lemonad.ErrorHandling.Result`2.Cast``1">Cast&lt;TResult&gt;()</h4>
+  <div class="markdown level1 summary"><p>Casts <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> into <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public Result&lt;TResult, TError&gt; Cast&lt;TResult&gt;()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.Result-2.html">Result</a>&lt;TResult, TError&gt;</td>
+        <td><p>A <a class="xref" href="Lemonad.ErrorHandling.Result-2.html">Result&lt;T, TError&gt;</a> whose <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> has been casted to <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td><p>The type to cast to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Result_2_CompareTo_Lemonad_ErrorHandling_Result__0__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Result%602.CompareTo(Lemonad.ErrorHandling.Result%7B%600%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
@@ -1253,7 +1302,7 @@ public Result&lt;TResult, TErrorResult&gt; FullFlatMap&lt;TErrorResult, TResult&
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Result_2_FullFlatMap__3_System_Func__0_Lemonad_ErrorHandling_Result___1___0___System_Func__0___1___2__System_Func__1___0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Result%602.FullFlatMap%60%603(System.Func%7B%600%2CLemonad.ErrorHandling.Result%7B%60%601%2C%60%600%7D%7D%2CSystem.Func%7B%600%2C%60%601%2C%60%602%7D%2CSystem.Func%7B%601%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Result.cs/#L600">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Result.cs/#L636">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_Result_2_FullFlatMap_" data-uid="Lemonad.ErrorHandling.Result`2.FullFlatMap*"></a>
   <h4 id="Lemonad_ErrorHandling_Result_2_FullFlatMap__3_System_Func__0_Lemonad_ErrorHandling_Result___1___0___System_Func__0___1___2__System_Func__1___0__" data-uid="Lemonad.ErrorHandling.Result`2.FullFlatMap``3(System.Func{`0,Lemonad.ErrorHandling.Result{``1,``0}},System.Func{`0,``1,``2},System.Func{`1,``0})">FullFlatMap&lt;TErrorResult, TFlatMap, TResult&gt;(Func&lt;T, Result&lt;TFlatMap, TErrorResult&gt;&gt;, Func&lt;T, TFlatMap, TResult&gt;, Func&lt;TError, TErrorResult&gt;)</h4>
@@ -1863,6 +1912,73 @@ public TResult Match&lt;TResult&gt;(Func&lt;T, TResult&gt; selector, Func&lt;TEr
       <tr>
         <td><a class="xref" href="Lemonad.ErrorHandling.Result-2.html">Result</a>&lt;T, <span class="xref">System.Collections.Generic.IReadOnlyList</span>&lt;TError&gt;&gt;</td>
         <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Result_2_SafeCast__1_System_Func__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Result%602.SafeCast%60%601(System.Func%7B%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/Result.cs/#L605">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_Result_2_SafeCast_" data-uid="Lemonad.ErrorHandling.Result`2.SafeCast*"></a>
+  <h4 id="Lemonad_ErrorHandling_Result_2_SafeCast__1_System_Func__1__" data-uid="Lemonad.ErrorHandling.Result`2.SafeCast``1(System.Func{`1})">SafeCast&lt;TResult&gt;(Func&lt;TError&gt;)</h4>
+  <div class="markdown level1 summary"><p>Attempts to cast <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> into <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public Result&lt;TResult, TError&gt; SafeCast&lt;TResult&gt;(Func&lt;TError&gt; errorSelector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TError&gt;</td>
+        <td><span class="parametername">errorSelector</span></td>
+        <td><p>Is executed if the cast would fail.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.Result-2.html">Result</a>&lt;TResult, TError&gt;</td>
+        <td><p>A <a class="xref" href="Lemonad.ErrorHandling.Result-2.html">Result&lt;T, TError&gt;</a> whose <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> has been casted to <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td><p>The type to cast to.</p>
+</td>
       </tr>
     </tbody>
   </table>
