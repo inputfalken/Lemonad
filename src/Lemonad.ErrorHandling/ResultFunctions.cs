@@ -71,7 +71,7 @@ namespace Lemonad.ErrorHandling {
         /// Evaluates the <see cref="Result{T,TError}"/>.
         /// </summary>
         /// <param name="source">
-        /// The <see cref="Result{T,TError}"/> to Evaluate.
+        /// The <see cref="Result{T,TError}"/> to evaluate.
         /// </param>
         /// <typeparam name="T">
         /// The type of the value.
@@ -80,7 +80,30 @@ namespace Lemonad.ErrorHandling {
         /// The type of the error.
         /// </typeparam>
         [Pure]
-        public static T Match<T, TError>(this Result<T, TError> source) where TError : T => source.Match(x => x, x => x);
+        public static T Match<T, TError>(this Result<T, TError> source) where TError : T =>
+            source.Match(x => x, x => x);
+
+        /// <summary>
+        /// Evaluates the <see cref="Result{T,TError}"/>.
+        /// </summary>
+        /// <param name="source">
+        /// The <see cref="Result{T,TError}"/> to evaluate.
+        /// </param>
+        /// <param name="selector">
+        /// A function to map <typeparamref name="T"/> to <typeparamref name="TResult"/>.
+        /// </param>
+        /// <typeparam name="T">
+        /// The value type of the <see cref="Result{T,TError}"/>.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        /// The error type of the <see cref="Result{T,TError}"/>.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// The type returned from function <paramref name="selector"/>>
+        /// </typeparam>
+        [Pure]
+        public static TResult Match<T, TError, TResult>(this Result<T, TError> source, Func<T, TResult> selector)
+            where T : TError => source.Match(selector, x => selector((T) x));
 
         /// <summary>
         /// Converts an <see cref="Nullable{T}"/> to an <see cref="Result{T,TError}"/> with the value <typeparamref name="T"/>.

@@ -19,5 +19,17 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var result = Division(10, 2).Match();
             Assert.Equal(5, result);
         }
+        
+        [Fact]
+        public void Result_With_Error_With_Selector() {
+            var result = Division(10, 0).Match(d => d * 2);
+            Assert.Equal(-2, result);
+        }
+        
+        [Fact]
+        public void Result_With_Value_With_Selector() {
+            var result = Division(10, 2).Match(d => d * 2);
+            Assert.Equal(10, result);
+        }
     }
 }
