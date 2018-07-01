@@ -5,18 +5,6 @@
   "files": [
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.EquailtyFunctions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.EquailtyFunctions.html",
-          "hash": "/oi0i0gfXgdCqjjPg0CLCQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/Lemonad.ErrorHandling.Maybe-1.yml",
       "output": {
         ".html": {
@@ -93,7 +81,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.html",
-          "hash": "1IB0Br/eQHPjH6sny2uxRQ=="
+          "hash": "sEJltXcXOirZYiv0wZL2Wg=="
         }
       },
       "is_incremental": false,
@@ -117,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "c89puy4vtrBOqe2EzFIJsg=="
+          "hash": "c6eTVxDM9M+JJKLY0GTr4g=="
         }
       },
       "is_incremental": false,
@@ -180,17 +168,17 @@
         "incrementalPhase": "build"
       },
       "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build"
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
-          "incrementalPhase": "build"
-        },
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         }
       }

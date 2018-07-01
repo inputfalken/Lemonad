@@ -7,28 +7,6 @@ references:
   commentId: N:Lemonad.ErrorHandling
   fullName: Lemonad.ErrorHandling
   nameWithType: Lemonad.ErrorHandling
-- uid: Lemonad.ErrorHandling.EquailtyFunctions
-  name: EquailtyFunctions
-  href: api/Lemonad.ErrorHandling.EquailtyFunctions.html
-  commentId: T:Lemonad.ErrorHandling.EquailtyFunctions
-  fullName: Lemonad.ErrorHandling.EquailtyFunctions
-  nameWithType: EquailtyFunctions
-- uid: Lemonad.ErrorHandling.EquailtyFunctions.IsNull*
-  name: IsNull
-  href: api/Lemonad.ErrorHandling.EquailtyFunctions.html#Lemonad_ErrorHandling_EquailtyFunctions_IsNull_
-  commentId: Overload:Lemonad.ErrorHandling.EquailtyFunctions.IsNull
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.EquailtyFunctions.IsNull
-  nameWithType: EquailtyFunctions.IsNull
-- uid: Lemonad.ErrorHandling.EquailtyFunctions.IsNull``1(``0)
-  name: IsNull<TElement>(TElement)
-  href: api/Lemonad.ErrorHandling.EquailtyFunctions.html#Lemonad_ErrorHandling_EquailtyFunctions_IsNull__1___0_
-  commentId: M:Lemonad.ErrorHandling.EquailtyFunctions.IsNull``1(``0)
-  name.vb: IsNull(Of TElement)(TElement)
-  fullName: Lemonad.ErrorHandling.EquailtyFunctions.IsNull<TElement>(TElement)
-  fullName.vb: Lemonad.ErrorHandling.EquailtyFunctions.IsNull(Of TElement)(TElement)
-  nameWithType: EquailtyFunctions.IsNull<TElement>(TElement)
-  nameWithType.vb: EquailtyFunctions.IsNull(Of TElement)(TElement)
 - uid: Lemonad.ErrorHandling.Maybe
   name: Maybe
   href: api/Lemonad.ErrorHandling.Maybe.html
