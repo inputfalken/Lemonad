@@ -2,9 +2,9 @@
 using System.Diagnostics.Contracts;
 
 namespace Lemonad.ErrorHandling {
-    public static class EquailtyFunctions {
+    internal static class EquailtyFunctions {
         [Pure]
-        public static bool IsNull<TElement>(TElement element) =>
-            EqualityComparer<TElement>.Default.Equals(element, default(TElement)) && element == null;
+        internal static bool IsNull<TElement>(TElement element) =>
+            EqualityComparer<TElement>.Default.Equals(element, default) && element == null;
     }
 }
