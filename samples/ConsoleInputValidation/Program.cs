@@ -14,7 +14,7 @@ namespace ConsoleInputValidation {
                 .FullCast<int>()
                 .DoWithError(x => Console.WriteLine($"Bad input, exiting with code: {x}"))
                 .DoWith(x => Console.WriteLine($"Good input, exiting with code: {x}"))
-                .Match(x => x, x => x);
+                .Match();
         }
 
         private static Result<string, ExitCode> OnlyContainsAlphaNumericChars(string input) {

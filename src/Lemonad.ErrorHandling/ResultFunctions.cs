@@ -68,6 +68,21 @@ namespace Lemonad.ErrorHandling {
             new Result<T, TError>(default, error, true, false);
 
         /// <summary>
+        /// Evaluates the <see cref="Result{T,TError}"/>.
+        /// </summary>
+        /// <param name="source">
+        /// The <see cref="Result{T,TError}"/> to Evaluate.
+        /// </param>
+        /// <typeparam name="T">
+        /// The type of the value.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        /// The type of the error.
+        /// </typeparam>
+        [Pure]
+        public static T Match<T, TError>(this Result<T, TError> source) where TError : T => source.Match(x => x, x => x);
+
+        /// <summary>
         /// Converts an <see cref="Nullable{T}"/> to an <see cref="Result{T,TError}"/> with the value <typeparamref name="T"/>.
         /// </summary>
         /// <param name="source">
