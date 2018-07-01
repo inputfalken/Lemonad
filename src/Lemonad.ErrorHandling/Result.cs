@@ -591,6 +591,30 @@ namespace Lemonad.ErrorHandling {
         }
 
         /// <summary>
+        /// Casts both <typeparamref name="T"/> into <typeparamref name="TResult"/> and <typeparamref name="TError"/> into <typeparamref name="TErrorResult"/> 
+        /// </summary>
+        /// <typeparam name="TResult">
+        /// The type to cast <typeparamref name="T"/> into.
+        /// </typeparam>
+        /// <typeparam name="TErrorResult">
+        /// The type to cast <typeparamref name="TErrorResult"/> into.
+        /// </typeparam>
+        [Pure]
+        public Result<TResult, TErrorResult> FullCast<TResult, TErrorResult>() => HasValue
+            ? Result.Ok<TResult, TErrorResult>((TResult) (object) Value)
+            : Result.Error<TResult, TErrorResult>((TErrorResult) (object) Error);
+
+        /// <summary>
+        /// Casts both <typeparamref name="T"/> into <typeparamref name="TResult"/> and <typeparamref name="TError"/> into <typeparamref name="TResult"/> 
+        /// </summary>
+        /// <typeparam name="TResult">
+        /// The type to cast to.
+        /// </typeparam>
+        /// <returns></returns>
+        [Pure]
+        public Result<TResult, TResult> FullCast<TResult>() => FullCast<TResult, TResult>();
+
+        /// <summary>
         /// Casts <typeparamref name="T"/> into <typeparamref name="TResult"/>.
         /// </summary>
         /// <typeparam name="TResult">
