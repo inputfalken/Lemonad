@@ -1,37 +1,38 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling {
-    public class ResultAsync<T, TError> {
-        internal Task<TError> Error { get; }
-        internal Task<T> Value { get; }
-        public bool HasValue { get; }
-        public bool HasError { get; }
+    /// <summary>
+    /// Asynchronous wrapper of <see cref="Result{T,TError}"/>.
+    /// </summary>
+    /// <typeparam name="T">
+    /// The type which is considered as successfull.
+    /// </typeparam>
+    /// <typeparam name="TError">
+    /// The type which is considered as failure.
+    /// </typeparam>
+    public struct ResultAsync<T, TError> {
+        private readonly Task<Result<T, TError>> _result;
 
-        [Pure]
-        public async Task<TResult> Match<TResult>(
-            Func<T, TResult> selector, Func<TError, TResult> errorSelector) {
-            if (HasError)
-                return errorSelector != null
-                    ? errorSelector(await Error.ConfigureAwait(false))
-                    : throw new ArgumentNullException(nameof(errorSelector));
+        public ResultAsync(Task<Result<T, TError>> result) => _result = result;
 
-            return selector != null
-                ? selector(await Value.ConfigureAwait(false))
-                : throw new ArgumentNullException(nameof(selector));
+        public static implicit operator ResultAsync<T, TError>(Task<Result<T, TError>> value) =>
+            new ResultAsync<T, TError>(value);
+
+        public ResultAsync<T, TError> Filter(Func<T, bool> predicate, Func<TError> errorSelector) {
+            async Task<Result<T, TError>> Task(Task<Result<T, TError>> x) =>
+                (await x.ConfigureAwait(false)).Filter(predicate, errorSelector);
+
+            return Task(_result);
         }
 
-        public async Task Match(Action<T> action, Action<TError> errorAction) {
-            if (HasError)
-                if (errorAction != null)
-                    errorAction(await Error.ConfigureAwait(false));
-                else
-                    throw new ArgumentNullException(nameof(errorAction));
-            else if (action != null)
-                action(await Value.ConfigureAwait(false));
-            else
-                throw new ArgumentNullException(nameof(action));
+        public ResultAsync<TResult, TError> FlatMap<TErrorResult, TFlatMap, TResult>(
+            Func<T, Result<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
+            Func<TErrorResult, TError> errorSelector) {
+            async Task<Result<TResult, TError>> Task(Task<Result<T, TError>> x) =>
+                (await x.ConfigureAwait(false)).FlatMap(flatMapSelector, resultSelector, errorSelector);
+
+            return Task(_result);
         }
     }
 }
