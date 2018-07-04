@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 
 namespace Lemonad.ErrorHandling {
-    public struct Maybe<T> : IEquatable<Maybe<T>>, IComparable<Maybe<T>> {
-        public readonly static Maybe<T> None { get; } = new Maybe<T>(default(T), false);
+    public readonly struct Maybe<T> : IEquatable<Maybe<T>>, IComparable<Maybe<T>> {
+        public static Maybe<T> None { get; } = new Maybe<T>(default(T), false);
 
         /// <summary>
         /// Is true if there's a <typeparamref name="T"/> in the current state of the <see cref="Maybe{T}"/>.
@@ -20,7 +20,7 @@ namespace Lemonad.ErrorHandling {
         internal T Value { get; }
 
         // TODO add IEqualityComparer ctor overload.
-        internal Maybe(T value, bool hasValue) {
+        internal Maybe(in T value, in bool hasValue) {
             Value = value;
             HasValue = hasValue;
         }
