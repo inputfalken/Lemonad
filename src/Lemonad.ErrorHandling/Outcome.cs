@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling {
     /// <summary>
@@ -7,6 +8,6 @@ namespace Lemonad.ErrorHandling {
     public class Outcome<T, TError> {
         private readonly Task<Result<T, TError>> _result;
 
-        public Outcome(Task<Result<T, TError>> result) => _result = result;
+        public Outcome(Task<Result<T, TError>> result) => _result = result ?? throw new ArgumentNullException(nameof(result));
     }
 }
