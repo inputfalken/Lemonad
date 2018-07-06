@@ -26,5 +26,14 @@ namespace Lemonad.ErrorHandling {
             new Func<Task<Result<T, TErrorResult>>>(
                 async () => (await _result.ConfigureAwait(false)).MapError(selector)
             )();
+
+        [Pure]
+        public Outcome<TResult, TErrorResult> FullMap<TErrorResult, TResult>(
+            Func<T, TResult> selector,
+            Func<TError, TErrorResult> errorSelector
+        ) =>
+            new Func<Task<Result<TResult, TErrorResult>>>(
+                async () => (await _result.ConfigureAwait(false)).FullMap(selector, errorSelector)
+            )();
     }
 }
