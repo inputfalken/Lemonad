@@ -43,5 +43,22 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public async Task Match(Action<T> action, Action<TError> errorAction) =>
             (await _result.ConfigureAwait(false)).Match(action, errorAction);
+
+        public Outcome<T, TError> Do(Action action) {
+            return new Func<Task<Result<T, TError>>>(
+                async () => (await _result.ConfigureAwait(false)).Do(action)
+            )();
+        }
+
+        public Outcome<T, TError> DoWithError(Action<TError> action) {
+            return new Func<Task<Result<T, TError>>>(
+                async () => (await _result.ConfigureAwait(false)).DoWithError(action)
+            )();
+        }
+
+        public Outcome<T, TError> DoWith(Action<T> action) =>
+            new Func<Task<Result<T, TError>>>(
+                async () => (await _result.ConfigureAwait(false)).DoWith(action)
+            )();
     }
 }
