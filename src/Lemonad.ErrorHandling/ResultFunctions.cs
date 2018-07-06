@@ -102,7 +102,7 @@ namespace Lemonad.ErrorHandling {
         /// The type returned from function <paramref name="selector"/>>
         /// </typeparam>
         [Pure]
-        public static TResult Match<T, TError, TResult>(this Result<T, TError> source, Func<T, TResult> selector)
+        public static TResult Match<T, TResult, TError>(this Result<T, TError> source, Func<T, TResult> selector)
             where T : TError => source.Match(selector, x => selector((T) x));
 
         /// <summary>
