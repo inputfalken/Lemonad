@@ -752,22 +752,6 @@ references:
   commentId: T:Lemonad.ErrorHandling.Result
   fullName: Lemonad.ErrorHandling.Result
   nameWithType: Result
-- uid: Lemonad.ErrorHandling.Result.ConvertToMaybe*
-  name: ConvertToMaybe
-  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ConvertToMaybe_
-  commentId: Overload:Lemonad.ErrorHandling.Result.ConvertToMaybe
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Result.ConvertToMaybe
-  nameWithType: Result.ConvertToMaybe
-- uid: Lemonad.ErrorHandling.Result.ConvertToMaybe``2(Lemonad.ErrorHandling.Result{``1,``0})
-  name: ConvertToMaybe<T, TError>(Result<TError, T>)
-  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ConvertToMaybe__2_Lemonad_ErrorHandling_Result___1___0__
-  commentId: M:Lemonad.ErrorHandling.Result.ConvertToMaybe``2(Lemonad.ErrorHandling.Result{``1,``0})
-  name.vb: ConvertToMaybe(Of T, TError)(Result(Of TError, T))
-  fullName: Lemonad.ErrorHandling.Result.ConvertToMaybe<T, TError>(Lemonad.ErrorHandling.Result<TError, T>)
-  fullName.vb: Lemonad.ErrorHandling.Result.ConvertToMaybe(Of T, TError)(Lemonad.ErrorHandling.Result(Of TError, T))
-  nameWithType: Result.ConvertToMaybe<T, TError>(Result<TError, T>)
-  nameWithType.vb: Result.ConvertToMaybe(Of T, TError)(Result(Of TError, T))
 - uid: Lemonad.ErrorHandling.Result.Error*
   name: Error
   href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_Error_
@@ -841,6 +825,22 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Result.Ok(Of T, TError)(T)
   nameWithType: Result.Ok<T, TError>(T)
   nameWithType.vb: Result.Ok(Of T, TError)(T)
+- uid: Lemonad.ErrorHandling.Result.ToMaybe*
+  name: ToMaybe
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ToMaybe_
+  commentId: Overload:Lemonad.ErrorHandling.Result.ToMaybe
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.ToMaybe
+  nameWithType: Result.ToMaybe
+- uid: Lemonad.ErrorHandling.Result.ToMaybe``2(Lemonad.ErrorHandling.Result{``1,``0})
+  name: ToMaybe<T, TError>(Result<TError, T>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ToMaybe__2_Lemonad_ErrorHandling_Result___1___0__
+  commentId: M:Lemonad.ErrorHandling.Result.ToMaybe``2(Lemonad.ErrorHandling.Result{``1,``0})
+  name.vb: ToMaybe(Of T, TError)(Result(Of TError, T))
+  fullName: Lemonad.ErrorHandling.Result.ToMaybe<T, TError>(Lemonad.ErrorHandling.Result<TError, T>)
+  fullName.vb: Lemonad.ErrorHandling.Result.ToMaybe(Of T, TError)(Lemonad.ErrorHandling.Result(Of TError, T))
+  nameWithType: Result.ToMaybe<T, TError>(Result<TError, T>)
+  nameWithType.vb: Result.ToMaybe(Of T, TError)(Result(Of TError, T))
 - uid: Lemonad.ErrorHandling.Result.ToResult*
   name: ToResult
   href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ToResult_

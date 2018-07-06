@@ -114,77 +114,6 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Result_ConvertToMaybe__2_Lemonad_ErrorHandling_Result___1___0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Result.ConvertToMaybe%60%602(Lemonad.ErrorHandling.Result%7B%60%601%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/ResultFunctions.cs/#L174">View Source</a>
-  </span>
-  <a id="Lemonad_ErrorHandling_Result_ConvertToMaybe_" data-uid="Lemonad.ErrorHandling.Result.ConvertToMaybe*"></a>
-  <h4 id="Lemonad_ErrorHandling_Result_ConvertToMaybe__2_Lemonad_ErrorHandling_Result___1___0__" data-uid="Lemonad.ErrorHandling.Result.ConvertToMaybe``2(Lemonad.ErrorHandling.Result{``1,``0})">ConvertToMaybe&lt;T, TError&gt;(Result&lt;TError, T&gt;)</h4>
-  <div class="markdown level1 summary"><p>Converts an <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a> to an <a class="xref" href="Lemonad.ErrorHandling.Result-2.html">Result&lt;T, TError&gt;</a> with the value <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[Pure]
-public static Maybe&lt;T&gt; ConvertToMaybe&lt;T, TError&gt;(this Result&lt;TError, T&gt; source)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Lemonad.ErrorHandling.Result-2.html">Result</a>&lt;TError, T&gt;</td>
-        <td><span class="parametername">source</span></td>
-        <td><p>The <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a> to convert.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe</a>&lt;T&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The type in the <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TError</span></td>
-        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TError</code> from the <a class="xref" href="Lemonad.ErrorHandling.Result-2.html">Result&lt;T, TError&gt;</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Result_Error__2___1_.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Result.Error%60%602(%60%601)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
@@ -546,6 +475,77 @@ public static Result&lt;T, TError&gt; Ok&lt;T, TError&gt;(T element)</code></pre
       <tr>
         <td><span class="parametername">TError</span></td>
         <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TError</code> of <a class="xref" href="Lemonad.ErrorHandling.Result-2.html">Result&lt;T, TError&gt;</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_Result_ToMaybe__2_Lemonad_ErrorHandling_Result___1___0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.Result.ToMaybe%60%602(Lemonad.ErrorHandling.Result%7B%60%601%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/ResultFunctions.cs/#L174">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_Result_ToMaybe_" data-uid="Lemonad.ErrorHandling.Result.ToMaybe*"></a>
+  <h4 id="Lemonad_ErrorHandling_Result_ToMaybe__2_Lemonad_ErrorHandling_Result___1___0__" data-uid="Lemonad.ErrorHandling.Result.ToMaybe``2(Lemonad.ErrorHandling.Result{``1,``0})">ToMaybe&lt;T, TError&gt;(Result&lt;TError, T&gt;)</h4>
+  <div class="markdown level1 summary"><p>Converts an <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a> to an <a class="xref" href="Lemonad.ErrorHandling.Result-2.html">Result&lt;T, TError&gt;</a> with the value <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static Maybe&lt;T&gt; ToMaybe&lt;T, TError&gt;(this Result&lt;TError, T&gt; source)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.Result-2.html">Result</a>&lt;TError, T&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a> to convert.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type in the <a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TError</span></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TError</code> from the <a class="xref" href="Lemonad.ErrorHandling.Result-2.html">Result&lt;T, TError&gt;</a>.</p>
 </td>
       </tr>
     </tbody>
