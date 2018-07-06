@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling {
     public static class Result {
@@ -174,5 +175,9 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static Maybe<T> ConvertToMaybe<T, TError>(this Result<TError, T> source) =>
             source.HasValue ? source.Error.Some() : Maybe<T>.None;
+
+        [Pure]
+        public static Outcome<T, TError> ToOutcome<T, TError>(this Result<T, TError> source) =>
+            new Outcome<T, TError>(Task.FromResult(source));
     }
 }
