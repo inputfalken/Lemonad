@@ -172,7 +172,7 @@ namespace Lemonad.ErrorHandling {
         /// The <typeparamref name="TError"/> from the <see cref="Result{T,TError}"/>.
         /// </typeparam>
         [Pure]
-        public static Maybe<T> ConvertToMaybe<T, TError>(this Result<TError, T> source) =>
-            source.HasValue ? source.Error.Some() : Maybe<T>.None;
+        public static Maybe<T> ConvertToMaybe<T, TError>(this Result<T, TError> source) =>
+            source.HasValue ? source.Value.Some() : Maybe<T>.None;
     }
 }
