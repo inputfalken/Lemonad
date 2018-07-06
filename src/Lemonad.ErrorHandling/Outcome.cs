@@ -12,9 +12,19 @@ namespace Lemonad.ErrorHandling {
         public Outcome(Task<Result<T, TError>> result) =>
             _result = result ?? throw new ArgumentNullException(nameof(result));
 
+        public static implicit operator Outcome<T, TError>(Task<Result<T, TError>> result) =>
+            new Outcome<T, TError>(result);
+
         [Pure]
-        public Outcome<TResult, TError> Map<TResult>(Func<T, TResult> selector) => new Outcome<TResult, TError>(
-            new Func<Task<Result<TResult, TError>>>(async () => (await _result.ConfigureAwait(false)).Map(selector))()
-        );
+        public Outcome<TResult, TError> Map<TResult>(Func<T, TResult> selector) =>
+            new Func<Task<Result<TResult, TError>>>(
+                async () => (await _result.ConfigureAwait(false)).Map(selector)
+            )();
+
+        [Pure]
+        public Outcome<T, TErrorResult> MapError<TErrorResult>(Func<TError, TErrorResult> selector) =>
+            new Func<Task<Result<T, TErrorResult>>>(
+                async () => (await _result.ConfigureAwait(false)).MapError(selector)
+            )();
     }
 }
