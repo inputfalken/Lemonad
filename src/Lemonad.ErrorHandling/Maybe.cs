@@ -3,7 +3,15 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 
 namespace Lemonad.ErrorHandling {
+  
+    /// <summary>
+    ///  A data-structure commonly used for error-handling where value may or may not be present.
+    /// </summary>
+    /// <typeparam name="T">
+    /// The potential value.
+    /// </typeparam>
     public readonly struct Maybe<T> : IEquatable<Maybe<T>>, IComparable<Maybe<T>> {
+
         public static Maybe<T> None { get; } = new Maybe<T>(default(T), false);
 
         /// <summary>
