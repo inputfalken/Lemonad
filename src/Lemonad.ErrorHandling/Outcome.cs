@@ -15,6 +15,18 @@ namespace Lemonad.ErrorHandling {
         public static implicit operator Outcome<T, TError>(Task<Result<T, TError>> result) =>
             new Outcome<T, TError>(result);
 
+        public static implicit operator Outcome<T, TError>(T value) =>
+            new Outcome<T, TError>(Task.FromResult(ErrorHandling.Result.Ok<T, TError>(value)));
+
+        public static implicit operator Outcome<T, TError>(Task<T> value) =>
+            new Func<Task<Result<T, TError>>>(async () => await value)();
+
+        public static implicit operator Outcome<T, TError>(Task<TError> error) =>
+            new Func<Task<Result<T, TError>>>(async () => await error)();
+
+        public static implicit operator Outcome<T, TError>(TError error) =>
+            new Outcome<T, TError>(Task.FromResult(ErrorHandling.Result.Error<T, TError>(error)));
+
         [Pure]
         public Outcome<TResult, TError> Map<TResult>(Func<T, TResult> selector) =>
             new Func<Task<Result<TResult, TError>>>(
