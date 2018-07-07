@@ -60,5 +60,20 @@ namespace Lemonad.ErrorHandling {
             new Func<Task<Result<T, TError>>>(
                 async () => (await _result.ConfigureAwait(false)).DoWith(action)
             )();
+        [Pure]
+        public Outcome<T, TError> Filter(Func<T, bool> predicate, Func<TError> errorSelector) =>
+            new Func<Task<Result<T, TError>>>(
+                async () => (await _result.ConfigureAwait(false)).Filter(predicate, errorSelector)
+            )();
+
+        [Pure]
+        public Outcome<T, TError> IsErrorWhen(Func<T, bool> predicate, Func<TError> errorSelector) =>
+            new Func<Task<Result<T, TError>>>(
+                async () => (await _result.ConfigureAwait(false)).Filter(predicate, errorSelector)
+            )();
+
+        [Pure]
+        public Outcome<T, TError> IsErrorWhenNull(Func<TError> errorSelector) =>
+            IsErrorWhen(EquailtyFunctions.IsNull, errorSelector);
     }
 }
