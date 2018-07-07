@@ -310,7 +310,7 @@ namespace Lemonad.ErrorHandling {
         /// A mapped <see cref="Result{T,TError}"/>.
         /// </returns>
         [Pure]
-        public Result<TResult, TErrorResult> FullMap<TErrorResult, TResult>(
+        public Result<TResult, TErrorResult> FullMap<TResult, TErrorResult>(
             Func<T, TResult> selector,
             Func<TError, TErrorResult> errorSelector
         ) => HasError
@@ -500,7 +500,7 @@ namespace Lemonad.ErrorHandling {
         /// When any of the function parameters are null and needs to be exectued.
         /// </exception>
         [Pure]
-        public Result<TResult, TError> FlatMap<TErrorResult, TResult>(
+        public Result<TResult, TError> FlatMap<TResult, TErrorResult>(
             Func<T, Result<TResult, TErrorResult>> flatMapSelector, Func<TErrorResult, TError> errorSelector) {
             if (HasValue) {
                 if (flatMapSelector == null) throw new ArgumentNullException(nameof(flatMapSelector));
@@ -536,7 +536,7 @@ namespace Lemonad.ErrorHandling {
         /// The type returned by the function <paramref name="resultSelector"/>.
         /// </typeparam>
         [Pure]
-        public Result<TResult, TError> FlatMap<TErrorResult, TFlatMap, TResult>(
+        public Result<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
             Func<T, Result<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
             Func<TErrorResult, TError> errorSelector) =>
             FlatMap(x => flatMapSelector?.Invoke(x).Map(y => {
@@ -565,7 +565,7 @@ namespace Lemonad.ErrorHandling {
         /// When any of the function parameters are null and needs to be exectued.
         /// </exception>
         [Pure]
-        public Result<TResult, TErrorResult> FullFlatMap<TErrorResult, TResult>(
+        public Result<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
             Func<T, Result<TResult, TErrorResult>> flatMapSelector, Func<TError, TErrorResult> errorSelector) {
             if (HasValue) {
                 return flatMapSelector?.Invoke(Value) ?? throw new ArgumentNullException(nameof(flatMapSelector));
@@ -674,7 +674,7 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         /// <returns></returns>
         [Pure]
-        public Result<TResult, TErrorResult> FullFlatMap<TErrorResult, TFlatMap, TResult>(
+        public Result<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
             Func<T, Result<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector) =>
             FullFlatMap(x => flatMapSelector?.Invoke(x).Map(y => {
