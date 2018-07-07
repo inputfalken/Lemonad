@@ -119,7 +119,7 @@ foreach (int division in successFulDivisions) { Console.WriteLine(division); }
 
 ## To be added
 
-* Async error handlers.
-  * `Outcome<T, TError>` (Async Result<T, TError>)
-  * `MaybeAsync<T>`
+* Async extensions methods for
+  * `Result<TLeft, TRight>`
+  * `Maybe<T>`
 
