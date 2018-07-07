@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using Lemonad.ErrorHandling.DataTypes.Result.Extensions;
+using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class ToResultOkTests {

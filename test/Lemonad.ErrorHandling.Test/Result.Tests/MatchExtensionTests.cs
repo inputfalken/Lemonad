@@ -1,11 +1,13 @@
-﻿using Xunit;
+﻿using Lemonad.ErrorHandling.DataTypes.Result;
+using Lemonad.ErrorHandling.DataTypes.Result.Extensions;
+using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class MatchExtensionTests {
         private static Result<double, double> Division(double left, double right) {
             return right == 0
-                ? ErrorHandling.Result.Error<double, double>(-1)
-                : ErrorHandling.Result.Ok<double, double>(left / right);
+                ? DataTypes.Result.Extensions.Result.Error<double, double>(-1)
+                : DataTypes.Result.Extensions.Result.Ok<double, double>(left / right);
         }
 
         [Fact]

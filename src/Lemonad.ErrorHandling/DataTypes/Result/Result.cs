@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using Lemonad.ErrorHandling.DataTypes.Result.Extensions;
 
-namespace Lemonad.ErrorHandling {
+namespace Lemonad.ErrorHandling.DataTypes.Result {
     /// <summary>
     ///  A data-structure commonly used for error-handling where only one value can be present.
     ///  Either it's <typeparamref name="TError" /> or it's <typeparamref name="T" />. Which makes it possible to handle error without throwing exceptions.
@@ -68,9 +69,9 @@ namespace Lemonad.ErrorHandling {
         public static bool operator >=(Result<T, TError> left, Result<T, TError> right) =>
             left.CompareTo(right) >= 0;
 
-        public static implicit operator Result<T, TError>(TError error) => Result.Error<T, TError>(error);
+        public static implicit operator Result<T, TError>(TError error) => Extensions.Result.Error<T, TError>(error);
 
-        public static implicit operator Result<T, TError>(T value) => Result.Ok<T, TError>(value);
+        public static implicit operator Result<T, TError>(T value) => Extensions.Result.Ok<T, TError>(value);
 
         private static IEnumerable<TError> YieldErrors(Result<T, TError> result) {
             if (result.HasError)
@@ -241,13 +242,13 @@ namespace Lemonad.ErrorHandling {
                 ? predicate == null
                     ? throw new ArgumentNullException(nameof(predicate))
                     : predicate(Value)
-                        ? Result.Ok<T, TError>(Value)
+                        ? Extensions.Result.Ok<T, TError>(Value)
                         : errorSelector == null
                             ? throw new ArgumentNullException(nameof(errorSelector))
-                            : Result.Error<T, TError>(errorSelector())
+                            : Extensions.Result.Error<T, TError>(errorSelector())
                 : errorSelector == null
                     ? throw new ArgumentNullException(nameof(errorSelector))
-                    : Result.Error<T, TError>(Error);
+                    : Extensions.Result.Error<T, TError>(Error);
         }
 
         /// <summary>
@@ -271,11 +272,11 @@ namespace Lemonad.ErrorHandling {
                     : predicate(Value)
                         ? errorSelector == null
                             ? throw new ArgumentNullException(nameof(errorSelector))
-                            : Result.Error<T, TError>(errorSelector())
-                        : Result.Ok<T, TError>(Value)
+                            : Extensions.Result.Error<T, TError>(errorSelector())
+                        : Extensions.Result.Ok<T, TError>(Value)
                 : errorSelector == null
                     ? throw new ArgumentNullException(nameof(errorSelector))
-                    : Result.Error<T, TError>(Error);
+                    : Extensions.Result.Error<T, TError>(Error);
 
         /// <summary>
         ///  Filters the <typeparamref name="T"/> by checking for null if <typeparamref name="T"/> is the active type.
@@ -313,10 +314,10 @@ namespace Lemonad.ErrorHandling {
             Func<T, TResult> selector,
             Func<TError, TErrorResult> errorSelector
         ) => HasError
-            ? Result.Error<TResult, TErrorResult>(errorSelector != null
+            ? Extensions.Result.Error<TResult, TErrorResult>(errorSelector != null
                 ? errorSelector(Error)
                 : throw new ArgumentNullException(nameof(errorSelector)))
-            : Result.Ok<TResult, TErrorResult>(selector != null
+            : Extensions.Result.Ok<TResult, TErrorResult>(selector != null
                 ? selector(Value)
                 : throw new ArgumentNullException(nameof(selector)));
 
@@ -335,9 +336,9 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public Result<TResult, TError> Map<TResult>(Func<T, TResult> selector) => HasValue
             ? selector != null
-                ? Result.Ok<TResult, TError>(selector(Value))
+                ? Extensions.Result.Ok<TResult, TError>(selector(Value))
                 : throw new ArgumentNullException(nameof(selector))
-            : Result.Error<TResult, TError>(Error);
+            : Extensions.Result.Error<TResult, TError>(Error);
 
         /// <summary>
         /// Maps <typeparamref name="TError"/>.
@@ -354,9 +355,9 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public Result<T, TErrorResult> MapError<TErrorResult>(Func<TError, TErrorResult> selector) => HasError
             ? selector != null
-                ? Result.Error<T, TErrorResult>(selector(Error))
+                ? Extensions.Result.Error<T, TErrorResult>(selector(Error))
                 : throw new ArgumentNullException(nameof(selector))
-            : Result.Ok<T, TErrorResult>(Value);
+            : Extensions.Result.Ok<T, TErrorResult>(Value);
 
         /// <summary>
         /// Flatten another <see cref="Result{T,TError}"/> who shares the same <typeparamref name="TError"/>.
@@ -372,7 +373,7 @@ namespace Lemonad.ErrorHandling {
         public Result<TResult, TError> FlatMap<TResult>(
             Func<T, Result<TResult, TError>> flatSelector) => HasValue
             ? flatSelector?.Invoke(Value) ?? throw new ArgumentNullException(nameof(flatSelector))
-            : Result.Error<TResult, TError>(Error);
+            : Extensions.Result.Error<TResult, TError>(Error);
 
         /// <summary>
         /// Flatten another <see cref="Result{T,TError}"/> who shares the same <typeparamref name="TError"/>.
@@ -432,12 +433,12 @@ namespace Lemonad.ErrorHandling {
                 if (selector == null) throw new ArgumentNullException(nameof(selector));
                 var okSelector = selector(Value);
                 if (okSelector.HasValue)
-                    return Result.Ok<T, TError>(Value);
+                    return Extensions.Result.Ok<T, TError>(Value);
                 var tmpThis = this;
                 return okSelector.FullMap(x => tmpThis.Value, errorSelector);
             }
 
-            return Result.Error<T, TError>(Error);
+            return Extensions.Result.Error<T, TError>(Error);
         }
 
         /// <summary>
@@ -461,7 +462,7 @@ namespace Lemonad.ErrorHandling {
                 return okSelector.Error;
             }
 
-            return Result.Error<T, TError>(Error);
+            return Extensions.Result.Error<T, TError>(Error);
         }
 
         /// <summary>
@@ -506,11 +507,11 @@ namespace Lemonad.ErrorHandling {
                 var okSelector = flatMapSelector(Value);
 
                 return okSelector.HasValue
-                    ? Result.Ok<TResult, TError>(okSelector.Value)
+                    ? Extensions.Result.Ok<TResult, TError>(okSelector.Value)
                     : okSelector.MapError(errorSelector);
             }
 
-            return Result.Error<TResult, TError>(Error);
+            return Extensions.Result.Error<TResult, TError>(Error);
         }
 
         /// <summary>
@@ -601,8 +602,8 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         [Pure]
         public Result<TResult, TErrorResult> FullCast<TResult, TErrorResult>() => HasValue
-            ? Result.Ok<TResult, TErrorResult>((TResult) (object) Value)
-            : Result.Error<TResult, TErrorResult>((TErrorResult) (object) Error);
+            ? Extensions.Result.Ok<TResult, TErrorResult>((TResult) (object) Value)
+            : Extensions.Result.Error<TResult, TErrorResult>((TErrorResult) (object) Error);
 
         /// <summary>
         /// Casts both <typeparamref name="T"/> into <typeparamref name="TResult"/> and <typeparamref name="TError"/> into <typeparamref name="TResult"/> 
