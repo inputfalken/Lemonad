@@ -7,10 +7,10 @@ namespace Lemonad.ErrorHandling {
     /// Async version of <see cref="Result{T,TError}"/>.
     /// </summary>
     public class Outcome<T, TError> {
-        private readonly Task<Result<T, TError>> _result;
+        internal Task<Result<T, TError>> Result { get; }
 
         public Outcome(Task<Result<T, TError>> result) =>
-            _result = result ?? throw new ArgumentNullException(nameof(result));
+            Result = result ?? throw new ArgumentNullException(nameof(result));
 
         public static implicit operator Outcome<T, TError>(Task<Result<T, TError>> result) =>
             new Outcome<T, TError>(result);
@@ -30,13 +30,13 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public Outcome<TResult, TError> Map<TResult>(Func<T, TResult> selector) =>
             new Func<Task<Result<TResult, TError>>>(
-                async () => (await _result.ConfigureAwait(false)).Map(selector)
+                async () => (await Result.ConfigureAwait(false)).Map(selector)
             )();
 
         [Pure]
         public Outcome<T, TErrorResult> MapError<TErrorResult>(Func<TError, TErrorResult> selector) =>
             new Func<Task<Result<T, TErrorResult>>>(
-                async () => (await _result.ConfigureAwait(false)).MapError(selector)
+                async () => (await Result.ConfigureAwait(false)).MapError(selector)
             )();
 
         [Pure]
@@ -45,43 +45,43 @@ namespace Lemonad.ErrorHandling {
             Func<TError, TErrorResult> errorSelector
         ) =>
             new Func<Task<Result<TResult, TErrorResult>>>(
-                async () => (await _result.ConfigureAwait(false)).FullMap(selector, errorSelector)
+                async () => (await Result.ConfigureAwait(false)).FullMap(selector, errorSelector)
             )();
 
         [Pure]
         public async Task<TResult> Match<TResult>(Func<T, TResult> selector, Func<TError, TResult> errorSelector) =>
-            (await _result.ConfigureAwait(false)).Match(selector, errorSelector);
+            (await Result.ConfigureAwait(false)).Match(selector, errorSelector);
 
         public async Task Match(Action<T> action, Action<TError> errorAction) =>
-            (await _result.ConfigureAwait(false)).Match(action, errorAction);
+            (await Result.ConfigureAwait(false)).Match(action, errorAction);
 
         public Outcome<T, TError> Do(Action action) {
             return new Func<Task<Result<T, TError>>>(
-                async () => (await _result.ConfigureAwait(false)).Do(action)
+                async () => (await Result.ConfigureAwait(false)).Do(action)
             )();
         }
 
         public Outcome<T, TError> DoWithError(Action<TError> action) {
             return new Func<Task<Result<T, TError>>>(
-                async () => (await _result.ConfigureAwait(false)).DoWithError(action)
+                async () => (await Result.ConfigureAwait(false)).DoWithError(action)
             )();
         }
 
         public Outcome<T, TError> DoWith(Action<T> action) =>
             new Func<Task<Result<T, TError>>>(
-                async () => (await _result.ConfigureAwait(false)).DoWith(action)
+                async () => (await Result.ConfigureAwait(false)).DoWith(action)
             )();
 
         [Pure]
         public Outcome<T, TError> Filter(Func<T, bool> predicate, Func<TError> errorSelector) =>
             new Func<Task<Result<T, TError>>>(
-                async () => (await _result.ConfigureAwait(false)).Filter(predicate, errorSelector)
+                async () => (await Result.ConfigureAwait(false)).Filter(predicate, errorSelector)
             )();
 
         [Pure]
         public Outcome<T, TError> IsErrorWhen(Func<T, bool> predicate, Func<TError> errorSelector) =>
             new Func<Task<Result<T, TError>>>(
-                async () => (await _result.ConfigureAwait(false)).Filter(predicate, errorSelector)
+                async () => (await Result.ConfigureAwait(false)).Filter(predicate, errorSelector)
             )();
 
         [Pure]
@@ -90,25 +90,25 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public Outcome<T, TResult> CastError<TResult>() => new Func<Task<Result<T, TResult>>>(
-            async () => (await _result.ConfigureAwait(false)).CastError<TResult>()
+            async () => (await Result.ConfigureAwait(false)).CastError<TResult>()
         )();
 
         [Pure]
         public Outcome<TResult, TErrorResult> FullCast<TResult, TErrorResult>() {
             return new Func<Task<Result<TResult, TErrorResult>>>(
-                async () => (await _result.ConfigureAwait(false)).FullCast<TResult, TErrorResult>()
+                async () => (await Result.ConfigureAwait(false)).FullCast<TResult, TErrorResult>()
             )();
         }
 
         [Pure]
         public Outcome<TResult, TError> Cast<TResult>() => new Func<Task<Result<TResult, TError>>>(
-            async () => (await _result.ConfigureAwait(false)).Cast<TResult>()
+            async () => (await Result.ConfigureAwait(false)).Cast<TResult>()
         )();
 
         [Pure]
         public Outcome<TResult, TError> SafeCast<TResult>(Func<TError> errorSelector) =>
             new Func<Task<Result<TResult, TError>>>(
-                async () => (await _result.ConfigureAwait(false)).SafeCast<TResult>(errorSelector)
+                async () => (await Result.ConfigureAwait(false)).SafeCast<TResult>(errorSelector)
             )();
     }
 }
