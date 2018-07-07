@@ -5,7 +5,7 @@ using System.Linq;
 using Lemonad.ErrorHandling.DataTypes.Result;
 
 namespace Lemonad.ErrorHandling.DataTypes.Maybe.Extensions {
-    public static class Maybe {
+    public static class MaybeExtensions {
         /// <summary>
         /// Creates a <see cref="Maybe{T}"/> who will have the value <paramref name="item"/>.
         /// </summary>

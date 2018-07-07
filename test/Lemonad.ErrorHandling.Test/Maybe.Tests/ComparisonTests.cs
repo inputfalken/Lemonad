@@ -46,8 +46,8 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Noones_Are_Expected_To_Be_Equal() {
-            var first = DataTypes.Maybe.Extensions.Maybe.None<string>();
-            var second = DataTypes.Maybe.Extensions.Maybe.None<string>();
+            var first = DataTypes.Maybe.Extensions.MaybeExtensions.None<string>();
+            var second = DataTypes.Maybe.Extensions.MaybeExtensions.None<string>();
 
             Assert.Equal(first, second);
             Assert.Equal(first, Maybe<string>.None);
