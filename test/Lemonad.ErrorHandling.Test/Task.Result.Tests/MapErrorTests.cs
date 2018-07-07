@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using Lemonad.ErrorHandling.DataTypes.Result;
+using Lemonad.ErrorHandling.DataTypes.Result.Extensions;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Task.Result.Tests {
@@ -19,7 +21,7 @@ namespace Lemonad.ErrorHandling.Test.Task.Result.Tests {
                 return s.ToUpper();
             });
             Assert.False(errorSelectorInvoked, "The function should not get exectued before the value is awaited.");
-            
+
             var result = await task;
             Assert.True(errorSelectorInvoked,
                 "Errorselector should get exeuted since there is an error in the result.");

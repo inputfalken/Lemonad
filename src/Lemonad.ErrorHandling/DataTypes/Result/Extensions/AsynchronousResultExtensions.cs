@@ -2,8 +2,8 @@
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 
-namespace Lemonad.ErrorHandling {
-    public static class AsyncResultFunctions {
+namespace Lemonad.ErrorHandling.DataTypes.Result.Extensions {
+    public static class AsynchronousResultExtensions {
         [Pure]
         public static async Task<Result<TResult, TError>> Map<T, TResult, TError>(this Task<Result<T, TError>> source,
             Func<T, TResult> selector) => (await source.ConfigureAwait(false)).Map(selector);

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Lemonad.ErrorHandling;
+﻿using System.Linq;
+using Lemonad.ErrorHandling.DataTypes.Result;
+using Lemonad.ErrorHandling.DataTypes.Result.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using MvcValidation.ApiModels;
 using MvcValidation.Models;
@@ -22,9 +22,12 @@ namespace MvcValidation.Controller {
             var apiValidation = model
                 .ToResult<PersonPostApiModel, PersonPostApiError>()
                 .Multiple(
-                    x => x.Filter(y => y.Age > 10, () => new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
-                    x => x.Flatten(y => ValidateName(y.FirstName), s => new PersonPostApiError {Message = s, Model = model}),
-                    x => x.Flatten(y => ValidateName(y.LastName), s => new PersonPostApiError {Message = s, Model = model})
+                    x => x.Filter(y => y.Age > 10,
+                        () => new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
+                    x => x.Flatten(y => ValidateName(y.FirstName),
+                        s => new PersonPostApiError {Message = s, Model = model}),
+                    x => x.Flatten(y => ValidateName(y.LastName),
+                        s => new PersonPostApiError {Message = s, Model = model})
                 );
 
             return apiValidation.Match(x => x, x => {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Lemonad.ErrorHandling {
+namespace Lemonad.ErrorHandling.DataTypes.Result.Parsers {
     public static class ResultParsers {
         private static string FormatStringParserMessage<T>(string input) where T : struct =>
             $"Could not parse type {typeof(string)}(\"{input}\") into {typeof(T)}.";

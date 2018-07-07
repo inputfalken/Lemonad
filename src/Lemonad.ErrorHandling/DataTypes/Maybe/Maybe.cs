@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using Lemonad.ErrorHandling.DataTypes.Maybe.Extensions;
+using Lemonad.ErrorHandling.DataTypes.Result;
 
-namespace Lemonad.ErrorHandling {
+namespace Lemonad.ErrorHandling.DataTypes.Maybe {
   
     /// <summary>
     ///  A data-structure commonly used for error-handling where value may or may not be present.
@@ -137,7 +139,7 @@ namespace Lemonad.ErrorHandling {
             Map<TResult>(Func<T, TResult> selector) =>
             HasValue
                 ? selector != null
-                    ? Maybe.Some(selector(Value))
+                    ? Extensions.Maybe.Some(selector(Value))
                     : throw new ArgumentNullException(nameof(selector))
                 : Maybe<TResult>.None;
 

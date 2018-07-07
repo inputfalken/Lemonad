@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using Lemonad.ErrorHandling.DataTypes.Result;
 
-namespace Lemonad.ErrorHandling {
+namespace Lemonad.ErrorHandling.DataTypes.Maybe.Extensions {
     public static class Maybe {
         /// <summary>
         /// Creates a <see cref="Maybe{T}"/> who will have the value <paramref name="item"/>.
