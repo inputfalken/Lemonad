@@ -45,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Result-2.html",
-          "hash": "4BnFEqp3d5u5pKagO0GiNw=="
+          "hash": "6wJQxsAR1EszaMEVqRYrrw=="
         }
       },
       "is_incremental": false,
@@ -57,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Result.html",
-          "hash": "3hOts8Hj3OKTQaVIfAy+xQ=="
+          "hash": "S2B9x7lY7Kzn00rh+V7c1A=="
         }
       },
       "is_incremental": false,
@@ -168,17 +168,17 @@
         "incrementalPhase": "build"
       },
       "processors": {
-        "TocDocumentProcessor": {
+        "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build"
         },
-        "ManagedReferenceDocumentProcessor": {
+        "TocDocumentProcessor": {
           "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         }
       }

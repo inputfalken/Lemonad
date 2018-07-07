@@ -800,15 +800,15 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Result.Match(Of T, TError)(Lemonad.ErrorHandling.Result(Of T, TError))
   nameWithType: Result.Match<T, TError>(Result<T, TError>)
   nameWithType.vb: Result.Match(Of T, TError)(Result(Of T, TError))
-- uid: Lemonad.ErrorHandling.Result.Match``3(Lemonad.ErrorHandling.Result{``0,``1},System.Func{``0,``2})
-  name: Match<T, TError, TResult>(Result<T, TError>, Func<T, TResult>)
-  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_Match__3_Lemonad_ErrorHandling_Result___0___1__System_Func___0___2__
-  commentId: M:Lemonad.ErrorHandling.Result.Match``3(Lemonad.ErrorHandling.Result{``0,``1},System.Func{``0,``2})
-  name.vb: Match(Of T, TError, TResult)(Result(Of T, TError), Func(Of T, TResult))
-  fullName: Lemonad.ErrorHandling.Result.Match<T, TError, TResult>(Lemonad.ErrorHandling.Result<T, TError>, System.Func<T, TResult>)
-  fullName.vb: Lemonad.ErrorHandling.Result.Match(Of T, TError, TResult)(Lemonad.ErrorHandling.Result(Of T, TError), System.Func(Of T, TResult))
-  nameWithType: Result.Match<T, TError, TResult>(Result<T, TError>, Func<T, TResult>)
-  nameWithType.vb: Result.Match(Of T, TError, TResult)(Result(Of T, TError), Func(Of T, TResult))
+- uid: Lemonad.ErrorHandling.Result.Match``3(Lemonad.ErrorHandling.Result{``0,``2},System.Func{``0,``1})
+  name: Match<T, TResult, TError>(Result<T, TError>, Func<T, TResult>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_Match__3_Lemonad_ErrorHandling_Result___0___2__System_Func___0___1__
+  commentId: M:Lemonad.ErrorHandling.Result.Match``3(Lemonad.ErrorHandling.Result{``0,``2},System.Func{``0,``1})
+  name.vb: Match(Of T, TResult, TError)(Result(Of T, TError), Func(Of T, TResult))
+  fullName: Lemonad.ErrorHandling.Result.Match<T, TResult, TError>(Lemonad.ErrorHandling.Result<T, TError>, System.Func<T, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.Result.Match(Of T, TResult, TError)(Lemonad.ErrorHandling.Result(Of T, TError), System.Func(Of T, TResult))
+  nameWithType: Result.Match<T, TResult, TError>(Result<T, TError>, Func<T, TResult>)
+  nameWithType.vb: Result.Match(Of T, TResult, TError)(Result(Of T, TError), Func(Of T, TResult))
 - uid: Lemonad.ErrorHandling.Result.Ok*
   name: Ok
   href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_Ok_
@@ -832,15 +832,15 @@ references:
   isSpec: "True"
   fullName: Lemonad.ErrorHandling.Result.ToMaybe
   nameWithType: Result.ToMaybe
-- uid: Lemonad.ErrorHandling.Result.ToMaybe``2(Lemonad.ErrorHandling.Result{``1,``0})
-  name: ToMaybe<T, TError>(Result<TError, T>)
-  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ToMaybe__2_Lemonad_ErrorHandling_Result___1___0__
-  commentId: M:Lemonad.ErrorHandling.Result.ToMaybe``2(Lemonad.ErrorHandling.Result{``1,``0})
-  name.vb: ToMaybe(Of T, TError)(Result(Of TError, T))
-  fullName: Lemonad.ErrorHandling.Result.ToMaybe<T, TError>(Lemonad.ErrorHandling.Result<TError, T>)
-  fullName.vb: Lemonad.ErrorHandling.Result.ToMaybe(Of T, TError)(Lemonad.ErrorHandling.Result(Of TError, T))
-  nameWithType: Result.ToMaybe<T, TError>(Result<TError, T>)
-  nameWithType.vb: Result.ToMaybe(Of T, TError)(Result(Of TError, T))
+- uid: Lemonad.ErrorHandling.Result.ToMaybe``2(Lemonad.ErrorHandling.Result{``0,``1})
+  name: ToMaybe<T, TError>(Result<T, TError>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ToMaybe__2_Lemonad_ErrorHandling_Result___0___1__
+  commentId: M:Lemonad.ErrorHandling.Result.ToMaybe``2(Lemonad.ErrorHandling.Result{``0,``1})
+  name.vb: ToMaybe(Of T, TError)(Result(Of T, TError))
+  fullName: Lemonad.ErrorHandling.Result.ToMaybe<T, TError>(Lemonad.ErrorHandling.Result<T, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result.ToMaybe(Of T, TError)(Lemonad.ErrorHandling.Result(Of T, TError))
+  nameWithType: Result.ToMaybe<T, TError>(Result<T, TError>)
+  nameWithType.vb: Result.ToMaybe(Of T, TError)(Result(Of T, TError))
 - uid: Lemonad.ErrorHandling.Result.ToResult*
   name: ToResult
   href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ToResult_
@@ -1110,6 +1110,15 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FlatMap(Of TResult)(System.Func(Of T, Lemonad.ErrorHandling.Result(Of TResult, TError)))
   nameWithType: Result<T, TError>.FlatMap<TResult>(Func<T, Result<TResult, TError>>)
   nameWithType.vb: Result(Of T, TError).FlatMap(Of TResult)(Func(Of T, Result(Of TResult, TError)))
+- uid: Lemonad.ErrorHandling.Result`2.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Result{``0,``1}},System.Func{``1,`1})
+  name: FlatMap<TResult, TErrorResult>(Func<T, Result<TResult, TErrorResult>>, Func<TErrorResult, TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_Result___0___1___System_Func___1__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Result{``0,``1}},System.Func{``1,`1})
+  name.vb: FlatMap(Of TResult, TErrorResult)(Func(Of T, Result(Of TResult, TErrorResult)), Func(Of TErrorResult, TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.FlatMap<TResult, TErrorResult>(System.Func<T, Lemonad.ErrorHandling.Result<TResult, TErrorResult>>, System.Func<TErrorResult, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FlatMap(Of TResult, TErrorResult)(System.Func(Of T, Lemonad.ErrorHandling.Result(Of TResult, TErrorResult)), System.Func(Of TErrorResult, TError))
+  nameWithType: Result<T, TError>.FlatMap<TResult, TErrorResult>(Func<T, Result<TResult, TErrorResult>>, Func<TErrorResult, TError>)
+  nameWithType.vb: Result(Of T, TError).FlatMap(Of TResult, TErrorResult)(Func(Of T, Result(Of TResult, TErrorResult)), Func(Of TErrorResult, TError))
 - uid: Lemonad.ErrorHandling.Result`2.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Result{``0,`1}},System.Func{`0,``0,``1})
   name: FlatMap<TSelector, TResult>(Func<T, Result<TSelector, TError>>, Func<T, TSelector, TResult>)
   href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_Result___0__1___System_Func__0___0___1__
@@ -1119,24 +1128,15 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FlatMap(Of TSelector, TResult)(System.Func(Of T, Lemonad.ErrorHandling.Result(Of TSelector, TError)), System.Func(Of T, TSelector, TResult))
   nameWithType: Result<T, TError>.FlatMap<TSelector, TResult>(Func<T, Result<TSelector, TError>>, Func<T, TSelector, TResult>)
   nameWithType.vb: Result(Of T, TError).FlatMap(Of TSelector, TResult)(Func(Of T, Result(Of TSelector, TError)), Func(Of T, TSelector, TResult))
-- uid: Lemonad.ErrorHandling.Result`2.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Result{``1,``0}},System.Func{``0,`1})
-  name: FlatMap<TErrorResult, TResult>(Func<T, Result<TResult, TErrorResult>>, Func<TErrorResult, TError>)
-  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_Result___1___0___System_Func___0__1__
-  commentId: M:Lemonad.ErrorHandling.Result`2.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Result{``1,``0}},System.Func{``0,`1})
-  name.vb: FlatMap(Of TErrorResult, TResult)(Func(Of T, Result(Of TResult, TErrorResult)), Func(Of TErrorResult, TError))
-  fullName: Lemonad.ErrorHandling.Result<T, TError>.FlatMap<TErrorResult, TResult>(System.Func<T, Lemonad.ErrorHandling.Result<TResult, TErrorResult>>, System.Func<TErrorResult, TError>)
-  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FlatMap(Of TErrorResult, TResult)(System.Func(Of T, Lemonad.ErrorHandling.Result(Of TResult, TErrorResult)), System.Func(Of TErrorResult, TError))
-  nameWithType: Result<T, TError>.FlatMap<TErrorResult, TResult>(Func<T, Result<TResult, TErrorResult>>, Func<TErrorResult, TError>)
-  nameWithType.vb: Result(Of T, TError).FlatMap(Of TErrorResult, TResult)(Func(Of T, Result(Of TResult, TErrorResult)), Func(Of TErrorResult, TError))
-- uid: Lemonad.ErrorHandling.Result`2.FlatMap``3(System.Func{`0,Lemonad.ErrorHandling.Result{``1,``0}},System.Func{`0,``1,``2},System.Func{``0,`1})
-  name: FlatMap<TErrorResult, TFlatMap, TResult>(Func<T, Result<TFlatMap, TErrorResult>>, Func<T, TFlatMap, TResult>, Func<TErrorResult, TError>)
-  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FlatMap__3_System_Func__0_Lemonad_ErrorHandling_Result___1___0___System_Func__0___1___2__System_Func___0__1__
-  commentId: M:Lemonad.ErrorHandling.Result`2.FlatMap``3(System.Func{`0,Lemonad.ErrorHandling.Result{``1,``0}},System.Func{`0,``1,``2},System.Func{``0,`1})
-  name.vb: FlatMap(Of TErrorResult, TFlatMap, TResult)(Func(Of T, Result(Of TFlatMap, TErrorResult)), Func(Of T, TFlatMap, TResult), Func(Of TErrorResult, TError))
-  fullName: Lemonad.ErrorHandling.Result<T, TError>.FlatMap<TErrorResult, TFlatMap, TResult>(System.Func<T, Lemonad.ErrorHandling.Result<TFlatMap, TErrorResult>>, System.Func<T, TFlatMap, TResult>, System.Func<TErrorResult, TError>)
-  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FlatMap(Of TErrorResult, TFlatMap, TResult)(System.Func(Of T, Lemonad.ErrorHandling.Result(Of TFlatMap, TErrorResult)), System.Func(Of T, TFlatMap, TResult), System.Func(Of TErrorResult, TError))
-  nameWithType: Result<T, TError>.FlatMap<TErrorResult, TFlatMap, TResult>(Func<T, Result<TFlatMap, TErrorResult>>, Func<T, TFlatMap, TResult>, Func<TErrorResult, TError>)
-  nameWithType.vb: Result(Of T, TError).FlatMap(Of TErrorResult, TFlatMap, TResult)(Func(Of T, Result(Of TFlatMap, TErrorResult)), Func(Of T, TFlatMap, TResult), Func(Of TErrorResult, TError))
+- uid: Lemonad.ErrorHandling.Result`2.FlatMap``3(System.Func{`0,Lemonad.ErrorHandling.Result{``0,``2}},System.Func{`0,``0,``1},System.Func{``2,`1})
+  name: FlatMap<TFlatMap, TResult, TErrorResult>(Func<T, Result<TFlatMap, TErrorResult>>, Func<T, TFlatMap, TResult>, Func<TErrorResult, TError>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FlatMap__3_System_Func__0_Lemonad_ErrorHandling_Result___0___2___System_Func__0___0___1__System_Func___2__1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.FlatMap``3(System.Func{`0,Lemonad.ErrorHandling.Result{``0,``2}},System.Func{`0,``0,``1},System.Func{``2,`1})
+  name.vb: FlatMap(Of TFlatMap, TResult, TErrorResult)(Func(Of T, Result(Of TFlatMap, TErrorResult)), Func(Of T, TFlatMap, TResult), Func(Of TErrorResult, TError))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.FlatMap<TFlatMap, TResult, TErrorResult>(System.Func<T, Lemonad.ErrorHandling.Result<TFlatMap, TErrorResult>>, System.Func<T, TFlatMap, TResult>, System.Func<TErrorResult, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FlatMap(Of TFlatMap, TResult, TErrorResult)(System.Func(Of T, Lemonad.ErrorHandling.Result(Of TFlatMap, TErrorResult)), System.Func(Of T, TFlatMap, TResult), System.Func(Of TErrorResult, TError))
+  nameWithType: Result<T, TError>.FlatMap<TFlatMap, TResult, TErrorResult>(Func<T, Result<TFlatMap, TErrorResult>>, Func<T, TFlatMap, TResult>, Func<TErrorResult, TError>)
+  nameWithType.vb: Result(Of T, TError).FlatMap(Of TFlatMap, TResult, TErrorResult)(Func(Of T, Result(Of TFlatMap, TErrorResult)), Func(Of T, TFlatMap, TResult), Func(Of TErrorResult, TError))
 - uid: Lemonad.ErrorHandling.Result`2.Flatten*
   name: Flatten
   href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_Flatten_
@@ -1200,24 +1200,24 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FullFlatMap
   nameWithType: Result<T, TError>.FullFlatMap
   nameWithType.vb: Result(Of T, TError).FullFlatMap
-- uid: Lemonad.ErrorHandling.Result`2.FullFlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Result{``1,``0}},System.Func{`1,``0})
-  name: FullFlatMap<TErrorResult, TResult>(Func<T, Result<TResult, TErrorResult>>, Func<TError, TErrorResult>)
-  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FullFlatMap__2_System_Func__0_Lemonad_ErrorHandling_Result___1___0___System_Func__1___0__
-  commentId: M:Lemonad.ErrorHandling.Result`2.FullFlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Result{``1,``0}},System.Func{`1,``0})
-  name.vb: FullFlatMap(Of TErrorResult, TResult)(Func(Of T, Result(Of TResult, TErrorResult)), Func(Of TError, TErrorResult))
-  fullName: Lemonad.ErrorHandling.Result<T, TError>.FullFlatMap<TErrorResult, TResult>(System.Func<T, Lemonad.ErrorHandling.Result<TResult, TErrorResult>>, System.Func<TError, TErrorResult>)
-  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FullFlatMap(Of TErrorResult, TResult)(System.Func(Of T, Lemonad.ErrorHandling.Result(Of TResult, TErrorResult)), System.Func(Of TError, TErrorResult))
-  nameWithType: Result<T, TError>.FullFlatMap<TErrorResult, TResult>(Func<T, Result<TResult, TErrorResult>>, Func<TError, TErrorResult>)
-  nameWithType.vb: Result(Of T, TError).FullFlatMap(Of TErrorResult, TResult)(Func(Of T, Result(Of TResult, TErrorResult)), Func(Of TError, TErrorResult))
-- uid: Lemonad.ErrorHandling.Result`2.FullFlatMap``3(System.Func{`0,Lemonad.ErrorHandling.Result{``1,``0}},System.Func{`0,``1,``2},System.Func{`1,``0})
-  name: FullFlatMap<TErrorResult, TFlatMap, TResult>(Func<T, Result<TFlatMap, TErrorResult>>, Func<T, TFlatMap, TResult>, Func<TError, TErrorResult>)
-  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FullFlatMap__3_System_Func__0_Lemonad_ErrorHandling_Result___1___0___System_Func__0___1___2__System_Func__1___0__
-  commentId: M:Lemonad.ErrorHandling.Result`2.FullFlatMap``3(System.Func{`0,Lemonad.ErrorHandling.Result{``1,``0}},System.Func{`0,``1,``2},System.Func{`1,``0})
-  name.vb: FullFlatMap(Of TErrorResult, TFlatMap, TResult)(Func(Of T, Result(Of TFlatMap, TErrorResult)), Func(Of T, TFlatMap, TResult), Func(Of TError, TErrorResult))
-  fullName: Lemonad.ErrorHandling.Result<T, TError>.FullFlatMap<TErrorResult, TFlatMap, TResult>(System.Func<T, Lemonad.ErrorHandling.Result<TFlatMap, TErrorResult>>, System.Func<T, TFlatMap, TResult>, System.Func<TError, TErrorResult>)
-  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FullFlatMap(Of TErrorResult, TFlatMap, TResult)(System.Func(Of T, Lemonad.ErrorHandling.Result(Of TFlatMap, TErrorResult)), System.Func(Of T, TFlatMap, TResult), System.Func(Of TError, TErrorResult))
-  nameWithType: Result<T, TError>.FullFlatMap<TErrorResult, TFlatMap, TResult>(Func<T, Result<TFlatMap, TErrorResult>>, Func<T, TFlatMap, TResult>, Func<TError, TErrorResult>)
-  nameWithType.vb: Result(Of T, TError).FullFlatMap(Of TErrorResult, TFlatMap, TResult)(Func(Of T, Result(Of TFlatMap, TErrorResult)), Func(Of T, TFlatMap, TResult), Func(Of TError, TErrorResult))
+- uid: Lemonad.ErrorHandling.Result`2.FullFlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Result{``0,``1}},System.Func{`1,``1})
+  name: FullFlatMap<TResult, TErrorResult>(Func<T, Result<TResult, TErrorResult>>, Func<TError, TErrorResult>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FullFlatMap__2_System_Func__0_Lemonad_ErrorHandling_Result___0___1___System_Func__1___1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.FullFlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Result{``0,``1}},System.Func{`1,``1})
+  name.vb: FullFlatMap(Of TResult, TErrorResult)(Func(Of T, Result(Of TResult, TErrorResult)), Func(Of TError, TErrorResult))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.FullFlatMap<TResult, TErrorResult>(System.Func<T, Lemonad.ErrorHandling.Result<TResult, TErrorResult>>, System.Func<TError, TErrorResult>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FullFlatMap(Of TResult, TErrorResult)(System.Func(Of T, Lemonad.ErrorHandling.Result(Of TResult, TErrorResult)), System.Func(Of TError, TErrorResult))
+  nameWithType: Result<T, TError>.FullFlatMap<TResult, TErrorResult>(Func<T, Result<TResult, TErrorResult>>, Func<TError, TErrorResult>)
+  nameWithType.vb: Result(Of T, TError).FullFlatMap(Of TResult, TErrorResult)(Func(Of T, Result(Of TResult, TErrorResult)), Func(Of TError, TErrorResult))
+- uid: Lemonad.ErrorHandling.Result`2.FullFlatMap``3(System.Func{`0,Lemonad.ErrorHandling.Result{``0,``2}},System.Func{`0,``0,``1},System.Func{`1,``2})
+  name: FullFlatMap<TFlatMap, TResult, TErrorResult>(Func<T, Result<TFlatMap, TErrorResult>>, Func<T, TFlatMap, TResult>, Func<TError, TErrorResult>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FullFlatMap__3_System_Func__0_Lemonad_ErrorHandling_Result___0___2___System_Func__0___0___1__System_Func__1___2__
+  commentId: M:Lemonad.ErrorHandling.Result`2.FullFlatMap``3(System.Func{`0,Lemonad.ErrorHandling.Result{``0,``2}},System.Func{`0,``0,``1},System.Func{`1,``2})
+  name.vb: FullFlatMap(Of TFlatMap, TResult, TErrorResult)(Func(Of T, Result(Of TFlatMap, TErrorResult)), Func(Of T, TFlatMap, TResult), Func(Of TError, TErrorResult))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.FullFlatMap<TFlatMap, TResult, TErrorResult>(System.Func<T, Lemonad.ErrorHandling.Result<TFlatMap, TErrorResult>>, System.Func<T, TFlatMap, TResult>, System.Func<TError, TErrorResult>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FullFlatMap(Of TFlatMap, TResult, TErrorResult)(System.Func(Of T, Lemonad.ErrorHandling.Result(Of TFlatMap, TErrorResult)), System.Func(Of T, TFlatMap, TResult), System.Func(Of TError, TErrorResult))
+  nameWithType: Result<T, TError>.FullFlatMap<TFlatMap, TResult, TErrorResult>(Func<T, Result<TFlatMap, TErrorResult>>, Func<T, TFlatMap, TResult>, Func<TError, TErrorResult>)
+  nameWithType.vb: Result(Of T, TError).FullFlatMap(Of TFlatMap, TResult, TErrorResult)(Func(Of T, Result(Of TFlatMap, TErrorResult)), Func(Of T, TFlatMap, TResult), Func(Of TError, TErrorResult))
 - uid: Lemonad.ErrorHandling.Result`2.FullMap*
   name: FullMap
   href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FullMap_
@@ -1227,15 +1227,15 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FullMap
   nameWithType: Result<T, TError>.FullMap
   nameWithType.vb: Result(Of T, TError).FullMap
-- uid: Lemonad.ErrorHandling.Result`2.FullMap``2(System.Func{`0,``1},System.Func{`1,``0})
-  name: FullMap<TErrorResult, TResult>(Func<T, TResult>, Func<TError, TErrorResult>)
-  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FullMap__2_System_Func__0___1__System_Func__1___0__
-  commentId: M:Lemonad.ErrorHandling.Result`2.FullMap``2(System.Func{`0,``1},System.Func{`1,``0})
-  name.vb: FullMap(Of TErrorResult, TResult)(Func(Of T, TResult), Func(Of TError, TErrorResult))
-  fullName: Lemonad.ErrorHandling.Result<T, TError>.FullMap<TErrorResult, TResult>(System.Func<T, TResult>, System.Func<TError, TErrorResult>)
-  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FullMap(Of TErrorResult, TResult)(System.Func(Of T, TResult), System.Func(Of TError, TErrorResult))
-  nameWithType: Result<T, TError>.FullMap<TErrorResult, TResult>(Func<T, TResult>, Func<TError, TErrorResult>)
-  nameWithType.vb: Result(Of T, TError).FullMap(Of TErrorResult, TResult)(Func(Of T, TResult), Func(Of TError, TErrorResult))
+- uid: Lemonad.ErrorHandling.Result`2.FullMap``2(System.Func{`0,``0},System.Func{`1,``1})
+  name: FullMap<TResult, TErrorResult>(Func<T, TResult>, Func<TError, TErrorResult>)
+  href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_FullMap__2_System_Func__0___0__System_Func__1___1__
+  commentId: M:Lemonad.ErrorHandling.Result`2.FullMap``2(System.Func{`0,``0},System.Func{`1,``1})
+  name.vb: FullMap(Of TResult, TErrorResult)(Func(Of T, TResult), Func(Of TError, TErrorResult))
+  fullName: Lemonad.ErrorHandling.Result<T, TError>.FullMap<TResult, TErrorResult>(System.Func<T, TResult>, System.Func<TError, TErrorResult>)
+  fullName.vb: Lemonad.ErrorHandling.Result(Of T, TError).FullMap(Of TResult, TErrorResult)(System.Func(Of T, TResult), System.Func(Of TError, TErrorResult))
+  nameWithType: Result<T, TError>.FullMap<TResult, TErrorResult>(Func<T, TResult>, Func<TError, TErrorResult>)
+  nameWithType.vb: Result(Of T, TError).FullMap(Of TResult, TErrorResult)(Func(Of T, TResult), Func(Of TError, TErrorResult))
 - uid: Lemonad.ErrorHandling.Result`2.GetHashCode
   name: GetHashCode()
   href: api/Lemonad.ErrorHandling.Result-2.html#Lemonad_ErrorHandling_Result_2_GetHashCode
