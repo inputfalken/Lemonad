@@ -5,11 +5,11 @@
   "files": [
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.Maybe-1.yml",
+      "source_relative_path": "api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.Maybe-1.html",
-          "hash": "mOlGLuC9UmS3bqIdQNereA=="
+          "relative_path": "api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html",
+          "hash": "WuagtsI6wZ6THS8BXyUMOA=="
         }
       },
       "is_incremental": false,
@@ -17,11 +17,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.Maybe.yml",
+      "source_relative_path": "api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.Maybe.html",
-          "hash": "T8LlZ+WGvf9dt8Cm1NtgaA=="
+          "relative_path": "api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.html",
+          "hash": "06T7/1mFoDZxyjk7IcmvAQ=="
         }
       },
       "is_incremental": false,
@@ -29,11 +29,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.MaybeParsers.yml",
+      "source_relative_path": "api/Lemonad.ErrorHandling.DataTypes.Maybe.Maybe-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.MaybeParsers.html",
-          "hash": "92WauJyHTNbiHDF9LszX8A=="
+          "relative_path": "api/Lemonad.ErrorHandling.DataTypes.Maybe.Maybe-1.html",
+          "hash": "zrDzyIBYwKShzIf+mqmNsg=="
         }
       },
       "is_incremental": false,
@@ -41,11 +41,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.Result-2.yml",
+      "source_relative_path": "api/Lemonad.ErrorHandling.DataTypes.Maybe.Parsers.MaybeParsers.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.Result-2.html",
-          "hash": "6wJQxsAR1EszaMEVqRYrrw=="
+          "relative_path": "api/Lemonad.ErrorHandling.DataTypes.Maybe.Parsers.MaybeParsers.html",
+          "hash": "q+PpnfpkHr9EQ8sXMpkk8w=="
         }
       },
       "is_incremental": false,
@@ -53,11 +53,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.Result.yml",
+      "source_relative_path": "api/Lemonad.ErrorHandling.DataTypes.Maybe.Parsers.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.Result.html",
-          "hash": "S2B9x7lY7Kzn00rh+V7c1A=="
+          "relative_path": "api/Lemonad.ErrorHandling.DataTypes.Maybe.Parsers.html",
+          "hash": "VVoT/MrOWhM6iTD6Tk9FbA=="
         }
       },
       "is_incremental": false,
@@ -65,11 +65,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.ResultParsers.yml",
+      "source_relative_path": "api/Lemonad.ErrorHandling.DataTypes.Maybe.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.ResultParsers.html",
-          "hash": "2mbp8wTSNa4sfba+3TxOGQ=="
+          "relative_path": "api/Lemonad.ErrorHandling.DataTypes.Maybe.html",
+          "hash": "QfkYx9laQrXGIW2VhjOiRQ=="
         }
       },
       "is_incremental": false,
@@ -77,11 +77,71 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.yml",
+      "source_relative_path": "api/Lemonad.ErrorHandling.DataTypes.Result.Extensions.Result.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.html",
-          "hash": "9vqqtr52JayHEpswKx4oEQ=="
+          "relative_path": "api/Lemonad.ErrorHandling.DataTypes.Result.Extensions.Result.html",
+          "hash": "h5aXWfc6MA4uCShQ/Mfejg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.DataTypes.Result.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.DataTypes.Result.Extensions.html",
+          "hash": "qjS8sqN6IIhEYEzQRLspnA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.DataTypes.Result.Parsers.ResultParsers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.DataTypes.Result.Parsers.ResultParsers.html",
+          "hash": "4ScqEnjrAt947s7dvCDD7Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.DataTypes.Result.Parsers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.DataTypes.Result.Parsers.html",
+          "hash": "7CapxKleS3lC+ZtslfdKKw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.DataTypes.Result.Result-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.DataTypes.Result.Result-2.html",
+          "hash": "mIW3iarl/jFpw/KWDk/ddA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.DataTypes.Result.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.DataTypes.Result.html",
+          "hash": "SmrIrQO/SoSsnGPIwGyS1Q=="
         }
       },
       "is_incremental": false,
@@ -105,7 +165,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "c6eTVxDM9M+JJKLY0GTr4g=="
+          "hash": "lJ7vEWGnrMZ7IVjqPF1HPQ=="
         }
       },
       "is_incremental": false,
@@ -168,11 +228,11 @@
         "incrementalPhase": "build"
       },
       "processors": {
-        "ManagedReferenceDocumentProcessor": {
+        "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build"
         },
-        "ConceptualDocumentProcessor": {
+        "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build"
         },
