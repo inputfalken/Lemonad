@@ -60,6 +60,7 @@ namespace Lemonad.ErrorHandling {
             new Func<Task<Result<T, TError>>>(
                 async () => (await _result.ConfigureAwait(false)).DoWith(action)
             )();
+
         [Pure]
         public Outcome<T, TError> Filter(Func<T, bool> predicate, Func<TError> errorSelector) =>
             new Func<Task<Result<T, TError>>>(
@@ -75,6 +76,7 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public Outcome<T, TError> IsErrorWhenNull(Func<TError> errorSelector) =>
             IsErrorWhen(EquailtyFunctions.IsNull, errorSelector);
+
         [Pure]
         public Outcome<T, TResult> CastError<TResult>() => new Func<Task<Result<T, TResult>>>(
             async () => (await _result.ConfigureAwait(false)).CastError<TResult>()
@@ -85,5 +87,6 @@ namespace Lemonad.ErrorHandling {
             return new Func<Task<Result<TResult, TErrorResult>>>(
                 async () => (await _result.ConfigureAwait(false)).FullCast<TResult, TErrorResult>()
             )();
+        }
     }
 }
