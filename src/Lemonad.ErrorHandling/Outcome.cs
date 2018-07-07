@@ -88,5 +88,16 @@ namespace Lemonad.ErrorHandling {
                 async () => (await _result.ConfigureAwait(false)).FullCast<TResult, TErrorResult>()
             )();
         }
+
+        [Pure]
+        public Outcome<TResult, TError> Cast<TResult>() => new Func<Task<Result<TResult, TError>>>(
+            async () => (await _result.ConfigureAwait(false)).Cast<TResult>()
+        )();
+
+        [Pure]
+        public Outcome<TResult, TError> SafeCast<TResult>(Func<TError> errorSelector) =>
+            new Func<Task<Result<TResult, TError>>>(
+                async () => (await _result.ConfigureAwait(false)).SafeCast<TResult>(errorSelector)
+            )();
     }
 }
