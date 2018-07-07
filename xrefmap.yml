@@ -13,176 +13,176 @@ references:
   commentId: N:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions
   fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions
   nameWithType: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe
-  name: Maybe
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html
-  commentId: T:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe
-  nameWithType: Maybe
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.FirstMaybe*
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions
+  name: MaybeExtensions
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html
+  commentId: T:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions
+  nameWithType: MaybeExtensions
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.FirstMaybe*
   name: FirstMaybe
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_FirstMaybe_
-  commentId: Overload:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.FirstMaybe
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_FirstMaybe_
+  commentId: Overload:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.FirstMaybe
   isSpec: "True"
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.FirstMaybe
-  nameWithType: Maybe.FirstMaybe
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.FirstMaybe``1(System.Collections.Generic.IEnumerable{``0})
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.FirstMaybe
+  nameWithType: MaybeExtensions.FirstMaybe
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.FirstMaybe``1(System.Collections.Generic.IEnumerable{``0})
   name: FirstMaybe<TSource>(IEnumerable<TSource>)
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_FirstMaybe__1_System_Collections_Generic_IEnumerable___0__
-  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.FirstMaybe``1(System.Collections.Generic.IEnumerable{``0})
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_FirstMaybe__1_System_Collections_Generic_IEnumerable___0__
+  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.FirstMaybe``1(System.Collections.Generic.IEnumerable{``0})
   name.vb: FirstMaybe(Of TSource)(IEnumerable(Of TSource))
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.FirstMaybe<TSource>(System.Collections.Generic.IEnumerable<TSource>)
-  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.FirstMaybe(Of TSource)(System.Collections.Generic.IEnumerable(Of TSource))
-  nameWithType: Maybe.FirstMaybe<TSource>(IEnumerable<TSource>)
-  nameWithType.vb: Maybe.FirstMaybe(Of TSource)(IEnumerable(Of TSource))
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.FirstMaybe``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.FirstMaybe<TSource>(System.Collections.Generic.IEnumerable<TSource>)
+  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.FirstMaybe(Of TSource)(System.Collections.Generic.IEnumerable(Of TSource))
+  nameWithType: MaybeExtensions.FirstMaybe<TSource>(IEnumerable<TSource>)
+  nameWithType.vb: MaybeExtensions.FirstMaybe(Of TSource)(IEnumerable(Of TSource))
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.FirstMaybe``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})
   name: FirstMaybe<TSource>(IEnumerable<TSource>, Func<TSource, Boolean>)
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_FirstMaybe__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__
-  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.FirstMaybe``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_FirstMaybe__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__
+  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.FirstMaybe``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})
   name.vb: FirstMaybe(Of TSource)(IEnumerable(Of TSource), Func(Of TSource, Boolean))
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.FirstMaybe<TSource>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, System.Boolean>)
-  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.FirstMaybe(Of TSource)(System.Collections.Generic.IEnumerable(Of TSource), System.Func(Of TSource, System.Boolean))
-  nameWithType: Maybe.FirstMaybe<TSource>(IEnumerable<TSource>, Func<TSource, Boolean>)
-  nameWithType.vb: Maybe.FirstMaybe(Of TSource)(IEnumerable(Of TSource), Func(Of TSource, Boolean))
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Match*
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.FirstMaybe<TSource>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, System.Boolean>)
+  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.FirstMaybe(Of TSource)(System.Collections.Generic.IEnumerable(Of TSource), System.Func(Of TSource, System.Boolean))
+  nameWithType: MaybeExtensions.FirstMaybe<TSource>(IEnumerable<TSource>, Func<TSource, Boolean>)
+  nameWithType.vb: MaybeExtensions.FirstMaybe(Of TSource)(IEnumerable(Of TSource), Func(Of TSource, Boolean))
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Match*
   name: Match
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_Match_
-  commentId: Overload:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Match
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_Match_
+  commentId: Overload:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Match
   isSpec: "True"
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Match
-  nameWithType: Maybe.Match
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Match``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.DataTypes.Maybe.Maybe{``0}},System.Func{``0,``1},System.Func{``1})
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Match
+  nameWithType: MaybeExtensions.Match
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Match``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.DataTypes.Maybe.Maybe{``0}},System.Func{``0,``1},System.Func{``1})
   name: Match<TSource, TResult>(IEnumerable<Maybe<TSource>>, Func<TSource, TResult>, Func<TResult>)
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_Match__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_DataTypes_Maybe_Maybe___0___System_Func___0___1__System_Func___1__
-  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Match``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.DataTypes.Maybe.Maybe{``0}},System.Func{``0,``1},System.Func{``1})
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_Match__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_DataTypes_Maybe_Maybe___0___System_Func___0___1__System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Match``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.DataTypes.Maybe.Maybe{``0}},System.Func{``0,``1},System.Func{``1})
   name.vb: Match(Of TSource, TResult)(IEnumerable(Of Maybe(Of TSource)), Func(Of TSource, TResult), Func(Of TResult))
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Match<TSource, TResult>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.DataTypes.Maybe.Maybe<TSource>>, System.Func<TSource, TResult>, System.Func<TResult>)
-  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Match(Of TSource, TResult)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.DataTypes.Maybe.Maybe(Of TSource)), System.Func(Of TSource, TResult), System.Func(Of TResult))
-  nameWithType: Maybe.Match<TSource, TResult>(IEnumerable<Maybe<TSource>>, Func<TSource, TResult>, Func<TResult>)
-  nameWithType.vb: Maybe.Match(Of TSource, TResult)(IEnumerable(Of Maybe(Of TSource)), Func(Of TSource, TResult), Func(Of TResult))
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.None*
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Match<TSource, TResult>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.DataTypes.Maybe.Maybe<TSource>>, System.Func<TSource, TResult>, System.Func<TResult>)
+  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Match(Of TSource, TResult)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.DataTypes.Maybe.Maybe(Of TSource)), System.Func(Of TSource, TResult), System.Func(Of TResult))
+  nameWithType: MaybeExtensions.Match<TSource, TResult>(IEnumerable<Maybe<TSource>>, Func<TSource, TResult>, Func<TResult>)
+  nameWithType.vb: MaybeExtensions.Match(Of TSource, TResult)(IEnumerable(Of Maybe(Of TSource)), Func(Of TSource, TResult), Func(Of TResult))
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.None*
   name: None
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_None_
-  commentId: Overload:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.None
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_None_
+  commentId: Overload:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.None
   isSpec: "True"
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.None
-  nameWithType: Maybe.None
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.None``1
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.None
+  nameWithType: MaybeExtensions.None
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.None``1
   name: None<TSource>()
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_None__1
-  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.None``1
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_None__1
+  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.None``1
   name.vb: None(Of TSource)()
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.None<TSource>()
-  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.None(Of TSource)()
-  nameWithType: Maybe.None<TSource>()
-  nameWithType.vb: Maybe.None(Of TSource)()
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.None``1(``0)
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.None<TSource>()
+  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.None(Of TSource)()
+  nameWithType: MaybeExtensions.None<TSource>()
+  nameWithType.vb: MaybeExtensions.None(Of TSource)()
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.None``1(``0)
   name: None<TSource>(TSource)
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_None__1___0_
-  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.None``1(``0)
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_None__1___0_
+  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.None``1(``0)
   name.vb: None(Of TSource)(TSource)
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.None<TSource>(TSource)
-  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.None(Of TSource)(TSource)
-  nameWithType: Maybe.None<TSource>(TSource)
-  nameWithType.vb: Maybe.None(Of TSource)(TSource)
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.None``1(``0,System.Func{``0,System.Boolean})
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.None<TSource>(TSource)
+  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.None(Of TSource)(TSource)
+  nameWithType: MaybeExtensions.None<TSource>(TSource)
+  nameWithType.vb: MaybeExtensions.None(Of TSource)(TSource)
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.None``1(``0,System.Func{``0,System.Boolean})
   name: None<TSource>(TSource, Func<TSource, Boolean>)
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_None__1___0_System_Func___0_System_Boolean__
-  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.None``1(``0,System.Func{``0,System.Boolean})
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_None__1___0_System_Func___0_System_Boolean__
+  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.None``1(``0,System.Func{``0,System.Boolean})
   name.vb: None(Of TSource)(TSource, Func(Of TSource, Boolean))
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.None<TSource>(TSource, System.Func<TSource, System.Boolean>)
-  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.None(Of TSource)(TSource, System.Func(Of TSource, System.Boolean))
-  nameWithType: Maybe.None<TSource>(TSource, Func<TSource, Boolean>)
-  nameWithType.vb: Maybe.None(Of TSource)(TSource, Func(Of TSource, Boolean))
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.NoValues*
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.None<TSource>(TSource, System.Func<TSource, System.Boolean>)
+  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.None(Of TSource)(TSource, System.Func(Of TSource, System.Boolean))
+  nameWithType: MaybeExtensions.None<TSource>(TSource, Func<TSource, Boolean>)
+  nameWithType.vb: MaybeExtensions.None(Of TSource)(TSource, Func(Of TSource, Boolean))
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.NoValues*
   name: NoValues
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_NoValues_
-  commentId: Overload:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.NoValues
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_NoValues_
+  commentId: Overload:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.NoValues
   isSpec: "True"
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.NoValues
-  nameWithType: Maybe.NoValues
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.NoValues``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.DataTypes.Maybe.Maybe{``0}},System.Func{``1})
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.NoValues
+  nameWithType: MaybeExtensions.NoValues
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.NoValues``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.DataTypes.Maybe.Maybe{``0}},System.Func{``1})
   name: NoValues<TSource, TResult>(IEnumerable<Maybe<TSource>>, Func<TResult>)
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_NoValues__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_DataTypes_Maybe_Maybe___0___System_Func___1__
-  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.NoValues``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.DataTypes.Maybe.Maybe{``0}},System.Func{``1})
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_NoValues__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_DataTypes_Maybe_Maybe___0___System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.NoValues``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.DataTypes.Maybe.Maybe{``0}},System.Func{``1})
   name.vb: NoValues(Of TSource, TResult)(IEnumerable(Of Maybe(Of TSource)), Func(Of TResult))
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.NoValues<TSource, TResult>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.DataTypes.Maybe.Maybe<TSource>>, System.Func<TResult>)
-  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.NoValues(Of TSource, TResult)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.DataTypes.Maybe.Maybe(Of TSource)), System.Func(Of TResult))
-  nameWithType: Maybe.NoValues<TSource, TResult>(IEnumerable<Maybe<TSource>>, Func<TResult>)
-  nameWithType.vb: Maybe.NoValues(Of TSource, TResult)(IEnumerable(Of Maybe(Of TSource)), Func(Of TResult))
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Some*
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.NoValues<TSource, TResult>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.DataTypes.Maybe.Maybe<TSource>>, System.Func<TResult>)
+  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.NoValues(Of TSource, TResult)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.DataTypes.Maybe.Maybe(Of TSource)), System.Func(Of TResult))
+  nameWithType: MaybeExtensions.NoValues<TSource, TResult>(IEnumerable<Maybe<TSource>>, Func<TResult>)
+  nameWithType.vb: MaybeExtensions.NoValues(Of TSource, TResult)(IEnumerable(Of Maybe(Of TSource)), Func(Of TResult))
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Some*
   name: Some
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_Some_
-  commentId: Overload:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Some
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_Some_
+  commentId: Overload:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Some
   isSpec: "True"
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Some
-  nameWithType: Maybe.Some
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Some``1(``0)
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Some
+  nameWithType: MaybeExtensions.Some
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Some``1(``0)
   name: Some<TSource>(TSource)
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_Some__1___0_
-  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Some``1(``0)
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_Some__1___0_
+  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Some``1(``0)
   name.vb: Some(Of TSource)(TSource)
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Some<TSource>(TSource)
-  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Some(Of TSource)(TSource)
-  nameWithType: Maybe.Some<TSource>(TSource)
-  nameWithType.vb: Maybe.Some(Of TSource)(TSource)
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Some``1(``0,System.Func{``0,System.Boolean})
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Some<TSource>(TSource)
+  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Some(Of TSource)(TSource)
+  nameWithType: MaybeExtensions.Some<TSource>(TSource)
+  nameWithType.vb: MaybeExtensions.Some(Of TSource)(TSource)
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Some``1(``0,System.Func{``0,System.Boolean})
   name: Some<TSource>(TSource, Func<TSource, Boolean>)
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_Some__1___0_System_Func___0_System_Boolean__
-  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Some``1(``0,System.Func{``0,System.Boolean})
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_Some__1___0_System_Func___0_System_Boolean__
+  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Some``1(``0,System.Func{``0,System.Boolean})
   name.vb: Some(Of TSource)(TSource, Func(Of TSource, Boolean))
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Some<TSource>(TSource, System.Func<TSource, System.Boolean>)
-  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Some(Of TSource)(TSource, System.Func(Of TSource, System.Boolean))
-  nameWithType: Maybe.Some<TSource>(TSource, Func<TSource, Boolean>)
-  nameWithType.vb: Maybe.Some(Of TSource)(TSource, Func(Of TSource, Boolean))
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.ToMaybe*
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Some<TSource>(TSource, System.Func<TSource, System.Boolean>)
+  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Some(Of TSource)(TSource, System.Func(Of TSource, System.Boolean))
+  nameWithType: MaybeExtensions.Some<TSource>(TSource, Func<TSource, Boolean>)
+  nameWithType.vb: MaybeExtensions.Some(Of TSource)(TSource, Func(Of TSource, Boolean))
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.ToMaybe*
   name: ToMaybe
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_ToMaybe_
-  commentId: Overload:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.ToMaybe
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_ToMaybe_
+  commentId: Overload:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.ToMaybe
   isSpec: "True"
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.ToMaybe
-  nameWithType: Maybe.ToMaybe
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.ToMaybe``1(System.Nullable{``0})
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.ToMaybe
+  nameWithType: MaybeExtensions.ToMaybe
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.ToMaybe``1(System.Nullable{``0})
   name: ToMaybe<TSource>(Nullable<TSource>)
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_ToMaybe__1_System_Nullable___0__
-  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.ToMaybe``1(System.Nullable{``0})
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_ToMaybe__1_System_Nullable___0__
+  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.ToMaybe``1(System.Nullable{``0})
   name.vb: ToMaybe(Of TSource)(Nullable(Of TSource))
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.ToMaybe<TSource>(System.Nullable<TSource>)
-  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.ToMaybe(Of TSource)(System.Nullable(Of TSource))
-  nameWithType: Maybe.ToMaybe<TSource>(Nullable<TSource>)
-  nameWithType.vb: Maybe.ToMaybe(Of TSource)(Nullable(Of TSource))
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.ToResult*
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.ToMaybe<TSource>(System.Nullable<TSource>)
+  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.ToMaybe(Of TSource)(System.Nullable(Of TSource))
+  nameWithType: MaybeExtensions.ToMaybe<TSource>(Nullable<TSource>)
+  nameWithType.vb: MaybeExtensions.ToMaybe(Of TSource)(Nullable(Of TSource))
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.ToResult*
   name: ToResult
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_ToResult_
-  commentId: Overload:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.ToResult
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_ToResult_
+  commentId: Overload:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.ToResult
   isSpec: "True"
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.ToResult
-  nameWithType: Maybe.ToResult
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.ToResult``2(Lemonad.ErrorHandling.DataTypes.Maybe.Maybe{``0},System.Func{``1})
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.ToResult
+  nameWithType: MaybeExtensions.ToResult
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.ToResult``2(Lemonad.ErrorHandling.DataTypes.Maybe.Maybe{``0},System.Func{``1})
   name: ToResult<T, TError>(Maybe<T>, Func<TError>)
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_ToResult__2_Lemonad_ErrorHandling_DataTypes_Maybe_Maybe___0__System_Func___1__
-  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.ToResult``2(Lemonad.ErrorHandling.DataTypes.Maybe.Maybe{``0},System.Func{``1})
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_ToResult__2_Lemonad_ErrorHandling_DataTypes_Maybe_Maybe___0__System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.ToResult``2(Lemonad.ErrorHandling.DataTypes.Maybe.Maybe{``0},System.Func{``1})
   name.vb: ToResult(Of T, TError)(Maybe(Of T), Func(Of TError))
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.ToResult<T, TError>(Lemonad.ErrorHandling.DataTypes.Maybe.Maybe<T>, System.Func<TError>)
-  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.ToResult(Of T, TError)(Lemonad.ErrorHandling.DataTypes.Maybe.Maybe(Of T), System.Func(Of TError))
-  nameWithType: Maybe.ToResult<T, TError>(Maybe<T>, Func<TError>)
-  nameWithType.vb: Maybe.ToResult(Of T, TError)(Maybe(Of T), Func(Of TError))
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Values*
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.ToResult<T, TError>(Lemonad.ErrorHandling.DataTypes.Maybe.Maybe<T>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.ToResult(Of T, TError)(Lemonad.ErrorHandling.DataTypes.Maybe.Maybe(Of T), System.Func(Of TError))
+  nameWithType: MaybeExtensions.ToResult<T, TError>(Maybe<T>, Func<TError>)
+  nameWithType.vb: MaybeExtensions.ToResult(Of T, TError)(Maybe(Of T), Func(Of TError))
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Values*
   name: Values
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_Values_
-  commentId: Overload:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Values
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_Values_
+  commentId: Overload:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Values
   isSpec: "True"
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Values
-  nameWithType: Maybe.Values
-- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Values``1(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.DataTypes.Maybe.Maybe{``0}})
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Values
+  nameWithType: MaybeExtensions.Values
+- uid: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Values``1(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.DataTypes.Maybe.Maybe{``0}})
   name: Values<TSource>(IEnumerable<Maybe<TSource>>)
-  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_Maybe_Values__1_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_DataTypes_Maybe_Maybe___0___
-  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Values``1(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.DataTypes.Maybe.Maybe{``0}})
+  href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.html#Lemonad_ErrorHandling_DataTypes_Maybe_Extensions_MaybeExtensions_Values__1_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_DataTypes_Maybe_Maybe___0___
+  commentId: M:Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Values``1(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.DataTypes.Maybe.Maybe{``0}})
   name.vb: Values(Of TSource)(IEnumerable(Of Maybe(Of TSource)))
-  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Values<TSource>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.DataTypes.Maybe.Maybe<TSource>>)
-  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.Maybe.Values(Of TSource)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.DataTypes.Maybe.Maybe(Of TSource)))
-  nameWithType: Maybe.Values<TSource>(IEnumerable<Maybe<TSource>>)
-  nameWithType.vb: Maybe.Values(Of TSource)(IEnumerable(Of Maybe(Of TSource)))
+  fullName: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Values<TSource>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.DataTypes.Maybe.Maybe<TSource>>)
+  fullName.vb: Lemonad.ErrorHandling.DataTypes.Maybe.Extensions.MaybeExtensions.Values(Of TSource)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.DataTypes.Maybe.Maybe(Of TSource)))
+  nameWithType: MaybeExtensions.Values<TSource>(IEnumerable<Maybe<TSource>>)
+  nameWithType.vb: MaybeExtensions.Values(Of TSource)(IEnumerable(Of Maybe(Of TSource)))
 - uid: Lemonad.ErrorHandling.DataTypes.Maybe.Maybe`1
   name: Maybe<T>
   href: api/Lemonad.ErrorHandling.DataTypes.Maybe.Maybe-1.html
