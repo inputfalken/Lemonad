@@ -7,7 +7,10 @@ namespace Lemonad.ErrorHandling.Test.Outcome.Tests {
             if (right == 0)
                 return Task.Run(() => $"Can not divide '{left}' with '{right}'.");
 
-            return Task.Run(() => left / right);
+            return Task.Run(async () => {
+                await Task.Delay(50);
+                return left / right;
+            });
         }
 
         [Fact]
@@ -29,10 +32,12 @@ namespace Lemonad.ErrorHandling.Test.Outcome.Tests {
         [Fact]
         public async Task Result_With_Value_Maps__Expects_Selector_Be_Executed_And_Value_To_Be_Mapped() {
             var selectorExectued = false;
-            var division = await Division(10, 2).Map(x => {
+            var outcome = Division(10, 2).Map(x => {
                 selectorExectued = true;
                 return x * 4;
-            }).Result;
+            });
+            Assert.False(selectorExectued, "The function should not get exectued before the value is awaited.");
+            var division = await outcome.Result;
 
             Assert.True(selectorExectued, "The selector function should get executed since the result has value.");
             Assert.False(division.HasError, "Result not should have error.");
