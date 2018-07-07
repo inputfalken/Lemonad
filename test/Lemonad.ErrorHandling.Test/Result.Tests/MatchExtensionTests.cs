@@ -6,8 +6,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class MatchExtensionTests {
         private static Result<double, double> Division(double left, double right) {
             return right == 0
-                ? DataTypes.Result.Extensions.Result.Error<double, double>(-1)
-                : DataTypes.Result.Extensions.Result.Ok<double, double>(left / right);
+                ? DataTypes.Result.Extensions.ResultExtensions.Error<double, double>(-1)
+                : DataTypes.Result.Extensions.ResultExtensions.Ok<double, double>(left / right);
         }
 
         [Fact]
