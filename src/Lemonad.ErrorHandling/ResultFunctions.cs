@@ -102,7 +102,7 @@ namespace Lemonad.ErrorHandling {
         /// The type returned from function <paramref name="selector"/>>
         /// </typeparam>
         [Pure]
-        public static TResult Match<T, TError, TResult>(this Result<T, TError> source, Func<T, TResult> selector)
+        public static TResult Match<T, TResult, TError>(this Result<T, TError> source, Func<T, TResult> selector)
             where T : TError => source.Match(selector, x => selector((T) x));
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace Lemonad.ErrorHandling {
         /// The <typeparamref name="TError"/> from the <see cref="Result{T,TError}"/>.
         /// </typeparam>
         [Pure]
-        public static Maybe<T> ToMaybe<T, TError>(this Result<TError, T> source) =>
-            source.HasValue ? source.Error.Some() : Maybe<T>.None;
+        public static Maybe<T> ToMaybe<T, TError>(this Result<T, TError> source) =>
+            source.HasValue ? source.Value.Some() : Maybe<T>.None;
     }
 }
