@@ -4,13 +4,11 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Test.Task.Result.Tests {
     public class MapTests {
         private static async Task<Result<double, string>> Division(double left, double right) {
+            await System.Threading.Tasks.Task.Delay(50);
+
             if (right == 0)
                 return await System.Threading.Tasks.Task.Run(() => $"Can not divide '{left}' with '{right}'.");
-
-            return await System.Threading.Tasks.Task.Run(async () => {
-                await System.Threading.Tasks.Task.Delay(50);
-                return left / right;
-            });
+            return left / right;
         }
 
         [Fact]
