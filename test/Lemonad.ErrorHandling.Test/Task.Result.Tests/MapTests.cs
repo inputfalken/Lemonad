@@ -1,25 +1,25 @@
 ﻿using System.Threading.Tasks;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Test.Outcome.Tests {
+namespace Lemonad.ErrorHandling.Test.Task.Result.Tests {
     public class MapTests {
-        private static Outcome<double, string> Division(double left, double right) {
+        private static async Task<Result<double, string>> Division(double left, double right) {
             if (right == 0)
-                return Task.Run(() => $"Can not divide '{left}' with '{right}'.");
+                return await System.Threading.Tasks.Task.Run(() => $"Can not divide '{left}' with '{right}'.");
 
-            return Task.Run(async () => {
-                await Task.Delay(50);
+            return await System.Threading.Tasks.Task.Run(async () => {
+                await System.Threading.Tasks.Task.Delay(50);
                 return left / right;
             });
         }
 
         [Fact]
-        public async Task Result_With_Error_Maps__Expects_Selector_Never_Be_Executed() {
+        public async System.Threading.Tasks.Task Result_With_Error_Maps__Expects_Selector_Never_Be_Executed() {
             var selectorExectued = false;
             var division = await Division(2, 0).Map(x => {
                 selectorExectued = true;
                 return x * 8;
-            }).Result;
+            });
 
             Assert.False(selectorExectued,
                 "The selector function should never get executed if there's no value in the Result<T, TError>.");
@@ -30,14 +30,15 @@ namespace Lemonad.ErrorHandling.Test.Outcome.Tests {
         }
 
         [Fact]
-        public async Task Result_With_Value_Maps__Expects_Selector_Be_Executed_And_Value_To_Be_Mapped() {
+        public async System.Threading.Tasks.Task
+            Result_With_Value_Maps__Expects_Selector_Be_Executed_And_Value_To_Be_Mapped() {
             var selectorExectued = false;
             var outcome = Division(10, 2).Map(x => {
                 selectorExectued = true;
                 return x * 4;
             });
             Assert.False(selectorExectued, "The function should not get exectued before the value is awaited.");
-            var division = await outcome.Result;
+            var division = await outcome;
 
             Assert.True(selectorExectued, "The selector function should get executed since the result has value.");
             Assert.False(division.HasError, "Result not should have error.");
