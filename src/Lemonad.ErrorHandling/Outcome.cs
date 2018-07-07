@@ -40,7 +40,6 @@ namespace Lemonad.ErrorHandling {
         public async Task<TResult> Match<TResult>(Func<T, TResult> selector, Func<TError, TResult> errorSelector) =>
             (await _result.ConfigureAwait(false)).Match(selector, errorSelector);
 
-        [Pure]
         public async Task Match(Action<T> action, Action<TError> errorAction) =>
             (await _result.ConfigureAwait(false)).Match(action, errorAction);
 
