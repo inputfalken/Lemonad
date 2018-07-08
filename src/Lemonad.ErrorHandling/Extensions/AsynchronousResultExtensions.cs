@@ -96,5 +96,17 @@ namespace Lemonad.ErrorHandling.Extensions {
         public static async Task<Result<T, TError>> Flatten<T, TError, TResult>(
             this Task<Result<T, TError>> source,
             Func<T, Result<TResult, TError>> selector) => (await source.ConfigureAwait(false)).Flatten(selector);
+
+        [Pure]
+        public static async Task<Result<T, TError>> Flatten<T, TResult, TError, TErrorResult>(
+            this Task<Result<T, TError>> source, Func<T, Task<Result<TResult, TErrorResult>>> selector,
+            Func<TErrorResult, TError> errorSelector) =>
+            await (await source.ConfigureAwait(false)).FlattenAsync(selector, errorSelector);
+
+        [Pure]
+        public static async Task<Result<T, TError>> Flatten<T, TError, TResult>(
+            this Task<Result<T, TError>> source,
+            Func<T, Task<Result<TResult, TError>>> selector) =>
+            await (await source.ConfigureAwait(false)).FlattenAsync(selector);
     }
 }
