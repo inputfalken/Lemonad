@@ -448,7 +448,7 @@ namespace Lemonad.ErrorHandling {
             Func<T, Task<Result<TResult, TErrorResult>>> selector, Func<TErrorResult, TError> errorSelector) {
             if (HasValue) {
                 if (selector == null) throw new ArgumentNullException(nameof(selector));
-                var okSelector = await selector(Value);
+                var okSelector = await selector(Value).ConfigureAwait(false);
                 if (okSelector.HasValue)
                     return ResultExtensions.Ok<T, TError>(Value);
                 var tmpThis = this;
@@ -486,7 +486,7 @@ namespace Lemonad.ErrorHandling {
         public async Task<Result<T, TError>> FlattenAsync<TResult>(Func<T, Task<Result<TResult, TError>>> selector) {
             if (HasValue) {
                 if (selector == null) throw new ArgumentNullException(nameof(selector));
-                var okSelector = await selector(Value);
+                var okSelector = await selector(Value).ConfigureAwait(false);
                 if (okSelector.HasValue)
                     return Value;
                 return okSelector.Error;
