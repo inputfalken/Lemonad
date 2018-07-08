@@ -2,18 +2,18 @@
 using Lemonad.ErrorHandling.Extensions;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Test.Task.Result.Tests {
+namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
     public class FullMapTests {
         private static async Task<Result<double, string>> Division(double left, double right) {
-            await System.Threading.Tasks.Task.Delay(50);
+            await Task.Delay(50);
 
             if (right == 0)
-                return await System.Threading.Tasks.Task.Run(() => $"Can not divide '{left}' with '{right}'.");
+                return await Task.Run(() => $"Can not divide '{left}' with '{right}'.");
             return left / right;
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task
+        public async Task
             Result_With_Error_Expects__Selector_Never__To_Be_Executed_And_ErrorSelector_To_Be_Invoked() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
@@ -36,7 +36,7 @@ namespace Lemonad.ErrorHandling.Test.Task.Result.Tests {
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task
+        public async Task
             Result_With_Value_Expects__Selector_To_Be_Executed_And_ErrorSelector_To_Never_Be_Invoked() {
             var selectorExectued = false;
             var errorSelectorExectued = false;

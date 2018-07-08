@@ -2,18 +2,18 @@
 using Lemonad.ErrorHandling.Extensions;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Test.Task.Result.Tests {
+namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
     public class MatchTests {
         private static async Task<Result<double, string>> Division(double left, double right) {
-            await System.Threading.Tasks.Task.Delay(50);
+            await Task.Delay(50);
 
             if (right == 0)
-                return await System.Threading.Tasks.Task.Run(() => $"Can not divide '{left}' with '{right}'.");
+                return await Task.Run(() => $"Can not divide '{left}' with '{right}'.");
             return left / right;
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task Result_With_Error__Expect_ErrorAction() {
+        public async Task Result_With_Error__Expect_ErrorAction() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
             var match = Division(10, 0)
@@ -26,7 +26,7 @@ namespace Lemonad.ErrorHandling.Test.Task.Result.Tests {
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task Result_With_Error__Expect_ErrorSelector() {
+        public async Task Result_With_Error__Expect_ErrorSelector() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
             var match = Division(10, 0).Match(d => {
@@ -45,7 +45,7 @@ namespace Lemonad.ErrorHandling.Test.Task.Result.Tests {
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task
+        public async Task
             Result_With_Value__Expect_Action() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
@@ -58,7 +58,7 @@ namespace Lemonad.ErrorHandling.Test.Task.Result.Tests {
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task
+        public async Task
             Result_With_Value__Expect_Selector() {
             var selectorExectued = false;
             var errorSelectorExectued = false;

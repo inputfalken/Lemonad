@@ -2,18 +2,18 @@
 using Lemonad.ErrorHandling.Extensions;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Test.Task.Result.Tests {
+namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
     public class MapErrorTests {
         private static async Task<Result<double, string>> Division(double left, double right) {
-            await System.Threading.Tasks.Task.Delay(50);
+            await Task.Delay(50);
 
             if (right == 0)
-                return await System.Threading.Tasks.Task.Run(() => $"Can not divide '{left}' with '{right}'.");
+                return await Task.Run(() => $"Can not divide '{left}' with '{right}'.");
             return left / right;
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task Result_With_Error__Expects_Error_To_Be_Mapped() {
+        public async Task Result_With_Error__Expects_Error_To_Be_Mapped() {
             var errorSelectorInvoked = false;
             var task = Division(10, 0).MapError(s => {
                 errorSelectorInvoked = true;
@@ -31,7 +31,7 @@ namespace Lemonad.ErrorHandling.Test.Task.Result.Tests {
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task Result_With_Value__Expects_Error_To_Not_Be_Mapped() {
+        public async Task Result_With_Value__Expects_Error_To_Not_Be_Mapped() {
             var errorSelectorInvoked = false;
             var result = await Division(10, 2).MapError(s => {
                 errorSelectorInvoked = true;
