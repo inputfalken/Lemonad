@@ -2,7 +2,7 @@
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 
-namespace Lemonad.ErrorHandling.DataTypes.Result.Extensions {
+namespace Lemonad.ErrorHandling.Extensions {
     public static class AsynchronousResultExtensions {
         [Pure]
         public static async Task<Result<TResult, TError>> Map<T, TResult, TError>(this Task<Result<T, TError>> source,
