@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using Lemonad.ErrorHandling.DataTypes.Result.Extensions;
+using Lemonad.ErrorHandling.Extensions;
 
-namespace Lemonad.ErrorHandling.DataTypes.Result {
+namespace Lemonad.ErrorHandling {
     /// <summary>
     ///  A data-structure commonly used for error-handling where only one value can be present.
     ///  Either it's <typeparamref name="TError" /> or it's <typeparamref name="T" />. Which makes it possible to handle error without throwing exceptions.

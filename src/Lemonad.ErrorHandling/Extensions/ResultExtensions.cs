@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using Lemonad.ErrorHandling.DataTypes.Maybe;
-using Lemonad.ErrorHandling.DataTypes.Maybe.Extensions;
 
-namespace Lemonad.ErrorHandling.DataTypes.Result.Extensions {
+namespace Lemonad.ErrorHandling.Extensions {
     public static class ResultExtensions {
         /// <summary>
         /// Covnerts an <see cref="IEnumerable{T}"/> of <see cref="Result{T,TError}"/> to an <see cref="IEnumerable{T}"/> of <typeparamref name="TError"/>.

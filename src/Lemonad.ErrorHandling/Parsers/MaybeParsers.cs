@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using System.Globalization;
-using Lemonad.ErrorHandling.DataTypes.Maybe.Extensions;
+using Lemonad.ErrorHandling.Extensions;
 
-namespace Lemonad.ErrorHandling.DataTypes.Maybe.Parsers {
+namespace Lemonad.ErrorHandling.Parsers {
     public static class MaybeParsers {
         [Pure]
         private static string FormatMessage(string input) => $"Could not parse string '{input}'.";

@@ -1,5 +1,4 @@
-﻿using Lemonad.ErrorHandling.DataTypes.Maybe;
-using Lemonad.ErrorHandling.DataTypes.Maybe.Extensions;
+﻿using Lemonad.ErrorHandling.Extensions;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
@@ -46,8 +45,8 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Noones_Are_Expected_To_Be_Equal() {
-            var first = DataTypes.Maybe.Extensions.MaybeExtensions.None<string>();
-            var second = DataTypes.Maybe.Extensions.MaybeExtensions.None<string>();
+            var first = MaybeExtensions.None<string>();
+            var second = MaybeExtensions.None<string>();
 
             Assert.Equal(first, second);
             Assert.Equal(first, Maybe<string>.None);

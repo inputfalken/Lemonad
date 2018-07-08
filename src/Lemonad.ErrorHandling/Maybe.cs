@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using Lemonad.ErrorHandling.DataTypes.Maybe.Extensions;
-using Lemonad.ErrorHandling.DataTypes.Result;
+using Lemonad.ErrorHandling.Extensions;
 
-namespace Lemonad.ErrorHandling.DataTypes.Maybe {
+namespace Lemonad.ErrorHandling {
   
     /// <summary>
     ///  A data-structure commonly used for error-handling where value may or may not be present.
