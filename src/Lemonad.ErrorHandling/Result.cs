@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Extensions;
 
 namespace Lemonad.ErrorHandling {
@@ -69,7 +70,8 @@ namespace Lemonad.ErrorHandling {
         public static bool operator >=(Result<T, TError> left, Result<T, TError> right) =>
             left.CompareTo(right) >= 0;
 
-        public static implicit operator Result<T, TError>(TError error) => Extensions.ResultExtensions.Error<T, TError>(error);
+        public static implicit operator Result<T, TError>(TError error) =>
+            Extensions.ResultExtensions.Error<T, TError>(error);
 
         public static implicit operator Result<T, TError>(T value) => Extensions.ResultExtensions.Ok<T, TError>(value);
 
@@ -441,6 +443,21 @@ namespace Lemonad.ErrorHandling {
             return Extensions.ResultExtensions.Error<T, TError>(Error);
         }
 
+        [Pure]
+        public async Task<Result<T, TError>> FlattenAsync<TResult, TErrorResult>(
+            Func<T, Task<Result<TResult, TErrorResult>>> selector, Func<TErrorResult, TError> errorSelector) {
+            if (HasValue) {
+                if (selector == null) throw new ArgumentNullException(nameof(selector));
+                var okSelector = await selector(Value);
+                if (okSelector.HasValue)
+                    return ResultExtensions.Ok<T, TError>(Value);
+                var tmpThis = this;
+                return okSelector.FullMap(x => tmpThis.Value, errorSelector);
+            }
+
+            return ResultExtensions.Error<T, TError>(Error);
+        }
+
         /// <summary>
         /// Flatten another <see cref="Result{T,TError}"/>  who shares the same <typeparamref name="TError"/>.
         /// </summary>
@@ -463,6 +480,19 @@ namespace Lemonad.ErrorHandling {
             }
 
             return Extensions.ResultExtensions.Error<T, TError>(Error);
+        }
+
+        [Pure]
+        public async Task<Result<T, TError>> FlattenAsync<TResult>(Func<T, Task<Result<TResult, TError>>> selector) {
+            if (HasValue) {
+                if (selector == null) throw new ArgumentNullException(nameof(selector));
+                var okSelector = await selector(Value);
+                if (okSelector.HasValue)
+                    return Value;
+                return okSelector.Error;
+            }
+
+            return ResultExtensions.Error<T, TError>(Error);
         }
 
         /// <summary>
