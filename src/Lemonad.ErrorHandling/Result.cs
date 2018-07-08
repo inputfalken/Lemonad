@@ -443,6 +443,9 @@ namespace Lemonad.ErrorHandling {
             return Extensions.ResultExtensions.Error<T, TError>(Error);
         }
 
+        /// <summary>
+        /// Asynchronous version of <see cref="Flatten{TResult,TErrorResult}"/>.
+        /// </summary>
         [Pure]
         public async Task<Result<T, TError>> FlattenAsync<TResult, TErrorResult>(
             Func<T, Task<Result<TResult, TErrorResult>>> selector, Func<TErrorResult, TError> errorSelector) {
@@ -482,6 +485,9 @@ namespace Lemonad.ErrorHandling {
             return Extensions.ResultExtensions.Error<T, TError>(Error);
         }
 
+        /// <summary>
+        /// Asynchronous version of <see cref="Flatten{TResult}"/>
+        /// </summary>
         [Pure]
         public async Task<Result<T, TError>> FlattenAsync<TResult>(Func<T, Task<Result<TResult, TError>>> selector) {
             if (HasValue) {
