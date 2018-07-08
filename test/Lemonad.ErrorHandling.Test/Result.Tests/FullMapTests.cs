@@ -1,5 +1,4 @@
-﻿using Lemonad.ErrorHandling.DataTypes.Result;
-using Xunit;
+﻿using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class FullMapTests {

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Lemonad.ErrorHandling;
-using Lemonad.ErrorHandling.DataTypes.Result;
-using Lemonad.ErrorHandling.DataTypes.Result.Extensions;
+using Lemonad.ErrorHandling.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using MvcValidation.ApiModels;
 using MvcValidation.Models;
