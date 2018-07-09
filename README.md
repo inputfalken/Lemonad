@@ -1,5 +1,8 @@
 <p align="center"><img src="https://s8.postimg.cc/mbxqv2gx1/LOGO_LEMONAD_README.jpg"></p>
 
+
+[Logo](https://s8.postimg.cc/mbxqv2gx1/LOGO_LEMONAD_README.jpg) by [area55git](https://github.com/area55git) is licensed under [CC 4.0 International License.](https://creativecommons.org/licenses/by/4.0/)
+
 ## Status
 [![Build status](https://ci.appveyor.com/api/projects/status/y57renjt90pk5huy/branch/master?svg=true)](https://ci.appveyor.com/project/inputfalken/lemonad/branch/master)
 [![Build Status](https://travis-ci.org/inputfalken/Lemonad.svg?branch=master)](https://travis-ci.org/inputfalken/Lemonad)
