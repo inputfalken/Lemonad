@@ -1,4 +1,4 @@
-# 🍋 Lemonad 🍋
+<p align="center"><img src="https://s8.postimg.cc/mbxqv2gx1/LOGO_LEMONAD_README.jpg"></p>
 
 ## Status
 [![Build status](https://ci.appveyor.com/api/projects/status/y57renjt90pk5huy/branch/master?svg=true)](https://ci.appveyor.com/project/inputfalken/lemonad/branch/master)
