@@ -56,7 +56,7 @@
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
-      "default"
+      "_exported_templates/default"
     ],
     "postProcessors": [],
     "markdownEngineName": "markdig",
