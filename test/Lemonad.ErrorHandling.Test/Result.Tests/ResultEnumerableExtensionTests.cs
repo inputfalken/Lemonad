@@ -10,8 +10,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Result<int, string> Divide(int error, int right) {
                 if (right != 0)
                     return error / right;
-                else
-                    return "Cannot divide with zero";
+                return "Cannot divide with zero";
             }
 
             var results = new List<Result<int, string>> {

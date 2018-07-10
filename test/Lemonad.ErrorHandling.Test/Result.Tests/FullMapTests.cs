@@ -47,7 +47,6 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.Equal(default, result.Error);
             Assert.False(result.HasError, "Result should not have error.");
             Assert.True(result.HasValue, "Result should have value.");
-            
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 "Errorselector should get exeuted since there is an error in the result.");
             Assert.False(result.HasValue, "Result should not have a value.");
             Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default(double), result.Value);
+            Assert.Equal(default, result.Value);
             Assert.Equal("CAN NOT DIVIDE '10' WITH '0'.", result.Error);
         }
 
@@ -38,7 +38,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.True(result.HasValue, "Result should have a value.");
             Assert.False(result.HasError, "Result should not have a error.");
             Assert.Equal(5d, result.Value);
-            Assert.Equal(default(string), result.Error);
+            Assert.Equal(default, result.Error);
         }
     }
 }

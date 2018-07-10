@@ -11,15 +11,15 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         private static async Task<Result<double, string>> DivisionAsync(double left, double right) {
-            await System.Threading.Tasks.Task.Delay(50);
+            await Task.Delay(50);
 
             if (right == 0)
-                return await System.Threading.Tasks.Task.Run(() => $"Can not divide '{left}' with '{right}'.");
+                return await Task.Run(() => $"Can not divide '{left}' with '{right}'.");
             return left / right;
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task
+        public async Task
             Result_With_Error_Flatmaps_Result_with_Error__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
@@ -43,7 +43,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task
+        public async Task
             Result_With_Error_Flatmaps_Result_with_Error_Without_ErrorSelector__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var flattenAsync = Division(2, 0).FlattenAsync(x => {
@@ -61,7 +61,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task
+        public async Task
             Result_With_Error_Flatmaps_Result_with_Value__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
@@ -85,7 +85,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task
+        public async Task
             Result_With_Error_Flatmaps_Result_with_Value_Without_ErrorSelector__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var flattenAsync = Division(2, 0).FlattenAsync(x => {
@@ -104,7 +104,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task
+        public async Task
             Result_With_Value_Flatmaps_Result_with_Error__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
@@ -128,7 +128,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task
+        public async Task
             Result_With_Value_Flatmaps_Result_with_Error_Without_ErrorSelector__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var flattenAsync = Division(2, 2).FlattenAsync(x => {
@@ -146,7 +146,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task
+        public async Task
             Result_With_Value_Flatmaps_Result_with_Value__Expects_Result_With_Value() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
@@ -168,7 +168,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task
+        public async Task
             Result_With_Value_Flatmaps_Result_with_Value_Without_ErrorSelector__Expects_Result_With_Value() {
             var flatSelectorExecuted = false;
             var flattenAsync = Division(2, 2).FlattenAsync(x => {
@@ -184,7 +184,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task
+        public async Task
             Result_With_Value_FlatmapsRS_Result_with_Error__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
@@ -212,7 +212,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task
+        public async Task
             Result_With_Value_FlatmapsRS_Result_with_Error_Without_ErrorSelector__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var flattenAsync = Division(2, 2).FlattenAsync(x => {
