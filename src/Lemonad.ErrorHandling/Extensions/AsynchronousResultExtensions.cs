@@ -67,7 +67,7 @@ namespace Lemonad.ErrorHandling.Extensions {
             this Task<Result<T, TError>> source,
             Func<T, bool> predicate,
             Func<TError> errorSelector) =>
-            (await source.ConfigureAwait(false)).Filter(predicate, errorSelector);
+            (await source.ConfigureAwait(false)).IsErrorWhen(predicate, errorSelector);
 
         /// <inheritdoc cref="Result{T,TError}.IsErrorWhenNull"/>
         [Pure]
