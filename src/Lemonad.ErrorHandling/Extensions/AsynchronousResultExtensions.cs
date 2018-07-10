@@ -101,14 +101,14 @@ namespace Lemonad.ErrorHandling.Extensions {
             Func<TError> errorSelector)
             => (await source.ConfigureAwait(false)).SafeCast<TResult>(errorSelector);
 
-        /// <inheritdoc cref="Result{T,TError}.Flatten{TResult,TErrorResult}"/>
+        /// <inheritdoc cref="Result{T,TError}.Flatten{TResult,TErrorResult}(System.Func{T,Lemonad.ErrorHandling.Result{TResult,TErrorResult}},System.Func{TErrorResult,TError})"/>
         [Pure]
         public static async Task<Result<T, TError>> Flatten<T, TResult, TError, TErrorResult>(
             this Task<Result<T, TError>> source, Func<T, Result<TResult, TErrorResult>> selector,
             Func<TErrorResult, TError> errorSelector) =>
             (await source.ConfigureAwait(false)).Flatten(selector, errorSelector);
 
-        /// <inheritdoc cref="Result{T,TError}.Flatten{TResult}"/>
+        /// <inheritdoc cref="Result{T,TError}.Flatten{TResult}(System.Func{T,Lemonad.ErrorHandling.Result{TResult,TError}})"/>
         [Pure]
         public static async Task<Result<T, TError>> Flatten<T, TError, TResult>(
             this Task<Result<T, TError>> source,
@@ -118,12 +118,12 @@ namespace Lemonad.ErrorHandling.Extensions {
         public static async Task<Result<T, TError>> Flatten<T, TResult, TError, TErrorResult>(
             this Task<Result<T, TError>> source, Func<T, Task<Result<TResult, TErrorResult>>> selector,
             Func<TErrorResult, TError> errorSelector) =>
-            await (await source.ConfigureAwait(false)).FlattenAsync(selector, errorSelector);
+            await (await source.ConfigureAwait(false)).Flatten(selector, errorSelector);
 
         [Pure]
         public static async Task<Result<T, TError>> Flatten<T, TError, TResult>(
             this Task<Result<T, TError>> source,
             Func<T, Task<Result<TResult, TError>>> selector) =>
-            await (await source.ConfigureAwait(false)).FlattenAsync(selector);
+            await (await source.ConfigureAwait(false)).Flatten(selector);
     }
 }

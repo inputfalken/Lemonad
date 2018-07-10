@@ -444,10 +444,10 @@ namespace Lemonad.ErrorHandling {
         }
 
         /// <summary>
-        /// Asynchronous version of <see cref="Flatten{TResult,TErrorResult}"/>.
+        /// Asynchronous version of Flatten.
         /// </summary>
         [Pure]
-        public async Task<Result<T, TError>> FlattenAsync<TResult, TErrorResult>(
+        public async Task<Result<T, TError>> Flatten<TResult, TErrorResult>(
             Func<T, Task<Result<TResult, TErrorResult>>> selector, Func<TErrorResult, TError> errorSelector) {
             if (HasValue) {
                 if (selector == null) throw new ArgumentNullException(nameof(selector));
@@ -486,10 +486,10 @@ namespace Lemonad.ErrorHandling {
         }
 
         /// <summary>
-        /// Asynchronous version of <see cref="Flatten{TResult}"/>
+        /// Asynchronous version of Flatten.
         /// </summary>
         [Pure]
-        public async Task<Result<T, TError>> FlattenAsync<TResult>(Func<T, Task<Result<TResult, TError>>> selector) {
+        public async Task<Result<T, TError>> Flatten<TResult>(Func<T, Task<Result<TResult, TError>>> selector) {
             if (HasValue) {
                 if (selector == null) throw new ArgumentNullException(nameof(selector));
                 var okSelector = await selector(Value).ConfigureAwait(false);
