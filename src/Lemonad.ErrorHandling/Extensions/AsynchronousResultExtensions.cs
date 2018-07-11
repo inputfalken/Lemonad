@@ -71,10 +71,10 @@ namespace Lemonad.ErrorHandling.Extensions {
 
         /// <inheritdoc cref="Result{T,TError}.IsErrorWhenNull"/>
         [Pure]
-        public static Task<Result<T, TError>> IsErrorWhenNull<T, TError>(
+        public static async Task<Result<T, TError>> IsErrorWhenNull<T, TError>(
             this Task<Result<T, TError>> source,
             Func<TError> errorSelector) =>
-            source.IsErrorWhen(EquailtyFunctions.IsNull, errorSelector);
+            (await source.ConfigureAwait(false)).IsErrorWhenNull(errorSelector);
 
         /// <inheritdoc cref="Result{T,TError}.CastError{TResult}"/>
         [Pure]
