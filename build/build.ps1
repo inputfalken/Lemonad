@@ -162,7 +162,8 @@ function Generate-Documentation {
     Build-Documentation -Directory $DocumentationDirectory
     Configure-Git
     $ghPagesDirectory = 'gh_pages'
-    git clone https://github.com/inputfalken/Lemonad.git -b gh-pages $ghPagesDirectory -q
+    # APPVEYOR_REPO_NAME - repository name in format owner-name/repo-name
+    git clone "https://github.com/$($env:APPVEYOR_REPO_NAME)" -b gh-pages $ghPagesDirectory -q
     if (!$?) { throw "Could not clone 'gh-pages'." }
     $ghPagesDirectory = $ghPagesDirectory | Get-Item -ErrorAction Stop
     $docsSiteDirectory = Join-Path -Path $DocumentationDirectory -ChildPath '_site' -ErrorAction Stop | Get-Item -ErrorAction Stop
