@@ -1,13 +1,8 @@
 ﻿using Xunit;
+using static Lemonad.ErrorHandling.Test.Result.Tests.AssertionUtilities;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class FlattenTests {
-        private static Result<double, string> Division(double left, double right) {
-            if (right == 0)
-                return $"Can not divide '{left}' with '{right}'.";
-
-            return left / right;
-        }
 
         [Fact]
         public void Result_With_Error_Flatmaps_Result_with_Error__Expects_Result_With_Error() {
