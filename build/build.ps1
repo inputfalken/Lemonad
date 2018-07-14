@@ -152,7 +152,7 @@ function Generate-Documentation {
   Write-Host "Comparing diffs with '$currentSha1' '$previousSha1'." -ForegroundColor Yellow
   # TODO SrcDirectory parameter should be a list for all directories the diff needs to be checked with.
 
-  git diff --quiet --exit-code $previousSha1 $currentSha1 ($args | ForEach-Object { "'$_'" } | -join ' ')
+  git diff --quiet --exit-code $previousSha1 $currentSha1 (($args | ForEach-Object { "'$_'" }) -join ' ')
   if ($LASTEXITCODE -eq 1) {
     Build-Documentation -Directory $DocumentationDirectory
     Configure-Git
