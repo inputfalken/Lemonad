@@ -1,16 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Extensions;
 using Xunit;
+using static Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests.AssertionUtilitiesAsync;
 
 namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
     public class DoWithErrorTests {
-        private static async Task<Result<double, string>> Division(double left, double right) {
-            await Task.Delay(50);
-            if (right == 0)
-                return await Task.Run(() => $"Can not divide '{left}' with '{right}'.");
-            return left / right;
-        }
-
         [Fact]
         public async Task
             Result_With_Error__Expects_Action_To_Be_Invoked() {

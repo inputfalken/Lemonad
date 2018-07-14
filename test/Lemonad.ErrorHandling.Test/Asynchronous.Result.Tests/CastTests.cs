@@ -1,27 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Extensions;
+using static Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests.AssertionUtilitiesAsync;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
     public class CastTests {
-        private enum Gender {
-            Male = 0,
-            Female = 1
-        }
-
-        private static async Task<Result<Gender, string>> GetGender(int identity) {
-            await Task.Delay(50);
-            switch (identity) {
-                case 0:
-                    return Gender.Male;
-                case 1:
-                    return Gender.Female;
-                default:
-                    return "Could not determine gender";
-            }
-        }
-
         [Fact]
         public async Task Result_With_Error__With_Invalid_Casting() {
             var genderResult = GetGender(3);

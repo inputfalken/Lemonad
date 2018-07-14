@@ -1,28 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Extensions;
+using static Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests.AssertionUtilitiesAsync;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
     public class CastErrorTests {
-        private enum ExitCodes {
-            Fail = 1,
-            Unhandled
-        }
-
-        private static async Task<Result<string, ExitCodes>> Program(int code) {
-            await Task.Delay(50);
-
-            switch (code) {
-                case 0:
-                    return "Success";
-                case 1:
-                    return ExitCodes.Fail;
-                default:
-                    return ExitCodes.Unhandled;
-            }
-        }
-
         [Fact]
         public Task Result_With_Error__With_Invalid_Casting() {
             return Assert.ThrowsAsync<InvalidCastException>(() => Program(1).CastError<string, ExitCodes, string>());
