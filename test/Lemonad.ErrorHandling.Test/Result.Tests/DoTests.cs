@@ -1,15 +1,9 @@
 ﻿using System;
+using static Lemonad.ErrorHandling.Test.Result.Tests.AssertionUtilities;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class DoTests {
-        private static Result<double, string> Division(double left, double right) {
-            if (right == 0)
-                return $"Can not divide '{left}' with '{right}'.";
-
-            return left / right;
-        }
-
         [Fact]
         public void
             Result_With_Error__Expects_Action_To_Be_Invoked() {

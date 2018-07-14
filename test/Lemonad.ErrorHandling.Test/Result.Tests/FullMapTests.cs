@@ -1,13 +1,8 @@
 ﻿using Xunit;
+using static Lemonad.ErrorHandling.Test.Result.Tests.AssertionUtilities;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class FullMapTests {
-        private static Result<double, string> Division(double left, double right) {
-            if (right == 0)
-                return $"Can not divide '{left}' with '{right}'.";
-
-            return left / right;
-        }
 
         [Fact]
         public void Result_With_Error_Expects__Selector_Never__To_Be_Executed_And_ErrorSelector_To_Be_Invoked() {
