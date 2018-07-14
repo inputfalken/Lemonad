@@ -153,7 +153,7 @@ function Generate-Documentation {
     | Select-Object -First 1
   Write-Host "Comparing diffs with '$currentSha1' '$previousSha1'." -ForegroundColor Yellow
 
-  git diff --quiet --exit-code $previousSha1 $currentSha1 $DocumentationDirectory (($args | ForEach-Object { "'$_'" }) -join ' ')
+  git diff --quiet --exit-code $previousSha1 $currentSha1 -- $DocumentationDirectory (($args | ForEach-Object { "'$_'" }) -join ' ')
   if ($LASTEXITCODE -eq 1) {
     Build-Documentation -Directory $DocumentationDirectory
     Configure-Git
