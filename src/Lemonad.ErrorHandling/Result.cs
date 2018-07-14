@@ -21,7 +21,7 @@ namespace Lemonad.ErrorHandling {
         internal TError Error { get; }
         internal T Value { get; }
 
-        internal Result(in T value, in TError error, in bool hasError, in bool hasValue) {
+        internal Result(T value, TError error, bool hasError, bool hasValue) {
             HasValue = hasValue;
             HasError = hasError;
             Value = value;
