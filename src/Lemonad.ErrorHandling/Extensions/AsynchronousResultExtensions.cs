@@ -78,9 +78,9 @@ namespace Lemonad.ErrorHandling.Extensions {
 
         /// <inheritdoc cref="Result{T,TError}.CastError{TResult}"/>
         [Pure]
-        public static async Task<Result<T, TResult>> CastError<T, TResult, TError>
+        public static async Task<Result<T, TErrorResult>> CastError<T, TError, TErrorResult>
             (this Task<Result<T, TError>> source) =>
-            (await source.ConfigureAwait(false)).CastError<TResult>();
+            (await source.ConfigureAwait(false)).CastError<TErrorResult>();
 
         /// <inheritdoc cref="Result{T,TError}.FullCast{TResult,TErrorResult}"/>
         [Pure]

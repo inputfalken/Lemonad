@@ -25,13 +25,13 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
 
         [Fact]
         public Task Result_With_Error__With_Invalid_Casting() {
-            return Assert.ThrowsAsync<InvalidCastException>(() => Program(1).CastError<string, string, ExitCodes>());
+            return Assert.ThrowsAsync<InvalidCastException>(() => Program(1).CastError<string, ExitCodes, string>());
         }
 
         [Fact]
         public async Task Result_With_Error__With_Valid_Casting() {
             var programResult = Program(1);
-            var castResult = await programResult.CastError<string, int, ExitCodes>();
+            var castResult = await programResult.CastError<string, ExitCodes, int>();
             Assert.False(castResult.HasValue, "Casted Result not should have value.");
             Assert.True(castResult.HasError, "Casted Result should have error.");
             Assert.Equal(default, castResult.Value);
@@ -43,7 +43,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
             var programResult = Program(0);
 
             var exception = await Record.ExceptionAsync(async () => {
-                var castResult = await programResult.CastError<string, string, ExitCodes>();
+                var castResult = await programResult.CastError<string, ExitCodes, string>();
                 Assert.True(castResult.HasValue, "Result should have value");
                 Assert.False(castResult.HasError, "Result should not have error");
                 Assert.Equal("Success", castResult.Value);
@@ -56,7 +56,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         public async Task Result_With_Value__With_Valid_Casting() {
             var programResult = Program(0);
 
-            var castResult = await programResult.CastError<string, int, ExitCodes>();
+            var castResult = await programResult.CastError<string, ExitCodes, int>();
 
             Assert.True(castResult.HasValue, "Casted Result should have value.");
             Assert.False(castResult.HasError, "Casted Result should not have error.");
