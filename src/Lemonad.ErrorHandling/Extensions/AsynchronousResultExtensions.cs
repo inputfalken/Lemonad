@@ -78,25 +78,25 @@ namespace Lemonad.ErrorHandling.Extensions {
 
         /// <inheritdoc cref="Result{T,TError}.CastError{TResult}"/>
         [Pure]
-        public static async Task<Result<T, TErrorResult>> CastError<T, TError, TErrorResult>
+        internal static async Task<Result<T, TErrorResult>> CastError<T, TError, TErrorResult>
             (this Task<Result<T, TError>> source) =>
             (await source.ConfigureAwait(false)).CastError<TErrorResult>();
 
         /// <inheritdoc cref="Result{T,TError}.FullCast{TResult,TErrorResult}"/>
         [Pure]
-        public static async Task<Result<TResult, TErrorResult>> FullCast<T, TResult, TError, TErrorResult>(
+        internal static async Task<Result<TResult, TErrorResult>> FullCast<T, TResult, TError, TErrorResult>(
             this Task<Result<T, TError>> source) =>
             (await source.ConfigureAwait(false)).FullCast<TResult, TErrorResult>();
 
         /// <inheritdoc cref="Result{T,TError}.Cast{TResult}"/>
         [Pure]
-        public static async Task<Result<TResult, TError>> Cast<T, TResult, TError>(
+        internal static async Task<Result<TResult, TError>> Cast<T, TResult, TError>(
             this Task<Result<T, TError>> source) =>
             (await source.ConfigureAwait(false)).Cast<TResult>();
 
         /// <inheritdoc cref="Result{T,TError}.SafeCast{TResult}"/>
         [Pure]
-        public static async Task<Result<TResult, TError>> SafeCast<T, TResult, TError>(
+        internal static async Task<Result<TResult, TError>> SafeCast<T, TResult, TError>(
             this Task<Result<T, TError>> source,
             Func<TError> errorSelector)
             => (await source.ConfigureAwait(false)).SafeCast<TResult>(errorSelector);
