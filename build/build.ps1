@@ -115,11 +115,6 @@ function Build-Documentation {
 }
 
 function Generate-Documentation {
-  param(
-    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $DocumentationDirectory,
-    [Parameter(Position = 1, Mandatory = 1)] [System.IO.FileSystemInfo] $SrcDirectory
-  )
-
   function Configure-Git {
     if ($env:GITHUB_ACCESS_TOKEN) {
       git config --global credential.helper store
@@ -157,7 +152,7 @@ function Generate-Documentation {
   Write-Host "Comparing diffs with '$currentSha1' '$previousSha1'." -ForegroundColor Yellow
   # TODO SrcDirectory parameter should be a list for all directories the diff needs to be checked with.
 
-  git diff --quiet --exit-code $previousSha1 $currentSha1 $SrcDirectory $DocumentationDirectory
+  git diff --quiet --exit-code $previousSha1 $currentSha1 ($args | ForEach-Object { "'$_'" } | -join ' ')
   if ($LASTEXITCODE -eq 1) {
     Build-Documentation -Directory $DocumentationDirectory
     Configure-Git
@@ -240,8 +235,8 @@ if ($isWindows) {
   if ($env:APPVEYOR -and $env:CI) {
     switch ($env:APPVEYOR_REPO_BRANCH) {
       'master' {
-        if (!$env:APPVEYOR_PULL_REQUEST_TITLE -and $GenerateDocs) {
-          Generate-Documentation -DocumentationDirectory $documentationDirectory -SrcDirectory $srcDiretory
+        if (!$env:APPVEYOR_PULL_REQUEST_TITLE) {
+          if ($GenerateDocs) { Generate-Documentation $documentationDirectory $srcDiretory }
           List-Files (Join-Path -Path $srcDiretory -ChildPath '*.csproj') `
             | Get-ProjectInfo `
             | Pack-Package -ArtifactPath $rootDirectory -SourceCodePath $srcDiretory `
