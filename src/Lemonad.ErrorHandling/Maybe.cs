@@ -136,7 +136,7 @@ namespace Lemonad.ErrorHandling {
             Map<TResult>(Func<T, TResult> selector) =>
             HasValue
                 ? selector != null
-                    ? Extensions.MaybeExtensions.Some(selector(Value))
+                    ? MaybeExtensions.Some(selector(Value))
                     : throw new ArgumentNullException(nameof(selector))
                 : Maybe<TResult>.None;
 
