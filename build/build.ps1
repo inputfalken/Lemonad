@@ -79,12 +79,12 @@ function Pack-Package {
   # For some reason this pipe spits out bad elements which is filtered out below.
   $InputObject `
     | ForEach-Object {
-      if ($_.IsRelease) {
-        dotnet pack $_.Path --configuration $Configuration --no-build --output $ArtifactDirectory | Out-Null
-        if (!$?) { throw "Could not pack project" }
-      }
-      $_
-    } `
+    if ($_.IsRelease) {
+      dotnet pack $_.Path --configuration $Configuration --no-build --output $ArtifactDirectory | Out-Null
+      if (!$?) { throw "Could not pack project" }
+    }
+    $_
+  } `
     | Select-Object Path, Project, LocalVersion, OnlineVersion, IsRelease, @{Name = 'PackageOrNull'; Expression = {Join-Path -Path $ArtifactDirectory -ChildPath "$($_.Path.BaseName).$($_.LocalVersion).nupkg" | Get-Item -ErrorAction SilentlyContinue} }
 }
 
@@ -115,8 +115,10 @@ function Build-Documentation {
 }
 
 function Generate-Documentation {
-  param([Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $DocumentationDirectory)
-
+  param(
+    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $DocumentationDirectory, 
+    [Parameter(Position = 1, Mandatory = 0)] [System.IO.FileSystemInfo[]] $Directories
+  )
   function Configure-Git {
     if ($env:GITHUB_ACCESS_TOKEN) {
       git config --global credential.helper store
@@ -153,7 +155,7 @@ function Generate-Documentation {
     | Select-Object -First 1
   Write-Host "Comparing diffs with '$currentSha1' '$previousSha1'." -ForegroundColor Yellow
 
-  git diff --quiet --exit-code $previousSha1 $currentSha1 -- $DocumentationDirectory (($args | ForEach-Object { "'$_'" }) -join ' ')
+  git diff --quiet --exit-code $previousSha1 $currentSha1 -- $DocumentationDirectory (($Directories | ForEach-Object { "'$_'" }) -join ' ')
   if ($LASTEXITCODE -eq 1) {
     Build-Documentation -Directory $DocumentationDirectory
     Configure-Git
