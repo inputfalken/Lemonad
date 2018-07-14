@@ -5,64 +5,63 @@ using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
     public class CastErrorTests {
-        private enum Gender {
-            Male = 0,
-            Female = 1
+        private enum ExitCodes {
+            Fail = 1,
+            Unhandled
         }
 
-        private static async Task<Result<Gender, string>> GetGender(int identity) {
+        private static async Task<Result<string, ExitCodes>> Program(int code) {
             await Task.Delay(50);
-            switch (identity) {
+
+            switch (code) {
                 case 0:
-                    return Gender.Male;
+                    return "Success";
                 case 1:
-                    return Gender.Female;
+                    return ExitCodes.Fail;
                 default:
-                    return "Could not determine gender";
+                    return ExitCodes.Unhandled;
             }
         }
 
         [Fact]
-        public async Task Result_With_Error__With_Invalid_Casting() {
-            var genderResult = GetGender(3);
-            var exception = await Record.ExceptionAsync(async () => {
-                var result = genderResult.Cast<Gender, int, string>();
-                var castResult = await result;
-                Assert.False(castResult.HasValue, "Casted Result not should have value.");
-                Assert.True(castResult.HasError, "Casted Result should have error.");
-                Assert.Equal(default, castResult.Value);
-                Assert.Equal("Could not determine gender", castResult.Error);
-            });
-
-            Assert.Null(exception);
+        public Task Result_With_Error__With_Invalid_Casting() {
+            return Assert.ThrowsAsync<InvalidCastException>(() => Program(1).CastError<string, string, ExitCodes>());
         }
 
         [Fact]
         public async Task Result_With_Error__With_Valid_Casting() {
-            var genderResult = GetGender(3);
-
-            var castResult = await genderResult.Cast<Gender, int, string>();
-
+            var programResult = Program(1);
+            var castResult = await programResult.CastError<string, int, ExitCodes>();
             Assert.False(castResult.HasValue, "Casted Result not should have value.");
             Assert.True(castResult.HasError, "Casted Result should have error.");
             Assert.Equal(default, castResult.Value);
-            Assert.Equal("Could not determine gender", castResult.Error);
+            Assert.Equal(1, castResult.Error);
         }
 
         [Fact]
-        public Task Result_With_Value__With_Invalid_Casting() =>
-            Assert.ThrowsAsync<InvalidCastException>(() => GetGender(1).Cast<Gender, string, string>());
+        public async Task Result_With_Value__With_Invalid_Casting() {
+            var programResult = Program(0);
+
+            var exception = await Record.ExceptionAsync(async () => {
+                var castResult = await programResult.CastError<string, string, ExitCodes>();
+                Assert.True(castResult.HasValue, "Result should have value");
+                Assert.False(castResult.HasError, "Result should not have error");
+                Assert.Equal("Success", castResult.Value);
+                Assert.Equal(default, castResult.Error);
+            });
+            Assert.Null(exception);
+        }
 
         [Fact]
         public async Task Result_With_Value__With_Valid_Casting() {
-            var genderResult = GetGender(1);
+            var programResult = Program(0);
 
-            var castResult = await genderResult.Cast<Gender, int, string>();
+            var castResult = await programResult.CastError<string, int, ExitCodes>();
 
             Assert.True(castResult.HasValue, "Casted Result should have value.");
             Assert.False(castResult.HasError, "Casted Result should not have error.");
-            Assert.Equal(1, castResult.Value);
             Assert.Equal(default, castResult.Error);
+            Assert.Equal("Success", castResult.Value);
         }
     }
 }
