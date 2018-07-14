@@ -33,7 +33,7 @@ if ($isWindows) {
         if (!$env:APPVEYOR_PULL_REQUEST_TITLE) {
           if ($GenerateDocs) { Generate-Documentation -DocumentationDirectory $documentationDirectory -Directories @($srcDiretory) -UserName $UserName -UserEmail $UserEmail }
           List-Files (Join-Path -Path $srcDiretory -ChildPath '*.csproj') `
-            | ForEach-Object { Write-Host "Attempting to gather project info for '$_'." ; $_ }
+            | ForEach-Object { Write-Host "Attempting to gather project info for '$_'." ; $_ } `
             | Get-ProjectInfo `
             | Pack-Package -ArtifactPath $rootDirectory -SourceCodePath $srcDiretory `
             | Upload-Package
