@@ -96,20 +96,6 @@ function Upload-Package {
   }
 }
 
-function Build-Documentation {
-  param(
-    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $Directory
-  )
-  if (!(Get-Command -Name 'DocFx' -ErrorAction SilentlyContinue)) {
-    choco install docfx -y --version 2.37
-    if (!$?) { throw 'Could not install DocFx by chocolatey.' }
-  }
-  Push-Location $Directory
-  & docfx docfx.json
-  if (!$?) { throw 'Could not generate documentation.' }
-  Pop-Location
-}
-
 function Generate-Documentation {
   param(
     [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $DocumentationDirectory,
@@ -117,6 +103,21 @@ function Generate-Documentation {
     [Parameter(Position = 2, Mandatory = 1)] [string] $UserName,
     [Parameter(Position = 3, Mandatory = 1)] [string] $UserEmail
   )
+
+  function Build-Documentation {
+    param(
+      [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $Directory
+    )
+    if (!(Get-Command -Name 'DocFx' -ErrorAction SilentlyContinue)) {
+      choco install docfx -y --version 2.37
+      if (!$?) { throw 'Could not install DocFx by chocolatey.' }
+    }
+    Push-Location $Directory
+    & docfx docfx.json
+    if (!$?) { throw 'Could not generate documentation.' }
+    Pop-Location
+  }
+
   function Configure-Git {
     if ($env:GITHUB_ACCESS_TOKEN) {
       git config --global credential.helper store
