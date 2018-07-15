@@ -3,7 +3,6 @@ param (
   [Parameter(Position = 1, Mandatory = 1)] [string] $Source
 )
 
-
 function Is-InsideGitRepository {
   if (Get-Command -Name 'git' -ErrorAction SilentlyContinue) {
     if (git rev-parse --is-inside-work-tree 2>$null) { $true } else { $false }
