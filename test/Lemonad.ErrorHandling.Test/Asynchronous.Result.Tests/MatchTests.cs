@@ -9,7 +9,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         public async Task Result_With_Error__Expect_ErrorAction() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
-            var match = Division(10, 0)
+            var match = DivisionAsync(10, 0)
                 .Match(d => { selectorExectued = true; }, s => { errorSelectorExectued = true; });
             Assert.False(errorSelectorExectued, "Error should not get exectued until it's awaited.");
             await match;
@@ -22,7 +22,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         public async Task Result_With_Error__Expect_ErrorSelector() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
-            var match = Division(10, 0).Match(d => {
+            var match = DivisionAsync(10, 0).Match(d => {
                 selectorExectued = true;
                 return d;
             }, s => {
@@ -42,7 +42,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
             Result_With_Value__Expect_Action() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
-            var match = Division(10, 2)
+            var match = DivisionAsync(10, 2)
                 .Match(d => { selectorExectued = true; }, s => { errorSelectorExectued = true; });
             Assert.False(selectorExectued, "Selector should not get executed until it's awaited.");
             await match;
@@ -55,7 +55,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
             Result_With_Value__Expect_Selector() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
-            var match = Division(10, 2).Match(d => {
+            var match = DivisionAsync(10, 2).Match(d => {
                 selectorExectued = true;
                 return d;
             }, s => {

@@ -9,7 +9,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         public async Task
             Result_With_Error__Expects_Action_To_Be_Invoked() {
             var actionExectued = false;
-            var task = Division(10, 0).Do(() => actionExectued = true);
+            var task = DivisionAsync(10, 0).Do(() => actionExectued = true);
 
             Assert.False(actionExectued, "Should not get exectued beforet the value is awaited.");
             var result = await task;
@@ -24,7 +24,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         [Fact]
         public async Task Result_With_Value__Expects_Action_To_be_Invoked() {
             var actionExectued = false;
-            var task = Division(10, 2).Do(() => actionExectued = true);
+            var task = DivisionAsync(10, 2).Do(() => actionExectued = true);
             Assert.False(actionExectued, "Should not get exectued beforet the value is awaited.");
             var result = await task;
 

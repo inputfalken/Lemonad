@@ -10,7 +10,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
             Result_With_Error_Expects__Selector_Never__To_Be_Executed_And_ErrorSelector_To_Be_Invoked() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
-            var task = Division(10, 0).FullMap(d => {
+            var task = DivisionAsync(10, 0).FullMap(d => {
                 selectorExectued = true;
                 return d * 2;
             }, s => {
@@ -33,7 +33,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
             Result_With_Value_Expects__Selector_To_Be_Executed_And_ErrorSelector_To_Never_Be_Invoked() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
-            var task = Division(10, 2).FullMap(d => {
+            var task = DivisionAsync(10, 2).FullMap(d => {
                 selectorExectued = true;
                 return d * 10;
             }, s => {

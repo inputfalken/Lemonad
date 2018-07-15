@@ -8,7 +8,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         [Fact]
         public async Task Result_With_Error_Maps__Expects_Selector_Never_Be_Executed() {
             var selectorExectued = false;
-            var division = await Division(2, 0).Map(x => {
+            var division = await DivisionAsync(2, 0).Map(x => {
                 selectorExectued = true;
                 return x * 8;
             });
@@ -25,7 +25,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         public async Task
             Result_With_Value_Maps__Expects_Selector_Be_Executed_And_Value_To_Be_Mapped() {
             var selectorExectued = false;
-            var outcome = Division(10, 2).Map(x => {
+            var outcome = DivisionAsync(10, 2).Map(x => {
                 selectorExectued = true;
                 return x * 4;
             });
