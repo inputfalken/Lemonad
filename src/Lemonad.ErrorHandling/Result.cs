@@ -612,6 +612,17 @@ namespace Lemonad.ErrorHandling {
                 : throw new ArgumentNullException(nameof(errorSelector));
         }
 
+        public async Task<Result<TResult, TErrorResult>> FullFlatMap<TResult, TErrorResult>(
+            Func<T, Task<Result<TResult, TErrorResult>>> flatMapSelector, Func<TError, TErrorResult> errorSelector) {
+            if (HasValue) {
+                return await flatMapSelector(Value).ConfigureAwait(false);
+            }
+
+            return errorSelector != null
+                ? errorSelector(Error)
+                : throw new ArgumentNullException(nameof(errorSelector));
+        }
+
         /// <summary>
         /// Casts <typeparamref name="TError"/> into <typeparamref name="TResult"/>.
         /// </summary>
@@ -712,6 +723,17 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public Result<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
             Func<T, Result<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
+            Func<TError, TErrorResult> errorSelector) =>
+            FullFlatMap(x => flatMapSelector?.Invoke(x).Map(y => {
+                    if (resultSelector == null)
+                        throw new ArgumentNullException(nameof(resultSelector));
+                    return resultSelector(x, y);
+                }) ?? throw new ArgumentNullException(nameof(flatMapSelector)),
+                errorSelector);
+
+        [Pure]
+        public Task<Result<TResult, TErrorResult>> FullFlatMap<TFlatMap, TResult, TErrorResult>(
+            Func<T, Task<Result<TFlatMap, TErrorResult>>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector) =>
             FullFlatMap(x => flatMapSelector?.Invoke(x).Map(y => {
                     if (resultSelector == null)
