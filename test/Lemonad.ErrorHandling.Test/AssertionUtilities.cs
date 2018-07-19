@@ -1,9 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling.Test {
     internal static class AssertionUtilities {
+        private static Task Delay => Task.Delay(RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? 100 : 50);
+
         internal static async Task<Result<double, string>> DivisionAsync(double left, double right) {
-            await Task.Delay(50);
+            await Delay;
+
             if (right == 0)
                 return await Task.Run(() => $"Can not divide '{left}' with '{right}'.");
             return left / right;
@@ -21,7 +25,7 @@ namespace Lemonad.ErrorHandling.Test {
         }
 
         internal static async Task<Result<string, ExitCodes>> Program(int code) {
-            await Task.Delay(50);
+            await Delay;
 
             switch (code) {
                 case 0:
@@ -39,7 +43,7 @@ namespace Lemonad.ErrorHandling.Test {
         }
 
         internal static async Task<Result<Gender, string>> GetGender(int identity) {
-            await Task.Delay(50);
+            await Delay;
             switch (identity) {
                 case 0:
                     return Gender.Male;
