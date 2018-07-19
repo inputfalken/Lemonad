@@ -377,6 +377,12 @@ namespace Lemonad.ErrorHandling {
             ? flatSelector?.Invoke(Value) ?? throw new ArgumentNullException(nameof(flatSelector))
             : ResultExtensions.Error<TResult, TError>(Error);
 
+        [Pure]
+        public async Task<Result<TResult, TError>> FlatMap<TResult>(
+            Func<T, Task<Result<TResult, TError>>> flatSelector) => HasValue
+            ? await flatSelector(Value).ConfigureAwait(false)
+            : ResultExtensions.Error<TResult, TError>(Error);
+
         /// <summary>
         /// Flatten another <see cref="Result{T,TError}"/> who shares the same <typeparamref name="TError"/>.
         /// And maps <typeparamref name="T"/> together with <typeparamref name="TSelector"/> to <typeparamref name="TResult"/>.
@@ -396,6 +402,15 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public Result<TResult, TError> FlatMap<TSelector, TResult>(
             Func<T, Result<TSelector, TError>> flatSelector,
+            Func<T, TSelector, TResult> resultSelector) => FlatMap(x =>
+            flatSelector?.Invoke(x).Map(y => resultSelector == null
+                ? throw new ArgumentNullException(nameof(resultSelector))
+                : resultSelector(x, y)) ??
+            throw new ArgumentNullException(nameof(flatSelector)));
+
+        [Pure]
+        public Task<Result<TResult, TError>> FlatMap<TSelector, TResult>(
+            Func<T, Task<Result<TSelector, TError>>> flatSelector,
             Func<T, TSelector, TResult> resultSelector) => FlatMap(x =>
             flatSelector?.Invoke(x).Map(y => resultSelector == null
                 ? throw new ArgumentNullException(nameof(resultSelector))
@@ -550,6 +565,21 @@ namespace Lemonad.ErrorHandling {
             return ResultExtensions.Error<TResult, TError>(Error);
         }
 
+        [Pure]
+        public async Task<Result<TResult, TError>> FlatMap<TResult, TErrorResult>(
+            Func<T, Task<Result<TResult, TErrorResult>>> flatMapSelector, Func<TErrorResult, TError> errorSelector) {
+            if (HasValue) {
+                if (flatMapSelector == null) throw new ArgumentNullException(nameof(flatMapSelector));
+                var okSelector = await flatMapSelector(Value);
+
+                return okSelector.HasValue
+                    ? ResultExtensions.Ok<TResult, TError>(okSelector.Value)
+                    : okSelector.MapError(errorSelector);
+            }
+
+            return ResultExtensions.Error<TResult, TError>(Error);
+        }
+
         /// <summary>
         /// Flatmaps another <see cref="Result{T,TError}"/> but the <typeparamref name="TError"/> remains as the same type.
         /// </summary>
@@ -574,6 +604,17 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public Result<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
             Func<T, Result<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
+            Func<TErrorResult, TError> errorSelector) =>
+            FlatMap(x => flatMapSelector?.Invoke(x).Map(y => {
+                    if (resultSelector == null)
+                        throw new ArgumentNullException(nameof(resultSelector));
+                    return resultSelector(x, y);
+                }) ?? throw new ArgumentNullException(nameof(flatMapSelector)),
+                errorSelector);
+
+        [Pure]
+        public Task<Result<TResult, TError>> FlatMap<TFlatMap, TResult, TErrorResult>(
+            Func<T, Task<Result<TFlatMap, TErrorResult>>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
             Func<TErrorResult, TError> errorSelector) =>
             FlatMap(x => flatMapSelector?.Invoke(x).Map(y => {
                     if (resultSelector == null)
