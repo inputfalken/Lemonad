@@ -450,16 +450,13 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public async Task<Result<TResult, TError>> FlatMap<TResult, TErrorResult>(
             Func<T, Task<Result<TResult, TErrorResult>>> flatMapSelector, Func<TErrorResult, TError> errorSelector) {
-            if (HasValue) {
-                if (flatMapSelector == null) throw new ArgumentNullException(nameof(flatMapSelector));
-                var okSelector = await flatMapSelector(Value);
+            if (HasError) return ResultExtensions.Error<TResult, TError>(Error);
+            if (flatMapSelector == null) throw new ArgumentNullException(nameof(flatMapSelector));
+            var okSelector = await flatMapSelector(Value);
 
-                return okSelector.HasValue
-                    ? ResultExtensions.Ok<TResult, TError>(okSelector.Value)
-                    : okSelector.MapError(errorSelector);
-            }
-
-            return ResultExtensions.Error<TResult, TError>(Error);
+            return okSelector.HasValue
+                ? ResultExtensions.Ok<TResult, TError>(okSelector.Value)
+                : okSelector.MapError(errorSelector);
         }
 
         /// <summary>
