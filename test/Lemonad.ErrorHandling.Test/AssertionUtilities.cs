@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 
-namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
-    internal static class AssertionUtilitiesAsync {
+namespace Lemonad.ErrorHandling.Test {
+    internal static class AssertionUtilities {
         internal static async Task<Result<double, string>> DivisionAsync(double left, double right) {
             await Task.Delay(50);
             if (right == 0)

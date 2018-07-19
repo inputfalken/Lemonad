@@ -1,4 +1,4 @@
-﻿using static Lemonad.ErrorHandling.Test.Result.Tests.AssertionUtilities;
+﻿using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
