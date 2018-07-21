@@ -10,7 +10,7 @@ namespace ConsoleInputValidation {
             return Console.ReadLine()
                 .ToResult<string, ExitCode>()
                 .IsErrorWhen(string.IsNullOrWhiteSpace, () => ExitCode.EmptyName)
-                .Flatten(OnlyContainsAlphaNumericChars)
+                .Flatten(OnlyAlphanumericLetters)
                 .Map(_ => ExitCode.Success)
                 .FullCast<int>()
                 .DoWithError(x => Console.WriteLine($"Bad input, exiting with code: {x}"))
@@ -18,7 +18,7 @@ namespace ConsoleInputValidation {
                 .Match();
         }
 
-        private static Result<string, ExitCode> OnlyContainsAlphaNumericChars(string input) {
+        private static Result<string, ExitCode> OnlyAlphanumericLetters(string input) {
             if (input.All(c => char.IsLetter(c) || char.IsNumber(c)))
                 return input;
             return ExitCode.NameContainsNoneAlphaNumericChars;
