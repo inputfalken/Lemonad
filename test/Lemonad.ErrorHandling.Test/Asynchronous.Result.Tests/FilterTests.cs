@@ -4,7 +4,7 @@ using Xunit;
 using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
 namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
-    public class FiltertTests {
+    public class FilterTests {
         [Fact]
         public async Task
             Result_With_Error__Expects_Predicate_Never_To_Be_Executed_And_ErrorSelector_Never_To_Be_Invoked() {
