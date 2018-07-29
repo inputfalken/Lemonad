@@ -1,14 +1,15 @@
-﻿using Xunit;
+﻿using System.Threading.Tasks;
+using Xunit;
 using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
-    public class FlatMapTestsSameTError {
+    public class FlatMapSameTErrorAsyncTests {
         [Fact]
-        public void Result_With_Error_Flatmaps_Result_with_Error__Expects_Result_With_Value() {
+        public async Task Result_With_Error_Flatmaps_Result_with_Error__Expects_Result_With_Value() {
             var flatSelectorExecuted = false;
-            var result = Division(2, 0).FlatMap(x => {
+            var result = await Division(2, 0).FlatMap(x => {
                 flatSelectorExecuted = true;
-                return Division(x, 0);
+                return DivisionAsync(x, 0);
             });
 
             Assert.False(flatSelectorExecuted,
@@ -20,11 +21,11 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Error_Flatmaps_Result_with_Value__Expects_Result_With_Value() {
+        public async Task Result_With_Error_Flatmaps_Result_with_Value__Expects_Result_With_Value() {
             var flatSelectorExecuted = false;
-            var result = Division(2, 0).FlatMap(x => {
+            var result = await Division(2, 0).FlatMap(x => {
                 flatSelectorExecuted = true;
-                return Division(x, 2);
+                return DivisionAsync(x, 2);
             });
 
             Assert.False(flatSelectorExecuted,
@@ -36,12 +37,12 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Error_FlatmapsRS_Result_with_Error__Expects_Result_With_Value() {
+        public async Task Result_With_Error_FlatmapsRS_Result_with_Error__Expects_Result_With_Value() {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
-            var result = Division(2, 0).FlatMap(x => {
+            var result = await Division(2, 0).FlatMap(x => {
                 flatSelectorExecuted = true;
-                return Division(x, 0);
+                return DivisionAsync(x, 0);
             }, (y, x) => {
                 resultSelectorExectued = true;
                 return y + x;
@@ -58,12 +59,12 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Error_FlatmapsRS_Result_with_Value__Expects_Result_With_Value() {
+        public async Task Result_With_Error_FlatmapsRS_Result_with_Value__Expects_Result_With_Value() {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
-            var result = Division(2, 0).FlatMap(x => {
+            var result = await Division(2, 0).FlatMap(x => {
                 flatSelectorExecuted = true;
-                return Division(x, 2);
+                return DivisionAsync(x, 2);
             }, (y, x) => {
                 resultSelectorExectued = true;
                 return y + x;
@@ -79,12 +80,12 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Value_Flatmaps_Result_with_Error__Expects_Result_With_Value() {
+        public async Task Result_With_Value_Flatmaps_Result_with_Error__Expects_Result_With_Value() {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
-            var result = Division(2, 2).FlatMap(x => {
+            var result = await Division(2, 2).FlatMap(x => {
                 flatSelectorExecuted = true;
-                return Division(x, 0);
+                return DivisionAsync(x, 0);
             });
 
             Assert.True(flatSelectorExecuted,
@@ -98,12 +99,12 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Value_Flatmaps_Result_with_Value__Expects_Result_With_Value() {
+        public async Task Result_With_Value_Flatmaps_Result_with_Value__Expects_Result_With_Value() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
-            var result = Division(2, 2).FlatMap(x => {
+            var result = await Division(2, 2).FlatMap(x => {
                 flatSelectorExecuted = true;
-                return Division(x, 2);
+                return DivisionAsync(x, 2);
             });
             Assert.True(flatSelectorExecuted, "flatmapselector should get executed.");
             Assert.False(errorSelectorExecuted, "Errorselector should not get exeuted.");
@@ -114,12 +115,12 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Value_FlatmapsRS_Result_with_Error__Expects_Result_With_Value() {
+        public async Task Result_With_Value_FlatmapsRS_Result_with_Error__Expects_Result_With_Value() {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
-            var result = Division(2, 2).FlatMap(x => {
+            var result = await Division(2, 2).FlatMap(x => {
                 flatSelectorExecuted = true;
-                return Division(x, 0);
+                return DivisionAsync(x, 0);
             }, (y, x) => {
                 resultSelectorExectued = true;
                 return y + x;
@@ -140,12 +141,12 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Value_FlatmapsRS_Result_with_Value__Expects_Result_With_Value() {
+        public async Task Result_With_Value_FlatmapsRS_Result_with_Value__Expects_Result_With_Value() {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
-            var result = Division(2, 2).FlatMap(x => {
+            var result = await Division(2, 2).FlatMap(x => {
                 flatSelectorExecuted = true;
-                return Division(x, 2);
+                return DivisionAsync(x, 2);
             }, (y, x) => {
                 resultSelectorExectued = true;
                 return y + x;

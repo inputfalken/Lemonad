@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
 using Lemonad.ErrorHandling.Extensions;
 using Microsoft.AspNetCore.Mvc;
@@ -6,16 +7,17 @@ using MvcValidation.ApiModels;
 using MvcValidation.Models;
 
 namespace MvcValidation.Controller {
-    [Route("people")]
-    public class PersonController : Microsoft.AspNetCore.Mvc.Controller {
+    public class AsyncPersonController : Microsoft.AspNetCore.Mvc.Controller {
         [HttpPost]
         [Route("eitherSummarized")]
-        public IActionResult PostPerson([FromBody] PersonPostApiModel model) {
-            var result = ApiValidation(model)
-                .Map(x => new PersonModel {FirstName = x.FirstName, LastName = x.LastName})
-                .Flatten(LastNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
-                .FlatMap(FirstNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model});
-            return result.Match<IActionResult>(BadRequest, Ok);
+        public async Task<IActionResult> PostPerson([FromBody] PersonPostApiModel model) {
+            return (await ApiValidation(model)
+                    // Using match inside this scope is currently too complex since it requires all type params to be supplied.
+                    .Map(x => new PersonModel {FirstName = x.FirstName, LastName = x.LastName})
+                    .Flatten(LastNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
+                    .FlatMap(FirstNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
+                )
+                .Match<IActionResult>(Ok, BadRequest);
         }
 
         private static Result<PersonPostApiModel, PersonPostApiError> ApiValidation(PersonPostApiModel model) {
@@ -39,15 +41,19 @@ namespace MvcValidation.Controller {
             });
         }
 
-        public static Result<SuccessModel, ErrorModel> LastNameAppService(PersonModel person) =>
-            person.LastName == "Bar"
+        private static async Task<Result<SuccessModel, ErrorModel>> LastNameAppService(PersonModel person) {
+            await Task.Delay(50);
+            return person.LastName == "Bar"
                 ? (Result<SuccessModel, ErrorModel>) new SuccessModel {Count = 4711}
                 : new ErrorModel {Message = "Expected a 'Bar'"};
+        }
 
-        public static Result<SuccessModel, ErrorModel> FirstNameAppService(PersonModel person) =>
-            person.FirstName == "Foo"
+        private static async Task<Result<SuccessModel, ErrorModel>> FirstNameAppService(PersonModel person) {
+            await Task.Delay(50);
+            return person.FirstName == "Foo"
                 ? (Result<SuccessModel, ErrorModel>) new SuccessModel {Count = 4711}
                 : new ErrorModel {Message = "Expected a 'Foo'"};
+        }
 
         private static Result<string, string> ValidateName(string name) {
             return name.ToResult<string, string>()

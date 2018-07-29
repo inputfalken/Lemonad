@@ -1,15 +1,19 @@
+﻿using System.Threading.Tasks;
+using Lemonad.ErrorHandling.Extensions;
 using Xunit;
 using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
-namespace Lemonad.ErrorHandling.Test.Result.Tests {
-    public class DoWithTests {
+namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
+    public class DoTests {
         [Fact]
-        public void
-            Result_With_Error__Expects_Action__Not_To_Be_Invoked() {
+        public async Task
+            Result_With_Error__Expects_Action_To_Be_Invoked() {
             var actionExectued = false;
-            var result = Division(10, 0).DoWith(d => actionExectued = true);
+            var task = DivisionAsync(10, 0).Do(() => actionExectued = true);
 
-            Assert.False(actionExectued, "Should not get exectued since there's an error.");
+            var result = await task;
+
+            Assert.True(actionExectued, "Should not get exectued since there's an error.");
             Assert.Equal(default, result.Value);
             Assert.Equal("Can not divide '10' with '0'.", result.Error);
             Assert.True(result.HasError, "Result should have error.");
@@ -17,10 +21,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void
-            Result_With_Value__Expects_Action_To_Be_Invoked() {
+        public async Task Result_With_Value__Expects_Action_To_be_Invoked() {
             var actionExectued = false;
-            var result = Division(10, 2).DoWith(d => actionExectued = true);
+            var task = DivisionAsync(10, 2).Do(() => actionExectued = true);
+            var result = await task;
 
             Assert.True(actionExectued, "Should not get exectued since there's an error.");
             Assert.Equal(5, result.Value);

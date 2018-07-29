@@ -1,20 +1,24 @@
-﻿using Xunit;
+﻿using System.Threading.Tasks;
+using Lemonad.ErrorHandling.Extensions;
+using Xunit;
 using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
-namespace Lemonad.ErrorHandling.Test.Result.Tests {
-    public class ErrorWhenTests {
+namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
+    public class IsErrorWhenTests {
         [Fact]
-        public void
+        public async Task
             Result_With_Error__Expects_Predicate_Never_To_Be_Executed_And_ErrorSelector_Never_To_Be_Invoked() {
             var predicateExectued = false;
             var errorSelectorExectued = false;
-            var result = Division(10, 0).IsErrorWhen(d => {
+            var isErrorWhen = DivisionAsync(10, 0).IsErrorWhen(d => {
                 predicateExectued = true;
                 return d == 2;
             }, () => {
                 errorSelectorExectued = true;
                 return "Bad";
             });
+
+            var result = await isErrorWhen;
 
             Assert.False(predicateExectued,
                 "Should not get exectued since there's an error before the predicate was applied.");
@@ -27,17 +31,19 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void
+        public async Task
             Result_With_Value_With_Falsy_Predicate__Expects_Predicate_To_Be_Executed_And_ErrorSelector_To_Never_Be_Invoked() {
             var predicateExectued = false;
             var errorSelectorExectued = false;
-            var result = Division(10, 2).IsErrorWhen(d => {
+            var isErrorWhen = DivisionAsync(10, 2).IsErrorWhen(d => {
                 predicateExectued = true;
                 return false;
             }, () => {
                 errorSelectorExectued = true;
                 return "Bad";
             });
+
+            var result = await isErrorWhen;
 
             Assert.True(predicateExectued,
                 "Should get exectued since there's a value from the result.");
@@ -50,17 +56,22 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void
+        public async Task
             Result_With_Value_With_Truthy_Predicate__Expects_Predicate_To_Be_Executed_And_ErrorSelector_To_Be_Invoked() {
             var predicateExectued = false;
             var errorSelectorExectued = false;
-            var result = Division(10, 2).IsErrorWhen(d => {
+            var isErrorWhen = DivisionAsync(10, 2).IsErrorWhen(d => {
                 predicateExectued = true;
                 return true;
             }, () => {
                 errorSelectorExectued = true;
                 return "Bad";
             });
+
+            Assert.False(predicateExectued, "Should not get exectued before the value is awaited.");
+            Assert.False(errorSelectorExectued, "Should not get exectued before the value is awaited.");
+
+            var result = await isErrorWhen;
 
             Assert.True(predicateExectued, "Should get exectued since there's a value from the result.");
             Assert.True(errorSelectorExectued, "Should get exectued since the predicate was truthy.");

@@ -1,10 +1,8 @@
-﻿using System;
-using static Lemonad.ErrorHandling.Test.Result.Tests.AssertionUtilities;
 using Xunit;
+using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class DoWithErrorTests {
-
         [Fact]
         public void
             Result_With_Error__Expects_Action_To_Be_Invoked() {
