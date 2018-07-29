@@ -5,22 +5,22 @@ using Lemonad.ErrorHandling.Extensions;
 
 namespace Lemonad.ErrorHandling {
     /// <summary>
-    ///  A data-structure commonly used for error-handling where value may or may not be present.
+    ///     A data-structure commonly used for error-handling where value may or may not be present.
     /// </summary>
     /// <typeparam name="T">
-    /// The potential value.
+    ///     The potential value.
     /// </typeparam>
     public readonly struct Maybe<T> : IEquatable<Maybe<T>>, IComparable<Maybe<T>> {
         public static Maybe<T> None { get; } = new Maybe<T>(default, false);
 
         /// <summary>
-        /// Is true if there's a <typeparamref name="T"/> in the current state of the <see cref="Maybe{T}"/>.
+        ///     Is true if there's a <typeparamref name="T" /> in the current state of the <see cref="Maybe{T}" />.
         /// </summary>
         public bool HasValue { get; }
 
         /// <summary>
-        /// Treat <typeparamref name="T"/> as enumerable with 0-1 elements in.
-        /// This is handy when combining <see cref="Result{T,TError}"/> with LINQ's API.
+        ///     Treat <typeparamref name="T" /> as enumerable with 0-1 elements in.
+        ///     This is handy when combining <see cref="Result{T,TError}" /> with LINQ's API.
         /// </summary>
         public IEnumerable<T> AsEnumerable => Yield(this);
 
@@ -77,16 +77,16 @@ namespace Lemonad.ErrorHandling {
         }
 
         /// <summary>
-        /// Evaluates the <see cref="Maybe{T}"/>.
+        ///     Evaluates the <see cref="Maybe{T}" />.
         /// </summary>
         /// <param name="someAction">
-        /// Is executed when the <see cref="Maybe{T}"/> has a value.
+        ///     Is executed when the <see cref="Maybe{T}" /> has a value.
         /// </param>
         /// <param name="noneAction">
-        /// Is executed when he <see cref="Maybe{T}"/> has no value.
+        ///     Is executed when he <see cref="Maybe{T}" /> has no value.
         /// </param>
         /// <exception cref="ArgumentNullException">
-        /// When either <paramref name="someAction"/> or <paramref name="noneAction"/> needs to be executed.
+        ///     When either <paramref name="someAction" /> or <paramref name="noneAction" /> needs to be executed.
         /// </exception>
         public void Match(Action<T> someAction,
             Action noneAction) {
@@ -103,16 +103,16 @@ namespace Lemonad.ErrorHandling {
         }
 
         /// <summary>
-        /// Evaluates the <see cref="Maybe{T}"/>.
+        ///     Evaluates the <see cref="Maybe{T}" />.
         /// </summary>
         /// <param name="someSelector">
-        /// Is executed when the <see cref="Maybe{T}"/> has a value.
+        ///     Is executed when the <see cref="Maybe{T}" /> has a value.
         /// </param>
         /// <param name="noneSelector">
-        /// Is executed when he <see cref="Maybe{T}"/> has no value.
+        ///     Is executed when he <see cref="Maybe{T}" /> has no value.
         /// </param>
         /// <typeparam name="TResult">
-        /// The type returned by the functions <paramref name="someSelector"/> and <paramref name="noneSelector"/>.
+        ///     The type returned by the functions <paramref name="someSelector" /> and <paramref name="noneSelector" />.
         /// </typeparam>
         [Pure]
         public TResult Match<TResult>(Func<T, TResult> someSelector,
@@ -123,13 +123,13 @@ namespace Lemonad.ErrorHandling {
                 : (HasValue ? someSelector(Value) : noneSelector()));
 
         /// <summary>
-        /// Maps <typeparamref name="T"/>.
+        ///     Maps <typeparamref name="T" />.
         /// </summary>
         /// <param name="selector">
-        /// Is executed if <see cref="Maybe{T}"/> has a value.
+        ///     Is executed if <see cref="Maybe{T}" /> has a value.
         /// </param>
         /// <typeparam name="TResult">
-        /// The type returned from the function <paramref name="selector"/>.
+        ///     The type returned from the function <paramref name="selector" />.
         /// </typeparam>
         [Pure]
         public Maybe<TResult>
@@ -141,10 +141,10 @@ namespace Lemonad.ErrorHandling {
                 : Maybe<TResult>.None;
 
         /// <summary>
-        ///  Filters the <typeparamref name="T"/> if <see cref="Maybe{T}"/> has a value.
+        ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
         /// </summary>
         /// <param name="predicate">
-        /// A function to test <typeparamref name="T"/>.
+        ///     A function to test <typeparamref name="T" />.
         /// </param>
         [Pure]
         public Maybe<T> Filter(
@@ -157,13 +157,13 @@ namespace Lemonad.ErrorHandling {
             : None;
 
         /// <summary>
-        /// Flamaps another <see cref="Maybe{T}"/>.
+        ///     Flamaps another <see cref="Maybe{T}" />.
         /// </summary>
         /// <param name="flatMapSelector">
-        /// A function who expects a <see cref="Maybe{T}"/> as its return type.
+        ///     A function who expects a <see cref="Maybe{T}" /> as its return type.
         /// </param>
         /// <typeparam name="TResult">
-        /// The type <typeparamref name="T"/> returned from the <paramref name="flatMapSelector"/> function.
+        ///     The type <typeparamref name="T" /> returned from the <paramref name="flatMapSelector" /> function.
         /// </typeparam>
         [Pure]
         public Maybe<TResult> FlatMap<TResult>(
@@ -172,19 +172,20 @@ namespace Lemonad.ErrorHandling {
             : Maybe<TResult>.None;
 
         /// <summary>
-        /// Flamaps another <see cref="Maybe{T}"/>.
+        ///     Flamaps another <see cref="Maybe{T}" />.
         /// </summary>
         /// <param name="flatMapSelector">
-        /// A function who expects a <see cref="Maybe{T}"/> as its return type.
+        ///     A function who expects a <see cref="Maybe{T}" /> as its return type.
         /// </param>
         /// <param name="resultSelector">
-        /// A function whose in-parameters are <typeparamref name="T"/> and <typeparamref name="TFlatMap"/> which can return any type.
+        ///     A function whose in-parameters are <typeparamref name="T" /> and <typeparamref name="TFlatMap" /> which can return
+        ///     any type.
         /// </param>
         /// <typeparam name="TFlatMap">
-        /// The value type of the <see cref="Result{T,TError}"/> returned by the <paramref name="flatMapSelector"/>.
+        ///     The value type of the <see cref="Result{T,TError}" /> returned by the <paramref name="flatMapSelector" />.
         /// </typeparam>
         /// <typeparam name="TResult">
-        /// The type returned by the function <paramref name="resultSelector"/>.
+        ///     The type returned by the function <paramref name="resultSelector" />.
         /// </typeparam>
         [Pure]
         public Maybe<TResult> FlatMap<TFlatMap, TResult>(
@@ -201,13 +202,13 @@ namespace Lemonad.ErrorHandling {
         }
 
         /// <summary>
-        /// Flamaps a <see cref="Nullable{T}"/>.
+        ///     Flamaps a <see cref="Nullable{T}" />.
         /// </summary>
         /// <param name="flatSelector">
-        /// A function who expects a <see cref="Nullable{T}"/> as its return type.
+        ///     A function who expects a <see cref="Nullable{T}" /> as its return type.
         /// </param>
         /// <typeparam name="TResult">
-        /// The type <typeparamref name="T"/> returned from the <paramref name="flatSelector"/> function.
+        ///     The type <typeparamref name="T" /> returned from the <paramref name="flatSelector" /> function.
         /// </typeparam>
         [Pure]
         public Maybe<TResult> FlatMap<TResult>(
@@ -215,20 +216,20 @@ namespace Lemonad.ErrorHandling {
             HasValue ? flatSelector(Value).ToMaybe() : Maybe<TResult>.None;
 
         /// <summary>
-        /// Filters the <see cref="Maybe{T}"/> to see if <typeparamref name="T"/> is null.
+        ///     Filters the <see cref="Maybe{T}" /> to see if <typeparamref name="T" /> is null.
         /// </summary>
         /// <returns>
-        /// A <see cref="Maybe{T}"/> whose <typeparamref name="T"/> has value if <typeparamref name="T"/> is not null.
+        ///     A <see cref="Maybe{T}" /> whose <typeparamref name="T" /> has value if <typeparamref name="T" /> is not null.
         /// </returns>
         [Pure]
         public Maybe<T> IsNoneWhenNull() =>
             IsNoneWhen(EquailtyFunctions.IsNull);
 
         /// <summary>
-        ///  Filters the <typeparamref name="T"/> if <see cref="Maybe{T}"/> has a value.
+        ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
         /// </summary>
         /// <param name="predicate">
-        /// A function to test <typeparamref name="T"/>.
+        ///     A function to test <typeparamref name="T" />.
         /// </param>
         [Pure]
         public Maybe<T> IsNoneWhen(
@@ -241,19 +242,20 @@ namespace Lemonad.ErrorHandling {
             : None;
 
         /// <summary>
-        /// Flamaps another <see cref="Maybe{T}"/>.
+        ///     Flamaps another <see cref="Maybe{T}" />.
         /// </summary>
         /// <param name="flatMapSelector">
-        /// A function who expects a <see cref="Nullable{T}"/> as its return type.
+        ///     A function who expects a <see cref="Nullable{T}" /> as its return type.
         /// </param>
         /// <param name="resultSelector">
-        /// A function whose in-parameters are <typeparamref name="T"/> and <typeparamref name="TFlatMap"/> which can return any type.
+        ///     A function whose in-parameters are <typeparamref name="T" /> and <typeparamref name="TFlatMap" /> which can return
+        ///     any type.
         /// </param>
         /// <typeparam name="TFlatMap">
-        /// The value type of the <see cref="Nullable{T}"/> returned by the <paramref name="flatMapSelector"/>.
+        ///     The value type of the <see cref="Nullable{T}" /> returned by the <paramref name="flatMapSelector" />.
         /// </typeparam>
         /// <typeparam name="TResult">
-        /// The type returned by the function <paramref name="resultSelector"/>.
+        ///     The type returned by the function <paramref name="resultSelector" />.
         /// </typeparam>
         [Pure]
         public Maybe<TResult> FlatMap<TFlatMap, TResult>(

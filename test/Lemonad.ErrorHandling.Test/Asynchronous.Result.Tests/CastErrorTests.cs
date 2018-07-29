@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Extensions;
-using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 using Xunit;
+using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
 namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
     public class CastErrorTests {

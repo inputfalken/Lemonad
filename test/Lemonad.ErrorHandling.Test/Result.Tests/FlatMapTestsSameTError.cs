@@ -3,7 +3,6 @@ using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class FlatMapTestsSameTError {
-
         [Fact]
         public void Result_With_Error_Flatmaps_Result_with_Error__Expects_Result_With_Value() {
             var flatSelectorExecuted = false;

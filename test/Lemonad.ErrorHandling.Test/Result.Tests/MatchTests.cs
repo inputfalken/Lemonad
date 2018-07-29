@@ -3,7 +3,6 @@ using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class MatchTests {
-
         [Fact]
         public void Result_With_Error__Expect_ErrorAction() {
             var selectorExectued = false;

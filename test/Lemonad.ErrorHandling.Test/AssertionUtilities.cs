@@ -19,11 +19,6 @@ namespace Lemonad.ErrorHandling.Test {
             return left / right;
         }
 
-        internal enum ExitCodes {
-            Fail = 1,
-            Unhandled
-        }
-
         internal static async Task<Result<string, ExitCodes>> Program(int code) {
             await Delay;
 
@@ -37,11 +32,6 @@ namespace Lemonad.ErrorHandling.Test {
             }
         }
 
-        internal enum Gender {
-            Male = 0,
-            Female = 1
-        }
-
         internal static async Task<Result<Gender, string>> GetGender(int identity) {
             await Delay;
             switch (identity) {
@@ -52,6 +42,16 @@ namespace Lemonad.ErrorHandling.Test {
                 default:
                     return "Could not determine gender";
             }
+        }
+
+        internal enum ExitCodes {
+            Fail = 1,
+            Unhandled
+        }
+
+        internal enum Gender {
+            Male = 0,
+            Female = 1
         }
     }
 }

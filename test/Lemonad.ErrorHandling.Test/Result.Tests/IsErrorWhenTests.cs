@@ -3,7 +3,6 @@ using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class ErrorWhenTests {
-
         [Fact]
         public void
             Result_With_Error__Expects_Predicate_Never_To_Be_Executed_And_ErrorSelector_Never_To_Be_Invoked() {

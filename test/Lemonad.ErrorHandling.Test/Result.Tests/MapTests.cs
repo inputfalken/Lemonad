@@ -1,5 +1,5 @@
-﻿using static Lemonad.ErrorHandling.Test.AssertionUtilities;
-using Xunit;
+﻿using Xunit;
+using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class MapTests {
