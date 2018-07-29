@@ -3,13 +3,13 @@ using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling.Test {
     internal static class AssertionUtilities {
-        private static Task Delay => Task.Delay(RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? 100 : 50);
+        private static Task Delay => Task.Delay(RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? 200 : 50);
 
         internal static async Task<Result<double, string>> DivisionAsync(double left, double right) {
             await Delay;
 
             if (right == 0)
-                return await Task.Run(() => $"Can not divide '{left}' with '{right}'.");
+                return $"Can not divide '{left}' with '{right}'.";
             return left / right;
         }
 
