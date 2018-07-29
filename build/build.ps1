@@ -16,12 +16,8 @@ $buildDirectory = Join-Path -Path $rootDirectory -ChildPath 'build' `
   | Get-Item -ErrorAction Stop
 $documentationDirectory = (Join-Path -Path $rootDirectory -ChildPath 'docs' -ErrorAction Stop ) `
   | Get-Item -ErrorAction Stop
-
-$solution = Get-ChildItem -Filter '*.sln' `
-  | ForEach-Object `
-  -Begin {$result = $null} `
-  -Process { if ($result) { throw "More than 1 solution was found in '$(Get-Location)'" } else { $result = $_ } } `
-  -End { Get-Item $result }
+$solution = $rootDirectory `
+  | Get-Solution
 
 Build-Solution -Solution $solution
 Test-Projects -Directory $testDirectory

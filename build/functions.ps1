@@ -201,3 +201,14 @@ function Get-ProjectInfo () {
     | Select-Object -Property Project, LocalVersion , Path, OnlineVersion, @{Name = 'IsRelease'; Expression = { $_.LocalVersion -gt $_.OnlineVersion } } `
 
 }
+
+function Get-Solution {
+  param(
+    [Parameter(Position = 0, Mandatory = 1, ValueFromPipeline)][System.IO.FileSystemInfo] $Directory
+  )
+  Get-ChildItem -Path $Directory -Filter '*.sln' `
+    | ForEach-Object `
+    -Begin {$result = $null} `
+    -Process { if ($result) { throw "More than 1 solution was found in '$(Get-Location)'" } else { $result = $_ } } `
+    -End { Get-Item $result }
+}
