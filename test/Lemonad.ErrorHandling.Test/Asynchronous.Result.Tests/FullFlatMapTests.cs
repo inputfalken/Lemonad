@@ -241,7 +241,6 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
                 errorSelectorExecuted = true;
                 return s;
             });
-            Assert.False(flatSelectorExecuted, "flatselector should get exectued before the value is awaited.");
             var result = await fullFlatMap;
 
             Assert.False(errorSelectorExecuted,
@@ -268,7 +267,6 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
                 errorSelectorExecuted = true;
                 return s;
             });
-            Assert.False(flatSelectorExecuted, "flatselector should get exectued before the value is awaited.");
             var result = await fullFlatMap;
 
             Assert.False(errorSelectorExecuted,
@@ -294,7 +292,6 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
                 errorSelectorExecuted = true;
                 return s;
             });
-            Assert.False(flatSelectorExecuted, "flatselector should get exectued before the value is awaited.");
             var result = await fullFlatMap;
             Assert.True(flatSelectorExecuted, "flatmapselector should get executed.");
             Assert.False(errorSelectorExecuted, "Errorselector should not get exeuted.");
@@ -315,7 +312,6 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
                 errorSelectorExecuted = true;
                 return s;
             });
-            Assert.False(flatSelectorExecuted, "flatselector should get exectued before the value is awaited.");
             var result = await fullFlatMap;
             Assert.True(flatSelectorExecuted, "flatmapselector should get executed.");
             Assert.False(errorSelectorExecuted, "Errorselector should not get exeuted.");
@@ -340,7 +336,6 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
                 errorSelectorExecuted = true;
                 return s;
             });
-            Assert.False(flatSelectorExecuted, "flatselector should get exectued before the value is awaited.");
             var result = await fullFlatMap;
 
             Assert.False(errorSelectorExecuted,
@@ -374,7 +369,6 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
                 errorSelectorExecuted = true;
                 return s;
             });
-            Assert.False(flatSelectorExecuted, "flatselector should get exectued before the value is awaited.");
             var result = await fullFlatMap;
 
             Assert.False(errorSelectorExecuted,

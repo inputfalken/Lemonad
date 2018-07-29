@@ -29,7 +29,6 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
                 selectorExectued = true;
                 return x * 4;
             });
-            Assert.False(selectorExectued, "The function should not get exectued before the value is awaited.");
             var division = await outcome;
 
             Assert.True(selectorExectued, "The selector function should get executed since the result has value.");

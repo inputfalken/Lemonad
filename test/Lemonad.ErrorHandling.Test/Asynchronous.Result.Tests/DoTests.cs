@@ -11,7 +11,6 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
             var actionExectued = false;
             var task = DivisionAsync(10, 0).Do(() => actionExectued = true);
 
-            Assert.False(actionExectued, "Should not get exectued beforet the value is awaited.");
             var result = await task;
 
             Assert.True(actionExectued, "Should not get exectued since there's an error.");
@@ -25,7 +24,6 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         public async Task Result_With_Value__Expects_Action_To_be_Invoked() {
             var actionExectued = false;
             var task = DivisionAsync(10, 2).Do(() => actionExectued = true);
-            Assert.False(actionExectued, "Should not get exectued beforet the value is awaited.");
             var result = await task;
 
             Assert.True(actionExectued, "Should not get exectued since there's an error.");

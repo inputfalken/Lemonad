@@ -43,7 +43,6 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
                 return "Bad";
             });
 
-            Assert.False(predicateExectued, "Should not get exectued before the value is awaited.");
             var result = await isErrorWhen;
 
             Assert.True(predicateExectued,

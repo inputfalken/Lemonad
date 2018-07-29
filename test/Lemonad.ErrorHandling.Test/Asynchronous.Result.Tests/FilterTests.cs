@@ -41,8 +41,6 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
                 errorSelectorExectued = true;
                 return "Bad";
             });
-            Assert.False(predicateExectued, "Should not get exectued before the value is awaited.");
-            Assert.False(errorSelectorExectued, "Should not get exectued before the value is awaited.");
             var result = await filter;
 
             Assert.True(predicateExectued, "Should get exectued since there's a value from the result.");
@@ -66,7 +64,6 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
                 return "Bad";
             });
 
-            Assert.False(predicateExectued, "Should not get exectued before the value is awaited.");
             var result = await filter;
 
             Assert.True(predicateExectued,

@@ -24,7 +24,6 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
             Result_With_Value__Expects_Action_To_Be_Invoked() {
             var actionExectued = false;
             var doWith = DivisionAsync(10, 2).DoWith(d => actionExectued = true);
-            Assert.False(actionExectued, "Should not get exectued before the value is awaited.");
             var result = await doWith;
 
             Assert.True(actionExectued, "Should get exectued since there's no error.");
