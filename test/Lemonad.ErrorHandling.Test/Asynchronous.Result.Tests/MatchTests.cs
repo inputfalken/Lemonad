@@ -11,7 +11,6 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
             var errorSelectorExectued = false;
             var match = DivisionAsync(10, 0)
                 .Match(d => { selectorExectued = true; }, s => { errorSelectorExectued = true; });
-            Assert.False(errorSelectorExectued, "Error should not get exectued until it's awaited.");
             await match;
 
             Assert.False(selectorExectued, "Selector should not get executed.");
@@ -43,7 +42,6 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
             var errorSelectorExectued = false;
             var match = DivisionAsync(10, 2)
                 .Match(d => { selectorExectued = true; }, s => { errorSelectorExectued = true; });
-            Assert.False(selectorExectued, "Selector should not get executed until it's awaited.");
             await match;
             Assert.True(selectorExectued, "Selector should get executed.");
             Assert.False(errorSelectorExectued, "Error selector not should get exectued.");
