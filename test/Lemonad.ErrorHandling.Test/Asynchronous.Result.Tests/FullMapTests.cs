@@ -17,8 +17,6 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
                 errorSelectorExectued = true;
                 return s.ToUpper();
             });
-            Assert.False(errorSelectorExectued, "Should not get executed until value is awaited.");
-
             var result = await task;
 
             Assert.False(selectorExectued, "Should not get exectued since there's an error from the result.");
@@ -40,9 +38,6 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
                 errorSelectorExectued = true;
                 return s.ToUpper();
             });
-
-            Assert.False(selectorExectued, "Should not get exectued until the value is awaited.");
-
             var result = await task;
 
             Assert.True(selectorExectued, "Should get exectued since there's an value from the result.");
