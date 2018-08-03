@@ -116,12 +116,12 @@ foreach (int division in successFulDivisions) { Console.WriteLine(division); }
 ## Current supported data types
 
 * ErrorHandling
-  * `Result<TLeft, TRight>`
+  * `Result<T, TError>`
+    * Async Extensions
   * `Maybe<T>`
 
 ## To be added
 
 * Async extensions methods for
-  * `Result<TLeft, TRight>`
   * `Maybe<T>`
 
