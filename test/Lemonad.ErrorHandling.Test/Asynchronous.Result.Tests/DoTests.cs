@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Lemonad.ErrorHandling.Extensions;
+using Lemonad.ErrorHandling.Extensions.Internal;
 using Xunit;
 using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
@@ -9,7 +9,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         public async Task
             Result_With_Error__Expects_Action_To_Be_Invoked() {
             var actionExectued = false;
-            var task = DivisionAsync(10, 0).Do(() => actionExectued = true);
+            var task = TaskResultFunctions.Do(DivisionAsync(10, 0), () => actionExectued = true);
 
             var result = await task;
 
@@ -23,7 +23,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         [Fact]
         public async Task Result_With_Value__Expects_Action_To_be_Invoked() {
             var actionExectued = false;
-            var task = DivisionAsync(10, 2).Do(() => actionExectued = true);
+            var task = TaskResultFunctions.Do(DivisionAsync(10, 2), () => actionExectued = true);
             var result = await task;
 
             Assert.True(actionExectued, "Should not get exectued since there's an error.");

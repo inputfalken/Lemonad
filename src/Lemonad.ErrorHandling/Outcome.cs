@@ -26,5 +26,8 @@ namespace Lemonad.ErrorHandling {
 
         public Outcome<T, TError> Filter(Func<T, bool> predicate, Func<TError> errorSelector) =>
             Result.Filter(predicate, errorSelector);
+
+        public Task<TResult> Match<TResult>(Func<T, TResult> selector, Func<TError, TResult> errorSelector) =>
+            Result.Match(selector, errorSelector);
     }
 }

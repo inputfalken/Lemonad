@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Extensions;
+using Lemonad.ErrorHandling.Extensions.Internal;
 
 namespace Lemonad.ErrorHandling {
     /// <summary>
@@ -409,10 +410,9 @@ namespace Lemonad.ErrorHandling {
         public Task<Result<TResult, TError>> FlatMap<TSelector, TResult>(
             Func<T, Task<Result<TSelector, TError>>> flatSelector,
             Func<T, TSelector, TResult> resultSelector) => FlatMap(x =>
-            flatSelector?.Invoke(x).Map(y => resultSelector == null
+            TaskResultFunctions.Map(flatSelector?.Invoke(x), y => resultSelector == null
                 ? throw new ArgumentNullException(nameof(resultSelector))
-                : resultSelector(x, y)) ??
-            throw new ArgumentNullException(nameof(flatSelector)));
+                : resultSelector(x, y)));
 
         /// <summary>
         ///     Flatmaps another <see cref="Result{T,TError}" /> but the <typeparamref name="TError" /> remains as the same type.
@@ -496,7 +496,7 @@ namespace Lemonad.ErrorHandling {
         public Task<Result<TResult, TError>> FlatMap<TFlatMap, TResult, TErrorResult>(
             Func<T, Task<Result<TFlatMap, TErrorResult>>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
             Func<TErrorResult, TError> errorSelector) =>
-            FlatMap(x => flatMapSelector?.Invoke(x).Map(y => {
+            FlatMap<TResult, TErrorResult>(x => TaskResultFunctions.Map(flatMapSelector?.Invoke(x), y => {
                     if (resultSelector == null)
                         throw new ArgumentNullException(nameof(resultSelector));
                     return resultSelector(x, y);
@@ -774,7 +774,7 @@ namespace Lemonad.ErrorHandling {
         public Task<Result<TResult, TErrorResult>> FullFlatMap<TFlatMap, TResult, TErrorResult>(
             Func<T, Task<Result<TFlatMap, TErrorResult>>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector) =>
-            FullFlatMap(x => flatMapSelector?.Invoke(x).Map(y => {
+            FullFlatMap<TResult, TErrorResult>(x => TaskResultFunctions.Map(flatMapSelector?.Invoke(x), y => {
                     if (resultSelector == null)
                         throw new ArgumentNullException(nameof(resultSelector));
                     return resultSelector(x, y);

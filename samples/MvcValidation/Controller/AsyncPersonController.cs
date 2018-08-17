@@ -10,13 +10,12 @@ namespace MvcValidation.Controller {
     public class AsyncPersonController : Microsoft.AspNetCore.Mvc.Controller {
         [HttpPost]
         [Route("eitherSummarized")]
-        public async Task<IActionResult> PostPerson([FromBody] PersonPostApiModel model) {
-            return (await ApiValidation(model)
-                    // Using match inside this scope is currently too complex since it requires all type params to be supplied.
-                    .Map(x => new PersonModel {FirstName = x.FirstName, LastName = x.LastName})
-                    .Flatten(LastNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
-                    .FlatMap(FirstNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
-                )
+        public Task<IActionResult> PostPerson([FromBody] PersonPostApiModel model) {
+            return ApiValidation(model)
+                // Using match inside this scope is currently too complex since it requires all type params to be supplied.
+                .Map(x => new PersonModel {FirstName = x.FirstName, LastName = x.LastName})
+                .Flatten(LastNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
+                .FlatMap(FirstNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
                 .Match<IActionResult>(Ok, BadRequest);
         }
 

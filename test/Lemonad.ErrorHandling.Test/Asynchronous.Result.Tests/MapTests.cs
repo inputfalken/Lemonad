@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Lemonad.ErrorHandling.Extensions;
+using Lemonad.ErrorHandling.Extensions.Internal;
 using Xunit;
 using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
@@ -8,7 +8,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         [Fact]
         public async Task Result_With_Error_Maps__Expects_Selector_Never_Be_Executed() {
             var selectorExectued = false;
-            var division = await DivisionAsync(2, 0).Map(x => {
+            var division = await TaskResultFunctions.Map(DivisionAsync(2, 0), x => {
                 selectorExectued = true;
                 return x * 8;
             });
@@ -25,7 +25,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         public async Task
             Result_With_Value_Maps__Expects_Selector_Be_Executed_And_Value_To_Be_Mapped() {
             var selectorExectued = false;
-            var outcome = DivisionAsync(10, 2).Map(x => {
+            var outcome = TaskResultFunctions.Map(DivisionAsync(10, 2), x => {
                 selectorExectued = true;
                 return x * 4;
             });
