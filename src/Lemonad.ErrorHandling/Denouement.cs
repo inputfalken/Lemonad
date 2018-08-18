@@ -38,6 +38,9 @@ namespace Lemonad.ErrorHandling {
 
         public Denouement<TResult, TError> Map<TResult>(Func<T, TResult> selector) =>
             TaskResultFunctions.Map(Result, selector);
+        
+        public Denouement<TResult, TError> Map<TResult>(Func<T, Task<TResult>> selector) =>
+            TaskResultFunctions.Map(Result, selector);
 
         public Denouement<T, TErrorResult> MapError<TErrorResult>(Func<TError, TErrorResult> selector) =>
             TaskResultFunctions.MapError(Result, selector);
