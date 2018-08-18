@@ -112,15 +112,15 @@ namespace Lemonad.ErrorHandling {
 
         public Denouement<TResult, TError> Cast<TResult>() => TaskResultFunctions.Cast<T, TResult, TError>(Result);
 
-        internal Denouement<T, TError> Flatten<TResult, TErrorResult>(
+        public Denouement<T, TError> Flatten<TResult, TErrorResult>(
             Func<T, Task<Result<TResult, TErrorResult>>> selector, Func<TErrorResult, TError> errorSelector) =>
             TaskResultFunctions.Flatten(Result, selector, errorSelector);
 
-        internal Denouement<T, TError> Flatten<TResult, TErrorResult>(
+        public Denouement<T, TError> Flatten<TResult, TErrorResult>(
             Func<T, Denouement<TResult, TErrorResult>> selector, Func<TErrorResult, TError> errorSelector) =>
             TaskResultFunctions.Flatten(Result, x => selector(x).Result, errorSelector);
 
-        internal Denouement<T, TError> Flatten<TResult, TErrorResult>(
+        public Denouement<T, TError> Flatten<TResult, TErrorResult>(
             Func<T, Result<TResult, TErrorResult>> selector, Func<TErrorResult, TError> errorSelector) =>
             TaskResultFunctions.Flatten(Result, selector, errorSelector);
 
