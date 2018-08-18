@@ -87,12 +87,12 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
         [Pure]
         internal static async Task<Result<T, TError>> Flatten<T, TResult, TError, TErrorResult>(Task<Result<T, TError>> source, Func<T, Task<Result<TResult, TErrorResult>>> selector,
             Func<TErrorResult, TError> errorSelector) =>
-            await (await source.ConfigureAwait(false)).Flatten(selector, errorSelector).ConfigureAwait(false);
+            await (await source.ConfigureAwait(false)).FlattenInternal(selector, errorSelector).ConfigureAwait(false);
 
         [Pure]
         internal static async Task<Result<T, TError>> Flatten<T, TError, TResult>(Task<Result<T, TError>> source,
             Func<T, Task<Result<TResult, TError>>> selector) =>
-            await (await source.ConfigureAwait(false)).Flatten(selector).ConfigureAwait(false);
+            await (await source.ConfigureAwait(false)).FlattenInternal(selector).ConfigureAwait(false);
 
         [Pure]
         internal static async Task<Result<TResult, TErrorResult>> FullFlatMap<T, TError, TResult, TErrorResult>(Task<Result<T, TError>> source,
@@ -126,7 +126,7 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
         [Pure]
         internal static async Task<Result<TResult, TError>> FlatMap<T, TResult, TError>(Task<Result<T, TError>> source,
             Func<T, Task<Result<TResult, TError>>> flatSelector) =>
-            await (await source.ConfigureAwait(false)).FlatMap(flatSelector).ConfigureAwait(false);
+            await (await source.ConfigureAwait(false)).FlatMapInternal(flatSelector).ConfigureAwait(false);
 
         [Pure]
         internal static async Task<Result<TResult, TError>> FlatMap<T, TSelector, TResult, TError>(Task<Result<T, TError>> source,
@@ -138,7 +138,7 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
         internal static async Task<Result<TResult, TError>> FlatMap<T, TSelector, TResult, TError>(Task<Result<T, TError>> source,
             Func<T, Task<Result<TSelector, TError>>> flatSelector,
             Func<T, TSelector, TResult> resultSelector) =>
-            await (await source.ConfigureAwait(false)).FlatMap(flatSelector, resultSelector).ConfigureAwait(false);
+            await (await source.ConfigureAwait(false)).FlatMapInternal(flatSelector, resultSelector).ConfigureAwait(false);
 
         [Pure]
         internal static async Task<Result<TResult, TError>> FlatMap<T, TResult, TError, TErrorResult>(Task<Result<T, TError>> source,
@@ -148,7 +148,7 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
         [Pure]
         internal static async Task<Result<TResult, TError>> FlatMap<T, TResult, TError, TErrorResult>(Task<Result<T, TError>> source,
             Func<T, Task<Result<TResult, TErrorResult>>> flatMapSelector, Func<TErrorResult, TError> errorSelector) =>
-            await (await source.ConfigureAwait(false)).FlatMap(flatMapSelector, errorSelector).ConfigureAwait(false);
+            await (await source.ConfigureAwait(false)).FlatMapInternal(flatMapSelector, errorSelector).ConfigureAwait(false);
 
         [Pure]
         internal static async Task<Result<TResult, TError>> FlatMap<T, TError, TFlatMap, TResult, TErrorResult>(Task<Result<T, TError>> source,
@@ -160,7 +160,7 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
         internal static async Task<Result<TResult, TError>> FlatMap<T, TError, TFlatMap, TResult, TErrorResult>(Task<Result<T, TError>> source,
             Func<T, Task<Result<TFlatMap, TErrorResult>>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
             Func<TErrorResult, TError> errorSelector) =>
-            await (await source.ConfigureAwait(false)).FlatMap(flatMapSelector, resultSelector, errorSelector)
+            await (await source.ConfigureAwait(false)).FlatMapInternal(flatMapSelector, resultSelector, errorSelector)
                 .ConfigureAwait(false);
     }
 }
