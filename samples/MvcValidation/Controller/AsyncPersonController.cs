@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
 using Lemonad.ErrorHandling.Extensions;
+using Lemonad.ErrorHandling.Extensions.Internal;
 using Microsoft.AspNetCore.Mvc;
 using MvcValidation.ApiModels;
 using MvcValidation.Models;
@@ -11,6 +12,7 @@ namespace MvcValidation.Controller {
         [HttpPost]
         [Route("eitherSummarized")]
         public Task<IActionResult> PostPerson([FromBody] PersonPostApiModel model) {
+            var lastNameAppService = LastNameAppService(new PersonModel()).ToOutcome();
             return ApiValidation(model)
                 // Using match inside this scope is currently too complex since it requires all type params to be supplied.
                 .Map(x => new PersonModel {FirstName = x.FirstName, LastName = x.LastName})

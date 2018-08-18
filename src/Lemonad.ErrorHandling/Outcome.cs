@@ -5,6 +5,9 @@ using Lemonad.ErrorHandling.Extensions.Internal;
 
 namespace Lemonad.ErrorHandling {
     public class Outcome<T, TError> {
+        public Outcome(Task<Result<T, TError>> result) =>
+            Result = result ?? throw new ArgumentNullException(nameof(result));
+
         internal Task<Result<T, TError>> Result { get; }
 
         public static implicit operator Outcome<T, TError>(Task<Result<T, TError>> result) =>
@@ -22,9 +25,6 @@ namespace Lemonad.ErrorHandling {
         public static implicit operator Outcome<T, TError>(TError error) =>
             new Outcome<T, TError>(Task.FromResult(ResultExtensions.Error<T, TError>(error)));
 
-        public Outcome(Task<Result<T, TError>> result) =>
-            Result = result ?? throw new ArgumentNullException(nameof(result));
-
         public Outcome<T, TError> Filter(Func<T, bool> predicate, Func<TError> errorSelector) =>
             TaskResultFunctions.Filter(Result, predicate, errorSelector);
 
@@ -38,7 +38,7 @@ namespace Lemonad.ErrorHandling {
 
         public Outcome<TResult, TError> Map<TResult>(Func<T, TResult> selector) =>
             TaskResultFunctions.Map(Result, selector);
-        
+
         public Outcome<TResult, TError> Map<TResult>(Func<T, Task<TResult>> selector) =>
             TaskResultFunctions.Map(Result, selector);
 
