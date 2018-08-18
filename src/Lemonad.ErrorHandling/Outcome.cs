@@ -4,7 +4,7 @@ using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Extensions.Internal;
 
 namespace Lemonad.ErrorHandling {
-    public class Outcome<T, TError> {
+    public readonly struct Outcome<T, TError> {
         public Outcome(Task<Result<T, TError>> result) =>
             Result = result ?? throw new ArgumentNullException(nameof(result));
 
