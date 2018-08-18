@@ -98,13 +98,13 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
         internal static async Task<Result<TResult, TErrorResult>> FullFlatMap<T, TError, TResult, TErrorResult>(Task<Result<T, TError>> source,
             Func<T, Task<Result<TResult, TErrorResult>>> flatMapSelector,
             Func<TError, TErrorResult> errorSelector) => await (await source.ConfigureAwait(false))
-            .FullFlatMap(flatMapSelector, errorSelector).ConfigureAwait(false);
+            .FullFlatMapInternal(flatMapSelector, errorSelector).ConfigureAwait(false);
 
         [Pure]
         internal static async Task<Result<TResult, TErrorResult>> FullFlatMap<T, TError, TFlatMap, TResult, TErrorResult>(Task<Result<T, TError>> source,
             Func<T, Task<Result<TFlatMap, TErrorResult>>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector) => await (await source.ConfigureAwait(false))
-            .FullFlatMap(flatMapSelector, resultSelector, errorSelector).ConfigureAwait(false);
+            .FullFlatMapInternal(flatMapSelector, resultSelector, errorSelector).ConfigureAwait(false);
 
         [Pure]
         internal static async Task<Result<TResult, TErrorResult>> FullFlatMap<T, TError, TResult, TErrorResult>(Task<Result<T, TError>> source,

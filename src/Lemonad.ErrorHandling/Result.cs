@@ -524,7 +524,7 @@ namespace Lemonad.ErrorHandling {
                     if (resultSelector == null)
                         throw new ArgumentNullException(nameof(resultSelector));
                     return resultSelector(x, y);
-                }) ?? throw new ArgumentNullException(nameof(flatMapSelector)),
+                }),
                 errorSelector);
 
         public Denouement<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
@@ -696,7 +696,7 @@ namespace Lemonad.ErrorHandling {
                 : throw new ArgumentNullException(nameof(errorSelector));
         }
 
-        public async Task<Result<TResult, TErrorResult>> FullFlatMap<TResult, TErrorResult>(
+        internal async Task<Result<TResult, TErrorResult>> FullFlatMapInternal<TResult, TErrorResult>(
             Func<T, Task<Result<TResult, TErrorResult>>> flatMapSelector, Func<TError, TErrorResult> errorSelector) {
             if (HasValue) return await flatMapSelector(Value).ConfigureAwait(false);
 
@@ -704,6 +704,14 @@ namespace Lemonad.ErrorHandling {
                 ? errorSelector(Error)
                 : throw new ArgumentNullException(nameof(errorSelector));
         }
+
+        public Denouement<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
+            Func<T, Task<Result<TResult, TErrorResult>>> flatMapSelector, Func<TError, TErrorResult> errorSelector) =>
+            FullFlatMapInternal(flatMapSelector, errorSelector);
+
+        public Denouement<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
+            Func<T, Denouement<TResult, TErrorResult>> flatMapSelector, Func<TError, TErrorResult> errorSelector) =>
+            FullFlatMapInternal(x => flatMapSelector(x).Result, errorSelector);
 
         /// <summary>
         ///     Casts <typeparamref name="TError" /> into <typeparamref name="TResult" />.
@@ -820,14 +828,24 @@ namespace Lemonad.ErrorHandling {
                 errorSelector);
 
         [Pure]
-        public Task<Result<TResult, TErrorResult>> FullFlatMap<TFlatMap, TResult, TErrorResult>(
+        internal Task<Result<TResult, TErrorResult>> FullFlatMapInternal<TFlatMap, TResult, TErrorResult>(
             Func<T, Task<Result<TFlatMap, TErrorResult>>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector) =>
-            FullFlatMap(x => TaskResultFunctions.Map(flatMapSelector?.Invoke(x), y => {
+            FullFlatMapInternal(x => TaskResultFunctions.Map(flatMapSelector?.Invoke(x), y => {
                     if (resultSelector == null)
                         throw new ArgumentNullException(nameof(resultSelector));
                     return resultSelector(x, y);
-                }) ?? throw new ArgumentNullException(nameof(flatMapSelector)),
+                }),
                 errorSelector);
+
+        public Denouement<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
+            Func<T, Task<Result<TFlatMap, TErrorResult>>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
+            Func<TError, TErrorResult> errorSelector) =>
+            FullFlatMapInternal(flatMapSelector, resultSelector, errorSelector);
+
+        public Denouement<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
+            Func<T, Denouement<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
+            Func<TError, TErrorResult> errorSelector) =>
+            FullFlatMapInternal(x => flatMapSelector(x).Result, resultSelector, errorSelector);
     }
 }
