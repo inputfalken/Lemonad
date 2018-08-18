@@ -374,11 +374,11 @@ namespace Lemonad.ErrorHandling {
             : ResultExtensions.Error<TResult, TError>(Error);
 
         [Pure]
-        public Denouement<TResult, TError> FlatMap<TResult>(Func<T, Task<Result<TResult, TError>>> flatSelector) =>
+        public Outcome<TResult, TError> FlatMap<TResult>(Func<T, Task<Result<TResult, TError>>> flatSelector) =>
             FlatMapInternal(flatSelector);
 
         [Pure]
-        public Denouement<TResult, TError> FlatMap<TResult>(Func<T, Denouement<TResult, TError>> flatSelector) =>
+        public Outcome<TResult, TError> FlatMap<TResult>(Func<T, Outcome<TResult, TError>> flatSelector) =>
             FlatMapInternal(x => flatSelector(x).Result);
 
         [Pure]
@@ -422,12 +422,12 @@ namespace Lemonad.ErrorHandling {
                 ? throw new ArgumentNullException(nameof(resultSelector))
                 : resultSelector(x, y)));
 
-        public Denouement<TResult, TError> FlatMap<TSelector, TResult>(
+        public Outcome<TResult, TError> FlatMap<TSelector, TResult>(
             Func<T, Task<Result<TSelector, TError>>> flatSelector,
             Func<T, TSelector, TResult> resultSelector) => FlatMapInternal(flatSelector, resultSelector);
 
-        public Denouement<TResult, TError> FlatMap<TSelector, TResult>(
-            Func<T, Denouement<TSelector, TError>> flatSelector,
+        public Outcome<TResult, TError> FlatMap<TSelector, TResult>(
+            Func<T, Outcome<TSelector, TError>> flatSelector,
             Func<T, TSelector, TResult> resultSelector) => FlatMapInternal(x => flatSelector(x).Result, resultSelector);
 
         /// <summary>
@@ -475,12 +475,12 @@ namespace Lemonad.ErrorHandling {
                 : okSelector.MapError(errorSelector);
         }
 
-        public Denouement<TResult, TError> FlatMap<TResult, TErrorResult>(
+        public Outcome<TResult, TError> FlatMap<TResult, TErrorResult>(
             Func<T, Task<Result<TResult, TErrorResult>>> flatMapSelector, Func<TErrorResult, TError> errorSelector) =>
             FlatMapInternal(flatMapSelector, errorSelector);
 
-        public Denouement<TResult, TError> FlatMap<TResult, TErrorResult>(
-            Func<T, Denouement<TResult, TErrorResult>> flatMapSelector, Func<TErrorResult, TError> errorSelector) =>
+        public Outcome<TResult, TError> FlatMap<TResult, TErrorResult>(
+            Func<T, Outcome<TResult, TErrorResult>> flatMapSelector, Func<TErrorResult, TError> errorSelector) =>
             FlatMapInternal(x => flatMapSelector(x).Result, errorSelector);
 
         /// <summary>
@@ -527,13 +527,13 @@ namespace Lemonad.ErrorHandling {
                 }),
                 errorSelector);
 
-        public Denouement<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
+        public Outcome<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
             Func<T, Task<Result<TFlatMap, TErrorResult>>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
             Func<TErrorResult, TError> errorSelector) =>
             FlatMapInternal(flatMapSelector, resultSelector, errorSelector);
 
-        public Denouement<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, Denouement<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
+        public Outcome<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
+            Func<T, Outcome<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
             Func<TErrorResult, TError> errorSelector) =>
             FlatMapInternal(x => flatMapSelector(x).Result, resultSelector, errorSelector);
 
@@ -596,13 +596,13 @@ namespace Lemonad.ErrorHandling {
         }
 
         [Pure]
-        public Denouement<T, TError> Flatten<TResult, TErrorResult>(
+        public Outcome<T, TError> Flatten<TResult, TErrorResult>(
             Func<T, Task<Result<TResult, TErrorResult>>> selector, Func<TErrorResult, TError> errorSelector) =>
             FlattenInternal(selector, errorSelector);
 
         [Pure]
-        public Denouement<T, TError> Flatten<TResult, TErrorResult>(
-            Func<T, Denouement<TResult, TErrorResult>> selector, Func<TErrorResult, TError> errorSelector) =>
+        public Outcome<T, TError> Flatten<TResult, TErrorResult>(
+            Func<T, Outcome<TResult, TErrorResult>> selector, Func<TErrorResult, TError> errorSelector) =>
             FlattenInternal(x => selector(x).Result, errorSelector);
 
         /// <summary>
@@ -645,10 +645,10 @@ namespace Lemonad.ErrorHandling {
             return ResultExtensions.Error<T, TError>(Error);
         }
 
-        public Denouement<T, TError> Flatten<TResult>(Func<T, Task<Result<TResult, TError>>> selector) =>
+        public Outcome<T, TError> Flatten<TResult>(Func<T, Task<Result<TResult, TError>>> selector) =>
             FlattenInternal(selector);
 
-        public Denouement<T, TError> Flatten<TResult>(Func<T, Denouement<TResult, TError>> selector) =>
+        public Outcome<T, TError> Flatten<TResult>(Func<T, Outcome<TResult, TError>> selector) =>
             FlattenInternal(x => selector(x).Result);
 
         /// <summary>
@@ -705,12 +705,12 @@ namespace Lemonad.ErrorHandling {
                 : throw new ArgumentNullException(nameof(errorSelector));
         }
 
-        public Denouement<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
+        public Outcome<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
             Func<T, Task<Result<TResult, TErrorResult>>> flatMapSelector, Func<TError, TErrorResult> errorSelector) =>
             FullFlatMapInternal(flatMapSelector, errorSelector);
 
-        public Denouement<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
-            Func<T, Denouement<TResult, TErrorResult>> flatMapSelector, Func<TError, TErrorResult> errorSelector) =>
+        public Outcome<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
+            Func<T, Outcome<TResult, TErrorResult>> flatMapSelector, Func<TError, TErrorResult> errorSelector) =>
             FullFlatMapInternal(x => flatMapSelector(x).Result, errorSelector);
 
         /// <summary>
@@ -838,13 +838,13 @@ namespace Lemonad.ErrorHandling {
                 }),
                 errorSelector);
 
-        public Denouement<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
+        public Outcome<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
             Func<T, Task<Result<TFlatMap, TErrorResult>>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector) =>
             FullFlatMapInternal(flatMapSelector, resultSelector, errorSelector);
 
-        public Denouement<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, Denouement<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
+        public Outcome<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
+            Func<T, Outcome<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector) =>
             FullFlatMapInternal(x => flatMapSelector(x).Result, resultSelector, errorSelector);
     }
