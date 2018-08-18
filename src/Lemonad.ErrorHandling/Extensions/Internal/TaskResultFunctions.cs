@@ -3,7 +3,9 @@ using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling.Extensions.Internal {
-    // Todo make these methods internal, and expose outcome functions.
+    // The methods needs to stay internal; so we do not expose extensions to Task<Result<T, TError>>.
+    // Since the result will be ambigous method signatures when combined with extensions of Task<T>.
+    // The API consumer will have to convert their task types into outcome.
     internal static class TaskResultFunctions {
         [Pure]
         internal static async Task<Result<TResult, TError>> Map<T, TResult, TError>(Task<Result<T, TError>> source,
