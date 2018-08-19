@@ -1,14 +1,13 @@
 ﻿using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Extensions.Internal;
 using Xunit;
-using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
-namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
+namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.Tests {
     public class MapErrorTests {
         [Fact]
         public async Task Result_With_Error__Expects_Error_To_Be_Mapped() {
             var errorSelectorInvoked = false;
-            var task = TaskResultFunctions.MapError(DivisionAsync(10, 0), s => {
+            var task = TaskResultFunctions.MapError(AssertionUtilities.DivisionAsync(10, 0), s => {
                 errorSelectorInvoked = true;
                 return s.ToUpper();
             });
@@ -26,7 +25,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         [Fact]
         public async Task Result_With_Value__Expects_Error_To_Not_Be_Mapped() {
             var errorSelectorInvoked = false;
-            var result = await TaskResultFunctions.MapError(DivisionAsync(10, 2), s => {
+            var result = await TaskResultFunctions.MapError(AssertionUtilities.DivisionAsync(10, 2), s => {
                 errorSelectorInvoked = true;
                 return s.ToUpper();
             });
