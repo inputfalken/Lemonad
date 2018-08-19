@@ -12,14 +12,6 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
             Func<T, TResult> selector) => (await source.ConfigureAwait(false)).Map(selector);
 
         [Pure]
-        internal static async Task<Result<TResult, TError>> Map<T, TResult, TError>(Task<Result<T, TError>> source,
-            Func<T, Task<TResult>> selector) {
-            var result = (await source.ConfigureAwait(false)).Map(selector);
-
-            return result.HasValue ? (Result<TResult, TError>) await result.Value : result.Error;
-        }
-
-        [Pure]
         internal static async Task<Result<T, TErrorResult>> MapError<T, TError, TErrorResult>(
             Task<Result<T, TError>> source, Func<TError, TErrorResult> selector) =>
             (await source.ConfigureAwait(false)).MapError(selector);
