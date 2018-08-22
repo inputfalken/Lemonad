@@ -49,6 +49,15 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
             Func<T, bool> predicate,
             Func<TError> errorSelector) =>
             (await source.ConfigureAwait(false)).Filter(predicate, errorSelector);
+        
+        [Pure]
+        internal static async Task<Result<T, TError>> Filter<T, TError>(
+            this Task<Result<T, TError>> source,
+            Func<T, bool> predicate,
+            Func<Maybe<T>, TError> errorSelector) =>
+            (await source.ConfigureAwait(false)).Filter(predicate, errorSelector);
+
+
 
         [Pure]
         internal static async Task<Result<T, TError>> IsErrorWhen<T, TError>(Task<Result<T, TError>> source,

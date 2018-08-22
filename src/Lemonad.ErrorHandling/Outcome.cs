@@ -29,6 +29,9 @@ namespace Lemonad.ErrorHandling {
         public Outcome<T, TError> Filter(Func<T, bool> predicate, Func<TError> errorSelector) =>
             TaskResultFunctions.Filter(Result, predicate, errorSelector);
 
+        public Outcome<T, TError> Filter(Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) =>
+            Result.Filter(predicate, errorSelector);
+
         public async Task<IEnumerable<T>> AsEnumerable() => (await Result.ConfigureAwait(false)).AsEnumerable;
 
         public async Task<IEnumerable<TError>> AsErrorEnumerable() =>
