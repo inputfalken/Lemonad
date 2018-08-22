@@ -232,21 +232,36 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         /// <param name="errorSelector">
-        ///     Is executed when the <paramref name="predicate" /> function returns false.
+        ///     Is exectued when the predicate fails.
         /// </param>
         [Pure]
-        public Result<T, TError> Filter(
-            Func<T, bool> predicate, Func<TError> errorSelector) => HasValue
-            ? predicate == null
-                ? throw new ArgumentNullException(nameof(predicate))
-                : predicate(Value)
-                    ? ResultExtensions.Ok<T, TError>(Value)
-                    : errorSelector == null
+        public Result<T, TError> Filter(Func<T, bool> predicate, Func<TError> errorSelector) =>
+            Filter(predicate, _ => errorSelector());
+
+        /// <summary>
+        ///     Filters the <typeparamref name="T" /> if <typeparamref name="T" /> is the active type.
+        /// </summary>
+        /// <param name="predicate">
+        ///     A function to test <typeparamref name="T" />.
+        /// </param>
+        /// <param name="errorSelector">
+        ///     Is exectued when the predicate fails. The in parameter is a <see cref="Maybe{T}"/> whose <typeparamref name="T"/> has been checked to not be null.
+        ///     But the <see cref="Maybe{T}"/> could still be unsafe and should be used with care.
+        /// </param>
+        [Pure]
+        public Result<T, TError> Filter(Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) {
+            if (HasValue)
+                if (predicate == null)
+                    throw new ArgumentNullException(nameof(predicate));
+                else if (predicate(Value))
+                    return ResultExtensions.Ok<T, TError>(Value);
+                else
+                    return errorSelector == null
                         ? throw new ArgumentNullException(nameof(errorSelector))
-                        : ResultExtensions.Error<T, TError>(errorSelector())
-            : errorSelector == null
-                ? throw new ArgumentNullException(nameof(errorSelector))
-                : ResultExtensions.Error<T, TError>(Error);
+                        : ResultExtensions.Error<T, TError>(errorSelector(Value.Some().IsNoneWhenNull()));
+
+            return ResultExtensions.Error<T, TError>(Error);
+        }
 
         /// <summary>
         ///     Filters the <typeparamref name="T" /> if <typeparamref name="T" /> is the active type.
