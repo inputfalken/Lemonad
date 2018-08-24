@@ -251,17 +251,14 @@ namespace Lemonad.ErrorHandling {
         /// </param>
         [Pure]
         public Result<T, TError> Filter(Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) {
-            if (HasValue)
-                if (predicate == null)
-                    throw new ArgumentNullException(nameof(predicate));
-                else if (predicate(Value))
-                    return ResultExtensions.Ok<T, TError>(Value);
-                else
-                    return errorSelector == null
-                        ? throw new ArgumentNullException(nameof(errorSelector))
-                        : ResultExtensions.Error<T, TError>(errorSelector(Value.Some().IsNoneWhenNull()));
-
-            return ResultExtensions.Error<T, TError>(Error);
+            if (HasError) return ResultExtensions.Error<T, TError>(Error);
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
+            if (predicate(Value))
+                return ResultExtensions.Ok<T, TError>(Value);
+            return errorSelector == null
+                ? throw new ArgumentNullException(nameof(errorSelector))
+                : ResultExtensions.Error<T, TError>(errorSelector(Value.Some().IsNoneWhenNull()));
         }
 
         /// <summary>
@@ -278,18 +275,33 @@ namespace Lemonad.ErrorHandling {
         /// </returns>
         [Pure]
         public Result<T, TError> IsErrorWhen(
-            Func<T, bool> predicate, Func<TError> errorSelector) =>
-            HasValue
-                ? predicate == null
-                    ? throw new ArgumentNullException(nameof(predicate))
-                    : predicate(Value)
-                        ? errorSelector == null
-                            ? throw new ArgumentNullException(nameof(errorSelector))
-                            : ResultExtensions.Error<T, TError>(errorSelector())
-                        : ResultExtensions.Ok<T, TError>(Value)
-                : errorSelector == null
+            Func<T, bool> predicate, Func<TError> errorSelector) {
+            if (HasError)
+                return errorSelector == null
                     ? throw new ArgumentNullException(nameof(errorSelector))
                     : ResultExtensions.Error<T, TError>(Error);
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
+            if (!predicate(Value)) return ResultExtensions.Ok<T, TError>(Value);
+            if (errorSelector == null)
+                throw new ArgumentNullException(nameof(errorSelector));
+            return ResultExtensions.Error<T, TError>(errorSelector());
+        }
+
+        [Pure]
+        public Result<T, TError> IsErrorWhen(
+            Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) {
+            if (HasError)
+                return errorSelector == null
+                    ? throw new ArgumentNullException(nameof(errorSelector))
+                    : ResultExtensions.Error<T, TError>(Error);
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
+            if (!predicate(Value)) return ResultExtensions.Ok<T, TError>(Value);
+            if (errorSelector == null)
+                throw new ArgumentNullException(nameof(errorSelector));
+            return ResultExtensions.Error<T, TError>(errorSelector(Value.Some().IsNoneWhenNull()));
+        }
 
         /// <summary>
         ///     Filters the <typeparamref name="T" /> by checking for null if <typeparamref name="T" /> is the active type.
@@ -302,6 +314,10 @@ namespace Lemonad.ErrorHandling {
         /// </returns>
         [Pure]
         public Result<T, TError> IsErrorWhenNull(Func<TError> errorSelector) =>
+            IsErrorWhen(EquailtyFunctions.IsNull, errorSelector);
+
+        [Pure]
+        public Result<T, TError> IsErrorWhenNull(Func<Maybe<T>, TError> errorSelector) =>
             IsErrorWhen(EquailtyFunctions.IsNull, errorSelector);
 
         /// <summary>
