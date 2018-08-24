@@ -32,10 +32,23 @@ namespace Lemonad.ErrorHandling {
         public Outcome<T, TError> Filter(Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) =>
             Result.Filter(predicate, errorSelector);
 
-        public async Task<IEnumerable<T>> AsEnumerable() => (await Result.ConfigureAwait(false)).AsEnumerable;
+        public Task<bool> HasError => TaskResultFunctions.HasError(Result);
 
-        public async Task<IEnumerable<TError>> AsErrorEnumerable() =>
-            (await Result.ConfigureAwait(false)).AsErrorEnumerable;
+        public Task<bool> HasValue => TaskResultFunctions.HasValue(Result);
+
+        public Task<IEnumerable<T>> AsEnumerable => TaskResultFunctions.AsEnumerable(Result);
+
+        public Task<IEnumerable<TError>> AsErrorEnumerable => TaskResultFunctions.AsErrorEnumerable(Result);
+
+        /// <summary>
+        ///     Executes each function and saves all potential errors to a list which will be the <typeparamref name="TError" />.
+        /// </summary>
+        /// <param name="validations">
+        ///     A <see cref="IReadOnlyList{T}" /> containining <typeparamref name="TError" />.
+        /// </param>
+        public Outcome<T, IReadOnlyList<TError>> Multiple(
+            params Func<Result<T, TError>, Result<T, TError>>[] validations) =>
+            TaskResultFunctions.Multiple(Result, validations);
 
         public Outcome<T, TError> IsErrorWhen(
             Func<T, bool> predicate,

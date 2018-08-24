@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling.Extensions.Internal {
@@ -10,6 +12,27 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
         [Pure]
         internal static async Task<Result<TResult, TError>> Map<T, TResult, TError>(Task<Result<T, TError>> source,
             Func<T, TResult> selector) => (await source.ConfigureAwait(false)).Map(selector);
+
+        [Pure]
+        internal static async Task<Result<T, IReadOnlyList<TError>>> Multiple<T, TError>(
+            Task<Result<T, TError>> source, params Func<Result<T, TError>, Result<T, TError>>[] validations
+        ) => (await source.ConfigureAwait(false)).Multiple(validations);
+
+        [Pure]
+        internal static async Task<bool> HasError<T, TError>(Task<Result<T, TError>> result) =>
+            (await result.ConfigureAwait(false)).HasError;
+
+        [Pure]
+        internal static async Task<bool> HasValue<T, TError>(Task<Result<T, TError>> result) =>
+            (await result.ConfigureAwait(false)).HasValue;
+
+        [Pure]
+        internal static async Task<IEnumerable<T>> AsEnumerable<T, TError>(Task<Result<T, TError>> result) =>
+            (await result.ConfigureAwait(false)).AsEnumerable;
+
+        [Pure]
+        internal static async Task<IEnumerable<TError>> AsErrorEnumerable<T, TError>(Task<Result<T, TError>> result) =>
+            (await result.ConfigureAwait(false)).AsErrorEnumerable;
 
         [Pure]
         internal static async Task<Result<T, TErrorResult>> MapError<T, TError, TErrorResult>(
@@ -49,15 +72,13 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
             Func<T, bool> predicate,
             Func<TError> errorSelector) =>
             (await source.ConfigureAwait(false)).Filter(predicate, errorSelector);
-        
+
         [Pure]
         internal static async Task<Result<T, TError>> Filter<T, TError>(
             this Task<Result<T, TError>> source,
             Func<T, bool> predicate,
             Func<Maybe<T>, TError> errorSelector) =>
             (await source.ConfigureAwait(false)).Filter(predicate, errorSelector);
-
-
 
         [Pure]
         internal static async Task<Result<T, TError>> IsErrorWhen<T, TError>(Task<Result<T, TError>> source,
