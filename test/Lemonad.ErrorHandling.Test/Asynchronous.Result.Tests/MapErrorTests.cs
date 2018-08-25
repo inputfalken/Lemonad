@@ -12,8 +12,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
                 errorSelectorInvoked = true;
                 return s.ToUpper();
             });
-            Assert.False(errorSelectorInvoked, "The function should not get exectued before the value is awaited.");
-
+            
             var result = await task;
             Assert.True(errorSelectorInvoked,
                 "Errorselector should get exeuted since there is an error in the result.");
