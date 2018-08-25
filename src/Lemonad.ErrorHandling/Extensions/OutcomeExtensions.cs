@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling.Extensions {
@@ -55,5 +56,8 @@ namespace Lemonad.ErrorHandling.Extensions {
         [Pure]
         public static Task<TResult> Match<T, TResult, TError>(this Outcome<T, TError> source, Func<T, TResult> selector)
             where T : TError => source.Match(selector, x => selector((T) x));
+
+        public static TaskAwaiter<Result<T, TError>> GetAwaiter<T, TError>(this Outcome<T, TError> outcome) =>
+            outcome.Result.GetAwaiter();
     }
 }
