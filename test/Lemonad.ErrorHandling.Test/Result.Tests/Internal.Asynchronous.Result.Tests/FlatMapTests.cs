@@ -1,18 +1,23 @@
 ﻿using System.Threading.Tasks;
-using Lemonad.ErrorHandling.Extensions;
+using Lemonad.ErrorHandling.Extensions.Internal;
 using Xunit;
-using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
-namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
-    public class FlatmapTestsSameTerror {
+namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.Tests {
+    public class FlatMapTests {
         [Fact]
-        public async Task Result_With_Error_Flatmaps_Result_with_Error__Expects_Result_With_Value() {
+        public async Task Result_With_Error_Flatmaps_Result_with_Error__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
-            var result = await DivisionAsync(2, 0).FlatMap(x => {
+            var errorSelectorExecuted = false;
+            var result = await TaskResultFunctions.FlatMap(AssertionUtilities.DivisionAsync(2, 0), x => {
                 flatSelectorExecuted = true;
-                return DivisionAsync(x, 0);
+                return AssertionUtilities.DivisionAsync(x, 0);
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
             });
 
+            Assert.False(errorSelectorExecuted,
+                "Errorselector should not get exeuted since there is an error in the source.");
             Assert.False(flatSelectorExecuted,
                 "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
             Assert.False(result.HasValue, "Result should not have a value.");
@@ -22,13 +27,19 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         }
 
         [Fact]
-        public async Task Result_With_Error_Flatmaps_Result_with_Error__Expects_Result_With_Value_Sync() {
+        public async Task Result_With_Error_Flatmaps_Result_with_Error__Expects_Result_With_Error_Sync() {
             var flatSelectorExecuted = false;
-            var result = await DivisionAsync(2, 0).FlatMap(x => {
+            var errorSelectorExecuted = false;
+            var result = await TaskResultFunctions.FlatMap(AssertionUtilities.DivisionAsync(2, 0), x => {
                 flatSelectorExecuted = true;
-                return Division(x, 0);
+                return AssertionUtilities.Division(x, 0);
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
             });
 
+            Assert.False(errorSelectorExecuted,
+                "Errorselector should not get exeuted since there is an error in the source.");
             Assert.False(flatSelectorExecuted,
                 "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
             Assert.False(result.HasValue, "Result should not have a value.");
@@ -38,13 +49,19 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         }
 
         [Fact]
-        public async Task Result_With_Error_Flatmaps_Result_with_Value__Expects_Result_With_Value() {
+        public async Task Result_With_Error_Flatmaps_Result_with_Value__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
-            var result = await DivisionAsync(2, 0).FlatMap(x => {
+            var errorSelectorExecuted = false;
+            var result = await TaskResultFunctions.FlatMap(AssertionUtilities.DivisionAsync(2, 0), x => {
                 flatSelectorExecuted = true;
-                return DivisionAsync(x, 2);
+                return AssertionUtilities.DivisionAsync(x, 2);
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
             });
 
+            Assert.False(errorSelectorExecuted,
+                "Errorselector should not get exeuted since there is an error in the source.");
             Assert.False(flatSelectorExecuted,
                 "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
             Assert.False(result.HasValue, "Result should not have a value.");
@@ -54,13 +71,19 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         }
 
         [Fact]
-        public async Task Result_With_Error_Flatmaps_Result_with_Value__Expects_Result_With_Value_Sync() {
+        public async Task Result_With_Error_Flatmaps_Result_with_Value__Expects_Result_With_Error_Sync() {
             var flatSelectorExecuted = false;
-            var result = await DivisionAsync(2, 0).FlatMap(x => {
+            var errorSelectorExecuted = false;
+            var result = await TaskResultFunctions.FlatMap(AssertionUtilities.DivisionAsync(2, 0), x => {
                 flatSelectorExecuted = true;
-                return Division(x, 2);
+                return AssertionUtilities.Division(x, 2);
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
             });
 
+            Assert.False(errorSelectorExecuted,
+                "Errorselector should not get exeuted since there is an error in the source.");
             Assert.False(flatSelectorExecuted,
                 "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
             Assert.False(result.HasValue, "Result should not have a value.");
@@ -70,17 +93,23 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         }
 
         [Fact]
-        public async Task Result_With_Error_FlatmapsRS_Result_with_Error__Expects_Result_With_Value() {
+        public async Task Result_With_Error_FlatmapsRS_Result_with_Error__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
-            var result = await DivisionAsync(2, 0).FlatMap(x => {
+            var errorSelectorExecuted = false;
+            var result = await TaskResultFunctions.FlatMap(AssertionUtilities.DivisionAsync(2, 0), x => {
                 flatSelectorExecuted = true;
-                return DivisionAsync(x, 0);
+                return AssertionUtilities.DivisionAsync(x, 0);
             }, (y, x) => {
                 resultSelectorExectued = true;
                 return y + x;
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
             });
 
+            Assert.False(errorSelectorExecuted,
+                "Errorselector should not get exeuted since there is an error in the source.");
             Assert.False(flatSelectorExecuted,
                 "The flatmapSelector should not get exectued if the source Result<T, TError> contains error.");
             Assert.False(resultSelectorExectued,
@@ -92,17 +121,23 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         }
 
         [Fact]
-        public async Task Result_With_Error_FlatmapsRS_Result_with_Error__Expects_Result_With_Value_Sync() {
+        public async Task Result_With_Error_FlatmapsRS_Result_with_Error__Expects_Result_With_Error_Sync() {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
-            var result = await DivisionAsync(2, 0).FlatMap(x => {
+            var errorSelectorExecuted = false;
+            var result = await TaskResultFunctions.FlatMap(AssertionUtilities.DivisionAsync(2, 0), x => {
                 flatSelectorExecuted = true;
-                return Division(x, 0);
+                return AssertionUtilities.Division(x, 0);
             }, (y, x) => {
                 resultSelectorExectued = true;
                 return y + x;
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
             });
 
+            Assert.False(errorSelectorExecuted,
+                "Errorselector should not get exeuted since there is an error in the source.");
             Assert.False(flatSelectorExecuted,
                 "The flatmapSelector should not get exectued if the source Result<T, TError> contains error.");
             Assert.False(resultSelectorExectued,
@@ -114,16 +149,23 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         }
 
         [Fact]
-        public async Task Result_With_Error_FlatmapsRS_Result_with_Value__Expects_Result_With_Value() {
+        public async Task Result_With_Error_FlatmapsRS_Result_with_Value__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
-            var result = await DivisionAsync(2, 0).FlatMap(x => {
+            var errorSelectorExecuted = false;
+            var result = await TaskResultFunctions.FlatMap(AssertionUtilities.DivisionAsync(2, 0), x => {
                 flatSelectorExecuted = true;
-                return DivisionAsync(x, 2);
+                return AssertionUtilities.DivisionAsync(x, 2);
             }, (y, x) => {
                 resultSelectorExectued = true;
                 return y + x;
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
             });
+
+            Assert.False(errorSelectorExecuted,
+                "Errorselector should not get exeuted since there is an error in the source.");
             Assert.False(flatSelectorExecuted,
                 "The flatmapSelector should not get exectued if the source Result<T, TError> contains error.");
             Assert.False(resultSelectorExectued,
@@ -135,16 +177,23 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         }
 
         [Fact]
-        public async Task Result_With_Error_FlatmapsRS_Result_with_Value__Expects_Result_With_Value_Sync() {
+        public async Task Result_With_Error_FlatmapsRS_Result_with_Value__Expects_Result_With_Error_Sync() {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
-            var result = await DivisionAsync(2, 0).FlatMap(x => {
+            var errorSelectorExecuted = false;
+            var result = await TaskResultFunctions.FlatMap(AssertionUtilities.DivisionAsync(2, 0), x => {
                 flatSelectorExecuted = true;
-                return Division(x, 2);
+                return AssertionUtilities.Division(x, 2);
             }, (y, x) => {
                 resultSelectorExectued = true;
                 return y + x;
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
             });
+
+            Assert.False(errorSelectorExecuted,
+                "Errorselector should not get exeuted since there is an error in the source.");
             Assert.False(flatSelectorExecuted,
                 "The flatmapSelector should not get exectued if the source Result<T, TError> contains error.");
             Assert.False(resultSelectorExectued,
@@ -159,13 +208,18 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         public async Task Result_With_Value_Flatmaps_Result_with_Error__Expects_Result_With_Value() {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
-            var flatMap = DivisionAsync(2, 2).FlatMap(x => {
+            var errorSelectorExecuted = false;
+            var flatMap = TaskResultFunctions.FlatMap(AssertionUtilities.DivisionAsync(2, 2), x => {
                 flatSelectorExecuted = true;
-                return DivisionAsync(x, 0);
+                return AssertionUtilities.DivisionAsync(x, 0);
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
             });
-
             var result = await flatMap;
 
+            Assert.True(errorSelectorExecuted,
+                "Errorselector should not exeuted since the errror came from the result given to the flatselector.");
             Assert.True(flatSelectorExecuted,
                 "The flatmapSelector should get exectued.");
             Assert.False(resultSelectorExectued,
@@ -180,13 +234,18 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         public async Task Result_With_Value_Flatmaps_Result_with_Error__Expects_Result_With_Value_Sync() {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
-            var flatMap = DivisionAsync(2, 2).FlatMap(x => {
+            var errorSelectorExecuted = false;
+            var flatMap = TaskResultFunctions.FlatMap(AssertionUtilities.DivisionAsync(2, 2), x => {
                 flatSelectorExecuted = true;
-                return Division(x, 0);
+                return AssertionUtilities.Division(x, 0);
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
             });
-
             var result = await flatMap;
 
+            Assert.True(errorSelectorExecuted,
+                "Errorselector should not exeuted since the errror came from the result given to the flatselector.");
             Assert.True(flatSelectorExecuted,
                 "The flatmapSelector should get exectued.");
             Assert.False(resultSelectorExectued,
@@ -201,9 +260,12 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         public async Task Result_With_Value_Flatmaps_Result_with_Value__Expects_Result_With_Value() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
-            var flatMap = DivisionAsync(2, 2).FlatMap(x => {
+            var flatMap = TaskResultFunctions.FlatMap(AssertionUtilities.DivisionAsync(2, 2), x => {
                 flatSelectorExecuted = true;
-                return DivisionAsync(x, 2);
+                return AssertionUtilities.DivisionAsync(x, 2);
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
             });
             var result = await flatMap;
             Assert.True(flatSelectorExecuted, "flatmapselector should get executed.");
@@ -218,9 +280,12 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         public async Task Result_With_Value_Flatmaps_Result_with_Value__Expects_Result_With_Value_Sync() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
-            var flatMap = DivisionAsync(2, 2).FlatMap(x => {
+            var flatMap = TaskResultFunctions.FlatMap(AssertionUtilities.DivisionAsync(2, 2), x => {
                 flatSelectorExecuted = true;
-                return Division(x, 2);
+                return AssertionUtilities.Division(x, 2);
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
             });
             var result = await flatMap;
             Assert.True(flatSelectorExecuted, "flatmapselector should get executed.");
@@ -232,18 +297,24 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         }
 
         [Fact]
-        public async Task Result_With_Value_FlatmapsRS_Result_with_Error__Expects_Result_With_Value() {
+        public async Task Result_With_Value_FlatmapsRS_Result_with_Error__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
-            var flatMap = DivisionAsync(2, 2).FlatMap(x => {
+            var errorSelectorExecuted = false;
+            var flatMap = TaskResultFunctions.FlatMap(AssertionUtilities.DivisionAsync(2, 2), x => {
                 flatSelectorExecuted = true;
-                return DivisionAsync(x, 0);
+                return AssertionUtilities.DivisionAsync(x, 0);
             }, (y, x) => {
                 resultSelectorExectued = true;
                 return y + x;
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
             });
             var result = await flatMap;
 
+            Assert.True(errorSelectorExecuted,
+                "Errorselector should get exeuted since the errror came from the result given to the flatselector.");
             Assert.True(flatSelectorExecuted,
                 "The flatmapSelector should get exectued.");
             Assert.False(resultSelectorExectued,
@@ -259,18 +330,24 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         }
 
         [Fact]
-        public async Task Result_With_Value_FlatmapsRS_Result_with_Error__Expects_Result_With_Value_Sync() {
+        public async Task Result_With_Value_FlatmapsRS_Result_with_Error__Expects_Result_With_Error_Sync() {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
-            var flatMap = DivisionAsync(2, 2).FlatMap(x => {
+            var errorSelectorExecuted = false;
+            var flatMap = TaskResultFunctions.FlatMap(AssertionUtilities.DivisionAsync(2, 2), x => {
                 flatSelectorExecuted = true;
-                return Division(x, 0);
+                return AssertionUtilities.Division(x, 0);
             }, (y, x) => {
                 resultSelectorExectued = true;
                 return y + x;
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
             });
             var result = await flatMap;
 
+            Assert.True(errorSelectorExecuted,
+                "Errorselector should get exeuted since the errror came from the result given to the flatselector.");
             Assert.True(flatSelectorExecuted,
                 "The flatmapSelector should get exectued.");
             Assert.False(resultSelectorExectued,
@@ -289,17 +366,24 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         public async Task Result_With_Value_FlatmapsRS_Result_with_Value__Expects_Result_With_Value() {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
-            var flatMap = DivisionAsync(2, 2).FlatMap(x => {
+            var errorSelectorExecuted = false;
+            var flatMap = TaskResultFunctions.FlatMap(AssertionUtilities.DivisionAsync(2, 2), x => {
                 flatSelectorExecuted = true;
-                return DivisionAsync(x, 2);
+                return AssertionUtilities.DivisionAsync(x, 2);
             }, (y, x) => {
                 resultSelectorExectued = true;
                 return y + x;
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
             });
+
             var result = await flatMap;
-            Assert.True(flatSelectorExecuted, "Flatmapselecotr should get executed.");
+            Assert.True(flatSelectorExecuted, "Flatmapselector should get executed.");
             Assert.True(resultSelectorExectued,
                 "ResultSelector should get executed since both source and the result from flatmapselector contains values.");
+            Assert.False(errorSelectorExecuted,
+                "Erroselector should not get executed since both source and the result from flatmapselector contains values.");
             Assert.True(result.HasValue, "Result should have a value.");
             Assert.False(result.HasError, "Result should not have a error.");
             Assert.Equal(1.5d, result.Value);
@@ -310,17 +394,24 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         public async Task Result_With_Value_FlatmapsRS_Result_with_Value__Expects_Result_With_Value_Sync() {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
-            var flatMap = DivisionAsync(2, 2).FlatMap(x => {
+            var errorSelectorExecuted = false;
+            var flatMap = TaskResultFunctions.FlatMap(AssertionUtilities.DivisionAsync(2, 2), x => {
                 flatSelectorExecuted = true;
-                return Division(x, 2);
+                return AssertionUtilities.Division(x, 2);
             }, (y, x) => {
                 resultSelectorExectued = true;
                 return y + x;
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
             });
+
             var result = await flatMap;
-            Assert.True(flatSelectorExecuted, "Flatmapselecotr should get executed.");
+            Assert.True(flatSelectorExecuted, "Flatmapselector should get executed.");
             Assert.True(resultSelectorExectued,
                 "ResultSelector should get executed since both source and the result from flatmapselector contains values.");
+            Assert.False(errorSelectorExecuted,
+                "Erroselector should not get executed since both source and the result from flatmapselector contains values.");
             Assert.True(result.HasValue, "Result should have a value.");
             Assert.False(result.HasError, "Result should not have a error.");
             Assert.Equal(1.5d, result.Value);

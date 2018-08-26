@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lemonad.ErrorHandling.Extensions;
+using Lemonad.ErrorHandling.Extensions.Internal;
 using Xunit;
-using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
-namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
+namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.Tests {
     public class CastTests {
         [Fact]
         public async Task Result_With_Error__With_Invalid_Casting() {
-            var genderResult = GetGender(3);
+            var genderResult = AssertionUtilities.GetGender(3);
             var exception = await Record.ExceptionAsync(async () => {
-                var result = genderResult.Cast<Gender, int, string>();
+                var result = TaskResultFunctions.Cast<AssertionUtilities.Gender, int, string>(genderResult);
                 var castResult = await result;
                 Assert.False(castResult.HasValue, "Casted Result not should have value.");
                 Assert.True(castResult.HasError, "Casted Result should have error.");
@@ -23,9 +22,9 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
 
         [Fact]
         public async Task Result_With_Error__With_Valid_Casting() {
-            var genderResult = GetGender(3);
+            var genderResult = AssertionUtilities.GetGender(3);
 
-            var castResult = await genderResult.Cast<Gender, int, string>();
+            var castResult = await TaskResultFunctions.Cast<AssertionUtilities.Gender, int, string>(genderResult);
 
             Assert.False(castResult.HasValue, "Casted Result not should have value.");
             Assert.True(castResult.HasError, "Casted Result should have error.");
@@ -35,13 +34,14 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
 
         [Fact]
         public Task Result_With_Value__With_Invalid_Casting() =>
-            Assert.ThrowsAsync<InvalidCastException>(() => GetGender(1).Cast<Gender, string, string>());
+            Assert.ThrowsAsync<InvalidCastException>(() =>
+                TaskResultFunctions.Cast<AssertionUtilities.Gender, string, string>(AssertionUtilities.GetGender(1)));
 
         [Fact]
         public async Task Result_With_Value__With_Valid_Casting() {
-            var genderResult = GetGender(1);
+            var genderResult = AssertionUtilities.GetGender(1);
 
-            var castResult = await genderResult.Cast<Gender, int, string>();
+            var castResult = await TaskResultFunctions.Cast<AssertionUtilities.Gender, int, string>(genderResult);
 
             Assert.True(castResult.HasValue, "Casted Result should have value.");
             Assert.False(castResult.HasError, "Casted Result should not have error.");

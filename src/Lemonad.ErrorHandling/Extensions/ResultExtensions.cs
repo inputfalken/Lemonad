@@ -6,54 +6,6 @@ using System.Linq;
 namespace Lemonad.ErrorHandling.Extensions {
     public static class ResultExtensions {
         /// <summary>
-        ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="Result{T,TError}" /> to an <see cref="IEnumerable{T}" /> of
-        ///     <typeparamref name="TError" />.
-        /// </summary>
-        /// <param name="enumerable">
-        ///     The <see cref="IEnumerable{T}" /> of <see cref="Result{T,TError}" />.
-        /// </param>
-        /// <typeparam name="T">
-        ///     The type of the values in <see cref="Result{T,TError}" />.
-        /// </typeparam>
-        /// <typeparam name="TError">
-        ///     The type of the errors in <see cref="Result{T,TError}" />.
-        /// </typeparam>
-        public static IEnumerable<TError> Errors<T, TError>(
-            this IEnumerable<Result<T, TError>> enumerable) => enumerable.SelectMany(x => x.AsErrorEnumerable);
-
-        /// <summary>
-        ///     Covnerts an <see cref="IEnumerable{T}" /> of <see cref="Result{T,TError}" /> to an <see cref="IEnumerable{T}" /> of
-        ///     <typeparamref name="T" />.
-        /// </summary>
-        /// <param name="enumerable">
-        ///     The <see cref="IEnumerable{T}" /> of <see cref="Result{T,TError}" />.
-        /// </param>
-        /// <typeparam name="T">
-        ///     The type of the values in <see cref="Result{T,TError}" />.
-        /// </typeparam>
-        /// <typeparam name="TError">
-        ///     The type of the errors in <see cref="Result{T,TError}" />.
-        /// </typeparam>
-        public static IEnumerable<T> Values<T, TError>(
-            this IEnumerable<Result<T, TError>> enumerable) => enumerable.SelectMany(x => x.AsEnumerable);
-
-        /// <summary>
-        ///     Creates a <see cref="Result{T,TError}" /> with <typeparamref name="T" />.
-        /// </summary>
-        /// <param name="element">
-        ///     The type of the <typeparamref name="T" />.
-        /// </param>
-        /// <typeparam name="T">
-        ///     The <typeparamref name="T" /> of <see cref="Result{T,TError}" />.
-        /// </typeparam>
-        /// <typeparam name="TError">
-        ///     The <typeparamref name="TError" /> of <see cref="Result{T,TError}" />.
-        /// </typeparam>
-        [Pure]
-        public static Result<T, TError> Ok<T, TError>(T element) =>
-            new Result<T, TError>(element, default, false, true);
-
-        /// <summary>
         ///     Creates a <see cref="Result{T,TError}" /> with <typeparamref name="TError" />.
         /// </summary>
         /// <param name="error">
@@ -68,6 +20,22 @@ namespace Lemonad.ErrorHandling.Extensions {
         [Pure]
         public static Result<T, TError> Error<T, TError>(TError error) =>
             new Result<T, TError>(default, error, true, false);
+
+        /// <summary>
+        ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="Result{T,TError}" /> to an <see cref="IEnumerable{T}" /> of
+        ///     <typeparamref name="TError" />.
+        /// </summary>
+        /// <param name="enumerable">
+        ///     The <see cref="IEnumerable{T}" /> of <see cref="Result{T,TError}" />.
+        /// </param>
+        /// <typeparam name="T">
+        ///     The type of the values in <see cref="Result{T,TError}" />.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        ///     The type of the errors in <see cref="Result{T,TError}" />.
+        /// </typeparam>
+        public static IEnumerable<TError> Errors<T, TError>(
+            this IEnumerable<Result<T, TError>> enumerable) => enumerable.SelectMany(x => x.AsErrorEnumerable);
 
         /// <summary>
         ///     Evaluates the <see cref="Result{T,TError}" />.
@@ -106,6 +74,38 @@ namespace Lemonad.ErrorHandling.Extensions {
         [Pure]
         public static TResult Match<T, TResult, TError>(this Result<T, TError> source, Func<T, TResult> selector)
             where T : TError => source.Match(selector, x => selector((T) x));
+
+        /// <summary>
+        ///     Creates a <see cref="Result{T,TError}" /> with <typeparamref name="T" />.
+        /// </summary>
+        /// <param name="element">
+        ///     The type of the <typeparamref name="T" />.
+        /// </param>
+        /// <typeparam name="T">
+        ///     The <typeparamref name="T" /> of <see cref="Result{T,TError}" />.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        ///     The <typeparamref name="TError" /> of <see cref="Result{T,TError}" />.
+        /// </typeparam>
+        [Pure]
+        public static Result<T, TError> Ok<T, TError>(T element) =>
+            new Result<T, TError>(element, default, false, true);
+
+        /// <summary>
+        ///     Converts an <see cref="Maybe{T}" /> to an <see cref="Result{T,TError}" /> with the value <typeparamref name="T" />.
+        /// </summary>
+        /// <param name="source">
+        ///     The <see cref="Maybe{T}" /> to convert.
+        /// </param>
+        /// <typeparam name="T">
+        ///     The type in the <see cref="Maybe{T}" />.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        ///     The <typeparamref name="TError" /> from the <see cref="Result{T,TError}" />.
+        /// </typeparam>
+        [Pure]
+        public static Maybe<T> ToMaybe<T, TError>(this Result<T, TError> source) =>
+            source.HasValue ? source.Value.Some() : Maybe<T>.None;
 
         /// <summary>
         ///     Converts an <see cref="Nullable{T}" /> to an <see cref="Result{T,TError}" /> with the value
@@ -163,19 +163,19 @@ namespace Lemonad.ErrorHandling.Extensions {
         public static Result<T, TError> ToResultError<T, TError>(this TError source) => Error<T, TError>(source);
 
         /// <summary>
-        ///     Converts an <see cref="Maybe{T}" /> to an <see cref="Result{T,TError}" /> with the value <typeparamref name="T" />.
+        ///     Covnerts an <see cref="IEnumerable{T}" /> of <see cref="Result{T,TError}" /> to an <see cref="IEnumerable{T}" /> of
+        ///     <typeparamref name="T" />.
         /// </summary>
-        /// <param name="source">
-        ///     The <see cref="Maybe{T}" /> to convert.
+        /// <param name="enumerable">
+        ///     The <see cref="IEnumerable{T}" /> of <see cref="Result{T,TError}" />.
         /// </param>
         /// <typeparam name="T">
-        ///     The type in the <see cref="Maybe{T}" />.
+        ///     The type of the values in <see cref="Result{T,TError}" />.
         /// </typeparam>
         /// <typeparam name="TError">
-        ///     The <typeparamref name="TError" /> from the <see cref="Result{T,TError}" />.
+        ///     The type of the errors in <see cref="Result{T,TError}" />.
         /// </typeparam>
-        [Pure]
-        public static Maybe<T> ToMaybe<T, TError>(this Result<T, TError> source) =>
-            source.HasValue ? source.Value.Some() : Maybe<T>.None;
+        public static IEnumerable<T> Values<T, TError>(
+            this IEnumerable<Result<T, TError>> enumerable) => enumerable.SelectMany(x => x.AsEnumerable);
     }
 }
