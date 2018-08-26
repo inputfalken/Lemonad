@@ -20,7 +20,11 @@ $solution = $rootDirectory `
   | Get-Solution
 
 Build-Solution -Solution $solution
-Test-Projects -Directory $testDirectory
+
+List-Files (Join-Path -Path $testDirectory -ChildPath '*.csproj') | ForEach-Object {
+  dotnet test $_ --configuration $Configuration --no-build --no-restore
+  if (!$?) { throw "Failed executing tests for project '$_'." }
+}
 
 if ($isWindows) {
   if ($env:APPVEYOR -and $env:CI) {

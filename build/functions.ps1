@@ -49,17 +49,6 @@ function Build-Solution {
   if (!$?) { throw "Could not build solution '$Solution'." }
 }
 
-function Test-Projects {
-  param(
-    [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $Directory
-  )
-  List-Files "$Directory*.csproj" `
-    | ForEach-Object {
-    dotnet test $_ --configuration $Configuration --no-build --no-restore
-    if (!$?) { throw "Failed executing tests for project '$_'." }
-  }
-}
-
 function Pack-Package {
   param (
     [Parameter(Position = 0, Mandatory = 0, ValueFromPipeline)] $InputObject,

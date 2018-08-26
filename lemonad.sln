@@ -5,24 +5,28 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{0BA35077-B0DD-456F-9A2E-C4EBD0F253B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lemonad.ErrorHandling.Test", "test\Lemonad.ErrorHandling.Test\Lemonad.ErrorHandling.Test.csproj", "{4FD96066-65FA-49CF-A0FC-CBFAFF4C82BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lemonad.ErrorHandling.Test", "test\Lemonad.ErrorHandling.Test\Lemonad.ErrorHandling.Test.csproj", "{4FD96066-65FA-49CF-A0FC-CBFAFF4C82BF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4D2F5D79-BB3D-482A-B328-8E9495DF71A3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{4D2F5D79-BB3D-482A-B328-8E9495DF71A3}"
-ProjectSection(SolutionItems) = preProject
-	build\build.ps1 = build\build.ps1
-EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{A92685BB-F187-4BA9-9CD9-3FBD39A1B109}"
+	ProjectSection(SolutionItems) = preProject
+		build\build.ps1 = build\build.ps1
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lemonad.ErrorHandling", "src\Lemonad.ErrorHandling\Lemonad.ErrorHandling.csproj", "{59392C10-CC39-4750-B421-5DC70AEC4C7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lemonad.ErrorHandling", "src\Lemonad.ErrorHandling\Lemonad.ErrorHandling.csproj", "{59392C10-CC39-4750-B421-5DC70AEC4C7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcValidation", "samples\MvcValidation\MvcValidation.csproj", "{91C42619-20F7-45F6-98F6-74E671A19C21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcValidation", "samples\MvcValidation\MvcValidation.csproj", "{91C42619-20F7-45F6-98F6-74E671A19C21}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{03FFFAEA-2C89-453B-B210-F4B664504456}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleInputValidation", "samples\ConsoleInputValidation\ConsoleInputValidation.csproj", "{E7E824C2-2008-492B-8F24-02D264792218}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleInputValidation", "samples\ConsoleInputValidation\ConsoleInputValidation.csproj", "{E7E824C2-2008-492B-8F24-02D264792218}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadFileAsync", "samples\ReadFileAsync\ReadFileAsync.csproj", "{C5C60F00-9764-44BF-9254-AED407AB8817}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadFileAsync", "samples\ReadFileAsync\ReadFileAsync.csproj", "{C5C60F00-9764-44BF-9254-AED407AB8817}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lemonad.Async", "src\Lemonad.Async\Lemonad.Async.csproj", "{B7D829A7-02EB-48D8-9C21-C81BFF3D66BE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lemonad.Async.Test", "test\Lemonad.Async.Test\Lemonad.Async.Test.csproj", "{130603DC-ED1B-4C17-839A-6B65683176D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,9 +36,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4FD96066-65FA-49CF-A0FC-CBFAFF4C82BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -97,6 +98,33 @@ Global
 		{C5C60F00-9764-44BF-9254-AED407AB8817}.Release|x64.Build.0 = Release|Any CPU
 		{C5C60F00-9764-44BF-9254-AED407AB8817}.Release|x86.ActiveCfg = Release|Any CPU
 		{C5C60F00-9764-44BF-9254-AED407AB8817}.Release|x86.Build.0 = Release|Any CPU
+		{B7D829A7-02EB-48D8-9C21-C81BFF3D66BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7D829A7-02EB-48D8-9C21-C81BFF3D66BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7D829A7-02EB-48D8-9C21-C81BFF3D66BE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B7D829A7-02EB-48D8-9C21-C81BFF3D66BE}.Debug|x64.Build.0 = Debug|Any CPU
+		{B7D829A7-02EB-48D8-9C21-C81BFF3D66BE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B7D829A7-02EB-48D8-9C21-C81BFF3D66BE}.Debug|x86.Build.0 = Debug|Any CPU
+		{B7D829A7-02EB-48D8-9C21-C81BFF3D66BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7D829A7-02EB-48D8-9C21-C81BFF3D66BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7D829A7-02EB-48D8-9C21-C81BFF3D66BE}.Release|x64.ActiveCfg = Release|Any CPU
+		{B7D829A7-02EB-48D8-9C21-C81BFF3D66BE}.Release|x64.Build.0 = Release|Any CPU
+		{B7D829A7-02EB-48D8-9C21-C81BFF3D66BE}.Release|x86.ActiveCfg = Release|Any CPU
+		{B7D829A7-02EB-48D8-9C21-C81BFF3D66BE}.Release|x86.Build.0 = Release|Any CPU
+		{130603DC-ED1B-4C17-839A-6B65683176D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{130603DC-ED1B-4C17-839A-6B65683176D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{130603DC-ED1B-4C17-839A-6B65683176D6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{130603DC-ED1B-4C17-839A-6B65683176D6}.Debug|x64.Build.0 = Debug|Any CPU
+		{130603DC-ED1B-4C17-839A-6B65683176D6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{130603DC-ED1B-4C17-839A-6B65683176D6}.Debug|x86.Build.0 = Debug|Any CPU
+		{130603DC-ED1B-4C17-839A-6B65683176D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{130603DC-ED1B-4C17-839A-6B65683176D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{130603DC-ED1B-4C17-839A-6B65683176D6}.Release|x64.ActiveCfg = Release|Any CPU
+		{130603DC-ED1B-4C17-839A-6B65683176D6}.Release|x64.Build.0 = Release|Any CPU
+		{130603DC-ED1B-4C17-839A-6B65683176D6}.Release|x86.ActiveCfg = Release|Any CPU
+		{130603DC-ED1B-4C17-839A-6B65683176D6}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4FD96066-65FA-49CF-A0FC-CBFAFF4C82BF} = {0BA35077-B0DD-456F-9A2E-C4EBD0F253B2}
@@ -104,5 +132,9 @@ Global
 		{91C42619-20F7-45F6-98F6-74E671A19C21} = {03FFFAEA-2C89-453B-B210-F4B664504456}
 		{E7E824C2-2008-492B-8F24-02D264792218} = {03FFFAEA-2C89-453B-B210-F4B664504456}
 		{C5C60F00-9764-44BF-9254-AED407AB8817} = {03FFFAEA-2C89-453B-B210-F4B664504456}
+		{B7D829A7-02EB-48D8-9C21-C81BFF3D66BE} = {4D2F5D79-BB3D-482A-B328-8E9495DF71A3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {942AC6F2-4256-4AAA-B28F-23EE5EA28CAD}
 	EndGlobalSection
 EndGlobal
