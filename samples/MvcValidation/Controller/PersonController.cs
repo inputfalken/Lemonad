@@ -8,16 +8,6 @@ using MvcValidation.Models;
 namespace MvcValidation.Controller {
     [Route("people")]
     public class PersonController : Microsoft.AspNetCore.Mvc.Controller {
-        [HttpPost]
-        [Route("eitherSummarized")]
-        public IActionResult PostPerson([FromBody] PersonPostApiModel model) {
-            var result = ApiValidation(model)
-                .Map(x => new PersonModel {FirstName = x.FirstName, LastName = x.LastName})
-                .Flatten(LastNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
-                .FlatMap(FirstNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model});
-            return result.Match<IActionResult>(BadRequest, Ok);
-        }
-
         private static Result<PersonPostApiModel, PersonPostApiError> ApiValidation(PersonPostApiModel model) {
             var apiValidation = model
                 .ToResult<PersonPostApiModel, PersonPostApiError>()
@@ -39,15 +29,25 @@ namespace MvcValidation.Controller {
             });
         }
 
+        public static Result<SuccessModel, ErrorModel> FirstNameAppService(PersonModel person) =>
+            person.FirstName == "Foo"
+                ? (Result<SuccessModel, ErrorModel>) new SuccessModel {Count = 4711}
+                : new ErrorModel {Message = "Expected a 'Foo'"};
+
         public static Result<SuccessModel, ErrorModel> LastNameAppService(PersonModel person) =>
             person.LastName == "Bar"
                 ? (Result<SuccessModel, ErrorModel>) new SuccessModel {Count = 4711}
                 : new ErrorModel {Message = "Expected a 'Bar'"};
 
-        public static Result<SuccessModel, ErrorModel> FirstNameAppService(PersonModel person) =>
-            person.FirstName == "Foo"
-                ? (Result<SuccessModel, ErrorModel>) new SuccessModel {Count = 4711}
-                : new ErrorModel {Message = "Expected a 'Foo'"};
+        [HttpPost]
+        [Route("eitherSummarized")]
+        public IActionResult PostPerson([FromBody] PersonPostApiModel model) {
+            var result = ApiValidation(model)
+                .Map(x => new PersonModel {FirstName = x.FirstName, LastName = x.LastName})
+                .Flatten(LastNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
+                .FlatMap(FirstNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model});
+            return result.Match<IActionResult>(BadRequest, Ok);
+        }
 
         private static Result<string, string> ValidateName(string name) {
             return name.ToResult<string, string>()

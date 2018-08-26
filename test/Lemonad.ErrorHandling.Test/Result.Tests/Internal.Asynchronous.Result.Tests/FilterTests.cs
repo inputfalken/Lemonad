@@ -1,16 +1,15 @@
 ﻿using System.Threading.Tasks;
-using Lemonad.ErrorHandling.Extensions;
+using Lemonad.ErrorHandling.Extensions.Internal;
 using Xunit;
-using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
-namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
+namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.Tests {
     public class FilterTests {
         [Fact]
         public async Task
             Result_With_Error__Expects_Predicate_Never_To_Be_Executed_And_ErrorSelector_Never_To_Be_Invoked() {
             var predicateExectued = false;
             var errorSelectorExectued = false;
-            var filter = DivisionAsync(10, 0).Filter(d => {
+            var filter = TaskResultFunctions.Filter(AssertionUtilities.DivisionAsync(10, 0), d => {
                 predicateExectued = true;
                 return d == 2;
             }, () => {
@@ -34,7 +33,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
             Result_With_Value_With_Falsy_Predicate__Expects_Predicate_To_Be_Executed_And_ErrorSelector_To_Be_Invoked() {
             var predicateExectued = false;
             var errorSelectorExectued = false;
-            var filter = DivisionAsync(10, 2).Filter(d => {
+            var filter = TaskResultFunctions.Filter(AssertionUtilities.DivisionAsync(10, 2), d => {
                 predicateExectued = true;
                 return false;
             }, () => {
@@ -56,7 +55,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
             Result_With_Value_With_Truthy_Predicate__Expects_Predicate_To_Be_Executed_And_ErrorSelector_To_Never_Be_Invoked() {
             var predicateExectued = false;
             var errorSelectorExectued = false;
-            var filter = DivisionAsync(10, 2).Filter(d => {
+            var filter = TaskResultFunctions.Filter(AssertionUtilities.DivisionAsync(10, 2), d => {
                 predicateExectued = true;
                 return true;
             }, () => {

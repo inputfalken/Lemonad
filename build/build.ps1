@@ -20,19 +20,29 @@ $solution = $rootDirectory `
   | Get-Solution
 
 Build-Solution -Solution $solution
-Test-Projects -Directory $testDirectory
+
+List-Files (Join-Path -Path $testDirectory -ChildPath '*.csproj') | ForEach-Object {
+  dotnet test $_ --configuration $Configuration --no-build --no-restore
+  if (!$?) { throw "Failed executing tests for project '$_'." }
+}
 
 if ($isWindows) {
   if ($env:APPVEYOR -and $env:CI) {
     switch ($env:APPVEYOR_REPO_BRANCH) {
       'master' {
         if (!$env:APPVEYOR_PULL_REQUEST_TITLE) {
-          if ($GenerateDocs) { Generate-Documentation -DocumentationDirectory $documentationDirectory -Directories @($srcDiretory) -UserName $UserName -UserEmail $UserEmail }
-          List-Files (Join-Path -Path $srcDiretory -ChildPath '*.csproj') `
+          $pipeline = List-Files (Join-Path -Path $srcDiretory -ChildPath '*.csproj') `
             | ForEach-Object { Write-Host "Attempting to gather project info for '$_'." ; $_ } `
             | Get-ProjectInfo `
             | Pack-Package -ArtifactPath $rootDirectory -SourceCodePath $srcDiretory `
             | Upload-Package
+            if (($pipeline | Where-Object {$_.IsRelease -eq $true}).count -gt 0 -and $GenerateDocs) {
+              Generate-Documentation -DocumentationDirectory $documentationDirectory -Directories @($srcDiretory) -UserName $UserName -UserEmail $UserEmail 
+            }
+
+            $pipeline `
+              | Format-Table `
+              | Write-Output
         }
       }
       [string]::Empty {

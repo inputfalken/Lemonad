@@ -1,19 +1,17 @@
 ﻿using System.Threading.Tasks;
-using Lemonad.ErrorHandling.Extensions;
+using Lemonad.ErrorHandling.Extensions.Internal;
 using Xunit;
-using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
-namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
+namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.Tests {
     public class MapErrorTests {
         [Fact]
         public async Task Result_With_Error__Expects_Error_To_Be_Mapped() {
             var errorSelectorInvoked = false;
-            var task = DivisionAsync(10, 0).MapError(s => {
+            var task = TaskResultFunctions.MapError(AssertionUtilities.DivisionAsync(10, 0), s => {
                 errorSelectorInvoked = true;
                 return s.ToUpper();
             });
-            Assert.False(errorSelectorInvoked, "The function should not get exectued before the value is awaited.");
-
+            
             var result = await task;
             Assert.True(errorSelectorInvoked,
                 "Errorselector should get exeuted since there is an error in the result.");
@@ -26,7 +24,7 @@ namespace Lemonad.ErrorHandling.Test.Asynchronous.Result.Tests {
         [Fact]
         public async Task Result_With_Value__Expects_Error_To_Not_Be_Mapped() {
             var errorSelectorInvoked = false;
-            var result = await DivisionAsync(10, 2).MapError(s => {
+            var result = await TaskResultFunctions.MapError(AssertionUtilities.DivisionAsync(10, 2), s => {
                 errorSelectorInvoked = true;
                 return s.ToUpper();
             });

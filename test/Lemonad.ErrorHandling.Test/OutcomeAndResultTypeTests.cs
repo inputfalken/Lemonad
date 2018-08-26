@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Xunit;
+
+namespace Lemonad.ErrorHandling.Test {
+    public class OutcomeAndResultTypeTests {
+        [Fact]
+        public void Share_Same_Generic_Public_Instance_Methods() {
+            IReadOnlyList<string> Filter(Type type) {
+                var interfaceMethods = type
+                    .GetInterfaces()
+                    .SelectMany(x => x.GetMethods())
+                    .Select(x => x.Name)
+                    .ToList();
+                return type
+                    .GetMethods()
+                    .Where(x => interfaceMethods.Contains(x.Name) == false)
+                    .Where(x => x.IsStatic == false)
+                    .OrderBy(x => x.Name)
+                    .Select(x => x.Name)
+                    .ToArray();
+            }
+
+            var result = typeof(Result<string, string>);
+            var resultMethods = Filter(result);
+
+            var outcome = typeof(Outcome<string, string>);
+            var outcomeMethods = Filter(outcome);
+
+            var differences = (resultMethods.Count > outcomeMethods.Count
+                    ? resultMethods.Where(x => outcomeMethods.Contains(x) == false)
+                    : outcomeMethods.Where(x => resultMethods.Contains(x) == false))
+                .ToArray();
+            var difference = differences.Aggregate("Method differences:", (x, y) => $"{x}{Environment.NewLine}{y}");
+
+            Assert.True(differences.Length == 0, difference);
+        }
+    }
+}
