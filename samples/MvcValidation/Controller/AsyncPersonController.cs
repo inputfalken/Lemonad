@@ -2,25 +2,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
 using Lemonad.ErrorHandling.Extensions;
-using Lemonad.ErrorHandling.Extensions.Internal;
 using Microsoft.AspNetCore.Mvc;
 using MvcValidation.ApiModels;
 using MvcValidation.Models;
 
 namespace MvcValidation.Controller {
     public class AsyncPersonController : Microsoft.AspNetCore.Mvc.Controller {
-        [HttpPost]
-        [Route("eitherSummarized")]
-        public Task<IActionResult> PostPerson([FromBody] PersonPostApiModel model) {
-            var lastNameAppService = LastNameAppService(new PersonModel()).ToOutcome();
-            return ApiValidation(model)
-                // Using match inside this scope is currently too complex since it requires all type params to be supplied.
-                .Map(x => new PersonModel {FirstName = x.FirstName, LastName = x.LastName})
-                .Flatten(LastNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
-                .FlatMap(FirstNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
-                .Match<IActionResult>(Ok, BadRequest);
-        }
-
         private static Result<PersonPostApiModel, PersonPostApiError> ApiValidation(PersonPostApiModel model) {
             var apiValidation = model
                 .ToResult<PersonPostApiModel, PersonPostApiError>()
@@ -42,6 +29,13 @@ namespace MvcValidation.Controller {
             });
         }
 
+        private static async Task<Result<SuccessModel, ErrorModel>> FirstNameAppService(PersonModel person) {
+            await Task.Delay(50);
+            return person.FirstName == "Foo"
+                ? (Result<SuccessModel, ErrorModel>) new SuccessModel {Count = 4711}
+                : new ErrorModel {Message = "Expected a 'Foo'"};
+        }
+
         private static async Task<Result<SuccessModel, ErrorModel>> LastNameAppService(PersonModel person) {
             await Task.Delay(50);
             return person.LastName == "Bar"
@@ -49,11 +43,16 @@ namespace MvcValidation.Controller {
                 : new ErrorModel {Message = "Expected a 'Bar'"};
         }
 
-        private static async Task<Result<SuccessModel, ErrorModel>> FirstNameAppService(PersonModel person) {
-            await Task.Delay(50);
-            return person.FirstName == "Foo"
-                ? (Result<SuccessModel, ErrorModel>) new SuccessModel {Count = 4711}
-                : new ErrorModel {Message = "Expected a 'Foo'"};
+        [HttpPost]
+        [Route("eitherSummarized")]
+        public Task<IActionResult> PostPerson([FromBody] PersonPostApiModel model) {
+            var lastNameAppService = LastNameAppService(new PersonModel()).ToOutcome();
+            return ApiValidation(model)
+                // Using match inside this scope is currently too complex since it requires all type params to be supplied.
+                .Map(x => new PersonModel {FirstName = x.FirstName, LastName = x.LastName})
+                .Flatten(LastNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
+                .FlatMap(FirstNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
+                .Match<IActionResult>(Ok, BadRequest);
         }
 
         private static Result<string, string> ValidateName(string name) {

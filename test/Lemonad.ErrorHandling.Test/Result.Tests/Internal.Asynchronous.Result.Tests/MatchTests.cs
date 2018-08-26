@@ -8,7 +8,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
         public async Task Result_With_Error__Expect_ErrorAction() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
-            var match = TaskResultFunctions.Match(AssertionUtilities.DivisionAsync(10, 0), d => { selectorExectued = true; }, s => { errorSelectorExectued = true; });
+            var match = TaskResultFunctions.Match(AssertionUtilities.DivisionAsync(10, 0),
+                d => { selectorExectued = true; }, s => { errorSelectorExectued = true; });
             await match;
 
             Assert.False(selectorExectued, "Selector should not get executed.");
@@ -38,7 +39,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
             Result_With_Value__Expect_Action() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
-            var match = TaskResultFunctions.Match(AssertionUtilities.DivisionAsync(10, 2), d => { selectorExectued = true; }, s => { errorSelectorExectued = true; });
+            var match = TaskResultFunctions.Match(AssertionUtilities.DivisionAsync(10, 2),
+                d => { selectorExectued = true; }, s => { errorSelectorExectued = true; });
             await match;
             Assert.True(selectorExectued, "Selector should get executed.");
             Assert.False(errorSelectorExectued, "Error selector not should get exectued.");

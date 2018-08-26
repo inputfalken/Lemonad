@@ -246,8 +246,9 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         /// <param name="errorSelector">
-        ///     Is exectued when the predicate fails. The in parameter is a <see cref="Maybe{T}"/> whose <typeparamref name="T"/> has been checked to not be null.
-        ///     But the <see cref="Maybe{T}"/> could still be unsafe and should be used with care.
+        ///     Is exectued when the predicate fails. The in parameter is a <see cref="Maybe{T}" /> whose <typeparamref name="T" />
+        ///     has been checked to not be null.
+        ///     But the <see cref="Maybe{T}" /> could still be unsafe and should be used with care.
         /// </param>
         [Pure]
         public Result<T, TError> Filter(Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) {

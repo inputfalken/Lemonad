@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using Lemonad.ErrorHandling;
 using Lemonad.ErrorHandling.Extensions;
 
@@ -29,10 +28,10 @@ namespace ReadFileAsync {
 
         private static Outcome<string[], int> Readfiles(string filename) => File.ReadAllLinesAsync(filename);
 
-        private static Result<string, int> VerifyFilextension(string filename) =>
-            Path.GetExtension(filename) == ".txt" ? (Result<string, int>) filename : 2;
-
         private static Result<IReadOnlyList<string>, int> VerifyFileContent(IReadOnlyList<string> lines) =>
             lines.Count > 0 ? ResultExtensions.Ok<IReadOnlyList<string>, int>(lines) : 3;
+
+        private static Result<string, int> VerifyFilextension(string filename) =>
+            Path.GetExtension(filename) == ".txt" ? (Result<string, int>) filename : 2;
     }
 }

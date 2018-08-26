@@ -34,7 +34,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
 
         [Fact]
         public Task Result_With_Value__With_Invalid_Casting() =>
-            Assert.ThrowsAsync<InvalidCastException>(() => TaskResultFunctions.Cast<AssertionUtilities.Gender, string, string>(AssertionUtilities.GetGender(1)));
+            Assert.ThrowsAsync<InvalidCastException>(() =>
+                TaskResultFunctions.Cast<AssertionUtilities.Gender, string, string>(AssertionUtilities.GetGender(1)));
 
         [Fact]
         public async Task Result_With_Value__With_Valid_Casting() {
