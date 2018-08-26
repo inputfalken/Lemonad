@@ -545,7 +545,6 @@ namespace Lemonad.ErrorHandling {
         /// </summary>
         /// <remarks>
         ///     The <see cref="Result{T,TError}" /> returned is not the the result from <paramref name="selector" />.
-        ///     Use <see cref="FlatMap{TResult}" /> in order to the get the result from <paramref name="selector" />.
         /// </remarks>
         /// <param name="selector">
         ///     A function who expects a <see cref="Result{T,TError}" /> as an return type.
@@ -596,7 +595,6 @@ namespace Lemonad.ErrorHandling {
         /// </summary>
         /// <remarks>
         ///     The <see cref="Result{T,TError}" /> returned is not the the result from <paramref name="selector" />.
-        ///     Use <see cref="FlatMap{TResult}" /> in order to the get the result from <paramref name="selector" />.
         /// </remarks>
         /// <param name="selector"></param>
         /// <typeparam name="TResult"></typeparam>
