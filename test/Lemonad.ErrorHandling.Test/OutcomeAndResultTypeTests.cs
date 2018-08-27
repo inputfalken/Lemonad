@@ -32,7 +32,7 @@ namespace Lemonad.ErrorHandling.Test {
                     ? resultMethods.Where(x => outcomeMethods.Contains(x) == false)
                     : outcomeMethods.Where(x => resultMethods.Contains(x) == false))
                 .ToArray();
-            var difference = differences.Aggregate("Method differences:", (x, y) => $"{x}{Environment.NewLine}{y}");
+            var difference = differences.Aggregate("Method differences:", (x, y) => $"{x}{Environment.NewLine}\tName of method: '{y}'");
 
             Assert.True(differences.Length == 0, difference);
         }
