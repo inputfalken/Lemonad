@@ -58,6 +58,14 @@ namespace Lemonad.ErrorHandling.Extensions {
         /// <typeparam name="TError">
         ///     The 'failure' value.
         /// </typeparam>
-        public static Outcome<T, TError> ToOutcome<T, TError>(this Task<Result<T, TError>> source) => source;
+        public static Outcome<T, TError> AsOutcome<T, TError>(this Task<Result<T, TError>> source) => source;
+
+        /// Async version of
+        /// <inheritdoc cref="ResultExtensions.ToResult{T,TError}(T)"/>
+        public static Outcome<T, TError> ToOutcome<T, TError>(this Task<T> source) => source;
+
+        /// Async version of
+        /// <inheritdoc cref="ResultExtensions.ToResultError{T,TError}"/>
+        public static Outcome<T, TError> ToOutcomeError<T, TError>(this Task<TError> source) => source;
     }
 }

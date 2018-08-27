@@ -9,7 +9,7 @@ namespace Lemonad.ErrorHandling.Test.Outcome.Tests {
             var selectorExectued = false;
             var division = await AssertionUtilities
                 .DivisionAsync(2, 0)
-                .ToOutcome()
+                .AsOutcome()
                 .Map(x => {
                     selectorExectued = true;
                     return x * 8;
@@ -25,7 +25,7 @@ namespace Lemonad.ErrorHandling.Test.Outcome.Tests {
             var selectorExectued = false;
             var division = await AssertionUtilities
                 .DivisionAsync(10, 2)
-                .ToOutcome()
+                .AsOutcome()
                 .Map(x => {
                         selectorExectued = true;
                         return x * 4;
