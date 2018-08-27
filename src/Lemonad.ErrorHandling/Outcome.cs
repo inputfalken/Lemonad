@@ -60,6 +60,11 @@ namespace Lemonad.ErrorHandling {
             Func<TError> errorSelector) =>
             TaskResultFunctions.IsErrorWhen(Result, predicate, errorSelector);
 
+        public Outcome<T, TError> IsErrorWhen(
+            Func<T, bool> predicate,
+            Func<Maybe<T>, TError> errorSelector) =>
+            TaskResultFunctions.IsErrorWhen(Result, predicate, errorSelector);
+
         /// <inheritdoc cref="Result{T,TError}.IsErrorWhenNull(System.Func{TError})" />
         public Outcome<T, TError> IsErrorWhenNull(Func<TError> errorSelector) =>
             TaskResultFunctions.IsErrorWhenNull(Result, errorSelector);
