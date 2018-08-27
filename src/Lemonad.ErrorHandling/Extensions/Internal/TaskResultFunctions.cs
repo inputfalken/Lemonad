@@ -36,16 +36,10 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
             Action<TError> action) => (await source.ConfigureAwait(false)).DoWithError(action);
 
         [Pure]
-        internal static async Task<Result<T, TError>> Filter<T, TError>(Task<Result<T, TError>> source,
-            Func<T, bool> predicate,
-            Func<TError> errorSelector) =>
-            (await source.ConfigureAwait(false)).Filter(predicate, errorSelector);
-
-        [Pure]
-        internal static async Task<Result<T, TError>> Filter<T, TError>(
+        internal static async Task<Result<T, TResult>> Filter<T, TError, TResult>(
             this Task<Result<T, TError>> source,
             Func<T, bool> predicate,
-            Func<Maybe<T>, TError> errorSelector) =>
+            Func<Maybe<T>, TResult> errorSelector) =>
             (await source.ConfigureAwait(false)).Filter(predicate, errorSelector);
 
         [Pure]

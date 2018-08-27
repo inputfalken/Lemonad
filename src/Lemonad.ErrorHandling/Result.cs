@@ -233,33 +233,20 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         /// <param name="errorSelector">
-        ///     Is exectued when the predicate fails.
-        /// </param>
-        [Pure]
-        public Result<T, TError> Filter(Func<T, bool> predicate, Func<TError> errorSelector) =>
-            Filter(predicate, _ => errorSelector());
-
-        /// <summary>
-        ///     Filters the <typeparamref name="T" /> if <typeparamref name="T" /> is the active type.
-        /// </summary>
-        /// <param name="predicate">
-        ///     A function to test <typeparamref name="T" />.
-        /// </param>
-        /// <param name="errorSelector">
         ///     Is exectued when the predicate fails. The in parameter is a <see cref="Maybe{T}" /> whose <typeparamref name="T" />
         ///     has been checked to not be null.
         ///     But the <see cref="Maybe{T}" /> could still be unsafe and should be used with care.
         /// </param>
         [Pure]
-        public Result<T, TError> Filter(Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) {
-            if (HasError) return ResultExtensions.Error<T, TError>(Error);
+        public Result<T, TResult> Filter<TResult>(Func<T, bool> predicate, Func<Maybe<T>, TResult> errorSelector) {
+            if (HasError) return ResultExtensions.Error<T, TResult>(errorSelector(Maybe<T>.None));
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
             if (predicate(Value))
-                return ResultExtensions.Ok<T, TError>(Value);
+                return ResultExtensions.Ok<T, TResult>(Value);
             return errorSelector == null
                 ? throw new ArgumentNullException(nameof(errorSelector))
-                : ResultExtensions.Error<T, TError>(errorSelector(Value.Some().IsNoneWhenNull()));
+                : ResultExtensions.Error<T, TResult>(errorSelector(Value.Some().IsNoneWhenNull()));
         }
 
         /// <summary>
