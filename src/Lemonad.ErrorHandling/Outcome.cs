@@ -29,12 +29,8 @@ namespace Lemonad.ErrorHandling {
         public static implicit operator Outcome<T, TError>(TError error) =>
             new Outcome<T, TError>(Task.FromResult(ResultExtensions.Error<T, TError>(error)));
 
-        /// <inheritdoc cref="Result{T,TError}.Filter(System.Func{T,bool},System.Func{TError})" />
-        public Outcome<T, TError> Filter(Func<T, bool> predicate, Func<TError> errorSelector) =>
-            TaskResultFunctions.Filter(Result, predicate, errorSelector);
-
-        /// <inheritdoc cref="Result{T,TError}.Filter(System.Func{T,bool},System.Func{Maybe{T},TError})" />
-        public Outcome<T, TError> Filter(Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) =>
+        /// <inheritdoc cref="Result{T,TError}.Filter{TResult}" />
+        public Outcome<T, TResult> Filter<TResult>(Func<T, bool> predicate, Func<Maybe<T>, TResult> errorSelector) =>
             Result.Filter(predicate, errorSelector);
 
         /// <inheritdoc cref="Result{T,TError}.HasError" />

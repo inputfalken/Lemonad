@@ -11,7 +11,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var result = Division(10, 0).Filter(d => {
                 predicateExectued = true;
                 return d == 2;
-            }, () => {
+            }, _ => {
                 errorSelectorExectued = true;
                 return "Bad";
             });
@@ -57,7 +57,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var result = Division(10, 2).Filter(d => {
                 predicateExectued = true;
                 return false;
-            }, () => {
+            }, _ => {
                 errorSelectorExectued = true;
                 return "Bad";
             });
@@ -100,7 +100,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var result = Division(10, 2).Filter(d => {
                 predicateExectued = true;
                 return true;
-            }, () => {
+            }, _ => {
                 errorSelectorExectued = true;
                 return "Bad";
             });

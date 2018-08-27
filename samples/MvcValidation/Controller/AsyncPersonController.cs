@@ -13,7 +13,7 @@ namespace MvcValidation.Controller {
                 .ToResult<PersonPostApiModel, PersonPostApiError>()
                 .Multiple(
                     x => x.Filter(y => y.Age > 10,
-                        () => new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
+                        _ => new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
                     x => x.Flatten(y => ValidateName(y.FirstName),
                         s => new PersonPostApiError {Message = s, Model = model}),
                     x => x.Flatten(y => ValidateName(y.LastName),
@@ -58,8 +58,8 @@ namespace MvcValidation.Controller {
         private static Result<string, string> ValidateName(string name) {
             return name.ToResult<string, string>()
                 .IsErrorWhen(string.IsNullOrWhiteSpace, () => "Name cannot be empty.")
-                .Filter(s => s.All(char.IsLetter), () => "Name can only contain letters.")
-                .Filter(s => char.IsUpper(s[0]), () => "Name must start with capital letter.");
+                .Filter(s => s.All(char.IsLetter), _ => "Name can only contain letters.")
+                .Filter(s => char.IsUpper(s[0]), _ => "Name must start with capital letter.");
         }
     }
 }
