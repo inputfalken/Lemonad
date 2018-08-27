@@ -148,10 +148,11 @@ namespace Lemonad.ErrorHandling.Extensions {
         public static Result<T, TError> ToResult<T, TError>(this T source) => Ok<T, TError>(source);
 
         /// <summary>
-        ///     Creates an <see cref="Result{T,TError}" /> with the value <typeparamref name="T" /> and a <see cref="Object"/> as the error type.
+        ///     Creates an <see cref="Result{T,TError}" /> with the value <typeparamref name="T" /> and a <see cref="Object" /> as
+        ///     the error type.
         /// </summary>
         /// <remarks>
-        /// The error object is null and just a fill in for the error type.
+        ///     The error object is null and just a fill in for the error type.
         /// </remarks>
         /// <param name="source">
         ///     The <typeparamref name="T" /> to convert.
@@ -178,10 +179,11 @@ namespace Lemonad.ErrorHandling.Extensions {
         public static Result<T, TError> ToResultError<T, TError>(this TError source) => Error<T, TError>(source);
 
         /// <summary>
-        ///     Creates an <see cref="Result{T,TError}" /> with the error <typeparamref name="TError" /> and a <see cref="Object"/> as the value type.
+        ///     Creates an <see cref="Result{T,TError}" /> with the error <typeparamref name="TError" /> and a
+        ///     <see cref="Object" /> as the value type.
         /// </summary>
         /// <remarks>
-        /// The value object is null and just a fill in for the error type.
+        ///     The value object is null and just a fill in for the error type.
         /// </remarks>
         /// <param name="source">
         ///     The <typeparamref name="TError" /> to convert.

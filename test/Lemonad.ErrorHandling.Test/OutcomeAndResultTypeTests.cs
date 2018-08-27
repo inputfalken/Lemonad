@@ -14,7 +14,7 @@ namespace Lemonad.ErrorHandling.Test {
                     .Concat(typeof(object).GetMethods())
                     .Select(x => x.Name)
                     .ToList();
-                
+
                 return type
                     .GetMethods()
                     .Where(x => exclusions.Contains(x.Name) == false)
@@ -34,7 +34,8 @@ namespace Lemonad.ErrorHandling.Test {
                     ? resultMethods.Where(x => outcomeMethods.Contains(x) == false)
                     : outcomeMethods.Where(x => resultMethods.Contains(x) == false))
                 .ToArray();
-            var difference = differences.Aggregate("Method differences:", (x, y) => $"{x}{Environment.NewLine}\tName of method: '{y}'");
+            var difference = differences.Aggregate("Method differences:",
+                (x, y) => $"{x}{Environment.NewLine}\tName of method: '{y}'");
 
             Assert.True(differences.Length == 0, difference);
         }
