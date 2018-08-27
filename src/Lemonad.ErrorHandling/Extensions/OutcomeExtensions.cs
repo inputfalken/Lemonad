@@ -64,8 +64,39 @@ namespace Lemonad.ErrorHandling.Extensions {
         /// <inheritdoc cref="ResultExtensions.ToResult{T,TError}(T)"/>
         public static Outcome<T, TError> ToOutcome<T, TError>(this Task<T> source) => source;
 
+        /// <summary>
+        ///     Creates an <see cref="Outcome{T,TError}" /> with the value <typeparamref name="T" /> and a <see cref="Object"/> as the error type.
+        /// </summary>
+        /// <remarks>
+        /// The error object is null and just a fill in for the error type.
+        /// </remarks>
+        /// <param name="source">
+        ///     The <typeparamref name="T" /> to convert.
+        /// </param>
+        /// <typeparam name="T">
+        ///     The type of the <paramref name="source" />.
+        /// </typeparam>
+        [Pure]
+        public static Outcome<T, object> ToOutcome<T>(this Task<T> source) => source;
+
         /// Async version of
-        /// <inheritdoc cref="ResultExtensions.ToResultError{T,TError}"/>
+        /// <inheritdoc cref="ResultExtensions.ToResult{T}(T)"/>
+        [Pure]
         public static Outcome<T, TError> ToOutcomeError<T, TError>(this Task<TError> source) => source;
+        
+        /// <summary>
+        ///     Creates an <see cref="Outcome{T,TError}" /> with the error <typeparamref name="TError" /> and a <see cref="Object"/> as the value type.
+        /// </summary>
+        /// <remarks>
+        /// The value object is null and just a fill in for the error type.
+        /// </remarks>
+        /// <param name="source">
+        ///     The <typeparamref name="TError" /> to convert.
+        /// </param>
+        /// <typeparam name="TError">
+        ///     The type of the <paramref name="source" />.
+        /// </typeparam>
+        [Pure]
+        public static Outcome<object, TError> ToOutcomeError<TError>(this Task<TError> source) => source;
     }
 }
