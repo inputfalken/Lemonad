@@ -36,7 +36,8 @@ if ($isWindows) {
             | Get-ProjectInfo `
             | Pack-Package -ArtifactPath $rootDirectory -SourceCodePath $srcDiretory `
             | Upload-Package
-            if (($pipeline | Where-Object {$_.IsRelease -eq $true}).count -gt 0 -and $GenerateDocs) {
+            # The '@' is needed if the pipeline only returns 1 item but we still want to access the count property.
+            if (@($pipeline | Where-Object {$_.IsRelease -eq $true}).count -gt 0 -and $GenerateDocs) {
               Generate-Documentation -DocumentationDirectory $documentationDirectory -Directories @($srcDiretory) -UserName $UserName -UserEmail $UserEmail 
             }
 
