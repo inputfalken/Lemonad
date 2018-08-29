@@ -60,8 +60,17 @@ namespace Lemonad.ErrorHandling.Extensions {
         public static Task<TResult> Match<T, TResult, TError>(this Outcome<T, TError> source, Func<T, TResult> selector)
             where T : TError => source.Match(selector, x => selector((T) x));
 
-        /// Async version of
-        /// <inheritdoc cref="ResultExtensions.ToResult{T,TError}(T)" />
+        [Pure]
+        public static Outcome<T, TError> ToOutcome<T, TError>(this Task<T> source, Func<T, bool> predicate,
+            Func<TError> errorSelector) {
+            async Task<Result<T, TError>> Factory(Task<T> x, Func<T, bool> y, Func<TError> z) {
+                var value = await x;
+                return value.ToResult(predicate, errorSelector);
+            }
+
+            return Factory(source, predicate, errorSelector);
+        }
+
         public static Outcome<T, TError> ToOutcome<T, TError>(this Task<T> source) => source;
 
         /// <summary>
@@ -77,8 +86,6 @@ namespace Lemonad.ErrorHandling.Extensions {
         [Pure]
         public static Outcome<T, Unit> ToOutcome<T>(this Task<T> source) => source;
 
-        /// Async version of
-        /// <inheritdoc cref="ResultExtensions.ToResult{T}(T)" />
         [Pure]
         public static Outcome<T, TError> ToOutcomeError<T, TError>(this Task<TError> source) => source;
 

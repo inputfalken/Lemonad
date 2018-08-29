@@ -126,11 +126,8 @@ namespace Lemonad.ErrorHandling.Extensions {
         [Pure]
         public static Result<T, TError>
             ToResult<T, TError>(this T? source, Func<TError> errorSelector) where T : struct =>
-            source.HasValue
-                ? Ok<T, TError>(source.Value)
-                : (errorSelector != null
-                    ? Error<T, TError>(errorSelector())
-                    : throw new ArgumentNullException(nameof(errorSelector)));
+            // ReSharper disable once PossibleInvalidOperationException
+            source.ToResult(x => x.HasValue, errorSelector).Map(x => x.Value);
 
         /// <summary>
         ///     Creates an <see cref="Result{T,TError}" /> with the value <typeparamref name="T" />.
@@ -158,6 +155,15 @@ namespace Lemonad.ErrorHandling.Extensions {
         /// </typeparam>
         [Pure]
         public static Result<T, Unit> ToResult<T>(this T source) => Ok<T, Unit>(source);
+
+        [Pure]
+        public static Result<T, TError> ToResult<T, TError>(this T source, Func<T, bool> predicate,
+            Func<TError> errorSelector) {
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            return predicate(source)
+                ? (Result<T, TError>) source
+                : (errorSelector == null ? throw new ArgumentNullException(nameof(errorSelector)) : errorSelector());
+        }
 
         /// <summary>
         ///     Creates an <see cref="Result{T,TError}" /> with the error <typeparamref name="TError" />.

@@ -3,7 +3,7 @@ using System.Diagnostics.Contracts;
 
 namespace Lemonad.ErrorHandling {
     /// <summary>
-    ///  Represents void but in a returnable fashion.
+    ///     Represents void but in a returnable fashion.
     /// </summary>
     [Serializable]
     public readonly struct Unit : IEquatable<Unit>, IComparable<Unit> {
@@ -40,7 +40,7 @@ namespace Lemonad.ErrorHandling {
         public static bool operator <=(Unit left, Unit right) => true;
 
         /// <summary>
-        /// Is Always equal
+        ///     Is Always equal
         /// </summary>
         [Pure]
         public int CompareTo(Unit other) => 0;
