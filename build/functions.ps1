@@ -140,9 +140,10 @@ function Generate-Documentation {
     | Select-Object -ExpandProperty commitId `
     | Where-Object {$_ -ne $currentSha1} `
     | Select-Object -First 1
-  Write-Host "Comparing diffs with '$currentSha1' '$previousSha1'." -ForegroundColor Yellow
 
-  git diff --quiet --exit-code $previousSha1 $currentSha1 -- $DocumentationDirectory (($Directories | ForEach-Object { "'$_'" }) -join ' ')
+  $diffPaths = ($Directories + $DocumentationDirectory | ForEach-Object { "'$_'" }) -join ' '
+  Write-Host "Comparing diffs with '$currentSha1' '$previousSha1', for paths: '$diffPaths'." -ForegroundColor Yellow
+  git diff --quiet --exit-code $previousSha1 $currentSha1 -- $diffPaths
   if ($LASTEXITCODE -eq 1) {
     Build-Documentation -Directory $DocumentationDirectory
     Configure-Git
