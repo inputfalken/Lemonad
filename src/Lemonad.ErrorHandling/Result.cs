@@ -239,9 +239,8 @@ namespace Lemonad.ErrorHandling {
         public Result<T, TError> Filter(Func<T, bool> predicate, Func<TError> errorSelector) =>
             Filter(predicate, _ => errorSelector());
 
-        public Outcome<T, TError> Filter(Func<T, Task<bool>> predicate, Func<Maybe<T>, TError> errorSelector) {
-            return TaskResultFunctions.Filter(this, predicate, errorSelector);
-        }
+        public Outcome<T, TError> Filter(Func<T, Task<bool>> predicate, Func<Maybe<T>, TError> errorSelector) =>
+            TaskResultFunctions.Filter(this, predicate, errorSelector);
 
         public Outcome<T, TError> Filter(Func<T, Task<bool>> predicate, Func<TError> errorSelector) =>
             TaskResultFunctions.Filter(this, predicate, _ => errorSelector());
@@ -409,9 +408,8 @@ namespace Lemonad.ErrorHandling {
             : ResultExtensions.Ok<T, TErrorResult>(Value);
 
         [Pure]
-        public Outcome<T, TErrorResult> MapError<TErrorResult>(Func<TError, Task<TErrorResult>> selector) {
-            return TaskResultFunctions.MapError(this, selector);
-        }
+        public Outcome<T, TErrorResult> MapError<TErrorResult>(Func<TError, Task<TErrorResult>> selector) =>
+            TaskResultFunctions.MapError(this, selector);
 
         /// <summary>
         ///     Flatten another <see cref="Result{T,TError}" /> who shares the same <typeparamref name="TError" />.

@@ -72,7 +72,9 @@ namespace Lemonad.ErrorHandling.Extensions {
         [Pure]
         public static Outcome<T, TError> ToOutcome<T, TError>(this Task<T?> source, Func<TError> errorSelector)
             where T : struct {
-            async Task<Result<T, TError>> Factory(Task<T?> x, Func<TError> y ) => (await x.ConfigureAwait(false)).ToResult(errorSelector);
+            async Task<Result<T, TError>> Factory(Task<T?> x, Func<TError> y) =>
+                (await x.ConfigureAwait(false)).ToResult(errorSelector);
+
             return Factory(source, errorSelector);
         }
 
