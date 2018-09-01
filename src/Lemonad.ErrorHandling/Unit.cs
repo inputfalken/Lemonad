@@ -7,6 +7,7 @@ namespace Lemonad.ErrorHandling {
     /// </summary>
     [Serializable]
     public readonly struct Unit : IEquatable<Unit>, IComparable<Unit> {
+        public static readonly Func<Unit> Selector = () => Default;
         public static readonly Unit Default = new Unit();
 
         [Pure]

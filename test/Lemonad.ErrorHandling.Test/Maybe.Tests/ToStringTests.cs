@@ -2,19 +2,23 @@
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
+    /// <summary>
+    ///     Maybe is based on <see cref="Result{T,TError}" /> and Result currently does not support showing the value of
+    ///     TError. instead it will be default keyword.
+    /// </summary>
     public class ToStringTests {
         [Fact]
         public void None_Maybe_Char_With__Expects_String_To_have__Doble_Quotes() {
             var maybe = 'x'.None();
             Assert.False(maybe.HasValue, "Maybe Should not have value.");
-            Assert.Equal("None ==> Maybe<Char>(\'x\')", maybe.ToString());
+            Assert.Equal($@"None ==> Maybe<Char>('{default(char)}')", maybe.ToString());
         }
 
         [Fact]
         public void None_Maybe_String_With_Content__Expects_String_To_have__Doble_Quotes() {
             var maybe = "hello".None();
             Assert.False(maybe.HasValue, "Maybe Should not have value.");
-            Assert.Equal("None ==> Maybe<String>(\"hello\")", maybe.ToString());
+            Assert.Equal($@"None ==> Maybe<String>(null)", maybe.ToString());
         }
 
         [Fact]
@@ -29,7 +33,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void None_Maybe_String_Without_Content__Expects_String_To_have__Doble_Quotes() {
             var maybe = string.Empty.None();
             Assert.False(maybe.HasValue, "Maybe Should not have value.");
-            Assert.Equal("None ==> Maybe<String>(\"\")", maybe.ToString());
+            Assert.Equal($@"None ==> Maybe<String>(null)", maybe.ToString());
         }
 
         [Fact]

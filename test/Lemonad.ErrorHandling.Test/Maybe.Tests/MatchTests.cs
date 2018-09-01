@@ -72,9 +72,11 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         }
 
         [Fact]
-        public void Null_SomeSelector__Throws() {
+        public void Null_SomeSelector__Does_Not_Throw() {
+            // Since there Hasvalue is false it should not be invoked.
             Func<string, int> someSelector = null;
-            Assert.Throws<ArgumentNullException>(() => "hello".Some(s => false).Match(someSelector, () => 2));
+            var exception = Record.Exception(() => "hello".Some(s => false).Match(someSelector, () => 2));
+            Assert.Null(exception);
         }
     }
 }
