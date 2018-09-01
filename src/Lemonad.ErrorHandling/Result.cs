@@ -311,10 +311,11 @@ namespace Lemonad.ErrorHandling {
         }
 
         [Pure]
-        private Outcome<T, TError> IsErrorWhen(Func<T, Task<bool>> predicate, Func<Maybe<T>, TError> errorSelector) =>
+        public Outcome<T, TError> IsErrorWhen(Func<T, Task<bool>> predicate, Func<Maybe<T>, TError> errorSelector) =>
             TaskResultFunctions.IsErrorWhen(this, predicate, errorSelector);
 
-        private Outcome<T, TError> IsErrorWhen(Func<T, Task<bool>> predicate, Func<TError> errorSelector) =>
+        [Pure]
+        public Outcome<T, TError> IsErrorWhen(Func<T, Task<bool>> predicate, Func<TError> errorSelector) =>
             IsErrorWhen(predicate, _ => errorSelector());
 
         /// <summary>
