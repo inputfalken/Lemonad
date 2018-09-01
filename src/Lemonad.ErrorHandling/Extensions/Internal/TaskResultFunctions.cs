@@ -42,6 +42,17 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
             (await source.ConfigureAwait(false)).Filter(predicate, errorSelector);
 
         [Pure]
+        internal static async Task<Result<T, TError>> Filter<T, TError>(Result<T, TError> source,
+            Func<T, Task<bool>> predicate,
+            Func<Maybe<T>, TError> errorSelector) {
+            if (source.HasError) return source.Error;
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            return await predicate(source.Value).ConfigureAwait(false)
+                ? (Result<T, TError>) source.Value
+                : errorSelector(source.ToMaybe().IsNoneWhenNull());
+        }
+
+        [Pure]
         internal static async Task<Result<T, TError>> Filter<T, TError>(
             this Task<Result<T, TError>> source,
             Func<T, bool> predicate,
@@ -144,7 +155,7 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
         ///     Asynchronous version of Flatten.
         /// </summary>
         [Pure]
-        public static async Task<Result<T, TError>> Flatten<TResult, T, TError>(Result<T, TError> result,
+        internal static async Task<Result<T, TError>> Flatten<TResult, T, TError>(Result<T, TError> result,
             Func<T, Task<Result<TResult, TError>>> selector) {
             if (result.HasValue) {
                 if (selector == null) throw new ArgumentNullException(nameof(selector));
@@ -270,6 +281,23 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
             (await result.ConfigureAwait(false)).HasValue;
 
         [Pure]
+        internal static async Task<Result<T, TError>> IsErrorWhen<T, TError>(Result<T, TError> source,
+            Func<T, Task<bool>> predicate,
+            Func<Maybe<T>, TError> errorSelector) {
+            if (source.HasError)
+                return errorSelector == null
+                    ? throw new ArgumentNullException(nameof(errorSelector))
+                    : ResultExtensions.Error<T, TError>(source.Error);
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
+            if (!await predicate(source.Value).ConfigureAwait(false))
+                return ResultExtensions.Ok<T, TError>(source.Value);
+            if (errorSelector == null)
+                throw new ArgumentNullException(nameof(errorSelector));
+            return ResultExtensions.Error<T, TError>(errorSelector(source.Value.Some().IsNoneWhenNull()));
+        }
+
+        [Pure]
         internal static async Task<Result<T, TError>> IsErrorWhen<T, TError>(Task<Result<T, TError>> source,
             Func<T, bool> predicate,
             Func<TError> errorSelector) =>
@@ -287,8 +315,25 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
             (await source.ConfigureAwait(false)).IsErrorWhenNull(errorSelector);
 
         [Pure]
+        internal static async Task<Result<TResult, TError>> Map<TResult, T, TError>(Result<T, TError> source,
+            Func<T, Task<TResult>> taskSelector) => source.HasError
+            ? (Result<TResult, TError>) source.Error
+            : (taskSelector != null
+                ? await taskSelector(source.Value).ConfigureAwait(false)
+                : throw new ArgumentNullException(nameof(taskSelector))
+            );
+
+        [Pure]
         internal static async Task<Result<TResult, TError>> Map<T, TResult, TError>(Task<Result<T, TError>> source,
             Func<T, TResult> selector) => (await source.ConfigureAwait(false)).Map(selector);
+
+        [Pure]
+        internal static async Task<Result<T, TErrorResult>> MapError<TErrorResult, T, TError>(Result<T, TError> source,
+            Func<TError, Task<TErrorResult>> taskSelector) {
+            if (source.HasValue) return source.Value;
+            if (taskSelector == null) throw new ArgumentNullException(nameof(taskSelector));
+            return await taskSelector(source.Error).ConfigureAwait(false);
+        }
 
         [Pure]
         internal static async Task<Result<T, TErrorResult>> MapError<T, TError, TErrorResult>(

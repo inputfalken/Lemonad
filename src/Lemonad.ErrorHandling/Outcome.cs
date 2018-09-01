@@ -37,6 +37,29 @@ namespace Lemonad.ErrorHandling {
         public Outcome<T, TError> Filter(Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) =>
             Result.Filter(predicate, errorSelector);
 
+        public Outcome<T, TError> Filter(Func<T, Task<bool>> predicate, Func<TError> errorSelector) =>
+            FilterFactory(this, predicate, errorSelector);
+
+        /// <inheritdoc cref="Result{T,TError}.Filter(System.Func{T,bool},System.Func{Maybe{T},TError})" />
+        public Outcome<T, TError> Filter(Func<T, Task<bool>> predicate, Func<Maybe<T>, TError> errorSelector) =>
+            FilterFactory(this, predicate, errorSelector);
+
+        private static async Task<Result<T, TError>> FilterFactory(Outcome<T, TError> source,
+            Func<T, Task<bool>> predicate, Func<TError> errorSelector) =>
+            await (
+                    await source.Result.ConfigureAwait(false)
+                )
+                .Filter(predicate, errorSelector).Result
+                .ConfigureAwait(false);
+
+        private static async Task<Result<T, TError>> FilterFactory(Outcome<T, TError> source,
+            Func<T, Task<bool>> predicate, Func<Maybe<T>, TError> errorSelector) =>
+            await (
+                    await source.Result.ConfigureAwait(false)
+                )
+                .Filter(predicate, errorSelector).Result
+                .ConfigureAwait(false);
+
         /// <inheritdoc cref="Result{T,TError}.HasError" />
         public Task<bool> HasError => TaskResultFunctions.HasError(Result);
 
@@ -65,17 +88,57 @@ namespace Lemonad.ErrorHandling {
             Func<Maybe<T>, TError> errorSelector) =>
             TaskResultFunctions.IsErrorWhen(Result, predicate, errorSelector);
 
+        public Outcome<T, TError> IsErrorWhen(
+            Func<T, Task<bool>> predicate,
+            Func<TError> errorSelector) =>
+            IsErrorWhenFactory(this, predicate, errorSelector);
+
+        public Outcome<T, TError> IsErrorWhen(
+            Func<T, Task<bool>> predicate,
+            Func<Maybe<T>, TError> errorSelector) =>
+            IsErrorWhenFactory(this, predicate, errorSelector);
+
+        private static async Task<Result<T, TError>> IsErrorWhenFactory(Outcome<T, TError> source,
+            Func<T, Task<bool>> predicate, Func<Maybe<T>, TError> errorSelector) =>
+            await (
+                    await source.Result.ConfigureAwait(false)
+                )
+                .IsErrorWhen(predicate, errorSelector).Result
+                .ConfigureAwait(false);
+
+        private static async Task<Result<T, TError>> IsErrorWhenFactory(Outcome<T, TError> source,
+            Func<T, Task<bool>> predicate, Func<TError> errorSelector) =>
+            await (
+                    await source.Result.ConfigureAwait(false)
+                )
+                .IsErrorWhen(predicate, errorSelector).Result
+                .ConfigureAwait(false);
+
         /// <inheritdoc cref="Result{T,TError}.IsErrorWhenNull(System.Func{TError})" />
         public Outcome<T, TError> IsErrorWhenNull(Func<TError> errorSelector) =>
             TaskResultFunctions.IsErrorWhenNull(Result, errorSelector);
 
-        /// <inheritdoc cref="Result{T,TError}.Map{TResult}" />
         public Outcome<TResult, TError> Map<TResult>(Func<T, TResult> selector) =>
             TaskResultFunctions.Map(Result, selector);
 
-        /// <inheritdoc cref="Result{T,TError}.MapError{TErrorResult}" />
+        public Outcome<TResult, TError> Map<TResult>(Func<T, Task<TResult>> selector) => MapFactory(this, selector);
+
+        private static async Task<Result<TResult, TError>> MapFactory<TResult>(Outcome<T, TError> source,
+            Func<T, Task<TResult>> selector) => await (await source.Result.ConfigureAwait(false)).Map(selector).Result
+            .ConfigureAwait(false);
+
         public Outcome<T, TErrorResult> MapError<TErrorResult>(Func<TError, TErrorResult> selector) =>
             TaskResultFunctions.MapError(Result, selector);
+
+        public Outcome<T, TErrorResult> MapError<TErrorResult>(Func<TError, Task<TErrorResult>> selector) =>
+            MapErrorFactory(this, selector);
+
+        private static async Task<Result<T, TResult>> MapErrorFactory<TResult>(Outcome<T, TError> source,
+            Func<TError, Task<TResult>> selector) => await (
+                await source.Result.ConfigureAwait(false)
+            )
+            .MapError(selector).Result
+            .ConfigureAwait(false);
 
         /// <inheritdoc cref="Result{T,TError}.Do" />
         public Outcome<T, TError> Do(Action action) => TaskResultFunctions.Do(Result, action);

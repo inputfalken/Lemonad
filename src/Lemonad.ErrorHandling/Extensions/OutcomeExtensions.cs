@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling.Extensions {
@@ -19,9 +18,6 @@ namespace Lemonad.ErrorHandling.Extensions {
         ///     The 'failure' value.
         /// </typeparam>
         public static Outcome<T, TError> AsOutcome<T, TError>(this Task<Result<T, TError>> source) => source;
-
-        public static TaskAwaiter<Result<T, TError>> GetAwaiter<T, TError>(this Outcome<T, TError> outcome) =>
-            outcome.Result.GetAwaiter();
 
         /// <summary>
         ///     Evaluates the <see cref="Result{T,TError}" />.
@@ -72,7 +68,9 @@ namespace Lemonad.ErrorHandling.Extensions {
         [Pure]
         public static Outcome<T, TError> ToOutcome<T, TError>(this Task<T?> source, Func<TError> errorSelector)
             where T : struct {
-            async Task<Result<T, TError>> Factory(Task<T?> x, Func<TError> y ) => (await x.ConfigureAwait(false)).ToResult(errorSelector);
+            async Task<Result<T, TError>> Factory(Task<T?> x, Func<TError> y) =>
+                (await x.ConfigureAwait(false)).ToResult(errorSelector);
+
             return Factory(source, errorSelector);
         }
 

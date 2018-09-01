@@ -10,7 +10,7 @@ namespace ReadFileAsync {
         private static int Main(string[] args) {
             return args[0]
                 .ToResult<string, int>()
-                .Filter(File.Exists, () => 1)
+                .Filter(x => File.Exists(x), _ => 1)
                 .DoWithError(x => Console.WriteLine("File does not exist."))
                 .FlatMap(VerifyFilextension, i => {
                     Console.WriteLine("Invalid file extension.");

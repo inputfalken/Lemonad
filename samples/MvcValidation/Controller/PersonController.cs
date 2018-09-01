@@ -51,7 +51,7 @@ namespace MvcValidation.Controller {
 
         private static Result<string, string> ValidateName(string name) {
             return name.ToResult<string, string>()
-                .IsErrorWhen(string.IsNullOrWhiteSpace, () => "Name cannot be empty.")
+                .IsErrorWhen(x => string.IsNullOrWhiteSpace(x), () => "Name cannot be empty.")
                 .Filter(s => s.All(char.IsLetter), () => "Name can only contain letters.")
                 .Filter(s => char.IsUpper(s[0]), () => "Name must start with capital letter.");
         }
