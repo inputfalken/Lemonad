@@ -239,6 +239,13 @@ namespace Lemonad.ErrorHandling {
         public Result<T, TError> Filter(Func<T, bool> predicate, Func<TError> errorSelector) =>
             Filter(predicate, _ => errorSelector());
 
+        public Outcome<T, TError> Filter(Func<T, Task<bool>> predicate, Func<Maybe<T>, TError> errorSelector) {
+            return TaskResultFunctions.Filter(this, predicate, errorSelector);
+        }
+
+        public Outcome<T, TError> Filter(Func<T, Task<bool>> predicate, Func<TError> errorSelector) =>
+            TaskResultFunctions.Filter(this, predicate, _ => errorSelector());
+
         /// <summary>
         ///     Filters the <typeparamref name="T" /> if <typeparamref name="T" /> is the active type.
         /// </summary>
@@ -304,6 +311,13 @@ namespace Lemonad.ErrorHandling {
             return ResultExtensions.Error<T, TError>(errorSelector(Value.Some().IsNoneWhenNull()));
         }
 
+        [Pure]
+        private Outcome<T, TError> IsErrorWhen(Func<T, Task<bool>> predicate, Func<Maybe<T>, TError> errorSelector) =>
+            TaskResultFunctions.IsErrorWhen(this, predicate, errorSelector);
+
+        private Outcome<T, TError> IsErrorWhen(Func<T, Task<bool>> predicate, Func<TError> errorSelector) =>
+            IsErrorWhen(predicate, _ => errorSelector());
+
         /// <summary>
         ///     Filters the <typeparamref name="T" /> by checking for null if <typeparamref name="T" /> is the active type.
         /// </summary>
@@ -313,13 +327,14 @@ namespace Lemonad.ErrorHandling {
         /// <returns>
         ///     A filtered <see cref="Result{T,TError}" />.
         /// </returns>
-        [Pure]
+        [
+            Pure]
         public Result<T, TError> IsErrorWhenNull(Func<TError> errorSelector) =>
-            IsErrorWhen(EquailtyFunctions.IsNull, errorSelector);
+            IsErrorWhen(x => EquailtyFunctions.IsNull(x), errorSelector);
 
         [Pure]
         public Result<T, TError> IsErrorWhenNull(Func<Maybe<T>, TError> errorSelector) =>
-            IsErrorWhen(EquailtyFunctions.IsNull, errorSelector);
+            IsErrorWhen(x => EquailtyFunctions.IsNull(x), errorSelector);
 
         /// <summary>
         ///     Maps both <typeparamref name="T" /> and <typeparamref name="TError" /> but only one is executed.
@@ -370,6 +385,10 @@ namespace Lemonad.ErrorHandling {
                 : throw new ArgumentNullException(nameof(selector))
             : ResultExtensions.Error<TResult, TError>(Error);
 
+        [Pure]
+        public Outcome<TResult, TError> Map<TResult>(Func<T, Task<TResult>> selector) =>
+            TaskResultFunctions.Map(this, selector);
+
         /// <summary>
         ///     Maps <typeparamref name="TError" />.
         /// </summary>
@@ -388,6 +407,11 @@ namespace Lemonad.ErrorHandling {
                 ? ResultExtensions.Error<T, TErrorResult>(selector(Error))
                 : throw new ArgumentNullException(nameof(selector))
             : ResultExtensions.Ok<T, TErrorResult>(Value);
+
+        [Pure]
+        public Outcome<T, TErrorResult> MapError<TErrorResult>(Func<TError, Task<TErrorResult>> selector) {
+            return TaskResultFunctions.MapError(this, selector);
+        }
 
         /// <summary>
         ///     Flatten another <see cref="Result{T,TError}" /> who shares the same <typeparamref name="TError" />.
