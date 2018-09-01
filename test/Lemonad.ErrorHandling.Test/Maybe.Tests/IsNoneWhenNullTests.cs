@@ -34,7 +34,8 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Maybe_Overload__With_Some_Empty_String() {
-            var maybe = "".Some().IsNoneWhenNull();
+            var some = "".Some();
+            var maybe = some.IsNoneWhenNull();
             Assert.True(maybe.HasValue, "Maybe should have a value, since the string is not null.");
             Assert.Equal(string.Empty, maybe.Value);
         }

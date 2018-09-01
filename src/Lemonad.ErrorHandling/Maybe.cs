@@ -11,35 +11,31 @@ namespace Lemonad.ErrorHandling {
     ///     The potential value.
     /// </typeparam>
     public readonly struct Maybe<T> : IEquatable<Maybe<T>>, IComparable<Maybe<T>> {
-        public static Maybe<T> None { get; } = new Maybe<T>(default, false);
+        public static Maybe<T> None { get; } = new Maybe<T>(new Result<T, Unit>(default, Unit.Default, true, false));
 
         /// <summary>
         ///     Is true if there's a <typeparamref name="T" /> in the current state of the <see cref="Maybe{T}" />.
         /// </summary>
         public bool HasValue { get; }
 
+        private readonly Result<T, Unit> _result;
+
         /// <summary>
         ///     Treat <typeparamref name="T" /> as enumerable with 0-1 elements in.
         ///     This is handy when combining <see cref="Result{T,TError}" /> with LINQ's API.
         /// </summary>
-        public IEnumerable<T> AsEnumerable => Yield(this);
+        public IEnumerable<T> AsEnumerable => _result.AsEnumerable;
 
         internal T Value { get; }
 
-        // TODO add IEqualityComparer ctor overload.
-        internal Maybe(T value, bool hasValue) {
-            Value = value;
-            HasValue = hasValue;
+        internal Maybe(Result<T, Unit> result) {
+            HasValue = result.HasValue;
+            Value = result.Value;
+            _result = result;
         }
 
         /// <inheritdoc />
-        public bool Equals(Maybe<T> other) {
-            if (!HasValue && !other.HasValue)
-                return true;
-            if (HasValue && other.HasValue)
-                return EqualityComparer<T>.Default.Equals(Value, other.Value);
-            return false;
-        }
+        public bool Equals(Maybe<T> other) => other._result.Equals(_result);
 
         public static implicit operator Maybe<T>(T item) => item.Some();
 
@@ -50,14 +46,10 @@ namespace Lemonad.ErrorHandling {
         public static bool operator !=(Maybe<T> left, Maybe<T> right) => !left.Equals(right);
 
         /// <inheritdoc />
-        public override int GetHashCode() => !HasValue ? 0 : (Value == null ? 1 : Value.GetHashCode());
+        public override int GetHashCode() => _result.GetHashCode();
 
         /// <inheritdoc />
-        public int CompareTo(Maybe<T> other) {
-            if (HasValue && !other.HasValue) return 1;
-            if (!HasValue && other.HasValue) return -1;
-            return Comparer<T>.Default.Compare(Value, other.Value);
-        }
+        public int CompareTo(Maybe<T> other) => other._result.CompareTo(other._result);
 
         public static bool operator <(Maybe<T> left, Maybe<T> right) => left.CompareTo(right) < 0;
 
@@ -71,10 +63,6 @@ namespace Lemonad.ErrorHandling {
         public override string ToString() =>
             $"{(HasValue ? "Some" : "None")} ==> {typeof(Maybe<T>).ToHumanString()}{StringFunctions.PrettyTypeString(Value)}";
 
-        private static IEnumerable<T> Yield(Maybe<T> maybe) {
-            if (maybe.HasValue)
-                yield return maybe.Value;
-        }
 
         /// <summary>
         ///     Evaluates the <see cref="Maybe{T}" />.
@@ -88,19 +76,11 @@ namespace Lemonad.ErrorHandling {
         /// <exception cref="ArgumentNullException">
         ///     When either <paramref name="someAction" /> or <paramref name="noneAction" /> needs to be executed.
         /// </exception>
-        public void Match(Action<T> someAction,
-            Action noneAction) {
-            if (HasValue) {
-                if (someAction == null)
-                    throw new ArgumentNullException(nameof(someAction));
-                someAction(Value);
-            }
-            else {
-                if (noneAction == null)
-                    throw new ArgumentNullException(nameof(noneAction));
-                noneAction();
-            }
-        }
+        public void Match(Action<T> someAction, Action noneAction) => _result.Match(someAction, x => {
+            if (noneAction == null)
+                throw new ArgumentNullException(nameof(noneAction));
+            noneAction();
+        });
 
         /// <summary>
         ///     Evaluates the <see cref="Maybe{T}" />.
@@ -115,12 +95,13 @@ namespace Lemonad.ErrorHandling {
         ///     The type returned by the functions <paramref name="someSelector" /> and <paramref name="noneSelector" />.
         /// </typeparam>
         [Pure]
-        public TResult Match<TResult>(Func<T, TResult> someSelector,
-            Func<TResult> noneSelector) => someSelector == null
-            ? throw new ArgumentNullException(nameof(someSelector))
-            : (noneSelector == null
-                ? throw new ArgumentNullException(nameof(noneSelector))
-                : (HasValue ? someSelector(Value) : noneSelector()));
+        public TResult Match<TResult>(Func<T, TResult> someSelector, Func<TResult> noneSelector) =>
+            _result.Match(someSelector, _ => {
+                if (noneSelector == null)
+                    throw new ArgumentNullException(nameof(noneSelector));
+
+                return noneSelector();
+            });
 
         /// <summary>
         ///     Maps <typeparamref name="T" />.
@@ -133,12 +114,7 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         [Pure]
         public Maybe<TResult>
-            Map<TResult>(Func<T, TResult> selector) =>
-            HasValue
-                ? selector != null
-                    ? MaybeExtensions.Some(selector(Value))
-                    : throw new ArgumentNullException(nameof(selector))
-                : Maybe<TResult>.None;
+            Map<TResult>(Func<T, TResult> selector) => new Maybe<TResult>(_result.Map(selector));
 
         /// <summary>
         ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
@@ -147,14 +123,7 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         [Pure]
-        public Maybe<T> Filter(
-            Func<T, bool> predicate) => HasValue
-            ? predicate != null
-                ? predicate(Value)
-                    ? this
-                    : None
-                : throw new ArgumentNullException()
-            : None;
+        public Maybe<T> Filter(Func<T, bool> predicate) => new Maybe<T>(_result.Filter(predicate, Unit.Selector));
 
         /// <summary>
         ///     Flamaps another <see cref="Maybe{T}" />.
@@ -166,10 +135,11 @@ namespace Lemonad.ErrorHandling {
         ///     The type <typeparamref name="T" /> returned from the <paramref name="flatMapSelector" /> function.
         /// </typeparam>
         [Pure]
-        public Maybe<TResult> FlatMap<TResult>(
-            Func<T, Maybe<TResult>> flatMapSelector) => HasValue
-            ? flatMapSelector?.Invoke(Value) ?? throw new ArgumentNullException(nameof(flatMapSelector))
-            : Maybe<TResult>.None;
+        public Maybe<TResult> FlatMap<TResult>(Func<T, Maybe<TResult>> flatMapSelector) =>
+            new Maybe<TResult>(_result.FlatMap(x => {
+                if (flatMapSelector == null) throw new ArgumentNullException(nameof(flatMapSelector));
+                return flatMapSelector(x)._result;
+            }, x => x));
 
         /// <summary>
         ///     Flamaps another <see cref="Maybe{T}" />.
@@ -190,16 +160,12 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public Maybe<TResult> FlatMap<TFlatMap, TResult>(
             Func<T, Maybe<TFlatMap>> flatMapSelector,
-            Func<T, TFlatMap, TResult> resultSelector) {
-            if (HasValue)
-                return flatMapSelector != null
-                    ? FlatMap(x => flatMapSelector(x).Map(y => resultSelector != null
-                        ? resultSelector(x, y)
-                        : throw new ArgumentNullException(nameof(resultSelector))))
-                    : throw new ArgumentNullException(nameof(flatMapSelector));
-
-            return Maybe<TResult>.None;
-        }
+            Func<T, TFlatMap, TResult> resultSelector) =>
+            new Maybe<TResult>(_result.FlatMap(x => {
+                if (flatMapSelector == null)
+                    throw new ArgumentNullException(nameof(flatMapSelector));
+                return flatMapSelector(x)._result;
+            }, resultSelector));
 
         /// <summary>
         ///     Flamaps a <see cref="Nullable{T}" />.
@@ -222,7 +188,7 @@ namespace Lemonad.ErrorHandling {
         ///     A <see cref="Maybe{T}" /> whose <typeparamref name="T" /> has value if <typeparamref name="T" /> is not null.
         /// </returns>
         [Pure]
-        public Maybe<T> IsNoneWhenNull() => IsNoneWhen(EquailtyFunctions.IsNull);
+        public Maybe<T> IsNoneWhenNull() => new Maybe<T>(_result.IsErrorWhenNull(() => Unit.Default));
 
         /// <summary>
         ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
@@ -231,14 +197,7 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         [Pure]
-        public Maybe<T> IsNoneWhen(
-            Func<T, bool> predicate) => HasValue
-            ? predicate != null
-                ? predicate(Value) == false
-                    ? this
-                    : None
-                : throw new ArgumentNullException(nameof(predicate))
-            : None;
+        public Maybe<T> IsNoneWhen(Func<T, bool> predicate) => new Maybe<T>(_result.Filter(predicate, Unit.Selector));
 
         /// <summary>
         ///     Flamaps another <see cref="Maybe{T}" />.

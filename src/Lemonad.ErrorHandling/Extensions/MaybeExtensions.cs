@@ -89,7 +89,8 @@ namespace Lemonad.ErrorHandling.Extensions {
         ///     A <see cref="Maybe{T}" /> who will have no value.
         /// </returns>
         [Pure]
-        public static Maybe<TSource> None<TSource>(this TSource item) => new Maybe<TSource>(item, false);
+        public static Maybe<TSource> None<TSource>(this TSource item) =>
+            new Maybe<TSource>(item.ToResult(x => false, Unit.Selector));
 
         /// <summary>
         ///     Works like <see cref="None{TSource}(TSource)" /> but with an <paramref name="predicate" /> to test the element.
@@ -105,9 +106,10 @@ namespace Lemonad.ErrorHandling.Extensions {
         /// </typeparam>
         [Pure]
         public static Maybe<TSource> None<TSource>(this TSource source, Func<TSource, bool> predicate) =>
-            predicate != null
-                ? Some(source).Filter(x => !predicate(x))
-                : throw new ArgumentNullException(nameof(predicate));
+            new Maybe<TSource>(source.ToResult(x => {
+                if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+                return predicate(x) == false;
+            }, Unit.Selector));
 
         /// <summary>
         ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="Maybe{T}" /> into an <see cref="IEnumerable{T}" /> of
@@ -141,7 +143,8 @@ namespace Lemonad.ErrorHandling.Extensions {
         ///     A <see cref="Maybe{T}" /> whose value will be <paramref name="item" />.
         /// </returns>
         [Pure]
-        public static Maybe<TSource> Some<TSource>(this TSource item) => new Maybe<TSource>(item, true);
+        public static Maybe<TSource> Some<TSource>(this TSource item) =>
+            new Maybe<TSource>(item.ToResult(x => true, Unit.Selector));
 
         /// <summary>
         ///     Works like <see cref="Some{TSource}(TSource)" /> but with an <paramref name="predicate" /> to test the element.
@@ -156,10 +159,11 @@ namespace Lemonad.ErrorHandling.Extensions {
         ///     The type of the <paramref name="source" />.
         /// </typeparam>
         [Pure]
-        public static Maybe<TSource> Some<TSource>(this TSource source, Func<TSource, bool> predicate) =>
-            predicate != null
-                ? Some(source).Filter(predicate)
-                : throw new ArgumentNullException(nameof(predicate));
+        public static Maybe<TSource> Some<TSource>(this TSource source, Func<TSource, bool> predicate) {
+            if (predicate != null)
+                return Some(source).Filter(predicate);
+            throw new ArgumentNullException(nameof(predicate));
+        }
 
         /// <summary>
         ///     Converts an <see cref="Nullable{T}" /> to an <see cref="Maybe{T}" />.
