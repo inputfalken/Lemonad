@@ -24,7 +24,7 @@ namespace Lemonad.ErrorHandling {
         ///     Treat <typeparamref name="T" /> as enumerable with 0-1 elements in.
         ///     This is handy when combining <see cref="Result{T,TError}" /> with LINQ's API.
         /// </summary>
-        public IEnumerable<T> AsEnumerable => Yield(this);
+        public IEnumerable<T> AsEnumerable => _result.AsEnumerable;
 
         internal T Value { get; }
 
@@ -35,13 +35,7 @@ namespace Lemonad.ErrorHandling {
         }
 
         /// <inheritdoc />
-        public bool Equals(Maybe<T> other) {
-            if (!HasValue && !other.HasValue)
-                return true;
-            if (HasValue && other.HasValue)
-                return EqualityComparer<T>.Default.Equals(Value, other.Value);
-            return false;
-        }
+        public bool Equals(Maybe<T> other) => other._result.Equals(_result);
 
         public static implicit operator Maybe<T>(T item) => item.Some();
 
@@ -52,14 +46,10 @@ namespace Lemonad.ErrorHandling {
         public static bool operator !=(Maybe<T> left, Maybe<T> right) => !left.Equals(right);
 
         /// <inheritdoc />
-        public override int GetHashCode() => !HasValue ? 0 : (Value == null ? 1 : Value.GetHashCode());
+        public override int GetHashCode() => _result.GetHashCode();
 
         /// <inheritdoc />
-        public int CompareTo(Maybe<T> other) {
-            if (HasValue && !other.HasValue) return 1;
-            if (!HasValue && other.HasValue) return -1;
-            return Comparer<T>.Default.Compare(Value, other.Value);
-        }
+        public int CompareTo(Maybe<T> other) => other._result.CompareTo(other._result);
 
         public static bool operator <(Maybe<T> left, Maybe<T> right) => left.CompareTo(right) < 0;
 
@@ -73,10 +63,6 @@ namespace Lemonad.ErrorHandling {
         public override string ToString() =>
             $"{(HasValue ? "Some" : "None")} ==> {typeof(Maybe<T>).ToHumanString()}{StringFunctions.PrettyTypeString(Value)}";
 
-        private static IEnumerable<T> Yield(Maybe<T> maybe) {
-            if (maybe.HasValue)
-                yield return maybe.Value;
-        }
 
         /// <summary>
         ///     Evaluates the <see cref="Maybe{T}" />.
