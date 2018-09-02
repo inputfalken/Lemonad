@@ -89,7 +89,7 @@ namespace Lemonad.ErrorHandling.Extensions {
         ///     A <see cref="Maybe{T}" /> who will have no value.
         /// </returns>
         [Pure]
-        public static Maybe<TSource> ToMaybeNone<TSource>(this TSource item) => ToMaybe(item, x => false);
+        public static Maybe<TSource> ToMaybeNone<TSource>(this TSource item) => Maybe<TSource>.None;
 
         /// <summary>
         ///     Works like <see cref="ToMaybeNone{TSource}(TSource)" /> but with an <paramref name="predicate" /> to test the element.
