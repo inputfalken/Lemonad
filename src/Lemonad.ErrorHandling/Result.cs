@@ -253,20 +253,17 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         /// <param name="errorSelector">
-        ///     Is exectued when the predicate fails. The in parameter is a <see cref="Maybe{T}" /> whose <typeparamref name="T" />
-        ///     has been checked to not be null.
-        ///     But the <see cref="Maybe{T}" /> could still be unsafe and should be used with care.
+        ///     Is exectued when the <paramref name="predicate"/> is false. The in parameter is a <see cref="Maybe{T}" /> since the <typeparamref name="T"/> could be unsafe in this context.
         /// </param>
         [Pure]
         public Result<T, TError> Filter(Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) {
-            if (HasError) return ResultExtensions.Error<T, TError>(Error);
+            if (HasError) return this;
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
-            if (predicate(Value))
-                return ResultExtensions.Ok<T, TError>(Value);
+            if (predicate(Value)) return this;
             return errorSelector == null
                 ? throw new ArgumentNullException(nameof(errorSelector))
-                : ResultExtensions.Error<T, TError>(errorSelector(Value.Some().IsNoneWhenNull()));
+                : ResultExtensions.Error<T, TError>(errorSelector(Value));
         }
 
         /// <summary>
@@ -276,39 +273,24 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         /// <param name="errorSelector">
-        ///     Is executed when the <paramref name="predicate" /> function is true.
+        ///     Is exectued when the <paramref name="predicate"/> is true. The in parameter is a <see cref="Maybe{T}" /> since the <typeparamref name="T"/> could be unsafe in this context.
         /// </param>
         /// <returns>
         ///     A filtered <see cref="Result{T,TError}" />.
         /// </returns>
         [Pure]
         public Result<T, TError> IsErrorWhen(
-            Func<T, bool> predicate, Func<TError> errorSelector) {
-            if (HasError)
-                return errorSelector == null
-                    ? throw new ArgumentNullException(nameof(errorSelector))
-                    : ResultExtensions.Error<T, TError>(Error);
-            if (predicate == null)
-                throw new ArgumentNullException(nameof(predicate));
-            if (!predicate(Value)) return ResultExtensions.Ok<T, TError>(Value);
-            if (errorSelector == null)
-                throw new ArgumentNullException(nameof(errorSelector));
-            return ResultExtensions.Error<T, TError>(errorSelector());
-        }
+            Func<T, bool> predicate, Func<TError> errorSelector) => IsErrorWhen(predicate, _ => errorSelector());
 
         [Pure]
         public Result<T, TError> IsErrorWhen(
             Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) {
-            if (HasError)
-                return errorSelector == null
-                    ? throw new ArgumentNullException(nameof(errorSelector))
-                    : ResultExtensions.Error<T, TError>(Error);
-            if (predicate == null)
-                throw new ArgumentNullException(nameof(predicate));
-            if (!predicate(Value)) return ResultExtensions.Ok<T, TError>(Value);
-            if (errorSelector == null)
-                throw new ArgumentNullException(nameof(errorSelector));
-            return ResultExtensions.Error<T, TError>(errorSelector(Value.Some().IsNoneWhenNull()));
+            return Filter(
+                x => predicate == null
+                    ? throw new ArgumentNullException(nameof(predicate))
+                    : predicate(x) == false,
+                errorSelector
+            );
         }
 
         [Pure]

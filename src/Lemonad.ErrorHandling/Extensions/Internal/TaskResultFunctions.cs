@@ -45,11 +45,13 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
         internal static async Task<Result<T, TError>> Filter<T, TError>(Result<T, TError> source,
             Func<T, Task<bool>> predicate,
             Func<Maybe<T>, TError> errorSelector) {
-            if (source.HasError) return source.Error;
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
-            return await predicate(source.Value).ConfigureAwait(false)
-                ? (Result<T, TError>) source.Value
-                : errorSelector(source.ToMaybe().IsNoneWhenNull());
+            if (source.HasError) return source;
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
+            if (await predicate(source.Value).ConfigureAwait(false)) return source;
+            return errorSelector == null
+                ? throw new ArgumentNullException(nameof(errorSelector))
+                : errorSelector(source.Value);
         }
 
         [Pure]
@@ -281,21 +283,12 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
             (await result.ConfigureAwait(false)).HasValue;
 
         [Pure]
-        internal static async Task<Result<T, TError>> IsErrorWhen<T, TError>(Result<T, TError> source,
-            Func<T, Task<bool>> predicate,
-            Func<Maybe<T>, TError> errorSelector) {
-            if (source.HasError)
-                return errorSelector == null
-                    ? throw new ArgumentNullException(nameof(errorSelector))
-                    : ResultExtensions.Error<T, TError>(source.Error);
-            if (predicate == null)
-                throw new ArgumentNullException(nameof(predicate));
-            if (!await predicate(source.Value).ConfigureAwait(false))
-                return ResultExtensions.Ok<T, TError>(source.Value);
-            if (errorSelector == null)
-                throw new ArgumentNullException(nameof(errorSelector));
-            return ResultExtensions.Error<T, TError>(errorSelector(source.Value.Some().IsNoneWhenNull()));
-        }
+        internal static Task<Result<T, TError>> IsErrorWhen<T, TError>(Result<T, TError> source,
+            Func<T, Task<bool>> predicate, Func<Maybe<T>, TError> errorSelector) => Filter(source,
+            async x => predicate != null
+                ? await predicate(x).ConfigureAwait(false) == false
+                : throw new ArgumentNullException(nameof(predicate)), errorSelector
+        );
 
         [Pure]
         internal static async Task<Result<T, TError>> IsErrorWhen<T, TError>(Task<Result<T, TError>> source,
