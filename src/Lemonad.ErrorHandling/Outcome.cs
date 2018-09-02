@@ -9,7 +9,7 @@ namespace Lemonad.ErrorHandling {
     ///     An asynchronous version of <see cref="Result{T,TError}" /> with the same method members.
     /// </summary>
     public readonly struct Outcome<T, TError> {
-        public Outcome(Task<Result<T, TError>> result) =>
+        private Outcome(Task<Result<T, TError>> result) =>
             Result = result ?? throw new ArgumentNullException(nameof(result));
 
         internal Task<Result<T, TError>> Result { get; }
@@ -20,11 +20,12 @@ namespace Lemonad.ErrorHandling {
         public static implicit operator Outcome<T, TError>(T value) =>
             new Outcome<T, TError>(Task.FromResult(ResultExtensions.Ok<T, TError>(value)));
 
-        public static implicit operator Outcome<T, TError>(Task<T> value) =>
-            new Func<Task<Result<T, TError>>>(async () => await value)();
+        private static async Task<Result<T, TError>> Factory(Task<T> foo) => await foo.ConfigureAwait(false);
+        private static async Task<Result<T, TError>> ErrorFactory(Task<TError> foo) => await foo.ConfigureAwait(false);
 
-        public static implicit operator Outcome<T, TError>(Task<TError> error) =>
-            new Func<Task<Result<T, TError>>>(async () => await error)();
+        public static implicit operator Outcome<T, TError>(Task<T> value) => Factory(value);
+
+        public static implicit operator Outcome<T, TError>(Task<TError> error) => ErrorFactory(error);
 
         public static implicit operator Outcome<T, TError>(TError error) =>
             new Outcome<T, TError>(Task.FromResult(ResultExtensions.Error<T, TError>(error)));

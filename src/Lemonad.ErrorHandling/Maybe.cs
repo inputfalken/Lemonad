@@ -11,7 +11,7 @@ namespace Lemonad.ErrorHandling {
     ///     The potential value.
     /// </typeparam>
     public readonly struct Maybe<T> : IEquatable<Maybe<T>>, IComparable<Maybe<T>> {
-        public static Maybe<T> None { get; } = new Maybe<T>(new Result<T, Unit>(default, Unit.Default, true, false));
+        public static Maybe<T> None { get; } = new Maybe<T>(ResultExtensions.Error<T, Unit>(default));
 
         /// <summary>
         ///     Is true if there's a <typeparamref name="T" /> in the current state of the <see cref="Maybe{T}" />.
@@ -62,7 +62,6 @@ namespace Lemonad.ErrorHandling {
         /// <inheritdoc />
         public override string ToString() =>
             $"{(HasValue ? "Some" : "None")} ==> {typeof(Maybe<T>).ToHumanString()}{StringFunctions.PrettyTypeString(Value)}";
-
 
         /// <summary>
         ///     Evaluates the <see cref="Maybe{T}" />.

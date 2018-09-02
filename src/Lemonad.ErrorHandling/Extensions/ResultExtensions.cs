@@ -18,8 +18,7 @@ namespace Lemonad.ErrorHandling.Extensions {
         ///     The <typeparamref name="TError" /> of <see cref="Result{T,TError}" />.
         /// </typeparam>
         [Pure]
-        public static Result<T, TError> Error<T, TError>(TError error) =>
-            new Result<T, TError>(default, error, true, false);
+        public static Result<T, TError> Error<T, TError>(TError error) => error;
 
         /// <summary>
         ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="Result{T,TError}" /> to an <see cref="IEnumerable{T}" /> of
@@ -88,8 +87,7 @@ namespace Lemonad.ErrorHandling.Extensions {
         ///     The <typeparamref name="TError" /> of <see cref="Result{T,TError}" />.
         /// </typeparam>
         [Pure]
-        public static Result<T, TError> Ok<T, TError>(T element) =>
-            new Result<T, TError>(element, default, false, true);
+        public static Result<T, TError> Ok<T, TError>(T element) => element;
 
         /// <summary>
         ///     Converts an <see cref="Maybe{T}" /> to an <see cref="Result{T,TError}" /> with the value <typeparamref name="T" />.
