@@ -103,7 +103,7 @@ namespace Lemonad.ErrorHandling.Extensions {
         /// </typeparam>
         [Pure]
         public static Maybe<T> ToMaybe<T, TError>(this Result<T, TError> source) =>
-            source.HasValue ? source.Value.Some() : Maybe<T>.None;
+            source.HasValue ? source.Value : Maybe<T>.None;
 
         /// <summary>
         ///     Converts an <see cref="Nullable{T}" /> to an <see cref="Result{T,TError}" /> with the value

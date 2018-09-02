@@ -28,7 +28,7 @@ namespace Lemonad.ErrorHandling {
 
         internal T Value { get; }
 
-        internal Maybe(Result<T, Unit> result) {
+        private Maybe(Result<T, Unit> result) {
             HasValue = result.HasValue;
             Value = result.Value;
             _result = result;
@@ -37,7 +37,7 @@ namespace Lemonad.ErrorHandling {
         /// <inheritdoc />
         public bool Equals(Maybe<T> other) => other._result.Equals(_result);
 
-        public static implicit operator Maybe<T>(T item) => item.Some();
+        public static implicit operator Maybe<T>(T item) => new Maybe<T>(ResultExtensions.Ok<T, Unit>(item));
 
         public override bool Equals(object obj) => obj is Maybe<T> maybe && Equals(maybe);
 
@@ -196,7 +196,7 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         [Pure]
-        public Maybe<T> IsNoneWhen(Func<T, bool> predicate) => new Maybe<T>(_result.Filter(predicate, Unit.Selector));
+        public Maybe<T> IsNoneWhen(Func<T, bool> predicate) => new Maybe<T>(_result.IsErrorWhen(predicate, Unit.Selector));
 
         /// <summary>
         ///     Flamaps another <see cref="Maybe{T}" />.

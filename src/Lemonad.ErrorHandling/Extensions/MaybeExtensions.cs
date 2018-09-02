@@ -89,8 +89,7 @@ namespace Lemonad.ErrorHandling.Extensions {
         ///     A <see cref="Maybe{T}" /> who will have no value.
         /// </returns>
         [Pure]
-        public static Maybe<TSource> None<TSource>(this TSource item) =>
-            new Maybe<TSource>(item.ToResult(x => false, Unit.Selector));
+        public static Maybe<TSource> None<TSource>(this TSource item) => Some(item, x => false);
 
         /// <summary>
         ///     Works like <see cref="None{TSource}(TSource)" /> but with an <paramref name="predicate" /> to test the element.
@@ -106,10 +105,7 @@ namespace Lemonad.ErrorHandling.Extensions {
         /// </typeparam>
         [Pure]
         public static Maybe<TSource> None<TSource>(this TSource source, Func<TSource, bool> predicate) =>
-            new Maybe<TSource>(source.ToResult(x => {
-                if (predicate == null) throw new ArgumentNullException(nameof(predicate));
-                return predicate(x) == false;
-            }, Unit.Selector));
+            Some(source).IsNoneWhen(predicate);
 
         /// <summary>
         ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="Maybe{T}" /> into an <see cref="IEnumerable{T}" /> of
@@ -143,8 +139,7 @@ namespace Lemonad.ErrorHandling.Extensions {
         ///     A <see cref="Maybe{T}" /> whose value will be <paramref name="item" />.
         /// </returns>
         [Pure]
-        public static Maybe<TSource> Some<TSource>(this TSource item) =>
-            new Maybe<TSource>(item.ToResult(x => true, Unit.Selector));
+        public static Maybe<TSource> Some<TSource>(this TSource item) => item;
 
         /// <summary>
         ///     Works like <see cref="Some{TSource}(TSource)" /> but with an <paramref name="predicate" /> to test the element.
@@ -176,7 +171,7 @@ namespace Lemonad.ErrorHandling.Extensions {
         /// </typeparam>
         [Pure]
         public static Maybe<TSource> ToMaybe<TSource>(this TSource? source) where TSource : struct =>
-            source.HasValue ? Some(source.Value) : None<TSource>();
+            source ?? None<TSource>();
 
         /// <summary>
         ///     Converts an <see cref="Maybe{T}" /> to an <see cref="Result{T,TError}" />.
