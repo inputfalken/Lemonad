@@ -198,6 +198,9 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public Maybe<T> IsNoneWhen(Func<T, bool> predicate) => new Maybe<T>(_result.IsErrorWhen(predicate, Unit.Selector));
 
+        [Pure]
+        public Maybe<T> Flatten<TResult>(Func<T, Maybe<TResult>> selector) => new Maybe<T>(_result.Flatten(x => selector?.Invoke(x)._result ?? throw new ArgumentNullException(nameof(selector)), x => x));
+
         /// <summary>
         ///     Flamaps another <see cref="Maybe{T}" />.
         /// </summary>
