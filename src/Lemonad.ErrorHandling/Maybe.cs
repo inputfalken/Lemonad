@@ -138,7 +138,7 @@ namespace Lemonad.ErrorHandling {
             new Maybe<TResult>(_result.FlatMap(x => {
                 if (flatMapSelector == null) throw new ArgumentNullException(nameof(flatMapSelector));
                 return flatMapSelector(x)._result;
-            }, x => x));
+            }, Unit.AlternativeSelector));
 
         /// <summary>
         ///     Flamaps another <see cref="Maybe{T}" />.
@@ -196,10 +196,16 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         [Pure]
-        public Maybe<T> IsNoneWhen(Func<T, bool> predicate) => new Maybe<T>(_result.IsErrorWhen(predicate, Unit.Selector));
+        public Maybe<T> IsNoneWhen(Func<T, bool> predicate) =>
+            new Maybe<T>(_result.IsErrorWhen(predicate, Unit.Selector));
 
         [Pure]
-        public Maybe<T> Flatten<TResult>(Func<T, Maybe<TResult>> selector) => new Maybe<T>(_result.Flatten(x => selector?.Invoke(x)._result ?? throw new ArgumentNullException(nameof(selector)), x => x));
+        public Maybe<T> Flatten<TResult>(Func<T, Maybe<TResult>> selector) => new Maybe<T>(
+            _result.Flatten(
+                x => selector?.Invoke(x)._result ?? throw new ArgumentNullException(nameof(selector)),
+                Unit.AlternativeSelector
+            )
+        );
 
         /// <summary>
         ///     Flamaps another <see cref="Maybe{T}" />.
