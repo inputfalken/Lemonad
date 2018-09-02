@@ -5,7 +5,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     public class NoneWhenStringIsNullOrEmpty {
         [Fact]
         public void Empty_String() {
-            var noneWhenStringIsNullOrEmpty = string.Empty.None(string.IsNullOrWhiteSpace);
+            var noneWhenStringIsNullOrEmpty = string.Empty.ToMaybeNone(string.IsNullOrWhiteSpace);
 
             Assert.False(noneWhenStringIsNullOrEmpty.HasValue);
             Assert.Equal(default, noneWhenStringIsNullOrEmpty.Value);
@@ -14,7 +14,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         [Fact]
         public void Null_String() {
             string f = null;
-            var noneWhenStringIsNullOrEmpty = f.None(string.IsNullOrWhiteSpace);
+            var noneWhenStringIsNullOrEmpty = f.ToMaybeNone(string.IsNullOrWhiteSpace);
 
             Assert.False(noneWhenStringIsNullOrEmpty.HasValue);
             Assert.Equal(default, noneWhenStringIsNullOrEmpty.Value);
@@ -22,7 +22,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void String_With_Content() {
-            var noneWhenStringIsNullOrEmpty = "hello".None(string.IsNullOrWhiteSpace);
+            var noneWhenStringIsNullOrEmpty = "hello".ToMaybeNone(string.IsNullOrWhiteSpace);
 
             Assert.True(noneWhenStringIsNullOrEmpty.HasValue);
             Assert.Equal("hello", noneWhenStringIsNullOrEmpty.Value);
