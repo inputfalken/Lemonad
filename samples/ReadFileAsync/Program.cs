@@ -2,28 +2,21 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
 using Lemonad.ErrorHandling.Extensions;
 
 namespace ReadFileAsync {
     internal class Program {
         private static int Main(string[] args) {
-            return args[0]
-                .ToResult<string, int>()
-                .Filter(x => File.Exists(x), _ => 1)
-                .DoWithError(x => Console.WriteLine("File does not exist."))
-                .FlatMap(VerifyFilextension, i => {
-                    Console.WriteLine("Invalid file extension.");
-                    return i;
-                })
-                .FlatMap(Readfiles)
-                .FlatMap(VerifyFileContent, i => {
-                    Console.WriteLine("File cannot be empty");
-                    return i;
-                })
-                .DoWith(x => Console.WriteLine(x.Aggregate((s, s1) => $"{s}{Environment.NewLine}{s1}")))
-                .Match(_ => 0, i => i)
+            var result = Task.FromResult("foo")
+                .ToOutcome(x => true, () => "")
+                .IsErrorWhen(x => Task.FromResult(false), () => "")
+                .Match(x => x, x => x)
                 .Result;
+
+            Console.WriteLine(result);
+            return 0;
         }
 
         private static Outcome<string[], int> Readfiles(string filename) => File.ReadAllLinesAsync(filename);

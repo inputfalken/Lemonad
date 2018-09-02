@@ -263,7 +263,7 @@ namespace Lemonad.ErrorHandling {
             if (predicate(Value)) return this;
             return errorSelector == null
                 ? throw new ArgumentNullException(nameof(errorSelector))
-                : ResultExtensions.Error<T, TError>(errorSelector(Value));
+                : errorSelector(Value);
         }
 
         /// <summary>
