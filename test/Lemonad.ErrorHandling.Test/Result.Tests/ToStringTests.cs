@@ -5,7 +5,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class ToStringTests {
         [Fact]
         public void Error_Result_With_Char__Expects_Char_To_have__Single_Quotes() {
-            var result = 2.None().ToResult(() => 'I');
+            var result = 2.ToMaybeNone().ToResult(() => 'I');
 
             Assert.True(result.HasError, "Result should have a error value.");
             Assert.False(result.HasValue, "Result should not have a Ok value.");
@@ -17,7 +17,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         [Fact]
         public void Error_Result_With_Int() {
             string hello = null;
-            var result = hello.None().ToResult(() => 2);
+            var result = hello.ToMaybeNone().ToResult(() => 2);
 
             Assert.True(result.HasError, "Result should have a error value.");
             Assert.False(result.HasValue, "Result should not have a Ok value.");
@@ -28,7 +28,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
         [Fact]
         public void Error_Result_With_String__Expects_String_To_have__Doble_Quotes() {
-            var result = 2.None().ToResult(() => "hello");
+            var result = 2.ToMaybeNone().ToResult(() => "hello");
 
             Assert.True(result.HasError, "Result should have a error value.");
             Assert.False(result.HasValue, "Result should not have a Ok value.");
@@ -39,7 +39,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
         [Fact]
         public void Ok_Result_With_Char__Expects_Char_To_have__Single_Quotes() {
-            var result = 'I'.Some().ToResult(() => 2);
+            var result = 'I'.ToMaybe().ToResult(() => 2);
 
             Assert.False(result.HasError, "Result should not have a error value.");
             Assert.True(result.HasValue, "Result should have a Ok value.");
@@ -50,7 +50,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
         [Fact]
         public void Ok_Result_With_String__Expects_String_To_have__Doble_Quotes() {
-            var result = "hello".Some().ToResult(() => 2);
+            var result = "hello".ToMaybe().ToResult(() => 2);
 
             Assert.False(result.HasError, "Result should not have a error value.");
             Assert.True(result.HasValue, "Result should have a Ok value.");
@@ -61,7 +61,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
         [Fact]
         public void Ok_Result_With_String_Using_Backslash__Expects_String_To_have__Backslash() {
-            var result = "hello\\".Some().ToResult(() => 2);
+            var result = "hello\\".ToMaybe().ToResult(() => 2);
 
             Assert.False(result.HasError, "Result should not have a error value.");
             Assert.True(result.HasValue, "Result should have a Ok value.");
@@ -72,7 +72,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
         [Fact]
         public void Ok_Result_With_String_Using_NewLines__Expects_String_To_have__Escaped_Values() {
-            var result = "hello\r\nfoo".Some().ToResult(() => 2);
+            var result = "hello\r\nfoo".ToMaybe().ToResult(() => 2);
 
             Assert.False(result.HasError, "Result should not have a error value.");
             Assert.True(result.HasValue, "Result should have a Ok value.");
@@ -83,7 +83,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
         [Fact]
         public void Ok_Result_With_String_Using_Tab__Expects_String_To_have__Escaped_Values() {
-            var result = "hello\tfoo".Some().ToResult(() => 2);
+            var result = "hello\tfoo".ToMaybe().ToResult(() => 2);
 
             Assert.False(result.HasError, "Result should not have a error value.");
             Assert.True(result.HasValue, "Result should have a Ok value.");

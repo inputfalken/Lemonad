@@ -8,7 +8,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void
             Flattening_From_String_Maybe_With_value_To_Nullable_Int_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
-            var lengthMaybe = input.Some(s => s.Length > 4);
+            var lengthMaybe = input.ToMaybe(s => s.Length > 4);
             int? nullabelInt = 2;
 
             var flatMappedMaybe = lengthMaybe.FlatMap(x => nullabelInt);
@@ -25,7 +25,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Flattening_From_String_Maybe_With_value_To_Nullable_Int_Without_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
             int? nullableInt = null;
-            var stringMaybe = input.None(string.IsNullOrEmpty);
+            var stringMaybe = input.ToMaybeNone(string.IsNullOrEmpty);
 
             var flatMappedMaybe = stringMaybe.FlatMap(x => nullableInt);
 
@@ -40,8 +40,8 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void
             Flattening_From_String_Maybe_With_value_To_String_Maybe_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
-            var lengthMaybe = input.Some(s => s.Length > 4);
-            var stringMaybe = input.None(string.IsNullOrEmpty);
+            var lengthMaybe = input.ToMaybe(s => s.Length > 4);
+            var stringMaybe = input.ToMaybeNone(string.IsNullOrEmpty);
 
             var flatMappedMaybe = lengthMaybe.FlatMap(_ => stringMaybe);
 
@@ -56,8 +56,8 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void
             Flattening_From_String_Maybe_With_value_To_String_Maybe_Without_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
-            var lengthMaybe = input.Some(s => s.Length > 5);
-            var stringMaybe = input.None(string.IsNullOrEmpty);
+            var lengthMaybe = input.ToMaybe(s => s.Length > 5);
+            var stringMaybe = input.ToMaybeNone(string.IsNullOrEmpty);
 
             var flatMappedMaybe = stringMaybe.FlatMap(_ => lengthMaybe);
 
@@ -73,7 +73,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Maybe_String_Whose_Property_HasValue_Is_False__Pasing_Null_ResultSelector__No_ArgumentNullReferenceException_Thrown() {
             var exception = Record.Exception(() => {
                 Func<string, string, string> resultSelector = null;
-                var maybe = "foo".None().FlatMap(s => s.None(), resultSelector);
+                var maybe = "foo".ToMaybeNone().FlatMap(s => s.ToMaybeNone(), resultSelector);
                 Assert.False(maybe.HasValue, "Maybe should not have value.");
                 Assert.Equal(default, maybe.Value);
             });
@@ -85,7 +85,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Maybe_String_Whose_Property_HasValue_Is_False__Pasing_Null_Selector__No_ArgumentNullReferenceException_Thrown() {
             var exception = Record.Exception(() => {
                 Func<string, Maybe<string>> selector = null;
-                var maybe = "foo".None().FlatMap(selector);
+                var maybe = "foo".ToMaybeNone().FlatMap(selector);
                 Assert.False(maybe.HasValue, "Maybe should not have value.");
                 Assert.Equal(default, maybe.Value);
             });
@@ -98,7 +98,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             var exception = Record.Exception(() => {
                 Func<string, Maybe<string>> selector = null;
                 Func<string, string, string> resultSelector = null;
-                var maybe = "foo".None().FlatMap(selector, resultSelector);
+                var maybe = "foo".ToMaybeNone().FlatMap(selector, resultSelector);
                 Assert.False(maybe.HasValue, "Maybe should not have value.");
                 Assert.Equal(default, maybe.Value);
             });
@@ -110,7 +110,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Maybe_String_Whose_Property_HasValue_Is_True__Pasing_Null_Selector__ArgumentNullReferenceException_Thrown() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, Maybe<string>> selector = null;
-                "foo".Some().FlatMap(selector);
+                "foo".ToMaybe().FlatMap(selector);
             });
         }
 
@@ -120,7 +120,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, Maybe<string>> selector = null;
                 Func<string, string, string> resultSelector = null;
-                "foo".Some().FlatMap(selector, resultSelector);
+                "foo".ToMaybe().FlatMap(selector, resultSelector);
             });
         }
 
@@ -129,7 +129,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Maybe_String_Whose_Property_HasValue_Is_True_Flatmapping_None__Pasing_Null_ResultSelector__No_ArgumentNullReferenceException_Thrown() {
             var exception = Record.Exception(() => {
                 Func<string, string, string> resultSelector = null;
-                var maybe = "foo".Some().FlatMap(s => s.None(), resultSelector);
+                var maybe = "foo".ToMaybe().FlatMap(s => s.ToMaybeNone(), resultSelector);
                 Assert.False(maybe.HasValue, "Maybe should not have value.");
                 Assert.Equal(default, maybe.Value);
             });
@@ -141,7 +141,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Maybe_String_Whose_Property_HasValue_Is_True_Flatmapping_Some__Pasing_Null_ResultSelector__ArgumentNullReferenceException_Thrown() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, string, string> resultSelector = null;
-                "foo".Some().FlatMap(s => s.Some(), resultSelector);
+                "foo".ToMaybe().FlatMap(s => s.ToMaybe(), resultSelector);
             });
         }
 
@@ -149,7 +149,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void Passing_Null_Function__Throws_ArgumentNullException() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, Maybe<bool>> function = null;
-                "foo".Some().FlatMap(function);
+                "foo".ToMaybe().FlatMap(function);
             });
         }
 
@@ -157,7 +157,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void
             ResultSelector_Overload__Flattening_From_String_Maybe_With_value_To_Nullable_Int_Maybe_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
-            var lengthMaybe = input.Some(s => s.Length > 4);
+            var lengthMaybe = input.ToMaybe(s => s.Length > 4);
             int? nullabelInt = 2;
 
             var flatMappedMaybe = lengthMaybe.FlatMap(x => nullabelInt, (s, s1) => s.Length + s1);
@@ -174,7 +174,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             ResultSelector_Overload__Flattening_From_String_Maybe_With_value_To_Nullable_Int_Without_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
             int? nullableInt = null;
-            var stringMaybe = input.None(string.IsNullOrEmpty);
+            var stringMaybe = input.ToMaybeNone(string.IsNullOrEmpty);
 
             var flatMappedMaybe = stringMaybe.FlatMap(x => nullableInt, (s, s1) => s.Length + s1);
 
@@ -189,8 +189,8 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void
             ResultSelector_Overload__Flattening_From_String_Maybe_With_value_To_String_Maybe_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
-            var lengthMaybe = input.Some(s => s.Length > 4);
-            var stringMaybe = input.None(string.IsNullOrEmpty);
+            var lengthMaybe = input.ToMaybe(s => s.Length > 4);
+            var stringMaybe = input.ToMaybeNone(string.IsNullOrEmpty);
 
             var flatMappedMaybe = lengthMaybe.FlatMap(x => stringMaybe, (s, s1) => s.Length + s1.Length);
 
@@ -205,8 +205,8 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void
             ResultSelector_Overload__Flattening_From_String_Maybe_With_value_To_String_Maybe_Without_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
-            var lengthMaybe = input.Some(s => s.Length > 5);
-            var stringMaybe = input.None(string.IsNullOrEmpty);
+            var lengthMaybe = input.ToMaybe(s => s.Length > 5);
+            var stringMaybe = input.ToMaybeNone(string.IsNullOrEmpty);
 
             var flatMappedMaybe = stringMaybe.FlatMap(x => lengthMaybe, (x, y) => x.Length + y.Length);
 
@@ -221,7 +221,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void
             ResultSelector_Overload__Flattening_From_String_Maybe_Without_value_To_Nullable_Int_With_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
-            var lengthMaybe = input.Some(s => s.Length > 5);
+            var lengthMaybe = input.ToMaybe(s => s.Length > 5);
             int? nullableInt = 2;
             var flatMappedMaybe = lengthMaybe.FlatMap(x => nullableInt, (s, s1) => s.Length + s1);
 
@@ -237,7 +237,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             ResultSelector_Overload__Flattening_From_String_Maybe_Without_value_To_Nullable_int_Without_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
             int? nullableInt = null;
-            var stringMaybe = input.Some(string.IsNullOrEmpty);
+            var stringMaybe = input.ToMaybe(string.IsNullOrEmpty);
 
             var flatMappedMaybe = stringMaybe.FlatMap(x => nullableInt, (s, s1) => s.Length + s1);
 
@@ -252,8 +252,8 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void
             ResultSelector_Overload__Flattening_From_String_Maybe_Without_value_To_String_Maybe_With_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
-            var lengthMaybe = input.Some(s => s.Length > 5);
-            var stringMaybe = input.None(string.IsNullOrEmpty);
+            var lengthMaybe = input.ToMaybe(s => s.Length > 5);
+            var stringMaybe = input.ToMaybeNone(string.IsNullOrEmpty);
             var flatMappedMaybe = lengthMaybe.FlatMap(x => stringMaybe, (x, y) => x.Length + y.Length);
 
             Assert.True(stringMaybe.HasValue, "Maybe should have value");
@@ -267,8 +267,8 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void
             ResultSelector_Overload__Flattening_From_String_Maybe_Without_value_To_String_Maybe_Without_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
-            var lengthMaybe = input.Some(s => s.Length > 5);
-            var stringMaybe = input.Some(string.IsNullOrEmpty);
+            var lengthMaybe = input.ToMaybe(s => s.Length > 5);
+            var stringMaybe = input.ToMaybe(string.IsNullOrEmpty);
 
             var flatMappedMaybe = stringMaybe.FlatMap(x => lengthMaybe, (s, s1) => s.Length + s1.Length);
 
