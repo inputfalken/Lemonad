@@ -7,8 +7,8 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void
             Flattening_From_String_Maybe_With_Value_To_Maybe_Int_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
-            var lengthMaybe = input.Some(s => s.Length > 4);
-            var maybe2 = 2.Some();
+            var lengthMaybe = input.ToMaybe(s => s.Length > 4);
+            var maybe2 = 2.ToMaybe();
 
             var flatMappedMaybe = lengthMaybe.Flatten(x => maybe2);
 
@@ -23,8 +23,8 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void
             Flattening_From_String_Maybe_With_No_Value_To_Maybe_Int_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
-            var lengthMaybe = input.None();
-            var maybe2 = 2.Some();
+            var lengthMaybe = input.ToMaybeNone();
+            var maybe2 = 2.ToMaybe();
 
             var flatMappedMaybe = lengthMaybe.Flatten(x => maybe2);
 
@@ -38,8 +38,8 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void
             Flattening_From_String_Maybe_With_Value_To_Maybe_Int_With_No_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
-            var lengthMaybe = input.Some(s => s.Length > 4);
-            var maybe2 = 2.None();
+            var lengthMaybe = input.ToMaybe(s => s.Length > 4);
+            var maybe2 = 2.ToMaybeNone();
 
             var flatMappedMaybe = lengthMaybe.Flatten(x => maybe2);
 
@@ -53,8 +53,8 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void
             Flattening_From_String_Maybe_With_No_Value_To_Maybe_Int_With_No_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
-            var lengthMaybe = input.None();
-            var maybe2 = 2.None();
+            var lengthMaybe = input.ToMaybeNone();
+            var maybe2 = 2.ToMaybeNone();
 
             var flatMappedMaybe = lengthMaybe.Flatten(x => maybe2);
 
