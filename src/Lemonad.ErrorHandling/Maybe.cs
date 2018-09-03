@@ -95,12 +95,10 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         [Pure]
         public TResult Match<TResult>(Func<T, TResult> someSelector, Func<TResult> noneSelector) =>
-            _result.Match(someSelector, _ => {
-                if (noneSelector == null)
-                    throw new ArgumentNullException(nameof(noneSelector));
-
-                return noneSelector();
-            });
+            _result.Match(someSelector, _ => noneSelector == null
+                ? throw new ArgumentNullException(nameof(noneSelector))
+                : noneSelector()
+            );
 
         /// <summary>
         ///     Maps <typeparamref name="T" />.
@@ -176,9 +174,8 @@ namespace Lemonad.ErrorHandling {
         ///     The type <typeparamref name="T" /> returned from the <paramref name="flatSelector" /> function.
         /// </typeparam>
         [Pure]
-        public Maybe<TResult> FlatMap<TResult>(
-            Func<T, TResult?> flatSelector) where TResult : struct =>
-            HasValue ? flatSelector(Value).ToMaybe() : Maybe<TResult>.None;
+        public Maybe<TResult> FlatMap<TResult>(Func<T, TResult?> flatSelector) where TResult : struct =>
+            new Maybe<TResult>(_result.FlatMap(x => flatSelector(x).ToResult(Unit.Selector)));
 
         /// <summary>
         ///     Filters the <see cref="Maybe{T}" /> to see if <typeparamref name="T" /> is null.
@@ -226,7 +223,7 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public Maybe<TResult> FlatMap<TFlatMap, TResult>(
             Func<T, TFlatMap?> flatMapSelector,
-            Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct => FlatMap(
-            src => flatMapSelector(src).ToMaybe().Map(elem => resultSelector(src, elem)));
+            Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct =>
+            new Maybe<TResult>(_result.FlatMap(x => flatMapSelector(x).ToResult(() => Unit.Default), resultSelector));
     }
 }
