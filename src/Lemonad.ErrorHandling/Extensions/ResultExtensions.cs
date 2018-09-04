@@ -142,18 +142,6 @@ namespace Lemonad.ErrorHandling.Extensions {
         [Pure]
         public static Result<T, TError> ToResult<T, TError>(this T source) => Ok<T, TError>(source);
 
-        /// <summary>
-        ///     Creates an <see cref="Result{T,TError}" /> with the value <typeparamref name="T" />.
-        /// </summary>
-        /// <param name="source">
-        ///     The <typeparamref name="T" /> to convert.
-        /// </param>
-        /// <typeparam name="T">
-        ///     The type of the <paramref name="source" />.
-        /// </typeparam>
-        [Pure]
-        public static Result<T, Unit> ToResult<T>(this T source) => Ok<T, Unit>(source);
-
         [Pure]
         public static Result<T, TError> ToResult<T, TError>(this T source, Func<T, bool> predicate,
             Func<TError> errorSelector) {
@@ -177,18 +165,6 @@ namespace Lemonad.ErrorHandling.Extensions {
         /// </typeparam>
         [Pure]
         public static Result<T, TError> ToResultError<T, TError>(this TError source) => Error<T, TError>(source);
-
-        /// <summary>
-        ///     Creates an <see cref="Result{T,TError}" /> with the error <typeparamref name="TError" />.
-        /// </summary>
-        /// <param name="source">
-        ///     The <typeparamref name="TError" /> to convert.
-        /// </param>
-        /// <typeparam name="TError">
-        ///     The type of the <paramref name="source" />.
-        /// </typeparam>
-        [Pure]
-        public static Result<Unit, TError> ToResultError<TError>(this TError source) => Error<Unit, TError>(source);
 
         /// <summary>
         ///     Covnerts an <see cref="IEnumerable{T}" /> of <see cref="Result{T,TError}" /> to an <see cref="IEnumerable{T}" /> of

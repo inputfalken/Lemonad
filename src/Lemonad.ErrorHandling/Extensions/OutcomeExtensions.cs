@@ -76,32 +76,7 @@ namespace Lemonad.ErrorHandling.Extensions {
 
         public static Outcome<T, TError> ToOutcome<T, TError>(this Task<T> source) => source;
 
-        /// <summary>
-        ///     Creates an <see cref="Outcome{T,TError}" /> with the value <typeparamref name="T" /> and a <see cref="Object" /> as
-        ///     the error type.
-        /// </summary>
-        /// <param name="source">
-        ///     The <typeparamref name="T" /> to convert.
-        /// </param>
-        /// <typeparam name="T">
-        ///     The type of the <paramref name="source" />.
-        /// </typeparam>
-        [Pure]
-        public static Outcome<T, Unit> ToOutcome<T>(this Task<T> source) => source;
-
         [Pure]
         public static Outcome<T, TError> ToOutcomeError<T, TError>(this Task<TError> source) => source;
-
-        /// <summary>
-        ///     Creates an <see cref="Outcome{T,TError}" /> with the error <typeparamref name="TError" />.
-        /// </summary>
-        /// <param name="source">
-        ///     The <typeparamref name="TError" /> to convert.
-        /// </param>
-        /// <typeparam name="TError">
-        ///     The type of the <paramref name="source" />.
-        /// </typeparam>
-        [Pure]
-        public static Outcome<Unit, TError> ToOutcomeError<TError>(this Task<TError> source) => source;
     }
 }
