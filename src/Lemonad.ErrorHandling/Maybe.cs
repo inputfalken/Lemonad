@@ -49,7 +49,7 @@ namespace Lemonad.ErrorHandling {
         public override int GetHashCode() => _result.GetHashCode();
 
         /// <inheritdoc />
-        public int CompareTo(Maybe<T> other) => other._result.CompareTo(other._result);
+        public int CompareTo(Maybe<T> other) => _result.CompareTo(other._result);
 
         public static bool operator <(Maybe<T> left, Maybe<T> right) => left.CompareTo(right) < 0;
 
