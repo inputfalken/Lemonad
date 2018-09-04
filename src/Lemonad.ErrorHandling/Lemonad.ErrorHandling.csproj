@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <Version>0.2.4</Version>
+    <Version>0.3.2</Version>
     <RepositoryType>Git</RepositoryType>
     <RepositoryUrl>https://github.com/inputfalken/Lemonad</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/inputfalken/Lemonad/blob/master/LICENSE</PackageLicenseUrl>
