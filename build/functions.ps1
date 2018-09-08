@@ -187,7 +187,7 @@ function Get-ProjectInfo () {
   @{Name = 'LocalVersion'; Expression = { [version]$_.Group[1].Node.InnerText} }, `
   @{Name = 'Path'; Expression = { $_.Name | Get-Item -ErrorAction Stop } } `
     | Select-Object -Property Project, LocalVersion , Path, @{Name = 'OnlineVersion'; Expression = { Get-OnlineVersion -PackageName  $_.Project} } `
-    | Select-Object -Property Project, LocalVersion , Path, OnlineVersion, @{Name = 'IsRelease'; Expression = { $_.LocalVersion -gt $_.OnlineVersion } } `
+    | Select-Object -Property Project, LocalVersion , Path, OnlineVersion, @{Name = 'IsRelease'; Expression = {if ([string]::IsNullOrWhiteSpace($_.LocalVersion) -or [string]::IsNullOrWhiteSpace($_.OnlineVersion)) { $false } else { $_.LocalVersion -gt $_.OnlineVersion } } } `
 
 }
 
@@ -200,4 +200,21 @@ function Get-Solution {
     -Begin {$result = $null} `
     -Process { if ($result) { throw "More than 1 solution was found in '$(Get-Location)'" } else { $result = $_ } } `
     -End { Get-Item $result }
+}
+
+function Test-Any {
+  [CmdletBinding()]
+  param($EvaluateCondition,
+    [Parameter(ValueFromPipeline = $true)] $ObjectToTest)
+  begin {
+    $any = $false
+  }
+  process {
+    if (-not $any -and (& $EvaluateCondition $ObjectToTest)) {
+      $any = $true
+    }
+  }
+  end {
+    $any
+  }
 }
