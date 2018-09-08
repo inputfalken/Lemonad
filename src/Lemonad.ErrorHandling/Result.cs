@@ -479,16 +479,13 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public Result<TResult, TError> FlatMap<TResult, TErrorResult>(
             Func<T, Result<TResult, TErrorResult>> flatMapSelector, Func<TErrorResult, TError> errorSelector) {
-            if (HasValue) {
-                if (flatMapSelector == null) throw new ArgumentNullException(nameof(flatMapSelector));
-                var okSelector = flatMapSelector(Value);
+            if (HasError) return ResultExtensions.Error<TResult, TError>(Error);
+            if (flatMapSelector == null) throw new ArgumentNullException(nameof(flatMapSelector));
+            var okSelector = flatMapSelector(Value);
 
-                return okSelector.HasValue
-                    ? ResultExtensions.Ok<TResult, TError>(okSelector.Value)
-                    : okSelector.MapError(errorSelector);
-            }
-
-            return ResultExtensions.Error<TResult, TError>(Error);
+            return okSelector.HasValue
+                ? ResultExtensions.Ok<TResult, TError>(okSelector.Value)
+                : okSelector.MapError(errorSelector);
         }
 
         [Pure]
@@ -574,16 +571,13 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public Result<T, TError> Flatten<TResult, TErrorResult>(
             Func<T, Result<TResult, TErrorResult>> selector, Func<TErrorResult, TError> errorSelector) {
-            if (HasValue) {
-                if (selector == null) throw new ArgumentNullException(nameof(selector));
-                var okSelector = selector(Value);
-                if (okSelector.HasValue)
-                    return ResultExtensions.Ok<T, TError>(Value);
-                var tmpThis = this;
-                return okSelector.FullMap(x => tmpThis.Value, errorSelector);
-            }
-
-            return ResultExtensions.Error<T, TError>(Error);
+            if (HasError) return ResultExtensions.Error<T, TError>(Error);
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
+            var okSelector = selector(Value);
+            if (okSelector.HasValue)
+                return ResultExtensions.Ok<T, TError>(Value);
+            var tmpThis = this;
+            return okSelector.FullMap(x => tmpThis.Value, errorSelector);
         }
 
         [Pure]
@@ -608,15 +602,12 @@ namespace Lemonad.ErrorHandling {
         /// <exception cref="ArgumentNullException"></exception>
         [Pure]
         public Result<T, TError> Flatten<TResult>(Func<T, Result<TResult, TError>> selector) {
-            if (HasValue) {
-                if (selector == null) throw new ArgumentNullException(nameof(selector));
-                var okSelector = selector(Value);
-                if (okSelector.HasValue)
-                    return Value;
-                return okSelector.Error;
-            }
-
-            return ResultExtensions.Error<T, TError>(Error);
+            if (HasError) return ResultExtensions.Error<T, TError>(Error);
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
+            var okSelector = selector(Value);
+            if (okSelector.HasValue)
+                return Value;
+            return okSelector.Error;
         }
 
         [Pure]
@@ -693,10 +684,9 @@ namespace Lemonad.ErrorHandling {
         ///     <typeparamref name="TResult" />.
         /// </returns>
         [Pure]
-        public Result<T, TResult> CastError<TResult>() {
-            if (HasValue) return Value;
-            return (TResult) (object) Error;
-        }
+        public Result<T, TResult> CastError<TResult>() => HasValue
+            ? (Result<T, TResult>) Value
+            : (TResult) (object) Error;
 
         /// <summary>
         ///     Casts both <typeparamref name="T" /> into <typeparamref name="TResult" /> and <typeparamref name="TError" /> into
@@ -735,10 +725,9 @@ namespace Lemonad.ErrorHandling {
         ///     <typeparamref name="TResult" />.
         /// </returns>
         [Pure]
-        public Result<TResult, TError> Cast<TResult>() {
-            if (HasError) return Error;
-            return (TResult) (object) Value;
-        }
+        public Result<TResult, TError> Cast<TResult>() => HasError
+            ? (Result<TResult, TError>) Error
+            : (TResult) (object) Value;
 
         /// <summary>
         ///     Attempts to cast <typeparamref name="T" /> into <typeparamref name="TResult" />.
@@ -759,7 +748,7 @@ namespace Lemonad.ErrorHandling {
             if (Value is TResult result)
                 return result;
 
-            return errorSelector();
+            return errorSelector != null ? errorSelector() : throw new ArgumentNullException(nameof(errorSelector));
         }
 
         /// <summary>
