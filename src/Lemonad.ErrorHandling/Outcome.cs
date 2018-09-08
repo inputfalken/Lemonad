@@ -20,6 +20,41 @@ namespace Lemonad.ErrorHandling {
         public static implicit operator Outcome<T, TError>(T value) =>
             new Outcome<T, TError>(Task.FromResult(ResultExtensions.Ok<T, TError>(value)));
 
+        public Outcome<TResult, TError> Join<TInner, TKey, TResult>(
+            Result<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector) =>
+            TaskResultFunctions.Join(Result, inner, outerKeySelector, innerKeySelector, resultSelector, errorSelector);
+
+        public Outcome<TResult, TError> Join<TInner, TKey, TResult>(
+            Task<Result<TInner, TError>> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector) =>
+            TaskResultFunctions.Join(Result, inner, outerKeySelector, innerKeySelector, resultSelector,
+                errorSelector);
+
+        public Outcome<TResult, TError> Join<TInner, TKey, TResult>(
+            Result<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector, IEqualityComparer<TKey> comparer) =>
+            TaskResultFunctions.Join(Result, inner, outerKeySelector, innerKeySelector, resultSelector,
+                errorSelector, comparer);
+
+        public Outcome<TResult, TError> Join<TInner, TKey, TResult>(
+            Task<Result<TInner, TError>> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector, IEqualityComparer<TKey> comparer) =>
+            TaskResultFunctions.Join(Result, inner, outerKeySelector, innerKeySelector, resultSelector,
+                errorSelector, comparer);
+
+        public Outcome<TResult, TError> Join<TInner, TKey, TResult>(
+            Outcome<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector, IEqualityComparer<TKey> comparer) =>
+            TaskResultFunctions.Join(Result, inner.Result, outerKeySelector, innerKeySelector, resultSelector,
+                errorSelector, comparer);
+
+        public Outcome<TResult, TError> Join<TInner, TKey, TResult>(
+            Outcome<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector) =>
+            TaskResultFunctions.Join(Result, inner.Result, outerKeySelector, innerKeySelector, resultSelector,
+                errorSelector);
+
         private static async Task<Result<T, TError>> Factory(Task<T> foo) => await foo.ConfigureAwait(false);
         private static async Task<Result<T, TError>> ErrorFactory(Task<TError> foo) => await foo.ConfigureAwait(false);
 
