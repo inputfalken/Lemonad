@@ -764,12 +764,41 @@ namespace Lemonad.ErrorHandling {
             return errorSelector();
         }
 
+        /// <summary>
+        ///     Merge two <see cref="Result{T,TError}" /> when matched with a key.
+        /// </summary>
+        /// <typeparam name="TInner"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="inner">The other <see cref="Result{T,TError}" />.</param>
+        /// <param name="outerKeySelector">The key selector for this <see cref="Result{T,TError}" />.</param>
+        /// <param name="innerKeySelector">The key selector for the other <see cref="Result{T,TError}" />.</param>
+        /// <param name="resultSelector">The selector to determine the returning <see cref="Result{T,TError}" />.</param>
+        /// <param name="errorSelector">Is invoked when keys do not match.</param>
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" />.
+        /// </returns>
         public Result<TResult, TError> Join<TInner, TKey, TResult>(
             Result<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
             Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector) => Join(inner, outerKeySelector,
             innerKeySelector, resultSelector, errorSelector,
             EqualityComparer<TKey>.Default);
 
+        /// <summary>
+        ///     Merge two <see cref="Result{T,TError}" /> when matched with a key.
+        /// </summary>
+        /// <typeparam name="TInner"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="inner">The other <see cref="Result{T,TError}" />.</param>
+        /// <param name="outerKeySelector">The key selector for this <see cref="Result{T,TError}" />.</param>
+        /// <param name="innerKeySelector">The key selector for the other <see cref="Result{T,TError}" />.</param>
+        /// <param name="resultSelector">The selector to determine the returning <see cref="Result{T,TError}" />.</param>
+        /// <param name="errorSelector">Is invoked when keys do not match.</param>
+        /// <param name="comparer">The <see cref="IEqualityComparer{T}" /> to be used when matching keys.</param>
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" />.
+        /// </returns>
         public Result<TResult, TError> Join<TInner, TKey, TResult>(
             Result<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
             Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector, IEqualityComparer<TKey> comparer) {
@@ -787,6 +816,20 @@ namespace Lemonad.ErrorHandling {
             return errorSelector != null ? errorSelector() : throw new ArgumentNullException(nameof(errorSelector));
         }
 
+        /// <summary>
+        ///     Merge two <see cref="Result{T,TError}" /> when matched with a key.
+        /// </summary>
+        /// <typeparam name="TInner"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="inner">The other <see cref="Result{T,TError}" />.</param>
+        /// <param name="outerKeySelector">The key selector for this <see cref="Result{T,TError}" />.</param>
+        /// <param name="innerKeySelector">The key selector for the other <see cref="Result{T,TError}" />.</param>
+        /// <param name="resultSelector">The selector to determine the returning <see cref="Result{T,TError}" />.</param>
+        /// <param name="errorSelector">Is invoked when keys do not match.</param>
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" />.
+        /// </returns>
         public Outcome<TResult, TError> Join<TInner, TKey, TResult>(
             Task<Result<TInner, TError>> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
             Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector) =>
@@ -794,6 +837,21 @@ namespace Lemonad.ErrorHandling {
                 this, inner, outerKeySelector, innerKeySelector, resultSelector,
                 errorSelector);
 
+        /// <summary>
+        ///     Merge two <see cref="Result{T,TError}" /> when matched with a key.
+        /// </summary>
+        /// <typeparam name="TInner"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="inner">The other <see cref="Result{T,TError}" />.</param>
+        /// <param name="outerKeySelector">The key selector for this <see cref="Result{T,TError}" />.</param>
+        /// <param name="innerKeySelector">The key selector for the other <see cref="Result{T,TError}" />.</param>
+        /// <param name="resultSelector">The selector to determine the returning <see cref="Result{T,TError}" />.</param>
+        /// <param name="errorSelector">Is invoked when keys do not match.</param>
+        /// <param name="comparer">The <see cref="IEqualityComparer{T}" /> to be used when matching keys.</param>
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" />.
+        /// </returns>
         public Outcome<TResult, TError> Join<TInner, TKey, TResult>(
             Task<Result<TInner, TError>> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
             Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector, IEqualityComparer<TKey> comparer) =>
