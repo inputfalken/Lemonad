@@ -253,7 +253,8 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         /// <param name="errorSelector">
-        ///     Is exectued when the <paramref name="predicate"/> is false. The in parameter is a <see cref="Maybe{T}" /> since the <typeparamref name="T"/> could be unsafe in this context.
+        ///     Is exectued when the <paramref name="predicate" /> is false. The in parameter is a <see cref="Maybe{T}" /> since
+        ///     the <typeparamref name="T" /> could be unsafe in this context.
         /// </param>
         [Pure]
         public Result<T, TError> Filter(Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) {
@@ -273,7 +274,8 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         /// <param name="errorSelector">
-        ///     Is exectued when the <paramref name="predicate"/> is true. The in parameter is a <see cref="Maybe{T}" /> since the <typeparamref name="T"/> could be unsafe in this context.
+        ///     Is exectued when the <paramref name="predicate" /> is true. The in parameter is a <see cref="Maybe{T}" /> since the
+        ///     <typeparamref name="T" /> could be unsafe in this context.
         /// </param>
         /// <returns>
         ///     A filtered <see cref="Result{T,TError}" />.
@@ -752,6 +754,142 @@ namespace Lemonad.ErrorHandling {
         }
 
         /// <summary>
+        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
+        /// </summary>
+        /// <typeparam name="TInner"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="inner">The other <see cref="Result{T,TError}" />.</param>
+        /// <param name="outerKeySelector">The key selector for this <see cref="Result{T,TError}" />.</param>
+        /// <param name="innerKeySelector">The key selector for the other <see cref="Result{T,TError}" />.</param>
+        /// <param name="resultSelector">The selector to determine the returning <see cref="Result{T,TError}" />.</param>
+        /// <param name="errorSelector">Is invoked when keys do not match.</param>
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" />.
+        /// </returns>
+        public Result<TResult, TError> Join<TInner, TKey, TResult>(
+            Result<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector) => Join(inner, outerKeySelector,
+            innerKeySelector, resultSelector, errorSelector,
+            EqualityComparer<TKey>.Default);
+
+        /// <summary>
+        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
+        /// </summary>
+        /// <typeparam name="TInner"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="inner">The other <see cref="Result{T,TError}" />.</param>
+        /// <param name="outerKeySelector">The key selector for this <see cref="Result{T,TError}" />.</param>
+        /// <param name="innerKeySelector">The key selector for the other <see cref="Result{T,TError}" />.</param>
+        /// <param name="resultSelector">The selector to determine the returning <see cref="Result{T,TError}" />.</param>
+        /// <param name="errorSelector">Is invoked when keys do not match.</param>
+        /// <param name="comparer">The <see cref="IEqualityComparer{T}" /> to be used when matching keys.</param>
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" />.
+        /// </returns>
+        public Result<TResult, TError> Join<TInner, TKey, TResult>(
+            Result<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector, IEqualityComparer<TKey> comparer) {
+            if (HasError) return Error;
+            if (inner.HasError) return inner.Error;
+
+            foreach (var result in AsEnumerable.Join(
+                inner.AsEnumerable,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                comparer
+            )) return result;
+
+            return errorSelector != null ? errorSelector() : throw new ArgumentNullException(nameof(errorSelector));
+        }
+
+        /// <summary>
+        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
+        /// </summary>
+        /// <typeparam name="TInner"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="inner">The other <see cref="Result{T,TError}" />.</param>
+        /// <param name="outerKeySelector">The key selector for this <see cref="Result{T,TError}" />.</param>
+        /// <param name="innerKeySelector">The key selector for the other <see cref="Result{T,TError}" />.</param>
+        /// <param name="resultSelector">The selector to determine the returning <see cref="Result{T,TError}" />.</param>
+        /// <param name="errorSelector">Is invoked when keys do not match.</param>
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" />.
+        /// </returns>
+        public Outcome<TResult, TError> Join<TInner, TKey, TResult>(
+            Task<Result<TInner, TError>> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector) =>
+            TaskResultFunctions.Join(
+                this, inner, outerKeySelector, innerKeySelector, resultSelector,
+                errorSelector);
+
+        /// <summary>
+        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
+        /// </summary>
+        /// <typeparam name="TInner"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="inner">The other <see cref="Result{T,TError}" />.</param>
+        /// <param name="outerKeySelector">The key selector for this <see cref="Result{T,TError}" />.</param>
+        /// <param name="innerKeySelector">The key selector for the other <see cref="Result{T,TError}" />.</param>
+        /// <param name="resultSelector">The selector to determine the returning <see cref="Result{T,TError}" />.</param>
+        /// <param name="errorSelector">Is invoked when keys do not match.</param>
+        /// <param name="comparer">The <see cref="IEqualityComparer{T}" /> to be used when matching keys.</param>
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" />.
+        /// </returns>
+        public Outcome<TResult, TError> Join<TInner, TKey, TResult>(
+            Task<Result<TInner, TError>> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector, IEqualityComparer<TKey> comparer) =>
+            TaskResultFunctions.Join(this, inner, outerKeySelector, innerKeySelector, resultSelector,
+                errorSelector, comparer);
+
+        /// <summary>
+        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
+        /// </summary>
+        /// <typeparam name="TInner"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="inner">The other <see cref="Result{T,TError}" />.</param>
+        /// <param name="outerKeySelector">The key selector for this <see cref="Result{T,TError}" />.</param>
+        /// <param name="innerKeySelector">The key selector for the other <see cref="Result{T,TError}" />.</param>
+        /// <param name="resultSelector">The selector to determine the returning <see cref="Result{T,TError}" />.</param>
+        /// <param name="errorSelector">Is invoked when keys do not match.</param>
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" />.
+        /// </returns>
+        public Outcome<TResult, TError> Join<TInner, TKey, TResult>(
+            Outcome<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector) =>
+            TaskResultFunctions.Join(
+                this, inner.Result, outerKeySelector, innerKeySelector, resultSelector,
+                errorSelector);
+
+        /// <summary>
+        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
+        /// </summary>
+        /// <typeparam name="TInner"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="inner">The other <see cref="Result{T,TError}" />.</param>
+        /// <param name="outerKeySelector">The key selector for this <see cref="Result{T,TError}" />.</param>
+        /// <param name="innerKeySelector">The key selector for the other <see cref="Result{T,TError}" />.</param>
+        /// <param name="resultSelector">The selector to determine the returning <see cref="Result{T,TError}" />.</param>
+        /// <param name="errorSelector">Is invoked when keys do not match.</param>
+        /// <param name="comparer">The <see cref="IEqualityComparer{T}" /> to be used when matching keys.</param>
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" />.
+        /// </returns>
+        public Outcome<TResult, TError> Join<TInner, TKey, TResult>(
+            Outcome<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector, IEqualityComparer<TKey> comparer) =>
+            TaskResultFunctions.Join(this, inner.Result, outerKeySelector, innerKeySelector, resultSelector,
+                errorSelector, comparer);
+
+        /// <summary>
         ///     Fully flatmaps another <see cref="Result{T,TError}" />.
         /// </summary>
         /// <param name="flatMapSelector">
@@ -797,5 +935,62 @@ namespace Lemonad.ErrorHandling {
             Func<TError, TErrorResult> errorSelector) =>
             TaskResultFunctions.FullFlatMap(this, x => flatMapSelector(x).Result, resultSelector,
                 errorSelector);
+
+        /// <summary>
+        ///     Merges two <see cref="Result{T,TError}" /> together to create a new <see cref="Result{T,TError}" />.
+        /// </summary>
+        /// <param name="other">
+        ///     The other <see cref="Result{T,TError}" />.
+        /// </param>
+        /// <param name="resultSelector">
+        ///     The selector which will determine the type of the returning <see cref="Result{T,TError}" />.
+        /// </param>
+        /// <typeparam name="TOther">The type of the other <see cref="Result{T,TError}" />.</typeparam>
+        /// <typeparam name="TResult">The type of the returning <see cref="Result{T,TError}" />.</typeparam>
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" /> whose value is the result for merging two <see cref="Result{T,TError}" />
+        ///     together.
+        /// </returns>
+        [Pure]
+        public Result<TResult, TError> Zip<TOther, TResult>(Result<TOther, TError> other,
+            Func<T, TOther, TResult> resultSelector) => FlatMap(_ => other, resultSelector);
+
+        /// <summary>
+        ///     Merges two <see cref="Result{T,TError}" /> together to create a new <see cref="Result{T,TError}" />.
+        /// </summary>
+        /// <param name="other">
+        ///     The other <see cref="Result{T,TError}" />.
+        /// </param>
+        /// <param name="resultSelector">
+        ///     The selector which will determine the type of the returning <see cref="Result{T,TError}" />.
+        /// </param>
+        /// <typeparam name="TOther">The type of the other <see cref="Result{T,TError}" />.</typeparam>
+        /// <typeparam name="TResult">The type of the returning <see cref="Result{T,TError}" />.</typeparam>
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" /> whose value is the result for merging two <see cref="Result{T,TError}" />
+        ///     together.
+        /// </returns>
+        [Pure]
+        public Outcome<TResult, TError> Zip<TOther, TResult>(Task<Result<TOther, TError>> other,
+            Func<T, TOther, TResult> resultSelector) => FlatMap(_ => other, resultSelector);
+
+        /// <summary>
+        ///     Merges two <see cref="Result{T,TError}" /> together to create a new <see cref="Result{T,TError}" />.
+        /// </summary>
+        /// <param name="other">
+        ///     The other <see cref="Result{T,TError}" />.
+        /// </param>
+        /// <param name="resultSelector">
+        ///     The selector which will determine the type of the returning <see cref="Result{T,TError}" />.
+        /// </param>
+        /// <typeparam name="TOther">The type of the other <see cref="Result{T,TError}" />.</typeparam>
+        /// <typeparam name="TResult">The type of the returning <see cref="Result{T,TError}" />.</typeparam>
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" /> whose value is the result for merging two <see cref="Result{T,TError}" />
+        ///     together.
+        /// </returns>
+        [Pure]
+        public Outcome<TResult, TError> Zip<TOther, TResult>(Outcome<TOther, TError> other,
+            Func<T, TOther, TResult> resultSelector) => FlatMap(_ => other, resultSelector);
     }
 }
