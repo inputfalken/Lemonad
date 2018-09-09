@@ -36,14 +36,15 @@ if ($isWindows) {
             | Get-ProjectInfo `
             | Pack-Package -ArtifactPath $rootDirectory -SourceCodePath $srcDiretory `
             | Upload-Package
-          # The '@' is needed if the pipeline only returns 1 item but we still want to access the count property.
 
           if ($pipeline | Test-Any { $_.IsRelease -eq $true }) {
+            Write-Host 'New release found, Attempting to update documentation.' -ForegroundColor Yellow
             Generate-Documentation -DocumentationDirectory $documentationDirectory -Directories @($srcDiretory) -UserName $UserName -UserEmail $UserEmail 
-          }
+          } else { Write-Host 'No new release found, skipping documentation generation.' -ForegroundColor Yellow  }
 
+          Write-Host 'Printing build pipeline summary.' -ForegroundColor Yellow
           $pipeline `
-            | Format-List `
+            | Format-Table `
             | Write-Output
         }
       }
