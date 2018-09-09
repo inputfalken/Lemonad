@@ -44,7 +44,7 @@ if ($isWindows) {
 
           Write-Host 'Printing build pipeline summary.' -ForegroundColor Yellow
           $pipeline `
-            | Format-Table `
+            | Format-List `
             | Write-Output
         }
       }
