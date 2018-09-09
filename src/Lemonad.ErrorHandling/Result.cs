@@ -23,7 +23,7 @@ namespace Lemonad.ErrorHandling {
         internal TError Error { get; }
         internal T Value { get; }
 
-        private Result(T value, TError error, bool hasError, bool hasValue) {
+        private Result(in T value, in TError error, bool hasError, bool hasValue) {
             HasValue = hasValue;
             HasError = hasError;
             Value = value;
@@ -68,11 +68,15 @@ namespace Lemonad.ErrorHandling {
         public static bool operator >=(Result<T, TError> left, Result<T, TError> right) =>
             left.CompareTo(right) >= 0;
 
-        public static implicit operator Result<T, TError>(TError error) =>
-            new Result<T, TError>(default, error, true, false);
+        public static implicit operator Result<T, TError>(TError error) {
+            var tmp = default(T);
+            return new Result<T, TError>(in tmp, in error, true, false);
+        }
 
-        public static implicit operator Result<T, TError>(T value) =>
-            new Result<T, TError>(value, default, false, true);
+        public static implicit operator Result<T, TError>(T value) {
+            var tmp = default(TError);
+            return new Result<T, TError>(in value, in tmp, false, true);
+        }
 
         private static IEnumerable<TError> YieldErrors(Result<T, TError> result) {
             if (result.HasError)
