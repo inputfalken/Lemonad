@@ -187,10 +187,6 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
                 return s;
             });
 
-            Assert.False(errorSelectorExecuted,
-                "Errorselector should not get exectued before the value is awaited.");
-            Assert.False(flatSelectorExecuted,
-                "flatSelectorExecuted should not get exectued before the value is awaited.");
             var result = await flatMap;
 
             Assert.True(errorSelectorExecuted,
@@ -216,10 +212,6 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
                 return s;
             });
 
-            Assert.False(errorSelectorExecuted,
-                "Errorselector should not get exectued before the value is awaited.");
-            Assert.False(flatSelectorExecuted,
-                "flatSelectorExecuted should not get exectued before the value is awaited.");
             var result = await flatMap;
 
             Assert.True(errorSelectorExecuted,
@@ -240,8 +232,6 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
                 flatSelectorExecuted = true;
                 return AssertionUtilities.DivisionAsync(x, 0);
             });
-            Assert.False(flatSelectorExecuted,
-                "The flatmapSelector should get exectued before the value is awaited.");
             var result = await flattenAsync;
 
             Assert.True(flatSelectorExecuted,
@@ -260,8 +250,6 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
                 flatSelectorExecuted = true;
                 return AssertionUtilities.Division(x, 0);
             });
-            Assert.False(flatSelectorExecuted,
-                "The flatmapSelector should get exectued before the value is awaited.");
             var result = await flattenAsync;
 
             Assert.True(flatSelectorExecuted,
@@ -413,8 +401,6 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
                 return AssertionUtilities.DivisionAsync(x, 0);
             });
 
-            Assert.False(flatSelectorExecuted, "Flatselector should not get exectued before the value is awaited.");
-
             var result = await flattenAsync;
 
             Assert.True(flatSelectorExecuted);
@@ -436,8 +422,6 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
                 flatSelectorExecuted = true;
                 return AssertionUtilities.Division(x, 0);
             });
-
-            Assert.False(flatSelectorExecuted, "Flatselector should not get exectued before the value is awaited.");
 
             var result = await flattenAsync;
 
