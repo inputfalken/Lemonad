@@ -181,11 +181,11 @@ namespace Lemonad.ErrorHandling {
         ///     When <paramref name="action" /> is null and needs to be exectued.
         /// </exception>
         public Result<T, TError> DoWith(Action<T> action) {
-            if (HasValue)
-                if (action != null)
-                    action.Invoke(Value);
-                else
-                    throw new ArgumentNullException(nameof(action));
+            if (HasError) return this;
+            if (action != null)
+                action.Invoke(Value);
+            else
+                throw new ArgumentNullException(nameof(action));
 
             return this;
         }
@@ -222,11 +222,11 @@ namespace Lemonad.ErrorHandling {
         /// </exception>
         public Result<T, TError> DoWithError(
             Action<TError> action) {
-            if (HasError)
-                if (action != null)
-                    action.Invoke(Error);
-                else
-                    throw new ArgumentNullException(nameof(action));
+            if (HasValue) return this;
+            if (action != null)
+                action.Invoke(Error);
+            else
+                throw new ArgumentNullException(nameof(action));
 
             return this;
         }
