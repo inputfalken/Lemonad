@@ -2,13 +2,13 @@
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
-    public class MergeTests {
+    public class ZipTests {
         [Fact]
-        public void Result_With_No_Value_Merges_Result_With_No_Value__Expects_Result_With_No_Value() {
+        public void Result_With_No_Value_Zips_Result_With_No_Value__Expects_Result_With_No_Value() {
             var resultSelectorInvoked = false;
             var outer = new {Id = 1, Text = "Hello"}.ToResult(x => false, () => "ERROR 1");
             var inner = new {Id = 1, Text = "world"}.ToResult(x => false, () => "ERROR 2");
-            var result = outer.Merge(inner, (x, y) => {
+            var result = outer.Zip(inner, (x, y) => {
                 resultSelectorInvoked = true;
                 return $"{x.Text} {y.Text}";
             });
@@ -19,11 +19,11 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_No_Value_Merges_Result_With_Value__Expects_Result_With_No_Value() {
+        public void Result_With_No_Value_Zips_Result_With_Value__Expects_Result_With_No_Value() {
             var resultSelectorInvoked = false;
             var outer = new {Id = 1, Text = "Hello"}.ToResult(x => false, () => "ERROR 1");
             var inner = new {Id = 1, Text = "world"}.ToResult(x => true, () => "ERROR 2");
-            var result = outer.Merge(inner, (x, y) => {
+            var result = outer.Zip(inner, (x, y) => {
                 resultSelectorInvoked = true;
                 return $"{x.Text} {y.Text}";
             });
@@ -34,11 +34,11 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Value_Merges_Result_With_No_Value__Expects_Result_With_No_Value() {
+        public void Result_With_Value_Zips_Result_With_No_Value__Expects_Result_With_No_Value() {
             var resultSelectorInvoked = false;
             var outer = new {Id = 1, Text = "Hello"}.ToResult(x => true, () => "ERROR 1");
             var inner = new {Id = 1, Text = "world"}.ToResult(x => false, () => "ERROR 2");
-            var result = outer.Merge(inner, (x, y) => {
+            var result = outer.Zip(inner, (x, y) => {
                 resultSelectorInvoked = true;
                 return $"{x.Text} {y.Text}";
             });
@@ -49,11 +49,11 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Value_Merges_Result_With_Value__Expects_Result_With_Value() {
+        public void Result_With_Value_Zips_Result_With_Value__Expects_Result_With_Value() {
             var resultSelectorInvoked = false;
             var outer = new {Id = 1, Text = "Hello"}.ToResult(x => true, () => "ERROR 1");
             var inner = new {Id = 1, Text = "world"}.ToResult(x => true, () => "ERROR 2");
-            var result = outer.Merge(inner, (x, y) => {
+            var result = outer.Zip(inner, (x, y) => {
                 resultSelectorInvoked = true;
                 return $"{x.Text} {y.Text}";
             });

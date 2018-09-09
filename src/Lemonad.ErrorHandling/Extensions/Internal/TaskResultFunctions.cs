@@ -460,25 +460,25 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
             (await source.ConfigureAwait(false)).Match(action, errorAction);
 
         [Pure]
-        internal static async Task<Result<TResult, TError>> Merge<T, TError, TOther, TResult>(
+        internal static async Task<Result<TResult, TError>> Zip<T, TError, TOther, TResult>(
             Task<Result<T, TError>> source,
             Outcome<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector) => await (await source.ConfigureAwait(false))
-            .Merge(other, resultSelector).Result.ConfigureAwait(false);
+            .Zip(other, resultSelector).Result.ConfigureAwait(false);
 
         [Pure]
-        internal static async Task<Result<TResult, TError>> Merge<TOther, TResult, T, TError>(
+        internal static async Task<Result<TResult, TError>> Zip<TOther, TResult, T, TError>(
             Task<Result<T, TError>> source,
             Task<Result<TOther, TError>> other,
             Func<T, TOther, TResult> resultSelector) => await (await source.ConfigureAwait(false))
-            .Merge(other, resultSelector).Result.ConfigureAwait(false);
+            .Zip(other, resultSelector).Result.ConfigureAwait(false);
 
         [Pure]
-        internal static async Task<Result<TResult, TError>> Merge<TOther, TResult, T, TError>(
+        internal static async Task<Result<TResult, TError>> Zip<TOther, TResult, T, TError>(
             Task<Result<T, TError>> source,
             Result<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector) =>
-            (await source.ConfigureAwait(false)).Merge(other, resultSelector);
+            (await source.ConfigureAwait(false)).Zip(other, resultSelector);
 
         [Pure]
         internal static async Task<Result<T, IReadOnlyList<TError>>> Multiple<T, TError>(

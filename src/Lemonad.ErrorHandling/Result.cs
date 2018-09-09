@@ -765,7 +765,7 @@ namespace Lemonad.ErrorHandling {
         }
 
         /// <summary>
-        ///     Merge two <see cref="Result{T,TError}" /> when matched with a key.
+        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
         /// </summary>
         /// <typeparam name="TInner"></typeparam>
         /// <typeparam name="TKey"></typeparam>
@@ -785,7 +785,7 @@ namespace Lemonad.ErrorHandling {
             EqualityComparer<TKey>.Default);
 
         /// <summary>
-        ///     Merge two <see cref="Result{T,TError}" /> when matched with a key.
+        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
         /// </summary>
         /// <typeparam name="TInner"></typeparam>
         /// <typeparam name="TKey"></typeparam>
@@ -817,7 +817,7 @@ namespace Lemonad.ErrorHandling {
         }
 
         /// <summary>
-        ///     Merge two <see cref="Result{T,TError}" /> when matched with a key.
+        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
         /// </summary>
         /// <typeparam name="TInner"></typeparam>
         /// <typeparam name="TKey"></typeparam>
@@ -838,7 +838,7 @@ namespace Lemonad.ErrorHandling {
                 errorSelector);
 
         /// <summary>
-        ///     Merge two <see cref="Result{T,TError}" /> when matched with a key.
+        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
         /// </summary>
         /// <typeparam name="TInner"></typeparam>
         /// <typeparam name="TKey"></typeparam>
@@ -859,7 +859,7 @@ namespace Lemonad.ErrorHandling {
                 errorSelector, comparer);
 
         /// <summary>
-        ///     Merge two <see cref="Result{T,TError}" /> when matched with a key.
+        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
         /// </summary>
         /// <typeparam name="TInner"></typeparam>
         /// <typeparam name="TKey"></typeparam>
@@ -880,7 +880,7 @@ namespace Lemonad.ErrorHandling {
                 errorSelector);
 
         /// <summary>
-        ///     Merge two <see cref="Result{T,TError}" /> when matched with a key.
+        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
         /// </summary>
         /// <typeparam name="TInner"></typeparam>
         /// <typeparam name="TKey"></typeparam>
@@ -963,7 +963,7 @@ namespace Lemonad.ErrorHandling {
         ///     together.
         /// </returns>
         [Pure]
-        public Result<TResult, TError> Merge<TOther, TResult>(Result<TOther, TError> other,
+        public Result<TResult, TError> Zip<TOther, TResult>(Result<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector) => FlatMap(_ => other, resultSelector);
 
         /// <summary>
@@ -982,7 +982,7 @@ namespace Lemonad.ErrorHandling {
         ///     together.
         /// </returns>
         [Pure]
-        public Outcome<TResult, TError> Merge<TOther, TResult>(Task<Result<TOther, TError>> other,
+        public Outcome<TResult, TError> Zip<TOther, TResult>(Task<Result<TOther, TError>> other,
             Func<T, TOther, TResult> resultSelector) => FlatMap(_ => other, resultSelector);
 
         /// <summary>
@@ -1001,7 +1001,7 @@ namespace Lemonad.ErrorHandling {
         ///     together.
         /// </returns>
         [Pure]
-        public Outcome<TResult, TError> Merge<TOther, TResult>(Outcome<TOther, TError> other,
+        public Outcome<TResult, TError> Zip<TOther, TResult>(Outcome<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector) => FlatMap(_ => other, resultSelector);
     }
 }
