@@ -946,5 +946,62 @@ namespace Lemonad.ErrorHandling {
             Func<TError, TErrorResult> errorSelector) =>
             TaskResultFunctions.FullFlatMap(this, x => flatMapSelector(x).Result, resultSelector,
                 errorSelector);
+
+        /// <summary>
+        ///     Merges two <see cref="Result{T,TError}" /> together to create a new <see cref="Result{T,TError}" />.
+        /// </summary>
+        /// <param name="other">
+        ///     The other <see cref="Result{T,TError}" />.
+        /// </param>
+        /// <param name="resultSelector">
+        ///     The selector which will determine the type of the returning <see cref="Result{T,TError}" />.
+        /// </param>
+        /// <typeparam name="TOther">The type of the other <see cref="Result{T,TError}" />.</typeparam>
+        /// <typeparam name="TResult">The type of the returning <see cref="Result{T,TError}" />.</typeparam>
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" /> whose value is the result for merging two <see cref="Result{T,TError}" />
+        ///     together.
+        /// </returns>
+        [Pure]
+        public Result<TResult, TError> Merge<TOther, TResult>(Result<TOther, TError> other,
+            Func<T, TOther, TResult> resultSelector) => FlatMap(_ => other, resultSelector);
+
+        /// <summary>
+        ///     Merges two <see cref="Result{T,TError}" /> together to create a new <see cref="Result{T,TError}" />.
+        /// </summary>
+        /// <param name="other">
+        ///     The other <see cref="Result{T,TError}" />.
+        /// </param>
+        /// <param name="resultSelector">
+        ///     The selector which will determine the type of the returning <see cref="Result{T,TError}" />.
+        /// </param>
+        /// <typeparam name="TOther">The type of the other <see cref="Result{T,TError}" />.</typeparam>
+        /// <typeparam name="TResult">The type of the returning <see cref="Result{T,TError}" />.</typeparam>
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" /> whose value is the result for merging two <see cref="Result{T,TError}" />
+        ///     together.
+        /// </returns>
+        [Pure]
+        public Outcome<TResult, TError> Merge<TOther, TResult>(Task<Result<TOther, TError>> other,
+            Func<T, TOther, TResult> resultSelector) => FlatMap(_ => other, resultSelector);
+
+        /// <summary>
+        ///     Merges two <see cref="Result{T,TError}" /> together to create a new <see cref="Result{T,TError}" />.
+        /// </summary>
+        /// <param name="other">
+        ///     The other <see cref="Result{T,TError}" />.
+        /// </param>
+        /// <param name="resultSelector">
+        ///     The selector which will determine the type of the returning <see cref="Result{T,TError}" />.
+        /// </param>
+        /// <typeparam name="TOther">The type of the other <see cref="Result{T,TError}" />.</typeparam>
+        /// <typeparam name="TResult">The type of the returning <see cref="Result{T,TError}" />.</typeparam>
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" /> whose value is the result for merging two <see cref="Result{T,TError}" />
+        ///     together.
+        /// </returns>
+        [Pure]
+        public Outcome<TResult, TError> Merge<TOther, TResult>(Outcome<TOther, TError> other,
+            Func<T, TOther, TResult> resultSelector) => FlatMap(_ => other, resultSelector);
     }
 }

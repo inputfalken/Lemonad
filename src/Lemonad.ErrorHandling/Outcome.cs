@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Extensions.Internal;
@@ -54,6 +55,18 @@ namespace Lemonad.ErrorHandling {
             Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector) =>
             TaskResultFunctions.Join(Result, inner.Result, outerKeySelector, innerKeySelector, resultSelector,
                 errorSelector);
+
+        [Pure]
+        public Outcome<TResult, TError> Merge<TOther, TResult>(Result<TOther, TError> other,
+            Func<T, TOther, TResult> resultSelector) => TaskResultFunctions.Merge(Result, other, resultSelector);
+
+        [Pure]
+        public Outcome<TResult, TError> Merge<TOther, TResult>(Task<Result<TOther, TError>> other,
+            Func<T, TOther, TResult> resultSelector) => TaskResultFunctions.Merge(Result, other, resultSelector);
+
+        [Pure]
+        public Outcome<TResult, TError> Merge<TOther, TResult>(Outcome<TOther, TError> other,
+            Func<T, TOther, TResult> resultSelector) => TaskResultFunctions.Merge(Result, other, resultSelector);
 
         private static async Task<Result<T, TError>> Factory(Task<T> foo) => await foo.ConfigureAwait(false);
         private static async Task<Result<T, TError>> ErrorFactory(Task<TError> foo) => await foo.ConfigureAwait(false);
