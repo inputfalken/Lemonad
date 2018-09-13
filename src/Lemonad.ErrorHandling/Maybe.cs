@@ -81,6 +81,10 @@ namespace Lemonad.ErrorHandling {
             noneAction();
         });
 
+        public Maybe<T> DoWith(Action<T> someAction) => new Maybe<T>(_result.DoWith(someAction));
+
+        public Maybe<T> Do(Action action) => new Maybe<T>(_result.Do(action));
+
         /// <summary>
         ///     Evaluates the <see cref="Maybe{T}" />.
         /// </summary>
