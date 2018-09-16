@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "C:/projects/lemonad/docs",
+  "source_base_path": "C:/Users/Robert/source/repos/Lemonad/docs",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -9,10 +9,34 @@
       "output": {
         ".html": {
           "relative_path": "README.html",
-          "hash": "RAxiX1jfHsc7uxes281eeA=="
+          "hash": "FoZd0WPpytFiZA2TSDz4zg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.Async.Extensions.TaskExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.Async.Extensions.TaskExtensions.html",
+          "hash": "nNtROp+Y+nEAP7rh7E50/Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.Async.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.Async.Extensions.html",
+          "hash": "G7k3840lQBPmKeH87sV/wA=="
+        }
+      },
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -21,10 +45,22 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Extensions.MaybeExtensions.html",
-          "hash": "i2xN9n1IlVmpXm8FN8UCfw=="
+          "hash": "Gkqhi07O12jb3G2bOZI6MQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.Extensions.OutcomeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.Extensions.OutcomeExtensions.html",
+          "hash": "oyG/+Lweal6d2sjOlVMf7Q=="
+        }
+      },
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -33,10 +69,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Extensions.ResultExtensions.html",
-          "hash": "6DKRW+1GHw7j2EYOpA+UOg=="
+          "hash": "Ow7vyeZyAr0piqAIQXNQoQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -45,10 +81,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Extensions.html",
-          "hash": "M/9gSJ3xFRv3AZcipenddg=="
+          "hash": "UHCme8u+xV5UtKSqq1HtkA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -57,10 +93,22 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Maybe-1.html",
-          "hash": "simOR/rf049MC7NiavHy1Q=="
+          "hash": "Dwfvbw7r0m1H15JxFVtEcA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.Outcome-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.Outcome-2.html",
+          "hash": "qL8j9KOGmJonlnOy3Xd9Ag=="
+        }
+      },
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -69,10 +117,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Parsers.MaybeParsers.html",
-          "hash": "WRqBKkhtd1Iy6JC4I9oQJQ=="
+          "hash": "GLDW5NDAIJA/bQVxKdmqwA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -81,10 +129,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Parsers.ResultParsers.html",
-          "hash": "u7dGe7xpJUkgw7phtk2twg=="
+          "hash": "UeLpz84B6SfvoCOb29piIw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -93,10 +141,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Parsers.html",
-          "hash": "YWqI9D4LypIymgyvZrqqUw=="
+          "hash": "KvpGaWsrwcw7nbL4b1p0PA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -105,10 +153,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Result-2.html",
-          "hash": "e7UKVPIW8wqyhgZWEOTDiA=="
+          "hash": "wa5gSIMpBfsocXH1vVwQ1A=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -117,10 +165,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.html",
-          "hash": "X7fhqIIj9WFqMttH7nvIaQ=="
+          "hash": "PjjS3qMro85Dwknl6jqp5w=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -129,10 +177,10 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "E8cmSTHDE/L6K+5qR1fT4g=="
+          "hash": "mr8pLLT6bbNQs2JNNmvsVQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -141,7 +189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "Jce+dWg7n9+rMrbx8IYgog=="
+          "hash": "N749qZFOb41SCzshhQOSOQ=="
         }
       },
       "is_incremental": false,
@@ -153,10 +201,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "BivuDXv6fmDAatmMO70QDQ=="
+          "hash": "GVk6t+0KDP+4WDrccb5usA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -165,7 +213,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "YYTDRNX9uXkuVLgyP8KvQQ=="
+          "hash": "xVlQaX7Tk85omoiWv3O+Ag=="
         }
       },
       "is_incremental": false,
@@ -177,10 +225,10 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "vCky0egNGH+c0r1oLoh1pg=="
+          "hash": "qoWIxF/W01c3QHv6jcoSyA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -189,7 +237,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "Z09irS5Pl6ZKR+uuJHQm7g=="
+          "hash": "ob7LqWp4kTNLz+9W4omdTw=="
         }
       },
       "is_incremental": false,
@@ -199,30 +247,29 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": false,
-        "details": "Cannot build incrementally because last build info is missing.",
+        "can_incremental": true,
         "incrementalPhase": "build"
       },
       "processors": {
-        "ConceptualDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build"
-        },
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build"
-        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build"
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
           "incrementalPhase": "build"
         }
       }
     },
     {
       "status": {
-        "can_incremental": false,
-        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
         "incrementalPhase": "postProcessing"
       },
       "processors": {}
