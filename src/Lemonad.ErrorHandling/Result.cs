@@ -633,7 +633,7 @@ namespace Lemonad.ErrorHandling {
         public Result<T, IReadOnlyList<TError>> Multiple(
             params Func<Result<T, TError>, Result<T, TError>>[] validations) {
             var result = this;
-            var errors = validations.Select(x => x(result)).ToList().Errors().ToList();
+            var errors = validations.Select(x => x(result)).Errors().ToList();
             if (errors.Any())
                 return errors;
 
