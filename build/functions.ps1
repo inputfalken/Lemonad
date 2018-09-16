@@ -3,7 +3,7 @@ param (
   [Parameter(Position = 1, Mandatory = 1)] [string] $Source
 )
 
-function Is-InsideGitRepository {
+function Test-GitDirectory {
   if (Get-Command -Name 'git' -ErrorAction SilentlyContinue) {
     if (git rev-parse --is-inside-work-tree 2>$null) { $true } else { $false }
   } else {
@@ -12,7 +12,7 @@ function Is-InsideGitRepository {
 }
 
 function Get-RootDirectory {
-  if (Is-InsideGitRepository) {
+  if (Test-GitDirectory) {
     git rev-parse --show-toplevel `
       | Resolve-Path `
       | Get-Item
@@ -20,10 +20,10 @@ function Get-RootDirectory {
   } else { throw "'$(Get-Location)' is not a git directory/repository." }
 }
 
-function List-Files {
+function Get-Files {
   [OutputType('System.IO.FileSystemInfo')]
   param()
-  if (Is-InsideGitRepository) {
+  if (Test-GitDirectory) {
     $arguments = $args
     $input `
       | ForEach-Object `
@@ -49,7 +49,7 @@ function Build-Solution {
   if (!$?) { throw "Could not build solution '$Solution'." }
 }
 
-function Pack-Package {
+function Build-Package {
   param (
     [Parameter(Position = 0, Mandatory = 0, ValueFromPipeline)] $InputObject,
     [Parameter(Position = 1, Mandatory = 1)] [System.IO.FileSystemInfo] $ArtifactPath,
@@ -73,10 +73,10 @@ function Pack-Package {
     | Select-Object Path, Project, LocalVersion, OnlineVersion, IsRelease, @{Name = 'PackageOrNull'; Expression = {Join-Path -Path $ArtifactDirectory -ChildPath "$($_.Path.BaseName).$($_.LocalVersion).nupkg" | Get-Item -ErrorAction SilentlyContinue} }
 }
 
-function Upload-Package {
+function Register-Package {
   $Input | ForEach-Object {
     # Check if path exists and if 'IsRelease' is true.
-    if (($_.PackageOrNull -ne $null) -and [bool](Get-Item $_.PackageOrNull -ErrorAction SilentlyContinue) -and ($_.IsRelease)) {
+    if (($null -ne $_.PackageOrNull) -and [bool](Get-Item $_.PackageOrNull -ErrorAction SilentlyContinue) -and ($_.IsRelease)) {
       Write-Host "Pushing Package '$($_.PackageOrNull)' to '$Source'."
       dotnet nuget push $_.PackageOrNull --api-key $env:NUGET_API_KEY --source $Source | Out-Null
       if (!$?) { throw "Could not push package '$($_.PackageOrNull)' to NuGet (source : '$Source')." }
@@ -85,7 +85,7 @@ function Upload-Package {
   }
 }
 
-function Generate-Documentation {
+function Build-Documentation {
   param(
     [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $DocumentationDirectory,
     [Parameter(Position = 1, Mandatory = 0)] [System.IO.FileSystemInfo[]] $Directories,
@@ -93,7 +93,7 @@ function Generate-Documentation {
     [Parameter(Position = 3, Mandatory = 1)] [string] $UserEmail
   )
 
-  function Build-Documentation {
+  function Install-Documentation {
     param(
       [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $Directory
     )
@@ -107,7 +107,7 @@ function Generate-Documentation {
     Pop-Location
   }
 
-  function Configure-Git {
+  function Edit-Git {
     if ($env:GITHUB_ACCESS_TOKEN) {
       git config --global credential.helper store
       if (!$?) { throw "Could not set git command 'config --global credential.helper store'." }
@@ -146,7 +146,7 @@ function Generate-Documentation {
   git diff --quiet --exit-code $previousSha1 $currentSha1 -- $diffPaths
   if ($LASTEXITCODE -eq 1) {
     Build-Documentation -Directory $DocumentationDirectory
-    Configure-Git
+    Edit-Git
     $ghPagesDirectory = 'gh_pages'
     # APPVEYOR_REPO_NAME - repository name in format owner-name/repo-name
     git clone "https://github.com/$($env:APPVEYOR_REPO_NAME)" -b gh-pages $ghPagesDirectory -q

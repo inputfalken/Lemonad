@@ -21,7 +21,7 @@ $solution = $rootDirectory `
 
 Build-Solution -Solution $solution
 
-List-Files (Join-Path -Path $testDirectory -ChildPath '*.csproj') | ForEach-Object {
+Get-Files (Join-Path -Path $testDirectory -ChildPath '*.csproj') | ForEach-Object {
   dotnet test $_ --configuration $Configuration --no-build --no-restore
   if (!$?) { throw "Failed executing tests for project '$_'." }
 }
@@ -31,15 +31,15 @@ if ($isWindows) {
     switch ($env:APPVEYOR_REPO_BRANCH) {
       'master' {
         if (!$env:APPVEYOR_PULL_REQUEST_TITLE) {
-          $pipeline = List-Files (Join-Path -Path $srcDiretory -ChildPath '*.csproj') `
+          $pipeline = Get-Files (Join-Path -Path $srcDiretory -ChildPath '*.csproj') `
             | ForEach-Object { Write-Host "Attempting to gather project info for '$_'." ; $_ } `
             | Get-ProjectInfo `
-            | Pack-Package -ArtifactPath $rootDirectory -SourceCodePath $srcDiretory `
-            | Upload-Package
+            | Build-Package -ArtifactPath $rootDirectory -SourceCodePath $srcDiretory `
+            | Register-Package
 
           if ($pipeline | Test-Any { $_.IsRelease -eq $true }) {
             Write-Host 'New release found, Attempting to update documentation.' -ForegroundColor Yellow
-            Generate-Documentation -DocumentationDirectory $documentationDirectory -Directories @($srcDiretory) -UserName $UserName -UserEmail $UserEmail 
+            Build-Documentation -DocumentationDirectory $documentationDirectory -Directories @($srcDiretory) -UserName $UserName -UserEmail $UserEmail 
           } else { Write-Host 'No new release found, skipping documentation generation.' -ForegroundColor Yellow  }
 
           Write-Host 'Printing build pipeline summary.' -ForegroundColor Yellow
