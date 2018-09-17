@@ -1,6 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
+    <Version>0.0.0</Version>
+    <RepositoryType>Git</RepositoryType>
+    <RepositoryUrl>https://github.com/inputfalken/Lemonad</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/inputfalken/Lemonad/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://inputfalken.github.io/Lemonad/</PackageProjectUrl>
+    <PackageReleaseNotes>Initial version</PackageReleaseNotes>
+    <AssemblyName>Lemonad.Enumerable</AssemblyName>
+    <Authors>Robert Andersson</Authors>
+    <Product>Lemonad.Enumerable</Product>
   </PropertyGroup>
 </Project>
