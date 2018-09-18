@@ -46,18 +46,18 @@ namespace MvcValidation.Controller {
         [HttpPost]
         [Route("eitherSummarized")]
         public Task<IActionResult> PostPerson([FromBody] PersonPostApiModel model) {
-            var lastNameAppService = LastNameAppService(new PersonModel()).AsOutcome();
             return ApiValidation(model)
                 // Using match inside this scope is currently too complex since it requires all type params to be supplied.
                 .Map(x => new PersonModel {FirstName = x.FirstName, LastName = x.LastName})
-                .Flatten(LastNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
-                .FlatMap(FirstNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
+                .AsyncResult
+                .Flatten(x => LastNameAppService(x).ToAsyncResult(), x => new PersonPostApiError {Message = x.Message, Model = model})
+                .FlatMap(x => FirstNameAppService(x).ToAsyncResult(), x => new PersonPostApiError {Message = x.Message, Model = model})
                 .Match<IActionResult>(Ok, BadRequest);
         }
 
         private static Result<string, string> ValidateName(string name) {
             return name.ToResult<string, string>()
-                .IsErrorWhen(x => string.IsNullOrWhiteSpace(x), () => "Name cannot be empty.")
+                .IsErrorWhen(string.IsNullOrWhiteSpace, () => "Name cannot be empty.")
                 .Filter(s => s.All(char.IsLetter), () => "Name can only contain letters.")
                 .Filter(s => char.IsUpper(s[0]), () => "Name must start with capital letter.");
         }

@@ -27,7 +27,7 @@ namespace Lemonad.ErrorHandling.Test {
             var result = typeof(Result<string, string>);
             var resultMethods = Filter(result);
 
-            var outcome = typeof(Outcome<string, string>);
+            var outcome = typeof(AsyncResult<string, string>);
             var outcomeMethods = Filter(outcome);
 
             var differences = (resultMethods.Count > outcomeMethods.Count

@@ -89,16 +89,21 @@ namespace Lemonad.ErrorHandling {
         }
 
         /// <summary>
+        /// Convert <see cref="Result{T,TError}"/> into an <see cref="AsyncResult{T,TError}"/>.
+        /// </summary>
+        public AsyncResult<T, TError> AsyncResult => Task.FromResult(this);
+
+        /// <summary>
         ///     Treat <typeparamref name="TError" /> as enumerable with 0-1 elements in.
         ///     This is handy when combining <see cref="Result{T,TError}" /> with LINQs API.
         /// </summary>
-        public IEnumerable<TError> AsErrorEnumerable => YieldErrors(this);
+        public IEnumerable<TError> ErrorEnumerable => YieldErrors(this);
 
         /// <summary>
         ///     Treat <typeparamref name="T" /> as enumerable with 0-1 elements in.
         ///     This is handy when combining <see cref="Result{T,TError}" /> with LINQ's API.
         /// </summary>
-        public IEnumerable<T> AsEnumerable => YieldValues(this);
+        public IEnumerable<T> Enumerable => YieldValues(this);
 
         /// <inheritdoc />
         public override bool Equals(object obj) => obj is Result<T, TError> option && Equals(option);
@@ -244,12 +249,6 @@ namespace Lemonad.ErrorHandling {
         public Result<T, TError> Filter(Func<T, bool> predicate, Func<TError> errorSelector) =>
             Filter(predicate, _ => errorSelector());
 
-        public Outcome<T, TError> Filter(Func<T, Task<bool>> predicate, Func<Maybe<T>, TError> errorSelector) =>
-            TaskResultFunctions.Filter(this, predicate, errorSelector);
-
-        public Outcome<T, TError> Filter(Func<T, Task<bool>> predicate, Func<TError> errorSelector) =>
-            TaskResultFunctions.Filter(this, predicate, _ => errorSelector());
-
         /// <summary>
         ///     Filters the <typeparamref name="T" /> if <typeparamref name="T" /> is the active type.
         /// </summary>
@@ -298,14 +297,6 @@ namespace Lemonad.ErrorHandling {
                 errorSelector
             );
         }
-
-        [Pure]
-        public Outcome<T, TError> IsErrorWhen(Func<T, Task<bool>> predicate, Func<Maybe<T>, TError> errorSelector) =>
-            TaskResultFunctions.IsErrorWhen(this, predicate, errorSelector);
-
-        [Pure]
-        public Outcome<T, TError> IsErrorWhen(Func<T, Task<bool>> predicate, Func<TError> errorSelector) =>
-            IsErrorWhen(predicate, _ => errorSelector());
 
         /// <summary>
         ///     Filters the <typeparamref name="T" /> by checking for null if <typeparamref name="T" /> is the active type.
@@ -374,10 +365,6 @@ namespace Lemonad.ErrorHandling {
                 : throw new ArgumentNullException(nameof(selector))
             : ResultExtensions.Error<TResult, TError>(Error);
 
-        [Pure]
-        public Outcome<TResult, TError> Map<TResult>(Func<T, Task<TResult>> selector) =>
-            TaskResultFunctions.Map(this, selector);
-
         /// <summary>
         ///     Maps <typeparamref name="TError" />.
         /// </summary>
@@ -397,10 +384,6 @@ namespace Lemonad.ErrorHandling {
                 : throw new ArgumentNullException(nameof(selector))
             : ResultExtensions.Ok<T, TErrorResult>(Value);
 
-        [Pure]
-        public Outcome<T, TErrorResult> MapError<TErrorResult>(Func<TError, Task<TErrorResult>> selector) =>
-            TaskResultFunctions.MapError(this, selector);
-
         /// <summary>
         ///     Flatten another <see cref="Result{T,TError}" /> who shares the same <typeparamref name="TError" />.
         ///     And maps <typeparamref name="T" /> to <typeparamref name="TResult" />.
@@ -416,14 +399,6 @@ namespace Lemonad.ErrorHandling {
             Func<T, Result<TResult, TError>> flatSelector) => HasValue
             ? flatSelector?.Invoke(Value) ?? throw new ArgumentNullException(nameof(flatSelector))
             : ResultExtensions.Error<TResult, TError>(Error);
-
-        [Pure]
-        public Outcome<TResult, TError> FlatMap<TResult>(Func<T, Task<Result<TResult, TError>>> flatSelector) =>
-            TaskResultFunctions.FlatMap(this, flatSelector);
-
-        [Pure]
-        public Outcome<TResult, TError> FlatMap<TResult>(Func<T, Outcome<TResult, TError>> flatSelector) =>
-            TaskResultFunctions.FlatMap(this, x => flatSelector(x).Result);
 
         /// <summary>
         ///     Flatten another <see cref="Result{T,TError}" /> who shares the same <typeparamref name="TError" />.
@@ -451,18 +426,6 @@ namespace Lemonad.ErrorHandling {
                 ? throw new ArgumentNullException(nameof(resultSelector))
                 : resultSelector(x, y)) ??
             throw new ArgumentNullException(nameof(flatSelector)));
-
-        [Pure]
-        public Outcome<TResult, TError> FlatMap<TSelector, TResult>(
-            Func<T, Task<Result<TSelector, TError>>> flatSelector,
-            Func<T, TSelector, TResult> resultSelector) =>
-            TaskResultFunctions.FlatMap(this, flatSelector, resultSelector);
-
-        [Pure]
-        public Outcome<TResult, TError> FlatMap<TSelector, TResult>(
-            Func<T, Outcome<TSelector, TError>> flatSelector,
-            Func<T, TSelector, TResult> resultSelector) =>
-            TaskResultFunctions.FlatMap(this, x => flatSelector(x).Result, resultSelector);
 
         /// <summary>
         ///     Flatmaps another <see cref="Result{T,TError}" /> but the <typeparamref name="TError" /> remains as the same type.
@@ -493,16 +456,6 @@ namespace Lemonad.ErrorHandling {
                 ? ResultExtensions.Ok<TResult, TError>(okSelector.Value)
                 : okSelector.MapError(errorSelector);
         }
-
-        [Pure]
-        public Outcome<TResult, TError> FlatMap<TResult, TErrorResult>(
-            Func<T, Task<Result<TResult, TErrorResult>>> flatMapSelector, Func<TErrorResult, TError> errorSelector) =>
-            TaskResultFunctions.FlatMap(this, flatMapSelector, errorSelector);
-
-        [Pure]
-        public Outcome<TResult, TError> FlatMap<TResult, TErrorResult>(
-            Func<T, Outcome<TResult, TErrorResult>> flatMapSelector, Func<TErrorResult, TError> errorSelector) =>
-            TaskResultFunctions.FlatMap(this, x => flatMapSelector(x).Result, errorSelector);
 
         /// <summary>
         ///     Flatmaps another <see cref="Result{T,TError}" /> but the <typeparamref name="TError" /> remains as the same type.
@@ -536,18 +489,6 @@ namespace Lemonad.ErrorHandling {
                     return resultSelector(x, y);
                 }) ?? throw new ArgumentNullException(nameof(flatMapSelector)),
                 errorSelector);
-
-        [Pure]
-        public Outcome<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, Task<Result<TFlatMap, TErrorResult>>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
-            Func<TErrorResult, TError> errorSelector) =>
-            TaskResultFunctions.FlatMap(this, flatMapSelector, resultSelector, errorSelector);
-
-        [Pure]
-        public Outcome<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, Outcome<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
-            Func<TErrorResult, TError> errorSelector) =>
-            TaskResultFunctions.FlatMap(this, x => flatMapSelector(x).Result, resultSelector, errorSelector);
 
         /// <summary>
         ///     Flatten another <see cref="Result{T,TError}" />.
@@ -586,16 +527,6 @@ namespace Lemonad.ErrorHandling {
             return okSelector.FullMap(x => tmpThis.Value, errorSelector);
         }
 
-        [Pure]
-        public Outcome<T, TError> Flatten<TResult, TErrorResult>(
-            Func<T, Task<Result<TResult, TErrorResult>>> selector, Func<TErrorResult, TError> errorSelector) =>
-            TaskResultFunctions.Flatten(this, selector, errorSelector);
-
-        [Pure]
-        public Outcome<T, TError> Flatten<TResult, TErrorResult>(
-            Func<T, Outcome<TResult, TErrorResult>> selector, Func<TErrorResult, TError> errorSelector) =>
-            TaskResultFunctions.Flatten(this, x => selector(x).Result, errorSelector);
-
         /// <summary>
         ///     Flatten another <see cref="Result{T,TError}" />  who shares the same <typeparamref name="TError" />.
         /// </summary>
@@ -615,14 +546,6 @@ namespace Lemonad.ErrorHandling {
                 return Value;
             return okSelector.Error;
         }
-
-        [Pure]
-        public Outcome<T, TError> Flatten<TResult>(Func<T, Task<Result<TResult, TError>>> selector) =>
-            TaskResultFunctions.Flatten(this, selector);
-
-        [Pure]
-        public Outcome<T, TError> Flatten<TResult>(Func<T, Outcome<TResult, TError>> selector) =>
-            TaskResultFunctions.Flatten(this, x => selector(x).Result);
 
         /// <summary>
         ///     Executes each function and saves all potential errors to a list which will be the <typeparamref name="TError" />.
@@ -668,16 +591,6 @@ namespace Lemonad.ErrorHandling {
                 ? errorSelector(Error)
                 : throw new ArgumentNullException(nameof(errorSelector));
         }
-
-        [Pure]
-        public Outcome<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
-            Func<T, Task<Result<TResult, TErrorResult>>> flatMapSelector, Func<TError, TErrorResult> errorSelector) =>
-            TaskResultFunctions.FullFlatMap(this, flatMapSelector, errorSelector);
-
-        [Pure]
-        public Outcome<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
-            Func<T, Outcome<TResult, TErrorResult>> flatMapSelector, Func<TError, TErrorResult> errorSelector) =>
-            TaskResultFunctions.FullFlatMap(this, x => flatMapSelector(x).Result, errorSelector);
 
         /// <summary>
         ///     Casts <typeparamref name="TError" /> into <typeparamref name="TResult" />.
@@ -798,8 +711,8 @@ namespace Lemonad.ErrorHandling {
             if (HasError) return Error;
             if (inner.HasError) return inner.Error;
 
-            foreach (var result in AsEnumerable.Join(
-                inner.AsEnumerable,
+            foreach (var result in Enumerable.Join(
+                inner.Enumerable,
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
@@ -808,90 +721,6 @@ namespace Lemonad.ErrorHandling {
 
             return errorSelector != null ? errorSelector() : throw new ArgumentNullException(nameof(errorSelector));
         }
-
-        /// <summary>
-        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
-        /// </summary>
-        /// <typeparam name="TInner"></typeparam>
-        /// <typeparam name="TKey"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="inner">The other <see cref="Result{T,TError}" />.</param>
-        /// <param name="outerKeySelector">The key selector for this <see cref="Result{T,TError}" />.</param>
-        /// <param name="innerKeySelector">The key selector for the other <see cref="Result{T,TError}" />.</param>
-        /// <param name="resultSelector">The selector to determine the returning <see cref="Result{T,TError}" />.</param>
-        /// <param name="errorSelector">Is invoked when keys do not match.</param>
-        /// <returns>
-        ///     A <see cref="Result{T,TError}" />.
-        /// </returns>
-        public Outcome<TResult, TError> Join<TInner, TKey, TResult>(
-            Task<Result<TInner, TError>> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
-            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector) =>
-            TaskResultFunctions.Join(
-                this, inner, outerKeySelector, innerKeySelector, resultSelector,
-                errorSelector);
-
-        /// <summary>
-        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
-        /// </summary>
-        /// <typeparam name="TInner"></typeparam>
-        /// <typeparam name="TKey"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="inner">The other <see cref="Result{T,TError}" />.</param>
-        /// <param name="outerKeySelector">The key selector for this <see cref="Result{T,TError}" />.</param>
-        /// <param name="innerKeySelector">The key selector for the other <see cref="Result{T,TError}" />.</param>
-        /// <param name="resultSelector">The selector to determine the returning <see cref="Result{T,TError}" />.</param>
-        /// <param name="errorSelector">Is invoked when keys do not match.</param>
-        /// <param name="comparer">The <see cref="IEqualityComparer{T}" /> to be used when matching keys.</param>
-        /// <returns>
-        ///     A <see cref="Result{T,TError}" />.
-        /// </returns>
-        public Outcome<TResult, TError> Join<TInner, TKey, TResult>(
-            Task<Result<TInner, TError>> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
-            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector, IEqualityComparer<TKey> comparer) =>
-            TaskResultFunctions.Join(this, inner, outerKeySelector, innerKeySelector, resultSelector,
-                errorSelector, comparer);
-
-        /// <summary>
-        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
-        /// </summary>
-        /// <typeparam name="TInner"></typeparam>
-        /// <typeparam name="TKey"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="inner">The other <see cref="Result{T,TError}" />.</param>
-        /// <param name="outerKeySelector">The key selector for this <see cref="Result{T,TError}" />.</param>
-        /// <param name="innerKeySelector">The key selector for the other <see cref="Result{T,TError}" />.</param>
-        /// <param name="resultSelector">The selector to determine the returning <see cref="Result{T,TError}" />.</param>
-        /// <param name="errorSelector">Is invoked when keys do not match.</param>
-        /// <returns>
-        ///     A <see cref="Result{T,TError}" />.
-        /// </returns>
-        public Outcome<TResult, TError> Join<TInner, TKey, TResult>(
-            Outcome<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
-            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector) =>
-            TaskResultFunctions.Join(
-                this, inner.Result, outerKeySelector, innerKeySelector, resultSelector,
-                errorSelector);
-
-        /// <summary>
-        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
-        /// </summary>
-        /// <typeparam name="TInner"></typeparam>
-        /// <typeparam name="TKey"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="inner">The other <see cref="Result{T,TError}" />.</param>
-        /// <param name="outerKeySelector">The key selector for this <see cref="Result{T,TError}" />.</param>
-        /// <param name="innerKeySelector">The key selector for the other <see cref="Result{T,TError}" />.</param>
-        /// <param name="resultSelector">The selector to determine the returning <see cref="Result{T,TError}" />.</param>
-        /// <param name="errorSelector">Is invoked when keys do not match.</param>
-        /// <param name="comparer">The <see cref="IEqualityComparer{T}" /> to be used when matching keys.</param>
-        /// <returns>
-        ///     A <see cref="Result{T,TError}" />.
-        /// </returns>
-        public Outcome<TResult, TError> Join<TInner, TKey, TResult>(
-            Outcome<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
-            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector, IEqualityComparer<TKey> comparer) =>
-            TaskResultFunctions.Join(this, inner.Result, outerKeySelector, innerKeySelector, resultSelector,
-                errorSelector, comparer);
 
         /// <summary>
         ///     Fully flatmaps another <see cref="Result{T,TError}" />.
@@ -927,19 +756,6 @@ namespace Lemonad.ErrorHandling {
                 }) ?? throw new ArgumentNullException(nameof(flatMapSelector)),
                 errorSelector);
 
-        [Pure]
-        public Outcome<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, Task<Result<TFlatMap, TErrorResult>>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
-            Func<TError, TErrorResult> errorSelector) =>
-            TaskResultFunctions.FullFlatMap(this, flatMapSelector, resultSelector, errorSelector);
-
-        [Pure]
-        public Outcome<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, Outcome<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
-            Func<TError, TErrorResult> errorSelector) =>
-            TaskResultFunctions.FullFlatMap(this, x => flatMapSelector(x).Result, resultSelector,
-                errorSelector);
-
         /// <summary>
         ///     Merges two <see cref="Result{T,TError}" /> together to create a new <see cref="Result{T,TError}" />.
         /// </summary>
@@ -957,44 +773,6 @@ namespace Lemonad.ErrorHandling {
         /// </returns>
         [Pure]
         public Result<TResult, TError> Zip<TOther, TResult>(Result<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector) => FlatMap(_ => other, resultSelector);
-
-        /// <summary>
-        ///     Merges two <see cref="Result{T,TError}" /> together to create a new <see cref="Result{T,TError}" />.
-        /// </summary>
-        /// <param name="other">
-        ///     The other <see cref="Result{T,TError}" />.
-        /// </param>
-        /// <param name="resultSelector">
-        ///     The selector which will determine the type of the returning <see cref="Result{T,TError}" />.
-        /// </param>
-        /// <typeparam name="TOther">The type of the other <see cref="Result{T,TError}" />.</typeparam>
-        /// <typeparam name="TResult">The type of the returning <see cref="Result{T,TError}" />.</typeparam>
-        /// <returns>
-        ///     A <see cref="Result{T,TError}" /> whose value is the result for merging two <see cref="Result{T,TError}" />
-        ///     together.
-        /// </returns>
-        [Pure]
-        public Outcome<TResult, TError> Zip<TOther, TResult>(Task<Result<TOther, TError>> other,
-            Func<T, TOther, TResult> resultSelector) => FlatMap(_ => other, resultSelector);
-
-        /// <summary>
-        ///     Merges two <see cref="Result{T,TError}" /> together to create a new <see cref="Result{T,TError}" />.
-        /// </summary>
-        /// <param name="other">
-        ///     The other <see cref="Result{T,TError}" />.
-        /// </param>
-        /// <param name="resultSelector">
-        ///     The selector which will determine the type of the returning <see cref="Result{T,TError}" />.
-        /// </param>
-        /// <typeparam name="TOther">The type of the other <see cref="Result{T,TError}" />.</typeparam>
-        /// <typeparam name="TResult">The type of the returning <see cref="Result{T,TError}" />.</typeparam>
-        /// <returns>
-        ///     A <see cref="Result{T,TError}" /> whose value is the result for merging two <see cref="Result{T,TError}" />
-        ///     together.
-        /// </returns>
-        [Pure]
-        public Outcome<TResult, TError> Zip<TOther, TResult>(Outcome<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector) => FlatMap(_ => other, resultSelector);
     }
 }

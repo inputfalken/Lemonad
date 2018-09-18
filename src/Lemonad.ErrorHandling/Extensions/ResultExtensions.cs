@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling.Extensions {
     public static class ResultExtensions {
+        public static AsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<Result<T, TError>> source) => source;
+
         /// <summary>
         ///     Creates a <see cref="Result{T,TError}" /> with <typeparamref name="TError" />.
         /// </summary>
@@ -34,7 +37,7 @@ namespace Lemonad.ErrorHandling.Extensions {
         ///     The type of the errors in <see cref="Result{T,TError}" />.
         /// </typeparam>
         public static IEnumerable<TError> Errors<T, TError>(
-            this IEnumerable<Result<T, TError>> enumerable) => enumerable.SelectMany(x => x.AsErrorEnumerable);
+            this IEnumerable<Result<T, TError>> enumerable) => enumerable.SelectMany(x => x.ErrorEnumerable);
 
         /// <summary>
         ///     Evaluates the <see cref="Result{T,TError}" />.
@@ -180,6 +183,6 @@ namespace Lemonad.ErrorHandling.Extensions {
         ///     The type of the errors in <see cref="Result{T,TError}" />.
         /// </typeparam>
         public static IEnumerable<T> Values<T, TError>(
-            this IEnumerable<Result<T, TError>> enumerable) => enumerable.SelectMany(x => x.AsEnumerable);
+            this IEnumerable<Result<T, TError>> enumerable) => enumerable.SelectMany(x => x.Enumerable);
     }
 }

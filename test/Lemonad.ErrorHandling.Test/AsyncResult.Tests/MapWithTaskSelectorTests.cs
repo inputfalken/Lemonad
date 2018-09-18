@@ -2,16 +2,17 @@
 using Lemonad.ErrorHandling.Extensions;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Test.Outcome.Tests {
-    public class MapTests {
+namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
+    public class MapWithTaskSelectorTests {
         [Fact]
         public async Task Result_With_Error_Maps__Expects_Selector_Never_Be_Executed() {
             var selectorExectued = false;
             var division = await AssertionUtilities
                 .DivisionAsync(2, 0)
-                .AsOutcome()
-                .Map(x => {
+                .ToAsyncResult()
+                .Map(async x => {
                     selectorExectued = true;
+                    await Task.Delay(200);
                     return x * 8;
                 }).Match(d => d, s => -1);
 
@@ -25,9 +26,10 @@ namespace Lemonad.ErrorHandling.Test.Outcome.Tests {
             var selectorExectued = false;
             var division = await AssertionUtilities
                 .DivisionAsync(10, 2)
-                .AsOutcome()
-                .Map(x => {
+                .ToAsyncResult()
+                .Map(async x => {
                         selectorExectued = true;
+                        await Task.Delay(200);
                         return x * 4;
                     }
                 ).Match(x => x, x => -1);
