@@ -70,10 +70,10 @@ namespace Lemonad.ErrorHandling {
         public Task<bool> HasValue => TaskResultFunctions.HasValue(TaskResult);
 
         /// <inheritdoc cref="Result{T,TError}.Enumerable" />
-        public Task<IEnumerable<T>> AsEnumerable => TaskResultFunctions.AsEnumerable(TaskResult);
+        public Task<IEnumerable<T>> Enumerable => TaskResultFunctions.AsEnumerable(TaskResult);
 
         /// <inheritdoc cref="Result{T,TError}.ErrorEnumerable" />
-        public Task<IEnumerable<TError>> AsErrorEnumerable => TaskResultFunctions.AsErrorEnumerable(TaskResult);
+        public Task<IEnumerable<TError>> ErrorEnumerable => TaskResultFunctions.AsErrorEnumerable(TaskResult);
 
         /// <inheritdoc cref="Result{T,TError}.Multiple" />
         public AsyncResult<T, IReadOnlyList<TError>> Multiple(
@@ -93,29 +93,14 @@ namespace Lemonad.ErrorHandling {
 
         public AsyncResult<T, TError> IsErrorWhen(
             Func<T, Task<bool>> predicate,
-            Func<TError> errorSelector) =>
-            IsErrorWhenFactory(this, predicate, errorSelector);
+            Func<TError> errorSelector) => TaskResultFunctions.IsErrorWhen(TaskResult, predicate, errorSelector);
+            
 
         public AsyncResult<T, TError> IsErrorWhen(
             Func<T, Task<bool>> predicate,
             Func<Maybe<T>, TError> errorSelector) =>
-            IsErrorWhenFactory(this, predicate, errorSelector);
+            TaskResultFunctions.IsErrorWhen(TaskResult, predicate, errorSelector);
 
-        private static async Task<Result<T, TError>> IsErrorWhenFactory(AsyncResult<T, TError> source,
-            Func<T, Task<bool>> predicate, Func<Maybe<T>, TError> errorSelector) =>
-            await (
-                    await source.TaskResult.ConfigureAwait(false)
-                ).AsyncResult
-                .IsErrorWhen(predicate, errorSelector).TaskResult
-                .ConfigureAwait(false);
-
-        private static async Task<Result<T, TError>> IsErrorWhenFactory(AsyncResult<T, TError> source,
-            Func<T, Task<bool>> predicate, Func<TError> errorSelector) =>
-            await (
-                    await source.TaskResult.ConfigureAwait(false)
-                ).AsyncResult
-                .IsErrorWhen(predicate, errorSelector).TaskResult
-                .ConfigureAwait(false);
 
         /// <inheritdoc cref="Result{T,TError}.IsErrorWhenNull(System.Func{TError})" />
         public AsyncResult<T, TError> IsErrorWhenNull(Func<TError> errorSelector) =>
@@ -130,14 +115,8 @@ namespace Lemonad.ErrorHandling {
             TaskResultFunctions.MapError(TaskResult, selector);
 
         public AsyncResult<T, TErrorResult> MapError<TErrorResult>(Func<TError, Task<TErrorResult>> selector) =>
-            MapErrorFactory(this, selector);
+            TaskResultFunctions.MapError(TaskResult, selector);
 
-        private static async Task<Result<T, TResult>> MapErrorFactory<TResult>(AsyncResult<T, TError> source,
-            Func<TError, Task<TResult>> selector) => await (
-                await source.TaskResult.ConfigureAwait(false)
-            ).AsyncResult
-            .MapError(selector).TaskResult
-            .ConfigureAwait(false);
 
         /// <inheritdoc cref="Result{T,TError}.Do" />
         public AsyncResult<T, TError> Do(Action action) => TaskResultFunctions.Do(TaskResult, action);

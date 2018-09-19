@@ -54,6 +54,20 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
             (await source.ConfigureAwait(false)).Filter(predicate, errorSelector);
 
         [Pure]
+        internal static async Task<Result<T, TError>> IsErrorWhen<T, TError>(Task<Result<T, TError>> source,
+            Func<T, Task<bool>> predicate,
+            Func<Maybe<T>, TError> errorSelector) {
+            var result = await source.ConfigureAwait(false);
+            if (result.HasError) return result.Error;
+            return await predicate(result.Value) ? (Result<T, TError>) errorSelector(result.Value) : result.Value;
+        }
+
+        [Pure]
+        internal static Task<Result<T, TError>> IsErrorWhen<T, TError>(Task<Result<T, TError>> source,
+            Func<T, Task<bool>> predicate,
+            Func<TError> errorSelector) => IsErrorWhen(source, predicate, _ => errorSelector());
+
+        [Pure]
         internal static async Task<Result<T, TError>> Filter<T, TError>(Task<Result<T, TError>> source,
             Func<T, Task<bool>> predicate,
             Func<Maybe<T>, TError> errorSelector) {
@@ -340,18 +354,19 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
             );
 
         [Pure]
-        internal static async Task<Result<TResult, TError>> Map<TResult, T, TError>(Result<T, TError> source,
-            Func<T, Task<TResult>> taskSelector) => source.HasError
-            ? (Result<TResult, TError>) source.Error
-            : (taskSelector != null
-                ? await taskSelector(source.Value).ConfigureAwait(false)
-                : throw new ArgumentNullException(nameof(taskSelector))
-            );
-
-        [Pure]
         internal static async Task<Result<TResult, TError>> Map<T, TResult, TError>(Task<Result<T, TError>> source,
             Func<T, TResult> selector) => (await source.ConfigureAwait(false)).Map(selector);
-        
+
+        [Pure]
+        internal static async Task<Result<T, TResult>> MapError<T, TResult, TError>(Task<Result<T, TError>> source,
+            Func<TError, Task<TResult>> selector) {
+            var result = await source.ConfigureAwait(false);
+            if (result.HasValue) return result.Value;
+
+            if (selector != null) return await selector(result.Error);
+            throw new ArgumentNullException(nameof(selector));
+        }
+
         [Pure]
         internal static async Task<Result<TResult, TError>> Map<T, TResult, TError>(Task<Result<T, TError>> source,
             Func<T, Task<TResult>> selector) {
