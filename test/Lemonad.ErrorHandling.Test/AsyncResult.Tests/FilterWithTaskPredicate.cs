@@ -58,7 +58,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
             var predicateExectued = false;
             var errorSelectorExectued = false;
             var result = await AssertionUtilities.DivisionAsync(10, 2)
-                .AsOutcome()
+                .ToAsyncResult()
                 .Filter(async x => {
                     await Delay;
                     predicateExectued = true;

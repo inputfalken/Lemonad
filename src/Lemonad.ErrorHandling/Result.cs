@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Extensions;
-using Lemonad.ErrorHandling.Extensions.Internal;
 
 namespace Lemonad.ErrorHandling {
     /// <summary>
@@ -77,33 +75,6 @@ namespace Lemonad.ErrorHandling {
             var tmp = default(TError);
             return new Result<T, TError>(in value, in tmp, false, true);
         }
-
-        private static IEnumerable<TError> YieldErrors(Result<T, TError> result) {
-            if (result.HasError)
-                yield return result.Error;
-        }
-
-        private static IEnumerable<T> YieldValues(Result<T, TError> result) {
-            if (result.HasValue)
-                yield return result.Value;
-        }
-
-        /// <summary>
-        /// Convert <see cref="Result{T,TError}"/> into an <see cref="AsyncResult{T,TError}"/>.
-        /// </summary>
-        public AsyncResult<T, TError> AsyncResult => Task.FromResult(this);
-
-        /// <summary>
-        ///     Treat <typeparamref name="TError" /> as enumerable with 0-1 elements in.
-        ///     This is handy when combining <see cref="Result{T,TError}" /> with LINQs API.
-        /// </summary>
-        public IEnumerable<TError> ErrorEnumerable => YieldErrors(this);
-
-        /// <summary>
-        ///     Treat <typeparamref name="T" /> as enumerable with 0-1 elements in.
-        ///     This is handy when combining <see cref="Result{T,TError}" /> with LINQ's API.
-        /// </summary>
-        public IEnumerable<T> Enumerable => YieldValues(this);
 
         /// <inheritdoc />
         public override bool Equals(object obj) => obj is Result<T, TError> option && Equals(option);
@@ -711,8 +682,8 @@ namespace Lemonad.ErrorHandling {
             if (HasError) return Error;
             if (inner.HasError) return inner.Error;
 
-            foreach (var result in Enumerable.Join(
-                inner.Enumerable,
+            foreach (var result in this.ToEnumerable().Join(
+                inner.ToEnumerable(),
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,

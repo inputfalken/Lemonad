@@ -24,7 +24,7 @@ namespace Lemonad.ErrorHandling {
         ///     Treat <typeparamref name="T" /> as enumerable with 0-1 elements in.
         ///     This is handy when combining <see cref="Result{T,TError}" /> with LINQ's API.
         /// </summary>
-        public IEnumerable<T> AsEnumerable => _result.Enumerable;
+        public IEnumerable<T> AsEnumerable => _result.ToEnumerable();
 
         internal T Value { get; }
 

@@ -4,7 +4,7 @@ using System.Linq;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test {
-    public class OutcomeAndResultTypeTests {
+    public class AsyncResultAndResultTests {
         [Fact]
         public void Share_Same_Generic_Public_Instance_Methods() {
             IReadOnlyList<string> Filter(Type type) {

@@ -11,7 +11,7 @@ namespace ReadFileAsync {
             var result = await "data.txt"
                 .ToResult(File.Exists, () => ExitCode.FileNotFound)
                 .Filter(x => Path.GetExtension(x) == ".txt", () => ExitCode.InvalidFileExtension)
-                .AsyncResult
+                .ToAsyncResult()
                 .Map(s => File.ReadAllTextAsync(s))
                 .Filter(s => s == "Hello World", () => ExitCode.InvalidFileContent)
                 .FlatMap(s => ProcessText(s, "processed.txt").ToAsyncResult())

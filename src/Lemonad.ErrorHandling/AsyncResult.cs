@@ -69,12 +69,6 @@ namespace Lemonad.ErrorHandling {
         /// <inheritdoc cref="Result{T,TError}.HasValue" />
         public Task<bool> HasValue => TaskResultFunctions.HasValue(TaskResult);
 
-        /// <inheritdoc cref="Result{T,TError}.Enumerable" />
-        public Task<IEnumerable<T>> Enumerable => TaskResultFunctions.AsEnumerable(TaskResult);
-
-        /// <inheritdoc cref="Result{T,TError}.ErrorEnumerable" />
-        public Task<IEnumerable<TError>> ErrorEnumerable => TaskResultFunctions.AsErrorEnumerable(TaskResult);
-
         /// <inheritdoc cref="Result{T,TError}.Multiple" />
         public AsyncResult<T, IReadOnlyList<TError>> Multiple(
             params Func<Result<T, TError>, Result<T, TError>>[] validations) =>
@@ -94,13 +88,11 @@ namespace Lemonad.ErrorHandling {
         public AsyncResult<T, TError> IsErrorWhen(
             Func<T, Task<bool>> predicate,
             Func<TError> errorSelector) => TaskResultFunctions.IsErrorWhen(TaskResult, predicate, errorSelector);
-            
 
         public AsyncResult<T, TError> IsErrorWhen(
             Func<T, Task<bool>> predicate,
             Func<Maybe<T>, TError> errorSelector) =>
             TaskResultFunctions.IsErrorWhen(TaskResult, predicate, errorSelector);
-
 
         /// <inheritdoc cref="Result{T,TError}.IsErrorWhenNull(System.Func{TError})" />
         public AsyncResult<T, TError> IsErrorWhenNull(Func<TError> errorSelector) =>
@@ -109,14 +101,14 @@ namespace Lemonad.ErrorHandling {
         public AsyncResult<TResult, TError> Map<TResult>(Func<T, TResult> selector) =>
             TaskResultFunctions.Map(TaskResult, selector);
 
-        public AsyncResult<TResult, TError> Map<TResult>(Func<T, Task<TResult>> selector) => TaskResultFunctions.Map(TaskResult, selector);
+        public AsyncResult<TResult, TError> Map<TResult>(Func<T, Task<TResult>> selector) =>
+            TaskResultFunctions.Map(TaskResult, selector);
 
         public AsyncResult<T, TErrorResult> MapError<TErrorResult>(Func<TError, TErrorResult> selector) =>
             TaskResultFunctions.MapError(TaskResult, selector);
 
         public AsyncResult<T, TErrorResult> MapError<TErrorResult>(Func<TError, Task<TErrorResult>> selector) =>
             TaskResultFunctions.MapError(TaskResult, selector);
-
 
         /// <inheritdoc cref="Result{T,TError}.Do" />
         public AsyncResult<T, TError> Do(Action action) => TaskResultFunctions.Do(TaskResult, action);

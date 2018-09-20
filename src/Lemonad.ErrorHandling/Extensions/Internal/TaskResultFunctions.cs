@@ -10,11 +10,11 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
     internal static class TaskResultFunctions {
         [Pure]
         internal static async Task<IEnumerable<T>> AsEnumerable<T, TError>(Task<Result<T, TError>> result) =>
-            (await result.ConfigureAwait(false)).Enumerable;
+            (await result.ConfigureAwait(false)).ToEnumerable();
 
         [Pure]
         internal static async Task<IEnumerable<TError>> AsErrorEnumerable<T, TError>(Task<Result<T, TError>> result) =>
-            (await result.ConfigureAwait(false)).ErrorEnumerable;
+            (await result.ConfigureAwait(false)).ToErrorEnumerable();
 
         [Pure]
         internal static async Task<Result<TResult, TError>> Cast<T, TResult, TError>(Task<Result<T, TError>> source) =>
@@ -397,7 +397,7 @@ namespace Lemonad.ErrorHandling.Extensions.Internal {
             Task<Result<T, TError>> source,
             Task<Result<TOther, TError>> other,
             Func<T, TOther, TResult> resultSelector) => await (await source.ConfigureAwait(false))
-            .Zip(await other.ConfigureAwait(false), resultSelector).AsyncResult.TaskResult.ConfigureAwait(false);
+            .Zip(await other.ConfigureAwait(false), resultSelector).ToAsyncResult().TaskResult.ConfigureAwait(false);
 
         [Pure]
         internal static async Task<Result<T, IReadOnlyList<TError>>> Multiple<T, TError>(

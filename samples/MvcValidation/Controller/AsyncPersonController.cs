@@ -49,7 +49,7 @@ namespace MvcValidation.Controller {
             return ApiValidation(model)
                 // Using match inside this scope is currently too complex since it requires all type params to be supplied.
                 .Map(x => new PersonModel {FirstName = x.FirstName, LastName = x.LastName})
-                .AsyncResult
+                .ToAsyncResult()
                 .Flatten(x => LastNameAppService(x).ToAsyncResult(), x => new PersonPostApiError {Message = x.Message, Model = model})
                 .FlatMap(x => FirstNameAppService(x).ToAsyncResult(), x => new PersonPostApiError {Message = x.Message, Model = model})
                 .Match<IActionResult>(Ok, BadRequest);
