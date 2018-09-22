@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
-using Lemonad.ErrorHandling.Extensions;
-using Lemonad.ErrorHandling.Extensions.Internal;
+using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
     /// <summary>

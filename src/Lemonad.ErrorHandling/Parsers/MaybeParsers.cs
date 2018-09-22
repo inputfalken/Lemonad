@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using System.Globalization;
-using Lemonad.ErrorHandling.Extensions;
 
 namespace Lemonad.ErrorHandling.Parsers {
     public static class MaybeParsers {

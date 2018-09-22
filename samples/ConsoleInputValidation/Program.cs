@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Lemonad.ErrorHandling;
-using Lemonad.ErrorHandling.Extensions;
 
 namespace ConsoleInputValidation {
     internal static class Program {

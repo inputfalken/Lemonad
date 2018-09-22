@@ -3,7 +3,6 @@ using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
-using Lemonad.ErrorHandling.Extensions;
 
 namespace ReadFileAsync {
     internal static partial class Program {

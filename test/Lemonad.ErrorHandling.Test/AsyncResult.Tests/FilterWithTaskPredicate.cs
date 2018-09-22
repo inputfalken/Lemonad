@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Lemonad.ErrorHandling.Extensions;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {

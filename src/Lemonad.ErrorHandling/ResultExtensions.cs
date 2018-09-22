@@ -4,7 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Lemonad.ErrorHandling.Extensions {
+namespace Lemonad.ErrorHandling {
     public static class ResultExtensions {
         /// <summary>
         ///     Converts the <see cref="Task" /> with <see cref="Result{T,TError}" /> into <see cref="AsyncResult{T,TError}" /> with

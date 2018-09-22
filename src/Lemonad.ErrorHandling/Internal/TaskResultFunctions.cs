@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 
-namespace Lemonad.ErrorHandling.Extensions.Internal {
+namespace Lemonad.ErrorHandling.Internal {
     // The methods needs to stay internal; so we do not expose extensions to Task<Result<T, TError>>.
     // Since the result will be ambigous method signatures when combined with extensions of Task<T>.
     // The API consumer will have to convert their task types into outcome.

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using Lemonad.ErrorHandling.Extensions;
 
 namespace Lemonad.ErrorHandling {
     /// <summary>

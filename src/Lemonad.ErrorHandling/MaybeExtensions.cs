@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 
-namespace Lemonad.ErrorHandling.Extensions {
+namespace Lemonad.ErrorHandling {
     public static class MaybeExtensions {
         /// <summary>
         ///     Works just like <see cref="Enumerable.FirstOrDefault{TSource}(System.Collections.Generic.IEnumerable{TSource})" />
