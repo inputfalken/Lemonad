@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Lemonad.Enumerable {
-    public static class Extensions {
+    public static partial class Enumerable {
         /// <summary>
         /// Chunks the elements of a sequence according to a amount and creates a result value from each group and its max capacity.
         /// </summary>
@@ -15,33 +15,53 @@ namespace Lemonad.Enumerable {
         /// <exception cref="ArgumentNullException">When <paramref name="source"/> is null.</exception>
         /// <exception cref="ArgumentException">When <paramref name="count"/> is below 1.</exception>
         public static IEnumerable<IChunk<TSource>> ChunkBy<TSource>(this IEnumerable<TSource> source, int count) {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (count < 1) throw new ArgumentException($"Parameter: '{nameof(count)}' ({count}) can not be below 1.");
-            return source
-                .Select((x, y) => (Element: x, Index: y))
-                .GroupBy<(TSource Element, int Index), int, IChunk<TSource>>(
-                    x => x.Index / count,
-                    (_, y) => new Chunk<TSource>(y.Select(x => x.Element), count)
-                );
-        }
-
-        private readonly struct Chunk<T> : IChunk<T> {
-            private readonly IEnumerable<T> _chunk;
-
-            public Chunk(in IEnumerable<T> chunk, int count) {
-                _chunk = chunk;
-                MaxCount = count;
+            if (source == null) {
+                throw new ArgumentNullException(nameof(source));
             }
 
-            public IEnumerator<T> GetEnumerator() => _chunk.GetEnumerator();
+            if (count < 1) {
+                throw new ArgumentException($"Parameter: '{nameof(count)}' ({count}) can not be below 1.");
+            }
 
-            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-            /// <summary>
-            /// The max amount of allowed elements in <see cref="IChunk{T}"/>.
-            /// </summary>
-            public int MaxCount { get; }
+            foreach (IEnumerable<TSource> enumerable in CreateChunks(source, count)) {
+                yield return new Chunk<TSource>(enumerable, count);
+            }
         }
+
+        private static IEnumerable<IEnumerable<TSource>> CreateChunks<TSource>(IEnumerable<TSource> source, int count) {
+            var index = 0;
+            var elements = new Queue<TSource>();
+            foreach (var element in source) {
+                elements.Enqueue(element);
+                checked {
+                    index++;
+                }
+                if (index % count == 0) {
+                    yield return elements;
+                    elements = new Queue<TSource>();
+                }
+            }
+
+            yield return elements;
+        }
+    }
+
+    public sealed class Chunk<T> : IChunk<T> {
+        private readonly IEnumerable<T> _chunk;
+
+        public Chunk(IEnumerable<T> chunk, int count) {
+            _chunk = chunk;
+            MaxCount = count;
+        }
+
+        public IEnumerator<T> GetEnumerator() => _chunk.GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <summary>
+        /// The max amount of allowed elements in <see cref="IChunk{T}"/>.
+        /// </summary>
+        public int MaxCount { get; }
     }
 
     /// <summary>
