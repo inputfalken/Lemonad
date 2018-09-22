@@ -299,7 +299,7 @@ namespace Lemonad.ErrorHandling {
         public static AsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T?> source, Func<TError> errorSelector)
             where T : struct {
             async Task<Result<T, TError>> Factory(Task<T?> x, Func<TError> y) =>
-                (await x.ConfigureAwait(false)).ToResult(errorSelector);
+                (await x.ConfigureAwait(false)).ToResult(y);
 
             return Factory(source, errorSelector);
         }
