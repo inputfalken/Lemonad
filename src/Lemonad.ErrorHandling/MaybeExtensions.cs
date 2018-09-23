@@ -78,7 +78,7 @@ namespace Lemonad.ErrorHandling {
         ///     The type of the <see cref="Maybe{T}" />.
         /// </typeparam>
         /// <typeparam name="TResult">
-        ///     The return type of cuntion <paramref name="selector" />.
+        ///     The return type returned by the function <paramref name="selector" />.
         /// </typeparam>
         public static IEnumerable<TResult> NoValues<TSource, TResult>(this IEnumerable<Maybe<TSource>> source,
             Func<TResult> selector) => source.Where(x => x.HasValue == false).Select(_ => selector());
@@ -208,6 +208,15 @@ namespace Lemonad.ErrorHandling {
         ///     A sequence which can contain 0-n amount of values.
         /// </returns>
         public static IEnumerable<TSource> Values<TSource>(this IEnumerable<Maybe<TSource>> source) =>
-            source.SelectMany(x => x.AsEnumerable);
+            source.SelectMany(x => x.ToEnumerable());
+
+        /// <summary>
+        ///     Treat <typeparamref name="TSource" /> as enumerable with 0-1 elements in.
+        ///     This is handy when combining <see cref="Maybe{T}" /> with LINQ's API.
+        /// </summary>
+        public static IEnumerable<TSource> ToEnumerable<TSource>(this Maybe<TSource> source) {
+            if (source.HasValue)
+                yield return source.Value;
+        }
     }
 }

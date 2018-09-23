@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 
 namespace Lemonad.ErrorHandling {
@@ -18,12 +17,6 @@ namespace Lemonad.ErrorHandling {
         public bool HasValue { get; }
 
         private readonly Result<T, Unit> _result;
-
-        /// <summary>
-        ///     Treat <typeparamref name="T" /> as enumerable with 0-1 elements in.
-        ///     This is handy when combining <see cref="Result{T,TError}" /> with LINQ's API.
-        /// </summary>
-        public IEnumerable<T> AsEnumerable => _result.ToEnumerable();
 
         internal T Value { get; }
 
@@ -187,7 +180,7 @@ namespace Lemonad.ErrorHandling {
         ///     A <see cref="Maybe{T}" /> whose <typeparamref name="T" /> has value if <typeparamref name="T" /> is not null.
         /// </returns>
         [Pure]
-        public Maybe<T> IsNoneWhenNull() => new Maybe<T>(_result.IsErrorWhenNull(() => Unit.Default));
+        public Maybe<T> IsNoneWhenNull() => new Maybe<T>(_result.IsErrorWhenNull(Unit.Selector));
 
         /// <summary>
         ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
@@ -227,6 +220,6 @@ namespace Lemonad.ErrorHandling {
         public Maybe<TResult> FlatMap<TFlatMap, TResult>(
             Func<T, TFlatMap?> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct =>
-            new Maybe<TResult>(_result.FlatMap(x => flatMapSelector(x).ToResult(() => Unit.Default), resultSelector));
+            new Maybe<TResult>(_result.FlatMap(x => flatMapSelector(x).ToResult(Unit.Selector), resultSelector));
     }
 }
