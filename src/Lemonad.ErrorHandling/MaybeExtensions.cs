@@ -84,6 +84,15 @@ namespace Lemonad.ErrorHandling {
             Func<TResult> selector) => source.Where(x => x.HasValue == false).Select(_ => selector());
 
         /// <summary>
+        ///     Treat <typeparamref name="TSource" /> as enumerable with 0-1 elements in.
+        ///     This is handy when combining <see cref="Maybe{T}" /> with LINQ's API.
+        /// </summary>
+        public static IEnumerable<TSource> ToEnumerable<TSource>(this Maybe<TSource> source) {
+            if (source.HasValue)
+                yield return source.Value;
+        }
+
+        /// <summary>
         ///     Creates a <see cref="Maybe{T}" /> who will have the value <paramref name="item" />.
         /// </summary>
         /// <param name="item">
@@ -209,14 +218,5 @@ namespace Lemonad.ErrorHandling {
         /// </returns>
         public static IEnumerable<TSource> Values<TSource>(this IEnumerable<Maybe<TSource>> source) =>
             source.SelectMany(x => x.ToEnumerable());
-
-        /// <summary>
-        ///     Treat <typeparamref name="TSource" /> as enumerable with 0-1 elements in.
-        ///     This is handy when combining <see cref="Maybe{T}" /> with LINQ's API.
-        /// </summary>
-        public static IEnumerable<TSource> ToEnumerable<TSource>(this Maybe<TSource> source) {
-            if (source.HasValue)
-                yield return source.Value;
-        }
     }
 }

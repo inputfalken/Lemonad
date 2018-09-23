@@ -36,6 +36,10 @@ namespace Lemonad.ErrorHandling.Internal {
             Action<TError> action) => (await source.ConfigureAwait(false)).DoWithError(action);
 
         [Pure]
+        internal static async Task<Either<T, TError>> Either<T, TError>(Task<Result<T, TError>> result) =>
+            (await result.ConfigureAwait(false)).Either;
+
+        [Pure]
         internal static async Task<Result<T, TError>> Filter<T, TError>(Task<Result<T, TError>> source,
             Func<T, bool> predicate,
             Func<TError> errorSelector) =>
@@ -278,17 +282,14 @@ namespace Lemonad.ErrorHandling.Internal {
         ) => (await source.ConfigureAwait(false)).FullMap(selector, errorSelector);
 
         [Pure]
-        internal static async Task<Either<T, TError>> Either<T, TError>(Task<Result<T, TError>> result) =>
-            (await result.ConfigureAwait(false)).Either;
-
-
-        [Pure]
         internal static async Task<Result<T, TError>> IsErrorWhen<T, TError>(Task<Result<T, TError>> source,
             Func<T, Task<bool>> predicate,
             Func<Maybe<T>, TError> errorSelector) {
             var result = await source.ConfigureAwait(false);
             if (result.Either.HasError) return result.Either.Error;
-            return await predicate(result.Either.Value) ? (Result<T, TError>) errorSelector(result.Either.Value) : result.Either.Value;
+            return await predicate(result.Either.Value)
+                ? (Result<T, TError>) errorSelector(result.Either.Value)
+                : result.Either.Value;
         }
 
         [Pure]

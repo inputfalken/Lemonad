@@ -2,33 +2,45 @@
 
 namespace Lemonad.ErrorHandling {
     /// <summary>
-    /// Contains either <typeparamref name="T"/> or <typeparamref name="TError"/>.
+    ///     Contains either <typeparamref name="T" /> or <typeparamref name="TError" />.
     /// </summary>
     /// <typeparam name="T">
-    /// The value type.
+    ///     The value type.
     /// </typeparam>
     /// <typeparam name="TError">
-    /// The error type.
+    ///     The error type.
     /// </typeparam>
     public readonly struct Either<T, TError> {
         /// <summary>
-        ///     Is true if there's a <typeparamref name="T" /> in the current state of the <see cref="Result{T,TError}" />.
+        ///     Gets a value indicating whether the current <see cref="Either{T,TError}" /> object has a valid value for
+        ///     <typeparamref name="T" /> in
+        ///     its underlying type.
         /// </summary>
+        /// <returns>
+        ///     true if the current <see cref="Either{T,TError}"></see> object has a value for <typeparamref name="T" />; false if
+        ///     the current
+        ///     <see cref="Either{T,TError}"></see> object has a value for <typeparamref name="TError" />.
+        /// </returns>
         public bool HasValue { get; }
 
         /// <summary>
-        ///     Is true if there's a <typeparamref name="TError" /> in the current state of the <see cref="Result{T,TError}" />.
+        ///     Gets a value indicating whether the current <see cref="Either{T,TError}" /> object has a valid value for
+        ///     <typeparamref name="TError" /> in
+        ///     its underlying type.
         /// </summary>
+        /// <returns>
+        ///     true if the current <see cref="Either{T,TError}"></see> object has a value for <typeparamref name="TError" />;
+        ///     false if the current
+        ///     <see cref="Either{T,TError}"></see> object has a value for <typeparamref name="T" />.
+        /// </returns>
         public bool HasError { get; }
 
         /// <summary>
-        /// The potential <typeparamref name="TError"/>.
+        ///     Gets the <typeparamref name="TError" /> value of the current <see cref="Either{T,TError}"></see> object if
+        ///     <see cref="HasError" /> is true.
         /// </summary>
-        /// <remarks>
-        /// Verify with <see cref="HasError"/> before using this, unless your certain that the error exists.
-        /// </remarks>
         /// <example>
-        /// <code language="c#">
+        ///     <code language="c#">
         /// if (Either.HasError)
         /// {
         ///     // Safe to use.
@@ -39,13 +51,11 @@ namespace Lemonad.ErrorHandling {
         public TError Error { get; }
 
         /// <summary>
-        /// The potential <typeparamref name="T"/>.
+        ///     Gets the <typeparamref name="T" /> value of the current <see cref="Either{T,TError}"></see> object if
+        ///     <see cref="HasValue" /> is true.
         /// </summary>
-        /// <remarks>
-        /// Verify with <see cref="HasValue"/> before using this, unless your certain that the value exists.
-        /// </remarks>
         /// <example>
-        /// <code language="c#">
+        ///     <code language="c#">
         /// if (Either.HasValue)
         /// {
         ///     // Safe to use.

@@ -114,21 +114,6 @@ namespace Lemonad.ErrorHandling {
             where T : TError => source.Match(selector, x => selector((T) x));
 
         /// <summary>
-        ///     Creates a <see cref="Result{T,TError}" /> with <typeparamref name="T" />.
-        /// </summary>
-        /// <param name="element">
-        ///     The type of the <typeparamref name="T" />.
-        /// </param>
-        /// <typeparam name="T">
-        ///     The <typeparamref name="T" /> of <see cref="Result{T,TError}" />.
-        /// </typeparam>
-        /// <typeparam name="TError">
-        ///     The <typeparamref name="TError" /> of <see cref="Result{T,TError}" />.
-        /// </typeparam>
-        [Pure]
-        public static Result<T, TError> Value<T, TError>(T element) => element;
-
-        /// <summary>
         ///     Converts the <see cref="Task" /> with <see cref="Result{T,TError}" /> into <see cref="AsyncResult{T,TError}" />.
         /// </summary>
         /// <param name="result">
@@ -157,7 +142,7 @@ namespace Lemonad.ErrorHandling {
         public static AsyncResult<T, TError> ToAsyncResult<T, TError>(this Result<T, TError> result) =>
             Task.FromResult(result);
 
-        /// <inheritdoc cref="ToResult{T,TError}(T,Func{T,bool},Func{TError})"/>
+        /// <inheritdoc cref="ToResult{T,TError}(T,Func{T,bool},Func{TError})" />
         [Pure]
         public static AsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T> source, Func<T, bool> predicate,
             Func<TError> errorSelector) {
@@ -167,7 +152,7 @@ namespace Lemonad.ErrorHandling {
             return Factory(source, predicate, errorSelector);
         }
 
-        /// <inheritdoc cref="ToResult{T,TError}(T,Func{T,bool},Func{TError})"/>
+        /// <inheritdoc cref="ToResult{T,TError}(T,Func{T,bool},Func{TError})" />
         [Pure]
         public static AsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T?> source, Func<TError> errorSelector)
             where T : struct {
@@ -177,7 +162,7 @@ namespace Lemonad.ErrorHandling {
             return Factory(source, errorSelector);
         }
 
-        /// <inheritdoc cref="ToResultError{T,TError}(TError,Func{TError,bool},Func{T})"/>
+        /// <inheritdoc cref="ToResultError{T,TError}(TError,Func{TError,bool},Func{T})" />
         public static AsyncResult<T, TError> ToAsyncResultError<T, TError>(this Task<TError> source,
             Func<TError, bool> predicate,
             Func<T> valueSelector) {
@@ -250,22 +235,23 @@ namespace Lemonad.ErrorHandling {
             source.ToResult(x => x.HasValue, errorSelector).Map(x => x.Value);
 
         /// <summary>
-        ///  Creates an <see cref="Result{T,TError}"/> based on a predicate function combined with an <paramref name="errorSelector"/> for <typeparamref name="TError"/>.
+        ///     Creates an <see cref="Result{T,TError}" /> based on a predicate function combined with an
+        ///     <paramref name="errorSelector" /> for <typeparamref name="TError" />.
         /// </summary>
         /// <typeparam name="T">
-        /// The value type in <see cref="Result{T,TError}"/>.
+        ///     The value type in <see cref="Result{T,TError}" />.
         /// </typeparam>
         /// <typeparam name="TError">
-        /// The error type in the <see cref="Result{T,TError}"/>.
+        ///     The error type in the <see cref="Result{T,TError}" />.
         /// </typeparam>
         /// <param name="source">
-        /// The starting value which will be passed into the <paramref name="predicate"/>function.
+        ///     The starting value which will be passed into the <paramref name="predicate" />function.
         /// </param>
         /// <param name="predicate">
-        ///   A function to test <typeparamref name="T" />.
+        ///     A function to test <typeparamref name="T" />.
         /// </param>
         /// <param name="errorSelector">
-        /// Is executed when the predicate fails.
+        ///     Is executed when the predicate fails.
         /// </param>
         /// <returns></returns>
         [Pure]
@@ -278,22 +264,23 @@ namespace Lemonad.ErrorHandling {
         }
 
         /// <summary>
-        ///  Creates an <see cref="Result{T,TError}"/> based on a predicate function combined with an <paramref name="valueSelector"/> for <typeparamref name="T"/>.
+        ///     Creates an <see cref="Result{T,TError}" /> based on a predicate function combined with an
+        ///     <paramref name="valueSelector" /> for <typeparamref name="T" />.
         /// </summary>
         /// <typeparam name="T">
-        /// The value type in <see cref="Result{T,TError}"/>.
+        ///     The value type in <see cref="Result{T,TError}" />.
         /// </typeparam>
         /// <typeparam name="TError">
-        /// The error type in the <see cref="Result{T,TError}"/>.
+        ///     The error type in the <see cref="Result{T,TError}" />.
         /// </typeparam>
         /// <param name="source">
-        /// The starting value which will be passed into the <paramref name="predicate"/>function.
+        ///     The starting value which will be passed into the <paramref name="predicate" />function.
         /// </param>
         /// <param name="predicate">
-        ///   A function to test <typeparamref name="TError" />.
+        ///     A function to test <typeparamref name="TError" />.
         /// </param>
         /// <param name="valueSelector">
-        /// Is executed when the predicate fails.
+        ///     Is executed when the predicate fails.
         /// </param>
         public static Result<T, TError> ToResultError<T, TError>(this TError source,
             Func<TError, bool> predicate,
@@ -303,6 +290,21 @@ namespace Lemonad.ErrorHandling {
                 ? (Result<T, TError>) source
                 : (valueSelector == null ? throw new ArgumentNullException(nameof(valueSelector)) : valueSelector());
         }
+
+        /// <summary>
+        ///     Creates a <see cref="Result{T,TError}" /> with <typeparamref name="T" />.
+        /// </summary>
+        /// <param name="element">
+        ///     The type of the <typeparamref name="T" />.
+        /// </param>
+        /// <typeparam name="T">
+        ///     The <typeparamref name="T" /> of <see cref="Result{T,TError}" />.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        ///     The <typeparamref name="TError" /> of <see cref="Result{T,TError}" />.
+        /// </typeparam>
+        [Pure]
+        public static Result<T, TError> Value<T, TError>(T element) => element;
 
         /// <summary>
         ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="Result{T,TError}" /> to an <see cref="IEnumerable{T}" /> of

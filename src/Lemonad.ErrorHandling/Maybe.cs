@@ -10,15 +10,31 @@ namespace Lemonad.ErrorHandling {
     /// </typeparam>
     public readonly struct Maybe<T> : IEquatable<Maybe<T>>, IComparable<Maybe<T>> {
         public static Maybe<T> None { get; } = new Maybe<T>(ResultExtensions.Error<T, Unit>(default));
-
-        /// <summary>
-        ///     Is true if there's a <typeparamref name="T" /> in the current state of the <see cref="Maybe{T}" />.
-        /// </summary>
-        public bool HasValue { get; }
-
         private readonly Result<T, Unit> _result;
 
-        internal T Value { get; }
+        /// <summary>
+        ///     Gets a value indicating whether the current <see cref="Maybe{T}" /> object has a valid value of
+        ///     its underlying type.
+        /// </summary>
+        /// <returns>
+        ///     true if the current <see cref="Maybe{T}"></see> object has a value; false if the current
+        ///     <see cref="Maybe{T}"></see> object has no value.
+        /// </returns>
+        public bool HasValue { get; }
+
+        /// <summary>
+        ///     Gets the value of the current <see cref="Maybe{T}"></see> object if <see cref="HasValue" /> is true.
+        /// </summary>
+        /// <example>
+        ///     <code language="c#">
+        ///  if (Either.HasValue)
+        ///  {
+        ///      // Safe to use.
+        ///      Console.WriteLine(Either.Value)
+        ///  }
+        ///  </code>
+        /// </example>
+        public T Value { get; }
 
         private Maybe(Result<T, Unit> result) {
             HasValue = result.Either.HasValue;
