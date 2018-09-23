@@ -6,7 +6,7 @@ using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
     /// <summary>
-    ///     An asynchronous version of <see cref="Result{T,TError}" /> with the same method members.
+    ///     An asynchronous version of <see cref="Result{T,TError}" /> with the same functionality.
     /// </summary>
     public readonly struct AsyncResult<T, TError> {
         private AsyncResult(Task<Result<T, TError>> result) =>
@@ -18,7 +18,7 @@ namespace Lemonad.ErrorHandling {
             new AsyncResult<T, TError>(result);
 
         public static implicit operator AsyncResult<T, TError>(T value) =>
-            new AsyncResult<T, TError>(Task.FromResult(ResultExtensions.Ok<T, TError>(value)));
+            new AsyncResult<T, TError>(Task.FromResult(ResultExtensions.Value<T, TError>(value)));
 
         public AsyncResult<TResult, TError> Join<TInner, TKey, TResult>(
             AsyncResult<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
@@ -73,7 +73,7 @@ namespace Lemonad.ErrorHandling {
             params Func<Result<T, TError>, Result<T, TError>>[] validations) =>
             TaskResultFunctions.Multiple(TaskResult, validations);
 
-        /// <inheritdoc cref="Result{T,TError}.IsErrorWhen(System.Func{T,bool},System.Func{TError})" />
+        /// <inheritdoc cref="Result{T,TError}.IsErrorWhen(Func{T,bool},Func{TError})" />
         public AsyncResult<T, TError> IsErrorWhen(
             Func<T, bool> predicate,
             Func<TError> errorSelector) =>

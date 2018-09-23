@@ -6,6 +6,10 @@ using Lemonad.ErrorHandling;
 
 namespace ReadFileAsync {
     internal static partial class Program {
+        private static void LogFatal(string message, Exception exception) {
+            // Log fatal somewhere...
+        }
+
         private static async Task<int> Main(string[] args) {
             var result = await "data.txt"
                 .ToResult(File.Exists, () => ExitCode.FileNotFound)
@@ -39,10 +43,6 @@ namespace ReadFileAsync {
 
             Console.WriteLine(result.Message);
             return result.ExitCode;
-        }
-
-        private static void LogFatal(string message, Exception exception) {
-            // Log fatal somewhere...
         }
 
         private static async Task<Result<string, ExitCode>> ProcessText(

@@ -7,8 +7,7 @@ namespace ConsoleInputValidation {
         private static int Main(string[] args) {
             Console.WriteLine("Please supply your name.");
             return Console.ReadLine()
-                .ToResult<string, ExitCode>()
-                .IsErrorWhen(x => string.IsNullOrWhiteSpace(x), () => ExitCode.EmptyName)
+                .ToResult(s => string.IsNullOrEmpty(s) == false, () => ExitCode.EmptyName)
                 .Flatten(OnlyAlphanumericLetters)
                 .Map(_ => ExitCode.Success)
                 .FullCast<int>()

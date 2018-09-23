@@ -1,5 +1,4 @@
-﻿namespace ReadFileAsync
-{
+﻿namespace ReadFileAsync {
     internal static partial class Program {
         internal enum ExitCode {
             FileNotFound = 1,

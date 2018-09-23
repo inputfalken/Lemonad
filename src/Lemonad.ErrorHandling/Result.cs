@@ -8,10 +8,10 @@ namespace Lemonad.ErrorHandling {
     ///     A data-structure commonly used for error-handling where only one value can be present.
     ///     Either it's <typeparamref name="TError" /> or it's <typeparamref name="T" />. Which makes it possible to handle
     ///     error without throwing exceptions.
-    ///     Inspired by 'Haskells Either a b' and FSharps 'Result&lt;T, TError&gt;'.
+    ///     Inspired by 'Haskell's Either a b' and FSharps 'Result&lt;T, TError&gt;'.
     /// </summary>
     /// <typeparam name="T">
-    ///     The type which is considered as successfull.
+    ///     The type which is considered as successful.
     /// </typeparam>
     /// <typeparam name="TError">
     ///     The type which is considered as failure.
@@ -96,10 +96,10 @@ namespace Lemonad.ErrorHandling {
         ///     Evaluates the <see cref="Result{T,TError}" />.
         /// </summary>
         /// <param name="selector">
-        ///     Is exectued when the <see cref="Result{T,TError}" /> contains <see cref="T" />.
+        ///     Is executed when the <see cref="Result{T,TError}" /> contains <see cref="T" />.
         /// </param>
         /// <param name="errorSelector">
-        ///     Is exectued when the <see cref="Result{T,TError}" /> contains <see cref="TError" />.
+        ///     Is executed when the <see cref="Result{T,TError}" /> contains <see cref="TError" />.
         /// </param>
         /// <typeparam name="TResult">
         ///     The return type of <paramref name="selector" /> and <paramref name="errorSelector" />
@@ -124,10 +124,10 @@ namespace Lemonad.ErrorHandling {
         ///     Evaluates the <see cref="Result{T,TError}" />.
         /// </summary>
         /// <param name="action">
-        ///     Is exectued when the <see cref="Result{T,TError}" /> contains <see cref="T" />.
+        ///     Is executed when the <see cref="Result{T,TError}" /> contains <see cref="T" />.
         /// </param>
         /// <param name="errorAction">
-        ///     Is exectued when the <see cref="Result{T,TError}" /> contains <see cref="TError" />.
+        ///     Is executed when the <see cref="Result{T,TError}" /> contains <see cref="TError" />.
         /// </param>
         /// <exception cref="ArgumentNullException">
         ///     When either <paramref name="action" /> or <paramref name="errorAction" /> and needs to be executed.
@@ -153,7 +153,7 @@ namespace Lemonad.ErrorHandling {
         ///     <see cref="Result{T,TError}" /> with side effects.
         /// </returns>
         /// <exception cref="ArgumentNullException">
-        ///     When <paramref name="action" /> is null and needs to be exectued.
+        ///     When <paramref name="action" /> is null and needs to be executed.
         /// </exception>
         public Result<T, TError> DoWith(Action<T> action) {
             if (HasError) return this;
@@ -166,7 +166,7 @@ namespace Lemonad.ErrorHandling {
         }
 
         /// <summary>
-        ///     Exectues  <paramref name="action" />.
+        ///     Executes  <paramref name="action" />.
         /// </summary>
         /// <param name="action">
         ///     Is executed no matter what state <see cref="Result{T,TError}" /> is in.
@@ -193,7 +193,7 @@ namespace Lemonad.ErrorHandling {
         ///     <see cref="Result{T,TError}" /> with side effects.
         /// </returns>
         /// <exception cref="ArgumentNullException">
-        ///     When <paramref name="action" /> is null and needs to be exectued.
+        ///     When <paramref name="action" /> is null and needs to be executed.
         /// </exception>
         public Result<T, TError> DoWithError(
             Action<TError> action) {
@@ -213,7 +213,7 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         /// <param name="errorSelector">
-        ///     Is exectued when the predicate fails.
+        ///     Is executed when the predicate fails.
         /// </param>
         [Pure]
         public Result<T, TError> Filter(Func<T, bool> predicate, Func<TError> errorSelector) =>
@@ -226,7 +226,7 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         /// <param name="errorSelector">
-        ///     Is exectued when the <paramref name="predicate" /> is false. The in parameter is a <see cref="Maybe{T}" /> since
+        ///     Is executed when the <paramref name="predicate" /> is false. The in parameter is a <see cref="Maybe{T}" /> since
         ///     the <typeparamref name="T" /> could be unsafe in this context.
         /// </param>
         [Pure]
@@ -247,7 +247,7 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         /// <param name="errorSelector">
-        ///     Is exectued when the <paramref name="predicate" /> is true. The in parameter is a <see cref="Maybe{T}" /> since the
+        ///     Is executed when the <paramref name="predicate" /> is true. The in parameter is a <see cref="Maybe{T}" /> since the
         ///     <typeparamref name="T" /> could be unsafe in this context.
         /// </param>
         /// <returns>
@@ -312,7 +312,7 @@ namespace Lemonad.ErrorHandling {
             ? ResultExtensions.Error<TResult, TErrorResult>(errorSelector != null
                 ? errorSelector(Error)
                 : throw new ArgumentNullException(nameof(errorSelector)))
-            : ResultExtensions.Ok<TResult, TErrorResult>(selector != null
+            : ResultExtensions.Value<TResult, TErrorResult>(selector != null
                 ? selector(Value)
                 : throw new ArgumentNullException(nameof(selector)));
 
@@ -331,7 +331,7 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public Result<TResult, TError> Map<TResult>(Func<T, TResult> selector) => HasValue
             ? selector != null
-                ? ResultExtensions.Ok<TResult, TError>(selector(Value))
+                ? ResultExtensions.Value<TResult, TError>(selector(Value))
                 : throw new ArgumentNullException(nameof(selector))
             : ResultExtensions.Error<TResult, TError>(Error);
 
@@ -352,7 +352,7 @@ namespace Lemonad.ErrorHandling {
             ? selector != null
                 ? ResultExtensions.Error<T, TErrorResult>(selector(Error))
                 : throw new ArgumentNullException(nameof(selector))
-            : ResultExtensions.Ok<T, TErrorResult>(Value);
+            : ResultExtensions.Value<T, TErrorResult>(Value);
 
         /// <summary>
         ///     Flatten another <see cref="Result{T,TError}" /> who shares the same <typeparamref name="TError" />.
@@ -413,7 +413,7 @@ namespace Lemonad.ErrorHandling {
         ///     The value type of the <see cref="Result{T,TError}" /> returned by the <paramref name="flatMapSelector" />.
         /// </typeparam>
         /// <exception cref="ArgumentNullException">
-        ///     When any of the function parameters are null and needs to be exectued.
+        ///     When any of the function parameters are null and needs to be executed.
         /// </exception>
         [Pure]
         public Result<TResult, TError> FlatMap<TResult, TErrorResult>(
@@ -423,7 +423,7 @@ namespace Lemonad.ErrorHandling {
             var okSelector = flatMapSelector(Value);
 
             return okSelector.HasValue
-                ? ResultExtensions.Ok<TResult, TError>(okSelector.Value)
+                ? ResultExtensions.Value<TResult, TError>(okSelector.Value)
                 : okSelector.MapError(errorSelector);
         }
 
@@ -483,7 +483,7 @@ namespace Lemonad.ErrorHandling {
         ///     returned by the <paramref name="selector" />.
         /// </returns>
         /// <exception cref="ArgumentNullException">
-        ///     When any of the function parameters are null and needs to be exectued.
+        ///     When any of the function parameters are null and needs to be executed.
         /// </exception>
         [Pure]
         public Result<T, TError> Flatten<TResult, TErrorResult>(
@@ -492,7 +492,7 @@ namespace Lemonad.ErrorHandling {
             if (selector == null) throw new ArgumentNullException(nameof(selector));
             var okSelector = selector(Value);
             if (okSelector.HasValue)
-                return ResultExtensions.Ok<T, TError>(Value);
+                return ResultExtensions.Value<T, TError>(Value);
             var tmpThis = this;
             return okSelector.FullMap(x => tmpThis.Value, errorSelector);
         }
@@ -521,7 +521,7 @@ namespace Lemonad.ErrorHandling {
         ///     Executes each function and saves all potential errors to a list which will be the <typeparamref name="TError" />.
         /// </summary>
         /// <param name="validations">
-        ///     A <see cref="IReadOnlyList{T}" /> containining <typeparamref name="TError" />.
+        ///     A <see cref="IReadOnlyList{T}" /> containing <typeparamref name="TError" />.
         /// </param>
         public Result<T, IReadOnlyList<TError>> Multiple(
             params Func<Result<T, TError>, Result<T, TError>>[] validations) {
@@ -549,7 +549,7 @@ namespace Lemonad.ErrorHandling {
         ///     The value type of the <see cref="Result{T,TError}" /> returned by the <paramref name="flatMapSelector" />.
         /// </typeparam>
         /// <exception cref="ArgumentNullException">
-        ///     When any of the function parameters are null and needs to be exectued.
+        ///     When any of the function parameters are null and needs to be executed.
         /// </exception>
         [Pure]
         public Result<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
@@ -589,7 +589,7 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         [Pure]
         public Result<TResult, TErrorResult> FullCast<TResult, TErrorResult>() => HasValue
-            ? ResultExtensions.Ok<TResult, TErrorResult>((TResult) (object) Value)
+            ? ResultExtensions.Value<TResult, TErrorResult>((TResult) (object) Value)
             : ResultExtensions.Error<TResult, TErrorResult>((TErrorResult) (object) Error);
 
         /// <summary>

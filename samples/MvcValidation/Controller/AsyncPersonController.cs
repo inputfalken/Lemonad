@@ -9,7 +9,7 @@ namespace MvcValidation.Controller {
     public class AsyncPersonController : Microsoft.AspNetCore.Mvc.Controller {
         private static Result<PersonPostApiModel, PersonPostApiError> ApiValidation(PersonPostApiModel model) {
             var apiValidation = model
-                .ToResult<PersonPostApiModel, PersonPostApiError>()
+                .ToResult(x => true, () => default(PersonPostApiError))
                 .Multiple(
                     x => x.Filter(y => y.Age > 10,
                         () => new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
@@ -49,14 +49,16 @@ namespace MvcValidation.Controller {
                 // Using match inside this scope is currently too complex since it requires all type params to be supplied.
                 .Map(x => new PersonModel {FirstName = x.FirstName, LastName = x.LastName})
                 .ToAsyncResult()
-                .Flatten(x => LastNameAppService(x).ToAsyncResult(), x => new PersonPostApiError {Message = x.Message, Model = model})
-                .FlatMap(x => FirstNameAppService(x).ToAsyncResult(), x => new PersonPostApiError {Message = x.Message, Model = model})
+                .Flatten(x => LastNameAppService(x).ToAsyncResult(),
+                    x => new PersonPostApiError {Message = x.Message, Model = model})
+                .FlatMap(x => FirstNameAppService(x).ToAsyncResult(),
+                    x => new PersonPostApiError {Message = x.Message, Model = model})
                 .Match<IActionResult>(Ok, BadRequest);
         }
 
         private static Result<string, string> ValidateName(string name) {
-            return name.ToResult<string, string>()
-                .IsErrorWhen(string.IsNullOrWhiteSpace, () => "Name cannot be empty.")
+            return name
+                .ToResult(x => string.IsNullOrWhiteSpace(x) == false, () => "Name cannot be empty.")
                 .Filter(s => s.All(char.IsLetter), () => "Name can only contain letters.")
                 .Filter(s => char.IsUpper(s[0]), () => "Name must start with capital letter.");
         }

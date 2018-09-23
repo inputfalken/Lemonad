@@ -36,7 +36,7 @@ namespace Lemonad.ErrorHandling {
         /// <inheritdoc />
         public bool Equals(Maybe<T> other) => other._result.Equals(_result);
 
-        public static implicit operator Maybe<T>(T item) => new Maybe<T>(ResultExtensions.Ok<T, Unit>(item));
+        public static implicit operator Maybe<T>(T item) => new Maybe<T>(ResultExtensions.Value<T, Unit>(item));
 
         public override bool Equals(object obj) => obj is Maybe<T> maybe && Equals(maybe);
 
@@ -126,7 +126,7 @@ namespace Lemonad.ErrorHandling {
         public Maybe<T> Filter(Func<T, bool> predicate) => new Maybe<T>(_result.Filter(predicate, Unit.Selector));
 
         /// <summary>
-        ///     Flamaps another <see cref="Maybe{T}" />.
+        ///     Flatmaps another <see cref="Maybe{T}" />.
         /// </summary>
         /// <param name="flatMapSelector">
         ///     A function who expects a <see cref="Maybe{T}" /> as its return type.
@@ -142,7 +142,7 @@ namespace Lemonad.ErrorHandling {
             }, Unit.AlternativeSelector));
 
         /// <summary>
-        ///     Flamaps another <see cref="Maybe{T}" />.
+        ///     Flatmaps another <see cref="Maybe{T}" />.
         /// </summary>
         /// <param name="flatMapSelector">
         ///     A function who expects a <see cref="Maybe{T}" /> as its return type.
@@ -168,7 +168,7 @@ namespace Lemonad.ErrorHandling {
             }, resultSelector));
 
         /// <summary>
-        ///     Flamaps a <see cref="Nullable{T}" />.
+        ///     Flatmaps a <see cref="Nullable{T}" />.
         /// </summary>
         /// <param name="flatSelector">
         ///     A function who expects a <see cref="Nullable{T}" /> as its return type.
@@ -208,7 +208,7 @@ namespace Lemonad.ErrorHandling {
         );
 
         /// <summary>
-        ///     Flamaps another <see cref="Maybe{T}" />.
+        ///     Flatmaps another <see cref="Maybe{T}" />.
         /// </summary>
         /// <param name="flatMapSelector">
         ///     A function who expects a <see cref="Nullable{T}" /> as its return type.

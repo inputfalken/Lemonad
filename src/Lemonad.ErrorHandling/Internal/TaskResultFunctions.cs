@@ -54,20 +54,6 @@ namespace Lemonad.ErrorHandling.Internal {
             (await source.ConfigureAwait(false)).Filter(predicate, errorSelector);
 
         [Pure]
-        internal static async Task<Result<T, TError>> IsErrorWhen<T, TError>(Task<Result<T, TError>> source,
-            Func<T, Task<bool>> predicate,
-            Func<Maybe<T>, TError> errorSelector) {
-            var result = await source.ConfigureAwait(false);
-            if (result.HasError) return result.Error;
-            return await predicate(result.Value) ? (Result<T, TError>) errorSelector(result.Value) : result.Value;
-        }
-
-        [Pure]
-        internal static Task<Result<T, TError>> IsErrorWhen<T, TError>(Task<Result<T, TError>> source,
-            Func<T, Task<bool>> predicate,
-            Func<TError> errorSelector) => IsErrorWhen(source, predicate, _ => errorSelector());
-
-        [Pure]
         internal static async Task<Result<T, TError>> Filter<T, TError>(Task<Result<T, TError>> source,
             Func<T, Task<bool>> predicate,
             Func<Maybe<T>, TError> errorSelector) {
@@ -133,11 +119,9 @@ namespace Lemonad.ErrorHandling.Internal {
 
         [Pure]
         internal static async Task<Result<TResult, TError>> FlatMap<TResult, TError, T>(Result<T, TError> result,
-            Func<T, Task<Result<TResult, TError>>> flatSelector) {
-            return result.HasValue
-                ? await flatSelector(result.Value).ConfigureAwait(false)
-                : ResultExtensions.Error<TResult, TError>(result.Error);
-        }
+            Func<T, Task<Result<TResult, TError>>> flatSelector) => result.HasValue
+            ? await flatSelector(result.Value).ConfigureAwait(false)
+            : ResultExtensions.Error<TResult, TError>(result.Error);
 
         [Pure]
         internal static Task<Result<TResult, TError>> FlatMap<TSelector, TResult, TError, T>(Result<T, TError> result,
@@ -156,7 +140,7 @@ namespace Lemonad.ErrorHandling.Internal {
             var okSelector = await flatMapSelector(result.Value);
 
             return okSelector.HasValue
-                ? ResultExtensions.Ok<TResult, TError>(okSelector.Value)
+                ? ResultExtensions.Value<TResult, TError>(okSelector.Value)
                 : okSelector.MapError(errorSelector);
         }
 
@@ -221,7 +205,7 @@ namespace Lemonad.ErrorHandling.Internal {
                 if (selector == null) throw new ArgumentNullException(nameof(selector));
                 var okSelector = await selector(result.Value).ConfigureAwait(false);
                 if (okSelector.HasValue)
-                    return ResultExtensions.Ok<T, TError>(result.Value);
+                    return ResultExtensions.Value<T, TError>(result.Value);
                 var tmpThis = result;
                 return okSelector.FullMap(x => tmpThis.Value, errorSelector);
             }
@@ -303,6 +287,20 @@ namespace Lemonad.ErrorHandling.Internal {
 
         [Pure]
         internal static async Task<Result<T, TError>> IsErrorWhen<T, TError>(Task<Result<T, TError>> source,
+            Func<T, Task<bool>> predicate,
+            Func<Maybe<T>, TError> errorSelector) {
+            var result = await source.ConfigureAwait(false);
+            if (result.HasError) return result.Error;
+            return await predicate(result.Value) ? (Result<T, TError>) errorSelector(result.Value) : result.Value;
+        }
+
+        [Pure]
+        internal static Task<Result<T, TError>> IsErrorWhen<T, TError>(Task<Result<T, TError>> source,
+            Func<T, Task<bool>> predicate,
+            Func<TError> errorSelector) => IsErrorWhen(source, predicate, _ => errorSelector());
+
+        [Pure]
+        internal static async Task<Result<T, TError>> IsErrorWhen<T, TError>(Task<Result<T, TError>> source,
             Func<T, bool> predicate,
             Func<TError> errorSelector) =>
             (await source.ConfigureAwait(false)).IsErrorWhen(predicate, errorSelector);
@@ -358,21 +356,21 @@ namespace Lemonad.ErrorHandling.Internal {
             Func<T, TResult> selector) => (await source.ConfigureAwait(false)).Map(selector);
 
         [Pure]
+        internal static async Task<Result<TResult, TError>> Map<T, TResult, TError>(Task<Result<T, TError>> source,
+            Func<T, Task<TResult>> selector) {
+            var result = await source.ConfigureAwait(false);
+            if (result.HasError) return result.Error;
+            if (selector != null) return await selector(result.Value);
+            throw new ArgumentNullException(nameof(selector));
+        }
+
+        [Pure]
         internal static async Task<Result<T, TResult>> MapError<T, TResult, TError>(Task<Result<T, TError>> source,
             Func<TError, Task<TResult>> selector) {
             var result = await source.ConfigureAwait(false);
             if (result.HasValue) return result.Value;
 
             if (selector != null) return await selector(result.Error);
-            throw new ArgumentNullException(nameof(selector));
-        }
-
-        [Pure]
-        internal static async Task<Result<TResult, TError>> Map<T, TResult, TError>(Task<Result<T, TError>> source,
-            Func<T, Task<TResult>> selector) {
-            var result = await source.ConfigureAwait(false);
-            if (result.HasError) return result.Error;
-            if (selector != null) return await selector(result.Value);
             throw new ArgumentNullException(nameof(selector));
         }
 
@@ -393,13 +391,6 @@ namespace Lemonad.ErrorHandling.Internal {
             (await source.ConfigureAwait(false)).Match(action, errorAction);
 
         [Pure]
-        internal static async Task<Result<TResult, TError>> Zip<T, TError, TOther, TResult>(
-            Task<Result<T, TError>> source,
-            Task<Result<TOther, TError>> other,
-            Func<T, TOther, TResult> resultSelector) => await (await source.ConfigureAwait(false))
-            .Zip(await other.ConfigureAwait(false), resultSelector).ToAsyncResult().TaskResult.ConfigureAwait(false);
-
-        [Pure]
         internal static async Task<Result<T, IReadOnlyList<TError>>> Multiple<T, TError>(
             Task<Result<T, TError>> source, params Func<Result<T, TError>, Result<T, TError>>[] validations
         ) => (await source.ConfigureAwait(false)).Multiple(validations);
@@ -408,5 +399,12 @@ namespace Lemonad.ErrorHandling.Internal {
         internal static async Task<Result<TResult, TError>> SafeCast<T, TResult, TError>(Task<Result<T, TError>> source,
             Func<TError> errorSelector)
             => (await source.ConfigureAwait(false)).SafeCast<TResult>(errorSelector);
+
+        [Pure]
+        internal static async Task<Result<TResult, TError>> Zip<T, TError, TOther, TResult>(
+            Task<Result<T, TError>> source,
+            Task<Result<TOther, TError>> other,
+            Func<T, TOther, TResult> resultSelector) => await (await source.ConfigureAwait(false))
+            .Zip(await other.ConfigureAwait(false), resultSelector).ToAsyncResult().TaskResult.ConfigureAwait(false);
     }
 }

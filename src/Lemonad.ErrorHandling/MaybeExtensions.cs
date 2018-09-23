@@ -65,49 +65,6 @@ namespace Lemonad.ErrorHandling {
             source.Select(x => x.Match(someSelector, noneSelector));
 
         /// <summary>
-        ///     Creates a <see cref="Maybe{T}" /> who will have no value.
-        /// </summary>
-        /// <typeparam name="TSource">
-        ///     The type of the <see cref="Maybe{T}" />.
-        /// </typeparam>
-        /// <returns>
-        ///     A <see cref="Maybe{T}" /> who will have no value.
-        /// </returns>
-        [Pure]
-        public static Maybe<TSource> ToMaybeNone<TSource>() => Maybe<TSource>.None;
-
-        /// <summary>
-        ///     Creates a <see cref="Maybe{T}" /> who will have no value.
-        /// </summary>
-        /// <param name="item">
-        ///     The value that will be considered to not have a value.
-        /// </param>
-        /// <typeparam name="TSource">
-        ///     The type of the <see cref="Maybe{T}" />.
-        /// </typeparam>
-        /// <returns>
-        ///     A <see cref="Maybe{T}" /> who will have no value.
-        /// </returns>
-        [Pure]
-        public static Maybe<TSource> ToMaybeNone<TSource>(this TSource item) => Maybe<TSource>.None;
-
-        /// <summary>
-        ///     Works like <see cref="ToMaybeNone{TSource}(TSource)" /> but with an <paramref name="predicate" /> to test the element.
-        /// </summary>
-        /// <param name="source">
-        ///     The element to be passed into <see cref="Maybe{T}" />.
-        /// </param>
-        /// <param name="predicate">
-        ///     A function to test the element.
-        /// </param>
-        /// <typeparam name="TSource">
-        ///     The type of the <paramref name="source" />.
-        /// </typeparam>
-        [Pure]
-        public static Maybe<TSource> ToMaybeNone<TSource>(this TSource source, Func<TSource, bool> predicate) =>
-            ToMaybe(source).IsNoneWhen(predicate);
-
-        /// <summary>
         ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="Maybe{T}" /> into an <see cref="IEnumerable{T}" /> of
         ///     <typeparamref name="TResult" /> for each element which do not have a value.
         /// </summary>
@@ -172,6 +129,50 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static Maybe<TSource> ToMaybe<TSource>(this TSource? source) where TSource : struct =>
             source ?? ToMaybeNone<TSource>();
+
+        /// <summary>
+        ///     Creates a <see cref="Maybe{T}" /> who will have no value.
+        /// </summary>
+        /// <typeparam name="TSource">
+        ///     The type of the <see cref="Maybe{T}" />.
+        /// </typeparam>
+        /// <returns>
+        ///     A <see cref="Maybe{T}" /> who will have no value.
+        /// </returns>
+        [Pure]
+        public static Maybe<TSource> ToMaybeNone<TSource>() => Maybe<TSource>.None;
+
+        /// <summary>
+        ///     Creates a <see cref="Maybe{T}" /> who will have no value.
+        /// </summary>
+        /// <param name="item">
+        ///     The value that will be considered to not have a value.
+        /// </param>
+        /// <typeparam name="TSource">
+        ///     The type of the <see cref="Maybe{T}" />.
+        /// </typeparam>
+        /// <returns>
+        ///     A <see cref="Maybe{T}" /> who will have no value.
+        /// </returns>
+        [Pure]
+        public static Maybe<TSource> ToMaybeNone<TSource>(this TSource item) => Maybe<TSource>.None;
+
+        /// <summary>
+        ///     Works like <see cref="ToMaybeNone{TSource}(TSource)" /> but with an <paramref name="predicate" /> to test the
+        ///     element.
+        /// </summary>
+        /// <param name="source">
+        ///     The element to be passed into <see cref="Maybe{T}" />.
+        /// </param>
+        /// <param name="predicate">
+        ///     A function to test the element.
+        /// </param>
+        /// <typeparam name="TSource">
+        ///     The type of the <paramref name="source" />.
+        /// </typeparam>
+        [Pure]
+        public static Maybe<TSource> ToMaybeNone<TSource>(this TSource source, Func<TSource, bool> predicate) =>
+            ToMaybe(source).IsNoneWhen(predicate);
 
         /// <summary>
         ///     Converts an <see cref="Maybe{T}" /> to an <see cref="Result{T,TError}" />.
