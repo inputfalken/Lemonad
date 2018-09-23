@@ -225,7 +225,7 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         [Pure]
         public static Maybe<T> ToMaybe<T, TError>(this Result<T, TError> source) =>
-            source.HasValue ? source.Value : Maybe<T>.None;
+            source.Either.HasValue ? source.Either.Value : Maybe<T>.None;
 
         /// <summary>
         ///     Converts an <see cref="Nullable{T}" /> to an <see cref="Result{T,TError}" /> with the value
@@ -322,13 +322,13 @@ namespace Lemonad.ErrorHandling {
             enumerable.SelectMany(x => x.ToEnumerable());
 
         private static IEnumerable<TError> YieldErrors<T, TError>(Result<T, TError> result) {
-            if (result.HasError)
-                yield return result.Error;
+            if (result.Either.HasError)
+                yield return result.Either.Error;
         }
 
         private static IEnumerable<T> YieldValues<T, TError>(Result<T, TError> result) {
-            if (result.HasValue)
-                yield return result.Value;
+            if (result.Either.HasValue)
+                yield return result.Either.Value;
         }
     }
 }

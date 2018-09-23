@@ -58,10 +58,10 @@ namespace Lemonad.ErrorHandling.Internal {
             Func<T, Task<bool>> predicate,
             Func<Maybe<T>, TError> errorSelector) {
             var result = await source.ConfigureAwait(false);
-            if (result.HasError) return result.Error;
-            if (await predicate(result.Value)) return result.Value;
+            if (result.Either.HasError) return result.Either.Error;
+            if (await predicate(result.Either.Value)) return result.Either.Value;
 
-            return errorSelector(result.Value);
+            return errorSelector(result.Either.Value);
         }
 
         [Pure]
@@ -119,9 +119,9 @@ namespace Lemonad.ErrorHandling.Internal {
 
         [Pure]
         internal static async Task<Result<TResult, TError>> FlatMap<TResult, TError, T>(Result<T, TError> result,
-            Func<T, Task<Result<TResult, TError>>> flatSelector) => result.HasValue
-            ? await flatSelector(result.Value).ConfigureAwait(false)
-            : ResultExtensions.Error<TResult, TError>(result.Error);
+            Func<T, Task<Result<TResult, TError>>> flatSelector) => result.Either.HasValue
+            ? await flatSelector(result.Either.Value).ConfigureAwait(false)
+            : ResultExtensions.Error<TResult, TError>(result.Either.Error);
 
         [Pure]
         internal static Task<Result<TResult, TError>> FlatMap<TSelector, TResult, TError, T>(Result<T, TError> result,
@@ -135,12 +135,12 @@ namespace Lemonad.ErrorHandling.Internal {
         internal static async Task<Result<TResult, TError>> FlatMap<TResult, TErrorResult, TError, T>(
             Result<T, TError> result, Func<T, Task<Result<TResult, TErrorResult>>> flatMapSelector,
             Func<TErrorResult, TError> errorSelector) {
-            if (result.HasError) return ResultExtensions.Error<TResult, TError>(result.Error);
+            if (result.Either.HasError) return ResultExtensions.Error<TResult, TError>(result.Either.Error);
             if (flatMapSelector == null) throw new ArgumentNullException(nameof(flatMapSelector));
-            var okSelector = await flatMapSelector(result.Value);
+            var okSelector = await flatMapSelector(result.Either.Value);
 
-            return okSelector.HasValue
-                ? ResultExtensions.Value<TResult, TError>(okSelector.Value)
+            return okSelector.Either.HasValue
+                ? ResultExtensions.Value<TResult, TError>(okSelector.Either.Value)
                 : okSelector.MapError(errorSelector);
         }
 
@@ -162,15 +162,15 @@ namespace Lemonad.ErrorHandling.Internal {
         [Pure]
         internal static async Task<Result<T, TError>> Flatten<TResult, T, TError>(Result<T, TError> result,
             Func<T, Task<Result<TResult, TError>>> selector) {
-            if (result.HasValue) {
+            if (result.Either.HasValue) {
                 if (selector == null) throw new ArgumentNullException(nameof(selector));
-                var okSelector = await selector(result.Value).ConfigureAwait(false);
-                if (okSelector.HasValue)
-                    return result.Value;
-                return okSelector.Error;
+                var okSelector = await selector(result.Either.Value).ConfigureAwait(false);
+                if (okSelector.Either.HasValue)
+                    return result.Either.Value;
+                return okSelector.Either.Error;
             }
 
-            return ResultExtensions.Error<T, TError>(result.Error);
+            return ResultExtensions.Error<T, TError>(result.Either.Error);
         }
 
         [Pure]
@@ -201,16 +201,16 @@ namespace Lemonad.ErrorHandling.Internal {
         internal static async Task<Result<T, TError>> Flatten<TResult, TErrorResult, T, TError>(
             Result<T, TError> result, Func<T, Task<Result<TResult, TErrorResult>>> selector,
             Func<TErrorResult, TError> errorSelector) {
-            if (result.HasValue) {
+            if (result.Either.HasValue) {
                 if (selector == null) throw new ArgumentNullException(nameof(selector));
-                var okSelector = await selector(result.Value).ConfigureAwait(false);
-                if (okSelector.HasValue)
-                    return ResultExtensions.Value<T, TError>(result.Value);
+                var okSelector = await selector(result.Either.Value).ConfigureAwait(false);
+                if (okSelector.Either.HasValue)
+                    return ResultExtensions.Value<T, TError>(result.Either.Value);
                 var tmpThis = result;
-                return okSelector.FullMap(x => tmpThis.Value, errorSelector);
+                return okSelector.FullMap(x => tmpThis.Either.Value, errorSelector);
             }
 
-            return ResultExtensions.Error<T, TError>(result.Error);
+            return ResultExtensions.Error<T, TError>(result.Either.Error);
         }
 
         [Pure]
@@ -251,10 +251,10 @@ namespace Lemonad.ErrorHandling.Internal {
         internal static async Task<Result<TResult, TErrorResult>> FullFlatMap<TResult, TErrorResult, T, TError>(
             Result<T, TError> result, Func<T, Task<Result<TResult, TErrorResult>>> flatMapSelector,
             Func<TError, TErrorResult> errorSelector) {
-            if (result.HasValue) return await flatMapSelector(result.Value).ConfigureAwait(false);
+            if (result.Either.HasValue) return await flatMapSelector(result.Either.Value).ConfigureAwait(false);
 
             return errorSelector != null
-                ? errorSelector(result.Error)
+                ? errorSelector(result.Either.Error)
                 : throw new ArgumentNullException(nameof(errorSelector));
         }
 
@@ -278,20 +278,17 @@ namespace Lemonad.ErrorHandling.Internal {
         ) => (await source.ConfigureAwait(false)).FullMap(selector, errorSelector);
 
         [Pure]
-        internal static async Task<bool> HasError<T, TError>(Task<Result<T, TError>> result) =>
-            (await result.ConfigureAwait(false)).HasError;
+        internal static async Task<Either<T, TError>> Either<T, TError>(Task<Result<T, TError>> result) =>
+            (await result.ConfigureAwait(false)).Either;
 
-        [Pure]
-        internal static async Task<bool> HasValue<T, TError>(Task<Result<T, TError>> result) =>
-            (await result.ConfigureAwait(false)).HasValue;
 
         [Pure]
         internal static async Task<Result<T, TError>> IsErrorWhen<T, TError>(Task<Result<T, TError>> source,
             Func<T, Task<bool>> predicate,
             Func<Maybe<T>, TError> errorSelector) {
             var result = await source.ConfigureAwait(false);
-            if (result.HasError) return result.Error;
-            return await predicate(result.Value) ? (Result<T, TError>) errorSelector(result.Value) : result.Value;
+            if (result.Either.HasError) return result.Either.Error;
+            return await predicate(result.Either.Value) ? (Result<T, TError>) errorSelector(result.Either.Value) : result.Either.Value;
         }
 
         [Pure]
@@ -359,8 +356,8 @@ namespace Lemonad.ErrorHandling.Internal {
         internal static async Task<Result<TResult, TError>> Map<T, TResult, TError>(Task<Result<T, TError>> source,
             Func<T, Task<TResult>> selector) {
             var result = await source.ConfigureAwait(false);
-            if (result.HasError) return result.Error;
-            if (selector != null) return await selector(result.Value);
+            if (result.Either.HasError) return result.Either.Error;
+            if (selector != null) return await selector(result.Either.Value);
             throw new ArgumentNullException(nameof(selector));
         }
 
@@ -368,9 +365,9 @@ namespace Lemonad.ErrorHandling.Internal {
         internal static async Task<Result<T, TResult>> MapError<T, TResult, TError>(Task<Result<T, TError>> source,
             Func<TError, Task<TResult>> selector) {
             var result = await source.ConfigureAwait(false);
-            if (result.HasValue) return result.Value;
+            if (result.Either.HasValue) return result.Either.Value;
 
-            if (selector != null) return await selector(result.Error);
+            if (selector != null) return await selector(result.Either.Error);
             throw new ArgumentNullException(nameof(selector));
         }
 
