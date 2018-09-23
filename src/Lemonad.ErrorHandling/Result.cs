@@ -19,13 +19,16 @@ namespace Lemonad.ErrorHandling {
     public readonly struct Result<T, TError> : IEquatable<Result<T, TError>>, IComparable<Result<T, TError>> {
         public Either<T, TError> Either { get; }
 
-        private Result(in T value, in TError error, bool hasError, bool hasValue) => Either = new Either<T, TError>(value, error, hasError, hasValue);
+        private Result(in T value, in TError error, bool hasError, bool hasValue) =>
+            Either = new Either<T, TError>(value, error, hasError, hasValue);
 
         /// <inheritdoc />
         public bool Equals(Result<T, TError> other) {
-            if (!Either.HasValue && !other.Either.HasValue) return EqualityComparer<TError>.Default.Equals(Either.Error, other.Either.Error);
+            if (!Either.HasValue && !other.Either.HasValue)
+                return EqualityComparer<TError>.Default.Equals(Either.Error, other.Either.Error);
 
-            if (Either.HasValue && other.Either.HasValue) return EqualityComparer<T>.Default.Equals(Either.Value, other.Either.Value);
+            if (Either.HasValue && other.Either.HasValue)
+                return EqualityComparer<T>.Default.Equals(Either.Value, other.Either.Value);
 
             return false;
         }
@@ -64,7 +67,9 @@ namespace Lemonad.ErrorHandling {
 
         /// <inheritdoc />
         public override int GetHashCode() =>
-            Either.HasValue ? (Either.Value == null ? 1 : Either.Value.GetHashCode()) : (Either.Error == null ? 0 : Either.Error.GetHashCode());
+            Either.HasValue
+                ? (Either.Value == null ? 1 : Either.Value.GetHashCode())
+                : (Either.Error == null ? 0 : Either.Error.GetHashCode());
 
         /// <inheritdoc />
         public int CompareTo(Result<T, TError> other) {
@@ -261,8 +266,7 @@ namespace Lemonad.ErrorHandling {
         /// <returns>
         ///     A filtered <see cref="Result{T,TError}" />.
         /// </returns>
-        [
-            Pure]
+        [Pure]
         public Result<T, TError> IsErrorWhenNull(Func<TError> errorSelector) =>
             IsErrorWhen(EquailtyFunctions.IsNull, errorSelector);
 
@@ -463,7 +467,7 @@ namespace Lemonad.ErrorHandling {
         ///     The error of the <see cref="Result{T,TError}" /> returned by the function <paramref name="selector" />.
         /// </typeparam>
         /// <returns>
-        ///     The same <see cref="Result{T,TError}" /> but it's state is dependant on the <see cref="Result{T,TError}" />
+        ///     The same <see cref="Result{T,TError}" /> but it's state is dependent on the <see cref="Result{T,TError}" />
         ///     returned by the <paramref name="selector" />.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -539,7 +543,8 @@ namespace Lemonad.ErrorHandling {
         public Result<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
             Func<T, Result<TResult, TErrorResult>> flatMapSelector, Func<TError, TErrorResult> errorSelector) {
             if (Either.HasValue)
-                return flatMapSelector?.Invoke(Either.Value) ?? throw new ArgumentNullException(nameof(flatMapSelector));
+                return flatMapSelector?.Invoke(Either.Value) ??
+                       throw new ArgumentNullException(nameof(flatMapSelector));
 
             return errorSelector != null
                 ? errorSelector(Either.Error)
@@ -553,7 +558,7 @@ namespace Lemonad.ErrorHandling {
         ///     The type to <typeparamref name="TError" /> cast to.
         /// </typeparam>
         /// <returns>
-        ///     A <see cref="Result{T,TError}" /> whose <typeparamref name="TError" /> has been casted to
+        ///     A <see cref="Result{T,TError}" /> whose <typeparamref name="TError" /> has been cast to
         ///     <typeparamref name="TResult" />.
         /// </returns>
         [Pure]
@@ -594,7 +599,7 @@ namespace Lemonad.ErrorHandling {
         ///     The type to cast to.
         /// </typeparam>
         /// <returns>
-        ///     A <see cref="Result{T,TError}" /> whose <typeparamref name="T" /> has been casted to
+        ///     A <see cref="Result{T,TError}" /> whose <typeparamref name="T" /> has been cast to
         ///     <typeparamref name="TResult" />.
         /// </returns>
         [Pure]
@@ -612,7 +617,7 @@ namespace Lemonad.ErrorHandling {
         ///     The type to cast to.
         /// </typeparam>
         /// <returns>
-        ///     A <see cref="Result{T,TError}" /> whose <typeparamref name="T" /> has been casted to
+        ///     A <see cref="Result{T,TError}" /> whose <typeparamref name="T" /> has been cast to
         ///     <typeparamref name="TResult" />.
         /// </returns>
         [Pure]
