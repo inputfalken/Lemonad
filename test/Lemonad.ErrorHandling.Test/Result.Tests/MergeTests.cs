@@ -12,8 +12,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 return $"{x.Text} {y.Text}";
             });
 
-            Assert.Equal(result.Value, default);
-            Assert.Equal(result.Error, "ERROR 1");
+            Assert.Equal(result.Either.Value, default);
+            Assert.Equal(result.Either.Error, "ERROR 1");
             Assert.False(resultSelectorInvoked, "resultSelectorInvoked");
         }
 
@@ -27,8 +27,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 return $"{x.Text} {y.Text}";
             });
 
-            Assert.Equal(result.Value, default);
-            Assert.Equal(result.Error, "ERROR 1");
+            Assert.Equal(result.Either.Value, default);
+            Assert.Equal(result.Either.Error, "ERROR 1");
             Assert.False(resultSelectorInvoked, "resultSelectorInvoked");
         }
 
@@ -42,8 +42,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 return $"{x.Text} {y.Text}";
             });
 
-            Assert.Equal(result.Value, default);
-            Assert.Equal(result.Error, "ERROR 2");
+            Assert.Equal(result.Either.Value, default);
+            Assert.Equal(result.Either.Error, "ERROR 2");
             Assert.False(resultSelectorInvoked, "resultSelectorInvoked");
         }
 
@@ -57,8 +57,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 return $"{x.Text} {y.Text}";
             });
 
-            Assert.Equal(result.Value, "Hello world");
-            Assert.Equal(result.Error, default);
+            Assert.Equal(result.Either.Value, "Hello world");
+            Assert.Equal(result.Either.Error, default);
             Assert.True(resultSelectorInvoked, "resultSelectorInvoked");
         }
     }

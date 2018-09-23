@@ -22,10 +22,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
                 "Errorselector should not get exeuted since there is an error in the source.");
             Assert.False(flatSelectorExecuted,
                 "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '2' with '0'.", result.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '2' with '0'.", result.Either.Error);
         }
 
         [Fact]
@@ -46,10 +46,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
                 "Errorselector should not get exeuted since there is an error in the source.");
             Assert.False(flatSelectorExecuted,
                 "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '2' with '0'.", result.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '2' with '0'.", result.Either.Error);
         }
 
         [Fact]
@@ -64,10 +64,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
 
             Assert.False(flatSelectorExecuted,
                 "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '2' with '0'.", result.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '2' with '0'.", result.Either.Error);
         }
 
         [Fact]
@@ -82,10 +82,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
 
             Assert.False(flatSelectorExecuted,
                 "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '2' with '0'.", result.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '2' with '0'.", result.Either.Error);
         }
 
         [Fact]
@@ -106,10 +106,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
                 "Errorselector should not get exeuted since there is an error in the source.");
             Assert.False(flatSelectorExecuted,
                 "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '2' with '0'.", result.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '2' with '0'.", result.Either.Error);
         }
 
         [Fact]
@@ -130,10 +130,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
                 "Errorselector should not get exeuted since there is an error in the source.");
             Assert.False(flatSelectorExecuted,
                 "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '2' with '0'.", result.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '2' with '0'.", result.Either.Error);
         }
 
         [Fact]
@@ -149,10 +149,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
 
             Assert.False(flatSelectorExecuted,
                 "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '2' with '0'.", result.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '2' with '0'.", result.Either.Error);
         }
 
         [Fact]
@@ -168,10 +168,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
 
             Assert.False(flatSelectorExecuted,
                 "The flatmap selector should not get exectued if the source Result<T, TError> contains error.");
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '2' with '0'.", result.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '2' with '0'.", result.Either.Error);
         }
 
         [Fact]
@@ -193,10 +193,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
                 "Errorselector should not exeuted since the errror came from the result given to the flatselector.");
             Assert.True(flatSelectorExecuted,
                 "The flatmapSelector should get exectued.");
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '1' with '0'.", result.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '1' with '0'.", result.Either.Error);
         }
 
         [Fact]
@@ -218,10 +218,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
                 "Errorselector should not exeuted since the errror came from the result given to the flatselector.");
             Assert.True(flatSelectorExecuted,
                 "The flatmapSelector should get exectued.");
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '1' with '0'.", result.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '1' with '0'.", result.Either.Error);
         }
 
         [Fact]
@@ -236,10 +236,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
 
             Assert.True(flatSelectorExecuted,
                 "The flatmapSelector should get exectued.");
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '1' with '0'.", result.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '1' with '0'.", result.Either.Error);
         }
 
         [Fact]
@@ -254,10 +254,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
 
             Assert.True(flatSelectorExecuted,
                 "The flatmapSelector should get exectued.");
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '1' with '0'.", result.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '1' with '0'.", result.Either.Error);
         }
 
         [Fact]
@@ -276,10 +276,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
             var result = await flattenAsync;
             Assert.True(flatSelectorExecuted, "flatmapselector should get executed.");
             Assert.False(errorSelectorExecuted, "Errorselector should not get exeuted.");
-            Assert.True(result.HasValue, "Result should have a value.");
-            Assert.False(result.HasError, "Result should not have a error.");
-            Assert.Equal(1, result.Value);
-            Assert.Equal(default, result.Error);
+            Assert.True(result.Either.HasValue, "Result should have a value.");
+            Assert.False(result.Either.HasError, "Result should not have a error.");
+            Assert.Equal(1, result.Either.Value);
+            Assert.Equal(default, result.Either.Error);
         }
 
         [Fact]
@@ -298,10 +298,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
             var result = await flattenAsync;
             Assert.True(flatSelectorExecuted, "flatmapselector should get executed.");
             Assert.False(errorSelectorExecuted, "Errorselector should not get exeuted.");
-            Assert.True(result.HasValue, "Result should have a value.");
-            Assert.False(result.HasError, "Result should not have a error.");
-            Assert.Equal(1, result.Value);
-            Assert.Equal(default, result.Error);
+            Assert.True(result.Either.HasValue, "Result should have a value.");
+            Assert.False(result.Either.HasError, "Result should not have a error.");
+            Assert.Equal(1, result.Either.Value);
+            Assert.Equal(default, result.Either.Error);
         }
 
         [Fact]
@@ -314,10 +314,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
             });
             var result = await flattenAsync;
             Assert.True(flatSelectorExecuted, "flatmapselector should get executed.");
-            Assert.True(result.HasValue, "Result should have a value.");
-            Assert.False(result.HasError, "Result should not have a error.");
-            Assert.Equal(1, result.Value);
-            Assert.Equal(default, result.Error);
+            Assert.True(result.Either.HasValue, "Result should have a value.");
+            Assert.False(result.Either.HasError, "Result should not have a error.");
+            Assert.Equal(1, result.Either.Value);
+            Assert.Equal(default, result.Either.Error);
         }
 
         [Fact]
@@ -330,10 +330,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
             });
             var result = await flattenAsync;
             Assert.True(flatSelectorExecuted, "flatmapselector should get executed.");
-            Assert.True(result.HasValue, "Result should have a value.");
-            Assert.False(result.HasError, "Result should not have a error.");
-            Assert.Equal(1, result.Value);
-            Assert.Equal(default, result.Error);
+            Assert.True(result.Either.HasValue, "Result should have a value.");
+            Assert.False(result.Either.HasError, "Result should not have a error.");
+            Assert.Equal(1, result.Either.Value);
+            Assert.Equal(default, result.Either.Error);
         }
 
         [Fact]
@@ -354,14 +354,14 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
             Assert.True(errorSelectorExecuted,
                 "Errorselector should get exeuted since the errror came from the result given to the flatselector.");
             Assert.True(flatSelectorExecuted);
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '1' with '0'.", result.Error);
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '1' with '0'.", result.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '1' with '0'.", result.Either.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '1' with '0'.", result.Either.Error);
         }
 
         [Fact]
@@ -382,14 +382,14 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
             Assert.True(errorSelectorExecuted,
                 "Errorselector should get exeuted since the errror came from the result given to the flatselector.");
             Assert.True(flatSelectorExecuted);
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '1' with '0'.", result.Error);
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '1' with '0'.", result.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '1' with '0'.", result.Either.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '1' with '0'.", result.Either.Error);
         }
 
         [Fact]
@@ -404,14 +404,14 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
             var result = await flattenAsync;
 
             Assert.True(flatSelectorExecuted);
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '1' with '0'.", result.Error);
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '1' with '0'.", result.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '1' with '0'.", result.Either.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '1' with '0'.", result.Either.Error);
         }
 
         [Fact]
@@ -426,14 +426,14 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
             var result = await flattenAsync;
 
             Assert.True(flatSelectorExecuted);
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '1' with '0'.", result.Error);
-            Assert.False(result.HasValue, "Result should not have a value.");
-            Assert.True(result.HasError, "Result should have a error.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("Can not divide '1' with '0'.", result.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '1' with '0'.", result.Either.Error);
+            Assert.False(result.Either.HasValue, "Result should not have a value.");
+            Assert.True(result.Either.HasError, "Result should have a error.");
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("Can not divide '1' with '0'.", result.Either.Error);
         }
     }
 }

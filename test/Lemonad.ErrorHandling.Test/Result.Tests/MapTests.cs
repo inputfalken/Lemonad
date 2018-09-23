@@ -13,10 +13,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
             Assert.False(selectorExectued,
                 "The selector function should never get executed if there's no value in the Result<T, TError>.");
-            Assert.True(division.HasError, "Result should have error.");
-            Assert.False(division.HasValue, "Result should not have a value.");
-            Assert.Equal(default, division.Value);
-            Assert.Equal("Can not divide '2' with '0'.", division.Error);
+            Assert.True(division.Either.HasError, "Result should have error.");
+            Assert.False(division.Either.HasValue, "Result should not have a value.");
+            Assert.Equal(default, division.Either.Value);
+            Assert.Equal("Can not divide '2' with '0'.", division.Either.Error);
         }
 
         [Fact]
@@ -28,10 +28,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             });
 
             Assert.True(selectorExectued, "The selector function should get executed since the result has value.");
-            Assert.False(division.HasError, "Result not should have error.");
-            Assert.True(division.HasValue, "Result should have a value.");
-            Assert.Equal(20d, division.Value);
-            Assert.Equal(default, division.Error);
+            Assert.False(division.Either.HasError, "Result not should have error.");
+            Assert.True(division.Either.HasValue, "Result should have a value.");
+            Assert.Equal(20d, division.Either.Value);
+            Assert.Equal(default, division.Either.Error);
         }
     }
 }

@@ -21,8 +21,8 @@ namespace Lemonad.ErrorHandling {
         internal T Value { get; }
 
         private Maybe(Result<T, Unit> result) {
-            HasValue = result.HasValue;
-            Value = result.Value;
+            HasValue = result.Either.HasValue;
+            Value = result.Either.Value;
             _result = result;
         }
 

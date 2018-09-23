@@ -23,10 +23,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         [Fact]
         public void Result_With_Error__With_Invalid_Casting() {
             var collectionResult = GetCollection(Collection.Unknown);
-            Assert.False(collectionResult.HasValue, "Result should not have value");
-            Assert.True(collectionResult.HasError, "Result should have error");
-            Assert.Equal(default, collectionResult.Value);
-            Assert.Equal("Could not obtain a collection.", collectionResult.Error);
+            Assert.False(collectionResult.Either.HasValue, "Result should not have value");
+            Assert.True(collectionResult.Either.HasError, "Result should have error");
+            Assert.Equal(default, collectionResult.Either.Value);
+            Assert.Equal("Could not obtain a collection.", collectionResult.Either.Error);
 
             var errorSelectorExectued = false;
             var castResult = collectionResult.SafeCast<double>(() => {
@@ -35,19 +35,19 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             });
 
             Assert.False(errorSelectorExectued, "Errorselector should not get executed");
-            Assert.False(castResult.HasValue, "Converted result should not have value");
-            Assert.True(castResult.HasError, "Converted Result should have error");
-            Assert.Equal(default, castResult.Value);
-            Assert.Equal("Could not obtain a collection.", castResult.Error);
+            Assert.False(castResult.Either.HasValue, "Converted result should not have value");
+            Assert.True(castResult.Either.HasError, "Converted Result should have error");
+            Assert.Equal(default, castResult.Either.Value);
+            Assert.Equal("Could not obtain a collection.", castResult.Either.Error);
         }
 
         [Fact]
         public void Result_With_Error__With_Valid_Casting() {
             var collectionResult = GetCollection(Collection.Unknown);
-            Assert.False(collectionResult.HasValue, "Result should not have value");
-            Assert.True(collectionResult.HasError, "Result should have error");
-            Assert.Equal(default, collectionResult.Value);
-            Assert.Equal("Could not obtain a collection.", collectionResult.Error);
+            Assert.False(collectionResult.Either.HasValue, "Result should not have value");
+            Assert.True(collectionResult.Either.HasError, "Result should have error");
+            Assert.Equal(default, collectionResult.Either.Value);
+            Assert.Equal("Could not obtain a collection.", collectionResult.Either.Error);
 
             var errorSelectorExectued = false;
             var castResult = collectionResult.SafeCast<int[]>(() => {
@@ -56,19 +56,19 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             });
 
             Assert.False(errorSelectorExectued, "Errorselector should not get executed");
-            Assert.False(castResult.HasValue, "Converted result should not have value");
-            Assert.True(castResult.HasError, "Converted Result should have error");
-            Assert.Equal(default, castResult.Value);
-            Assert.Equal("Could not obtain a collection.", castResult.Error);
+            Assert.False(castResult.Either.HasValue, "Converted result should not have value");
+            Assert.True(castResult.Either.HasError, "Converted Result should have error");
+            Assert.Equal(default, castResult.Either.Value);
+            Assert.Equal("Could not obtain a collection.", castResult.Either.Error);
         }
 
         [Fact]
         public void Result_With_Value__With_Invalid_Casting() {
             var collectionResult = GetCollection(Collection.Array);
-            Assert.True(collectionResult.HasValue, "Result should have value");
-            Assert.False(collectionResult.HasError, "Result should not have error");
-            Assert.IsType<int[]>(collectionResult.Value);
-            Assert.Equal(default, collectionResult.Error);
+            Assert.True(collectionResult.Either.HasValue, "Result should have value");
+            Assert.False(collectionResult.Either.HasError, "Result should not have error");
+            Assert.IsType<int[]>(collectionResult.Either.Value);
+            Assert.Equal(default, collectionResult.Either.Error);
 
             var errorSelectorExectued = false;
             var castResult = collectionResult.SafeCast<double>(() => {
@@ -77,19 +77,19 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             });
 
             Assert.True(errorSelectorExectued, "Errorselector should get executed");
-            Assert.False(castResult.HasValue, "Casted Result should not have value.");
-            Assert.True(castResult.HasError, "Casted Result should have error.");
-            Assert.Equal(default, castResult.Value);
-            Assert.Equal("Could not cast collection to double.", castResult.Error);
+            Assert.False(castResult.Either.HasValue, "Casted Result should not have value.");
+            Assert.True(castResult.Either.HasError, "Casted Result should have error.");
+            Assert.Equal(default, castResult.Either.Value);
+            Assert.Equal("Could not cast collection to double.", castResult.Either.Error);
         }
 
         [Fact]
         public void Result_With_Value__With_Valid_Casting() {
             var collectionResult = GetCollection(Collection.Array);
-            Assert.True(collectionResult.HasValue, "Result should have value");
-            Assert.False(collectionResult.HasError, "Result should not have error");
-            Assert.IsType<int[]>(collectionResult.Value);
-            Assert.Equal(default, collectionResult.Error);
+            Assert.True(collectionResult.Either.HasValue, "Result should have value");
+            Assert.False(collectionResult.Either.HasError, "Result should not have error");
+            Assert.IsType<int[]>(collectionResult.Either.Value);
+            Assert.Equal(default, collectionResult.Either.Error);
 
             var errorSelectorExectued = false;
             var castResult = collectionResult.SafeCast<int[]>(() => {
@@ -98,10 +98,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             });
 
             Assert.False(errorSelectorExectued, "Errorselector should not get executed");
-            Assert.True(castResult.HasValue, "Casted Result should have value.");
-            Assert.False(castResult.HasError, "Casted Result should not have error.");
-            Assert.Equal(new[] {1}, castResult.Value);
-            Assert.Equal(default, castResult.Error);
+            Assert.True(castResult.Either.HasValue, "Casted Result should have value.");
+            Assert.False(castResult.Either.HasError, "Casted Result should not have error.");
+            Assert.Equal(new[] {1}, castResult.Either.Value);
+            Assert.Equal(default, castResult.Either.Error);
         }
     }
 }

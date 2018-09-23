@@ -17,10 +17,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
             var programResult = AssertionUtilities.Program(1);
             var castResult =
                 await TaskResultFunctions.CastError<string, AssertionUtilities.ExitCodes, int>(programResult);
-            Assert.False(castResult.HasValue, "Casted Result not should have value.");
-            Assert.True(castResult.HasError, "Casted Result should have error.");
-            Assert.Equal(default, castResult.Value);
-            Assert.Equal(1, castResult.Error);
+            Assert.False(castResult.Either.HasValue, "Casted Result not should have value.");
+            Assert.True(castResult.Either.HasError, "Casted Result should have error.");
+            Assert.Equal(default, castResult.Either.Value);
+            Assert.Equal(1, castResult.Either.Error);
         }
 
         [Fact]
@@ -30,10 +30,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
             var exception = await Record.ExceptionAsync(async () => {
                 var castResult =
                     await TaskResultFunctions.CastError<string, AssertionUtilities.ExitCodes, string>(programResult);
-                Assert.True(castResult.HasValue, "Result should have value");
-                Assert.False(castResult.HasError, "Result should not have error");
-                Assert.Equal("Success", castResult.Value);
-                Assert.Equal(default, castResult.Error);
+                Assert.True(castResult.Either.HasValue, "Result should have value");
+                Assert.False(castResult.Either.HasError, "Result should not have error");
+                Assert.Equal("Success", castResult.Either.Value);
+                Assert.Equal(default, castResult.Either.Error);
             });
             Assert.Null(exception);
         }
@@ -45,10 +45,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
             var castResult =
                 await TaskResultFunctions.CastError<string, AssertionUtilities.ExitCodes, int>(programResult);
 
-            Assert.True(castResult.HasValue, "Casted Result should have value.");
-            Assert.False(castResult.HasError, "Casted Result should not have error.");
-            Assert.Equal(default, castResult.Error);
-            Assert.Equal("Success", castResult.Value);
+            Assert.True(castResult.Either.HasValue, "Casted Result should have value.");
+            Assert.False(castResult.Either.HasError, "Casted Result should not have error.");
+            Assert.Equal(default, castResult.Either.Error);
+            Assert.Equal("Success", castResult.Either.Value);
         }
     }
 }
