@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Lemonad.ErrorHandling.Extensions;
 
 namespace Lemonad.ErrorHandling {
     /// <summary>
@@ -20,9 +19,12 @@ namespace Lemonad.ErrorHandling {
         /// <summary>
         /// Convert to a <see cref="Result{T,TError}"/>.
         /// </summary>
-        public Result<T, IReadOnlyCollection<TError>> Result => Count > 0
-            ? _errors.ToResultError<T, IReadOnlyCollection<TError>>()
-            : _candidate.ToResult<T, IReadOnlyCollection<TError>>();
+        public Result<T, IReadOnlyCollection<TError>> Result {
+            get {
+                var candidate = _candidate;
+                return _errors.ToResultError<T, IReadOnlyCollection<TError>>(x => x.Count > 0, () => candidate);
+            }
+        }
 
         /// <summary>
         ///  Creates an instance of <see cref="Validator{T,TError}"/>.
