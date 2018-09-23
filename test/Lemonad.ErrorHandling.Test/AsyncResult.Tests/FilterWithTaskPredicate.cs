@@ -1,9 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Lemonad.ErrorHandling.Extensions;
-using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Test.Outcome.Tests {
+namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
     public class FilterWithTaskPredicate {
         private static Task Delay => Task.Delay(200);
 
@@ -13,8 +11,8 @@ namespace Lemonad.ErrorHandling.Test.Outcome.Tests {
             var predicateExectued = false;
             var errorSelectorExectued = false;
 
-            var result = await DivisionAsync(10, 0)
-                .AsOutcome()
+            var result = await AssertionUtilities.DivisionAsync(10, 0)
+                .ToAsyncResult()
                 .Filter(async x => {
                     await Delay;
                     predicateExectued = true;
@@ -37,8 +35,8 @@ namespace Lemonad.ErrorHandling.Test.Outcome.Tests {
             var predicateExectued = false;
             var errorSelectorExectued = false;
 
-            var result = await DivisionAsync(10, 2)
-                .AsOutcome()
+            var result = await AssertionUtilities.DivisionAsync(10, 2)
+                .ToAsyncResult()
                 .Filter(async x => {
                     await Delay;
                     predicateExectued = true;
@@ -58,8 +56,8 @@ namespace Lemonad.ErrorHandling.Test.Outcome.Tests {
             Result_With_Value_With_Truthy_Predicate__Expects_Predicate_To_Be_Executed_And_ErrorSelector_To_Never_Be_Invoked() {
             var predicateExectued = false;
             var errorSelectorExectued = false;
-            var result = await DivisionAsync(10, 2)
-                .AsOutcome()
+            var result = await AssertionUtilities.DivisionAsync(10, 2)
+                .ToAsyncResult()
                 .Filter(async x => {
                     await Delay;
                     predicateExectued = true;

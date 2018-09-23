@@ -4,7 +4,7 @@ using System.Linq;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test {
-    public class OutcomeAndResultTypeTests {
+    public class AsyncResultAndResultTests {
         [Fact]
         public void Share_Same_Generic_Public_Instance_Methods() {
             IReadOnlyList<string> Filter(Type type) {
@@ -27,7 +27,7 @@ namespace Lemonad.ErrorHandling.Test {
             var result = typeof(Result<string, string>);
             var resultMethods = Filter(result);
 
-            var outcome = typeof(Outcome<string, string>);
+            var outcome = typeof(AsyncResult<string, string>);
             var outcomeMethods = Filter(outcome);
 
             var differences = (resultMethods.Count > outcomeMethods.Count

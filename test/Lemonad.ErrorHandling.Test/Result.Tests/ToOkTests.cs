@@ -1,11 +1,10 @@
-﻿using Lemonad.ErrorHandling.Extensions;
-using Xunit;
+﻿using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class ToResultOkTests {
         [Fact]
         public void Convert_Int_To_ResultOk() {
-            var result = 2.ToResult<int, string>();
+            var result = 2.ToResult(x => true, () => "");
 
             Assert.True(result.HasValue, "Result should have value.");
             Assert.False(result.HasError, "Result should not have a error value.");
@@ -16,7 +15,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         [Fact]
         public void Convert_Null_String_To_ResultOk() {
             string str = null;
-            var result = str.ToResult<string, int>();
+            var result = str.ToResult(x => true, () => "");
 
             Assert.True(result.HasValue, "Result should have value.");
             Assert.False(result.HasError, "Result should not have a error value.");
@@ -25,7 +24,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
         [Fact]
         public void Convert_String_To_ResultOk() {
-            var result = "hello".ToResult<string, int>();
+            var result = "hello".ToResult(x => true, () => "");
 
             Assert.True(result.HasValue, "Result should have value.");
             Assert.False(result.HasError, "Result should not have a error value.");

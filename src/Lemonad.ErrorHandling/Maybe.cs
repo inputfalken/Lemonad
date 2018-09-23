@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using Lemonad.ErrorHandling.Extensions;
 
 namespace Lemonad.ErrorHandling {
     /// <summary>
@@ -20,12 +18,6 @@ namespace Lemonad.ErrorHandling {
 
         private readonly Result<T, Unit> _result;
 
-        /// <summary>
-        ///     Treat <typeparamref name="T" /> as enumerable with 0-1 elements in.
-        ///     This is handy when combining <see cref="Result{T,TError}" /> with LINQ's API.
-        /// </summary>
-        public IEnumerable<T> AsEnumerable => _result.AsEnumerable;
-
         internal T Value { get; }
 
         private Maybe(Result<T, Unit> result) {
@@ -37,7 +29,7 @@ namespace Lemonad.ErrorHandling {
         /// <inheritdoc />
         public bool Equals(Maybe<T> other) => other._result.Equals(_result);
 
-        public static implicit operator Maybe<T>(T item) => new Maybe<T>(ResultExtensions.Ok<T, Unit>(item));
+        public static implicit operator Maybe<T>(T item) => new Maybe<T>(ResultExtensions.Value<T, Unit>(item));
 
         public override bool Equals(object obj) => obj is Maybe<T> maybe && Equals(maybe);
 
@@ -127,7 +119,7 @@ namespace Lemonad.ErrorHandling {
         public Maybe<T> Filter(Func<T, bool> predicate) => new Maybe<T>(_result.Filter(predicate, Unit.Selector));
 
         /// <summary>
-        ///     Flamaps another <see cref="Maybe{T}" />.
+        ///     Flatmaps another <see cref="Maybe{T}" />.
         /// </summary>
         /// <param name="flatMapSelector">
         ///     A function who expects a <see cref="Maybe{T}" /> as its return type.
@@ -143,7 +135,7 @@ namespace Lemonad.ErrorHandling {
             }, Unit.AlternativeSelector));
 
         /// <summary>
-        ///     Flamaps another <see cref="Maybe{T}" />.
+        ///     Flatmaps another <see cref="Maybe{T}" />.
         /// </summary>
         /// <param name="flatMapSelector">
         ///     A function who expects a <see cref="Maybe{T}" /> as its return type.
@@ -169,7 +161,7 @@ namespace Lemonad.ErrorHandling {
             }, resultSelector));
 
         /// <summary>
-        ///     Flamaps a <see cref="Nullable{T}" />.
+        ///     Flatmaps a <see cref="Nullable{T}" />.
         /// </summary>
         /// <param name="flatSelector">
         ///     A function who expects a <see cref="Nullable{T}" /> as its return type.
@@ -188,7 +180,7 @@ namespace Lemonad.ErrorHandling {
         ///     A <see cref="Maybe{T}" /> whose <typeparamref name="T" /> has value if <typeparamref name="T" /> is not null.
         /// </returns>
         [Pure]
-        public Maybe<T> IsNoneWhenNull() => new Maybe<T>(_result.IsErrorWhenNull(() => Unit.Default));
+        public Maybe<T> IsNoneWhenNull() => new Maybe<T>(_result.IsErrorWhenNull(Unit.Selector));
 
         /// <summary>
         ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
@@ -209,7 +201,7 @@ namespace Lemonad.ErrorHandling {
         );
 
         /// <summary>
-        ///     Flamaps another <see cref="Maybe{T}" />.
+        ///     Flatmaps another <see cref="Maybe{T}" />.
         /// </summary>
         /// <param name="flatMapSelector">
         ///     A function who expects a <see cref="Nullable{T}" /> as its return type.
@@ -228,6 +220,6 @@ namespace Lemonad.ErrorHandling {
         public Maybe<TResult> FlatMap<TFlatMap, TResult>(
             Func<T, TFlatMap?> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct =>
-            new Maybe<TResult>(_result.FlatMap(x => flatMapSelector(x).ToResult(() => Unit.Default), resultSelector));
+            new Maybe<TResult>(_result.FlatMap(x => flatMapSelector(x).ToResult(Unit.Selector), resultSelector));
     }
 }

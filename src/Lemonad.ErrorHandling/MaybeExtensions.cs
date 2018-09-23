@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 
-namespace Lemonad.ErrorHandling.Extensions {
+namespace Lemonad.ErrorHandling {
     public static class MaybeExtensions {
         /// <summary>
         ///     Works just like <see cref="Enumerable.FirstOrDefault{TSource}(System.Collections.Generic.IEnumerable{TSource})" />
@@ -65,49 +65,6 @@ namespace Lemonad.ErrorHandling.Extensions {
             source.Select(x => x.Match(someSelector, noneSelector));
 
         /// <summary>
-        ///     Creates a <see cref="Maybe{T}" /> who will have no value.
-        /// </summary>
-        /// <typeparam name="TSource">
-        ///     The type of the <see cref="Maybe{T}" />.
-        /// </typeparam>
-        /// <returns>
-        ///     A <see cref="Maybe{T}" /> who will have no value.
-        /// </returns>
-        [Pure]
-        public static Maybe<TSource> ToMaybeNone<TSource>() => Maybe<TSource>.None;
-
-        /// <summary>
-        ///     Creates a <see cref="Maybe{T}" /> who will have no value.
-        /// </summary>
-        /// <param name="item">
-        ///     The value that will be considered to not have a value.
-        /// </param>
-        /// <typeparam name="TSource">
-        ///     The type of the <see cref="Maybe{T}" />.
-        /// </typeparam>
-        /// <returns>
-        ///     A <see cref="Maybe{T}" /> who will have no value.
-        /// </returns>
-        [Pure]
-        public static Maybe<TSource> ToMaybeNone<TSource>(this TSource item) => Maybe<TSource>.None;
-
-        /// <summary>
-        ///     Works like <see cref="ToMaybeNone{TSource}(TSource)" /> but with an <paramref name="predicate" /> to test the element.
-        /// </summary>
-        /// <param name="source">
-        ///     The element to be passed into <see cref="Maybe{T}" />.
-        /// </param>
-        /// <param name="predicate">
-        ///     A function to test the element.
-        /// </param>
-        /// <typeparam name="TSource">
-        ///     The type of the <paramref name="source" />.
-        /// </typeparam>
-        [Pure]
-        public static Maybe<TSource> ToMaybeNone<TSource>(this TSource source, Func<TSource, bool> predicate) =>
-            ToMaybe(source).IsNoneWhen(predicate);
-
-        /// <summary>
         ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="Maybe{T}" /> into an <see cref="IEnumerable{T}" /> of
         ///     <typeparamref name="TResult" /> for each element which do not have a value.
         /// </summary>
@@ -121,7 +78,7 @@ namespace Lemonad.ErrorHandling.Extensions {
         ///     The type of the <see cref="Maybe{T}" />.
         /// </typeparam>
         /// <typeparam name="TResult">
-        ///     The return type of cuntion <paramref name="selector" />.
+        ///     The return type returned by the function <paramref name="selector" />.
         /// </typeparam>
         public static IEnumerable<TResult> NoValues<TSource, TResult>(this IEnumerable<Maybe<TSource>> source,
             Func<TResult> selector) => source.Where(x => x.HasValue == false).Select(_ => selector());
@@ -174,6 +131,50 @@ namespace Lemonad.ErrorHandling.Extensions {
             source ?? ToMaybeNone<TSource>();
 
         /// <summary>
+        ///     Creates a <see cref="Maybe{T}" /> who will have no value.
+        /// </summary>
+        /// <typeparam name="TSource">
+        ///     The type of the <see cref="Maybe{T}" />.
+        /// </typeparam>
+        /// <returns>
+        ///     A <see cref="Maybe{T}" /> who will have no value.
+        /// </returns>
+        [Pure]
+        public static Maybe<TSource> ToMaybeNone<TSource>() => Maybe<TSource>.None;
+
+        /// <summary>
+        ///     Creates a <see cref="Maybe{T}" /> who will have no value.
+        /// </summary>
+        /// <param name="item">
+        ///     The value that will be considered to not have a value.
+        /// </param>
+        /// <typeparam name="TSource">
+        ///     The type of the <see cref="Maybe{T}" />.
+        /// </typeparam>
+        /// <returns>
+        ///     A <see cref="Maybe{T}" /> who will have no value.
+        /// </returns>
+        [Pure]
+        public static Maybe<TSource> ToMaybeNone<TSource>(this TSource item) => Maybe<TSource>.None;
+
+        /// <summary>
+        ///     Works like <see cref="ToMaybeNone{TSource}(TSource)" /> but with an <paramref name="predicate" /> to test the
+        ///     element.
+        /// </summary>
+        /// <param name="source">
+        ///     The element to be passed into <see cref="Maybe{T}" />.
+        /// </param>
+        /// <param name="predicate">
+        ///     A function to test the element.
+        /// </param>
+        /// <typeparam name="TSource">
+        ///     The type of the <paramref name="source" />.
+        /// </typeparam>
+        [Pure]
+        public static Maybe<TSource> ToMaybeNone<TSource>(this TSource source, Func<TSource, bool> predicate) =>
+            ToMaybe(source).IsNoneWhen(predicate);
+
+        /// <summary>
         ///     Converts an <see cref="Maybe{T}" /> to an <see cref="Result{T,TError}" />.
         /// </summary>
         /// <param name="source">
@@ -207,6 +208,15 @@ namespace Lemonad.ErrorHandling.Extensions {
         ///     A sequence which can contain 0-n amount of values.
         /// </returns>
         public static IEnumerable<TSource> Values<TSource>(this IEnumerable<Maybe<TSource>> source) =>
-            source.SelectMany(x => x.AsEnumerable);
+            source.SelectMany(x => x.ToEnumerable());
+
+        /// <summary>
+        ///     Treat <typeparamref name="TSource" /> as enumerable with 0-1 elements in.
+        ///     This is handy when combining <see cref="Maybe{T}" /> with LINQ's API.
+        /// </summary>
+        public static IEnumerable<TSource> ToEnumerable<TSource>(this Maybe<TSource> source) {
+            if (source.HasValue)
+                yield return source.Value;
+        }
     }
 }

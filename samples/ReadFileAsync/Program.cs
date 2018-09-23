@@ -3,17 +3,21 @@ using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
-using Lemonad.ErrorHandling.Extensions;
 
 namespace ReadFileAsync {
     internal static partial class Program {
+        private static void LogFatal(string message, Exception exception) {
+            // Log fatal somewhere...
+        }
+
         private static async Task<int> Main(string[] args) {
             var result = await "data.txt"
                 .ToResult(File.Exists, () => ExitCode.FileNotFound)
                 .Filter(x => Path.GetExtension(x) == ".txt", () => ExitCode.InvalidFileExtension)
+                .ToAsyncResult()
                 .Map(s => File.ReadAllTextAsync(s))
                 .Filter(s => s == "Hello World", () => ExitCode.InvalidFileContent)
-                .FlatMap(s => ProcessText(s, "processed.txt"))
+                .FlatMap(s => ProcessText(s, "processed.txt").ToAsyncResult())
                 .Match(x => (ExitCode: 0, Message: x),
                     x => {
                         string message;
@@ -39,10 +43,6 @@ namespace ReadFileAsync {
 
             Console.WriteLine(result.Message);
             return result.ExitCode;
-        }
-
-        private static void LogFatal(string message, Exception exception) {
-            // Log fatal somewhere...
         }
 
         private static async Task<Result<string, ExitCode>> ProcessText(

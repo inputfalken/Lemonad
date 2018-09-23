@@ -1,11 +1,11 @@
-﻿using Lemonad.ErrorHandling.Extensions;
+﻿using System.Threading.Tasks;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
-    public class ToResulterrorTests {
+    public class ToResultErrorTests {
         [Fact]
-        public void Convert_Int_To_Resulterror() {
-            var result = 2.ToResultError<string, int>();
+        public void Convert_Int_To_ResultError() {
+            var result = 2.ToResultError(i => true, () => "");
 
             Assert.False(result.HasValue, "Result should have error.");
             Assert.True(result.HasError, "Result should have a error value.");
@@ -14,9 +14,9 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Convert_Null_String_To_Resulterror() {
+        public void Convert_Null_String_To_ResultError() {
             string str = null;
-            var result = str.ToResultError<int, string>();
+            var result = str.ToResultError(x => true, () => "");
 
             Assert.False(result.HasValue, "Result should have error.");
             Assert.True(result.HasError, "Result should have a error value.");
@@ -25,8 +25,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Convert_String_To_Resulterror() {
-            var result = "hello".ToResultError<int, string>();
+        public void Convert_String_To_ResultError() {
+            var result = "hello".ToResultError(s => true, () => "");
 
             Assert.False(result.HasValue, "Result should have value.");
             Assert.True(result.HasError, "Result should have a error value.");

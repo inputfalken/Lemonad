@@ -1,5 +1,4 @@
-﻿using Lemonad.ErrorHandling.Extensions;
-using Xunit;
+﻿using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     /// <summary>
@@ -18,7 +17,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void None_Maybe_String_With_Content__Expects_String_To_have__Doble_Quotes() {
             var maybe = "hello".ToMaybeNone();
             Assert.False(maybe.HasValue, "Maybe Should not have value.");
-            Assert.Equal($@"None ==> Maybe<String>(null)", maybe.ToString());
+            Assert.Equal(@"None ==> Maybe<String>(null)", maybe.ToString());
         }
 
         [Fact]
@@ -33,7 +32,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void None_Maybe_String_Without_Content__Expects_String_To_have__Doble_Quotes() {
             var maybe = string.Empty.ToMaybeNone();
             Assert.False(maybe.HasValue, "Maybe Should not have value.");
-            Assert.Equal($@"None ==> Maybe<String>(null)", maybe.ToString());
+            Assert.Equal(@"None ==> Maybe<String>(null)", maybe.ToString());
         }
 
         [Fact]
