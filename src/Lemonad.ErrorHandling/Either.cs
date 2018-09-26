@@ -2,7 +2,7 @@
 
 namespace Lemonad.ErrorHandling {
     /// <summary>
-    ///     Either <typeparamref name="T" /> or <typeparamref name="TError" /> can be valid.
+    ///     Either <typeparamref name="T" /> or <typeparamref name="TError" /> can have a value.
     /// </summary>
     /// <typeparam name="T">
     ///     The value type.
@@ -17,7 +17,7 @@ namespace Lemonad.ErrorHandling {
         ///     its underlying type.
         /// </summary>
         /// <returns>
-        ///     true if the current <see cref="Either{T,TError}"></see> object has a valid value for <typeparamref name="T" />; false if
+        ///     true if the current <see cref="Either{T,TError}"></see> object has a value for <typeparamref name="T" />; false if
         ///     the current
         ///     <see cref="Either{T,TError}"></see> object has a valid value for <typeparamref name="TError" />.
         /// </returns>
@@ -29,7 +29,7 @@ namespace Lemonad.ErrorHandling {
         ///     its underlying type.
         /// </summary>
         /// <returns>
-        ///     true if the current <see cref="Either{T,TError}"></see> object has a valid value for <typeparamref name="TError" />;
+        ///     true if the current <see cref="Either{T,TError}"></see> object has a value for <typeparamref name="TError" />;
         ///     false if the current
         ///     <see cref="Either{T,TError}"></see> object has a valid value for <typeparamref name="T" />.
         /// </returns>

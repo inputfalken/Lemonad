@@ -19,25 +19,7 @@ namespace Lemonad.ErrorHandling {
     public readonly struct Result<T, TError> : IEquatable<Result<T, TError>>, IComparable<Result<T, TError>> {
         /// <summary>
         ///    Gets the <see cref="Either{T,TError}"/> from the <see cref="Result{T,TError}"/> instance.
-        ///   <para></para>
-        ///   <para></para>
-        ///   TIP: In situations where you start with an <typeparamref name="T"/> and got an <typeparamref name="TError"/> along the way,
-        ///   it can be safe to use the <see cref="Either{T,TError}.Value"/> from <see cref="Either{T,TError}"/>.
         /// </summary>
-        /// <example>
-        ///     <para>
-        ///         Here's an example of a situation where it's safe to use the <see cref="Result{T,TError}"/>'s <see cref="Either{T,TError}.Value"/> from <see cref="Either{T,TError}"/>.
-        ///         When the <see cref="Either{T, TError}"/> is a wrongful state.
-        ///     </para>
-        ///  <code language="c#">
-        ///  var text = "foo";
-        ///  // We start with the value from the text variable. But fail in the predicate test.
-        ///  Result&lt;string, int&gt; result = text.ToResult(x => x == "bar", () => 2);
-        ///  //  It maybe be considered as an error, but that may not mean it does not have a value.
-        ///  Console.WriteLine(result.Either.Value == text); // >_ true
-        ///  Console.WriteLine(result.Either.Error == 2); // >_ true
-        /// </code>
-        /// </example>
         public Either<T, TError> Either { get; }
 
         private Result(in T value, in TError error, bool hasError, bool hasValue) =>
