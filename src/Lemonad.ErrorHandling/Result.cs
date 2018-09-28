@@ -242,7 +242,7 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public Result<T, TError> IsErrorWhenNull(Func<Maybe<T>, TError> errorSelector) =>
-            IsErrorWhen(EquailtyFunctions.IsNull, errorSelector);
+            IsErrorWhen(EqualityFunctions.IsNull, errorSelector);
 
         /// <summary>
         ///     Maps both <typeparamref name="T" /> and <typeparamref name="TError" /> but only one is executed.
