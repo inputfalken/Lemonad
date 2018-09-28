@@ -19,6 +19,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
             var result = await task;
 
             Assert.False(selectorExectued, "Should not get exectued since there's an error from the result.");
+            Assert.True(errorSelectorExectued);
             Assert.Equal(default, result.Either.Value);
             Assert.Equal("CAN NOT DIVIDE '10' WITH '0'.", result.Either.Error);
             Assert.True(result.Either.HasError, "Result should have error.");
