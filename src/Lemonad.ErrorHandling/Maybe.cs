@@ -132,7 +132,7 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         [Pure]
-        public Maybe<T> Filter(Func<T, bool> predicate) => new Maybe<T>(_result.Filter(predicate, Unit.Selector));
+        public Maybe<T> Filter(Func<T, bool> predicate) => new Maybe<T>(_result.Filter(predicate, x => Unit.Default));
 
         /// <summary>
         ///     Flatmaps another <see cref="Maybe{T}" />.
@@ -196,7 +196,7 @@ namespace Lemonad.ErrorHandling {
         ///     A <see cref="Maybe{T}" /> whose <typeparamref name="T" /> has value if <typeparamref name="T" /> is not null.
         /// </returns>
         [Pure]
-        public Maybe<T> IsNoneWhenNull() => new Maybe<T>(_result.IsErrorWhenNull(Unit.Selector));
+        public Maybe<T> IsNoneWhenNull() => new Maybe<T>(_result.IsErrorWhenNull(maybe => default));
 
         /// <summary>
         ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
@@ -206,7 +206,7 @@ namespace Lemonad.ErrorHandling {
         /// </param>
         [Pure]
         public Maybe<T> IsNoneWhen(Func<T, bool> predicate) =>
-            new Maybe<T>(_result.IsErrorWhen(predicate, Unit.Selector));
+            new Maybe<T>(_result.IsErrorWhen(predicate, maybe => default));
 
         [Pure]
         public Maybe<T> Flatten<TResult>(Func<T, Maybe<TResult>> selector) => new Maybe<T>(

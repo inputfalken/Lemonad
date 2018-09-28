@@ -12,7 +12,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
             var filter = TaskResultFunctions.Filter(AssertionUtilities.DivisionAsync(10, 0), d => {
                 predicateExectued = true;
                 return d == 2;
-            }, () => {
+            }, x => {
                 errorSelectorExectued = true;
                 return "Bad";
             });
@@ -36,7 +36,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
             var filter = TaskResultFunctions.Filter(AssertionUtilities.DivisionAsync(10, 2), d => {
                 predicateExectued = true;
                 return false;
-            }, () => {
+            }, x => {
                 errorSelectorExectued = true;
                 return "Bad";
             });
@@ -58,7 +58,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
             var filter = TaskResultFunctions.Filter(AssertionUtilities.DivisionAsync(10, 2), d => {
                 predicateExectued = true;
                 return true;
-            }, () => {
+            }, x => {
                 errorSelectorExectued = true;
                 return "Bad";
             });

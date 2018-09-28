@@ -13,10 +13,10 @@ namespace ReadFileAsync {
         private static async Task<int> Main(string[] args) {
             var result = await "data.txt"
                 .ToResult(File.Exists, () => ExitCode.FileNotFound)
-                .Filter(x => Path.GetExtension(x) == ".txt", () => ExitCode.InvalidFileExtension)
+                .Filter(x => Path.GetExtension(x) == ".txt", y => ExitCode.InvalidFileExtension)
                 .ToAsyncResult()
                 .Map(s => File.ReadAllTextAsync(s))
-                .Filter(s => s == "Hello World", () => ExitCode.InvalidFileContent)
+                .Filter(s => s == "Hello World", x => ExitCode.InvalidFileContent)
                 .FlatMap(s => ProcessText(s, "processed.txt").ToAsyncResult())
                 .Match(x => (ExitCode: 0, Message: x),
                     x => {

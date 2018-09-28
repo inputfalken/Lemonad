@@ -11,7 +11,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var result = Division(10, 0).IsErrorWhen(d => {
                 predicateExectued = true;
                 return d == 2;
-            }, () => {
+            }, x => {
                 errorSelectorExectued = true;
                 return "Bad";
             });
@@ -34,7 +34,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var result = Division(10, 2).IsErrorWhen(d => {
                 predicateExectued = true;
                 return false;
-            }, () => {
+            }, x => {
                 errorSelectorExectued = true;
                 return "Bad";
             });
@@ -57,7 +57,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var result = Division(10, 2).IsErrorWhen(d => {
                 predicateExectued = true;
                 return true;
-            }, () => {
+            }, x => {
                 errorSelectorExectued = true;
                 return "Bad";
             });

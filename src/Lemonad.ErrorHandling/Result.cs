@@ -211,23 +211,6 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         /// <param name="errorSelector">
-        ///     Is executed when the predicate fails.
-        /// </param>
-        ///<returns>
-        ///   A <see cref="Result{T,TError}"/> whose <typeparamref name="T"/> has been tested by the <paramref name="predicate"/>
-        ///   if the current <see cref="Result{T,TError}"/> is in valid state.
-        /// </returns>
-        [Pure]
-        public Result<T, TError> Filter(Func<T, bool> predicate, Func<TError> errorSelector) =>
-            Filter(predicate, _ => errorSelector());
-
-        /// <summary>
-        ///     Filters the <typeparamref name="T" /> if <typeparamref name="T" /> is the active type.
-        /// </summary>
-        /// <param name="predicate">
-        ///     A function to test <typeparamref name="T" />.
-        /// </param>
-        /// <param name="errorSelector">
         ///     Is executed when the <paramref name="predicate" /> is false. The in parameter is a <see cref="Maybe{T}" /> since
         ///     the <typeparamref name="T" /> could be unsafe in this context.
         /// </param>
@@ -246,23 +229,6 @@ namespace Lemonad.ErrorHandling {
                 : errorSelector(Either.Value);
         }
 
-        /// <summary>
-        ///     Filters the <typeparamref name="T" /> if <typeparamref name="T" /> is the active type.
-        /// </summary>
-        /// <param name="predicate">
-        ///     A function to test <typeparamref name="T" />.
-        /// </param>
-        /// <param name="errorSelector">
-        ///     Is executed when the <paramref name="predicate" /> is true. The in parameter is a <see cref="Maybe{T}" /> since the
-        ///     <typeparamref name="T" /> could be unsafe in this context.
-        /// </param>
-        /// <returns>
-        ///     A filtered <see cref="Result{T,TError}" />.
-        /// </returns>
-        [Pure]
-        public Result<T, TError> IsErrorWhen(
-            Func<T, bool> predicate, Func<TError> errorSelector) => IsErrorWhen(predicate, _ => errorSelector());
-
         [Pure]
         public Result<T, TError> IsErrorWhen(
             Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) {
@@ -273,19 +239,6 @@ namespace Lemonad.ErrorHandling {
                 errorSelector
             );
         }
-
-        /// <summary>
-        ///     Filters the <typeparamref name="T" /> by checking for null if <typeparamref name="T" /> is the active type.
-        /// </summary>
-        /// <param name="errorSelector">
-        ///     Is executed when <typeparamref name="T" /> is null.
-        /// </param>
-        /// <returns>
-        ///     A filtered <see cref="Result{T,TError}" />.
-        /// </returns>
-        [Pure]
-        public Result<T, TError> IsErrorWhenNull(Func<TError> errorSelector) =>
-            IsErrorWhen(EquailtyFunctions.IsNull, errorSelector);
 
         [Pure]
         public Result<T, TError> IsErrorWhenNull(Func<Maybe<T>, TError> errorSelector) =>

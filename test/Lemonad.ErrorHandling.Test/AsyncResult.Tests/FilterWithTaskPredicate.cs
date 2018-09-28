@@ -17,7 +17,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
                     await Delay;
                     predicateExectued = true;
                     return x == 2;
-                }, () => {
+                }, x => {
                     errorSelectorExectued = true;
                     return "Bad";
                 }).Match(x => x, s => -1);
@@ -41,7 +41,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
                     await Delay;
                     predicateExectued = true;
                     return false;
-                }, () => {
+                }, x => {
                     errorSelectorExectued = true;
                     return "Bad";
                 }).Match(x => x, s => -1);
@@ -62,7 +62,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
                     await Delay;
                     predicateExectued = true;
                     return true;
-                }, () => {
+                }, x => {
                     errorSelectorExectued = true;
                     return "Bad";
                 }).Match(x => x, s => -1);

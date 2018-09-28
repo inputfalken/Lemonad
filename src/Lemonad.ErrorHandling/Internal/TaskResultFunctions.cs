@@ -40,17 +40,6 @@ namespace Lemonad.ErrorHandling.Internal {
             (await result.ConfigureAwait(false)).Either;
 
         [Pure]
-        internal static async Task<Result<T, TError>> Filter<T, TError>(Task<Result<T, TError>> source,
-            Func<T, bool> predicate,
-            Func<TError> errorSelector) =>
-            (await source.ConfigureAwait(false)).Filter(predicate, errorSelector);
-
-        [Pure]
-        internal static Task<Result<T, TError>> Filter<T, TError>(Task<Result<T, TError>> source,
-            Func<T, Task<bool>> predicate,
-            Func<TError> errorSelector) => Filter(source, predicate, _ => errorSelector());
-
-        [Pure]
         internal static async Task<Result<T, TError>> Filter<T, TError>(
             Task<Result<T, TError>> source,
             Func<T, bool> predicate,
@@ -292,27 +281,12 @@ namespace Lemonad.ErrorHandling.Internal {
                 : result.Either.Value;
         }
 
-        [Pure]
-        internal static Task<Result<T, TError>> IsErrorWhen<T, TError>(Task<Result<T, TError>> source,
-            Func<T, Task<bool>> predicate,
-            Func<TError> errorSelector) => IsErrorWhen(source, predicate, _ => errorSelector());
-
-        [Pure]
-        internal static async Task<Result<T, TError>> IsErrorWhen<T, TError>(Task<Result<T, TError>> source,
-            Func<T, bool> predicate,
-            Func<TError> errorSelector) =>
-            (await source.ConfigureAwait(false)).IsErrorWhen(predicate, errorSelector);
 
         [Pure]
         internal static async Task<Result<T, TError>> IsErrorWhen<T, TError>(Task<Result<T, TError>> source,
             Func<T, bool> predicate,
             Func<Maybe<T>, TError> errorSelector) =>
             (await source.ConfigureAwait(false)).IsErrorWhen(predicate, errorSelector);
-
-        [Pure]
-        internal static async Task<Result<T, TError>> IsErrorWhenNull<T, TError>(Task<Result<T, TError>> source,
-            Func<TError> errorSelector) =>
-            (await source.ConfigureAwait(false)).IsErrorWhenNull(errorSelector);
 
         [Pure]
         internal static async Task<Result<TResult, TError>> Join<TOuter, TError, TInner, TKey, TResult>(
