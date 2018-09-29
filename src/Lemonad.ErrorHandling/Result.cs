@@ -9,6 +9,9 @@ namespace Lemonad.ErrorHandling {
     ///     Either it's <typeparamref name="TError" /> or it's <typeparamref name="T" />. Which makes it possible to handle
     ///     error without throwing exceptions.
     ///     Inspired by 'Haskell's Either a b' and FSharps 'Result&lt;T, TError&gt;'.
+    ///     <para></para>
+    ///     <para></para>
+    ///     Null values are allowed and therefore should be checked if necessary.
     /// </summary>
     /// <typeparam name="T">
     ///     The type which is considered as successful.
