@@ -1,37 +1,63 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
-using System.Linq;
+using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
-using Lemonad.ErrorHandling.Extensions;
 
 namespace ReadFileAsync {
-    internal class Program {
-        private static int Main(string[] args) {
-            return args[0]
-                .ToResult<string, int>()
-                .Filter(x => File.Exists(x), _ => 1)
-                .DoWithError(x => Console.WriteLine("File does not exist."))
-                .FlatMap(VerifyFilextension, i => {
-                    Console.WriteLine("Invalid file extension.");
-                    return i;
-                })
-                .FlatMap(Readfiles)
-                .FlatMap(VerifyFileContent, i => {
-                    Console.WriteLine("File cannot be empty");
-                    return i;
-                })
-                .DoWith(x => Console.WriteLine(x.Aggregate((s, s1) => $"{s}{Environment.NewLine}{s1}")))
-                .Match(_ => 0, i => i)
-                .Result;
+    internal static partial class Program {
+        private static void LogFatal(string message, Exception exception) {
+            // Log fatal somewhere...
         }
 
-        private static Outcome<string[], int> Readfiles(string filename) => File.ReadAllLinesAsync(filename);
+        private static async Task<int> Main(string[] args) {
+            var result = await "data.txt"
+                .ToResult(File.Exists, x => ExitCode.FileNotFound)
+                .Filter(x => Path.GetExtension(x) == ".txt", y => ExitCode.InvalidFileExtension)
+                .ToAsyncResult()
+                .Map(s => File.ReadAllTextAsync(s))
+                .Filter(s => s == "Hello World", x => ExitCode.InvalidFileContent)
+                .FlatMap(s => ProcessText(s, "processed.txt").ToAsyncResult())
+                .Match(x => (ExitCode: 0, Message: x),
+                    x => {
+                        string message;
+                        switch (x) {
+                            case ExitCode.FileNotFound:
+                                message = "File not found.";
+                                break;
+                            case ExitCode.InvalidFileContent:
+                                message = "Invalid file content.";
+                                break;
+                            case ExitCode.InvalidFileExtension:
+                                message = "Invalid file extension.";
+                                break;
+                            case ExitCode.FailedWritingText:
+                                message = "Could not write to file, try running again.";
+                                break;
+                            default:
+                                throw new ArgumentOutOfRangeException(nameof(x), x, null);
+                        }
 
-        private static Result<IReadOnlyList<string>, int> VerifyFileContent(IReadOnlyList<string> lines) =>
-            lines.Count > 0 ? ResultExtensions.Ok<IReadOnlyList<string>, int>(lines) : 3;
+                        return (ExitCode: (int) x, Message: message);
+                    });
 
-        private static Result<string, int> VerifyFilextension(string filename) =>
-            Path.GetExtension(filename) == ".txt" ? (Result<string, int>) filename : 2;
+            Console.WriteLine(result.Message);
+            return result.ExitCode;
+        }
+
+        private static async Task<Result<string, ExitCode>> ProcessText(
+            string text, string filePath) {
+            // You can also handle exceptions more effectivly with Result<T, TError>.
+            try {
+                await File.WriteAllTextAsync(filePath, text.ToUpper(CultureInfo.InvariantCulture));
+                // Return a message indicating a success.
+                return "Successfully precessed file.";
+            }
+            catch (Exception e) {
+                LogFatal($"Could not write to file {filePath}.", e);
+                // Return an error indicating a failure.
+                return ExitCode.FailedWritingText;
+            }
+        }
     }
 }

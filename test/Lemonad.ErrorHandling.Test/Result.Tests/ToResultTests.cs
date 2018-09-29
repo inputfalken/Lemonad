@@ -1,132 +1,43 @@
-﻿using System;
-using Lemonad.ErrorHandling.Extensions;
-using Xunit;
+﻿using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class ToResultTests {
         [Fact]
-        public void Convert_Maybe_Int_Whose_Property_HasValue_Is_False__Expects_Result_With_error_Value() {
-            var result = 2.None().ToResult(() => "ERROR");
-
-            Assert.False(result.HasValue, "Result should have error.");
-            Assert.True(result.HasError, "Result should have a error value.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("ERROR", result.Error);
-        }
-
-        [Fact]
-        public void
-            Convert_Maybe_Int_Whose_Property_HasValue_Is_False_Pass_Null_error_Selector__Expects_ArgumentNullException_Thrown_Thrown() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<int> x = null;
-                2.None().ToResult(x);
+        public void Create_Result_From_Value_With_True_Predicate() {
+            var predicateExecuted = false;
+            var errorSelectorExecuted = false;
+            var result = "value".ToResult(x => {
+                predicateExecuted = true;
+                return string.IsNullOrWhiteSpace(x) == false;
+            }, x => {
+                errorSelectorExecuted = true;
+                return "ERROR";
             });
+            Assert.Equal(default, result.Either.Error);
+            Assert.Equal("value", result.Either.Value);
+            Assert.True(result.Either.HasValue);
+            Assert.False(result.Either.HasError);
+            Assert.True(predicateExecuted);
+            Assert.False(errorSelectorExecuted);
         }
 
         [Fact]
-        public void Convert_Maybe_Int_Whose_Property_HasValue_Is_True__Expects_Result_With_Ok_Value() {
-            var result = 2.Some().ToResult(() => "ERROR");
-
-            Assert.True(result.HasValue, "Result should have value.");
-            Assert.False(result.HasError, "Result should not have a error value.");
-            Assert.Equal(2, result.Value);
-            Assert.Equal(default, result.Error);
-        }
-
-        [Fact]
-        public void
-            Convert_Maybe_Int_Whose_Property_HasValue_Is_True_Pass_Null_error_Selector__Expects_No_ArgumentNullException_Thrown() {
-            var exception = Record.Exception(() => {
-                Func<int> errorSelector = null;
-                var result = 2.Some().ToResult(errorSelector);
-                Assert.True(result.HasValue, "Result should have value.");
-                Assert.Equal(2, result.Value);
+        public void Create_Result_From_Value_With_False_Predicate() {
+            var predicateExecuted = false;
+            var errorSelectorExecuted = false;
+            var result = "value".ToResult(x => {
+                predicateExecuted = true;
+                return string.IsNullOrWhiteSpace(x);
+            }, x => {
+                errorSelectorExecuted = true;
+                return "ERROR";
             });
-            Assert.Null(exception);
-        }
-
-        [Fact]
-        public void Convert_Maybe_String_Whose_Property_HasValue_Is_False__Expects_Result_With_error_Value() {
-            var result = 2.None().ToResult(() => "ERROR");
-
-            Assert.False(result.HasValue, "Result should have value.");
-            Assert.True(result.HasError, "Result should have a error value.");
-            Assert.Equal("ERROR", result.Error);
-            Assert.Equal(default, result.Value);
-        }
-
-        [Fact]
-        public void Convert_Maybe_String_Whose_Property_HasValue_Is_True__Expects_Result_With_Ok_Value() {
-            var result = 2.Some().ToResult(() => "ERROR");
-
-            Assert.True(result.HasValue, "Result should have value.");
-            Assert.False(result.HasError, "Result should not have a error value.");
-            Assert.Equal(default, result.Error);
-            Assert.Equal(2, result.Value);
-        }
-
-        [Fact]
-        public void Convert_Maybe_String_With_Null_Whose_Property_HasValue_Is_False__Expects_Result_With_error_Value() {
-            string str = null;
-            var result = 2.None().ToResult(() => str);
-            Assert.False(result.HasValue, "Result should have error.");
-            Assert.True(result.HasError, "Result should have a error value.");
-            Assert.Null(result.Error);
-        }
-
-        [Fact]
-        public void Convert_Maybe_String_With_Null_Whose_Property_HasValue_Is_True__Expects_Result_With_Ok_value() {
-            string str = null;
-            var result = 2.Some().ToResult(() => str);
-            Assert.True(result.HasValue, "Result should have value.");
-            Assert.False(result.HasError, "Result should not have a error value.");
-            Assert.Equal(2, result.Value);
-            Assert.Equal(default, result.Error);
-        }
-
-        [Fact]
-        public void Convert_Nullable_Int_Whose_Property_HasValue_Is_False__Expects_Result_With_error_Value() {
-            int? number = null;
-            var result = number.ToResult(() => "ERROR");
-
-            Assert.False(result.HasValue, "Result should have error.");
-            Assert.True(result.HasError, "Result should have a error value.");
-            Assert.Equal(default, result.Value);
-            Assert.Equal("ERROR", result.Error);
-        }
-
-        [Fact]
-        public void
-            Convert_Nullable_Int_Whose_Property_HasValue_Is_False_Pass_Null_error_Selector__Expects_ArgumentNullException_Thrown() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<int> errorSelector = null;
-                int? nullable = null;
-                nullable.ToResult(errorSelector);
-            });
-        }
-
-        [Fact]
-        public void Convert_Nullable_Int_Whose_Property_HasValue_Is_True__Expects_Result_With_Ok_Value() {
-            int? number = 2;
-            var result = number.ToResult(() => "ERROR");
-
-            Assert.True(result.HasValue, "Result should have value.");
-            Assert.False(result.HasError, "Result should not have a error value.");
-            Assert.Equal(2, result.Value);
-            Assert.Equal(default, result.Error);
-        }
-
-        [Fact]
-        public void
-            Convert_Nullable_Int_Whose_Property_HasValue_Is_True_Pass_Null_error_Selector__Expects_No_ArgumentNullException_Thrown() {
-            var exception = Record.Exception(() => {
-                Func<int> errorSelector = null;
-                int? nullable = 2;
-                var result = nullable.ToResult(errorSelector);
-                Assert.True(result.HasValue, "Result should have value.");
-                Assert.Equal(2, result.Value);
-            });
-            Assert.Null(exception);
+            Assert.Equal("ERROR", result.Either.Error);
+            Assert.Equal(default, result.Either.Value);
+            Assert.False(result.Either.HasValue);
+            Assert.True(result.Either.HasError);
+            Assert.True(predicateExecuted);
+            Assert.True(errorSelectorExecuted);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lemonad.ErrorHandling.Extensions;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
@@ -11,7 +10,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             const string input = "hello";
             var list = Enumerable
                 .Range(0, 3)
-                .SelectMany(_ => input.None(string.IsNullOrWhiteSpace).AsEnumerable, (x, y) => x + y.Length)
+                .SelectMany(_ => input.ToMaybeNone(string.IsNullOrWhiteSpace).ToEnumerable(), (x, y) => x + y.Length)
                 .ToList();
 
             Assert.Equal(5, list[0]);
@@ -24,7 +23,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             const string input = "hello";
             var list = Enumerable
                 .Range(0, 3)
-                .SelectMany(_ => input.Some(y => y.Length > 10).AsEnumerable, (x, y) => x + y.Length)
+                .SelectMany(_ => input.ToMaybe(y => y.Length > 10).ToEnumerable(), (x, y) => x + y.Length)
                 .ToList();
 
             Assert.False(list.Any());
@@ -34,7 +33,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void Predicate_Overload__Passing_Null_Predicate__Throws_ArgumentNullException() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, IEnumerable<string>> func = null;
-                "foo".Some().AsEnumerable.SelectMany(func);
+                "foo".ToMaybe().ToEnumerable().SelectMany(func);
             });
         }
     }

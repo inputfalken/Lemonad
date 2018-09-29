@@ -6,8 +6,9 @@ namespace Lemonad.ErrorHandling {
     ///     Represents void but in a returnable fashion.
     /// </summary>
     [Serializable]
-    public readonly struct Unit : IEquatable<Unit>, IComparable<Unit> {
+    internal readonly struct Unit : IEquatable<Unit>, IComparable<Unit> {
         public static readonly Func<Unit> Selector = () => Default;
+        public static readonly Func<Unit, Unit> AlternativeSelector = x => x;
         public static readonly Unit Default = new Unit();
 
         [Pure]

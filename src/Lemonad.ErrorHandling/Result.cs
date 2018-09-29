@@ -2,56 +2,46 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Threading.Tasks;
-using Lemonad.ErrorHandling.Extensions;
-using Lemonad.ErrorHandling.Extensions.Internal;
 
 namespace Lemonad.ErrorHandling {
     /// <summary>
     ///     A data-structure commonly used for error-handling where only one value can be present.
     ///     Either it's <typeparamref name="TError" /> or it's <typeparamref name="T" />. Which makes it possible to handle
     ///     error without throwing exceptions.
-    ///     Inspired by 'Haskells Either a b' and FSharps 'Result&lt;T, TError&gt;'.
+    ///     Inspired by 'Haskell's Either a b' and FSharps 'Result&lt;T, TError&gt;'.
+    ///     <para></para>
+    ///     <para></para>
+    ///     Null values are not allowed and therefore excessively be checked before beginning an <see cref="Result{T,TError}"/> expression chain.
     /// </summary>
     /// <typeparam name="T">
-    ///     The type which is considered as successfull.
+    ///     The type which is considered as successful.
     /// </typeparam>
     /// <typeparam name="TError">
     ///     The type which is considered as failure.
     /// </typeparam>
     public readonly struct Result<T, TError> : IEquatable<Result<T, TError>>, IComparable<Result<T, TError>> {
-        internal TError Error { get; }
-        internal T Value { get; }
-
-        internal Result(T value, TError error, bool hasError, bool hasValue) {
-            HasValue = hasValue;
-            HasError = hasError;
-            Value = value;
-            Error = error;
-        }
-
         /// <summary>
-        ///     Is true if there's a <typeparamref name="T" /> in the current state of the <see cref="Result{T,TError}" />.
+        ///    Gets the <see cref="Either{T,TError}"/> from the <see cref="Result{T,TError}"/> instance.
         /// </summary>
-        public bool HasValue { get; }
+        public Either<T, TError> Either { get; }
 
-        /// <summary>
-        ///     Is true if there's a <typeparamref name="TError" /> in the current state of the <see cref="Result{T,TError}" />.
-        /// </summary>
-        public bool HasError { get; }
+        private Result(in T value, in TError error, bool hasError, bool hasValue) =>
+            Either = new Either<T, TError>(value, error, hasError, hasValue);
 
         /// <inheritdoc />
         public bool Equals(Result<T, TError> other) {
-            if (!HasValue && !other.HasValue) return EqualityComparer<TError>.Default.Equals(Error, other.Error);
+            if (!Either.HasValue && !other.Either.HasValue)
+                return EqualityComparer<TError>.Default.Equals(Either.Error, other.Either.Error);
 
-            if (HasValue && other.HasValue) return EqualityComparer<T>.Default.Equals(Value, other.Value);
+            if (Either.HasValue && other.Either.HasValue)
+                return EqualityComparer<T>.Default.Equals(Either.Value, other.Either.Value);
 
             return false;
         }
 
         /// <inheritdoc />
         public override string ToString() =>
-            $"{(HasValue ? "Ok" : "Error")} ==> {typeof(Result<T, TError>).ToHumanString()}{StringFunctions.PrettyTypeString(HasValue ? (object) Value : Error)}";
+            $"{(Either.HasValue ? "Ok" : "Error")} ==> {typeof(Result<T, TError>).ToHumanString()}{StringFunctions.PrettyTypeString(Either.HasValue ? (object) Either.Value : Either.Error)}";
 
         public static bool operator ==(Result<T, TError> left, Result<T, TError> right) => left.Equals(right);
         public static bool operator !=(Result<T, TError> left, Result<T, TError> right) => !left.Equals(right);
@@ -68,75 +58,60 @@ namespace Lemonad.ErrorHandling {
         public static bool operator >=(Result<T, TError> left, Result<T, TError> right) =>
             left.CompareTo(right) >= 0;
 
-        public static implicit operator Result<T, TError>(TError error) =>
-            ResultExtensions.Error<T, TError>(error);
-
-        public static implicit operator Result<T, TError>(T value) => ResultExtensions.Ok<T, TError>(value);
-
-        private static IEnumerable<TError> YieldErrors(Result<T, TError> result) {
-            if (result.HasError)
-                yield return result.Error;
+        public static implicit operator Result<T, TError>(TError error) {
+            var tmp = default(T);
+            return new Result<T, TError>(in tmp, in error, true, false);
         }
 
-        private static IEnumerable<T> YieldValues(Result<T, TError> result) {
-            if (result.HasValue)
-                yield return result.Value;
+        public static implicit operator Result<T, TError>(T value) {
+            var tmp = default(TError);
+            return new Result<T, TError>(in value, in tmp, false, true);
         }
-
-        /// <summary>
-        ///     Treat <typeparamref name="TError" /> as enumerable with 0-1 elements in.
-        ///     This is handy when combining <see cref="Result{T,TError}" /> with LINQs API.
-        /// </summary>
-        public IEnumerable<TError> AsErrorEnumerable => YieldErrors(this);
-
-        /// <summary>
-        ///     Treat <typeparamref name="T" /> as enumerable with 0-1 elements in.
-        ///     This is handy when combining <see cref="Result{T,TError}" /> with LINQ's API.
-        /// </summary>
-        public IEnumerable<T> AsEnumerable => YieldValues(this);
 
         /// <inheritdoc />
         public override bool Equals(object obj) => obj is Result<T, TError> option && Equals(option);
 
         /// <inheritdoc />
         public override int GetHashCode() =>
-            HasValue ? (Value == null ? 1 : Value.GetHashCode()) : (Error == null ? 0 : Error.GetHashCode());
+            Either.HasValue
+                ? (Either.Value == null ? 1 : Either.Value.GetHashCode())
+                : (Either.Error == null ? 0 : Either.Error.GetHashCode());
 
         /// <inheritdoc />
         public int CompareTo(Result<T, TError> other) {
-            if (HasValue && !other.HasValue) return 1;
-            if (!HasValue && other.HasValue) return -1;
+            if (Either.HasValue && !other.Either.HasValue) return 1;
+            if (!Either.HasValue && other.Either.HasValue) return -1;
 
-            return HasValue
-                ? Comparer<T>.Default.Compare(Value, other.Value)
-                : Comparer<TError>.Default.Compare(Error, other.Error);
+            return Either.HasValue
+                ? Comparer<T>.Default.Compare(Either.Value, other.Either.Value)
+                : Comparer<TError>.Default.Compare(Either.Error, other.Either.Error);
         }
 
         /// <summary>
         ///     Evaluates the <see cref="Result{T,TError}" />.
         /// </summary>
         /// <param name="selector">
-        ///     Is exectued when the <see cref="Result{T,TError}" /> contains <see cref="T" />.
+        ///     Is executed when the <see cref="Result{T,TError}" /> contains <see cref="T" />.
         /// </param>
         /// <param name="errorSelector">
-        ///     Is exectued when the <see cref="Result{T,TError}" /> contains <see cref="TError" />.
+        ///     Is executed when the <see cref="Result{T,TError}" /> contains <see cref="TError" />.
         /// </param>
         /// <typeparam name="TResult">
         ///     The return type of <paramref name="selector" /> and <paramref name="errorSelector" />
         /// </typeparam>
         /// <returns>
-        ///     Either <typeparamref name="T" /> or <typeparamref name="TError" />.
+        ///     Either <typeparamref name="T" /> or <typeparamref name="TError" /> as <typeparamref name="TResult"/>.
         /// </returns>
         [Pure]
         public TResult Match<TResult>(
             Func<T, TResult> selector, Func<TError, TResult> errorSelector) {
-            if (HasError)
+            if (Either.HasError)
                 return errorSelector != null
-                    ? errorSelector(Error)
+                    ? errorSelector(Either.Error)
                     : throw new ArgumentNullException(nameof(errorSelector));
 
             return selector != null
-                ? selector(Value)
+                ? selector(Either.Value)
                 : throw new ArgumentNullException(nameof(selector));
         }
 
@@ -144,22 +119,22 @@ namespace Lemonad.ErrorHandling {
         ///     Evaluates the <see cref="Result{T,TError}" />.
         /// </summary>
         /// <param name="action">
-        ///     Is exectued when the <see cref="Result{T,TError}" /> contains <see cref="T" />.
+        ///     Is executed when the <see cref="Result{T,TError}" /> contains <see cref="T" />.
         /// </param>
         /// <param name="errorAction">
-        ///     Is exectued when the <see cref="Result{T,TError}" /> contains <see cref="TError" />.
+        ///     Is executed when the <see cref="Result{T,TError}" /> contains <see cref="TError" />.
         /// </param>
         /// <exception cref="ArgumentNullException">
         ///     When either <paramref name="action" /> or <paramref name="errorAction" /> and needs to be executed.
         /// </exception>
         public void Match(Action<T> action, Action<TError> errorAction) {
-            if (HasError)
+            if (Either.HasError)
                 if (errorAction != null)
-                    errorAction(Error);
+                    errorAction(Either.Error);
                 else
                     throw new ArgumentNullException(nameof(errorAction));
             else if (action != null)
-                action(Value);
+                action(Either.Value);
             else
                 throw new ArgumentNullException(nameof(action));
         }
@@ -173,20 +148,23 @@ namespace Lemonad.ErrorHandling {
         ///     <see cref="Result{T,TError}" /> with side effects.
         /// </returns>
         /// <exception cref="ArgumentNullException">
-        ///     When <paramref name="action" /> is null and needs to be exectued.
+        ///     When <paramref name="action" /> is null and needs to be executed.
         /// </exception>
+        /// <returns>
+        /// A <see cref="Result{T,TError}"/> whom may have invoked the <paramref name="action"/> if the current <see cref="Result{T,TError}"/> is in a valid state.
+        /// </returns>
         public Result<T, TError> DoWith(Action<T> action) {
-            if (HasValue)
-                if (action != null)
-                    action.Invoke(Value);
-                else
-                    throw new ArgumentNullException(nameof(action));
+            if (Either.HasError) return this;
+            if (action != null)
+                action.Invoke(Either.Value);
+            else
+                throw new ArgumentNullException(nameof(action));
 
             return this;
         }
 
         /// <summary>
-        ///     Exectues  <paramref name="action" />.
+        ///     Executes  <paramref name="action" />.
         /// </summary>
         /// <param name="action">
         ///     Is executed no matter what state <see cref="Result{T,TError}" /> is in.
@@ -197,6 +175,9 @@ namespace Lemonad.ErrorHandling {
         /// <exception cref="ArgumentNullException">
         ///     When <paramref name="action" /> is null.
         /// </exception>
+        /// <returns>
+        /// A <see cref="Result{T,TError}"/> who have invoked <paramref name="action"/> no matter what state the current <see cref="Result{T,TError}"/> is in.
+        /// </returns>
         public Result<T, TError> Do(Action action) {
             if (action == null)
                 throw new ArgumentNullException(nameof(action));
@@ -212,16 +193,16 @@ namespace Lemonad.ErrorHandling {
         /// <returns>
         ///     <see cref="Result{T,TError}" /> with side effects.
         /// </returns>
-        /// <exception cref="ArgumentNullException">
-        ///     When <paramref name="action" /> is null and needs to be exectued.
-        /// </exception>
+        /// <returns>
+        /// A <see cref="Result{T,TError}"/> whom may have invoked the <paramref name="action"/> if the current <see cref="Result{T,TError}"/> is in a an invalid state.
+        /// </returns>
         public Result<T, TError> DoWithError(
             Action<TError> action) {
-            if (HasError)
-                if (action != null)
-                    action.Invoke(Error);
-                else
-                    throw new ArgumentNullException(nameof(action));
+            if (Either.HasValue) return this;
+            if (action != null)
+                action.Invoke(Either.Error);
+            else
+                throw new ArgumentNullException(nameof(action));
 
             return this;
         }
@@ -233,108 +214,38 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         /// <param name="errorSelector">
-        ///     Is exectued when the predicate fails.
+        ///     Is executed when the <paramref name="predicate" /> is false. The in parameter is a <see cref="Maybe{T}" /> since
+        ///     the <typeparamref name="T" /> could be unsafe in this context.
         /// </param>
-        [Pure]
-        public Result<T, TError> Filter(Func<T, bool> predicate, Func<TError> errorSelector) =>
-            Filter(predicate, _ => errorSelector());
-
-        public Outcome<T, TError> Filter(Func<T, Task<bool>> predicate, Func<Maybe<T>, TError> errorSelector) =>
-            TaskResultFunctions.Filter(this, predicate, errorSelector);
-
-        public Outcome<T, TError> Filter(Func<T, Task<bool>> predicate, Func<TError> errorSelector) =>
-            TaskResultFunctions.Filter(this, predicate, _ => errorSelector());
-
-        /// <summary>
-        ///     Filters the <typeparamref name="T" /> if <typeparamref name="T" /> is the active type.
-        /// </summary>
-        /// <param name="predicate">
-        ///     A function to test <typeparamref name="T" />.
-        /// </param>
-        /// <param name="errorSelector">
-        ///     Is exectued when the predicate fails. The in parameter is a <see cref="Maybe{T}" /> whose <typeparamref name="T" />
-        ///     has been checked to not be null.
-        ///     But the <see cref="Maybe{T}" /> could still be unsafe and should be used with care.
-        /// </param>
-        [Pure]
-        public Result<T, TError> Filter(Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) {
-            if (HasError) return ResultExtensions.Error<T, TError>(Error);
-            if (predicate == null)
-                throw new ArgumentNullException(nameof(predicate));
-            if (predicate(Value))
-                return ResultExtensions.Ok<T, TError>(Value);
-            return errorSelector == null
-                ? throw new ArgumentNullException(nameof(errorSelector))
-                : ResultExtensions.Error<T, TError>(errorSelector(Value.Some().IsNoneWhenNull()));
-        }
-
-        /// <summary>
-        ///     Filters the <typeparamref name="T" /> if <typeparamref name="T" /> is the active type.
-        /// </summary>
-        /// <param name="predicate">
-        ///     A function to test <typeparamref name="T" />.
-        /// </param>
-        /// <param name="errorSelector">
-        ///     Is executed when the <paramref name="predicate" /> function is true.
-        /// </param>
-        /// <returns>
-        ///     A filtered <see cref="Result{T,TError}" />.
+        ///<returns>
+        ///   A <see cref="Result{T,TError}"/> whose <typeparamref name="T"/> has been tested by the <paramref name="predicate"/>
+        ///   if the current <see cref="Result{T,TError}"/> is in valid state.
         /// </returns>
         [Pure]
-        public Result<T, TError> IsErrorWhen(
-            Func<T, bool> predicate, Func<TError> errorSelector) {
-            if (HasError)
-                return errorSelector == null
-                    ? throw new ArgumentNullException(nameof(errorSelector))
-                    : ResultExtensions.Error<T, TError>(Error);
+        public Result<T, TError> Filter(Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) {
+            if (Either.HasError) return this;
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
-            if (!predicate(Value)) return ResultExtensions.Ok<T, TError>(Value);
+            if (predicate(Either.Value)) return this;
             if (errorSelector == null)
                 throw new ArgumentNullException(nameof(errorSelector));
-            return ResultExtensions.Error<T, TError>(errorSelector());
+            return errorSelector(ResultExtensions.NullCheckedMaybe(Either.Value));
         }
 
         [Pure]
         public Result<T, TError> IsErrorWhen(
             Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) {
-            if (HasError)
-                return errorSelector == null
-                    ? throw new ArgumentNullException(nameof(errorSelector))
-                    : ResultExtensions.Error<T, TError>(Error);
-            if (predicate == null)
-                throw new ArgumentNullException(nameof(predicate));
-            if (!predicate(Value)) return ResultExtensions.Ok<T, TError>(Value);
-            if (errorSelector == null)
-                throw new ArgumentNullException(nameof(errorSelector));
-            return ResultExtensions.Error<T, TError>(errorSelector(Value.Some().IsNoneWhenNull()));
+            return Filter(
+                x => predicate == null
+                    ? throw new ArgumentNullException(nameof(predicate))
+                    : predicate(x) == false,
+                errorSelector
+            );
         }
 
         [Pure]
-        public Outcome<T, TError> IsErrorWhen(Func<T, Task<bool>> predicate, Func<Maybe<T>, TError> errorSelector) =>
-            TaskResultFunctions.IsErrorWhen(this, predicate, errorSelector);
-
-        [Pure]
-        public Outcome<T, TError> IsErrorWhen(Func<T, Task<bool>> predicate, Func<TError> errorSelector) =>
-            IsErrorWhen(predicate, _ => errorSelector());
-
-        /// <summary>
-        ///     Filters the <typeparamref name="T" /> by checking for null if <typeparamref name="T" /> is the active type.
-        /// </summary>
-        /// <param name="errorSelector">
-        ///     Is executed when <typeparamref name="T" /> is null.
-        /// </param>
-        /// <returns>
-        ///     A filtered <see cref="Result{T,TError}" />.
-        /// </returns>
-        [
-            Pure]
-        public Result<T, TError> IsErrorWhenNull(Func<TError> errorSelector) =>
-            IsErrorWhen(x => EquailtyFunctions.IsNull(x), errorSelector);
-
-        [Pure]
         public Result<T, TError> IsErrorWhenNull(Func<Maybe<T>, TError> errorSelector) =>
-            IsErrorWhen(x => EquailtyFunctions.IsNull(x), errorSelector);
+            IsErrorWhen(EqualityFunctions.IsNull, errorSelector);
 
         /// <summary>
         ///     Maps both <typeparamref name="T" /> and <typeparamref name="TError" /> but only one is executed.
@@ -358,12 +269,12 @@ namespace Lemonad.ErrorHandling {
         public Result<TResult, TErrorResult> FullMap<TResult, TErrorResult>(
             Func<T, TResult> selector,
             Func<TError, TErrorResult> errorSelector
-        ) => HasError
+        ) => Either.HasError
             ? ResultExtensions.Error<TResult, TErrorResult>(errorSelector != null
-                ? errorSelector(Error)
+                ? errorSelector(Either.Error)
                 : throw new ArgumentNullException(nameof(errorSelector)))
-            : ResultExtensions.Ok<TResult, TErrorResult>(selector != null
-                ? selector(Value)
+            : ResultExtensions.Value<TResult, TErrorResult>(selector != null
+                ? selector(Either.Value)
                 : throw new ArgumentNullException(nameof(selector)));
 
         /// <summary>
@@ -379,15 +290,11 @@ namespace Lemonad.ErrorHandling {
         ///     A <see cref="Result{T,TError}" />  with its <typeparamref name="T" /> mapped.
         /// </returns>
         [Pure]
-        public Result<TResult, TError> Map<TResult>(Func<T, TResult> selector) => HasValue
+        public Result<TResult, TError> Map<TResult>(Func<T, TResult> selector) => Either.HasValue
             ? selector != null
-                ? ResultExtensions.Ok<TResult, TError>(selector(Value))
+                ? ResultExtensions.Value<TResult, TError>(selector(Either.Value))
                 : throw new ArgumentNullException(nameof(selector))
-            : ResultExtensions.Error<TResult, TError>(Error);
-
-        [Pure]
-        public Outcome<TResult, TError> Map<TResult>(Func<T, Task<TResult>> selector) =>
-            TaskResultFunctions.Map(this, selector);
+            : ResultExtensions.Error<TResult, TError>(Either.Error);
 
         /// <summary>
         ///     Maps <typeparamref name="TError" />.
@@ -402,15 +309,11 @@ namespace Lemonad.ErrorHandling {
         ///     A <see cref="Result{T,TError}" />  with its <typeparamref name="TError" /> mapped.
         /// </returns>
         [Pure]
-        public Result<T, TErrorResult> MapError<TErrorResult>(Func<TError, TErrorResult> selector) => HasError
+        public Result<T, TErrorResult> MapError<TErrorResult>(Func<TError, TErrorResult> selector) => Either.HasError
             ? selector != null
-                ? ResultExtensions.Error<T, TErrorResult>(selector(Error))
+                ? ResultExtensions.Error<T, TErrorResult>(selector(Either.Error))
                 : throw new ArgumentNullException(nameof(selector))
-            : ResultExtensions.Ok<T, TErrorResult>(Value);
-
-        [Pure]
-        public Outcome<T, TErrorResult> MapError<TErrorResult>(Func<TError, Task<TErrorResult>> selector) =>
-            TaskResultFunctions.MapError(this, selector);
+            : ResultExtensions.Value<T, TErrorResult>(Either.Value);
 
         /// <summary>
         ///     Flatten another <see cref="Result{T,TError}" /> who shares the same <typeparamref name="TError" />.
@@ -424,17 +327,9 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         [Pure]
         public Result<TResult, TError> FlatMap<TResult>(
-            Func<T, Result<TResult, TError>> flatSelector) => HasValue
-            ? flatSelector?.Invoke(Value) ?? throw new ArgumentNullException(nameof(flatSelector))
-            : ResultExtensions.Error<TResult, TError>(Error);
-
-        [Pure]
-        public Outcome<TResult, TError> FlatMap<TResult>(Func<T, Task<Result<TResult, TError>>> flatSelector) =>
-            TaskResultFunctions.FlatMap(this, flatSelector);
-
-        [Pure]
-        public Outcome<TResult, TError> FlatMap<TResult>(Func<T, Outcome<TResult, TError>> flatSelector) =>
-            TaskResultFunctions.FlatMap(this, x => flatSelector(x).Result);
+            Func<T, Result<TResult, TError>> flatSelector) => Either.HasValue
+            ? flatSelector?.Invoke(Either.Value) ?? throw new ArgumentNullException(nameof(flatSelector))
+            : ResultExtensions.Error<TResult, TError>(Either.Error);
 
         /// <summary>
         ///     Flatten another <see cref="Result{T,TError}" /> who shares the same <typeparamref name="TError" />.
@@ -463,18 +358,6 @@ namespace Lemonad.ErrorHandling {
                 : resultSelector(x, y)) ??
             throw new ArgumentNullException(nameof(flatSelector)));
 
-        [Pure]
-        public Outcome<TResult, TError> FlatMap<TSelector, TResult>(
-            Func<T, Task<Result<TSelector, TError>>> flatSelector,
-            Func<T, TSelector, TResult> resultSelector) =>
-            TaskResultFunctions.FlatMap(this, flatSelector, resultSelector);
-
-        [Pure]
-        public Outcome<TResult, TError> FlatMap<TSelector, TResult>(
-            Func<T, Outcome<TSelector, TError>> flatSelector,
-            Func<T, TSelector, TResult> resultSelector) =>
-            TaskResultFunctions.FlatMap(this, x => flatSelector(x).Result, resultSelector);
-
         /// <summary>
         ///     Flatmaps another <see cref="Result{T,TError}" /> but the <typeparamref name="TError" /> remains as the same type.
         /// </summary>
@@ -491,32 +374,19 @@ namespace Lemonad.ErrorHandling {
         ///     The value type of the <see cref="Result{T,TError}" /> returned by the <paramref name="flatMapSelector" />.
         /// </typeparam>
         /// <exception cref="ArgumentNullException">
-        ///     When any of the function parameters are null and needs to be exectued.
+        ///     When any of the function parameters are null and needs to be executed.
         /// </exception>
         [Pure]
         public Result<TResult, TError> FlatMap<TResult, TErrorResult>(
             Func<T, Result<TResult, TErrorResult>> flatMapSelector, Func<TErrorResult, TError> errorSelector) {
-            if (HasValue) {
-                if (flatMapSelector == null) throw new ArgumentNullException(nameof(flatMapSelector));
-                var okSelector = flatMapSelector(Value);
+            if (Either.HasError) return ResultExtensions.Error<TResult, TError>(Either.Error);
+            if (flatMapSelector == null) throw new ArgumentNullException(nameof(flatMapSelector));
+            var okSelector = flatMapSelector(Either.Value);
 
-                return okSelector.HasValue
-                    ? ResultExtensions.Ok<TResult, TError>(okSelector.Value)
-                    : okSelector.MapError(errorSelector);
-            }
-
-            return ResultExtensions.Error<TResult, TError>(Error);
+            return okSelector.Either.HasValue
+                ? ResultExtensions.Value<TResult, TError>(okSelector.Either.Value)
+                : okSelector.MapError(errorSelector);
         }
-
-        [Pure]
-        public Outcome<TResult, TError> FlatMap<TResult, TErrorResult>(
-            Func<T, Task<Result<TResult, TErrorResult>>> flatMapSelector, Func<TErrorResult, TError> errorSelector) =>
-            TaskResultFunctions.FlatMap(this, flatMapSelector, errorSelector);
-
-        [Pure]
-        public Outcome<TResult, TError> FlatMap<TResult, TErrorResult>(
-            Func<T, Outcome<TResult, TErrorResult>> flatMapSelector, Func<TErrorResult, TError> errorSelector) =>
-            TaskResultFunctions.FlatMap(this, x => flatMapSelector(x).Result, errorSelector);
 
         /// <summary>
         ///     Flatmaps another <see cref="Result{T,TError}" /> but the <typeparamref name="TError" /> remains as the same type.
@@ -551,18 +421,6 @@ namespace Lemonad.ErrorHandling {
                 }) ?? throw new ArgumentNullException(nameof(flatMapSelector)),
                 errorSelector);
 
-        [Pure]
-        public Outcome<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, Task<Result<TFlatMap, TErrorResult>>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
-            Func<TErrorResult, TError> errorSelector) =>
-            TaskResultFunctions.FlatMap(this, flatMapSelector, resultSelector, errorSelector);
-
-        [Pure]
-        public Outcome<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, Outcome<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
-            Func<TErrorResult, TError> errorSelector) =>
-            TaskResultFunctions.FlatMap(this, x => flatMapSelector(x).Result, resultSelector, errorSelector);
-
         /// <summary>
         ///     Flatten another <see cref="Result{T,TError}" />.
         /// </summary>
@@ -582,36 +440,23 @@ namespace Lemonad.ErrorHandling {
         ///     The error of the <see cref="Result{T,TError}" /> returned by the function <paramref name="selector" />.
         /// </typeparam>
         /// <returns>
-        ///     The same <see cref="Result{T,TError}" /> but it's state is dependant on the <see cref="Result{T,TError}" />
+        ///     The same <see cref="Result{T,TError}" /> but it's state is dependent on the <see cref="Result{T,TError}" />
         ///     returned by the <paramref name="selector" />.
         /// </returns>
         /// <exception cref="ArgumentNullException">
-        ///     When any of the function parameters are null and needs to be exectued.
+        ///     When any of the function parameters are null and needs to be executed.
         /// </exception>
         [Pure]
         public Result<T, TError> Flatten<TResult, TErrorResult>(
             Func<T, Result<TResult, TErrorResult>> selector, Func<TErrorResult, TError> errorSelector) {
-            if (HasValue) {
-                if (selector == null) throw new ArgumentNullException(nameof(selector));
-                var okSelector = selector(Value);
-                if (okSelector.HasValue)
-                    return ResultExtensions.Ok<T, TError>(Value);
-                var tmpThis = this;
-                return okSelector.FullMap(x => tmpThis.Value, errorSelector);
-            }
-
-            return ResultExtensions.Error<T, TError>(Error);
+            if (Either.HasError) return ResultExtensions.Error<T, TError>(Either.Error);
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
+            var okSelector = selector(Either.Value);
+            if (okSelector.Either.HasValue)
+                return ResultExtensions.Value<T, TError>(Either.Value);
+            var tmpThis = this;
+            return okSelector.FullMap(x => tmpThis.Either.Value, errorSelector);
         }
-
-        [Pure]
-        public Outcome<T, TError> Flatten<TResult, TErrorResult>(
-            Func<T, Task<Result<TResult, TErrorResult>>> selector, Func<TErrorResult, TError> errorSelector) =>
-            TaskResultFunctions.Flatten(this, selector, errorSelector);
-
-        [Pure]
-        public Outcome<T, TError> Flatten<TResult, TErrorResult>(
-            Func<T, Outcome<TResult, TErrorResult>> selector, Func<TErrorResult, TError> errorSelector) =>
-            TaskResultFunctions.Flatten(this, x => selector(x).Result, errorSelector);
 
         /// <summary>
         ///     Flatten another <see cref="Result{T,TError}" />  who shares the same <typeparamref name="TError" />.
@@ -625,39 +470,28 @@ namespace Lemonad.ErrorHandling {
         /// <exception cref="ArgumentNullException"></exception>
         [Pure]
         public Result<T, TError> Flatten<TResult>(Func<T, Result<TResult, TError>> selector) {
-            if (HasValue) {
-                if (selector == null) throw new ArgumentNullException(nameof(selector));
-                var okSelector = selector(Value);
-                if (okSelector.HasValue)
-                    return Value;
-                return okSelector.Error;
-            }
-
-            return ResultExtensions.Error<T, TError>(Error);
+            if (Either.HasError) return ResultExtensions.Error<T, TError>(Either.Error);
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
+            var okSelector = selector(Either.Value);
+            if (okSelector.Either.HasValue)
+                return Either.Value;
+            return okSelector.Either.Error;
         }
-
-        [Pure]
-        public Outcome<T, TError> Flatten<TResult>(Func<T, Task<Result<TResult, TError>>> selector) =>
-            TaskResultFunctions.Flatten(this, selector);
-
-        [Pure]
-        public Outcome<T, TError> Flatten<TResult>(Func<T, Outcome<TResult, TError>> selector) =>
-            TaskResultFunctions.Flatten(this, x => selector(x).Result);
 
         /// <summary>
         ///     Executes each function and saves all potential errors to a list which will be the <typeparamref name="TError" />.
         /// </summary>
         /// <param name="validations">
-        ///     A <see cref="IReadOnlyList{T}" /> containining <typeparamref name="TError" />.
+        ///     A <see cref="IReadOnlyList{T}" /> containing <typeparamref name="TError" />.
         /// </param>
         public Result<T, IReadOnlyList<TError>> Multiple(
             params Func<Result<T, TError>, Result<T, TError>>[] validations) {
             var result = this;
-            var errors = validations.Select(x => x(result)).ToList().Errors().ToList();
+            var errors = validations.Select(x => x(result)).Errors().ToList();
             if (errors.Any())
                 return errors;
 
-            return Value;
+            return Either.Value;
         }
 
         /// <summary>
@@ -676,28 +510,19 @@ namespace Lemonad.ErrorHandling {
         ///     The value type of the <see cref="Result{T,TError}" /> returned by the <paramref name="flatMapSelector" />.
         /// </typeparam>
         /// <exception cref="ArgumentNullException">
-        ///     When any of the function parameters are null and needs to be exectued.
+        ///     When any of the function parameters are null and needs to be executed.
         /// </exception>
         [Pure]
         public Result<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
             Func<T, Result<TResult, TErrorResult>> flatMapSelector, Func<TError, TErrorResult> errorSelector) {
-            if (HasValue)
-                return flatMapSelector?.Invoke(Value) ?? throw new ArgumentNullException(nameof(flatMapSelector));
+            if (Either.HasValue)
+                return flatMapSelector?.Invoke(Either.Value) ??
+                       throw new ArgumentNullException(nameof(flatMapSelector));
 
             return errorSelector != null
-                ? errorSelector(Error)
+                ? errorSelector(Either.Error)
                 : throw new ArgumentNullException(nameof(errorSelector));
         }
-
-        [Pure]
-        public Outcome<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
-            Func<T, Task<Result<TResult, TErrorResult>>> flatMapSelector, Func<TError, TErrorResult> errorSelector) =>
-            TaskResultFunctions.FullFlatMap(this, flatMapSelector, errorSelector);
-
-        [Pure]
-        public Outcome<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
-            Func<T, Outcome<TResult, TErrorResult>> flatMapSelector, Func<TError, TErrorResult> errorSelector) =>
-            TaskResultFunctions.FullFlatMap(this, x => flatMapSelector(x).Result, errorSelector);
 
         /// <summary>
         ///     Casts <typeparamref name="TError" /> into <typeparamref name="TResult" />.
@@ -706,14 +531,13 @@ namespace Lemonad.ErrorHandling {
         ///     The type to <typeparamref name="TError" /> cast to.
         /// </typeparam>
         /// <returns>
-        ///     A <see cref="Result{T,TError}" /> whose <typeparamref name="TError" /> has been casted to
+        ///     A <see cref="Result{T,TError}" /> whose <typeparamref name="TError" /> has been cast to
         ///     <typeparamref name="TResult" />.
         /// </returns>
         [Pure]
-        public Result<T, TResult> CastError<TResult>() {
-            if (HasValue) return Value;
-            return (TResult) (object) Error;
-        }
+        public Result<T, TResult> CastError<TResult>() => Either.HasValue
+            ? (Result<T, TResult>) Either.Value
+            : (TResult) (object) Either.Error;
 
         /// <summary>
         ///     Casts both <typeparamref name="T" /> into <typeparamref name="TResult" /> and <typeparamref name="TError" /> into
@@ -726,9 +550,9 @@ namespace Lemonad.ErrorHandling {
         ///     The type to cast <typeparamref name="TErrorResult" /> into.
         /// </typeparam>
         [Pure]
-        public Result<TResult, TErrorResult> FullCast<TResult, TErrorResult>() => HasValue
-            ? ResultExtensions.Ok<TResult, TErrorResult>((TResult) (object) Value)
-            : ResultExtensions.Error<TResult, TErrorResult>((TErrorResult) (object) Error);
+        public Result<TResult, TErrorResult> FullCast<TResult, TErrorResult>() => Either.HasValue
+            ? ResultExtensions.Value<TResult, TErrorResult>((TResult) (object) Either.Value)
+            : ResultExtensions.Error<TResult, TErrorResult>((TErrorResult) (object) Either.Error);
 
         /// <summary>
         ///     Casts both <typeparamref name="T" /> into <typeparamref name="TResult" /> and <typeparamref name="TError" /> into
@@ -748,14 +572,13 @@ namespace Lemonad.ErrorHandling {
         ///     The type to cast to.
         /// </typeparam>
         /// <returns>
-        ///     A <see cref="Result{T,TError}" /> whose <typeparamref name="T" /> has been casted to
+        ///     A <see cref="Result{T,TError}" /> whose <typeparamref name="T" /> has been cast to
         ///     <typeparamref name="TResult" />.
         /// </returns>
         [Pure]
-        public Result<TResult, TError> Cast<TResult>() {
-            if (HasError) return Error;
-            return (TResult) (object) Value;
-        }
+        public Result<TResult, TError> Cast<TResult>() => Either.HasError
+            ? (Result<TResult, TError>) Either.Error
+            : (TResult) (object) Either.Value;
 
         /// <summary>
         ///     Attempts to cast <typeparamref name="T" /> into <typeparamref name="TResult" />.
@@ -767,16 +590,68 @@ namespace Lemonad.ErrorHandling {
         ///     The type to cast to.
         /// </typeparam>
         /// <returns>
-        ///     A <see cref="Result{T,TError}" /> whose <typeparamref name="T" /> has been casted to
+        ///     A <see cref="Result{T,TError}" /> whose <typeparamref name="T" /> has been cast to
         ///     <typeparamref name="TResult" />.
         /// </returns>
         [Pure]
         public Result<TResult, TError> SafeCast<TResult>(Func<TError> errorSelector) {
-            if (HasError) return Error;
-            if (Value is TResult result)
+            if (Either.HasError) return Either.Error;
+            if (Either.Value is TResult result)
                 return result;
 
-            return errorSelector();
+            return errorSelector != null ? errorSelector() : throw new ArgumentNullException(nameof(errorSelector));
+        }
+
+        /// <summary>
+        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
+        /// </summary>
+        /// <typeparam name="TInner"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="inner">The other <see cref="Result{T,TError}" />.</param>
+        /// <param name="outerKeySelector">The key selector for this <see cref="Result{T,TError}" />.</param>
+        /// <param name="innerKeySelector">The key selector for the other <see cref="Result{T,TError}" />.</param>
+        /// <param name="resultSelector">The selector to determine the returning <see cref="Result{T,TError}" />.</param>
+        /// <param name="errorSelector">Is invoked when keys do not match.</param>
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" />.
+        /// </returns>
+        public Result<TResult, TError> Join<TInner, TKey, TResult>(
+            Result<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector) => Join(inner, outerKeySelector,
+            innerKeySelector, resultSelector, errorSelector,
+            EqualityComparer<TKey>.Default);
+
+        /// <summary>
+        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
+        /// </summary>
+        /// <typeparam name="TInner"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="inner">The other <see cref="Result{T,TError}" />.</param>
+        /// <param name="outerKeySelector">The key selector for this <see cref="Result{T,TError}" />.</param>
+        /// <param name="innerKeySelector">The key selector for the other <see cref="Result{T,TError}" />.</param>
+        /// <param name="resultSelector">The selector to determine the returning <see cref="Result{T,TError}" />.</param>
+        /// <param name="errorSelector">Is invoked when keys do not match.</param>
+        /// <param name="comparer">The <see cref="IEqualityComparer{T}" /> to be used when matching keys.</param>
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" />.
+        /// </returns>
+        public Result<TResult, TError> Join<TInner, TKey, TResult>(
+            Result<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector, IEqualityComparer<TKey> comparer) {
+            if (Either.HasError) return Either.Error;
+            if (inner.Either.HasError) return inner.Either.Error;
+
+            foreach (var result in this.ToEnumerable().Join(
+                inner.ToEnumerable(),
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                comparer
+            )) return result;
+
+            return errorSelector != null ? errorSelector() : throw new ArgumentNullException(nameof(errorSelector));
         }
 
         /// <summary>
@@ -813,17 +688,23 @@ namespace Lemonad.ErrorHandling {
                 }) ?? throw new ArgumentNullException(nameof(flatMapSelector)),
                 errorSelector);
 
+        /// <summary>
+        ///     Merges two <see cref="Result{T,TError}" /> together to create a new <see cref="Result{T,TError}" />.
+        /// </summary>
+        /// <param name="other">
+        ///     The other <see cref="Result{T,TError}" />.
+        /// </param>
+        /// <param name="resultSelector">
+        ///     The selector which will determine the type of the returning <see cref="Result{T,TError}" />.
+        /// </param>
+        /// <typeparam name="TOther">The type of the other <see cref="Result{T,TError}" />.</typeparam>
+        /// <typeparam name="TResult">The type of the returning <see cref="Result{T,TError}" />.</typeparam>
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" /> whose value is the result for merging two <see cref="Result{T,TError}" />
+        ///     together.
+        /// </returns>
         [Pure]
-        public Outcome<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, Task<Result<TFlatMap, TErrorResult>>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
-            Func<TError, TErrorResult> errorSelector) =>
-            TaskResultFunctions.FullFlatMap(this, flatMapSelector, resultSelector, errorSelector);
-
-        [Pure]
-        public Outcome<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, Outcome<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
-            Func<TError, TErrorResult> errorSelector) =>
-            TaskResultFunctions.FullFlatMap(this, x => flatMapSelector(x).Result, resultSelector,
-                errorSelector);
+        public Result<TResult, TError> Zip<TOther, TResult>(Result<TOther, TError> other,
+            Func<T, TOther, TResult> resultSelector) => FlatMap(_ => other, resultSelector);
     }
 }

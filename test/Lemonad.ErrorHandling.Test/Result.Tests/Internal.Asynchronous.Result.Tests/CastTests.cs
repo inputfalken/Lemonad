@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lemonad.ErrorHandling.Extensions.Internal;
+using Lemonad.ErrorHandling.Internal;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.Tests {
@@ -11,10 +11,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
             var exception = await Record.ExceptionAsync(async () => {
                 var result = TaskResultFunctions.Cast<AssertionUtilities.Gender, int, string>(genderResult);
                 var castResult = await result;
-                Assert.False(castResult.HasValue, "Casted Result not should have value.");
-                Assert.True(castResult.HasError, "Casted Result should have error.");
-                Assert.Equal(default, castResult.Value);
-                Assert.Equal("Could not determine gender", castResult.Error);
+                Assert.False(castResult.Either.HasValue, "Casted Result not should have value.");
+                Assert.True(castResult.Either.HasError, "Casted Result should have error.");
+                Assert.Equal(default, castResult.Either.Value);
+                Assert.Equal("Could not determine gender", castResult.Either.Error);
             });
 
             Assert.Null(exception);
@@ -26,10 +26,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
 
             var castResult = await TaskResultFunctions.Cast<AssertionUtilities.Gender, int, string>(genderResult);
 
-            Assert.False(castResult.HasValue, "Casted Result not should have value.");
-            Assert.True(castResult.HasError, "Casted Result should have error.");
-            Assert.Equal(default, castResult.Value);
-            Assert.Equal("Could not determine gender", castResult.Error);
+            Assert.False(castResult.Either.HasValue, "Casted Result not should have value.");
+            Assert.True(castResult.Either.HasError, "Casted Result should have error.");
+            Assert.Equal(default, castResult.Either.Value);
+            Assert.Equal("Could not determine gender", castResult.Either.Error);
         }
 
         [Fact]
@@ -43,10 +43,10 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests.Internal.Asynchronous.Result.T
 
             var castResult = await TaskResultFunctions.Cast<AssertionUtilities.Gender, int, string>(genderResult);
 
-            Assert.True(castResult.HasValue, "Casted Result should have value.");
-            Assert.False(castResult.HasError, "Casted Result should not have error.");
-            Assert.Equal(1, castResult.Value);
-            Assert.Equal(default, castResult.Error);
+            Assert.True(castResult.Either.HasValue, "Casted Result should have value.");
+            Assert.False(castResult.Either.HasError, "Casted Result should not have error.");
+            Assert.Equal(1, castResult.Either.Value);
+            Assert.Equal(default, castResult.Either.Error);
         }
     }
 }

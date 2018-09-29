@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using Lemonad.ErrorHandling.Extensions;
 
 namespace Lemonad.ErrorHandling {
     /// <summary>
@@ -11,33 +9,43 @@ namespace Lemonad.ErrorHandling {
     ///     The potential value.
     /// </typeparam>
     public readonly struct Maybe<T> : IEquatable<Maybe<T>>, IComparable<Maybe<T>> {
-        public static Maybe<T> None { get; } = new Maybe<T>(new Result<T, Unit>(default, Unit.Default, true, false));
-
-        /// <summary>
-        ///     Is true if there's a <typeparamref name="T" /> in the current state of the <see cref="Maybe{T}" />.
-        /// </summary>
-        public bool HasValue { get; }
-
+        public static Maybe<T> None { get; } = new Maybe<T>(ResultExtensions.Error<T, Unit>(default));
         private readonly Result<T, Unit> _result;
 
         /// <summary>
-        ///     Treat <typeparamref name="T" /> as enumerable with 0-1 elements in.
-        ///     This is handy when combining <see cref="Result{T,TError}" /> with LINQ's API.
+        ///     Gets a value indicating whether the current <see cref="Maybe{T}" /> object has a valid value of
+        ///     its underlying type.
         /// </summary>
-        public IEnumerable<T> AsEnumerable => _result.AsEnumerable;
+        /// <returns>
+        ///     true if the current <see cref="Maybe{T}"></see> object has a value; false if the current
+        ///     <see cref="Maybe{T}"></see> object has no value.
+        /// </returns>
+        public bool HasValue { get; }
 
-        internal T Value { get; }
+        /// <summary>
+        ///     Gets the value of the current <see cref="Maybe{T}"></see> object if <see cref="HasValue" /> is true.
+        /// </summary>
+        /// <example>
+        ///     <code language="c#">
+        ///  if (Either.HasValue)
+        ///  {
+        ///      // Safe to use.
+        ///      Console.WriteLine(Either.Value)
+        ///  }
+        ///  </code>
+        /// </example>
+        public T Value { get; }
 
-        internal Maybe(Result<T, Unit> result) {
-            HasValue = result.HasValue;
-            Value = result.Value;
+        private Maybe(Result<T, Unit> result) {
+            HasValue = result.Either.HasValue;
+            Value = result.Either.Value;
             _result = result;
         }
 
         /// <inheritdoc />
         public bool Equals(Maybe<T> other) => other._result.Equals(_result);
 
-        public static implicit operator Maybe<T>(T item) => item.Some();
+        public static implicit operator Maybe<T>(T item) => new Maybe<T>(ResultExtensions.Value<T, Unit>(item));
 
         public override bool Equals(object obj) => obj is Maybe<T> maybe && Equals(maybe);
 
@@ -49,7 +57,7 @@ namespace Lemonad.ErrorHandling {
         public override int GetHashCode() => _result.GetHashCode();
 
         /// <inheritdoc />
-        public int CompareTo(Maybe<T> other) => other._result.CompareTo(other._result);
+        public int CompareTo(Maybe<T> other) => _result.CompareTo(other._result);
 
         public static bool operator <(Maybe<T> left, Maybe<T> right) => left.CompareTo(right) < 0;
 
@@ -62,7 +70,6 @@ namespace Lemonad.ErrorHandling {
         /// <inheritdoc />
         public override string ToString() =>
             $"{(HasValue ? "Some" : "None")} ==> {typeof(Maybe<T>).ToHumanString()}{StringFunctions.PrettyTypeString(Value)}";
-
 
         /// <summary>
         ///     Evaluates the <see cref="Maybe{T}" />.
@@ -82,6 +89,10 @@ namespace Lemonad.ErrorHandling {
             noneAction();
         });
 
+        public Maybe<T> DoWith(Action<T> someAction) => new Maybe<T>(_result.DoWith(someAction));
+
+        public Maybe<T> Do(Action action) => new Maybe<T>(_result.Do(action));
+
         /// <summary>
         ///     Evaluates the <see cref="Maybe{T}" />.
         /// </summary>
@@ -96,12 +107,10 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         [Pure]
         public TResult Match<TResult>(Func<T, TResult> someSelector, Func<TResult> noneSelector) =>
-            _result.Match(someSelector, _ => {
-                if (noneSelector == null)
-                    throw new ArgumentNullException(nameof(noneSelector));
-
-                return noneSelector();
-            });
+            _result.Match(someSelector, _ => noneSelector == null
+                ? throw new ArgumentNullException(nameof(noneSelector))
+                : noneSelector()
+            );
 
         /// <summary>
         ///     Maps <typeparamref name="T" />.
@@ -123,10 +132,10 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         [Pure]
-        public Maybe<T> Filter(Func<T, bool> predicate) => new Maybe<T>(_result.Filter(predicate, Unit.Selector));
+        public Maybe<T> Filter(Func<T, bool> predicate) => new Maybe<T>(_result.Filter(predicate, x => Unit.Default));
 
         /// <summary>
-        ///     Flamaps another <see cref="Maybe{T}" />.
+        ///     Flatmaps another <see cref="Maybe{T}" />.
         /// </summary>
         /// <param name="flatMapSelector">
         ///     A function who expects a <see cref="Maybe{T}" /> as its return type.
@@ -139,10 +148,10 @@ namespace Lemonad.ErrorHandling {
             new Maybe<TResult>(_result.FlatMap(x => {
                 if (flatMapSelector == null) throw new ArgumentNullException(nameof(flatMapSelector));
                 return flatMapSelector(x)._result;
-            }, x => x));
+            }, Unit.AlternativeSelector));
 
         /// <summary>
-        ///     Flamaps another <see cref="Maybe{T}" />.
+        ///     Flatmaps another <see cref="Maybe{T}" />.
         /// </summary>
         /// <param name="flatMapSelector">
         ///     A function who expects a <see cref="Maybe{T}" /> as its return type.
@@ -168,7 +177,7 @@ namespace Lemonad.ErrorHandling {
             }, resultSelector));
 
         /// <summary>
-        ///     Flamaps a <see cref="Nullable{T}" />.
+        ///     Flatmaps a <see cref="Nullable{T}" />.
         /// </summary>
         /// <param name="flatSelector">
         ///     A function who expects a <see cref="Nullable{T}" /> as its return type.
@@ -177,9 +186,8 @@ namespace Lemonad.ErrorHandling {
         ///     The type <typeparamref name="T" /> returned from the <paramref name="flatSelector" /> function.
         /// </typeparam>
         [Pure]
-        public Maybe<TResult> FlatMap<TResult>(
-            Func<T, TResult?> flatSelector) where TResult : struct =>
-            HasValue ? flatSelector(Value).ToMaybe() : Maybe<TResult>.None;
+        public Maybe<TResult> FlatMap<TResult>(Func<T, TResult?> flatSelector) where TResult : struct =>
+            new Maybe<TResult>(_result.FlatMap(x => flatSelector(x).ToResult(_ => Unit.Default)));
 
         /// <summary>
         ///     Filters the <see cref="Maybe{T}" /> to see if <typeparamref name="T" /> is null.
@@ -188,7 +196,7 @@ namespace Lemonad.ErrorHandling {
         ///     A <see cref="Maybe{T}" /> whose <typeparamref name="T" /> has value if <typeparamref name="T" /> is not null.
         /// </returns>
         [Pure]
-        public Maybe<T> IsNoneWhenNull() => new Maybe<T>(_result.IsErrorWhenNull(() => Unit.Default));
+        public Maybe<T> IsNoneWhenNull() => new Maybe<T>(_result.IsErrorWhenNull(maybe => default));
 
         /// <summary>
         ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
@@ -197,10 +205,19 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         [Pure]
-        public Maybe<T> IsNoneWhen(Func<T, bool> predicate) => new Maybe<T>(_result.Filter(predicate, Unit.Selector));
+        public Maybe<T> IsNoneWhen(Func<T, bool> predicate) =>
+            new Maybe<T>(_result.IsErrorWhen(predicate, maybe => default));
+
+        [Pure]
+        public Maybe<T> Flatten<TResult>(Func<T, Maybe<TResult>> selector) => new Maybe<T>(
+            _result.Flatten(
+                x => selector?.Invoke(x)._result ?? throw new ArgumentNullException(nameof(selector)),
+                Unit.AlternativeSelector
+            )
+        );
 
         /// <summary>
-        ///     Flamaps another <see cref="Maybe{T}" />.
+        ///     Flatmaps another <see cref="Maybe{T}" />.
         /// </summary>
         /// <param name="flatMapSelector">
         ///     A function who expects a <see cref="Nullable{T}" /> as its return type.
@@ -218,7 +235,7 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public Maybe<TResult> FlatMap<TFlatMap, TResult>(
             Func<T, TFlatMap?> flatMapSelector,
-            Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct => FlatMap(
-            src => flatMapSelector(src).ToMaybe().Map(elem => resultSelector(src, elem)));
+            Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct =>
+            new Maybe<TResult>(_result.FlatMap(x => flatMapSelector(x).ToResult(_ => Unit.Default), resultSelector));
     }
 }

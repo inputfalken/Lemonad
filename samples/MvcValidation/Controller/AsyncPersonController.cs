@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
-using Lemonad.ErrorHandling.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using MvcValidation.ApiModels;
 using MvcValidation.Models;
@@ -10,10 +9,10 @@ namespace MvcValidation.Controller {
     public class AsyncPersonController : Microsoft.AspNetCore.Mvc.Controller {
         private static Result<PersonPostApiModel, PersonPostApiError> ApiValidation(PersonPostApiModel model) {
             var apiValidation = model
-                .ToResult<PersonPostApiModel, PersonPostApiError>()
+                .ToResult(x => true, x => default(PersonPostApiError))
                 .Multiple(
                     x => x.Filter(y => y.Age > 10,
-                        () => new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
+                        y=> new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
                     x => x.Flatten(y => ValidateName(y.FirstName),
                         s => new PersonPostApiError {Message = s, Model = model}),
                     x => x.Flatten(y => ValidateName(y.LastName),
@@ -46,20 +45,22 @@ namespace MvcValidation.Controller {
         [HttpPost]
         [Route("eitherSummarized")]
         public Task<IActionResult> PostPerson([FromBody] PersonPostApiModel model) {
-            var lastNameAppService = LastNameAppService(new PersonModel()).AsOutcome();
             return ApiValidation(model)
                 // Using match inside this scope is currently too complex since it requires all type params to be supplied.
                 .Map(x => new PersonModel {FirstName = x.FirstName, LastName = x.LastName})
-                .Flatten(LastNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
-                .FlatMap(FirstNameAppService, x => new PersonPostApiError {Message = x.Message, Model = model})
+                .ToAsyncResult()
+                .Flatten(x => LastNameAppService(x).ToAsyncResult(),
+                    x => new PersonPostApiError {Message = x.Message, Model = model})
+                .FlatMap(x => FirstNameAppService(x).ToAsyncResult(),
+                    x => new PersonPostApiError {Message = x.Message, Model = model})
                 .Match<IActionResult>(Ok, BadRequest);
         }
 
         private static Result<string, string> ValidateName(string name) {
-            return name.ToResult<string, string>()
-                .IsErrorWhen(x => string.IsNullOrWhiteSpace(x), () => "Name cannot be empty.")
-                .Filter(s => s.All(char.IsLetter), () => "Name can only contain letters.")
-                .Filter(s => char.IsUpper(s[0]), () => "Name must start with capital letter.");
+            return name
+                .ToResult(x => string.IsNullOrWhiteSpace(x) == false, x => "Name cannot be empty.")
+                .Filter(s => s.All(char.IsLetter), y => "Name can only contain letters.")
+                .Filter(s => char.IsUpper(s[0]), y => "Name must start with capital letter.");
         }
     }
 }
