@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     public class NoneWhenNull {
@@ -41,10 +42,12 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Maybe_Overload__With_Some_Null_string() {
-            string str = null;
-            var maybe = str.ToMaybe().IsNoneWhenNull();
-            Assert.False(maybe.HasValue, "Maybe not should have a value, since the string is null.");
-            Assert.Equal(default, maybe.Value);
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.EitherValueName, () => {
+                string str = null;
+                var maybe = str.ToMaybe().IsNoneWhenNull();
+                Assert.False(maybe.HasValue, "Maybe not should have a value, since the string is null.");
+                Assert.Equal(default, maybe.Value);
+            });
         }
 
         [Fact]
@@ -56,10 +59,12 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Null_string() {
-            string str = null;
-            var maybe = str.ToMaybe().IsNoneWhenNull();
-            Assert.False(maybe.HasValue, "Maybe not should have a value, since the string is null.");
-            Assert.Equal(default, maybe.Value);
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.EitherValueName, () => {
+                string str = null;
+                var maybe = str.ToMaybe().IsNoneWhenNull();
+                Assert.False(maybe.HasValue, "Maybe not should have a value, since the string is null.");
+                Assert.Equal(default, maybe.Value);
+            });
         }
 
         [Fact]

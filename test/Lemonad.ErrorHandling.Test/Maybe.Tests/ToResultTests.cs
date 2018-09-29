@@ -17,7 +17,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void
             Convert_Maybe_Int_Whose_Property_HasValue_Is_False_Pass_Null_error_Selector__Expects_ArgumentNullException_Thrown_Thrown() {
             Assert.Throws<ArgumentNullException>(() => {
-                Func<Maybe<int>,int> x = null;
+                Func<Maybe<int>, int> x = null;
                 2.ToMaybeNone().ToResult(x);
             });
         }
@@ -36,7 +36,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void
             Convert_Maybe_Int_Whose_Property_HasValue_Is_True_Pass_Null_error_Selector__Expects_No_ArgumentNullException_Thrown() {
             var exception = Record.Exception(() => {
-                Func<Maybe<int>,int> errorSelector = null;
+                Func<Maybe<int>, int> errorSelector = null;
                 var result = 2.ToMaybe().ToResult(errorSelector);
                 Assert.True(result.Either.HasValue, "Result should have value.");
                 Assert.Equal(2, result.Either.Value);
@@ -66,11 +66,13 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Convert_Maybe_String_With_Null_Whose_Property_HasValue_Is_False__Expects_Result_With_error_Value() {
-            string str = null;
-            var result = 2.ToMaybeNone().ToResult(x => str);
-            Assert.False(result.Either.HasValue, "Result should have error.");
-            Assert.True(result.Either.HasError, "Result should have a error value.");
-            Assert.Null(result.Either.Error);
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.EitherErrorName,() => {
+                string str = null;
+                var result = 2.ToMaybeNone().ToResult(x => str);
+                Assert.False(result.Either.HasValue, "Result should have error.");
+                Assert.True(result.Either.HasError, "Result should have a error value.");
+                Assert.Null(result.Either.Error);
+            });
         }
 
         [Fact]

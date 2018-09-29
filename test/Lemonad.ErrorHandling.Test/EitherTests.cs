@@ -30,13 +30,16 @@ namespace Lemonad.ErrorHandling.Test {
         /// </summary>
         [Fact]
         public void String_Int_Either_With_Null_Error() {
-            var value = "foo";
-            int? error = null;
-            var either = new Either<string, int?>(value: in value, error: in error, hasError: true, hasValue: false);
-            Assert.Equal("foo", either.Value);
-            Assert.Null(either.Error);
-            Assert.NotEqual(either.HasError, either.HasValue);
-            Assert.True(either.HasError);
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.EitherErrorName, () => {
+                var value = "foo";
+                int? error = null;
+                var either =
+                    new Either<string, int?>(value: in value, error: in error, hasError: true, hasValue: false);
+                Assert.Equal("foo", either.Value);
+                Assert.Null(either.Error);
+                Assert.NotEqual(either.HasError, either.HasValue);
+                Assert.True(either.HasError);
+            });
         }
 
         /// <summary>

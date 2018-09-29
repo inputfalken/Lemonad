@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace Lemonad.ErrorHandling {
     /// <summary>
@@ -75,10 +76,33 @@ namespace Lemonad.ErrorHandling {
                     $"Can never have the same value {nameof(hasError)} ({hasError}) and {nameof(hasValue)} ({hasValue})."
                 );
 
-            HasValue = hasValue;
-            HasError = hasError;
             Value = value;
             Error = error;
+            var valueIsNull = Value.IsNull();
+            var errorIsNull = Error.IsNull();
+
+            // Verify that the active value can never be null.
+            if (valueIsNull && hasValue) {
+                var msg = new StringBuilder()
+                    .Append($"{nameof(Either<T, TError>)} property ")
+                    .Append($"\"{nameof(Value)}\"")
+                    .Append(" cannot be null.")
+                    .ToString();
+                throw new ArgumentNullException(nameof(Value),msg);
+            }
+
+            // Verify that the active value can never be null.
+            if (errorIsNull && hasError) {
+                var msg = new StringBuilder()
+                    .Append($"{nameof(Either<T, TError>)} property ")
+                    .Append($"\"{nameof(Error)}\"")
+                    .Append(" cannot be null.")
+                    .ToString();
+                throw new ArgumentNullException(nameof(Error), msg);
+            }
+
+            HasValue = hasValue;
+            HasError = hasError;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class ToResultOkTests {
@@ -14,12 +15,14 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
         [Fact]
         public void Convert_Null_String_To_ResultOk() {
-            string str = null;
-            var result = str.ToResult(x => true, x => "");
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.EitherValueName, () => {
+                string str = null;
+                var result = str.ToResult(x => true, x => "");
 
-            Assert.True(result.Either.HasValue, "Result should have value.");
-            Assert.False(result.Either.HasError, "Result should not have a error value.");
-            Assert.Null(result.Either.Value);
+                Assert.True(result.Either.HasValue, "Result should have value.");
+                Assert.False(result.Either.HasError, "Result should not have a error value.");
+                Assert.Null(result.Either.Value);
+            });
         }
 
         [Fact]

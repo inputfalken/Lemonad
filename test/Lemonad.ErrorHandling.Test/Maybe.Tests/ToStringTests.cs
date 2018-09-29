@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     /// <summary>
@@ -66,10 +67,12 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Some_Maybe_String_With_Null_String__Expects_String_To_Be_Empty() {
-            string hello = null;
-            var maybe = hello.ToMaybe();
-            Assert.True(maybe.HasValue, "Should have value.");
-            Assert.Equal("Some ==> Maybe<String>(null)", maybe.ToString());
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.EitherValueName, () => {
+                string hello = null;
+                var maybe = hello.ToMaybe();
+                Assert.True(maybe.HasValue, "Should have value.");
+                Assert.Equal("Some ==> Maybe<String>(null)", maybe.ToString());
+            });
         }
 
         [Fact]

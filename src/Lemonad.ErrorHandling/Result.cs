@@ -11,7 +11,7 @@ namespace Lemonad.ErrorHandling {
     ///     Inspired by 'Haskell's Either a b' and FSharps 'Result&lt;T, TError&gt;'.
     ///     <para></para>
     ///     <para></para>
-    ///     Null values are allowed and therefore should be checked if necessary.
+    ///     Null values are not allowed and therefore excessively be checked before beginning an <see cref="Result{T,TError}"/> expression chain.
     /// </summary>
     /// <typeparam name="T">
     ///     The type which is considered as successful.
