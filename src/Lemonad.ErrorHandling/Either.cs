@@ -73,7 +73,7 @@ namespace Lemonad.ErrorHandling {
         public Either(in T value, in TError error, bool hasError, bool hasValue) {
             if (hasError == hasValue)
                 throw new ArgumentException(
-                    $"Can never have the same value {nameof(hasError)} ({hasError}) and {nameof(hasValue)} ({hasValue})."
+                    $"{nameof(Either<T, TError>)} properties \"{nameof(HasError)}\": {hasError} and \"{nameof(HasValue)}\": ({hasValue}), can not both be {hasValue}."
                 );
 
             Value = value;
@@ -82,24 +82,18 @@ namespace Lemonad.ErrorHandling {
             var errorIsNull = Error.IsNull();
 
             // Verify that the active value can never be null.
-            if (valueIsNull && hasValue) {
-                var msg = new StringBuilder()
-                    .Append($"{nameof(Either<T, TError>)} property ")
-                    .Append($"\"{nameof(Value)}\"")
-                    .Append(" cannot be null.")
-                    .ToString();
-                throw new ArgumentNullException(nameof(Value),msg);
-            }
+            if (valueIsNull && hasValue)
+                throw new ArgumentNullException(
+                    nameof(Value),
+                    $"{nameof(Either<T, TError>)} property \"{nameof(Value)}\" cannot be null."
+                );
 
             // Verify that the active value can never be null.
-            if (errorIsNull && hasError) {
-                var msg = new StringBuilder()
-                    .Append($"{nameof(Either<T, TError>)} property ")
-                    .Append($"\"{nameof(Error)}\"")
-                    .Append(" cannot be null.")
-                    .ToString();
-                throw new ArgumentNullException(nameof(Error), msg);
-            }
+            if (errorIsNull && hasError)
+                throw new ArgumentNullException(
+                    nameof(Error),
+                    $"{nameof(Either<T, TError>)} property \"{nameof(Error)}\" cannot be null."
+                );
 
             HasValue = hasValue;
             HasError = hasError;
