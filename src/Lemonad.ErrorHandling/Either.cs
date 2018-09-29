@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 
 namespace Lemonad.ErrorHandling {
     /// <summary>
@@ -70,7 +69,28 @@ namespace Lemonad.ErrorHandling {
         /// </example>
         public T Value { get; }
 
-        public Either(in T value, in TError error, bool hasError, bool hasValue) {
+        /// <summary>
+        ///  Only one one <typeparamref name="T"/> and <typeparamref name="TError"/> can be available to use./
+        /// </summary>
+        /// <param name="value">
+        /// The potential value.
+        /// </param>
+        /// <param name="error">
+        /// The potential error.
+        /// </param>
+        /// <param name="hasError">
+        /// Is true when <paramref name="error"/> is available.
+        /// </param>
+        /// <param name="hasValue">
+        /// Is true when <paramref name="value"/> is available.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// When <see cref="HasValue"/> and <see cref="HasError"/>  are both either false or true.
+        /// </exception>
+        /// <exception cref="ArgumentNullException">
+        /// When either <see cref="Value"/> or <see cref="Error"/> is null at the same the corresponding <see cref="Boolean"/> value check is true.
+        /// </exception>
+        internal Either(in T value, in TError error, bool hasError, bool hasValue) {
             if (hasError == hasValue)
                 throw new ArgumentException(
                     $"{nameof(Either<T, TError>)} properties \"{nameof(HasError)}\": {hasError} and \"{nameof(HasValue)}\": ({hasValue}), can not both be {hasValue}."
