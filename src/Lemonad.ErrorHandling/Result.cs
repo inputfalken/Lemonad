@@ -224,9 +224,9 @@ namespace Lemonad.ErrorHandling {
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
             if (predicate(Either.Value)) return this;
-            return errorSelector == null
-                ? throw new ArgumentNullException(nameof(errorSelector))
-                : errorSelector(Either.Value.ToMaybe().IsNoneWhen(x => x.IsNull()));
+            if (errorSelector == null)
+                throw new ArgumentNullException(nameof(errorSelector));
+            return errorSelector(ResultExtensions.NullCheckedMaybe(Either.Value));
         }
 
         [Pure]

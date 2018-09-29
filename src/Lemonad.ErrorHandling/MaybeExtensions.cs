@@ -107,8 +107,6 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static Maybe<TSource> ToMaybe<TSource>(this TSource item) => item;
 
-        internal static Maybe<TSource> ToNullCheckedMaybe<TSource>(this TSource item) => ToMaybe(item).IsNoneWhenNull();
-
         /// <summary>
         ///     Works like <see cref="ToMaybe{TSource}(TSource)" /> but with an <paramref name="predicate" /> to test the element.
         /// </summary>
@@ -204,7 +202,9 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static Result<T, TError>
             ToResult<T, TError>(this Maybe<T> source, Func<Maybe<T>, TError> errorSelector) =>
-            source.ToResult(x => x.HasValue, x => errorSelector(x.FlatMap(y => y))).Map(x => x.Value);
+            source.ToResult(x => x.HasValue, x => errorSelector == null
+                ? throw new ArgumentNullException(nameof(errorSelector))
+                : errorSelector(x.FlatMap(y => y))).Map(x => x.Value);
 
         /// <summary>
         ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="Maybe{T}" /> into an <see cref="IEnumerable{T}" /> with the
