@@ -144,8 +144,8 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public static AsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T> source, Func<T, bool> predicate,
-            Func<Maybe<T>, TError> errorSelector) {
-            async Task<Result<T, TError>> Factory(Task<T> x, Func<T, bool> y, Func<Maybe<T>, TError> z) =>
+            Func<T, TError> errorSelector) {
+            async Task<Result<T, TError>> Factory(Task<T> x, Func<T, bool> y, Func<T, TError> z) =>
                 (await x.ConfigureAwait(false)).ToResult(y, z);
 
             return Factory(source, predicate, errorSelector);
@@ -153,9 +153,9 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public static AsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T?> source,
-            Func<Maybe<T>, TError> errorSelector)
+            Func<TError> errorSelector)
             where T : struct {
-            async Task<Result<T, TError>> Factory(Task<T?> x, Func<Maybe<T>, TError> y) =>
+            async Task<Result<T, TError>> Factory(Task<T?> x, Func<TError> y) =>
                 (await x.ConfigureAwait(false)).ToResult(y);
 
             return Factory(source, errorSelector);
@@ -163,8 +163,8 @@ namespace Lemonad.ErrorHandling {
 
         public static AsyncResult<T, TError> ToAsyncResultError<T, TError>(this Task<TError> source,
             Func<TError, bool> predicate,
-            Func<Maybe<TError>, T> valueSelector) {
-            async Task<Result<T, TError>> Factory(Task<TError> x, Func<TError, bool> y, Func<Maybe<TError>, T> z) =>
+            Func<TError, T> valueSelector) {
+            async Task<Result<T, TError>> Factory(Task<TError> x, Func<TError, bool> y, Func<TError, T> z) =>
                 (await x.ConfigureAwait(false)).ToResultError(y, z);
 
             return Factory(source, predicate, valueSelector);
@@ -227,12 +227,12 @@ namespace Lemonad.ErrorHandling {
         ///     The type returned by the <paramref name="errorSelector" /> function.
         /// </typeparam>
         [Pure]
-        public static Result<T, TError> ToResult<T, TError>(this T? source, Func<Maybe<T>, TError> errorSelector)
+        public static Result<T, TError> ToResult<T, TError>(this T? source, Func<TError> errorSelector)
             where T : struct =>
             // ReSharper disable once PossibleInvalidOperationException
             source.ToResult(x => x.HasValue, x => errorSelector == null
                     ? throw new ArgumentNullException(nameof(errorSelector))
-                    : errorSelector(x.HasValue ? x.Value.ToMaybe() : Maybe<T>.None))
+                    : errorSelector())
                 .Map(x => x.Value);
 
         /// <summary>
@@ -257,13 +257,13 @@ namespace Lemonad.ErrorHandling {
         /// <returns></returns>
         [Pure]
         public static Result<T, TError> ToResult<T, TError>(this T source, Func<T, bool> predicate,
-            Func<Maybe<T>, TError> errorSelector) {
+            Func<T, TError> errorSelector) {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             return predicate(source)
                 ? Value<T, TError>(source)
                 : errorSelector == null
                     ? throw new ArgumentNullException(nameof(errorSelector))
-                    : errorSelector(NullCheckedMaybe(source));
+                    : errorSelector(source);
         }
 
         /// <summary>
@@ -287,13 +287,13 @@ namespace Lemonad.ErrorHandling {
         /// </param>
         public static Result<T, TError> ToResultError<T, TError>(this TError source,
             Func<TError, bool> predicate,
-            Func<Maybe<TError>, T> valueSelector) {
+            Func<TError, T> valueSelector) {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             return predicate(source)
                 ? (Result<T, TError>) source
                 : valueSelector == null
                     ? throw new ArgumentNullException(nameof(valueSelector))
-                    : valueSelector(NullCheckedMaybe(source));
+                    : valueSelector(source);
         }
 
         /// <summary>

@@ -201,10 +201,10 @@ namespace Lemonad.ErrorHandling {
         /// <returns></returns>
         [Pure]
         public static Result<T, TError>
-            ToResult<T, TError>(this Maybe<T> source, Func<Maybe<T>, TError> errorSelector) =>
+            ToResult<T, TError>(this Maybe<T> source, Func<TError> errorSelector) =>
             source.ToResult(x => x.HasValue, x => errorSelector == null
                 ? throw new ArgumentNullException(nameof(errorSelector))
-                : errorSelector(x.FlatMap(y => y))).Map(x => x.Value);
+                : errorSelector()).Map(x => x.Value);
 
         /// <summary>
         ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="Maybe{T}" /> into an <see cref="IEnumerable{T}" /> with the
