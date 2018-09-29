@@ -263,7 +263,7 @@ namespace Lemonad.ErrorHandling {
                 ? Value<T, TError>(source)
                 : errorSelector == null
                     ? throw new ArgumentNullException(nameof(errorSelector))
-                    : errorSelector(source);
+                    : Error<T, TError>(errorSelector(source));
         }
 
         /// <summary>
@@ -290,10 +290,10 @@ namespace Lemonad.ErrorHandling {
             Func<TError, T> valueSelector) {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             return predicate(source)
-                ? (Result<T, TError>) source
+                ? Error<T, TError>(source)
                 : valueSelector == null
                     ? throw new ArgumentNullException(nameof(valueSelector))
-                    : valueSelector(source);
+                    : Value<T, TError>(valueSelector(source));
         }
 
         /// <summary>

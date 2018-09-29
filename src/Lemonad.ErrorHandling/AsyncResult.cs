@@ -37,8 +37,11 @@ namespace Lemonad.ErrorHandling {
             Func<T, TOther, TResult> resultSelector) =>
             TaskResultFunctions.Zip(TaskResult, other.TaskResult, resultSelector);
 
-        private static async Task<Result<T, TError>> Factory(Task<T> foo) => await foo.ConfigureAwait(false);
-        private static async Task<Result<T, TError>> ErrorFactory(Task<TError> foo) => await foo.ConfigureAwait(false);
+        private static async Task<Result<T, TError>> Factory(Task<T> foo) =>
+            ResultExtensions.Value<T, TError>(await foo.ConfigureAwait(false));
+
+        private static async Task<Result<T, TError>> ErrorFactory(Task<TError> foo) =>
+            ResultExtensions.Error<T, TError>(await foo.ConfigureAwait(false));
 
         public static implicit operator AsyncResult<T, TError>(Task<T> value) => Factory(value);
 
@@ -47,11 +50,9 @@ namespace Lemonad.ErrorHandling {
         public static implicit operator AsyncResult<T, TError>(TError error) =>
             new AsyncResult<T, TError>(Task.FromResult(ResultExtensions.Error<T, TError>(error)));
 
-
         /// <inheritdoc cref="Result{T,TError}.Filter(System.Func{T,bool},System.Func{Maybe{T},TError})" />
         public AsyncResult<T, TError> Filter(Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) =>
             TaskResultFunctions.Filter(TaskResult, predicate, errorSelector);
-
 
         /// <inheritdoc cref="Result{T,TError}.Filter(System.Func{T,bool},System.Func{Maybe{T},TError})" />
         public AsyncResult<T, TError> Filter(Func<T, Task<bool>> predicate, Func<Maybe<T>, TError> errorSelector) =>
@@ -64,18 +65,15 @@ namespace Lemonad.ErrorHandling {
             params Func<Result<T, TError>, Result<T, TError>>[] validations) =>
             TaskResultFunctions.Multiple(TaskResult, validations);
 
-
         public AsyncResult<T, TError> IsErrorWhen(
             Func<T, bool> predicate,
             Func<Maybe<T>, TError> errorSelector) =>
             TaskResultFunctions.IsErrorWhen(TaskResult, predicate, errorSelector);
 
-
         public AsyncResult<T, TError> IsErrorWhen(
             Func<T, Task<bool>> predicate,
             Func<Maybe<T>, TError> errorSelector) =>
             TaskResultFunctions.IsErrorWhen(TaskResult, predicate, errorSelector);
-
 
         public AsyncResult<TResult, TError> Map<TResult>(Func<T, TResult> selector) =>
             TaskResultFunctions.Map(TaskResult, selector);
