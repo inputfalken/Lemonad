@@ -7,8 +7,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var outerSelectorInvoked = false;
             var innerSelectorInvoked = false;
             var resultSelectorInvoked = false;
-            var outer = new {Id = 1, Text = "Hello"}.ToResult(x => false, () => "ERROR 1");
-            var inner = new {Id = 1, Text = "world"}.ToResult(x => false, () => "ERROR 2");
+            var outer = new {Id = 1, Text = "Hello"}.ToResult(x => false, x => "ERROR 1");
+            var inner = new {Id = 1, Text = "world"}.ToResult(x => false, x => "ERROR 2");
             var result = outer.Join(inner, x => {
                 outerSelectorInvoked = true;
                 return x.Id;
@@ -33,8 +33,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var outerSelectorInvoked = false;
             var innerSelectorInvoked = false;
             var resultSelectorInvoked = false;
-            var outer = new {Id = 1, Text = "Hello"}.ToResult(x => false, () => "ERROR 1");
-            var inner = new {Id = 1, Text = "world"}.ToResult(x => true, () => "ERROR 2");
+            var outer = new {Id = 1, Text = "Hello"}.ToResult(x => false, x => "ERROR 1");
+            var inner = new {Id = 1, Text = "world"}.ToResult(x => true, x => "ERROR 2");
             var result = outer.Join(inner, x => {
                 outerSelectorInvoked = true;
                 return x.Id;
@@ -59,8 +59,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var outerSelectorInvoked = false;
             var innerSelectorInvoked = false;
             var resultSelectorInvoked = false;
-            var outer = new {Id = 1, Text = "Hello"}.ToResult(x => true, () => "ERROR 1");
-            var inner = new {Id = 1, Text = "world"}.ToResult(x => false, () => "ERROR 2");
+            var outer = new {Id = 1, Text = "Hello"}.ToResult(x => true, x => "ERROR 1");
+            var inner = new {Id = 1, Text = "world"}.ToResult(x => false, x => "ERROR 2");
             var result = outer.Join(inner, x => {
                 outerSelectorInvoked = true;
                 return x.Id;
@@ -85,8 +85,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var outerSelectorInvoked = false;
             var innerSelectorInvoked = false;
             var resultSelectorInvoked = false;
-            var outer = new {Id = 1, Text = "Hello"}.ToResult(x => true, () => "ERROR 1");
-            var inner = new {Id = 1, Text = "world"}.ToResult(x => true, () => "ERROR 2");
+            var outer = new {Id = 1, Text = "Hello"}.ToResult(x => true, x => "ERROR 1");
+            var inner = new {Id = 1, Text = "world"}.ToResult(x => true, x => "ERROR 2");
             var result = outer.Join(inner, x => {
                 outerSelectorInvoked = true;
                 return x.Id;
@@ -111,8 +111,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var outerSelectorInvoked = false;
             var innerSelectorInvoked = false;
             var resultSelectorInvoked = false;
-            var outer = new {Id = 2, Text = "Hello"}.ToResult(x => true, () => "ERROR 1");
-            var inner = new {Id = 1, Text = "world"}.ToResult(x => true, () => "ERROR 2");
+            var outer = new {Id = 2, Text = "Hello"}.ToResult(x => true, x => "ERROR 1");
+            var inner = new {Id = 1, Text = "world"}.ToResult(x => true, x => "ERROR 2");
             var result = outer.Join(inner, x => {
                 outerSelectorInvoked = true;
                 return x.Id;

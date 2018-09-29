@@ -44,6 +44,8 @@ namespace Lemonad.ErrorHandling {
         public static bool IsNull<T>(this T value) =>
             Check<T>.IsNull(value);
 
+        public static bool IsNotNull<T>(this T value) => !IsNull(value);
+
         private static class Check<T> {
             private static readonly bool IsReferenceType;
             private static readonly bool IsNullable;

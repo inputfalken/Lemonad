@@ -9,7 +9,7 @@ namespace MvcValidation.Controller {
     public class AsyncPersonController : Microsoft.AspNetCore.Mvc.Controller {
         private static Result<PersonPostApiModel, PersonPostApiError> ApiValidation(PersonPostApiModel model) {
             var apiValidation = model
-                .ToResult(x => true, () => default(PersonPostApiError))
+                .ToResult(x => true, x => default(PersonPostApiError))
                 .Multiple(
                     x => x.Filter(y => y.Age > 10,
                         y=> new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
@@ -58,7 +58,7 @@ namespace MvcValidation.Controller {
 
         private static Result<string, string> ValidateName(string name) {
             return name
-                .ToResult(x => string.IsNullOrWhiteSpace(x) == false, () => "Name cannot be empty.")
+                .ToResult(x => string.IsNullOrWhiteSpace(x) == false, x => "Name cannot be empty.")
                 .Filter(s => s.All(char.IsLetter), y => "Name can only contain letters.")
                 .Filter(s => char.IsUpper(s[0]), y => "Name must start with capital letter.");
         }

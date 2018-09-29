@@ -4,7 +4,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class ToResultOkTests {
         [Fact]
         public void Convert_Int_To_ResultOk() {
-            var result = 2.ToResult(x => true, () => "");
+            var result = 2.ToResult(x => true, x => "");
 
             Assert.True(result.Either.HasValue, "Result should have value.");
             Assert.False(result.Either.HasError, "Result should not have a error value.");
@@ -15,7 +15,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         [Fact]
         public void Convert_Null_String_To_ResultOk() {
             string str = null;
-            var result = str.ToResult(x => true, () => "");
+            var result = str.ToResult(x => true, x => "");
 
             Assert.True(result.Either.HasValue, "Result should have value.");
             Assert.False(result.Either.HasError, "Result should not have a error value.");
@@ -24,7 +24,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
         [Fact]
         public void Convert_String_To_ResultOk() {
-            var result = "hello".ToResult(x => true, () => "");
+            var result = "hello".ToResult(x => true, x => "");
 
             Assert.True(result.Either.HasValue, "Result should have value.");
             Assert.False(result.Either.HasError, "Result should not have a error value.");

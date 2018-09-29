@@ -9,7 +9,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var result = "value".ToResult(x => {
                 predicateExecuted = true;
                 return string.IsNullOrWhiteSpace(x) == false;
-            }, () => {
+            }, x => {
                 errorSelectorExecuted = true;
                 return "ERROR";
             });
@@ -28,7 +28,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             var result = "value".ToResult(x => {
                 predicateExecuted = true;
                 return string.IsNullOrWhiteSpace(x);
-            }, () => {
+            }, x => {
                 errorSelectorExecuted = true;
                 return "ERROR";
             });

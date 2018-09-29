@@ -142,31 +142,29 @@ namespace Lemonad.ErrorHandling {
         public static AsyncResult<T, TError> ToAsyncResult<T, TError>(this Result<T, TError> result) =>
             Task.FromResult(result);
 
-        /// <inheritdoc cref="ToResult{T,TError}(T,Func{T,bool},Func{TError})" />
         [Pure]
         public static AsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T> source, Func<T, bool> predicate,
-            Func<TError> errorSelector) {
-            async Task<Result<T, TError>> Factory(Task<T> x, Func<T, bool> y, Func<TError> z) =>
+            Func<Maybe<T>, TError> errorSelector) {
+            async Task<Result<T, TError>> Factory(Task<T> x, Func<T, bool> y, Func<Maybe<T>, TError> z) =>
                 (await x.ConfigureAwait(false)).ToResult(y, z);
 
             return Factory(source, predicate, errorSelector);
         }
 
-        /// <inheritdoc cref="ToResult{T,TError}(T,Func{T,bool},Func{TError})" />
         [Pure]
-        public static AsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T?> source, Func<TError> errorSelector)
+        public static AsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T?> source,
+            Func<Maybe<T>, TError> errorSelector)
             where T : struct {
-            async Task<Result<T, TError>> Factory(Task<T?> x, Func<TError> y) =>
+            async Task<Result<T, TError>> Factory(Task<T?> x, Func<Maybe<T>, TError> y) =>
                 (await x.ConfigureAwait(false)).ToResult(y);
 
             return Factory(source, errorSelector);
         }
 
-        /// <inheritdoc cref="ToResultError{T,TError}(TError,Func{TError,bool},Func{T})" />
         public static AsyncResult<T, TError> ToAsyncResultError<T, TError>(this Task<TError> source,
             Func<TError, bool> predicate,
-            Func<T> valueSelector) {
-            async Task<Result<T, TError>> Factory(Task<TError> x, Func<TError, bool> y, Func<T> z) =>
+            Func<Maybe<TError>, T> valueSelector) {
+            async Task<Result<T, TError>> Factory(Task<TError> x, Func<TError, bool> y, Func<Maybe<TError>, T> z) =>
                 (await x.ConfigureAwait(false)).ToResultError(y, z);
 
             return Factory(source, predicate, valueSelector);
@@ -230,9 +228,9 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         [Pure]
         public static Result<T, TError>
-            ToResult<T, TError>(this T? source, Func<TError> errorSelector) where T : struct =>
+            ToResult<T, TError>(this T? source, Func<Maybe<T>, TError> errorSelector) where T : struct =>
             // ReSharper disable once PossibleInvalidOperationException
-            source.ToResult(x => x.HasValue, errorSelector).Map(x => x.Value);
+            source.ToResult(x => x.HasValue, x => errorSelector(x.FlatMap(y => y))).Map(x => x.Value);
 
         /// <summary>
         ///     Creates an <see cref="Result{T,TError}" /> based on a predicate function combined with an
@@ -256,13 +254,13 @@ namespace Lemonad.ErrorHandling {
         /// <returns></returns>
         [Pure]
         public static Result<T, TError> ToResult<T, TError>(this T source, Func<T, bool> predicate,
-            Func<TError> errorSelector) {
+            Func<Maybe<T>, TError> errorSelector) {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             return predicate(source)
                 ? Value<T, TError>(source)
                 : errorSelector == null
                     ? throw new ArgumentNullException(nameof(errorSelector))
-                    : errorSelector();
+                    : errorSelector(source.ToNullCheckedMaybe());
         }
 
         /// <summary>
@@ -286,11 +284,13 @@ namespace Lemonad.ErrorHandling {
         /// </param>
         public static Result<T, TError> ToResultError<T, TError>(this TError source,
             Func<TError, bool> predicate,
-            Func<T> valueSelector) {
+            Func<Maybe<TError>, T> valueSelector) {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             return predicate(source)
                 ? (Result<T, TError>) source
-                : (valueSelector == null ? throw new ArgumentNullException(nameof(valueSelector)) : valueSelector());
+                : valueSelector == null
+                    ? throw new ArgumentNullException(nameof(valueSelector))
+                    : valueSelector(source.ToNullCheckedMaybe());
         }
 
         /// <summary>
