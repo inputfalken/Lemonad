@@ -187,16 +187,7 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         [Pure]
         public Maybe<TResult> FlatMap<TResult>(Func<T, TResult?> flatSelector) where TResult : struct =>
-            new Maybe<TResult>(_result.FlatMap(x => flatSelector(x).ToResult(_ => Unit.Default)));
-
-        /// <summary>
-        ///     Filters the <see cref="Maybe{T}" /> to see if <typeparamref name="T" /> is null.
-        /// </summary>
-        /// <returns>
-        ///     A <see cref="Maybe{T}" /> whose <typeparamref name="T" /> has value if <typeparamref name="T" /> is not null.
-        /// </returns>
-        [Pure]
-        public Maybe<T> IsNoneWhenNull() => new Maybe<T>(_result.IsErrorWhenNull(maybe => default));
+            new Maybe<TResult>(_result.FlatMap(x => flatSelector(x).ToResult(Unit.Selector)));
 
         /// <summary>
         ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
@@ -236,6 +227,6 @@ namespace Lemonad.ErrorHandling {
         public Maybe<TResult> FlatMap<TFlatMap, TResult>(
             Func<T, TFlatMap?> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct =>
-            new Maybe<TResult>(_result.FlatMap(x => flatMapSelector(x).ToResult(_ => Unit.Default), resultSelector));
+            new Maybe<TResult>(_result.FlatMap(x => flatMapSelector(x).ToResult(Unit.Selector), resultSelector));
     }
 }

@@ -5,6 +5,9 @@ namespace Lemonad.ErrorHandling.Test {
     internal static class AssertionUtilities {
         private static Task Delay => Task.Delay(RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? 200 : 50);
 
+        public static string EitherValueName { get; } = nameof(IEither<object, object>.Value);
+        public static string EitherErrorName { get; } = nameof(IEither<object, object>.Error);
+
         internal static Result<double, string> Division(double left, double right) {
             if (right == 0)
                 return $"Can not divide '{left}' with '{right}'.";

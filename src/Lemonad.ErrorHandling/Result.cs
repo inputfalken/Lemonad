@@ -11,7 +11,7 @@ namespace Lemonad.ErrorHandling {
     ///     Inspired by 'Haskell's Either a b' and FSharps 'Result&lt;T, TError&gt;'.
     ///     <para></para>
     ///     <para></para>
-    ///     Null values are allowed and therefore should be checked if necessary.
+    ///     Null values are not allowed and therefore excessively be checked before beginning an <see cref="Result{T,TError}"/> expression chain.
     /// </summary>
     /// <typeparam name="T">
     ///     The type which is considered as successful.
@@ -20,13 +20,23 @@ namespace Lemonad.ErrorHandling {
     ///     The type which is considered as failure.
     /// </typeparam>
     public readonly struct Result<T, TError> : IEquatable<Result<T, TError>>, IComparable<Result<T, TError>> {
+        public static implicit operator Result<T, TError>(TError error) {
+            var tmp = default(T);
+            return new Result<T, TError>(in tmp, in error, true, false);
+        }
+
+        public static implicit operator Result<T, TError>(T value) {
+            var tmp = default(TError);
+            return new Result<T, TError>(in value, in tmp, false, true);
+        }
+
         /// <summary>
-        ///    Gets the <see cref="Either{T,TError}"/> from the <see cref="Result{T,TError}"/> instance.
+        ///    Gets the <see cref="IEither{T,TError}"/> from the <see cref="Result{T,TError}"/> instance.
         /// </summary>
-        public Either<T, TError> Either { get; }
+        public IEither<T, TError> Either { get; }
 
         private Result(in T value, in TError error, bool hasError, bool hasValue) =>
-            Either = new Either<T, TError>(value, error, hasError, hasValue);
+            Either = new NonNullEither(in value, in error, hasError, hasValue);
 
         /// <inheritdoc />
         public bool Equals(Result<T, TError> other) {
@@ -57,16 +67,6 @@ namespace Lemonad.ErrorHandling {
 
         public static bool operator >=(Result<T, TError> left, Result<T, TError> right) =>
             left.CompareTo(right) >= 0;
-
-        public static implicit operator Result<T, TError>(TError error) {
-            var tmp = default(T);
-            return new Result<T, TError>(in tmp, in error, true, false);
-        }
-
-        public static implicit operator Result<T, TError>(T value) {
-            var tmp = default(TError);
-            return new Result<T, TError>(in value, in tmp, false, true);
-        }
 
         /// <inheritdoc />
         public override bool Equals(object obj) => obj is Result<T, TError> option && Equals(option);
@@ -222,19 +222,19 @@ namespace Lemonad.ErrorHandling {
         ///   if the current <see cref="Result{T,TError}"/> is in valid state.
         /// </returns>
         [Pure]
-        public Result<T, TError> Filter(Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) {
+        public Result<T, TError> Filter(Func<T, bool> predicate, Func<T, TError> errorSelector) {
             if (Either.HasError) return this;
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
             if (predicate(Either.Value)) return this;
             if (errorSelector == null)
                 throw new ArgumentNullException(nameof(errorSelector));
-            return errorSelector(ResultExtensions.NullCheckedMaybe(Either.Value));
+            return ResultExtensions.Error<T, TError>(errorSelector(Either.Value));
         }
 
         [Pure]
         public Result<T, TError> IsErrorWhen(
-            Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) {
+            Func<T, bool> predicate, Func<T, TError> errorSelector) {
             return Filter(
                 x => predicate == null
                     ? throw new ArgumentNullException(nameof(predicate))
@@ -242,10 +242,6 @@ namespace Lemonad.ErrorHandling {
                 errorSelector
             );
         }
-
-        [Pure]
-        public Result<T, TError> IsErrorWhenNull(Func<Maybe<T>, TError> errorSelector) =>
-            IsErrorWhen(EqualityFunctions.IsNull, errorSelector);
 
         /// <summary>
         ///     Maps both <typeparamref name="T" /> and <typeparamref name="TError" /> but only one is executed.
@@ -473,9 +469,7 @@ namespace Lemonad.ErrorHandling {
             if (Either.HasError) return ResultExtensions.Error<T, TError>(Either.Error);
             if (selector == null) throw new ArgumentNullException(nameof(selector));
             var okSelector = selector(Either.Value);
-            if (okSelector.Either.HasValue)
-                return Either.Value;
-            return okSelector.Either.Error;
+            return okSelector.Either.HasValue ? this : ResultExtensions.Error<T, TError>(okSelector.Either.Error);
         }
 
         /// <summary>
@@ -488,10 +482,9 @@ namespace Lemonad.ErrorHandling {
             params Func<Result<T, TError>, Result<T, TError>>[] validations) {
             var result = this;
             var errors = validations.Select(x => x(result)).Errors().ToList();
-            if (errors.Any())
-                return errors;
-
-            return Either.Value;
+            return errors.Any()
+                ? ResultExtensions.Error<T, IReadOnlyList<TError>>(errors)
+                : ResultExtensions.Value<T, IReadOnlyList<TError>>(Either.Value);
         }
 
         /// <summary>
@@ -520,7 +513,7 @@ namespace Lemonad.ErrorHandling {
                        throw new ArgumentNullException(nameof(flatMapSelector));
 
             return errorSelector != null
-                ? errorSelector(Either.Error)
+                ? ResultExtensions.Error<TResult, TErrorResult>(errorSelector(Either.Error))
                 : throw new ArgumentNullException(nameof(errorSelector));
         }
 
@@ -536,8 +529,8 @@ namespace Lemonad.ErrorHandling {
         /// </returns>
         [Pure]
         public Result<T, TResult> CastError<TResult>() => Either.HasValue
-            ? (Result<T, TResult>) Either.Value
-            : (TResult) (object) Either.Error;
+            ? ResultExtensions.Value<T, TResult>(Either.Value)
+            : ResultExtensions.Error<T, TResult>((TResult) (object) Either.Error);
 
         /// <summary>
         ///     Casts both <typeparamref name="T" /> into <typeparamref name="TResult" /> and <typeparamref name="TError" /> into
@@ -577,8 +570,8 @@ namespace Lemonad.ErrorHandling {
         /// </returns>
         [Pure]
         public Result<TResult, TError> Cast<TResult>() => Either.HasError
-            ? (Result<TResult, TError>) Either.Error
-            : (TResult) (object) Either.Value;
+            ? ResultExtensions.Error<TResult, TError>(Either.Error)
+            : ResultExtensions.Value<TResult, TError>((TResult) (object) Either.Value);
 
         /// <summary>
         ///     Attempts to cast <typeparamref name="T" /> into <typeparamref name="TResult" />.
@@ -595,11 +588,13 @@ namespace Lemonad.ErrorHandling {
         /// </returns>
         [Pure]
         public Result<TResult, TError> SafeCast<TResult>(Func<TError> errorSelector) {
-            if (Either.HasError) return Either.Error;
+            if (Either.HasError) return ResultExtensions.Error<TResult, TError>(Either.Error);
             if (Either.Value is TResult result)
-                return result;
+                return ResultExtensions.Value<TResult, TError>(result);
 
-            return errorSelector != null ? errorSelector() : throw new ArgumentNullException(nameof(errorSelector));
+            return errorSelector != null
+                ? ResultExtensions.Error<TResult, TError>(errorSelector())
+                : throw new ArgumentNullException(nameof(errorSelector));
         }
 
         /// <summary>
@@ -640,8 +635,8 @@ namespace Lemonad.ErrorHandling {
         public Result<TResult, TError> Join<TInner, TKey, TResult>(
             Result<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
             Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector, IEqualityComparer<TKey> comparer) {
-            if (Either.HasError) return Either.Error;
-            if (inner.Either.HasError) return inner.Either.Error;
+            if (Either.HasError) return ResultExtensions.Error<TResult, TError>(Either.Error);
+            if (inner.Either.HasError) return ResultExtensions.Error<TResult, TError>(inner.Either.Error);
 
             foreach (var result in this.ToEnumerable().Join(
                 inner.ToEnumerable(),
@@ -649,9 +644,11 @@ namespace Lemonad.ErrorHandling {
                 innerKeySelector,
                 resultSelector,
                 comparer
-            )) return result;
+            )) return ResultExtensions.Value<TResult, TError>(result);
 
-            return errorSelector != null ? errorSelector() : throw new ArgumentNullException(nameof(errorSelector));
+            return errorSelector != null
+                ? ResultExtensions.Error<TResult, TError>(errorSelector())
+                : throw new ArgumentNullException(nameof(errorSelector));
         }
 
         /// <summary>
@@ -706,5 +703,59 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public Result<TResult, TError> Zip<TOther, TResult>(Result<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector) => FlatMap(_ => other, resultSelector);
+
+        internal readonly struct NonNullEither : IEither<T, TError> {
+            public bool HasValue { get; }
+            public bool HasError { get; }
+            public TError Error { get; }
+            public T Value { get; }
+
+            /// <summary>
+            ///  Only one one <typeparamref name="T"/> and <typeparamref name="TError"/> can be available to use.
+            /// </summary>
+            /// <param name="value">
+            /// The potential value.
+            /// </param>
+            /// <param name="error">
+            /// The potential error.
+            /// </param>
+            /// <param name="hasError">
+            /// Is true when <paramref name="error"/> is available.
+            /// </param>
+            /// <param name="hasValue">
+            /// Is true when <paramref name="value"/> is available.
+            /// </param>
+            /// <exception cref="ArgumentException">
+            /// When <see cref="HasValue"/> and <see cref="HasError"/>  are both either false or true.
+            /// </exception>
+            /// <exception cref="ArgumentNullException">
+            /// When either <see cref="Value"/> or <see cref="Error"/> is null at the same the corresponding <see cref="Boolean"/> value check is true.
+            /// </exception>
+            internal NonNullEither(in T value, in TError error, bool hasError, bool hasValue) {
+                if (hasError == hasValue)
+                    throw new ArgumentException(
+                        $"{nameof(IEither<T, TError>)} properties \"{nameof(HasError)}\": {hasError} and \"{nameof(HasValue)}\": ({hasValue}), can not both be {hasValue}."
+                    );
+
+                Value = value;
+                Error = error;
+                // Verify that the active value can never be null.
+                if (Value.IsNull() && hasValue)
+                    throw new ArgumentNullException(
+                        nameof(Value),
+                        $"{nameof(IEither<T, TError>)} property \"{nameof(Value)}\" cannot be null."
+                    );
+
+                // Verify that the active value can never be null.
+                if (Error.IsNull() && hasError)
+                    throw new ArgumentNullException(
+                        nameof(Error),
+                        $"{nameof(IEither<T, TError>)} property \"{nameof(Error)}\" cannot be null."
+                    );
+
+                HasValue = hasValue;
+                HasError = hasError;
+            }
+        }
     }
 }

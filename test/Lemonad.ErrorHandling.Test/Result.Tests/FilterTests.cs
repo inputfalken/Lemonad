@@ -14,7 +14,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 return d == 2;
             }, x => {
                 errorSelectorExectued = true;
-                return x.Match(d => "Good", () => "Bad");
+                return "This should never happen!";
             });
 
             Assert.False(predicateExectued,
@@ -39,7 +39,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             }, x => {
                 // Since the division operation was ok, but the predicate false, it makes sense that this value is positive.
                 errorSelectorExectued = true;
-                return x.Match(d => "Good", () => "Bad");
+                return "Good";
             });
 
             Assert.True(predicateExectued, "Should get exectued since there's a value from the result.");
@@ -61,7 +61,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 return true;
             }, x => {
                 errorSelectorExectued = true;
-                return x.Match(d => "Good", () => "Bad");
+                return "This should never happen.";
             });
 
             Assert.True(predicateExectued,

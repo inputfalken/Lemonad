@@ -5,6 +5,7 @@ using Lemonad.ErrorHandling;
 namespace ConsoleInputValidation {
     internal static class Program {
         private static int Main(string[] args) {
+            
             Console.WriteLine("Please supply your name.");
             return Console.ReadLine()
                 .ToResult(s => string.IsNullOrEmpty(s) == false, x => ExitCode.EmptyName)

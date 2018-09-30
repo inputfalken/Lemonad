@@ -153,9 +153,9 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public static AsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T?> source,
-            Func<Maybe<T>, TError> errorSelector)
+            Func<TError> errorSelector)
             where T : struct {
-            async Task<Result<T, TError>> Factory(Task<T?> x, Func<Maybe<T>, TError> y) =>
+            async Task<Result<T, TError>> Factory(Task<T?> x, Func<TError> y) =>
                 (await x.ConfigureAwait(false)).ToResult(y);
 
             return Factory(source, errorSelector);
@@ -163,8 +163,8 @@ namespace Lemonad.ErrorHandling {
 
         public static AsyncResult<T, TError> ToAsyncResultError<T, TError>(this Task<TError> source,
             Func<TError, bool> predicate,
-            Func<Maybe<TError>, T> valueSelector) {
-            async Task<Result<T, TError>> Factory(Task<TError> x, Func<TError, bool> y, Func<Maybe<TError>, T> z) =>
+            Func<TError, T> valueSelector) {
+            async Task<Result<T, TError>> Factory(Task<TError> x, Func<TError, bool> y, Func<TError, T> z) =>
                 (await x.ConfigureAwait(false)).ToResultError(y, z);
 
             return Factory(source, predicate, valueSelector);
@@ -227,17 +227,17 @@ namespace Lemonad.ErrorHandling {
         ///     The type returned by the <paramref name="errorSelector" /> function.
         /// </typeparam>
         [Pure]
-        public static Result<T, TError> ToResult<T, TError>(this T? source, Func<Maybe<T>, TError> errorSelector)
+        public static Result<T, TError> ToResult<T, TError>(this T? source, Func<TError> errorSelector)
             where T : struct =>
             // ReSharper disable once PossibleInvalidOperationException
             source.ToResult(x => x.HasValue, x => errorSelector == null
                     ? throw new ArgumentNullException(nameof(errorSelector))
-                    : errorSelector(x.HasValue ? x.Value.ToMaybe() : Maybe<T>.None))
+                    : errorSelector())
                 .Map(x => x.Value);
 
         /// <summary>
         ///     Creates an <see cref="Result{T,TError}" /> based on a predicate function combined with an
-        ///     <paramref name="errorSelector" /> for <typeparamref name="TError" />.
+        ///     <paramref name="errorSelector" /> with a <see cref="Maybe{T}"/> in parameter who has been null checked.
         /// </summary>
         /// <typeparam name="T">
         ///     The value type in <see cref="Result{T,TError}" />.
@@ -263,7 +263,7 @@ namespace Lemonad.ErrorHandling {
                 ? Value<T, TError>(source)
                 : errorSelector == null
                     ? throw new ArgumentNullException(nameof(errorSelector))
-                    : errorSelector(NullCheckedMaybe(source));
+                    : Error<T, TError>(errorSelector(source.ToMaybe(EqualityFunctions.IsNotNull)));
         }
 
         /// <summary>
@@ -287,13 +287,13 @@ namespace Lemonad.ErrorHandling {
         /// </param>
         public static Result<T, TError> ToResultError<T, TError>(this TError source,
             Func<TError, bool> predicate,
-            Func<Maybe<TError>, T> valueSelector) {
+            Func<TError, T> valueSelector) {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             return predicate(source)
-                ? (Result<T, TError>) source
+                ? Error<T, TError>(source)
                 : valueSelector == null
                     ? throw new ArgumentNullException(nameof(valueSelector))
-                    : valueSelector(NullCheckedMaybe(source));
+                    : Value<T, TError>(valueSelector(source));
         }
 
         /// <summary>
@@ -337,8 +337,5 @@ namespace Lemonad.ErrorHandling {
             if (result.Either.HasValue)
                 yield return result.Either.Value;
         }
-
-        internal static Maybe<TSource> NullCheckedMaybe<TSource>(TSource source) =>
-            source.IsNull() ? Maybe<TSource>.None : source.ToMaybe();
     }
 }
