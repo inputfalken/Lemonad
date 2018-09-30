@@ -36,7 +36,7 @@ namespace Lemonad.ErrorHandling {
         public IEither<T, TError> Either { get; }
 
         private Result(in T value, in TError error, bool hasError, bool hasValue) =>
-            Either = new NonNullEither(value, error, hasError, hasValue);
+            Either = new NonNullEither(in value, in error, hasError, hasValue);
 
         /// <inheritdoc />
         public bool Equals(Result<T, TError> other) {
