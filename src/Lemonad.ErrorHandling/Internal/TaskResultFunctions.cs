@@ -36,7 +36,7 @@ namespace Lemonad.ErrorHandling.Internal {
             Action<TError> action) => (await source.ConfigureAwait(false)).DoWithError(action);
 
         [Pure]
-        internal static async Task<Either<T, TError>> Either<T, TError>(Task<Result<T, TError>> result) =>
+        internal static async Task<IEither<T, TError>> Either<T, TError>(Task<Result<T, TError>> result) =>
             (await result.ConfigureAwait(false)).Either;
 
         [Pure]

@@ -7,7 +7,9 @@ namespace Lemonad.ErrorHandling.Test {
         public void String_Int_Either_With_Value() {
             var value = "foo";
             var error = 2;
-            var either = new Either<string, int>(value: in value, error: in error, hasError: false, hasValue: true);
+            var either =
+                new Result<string, int>.NonNullEither(value: in value, error: in error, hasError: false,
+                    hasValue: true);
             Assert.Equal("foo", either.Value);
             Assert.Equal(2, either.Error);
             Assert.NotEqual(either.HasError, either.HasValue);
@@ -18,7 +20,9 @@ namespace Lemonad.ErrorHandling.Test {
         public void String_Int_Either_With_Error() {
             var value = "foo";
             var error = 2;
-            var either = new Either<string, int>(value: in value, error: in error, hasError: true, hasValue: false);
+            var either =
+                new Result<string, int>.NonNullEither(value: in value, error: in error, hasError: true,
+                    hasValue: false);
             Assert.Equal("foo", either.Value);
             Assert.Equal(2, either.Error);
             Assert.NotEqual(either.HasError, either.HasValue);
@@ -34,7 +38,8 @@ namespace Lemonad.ErrorHandling.Test {
                 var value = "foo";
                 int? error = null;
                 var either =
-                    new Either<string, int?>(value: in value, error: in error, hasError: true, hasValue: false);
+                    new Result<string, int?>.NonNullEither(value: in value, error: in error, hasError: true,
+                        hasValue: false);
                 Assert.Equal("foo", either.Value);
                 Assert.Null(either.Error);
                 Assert.NotEqual(either.HasError, either.HasValue);
@@ -49,7 +54,9 @@ namespace Lemonad.ErrorHandling.Test {
         public void String_Int_Either_With_Null_Value() {
             string value = null;
             var error = 2;
-            var either = new Either<string, int>(value: in value, error: in error, hasError: true, hasValue: false);
+            var either =
+                new Result<string, int>.NonNullEither(value: in value, error: in error, hasError: true,
+                    hasValue: false);
             Assert.Null(either.Value);
             Assert.Equal(2, either.Error);
             Assert.NotEqual(either.HasError, either.HasValue);
@@ -61,7 +68,8 @@ namespace Lemonad.ErrorHandling.Test {
             var value = "foo";
             var error = 2;
             Assert.Throws<ArgumentException>(() =>
-                new Either<string, int>(value: in value, error: in error, hasError: true, hasValue: true));
+                new Result<string, int>.NonNullEither(value: in value, error: in error, hasError: true,
+                    hasValue: true));
         }
     }
 }
