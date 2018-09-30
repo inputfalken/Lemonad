@@ -75,19 +75,33 @@
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+  </h3>
+      <h4><a class="xref" href="Lemonad.ErrorHandling.MaybeExtensions.html">MaybeExtensions</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Lemonad.ErrorHandling.ResultExtensions.html">ResultExtensions</a></h4>
+      <section></section>
     <h3 id="structs">Structs
   </h3>
+      <h4><a class="xref" href="Lemonad.ErrorHandling.AsyncResult-2.html">AsyncResult&lt;T, TError&gt;</a></h4>
+      <section><p>An asynchronous version of <a class="xref" href="Lemonad.ErrorHandling.Result-2.html">Result&lt;T, TError&gt;</a> with the same functionality.</p>
+</section>
       <h4><a class="xref" href="Lemonad.ErrorHandling.Maybe-1.html">Maybe&lt;T&gt;</a></h4>
       <section><p>A data-structure commonly used for error-handling where value may or may not be present.</p>
-</section>
-      <h4><a class="xref" href="Lemonad.ErrorHandling.Outcome-2.html">Outcome&lt;T, TError&gt;</a></h4>
-      <section><p>An asynchronous version of <a class="xref" href="Lemonad.ErrorHandling.Result-2.html">Result&lt;T, TError&gt;</a> with the same method members.</p>
 </section>
       <h4><a class="xref" href="Lemonad.ErrorHandling.Result-2.html">Result&lt;T, TError&gt;</a></h4>
       <section><p>A data-structure commonly used for error-handling where only one value can be present.
 Either it's <code data-dev-comment-type="typeparamref" class="typeparamref">TError</code> or it's <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>. Which makes it possible to handle
 error without throwing exceptions.
-Inspired by 'Haskells Either a b' and FSharps 'Result&lt;T, TError&gt;'.</p>
+Inspired by 'Haskell's Either a b' and FSharps 'Result&lt;T, TError&gt;'.</p>
+<p>
+<p>
+Null values are not allowed and therefore excessively be checked before beginning an <a class="xref" href="Lemonad.ErrorHandling.Result-2.html">Result&lt;T, TError&gt;</a> expression chain.
+</section>
+    <h3 id="interfaces">Interfaces
+  </h3>
+      <h4><a class="xref" href="Lemonad.ErrorHandling.IEither-2.html">IEither&lt;T, TError&gt;</a></h4>
+      <section><p>Represents a data object who can either have <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> or <code data-dev-comment-type="typeparamref" class="typeparamref">TError</code> present.</p>
 </section>
 </article>
           </div>

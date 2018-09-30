@@ -41,47 +41,23 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.Extensions.MaybeExtensions.yml",
+      "source_relative_path": "api/Lemonad.ErrorHandling.AsyncResult-2.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.Extensions.MaybeExtensions.html",
-          "hash": "Gkqhi07O12jb3G2bOZI6MQ=="
+          "relative_path": "api/Lemonad.ErrorHandling.AsyncResult-2.html",
+          "hash": "/SVlUV8aQJAvqjq6VDcEBA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.Extensions.OutcomeExtensions.yml",
+      "source_relative_path": "api/Lemonad.ErrorHandling.IEither-2.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.Extensions.OutcomeExtensions.html",
-          "hash": "oyG/+Lweal6d2sjOlVMf7Q=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.Extensions.ResultExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.Extensions.ResultExtensions.html",
-          "hash": "Ow7vyeZyAr0piqAIQXNQoQ=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.Extensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.Extensions.html",
-          "hash": "UHCme8u+xV5UtKSqq1HtkA=="
+          "relative_path": "api/Lemonad.ErrorHandling.IEither-2.html",
+          "hash": "ntfBw1yaGLp1ADkiLJ7Rug=="
         }
       },
       "is_incremental": true,
@@ -93,22 +69,22 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Maybe-1.html",
-          "hash": "Dwfvbw7r0m1H15JxFVtEcA=="
+          "hash": "lp0ffzWPcybPDChoj25wHQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.Outcome-2.yml",
+      "source_relative_path": "api/Lemonad.ErrorHandling.MaybeExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.Outcome-2.html",
-          "hash": "qL8j9KOGmJonlnOy3Xd9Ag=="
+          "relative_path": "api/Lemonad.ErrorHandling.MaybeExtensions.html",
+          "hash": "RtcGvHI9IyYG9CnUGfXHYg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -117,10 +93,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Parsers.MaybeParsers.html",
-          "hash": "GLDW5NDAIJA/bQVxKdmqwA=="
+          "hash": "+aXoYXcGHvi71UgzBUFBsg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -129,10 +105,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Parsers.ResultParsers.html",
-          "hash": "UeLpz84B6SfvoCOb29piIw=="
+          "hash": "DRAcH0NeRd/wJBmIh92PHA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -144,7 +120,7 @@
           "hash": "KvpGaWsrwcw7nbL4b1p0PA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -153,10 +129,22 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Result-2.html",
-          "hash": "wa5gSIMpBfsocXH1vVwQ1A=="
+          "hash": "fGILw7j9a9GRBF1j16wrCQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.ResultExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.ResultExtensions.html",
+          "hash": "jb30SSAZW6IUNXhdiGmcPg=="
+        }
+      },
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -165,10 +153,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.html",
-          "hash": "PjjS3qMro85Dwknl6jqp5w=="
+          "hash": "aWPkU28MWfnlRebSfgYpZQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -189,7 +177,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "N749qZFOb41SCzshhQOSOQ=="
+          "hash": "+6gvxVB9zQKbZG76E6E2XA=="
         }
       },
       "is_incremental": false,
@@ -256,11 +244,11 @@
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
-        "ManagedReferenceDocumentProcessor": {
+        "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build"
         },
-        "ConceptualDocumentProcessor": {
+        "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build"
         }
