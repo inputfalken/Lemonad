@@ -144,8 +144,8 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public static AsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T> source, Func<T, bool> predicate,
-            Func<T, TError> errorSelector) {
-            async Task<Result<T, TError>> Factory(Task<T> x, Func<T, bool> y, Func<T, TError> z) =>
+            Func<Maybe<T>, TError> errorSelector) {
+            async Task<Result<T, TError>> Factory(Task<T> x, Func<T, bool> y, Func<Maybe<T>, TError> z) =>
                 (await x.ConfigureAwait(false)).ToResult(y, z);
 
             return Factory(source, predicate, errorSelector);
@@ -237,7 +237,7 @@ namespace Lemonad.ErrorHandling {
 
         /// <summary>
         ///     Creates an <see cref="Result{T,TError}" /> based on a predicate function combined with an
-        ///     <paramref name="errorSelector" /> for <typeparamref name="TError" />.
+        ///     <paramref name="errorSelector" /> with a <see cref="Maybe{T}"/> in parameter who has been null checked.
         /// </summary>
         /// <typeparam name="T">
         ///     The value type in <see cref="Result{T,TError}" />.
@@ -257,13 +257,13 @@ namespace Lemonad.ErrorHandling {
         /// <returns></returns>
         [Pure]
         public static Result<T, TError> ToResult<T, TError>(this T source, Func<T, bool> predicate,
-            Func<T, TError> errorSelector) {
+            Func<Maybe<T>, TError> errorSelector) {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             return predicate(source)
                 ? Value<T, TError>(source)
                 : errorSelector == null
                     ? throw new ArgumentNullException(nameof(errorSelector))
-                    : Error<T, TError>(errorSelector(source));
+                    : Error<T, TError>(errorSelector(source.ToMaybe(EqualityFunctions.IsNotNull)));
         }
 
         /// <summary>
@@ -337,8 +337,5 @@ namespace Lemonad.ErrorHandling {
             if (result.Either.HasValue)
                 yield return result.Either.Value;
         }
-
-        internal static Maybe<TSource> NullCheckedMaybe<TSource>(TSource source) =>
-            source.IsNull() ? Maybe<TSource>.None : source.ToMaybe();
     }
 }

@@ -222,19 +222,19 @@ namespace Lemonad.ErrorHandling {
         ///   if the current <see cref="Result{T,TError}"/> is in valid state.
         /// </returns>
         [Pure]
-        public Result<T, TError> Filter(Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) {
+        public Result<T, TError> Filter(Func<T, bool> predicate, Func<T, TError> errorSelector) {
             if (Either.HasError) return this;
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
             if (predicate(Either.Value)) return this;
             if (errorSelector == null)
                 throw new ArgumentNullException(nameof(errorSelector));
-            return ResultExtensions.Error<T, TError>(errorSelector(ResultExtensions.NullCheckedMaybe(Either.Value)));
+            return ResultExtensions.Error<T, TError>(errorSelector(Either.Value));
         }
 
         [Pure]
         public Result<T, TError> IsErrorWhen(
-            Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) {
+            Func<T, bool> predicate, Func<T, TError> errorSelector) {
             return Filter(
                 x => predicate == null
                     ? throw new ArgumentNullException(nameof(predicate))
@@ -242,10 +242,6 @@ namespace Lemonad.ErrorHandling {
                 errorSelector
             );
         }
-
-        [Pure]
-        public Result<T, TError> IsErrorWhenNull(Func<Maybe<T>, TError> errorSelector) =>
-            IsErrorWhen(EqualityFunctions.IsNull, errorSelector);
 
         /// <summary>
         ///     Maps both <typeparamref name="T" /> and <typeparamref name="TError" /> but only one is executed.

@@ -51,7 +51,7 @@ namespace Lemonad.ErrorHandling {
             new AsyncResult<T, TError>(Task.FromResult(ResultExtensions.Error<T, TError>(error)));
 
         /// <inheritdoc cref="Result{T,TError}.Filter(System.Func{T,bool},System.Func{Maybe{T},TError})" />
-        public AsyncResult<T, TError> Filter(Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) =>
+        public AsyncResult<T, TError> Filter(Func<T, bool> predicate, Func<T, TError> errorSelector) =>
             TaskResultFunctions.Filter(TaskResult, predicate, errorSelector);
 
         /// <inheritdoc cref="Result{T,TError}.Filter(System.Func{T,bool},System.Func{Maybe{T},TError})" />
@@ -67,7 +67,7 @@ namespace Lemonad.ErrorHandling {
 
         public AsyncResult<T, TError> IsErrorWhen(
             Func<T, bool> predicate,
-            Func<Maybe<T>, TError> errorSelector) =>
+            Func<T, TError> errorSelector) =>
             TaskResultFunctions.IsErrorWhen(TaskResult, predicate, errorSelector);
 
         public AsyncResult<T, TError> IsErrorWhen(

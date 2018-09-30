@@ -122,7 +122,7 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static Maybe<TSource> ToMaybe<TSource>(this TSource source, Func<TSource, bool> predicate) {
             if (predicate != null)
-                return ToMaybe(source).Filter(predicate);
+                return predicate(source) ? ToMaybe(source) : Maybe<TSource>.None;
             throw new ArgumentNullException(nameof(predicate));
         }
 

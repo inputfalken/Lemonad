@@ -190,15 +190,6 @@ namespace Lemonad.ErrorHandling {
             new Maybe<TResult>(_result.FlatMap(x => flatSelector(x).ToResult(Unit.Selector)));
 
         /// <summary>
-        ///     Filters the <see cref="Maybe{T}" /> to see if <typeparamref name="T" /> is null.
-        /// </summary>
-        /// <returns>
-        ///     A <see cref="Maybe{T}" /> whose <typeparamref name="T" /> has value if <typeparamref name="T" /> is not null.
-        /// </returns>
-        [Pure]
-        public Maybe<T> IsNoneWhenNull() => new Maybe<T>(_result.IsErrorWhenNull(maybe => default));
-
-        /// <summary>
         ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
         /// </summary>
         /// <param name="predicate">
