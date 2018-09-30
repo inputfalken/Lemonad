@@ -145,7 +145,7 @@ function Build-Documentation {
   Write-Host "Comparing diffs with '$currentSha1' '$previousSha1', for paths: '$diffPaths'." -ForegroundColor Yellow
   git diff --quiet --exit-code $previousSha1 $currentSha1 -- $diffPaths
   if ($LASTEXITCODE -eq 1) {
-    Build-Documentation -Directory $DocumentationDirectory
+    Install-Documentation -Directory $DocumentationDirectory
     Edit-Git
     $ghPagesDirectory = 'gh_pages'
     # APPVEYOR_REPO_NAME - repository name in format owner-name/repo-name
