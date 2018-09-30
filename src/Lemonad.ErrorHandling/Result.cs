@@ -743,18 +743,15 @@ namespace Lemonad.ErrorHandling {
 
                 Value = value;
                 Error = error;
-                var valueIsNull = Value.IsNull();
-                var errorIsNull = Error.IsNull();
-
                 // Verify that the active value can never be null.
-                if (valueIsNull && hasValue)
+                if (Value.IsNull() && hasValue)
                     throw new ArgumentNullException(
                         nameof(Value),
                         $"{nameof(IEither<T, TError>)} property \"{nameof(Value)}\" cannot be null."
                     );
 
                 // Verify that the active value can never be null.
-                if (errorIsNull && hasError)
+                if (Error.IsNull() && hasError)
                     throw new ArgumentNullException(
                         nameof(Error),
                         $"{nameof(IEither<T, TError>)} property \"{nameof(Error)}\" cannot be null."
