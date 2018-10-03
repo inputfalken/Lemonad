@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 
-namespace Lemonad.ErrorHandling {
+namespace Lemonad.ErrorHandling.Internal {
     /// <summary>
     ///     Represents void but in a returnable fashion.
     /// </summary>

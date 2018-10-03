@@ -21,15 +21,6 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Assert.Equal(5, maybe.Value);
         }
 
-        [Fact]
-        public void
-            Maybe_String_Whose_Property_HasValue_Is_False__Pasing_Null_Predicate__No_ArgumentNullReferenceException_Thrown() {
-            var exception = Record.Exception(() => {
-                Func<string, bool> function = null;
-                "foo".ToMaybeNone().Map(function);
-            });
-            Assert.Null(exception);
-        }
 
         [Fact]
         public void

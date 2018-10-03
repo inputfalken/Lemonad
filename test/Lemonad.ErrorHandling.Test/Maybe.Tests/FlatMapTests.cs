@@ -69,35 +69,10 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void
-            Maybe_String_Whose_Property_HasValue_Is_False__Pasing_Null_ResultSelector__No_ArgumentNullReferenceException_Thrown() {
-            var exception = Record.Exception(() => {
-                Func<string, string, string> resultSelector = null;
-                var maybe = "foo".ToMaybeNone().FlatMap(s => s.ToMaybeNone(), resultSelector);
-                Assert.False(maybe.HasValue, "Maybe should not have value.");
-                Assert.Equal(default, maybe.Value);
-            });
-            Assert.Null(exception);
-        }
-
-        [Fact]
-        public void
             Maybe_String_Whose_Property_HasValue_Is_False__Pasing_Null_Selector__No_ArgumentNullReferenceException_Thrown() {
             var exception = Record.Exception(() => {
                 Func<string, Maybe<string>> selector = null;
                 var maybe = "foo".ToMaybeNone().FlatMap(selector);
-                Assert.False(maybe.HasValue, "Maybe should not have value.");
-                Assert.Equal(default, maybe.Value);
-            });
-            Assert.Null(exception);
-        }
-
-        [Fact]
-        public void
-            Maybe_String_Whose_Property_HasValue_Is_False__Pasing_Null_Selector_AndResultSelector__No_ArgumentNullReferenceException_Thrown() {
-            var exception = Record.Exception(() => {
-                Func<string, Maybe<string>> selector = null;
-                Func<string, string, string> resultSelector = null;
-                var maybe = "foo".ToMaybeNone().FlatMap(selector, resultSelector);
                 Assert.False(maybe.HasValue, "Maybe should not have value.");
                 Assert.Equal(default, maybe.Value);
             });
@@ -121,18 +96,6 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
                 Func<string, string, string> resultSelector = null;
                 "foo".ToMaybe().FlatMap(selector, resultSelector);
             });
-        }
-
-        [Fact]
-        public void
-            Maybe_String_Whose_Property_HasValue_Is_True_Flatmapping_None__Pasing_Null_ResultSelector__No_ArgumentNullReferenceException_Thrown() {
-            var exception = Record.Exception(() => {
-                Func<string, string, string> resultSelector = null;
-                var maybe = "foo".ToMaybe().FlatMap(s => s.ToMaybeNone(), resultSelector);
-                Assert.False(maybe.HasValue, "Maybe should not have value.");
-                Assert.Equal(default, maybe.Value);
-            });
-            Assert.Null(exception);
         }
 
         [Fact]

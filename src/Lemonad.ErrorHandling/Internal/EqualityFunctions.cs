@@ -4,7 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace Lemonad.ErrorHandling {
+namespace Lemonad.ErrorHandling.Internal {
     /// <summary>
     ///  Source: https://github.com/louthy/language-ext/blob/master/LanguageExt.Core/Extensions/ObjectExt.cs
     /// </summary>
