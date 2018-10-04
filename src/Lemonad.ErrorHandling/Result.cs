@@ -501,7 +501,7 @@ namespace Lemonad.ErrorHandling {
         ///     <typeparamref name="TResult" />.
         /// </returns>
         [Pure]
-        public Result<TResult, TError> SafeCast<TResult>(Func<TError> errorSelector) =>
+        public Result<TResult, TError> SafeCast<TResult>(Func<T, TError> errorSelector) =>
             new Result<TResult, TError>(EitherMethods<T, TError>.SafeCast<TResult>(Either, errorSelector));
 
         /// <summary>

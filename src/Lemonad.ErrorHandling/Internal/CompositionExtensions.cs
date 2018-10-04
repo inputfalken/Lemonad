@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling.Internal {
     internal static class CompositionExtensions {
@@ -10,5 +11,8 @@ namespace Lemonad.ErrorHandling.Internal {
 
         public static Func<T1, T2, T4> Compose<T1, T2, T3, T4>(this Func<T1, T2, T3> source,
             Func<T2, T3, T4> selector) => (x, y) => selector(y, source(x, y));
+
+        public static Func<T1, Task<T3>> ComposeTask<T1, T2, T3>(this Func<T1, Task<T2>> source,
+            Func<T2, T3> selector) => async x => selector(await source(x).ConfigureAwait(false));
     }
 }

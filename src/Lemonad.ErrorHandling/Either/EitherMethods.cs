@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Threading.Tasks;
+using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling.Either {
     internal static class EitherMethods<T, TError> {
@@ -78,6 +80,27 @@ namespace Lemonad.ErrorHandling.Either {
         }
 
         [Pure]
+        public static async Task<IEither<T, TError>> FilterAsyncPredicate(Task<IEither<T, TError>> source,
+            Func<T, Task<bool>> predicate,
+            Func<T, TError> errorSelector) {
+            if (errorSelector == null)
+                throw new ArgumentNullException(nameof(errorSelector));
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
+            var either = await source.ConfigureAwait(false);
+            if (either.HasError) return either;
+            return await predicate(either.Value).ConfigureAwait(false)
+                ? either
+                : CreateError<T, TError>(errorSelector(either.Value));
+        }
+
+        [Pure]
+        internal static async Task<IEither<T, TError>> FilterAsync(
+            Task<IEither<T, TError>> source,
+            Func<T, bool> predicate,
+            Func<T, TError> errorSelector) => Filter(await source.ConfigureAwait(false), predicate, errorSelector);
+
+        [Pure]
         public static IEither<T, TError> IsErrorWhen(IEither<T, TError> either,
             Func<T, bool> predicate, Func<T, TError> errorSelector) {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
@@ -108,6 +131,19 @@ namespace Lemonad.ErrorHandling.Either {
             if (selector == null) throw new ArgumentNullException(nameof(selector));
             return either.HasValue
                 ? CreateValue<TResult, TError>(selector(either.Value))
+                : CreateError<TResult, TError>(either.Error);
+        }
+
+        public static async Task<IEither<TResult, TError>> MapAsync<TResult>(Task<IEither<T, TError>> source,
+            Func<T, TResult> selector) => Map(await source.ConfigureAwait(false), selector);
+
+        [Pure]
+        public static async Task<IEither<TResult, TError>> MapAsyncSelector<TResult>(Task<IEither<T, TError>> source,
+            Func<T, Task<TResult>> selector) {
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
+            var either = await source.ConfigureAwait(false);
+            return either.HasValue
+                ? CreateValue<TResult, TError>(await selector(either.Value).ConfigureAwait(false))
                 : CreateError<TResult, TError>(either.Error);
         }
 
@@ -238,13 +274,13 @@ namespace Lemonad.ErrorHandling.Either {
 
         [Pure]
         public static IEither<TResult, TError>
-            SafeCast<TResult>(IEither<T, TError> either, Func<TError> errorSelector) {
+            SafeCast<TResult>(IEither<T, TError> either, Func<T, TError> errorSelector) {
             if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
             if (either.HasError) return CreateError<TResult, TError>(either.Error);
 
             return either.Value is TResult result
                 ? CreateValue<TResult, TError>(result)
-                : CreateError<TResult, TError>(errorSelector());
+                : CreateError<TResult, TError>(errorSelector(either.Value));
         }
 
         public static IEither<TResult, TError> Join<TInner, TKey, TResult>(IEither<T, TError> either,
@@ -279,12 +315,12 @@ namespace Lemonad.ErrorHandling.Either {
             return CreateError<TResult, TError>(errorSelector());
         }
 
-        private static IEnumerable<T2> YieldErrors<T1, T2>(IEither<T1, T2> result) {
+        public static IEnumerable<T2> YieldErrors<T1, T2>(IEither<T1, T2> result) {
             if (result.HasError)
                 yield return result.Error;
         }
 
-        private static IEnumerable<T1> YieldValues<T1, T2>(IEither<T1, T2> result) {
+        public static IEnumerable<T1> YieldValues<T1, T2>(IEither<T1, T2> result) {
             if (result.HasValue)
                 yield return result.Value;
         }
@@ -313,6 +349,139 @@ namespace Lemonad.ErrorHandling.Either {
             return other.HasError
                 ? CreateError<TResult, TError>(other.Error)
                 : CreateValue<TResult, TError>(resultSelector(either.Value, other.Value));
+        }
+
+        public static Task<IEither<T, TError>> IsErrorWhenAsyncPredicate(Task<IEither<T, TError>> either,
+            Func<T, Task<bool>> predicate, Func<Maybe<T>, TError> errorSelector) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<T, TError>> IsErrorWhenAsync(Task<IEither<T, TError>> either,
+            Func<T, bool> predicate,
+            Func<T, TError> errorSelector) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<T, TError>> DoAsync(Task<IEither<T, TError>> taskResult, Action action) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<T, TError>> DoWithErrorAsync(Task<IEither<T, TError>> taskResult,
+            Action<TError> action) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<T, TError>> DoWithAsync(Task<IEither<T, TError>> taskResult, Action<T> action) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<TResult, TErrorResult>> FullMapAsync<TResult, TErrorResult, T, TError>(
+            Task<IEither<T, TError>> taskResult, Func<T, TResult> selector, Func<TError, TErrorResult> errorSelector) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<TResult> MatchAsync<TResult>(Task<IEither<T, TError>> taskResult, Func<T, TResult> selector,
+            Func<TError, TResult> errorSelector) {
+            throw new NotImplementedException();
+        }
+
+        public static Task MatchAsync(Task<IEither<T, TError>> taskResult, Action<T> selector,
+            Action<TError> errorSelector) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<TResult, TError>> FlatMapAsync<TResult>(Task<IEither<T, TError>> either,
+            Func<T, Func<T, Task<IEither<TResult, TError>>>> func) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<TResult, TError>> FlatMapAsync<TResult, TSelector>(Task<IEither<T, TError>> either,
+            Func<T, Func<T, Task<IEither<TSelector, TError>>>> func, Func<T, TSelector, TResult> resultSelector) {
+            throw new NotImplementedException();
+        }
+
+        [Pure]
+        internal static async Task<IEither<TResult, TError>> FlatMapAsync<TResult, TErrorResult>(
+            Task<IEither<T, TError>> source,
+            Func<T, Task<IEither<TResult, TErrorResult>>> flatMapSelector, Func<TErrorResult, TError> errorSelector) {
+            
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<TResult, TError>> FlatMapAsync<TResult, TFlatMap, TErrorResult>(
+            Task<IEither<T, TError>> either, Func<T, Task<IEither<TFlatMap, TErrorResult>>> flatMapSelector,
+            Func<T, TFlatMap, TResult> resultSelector, Func<TErrorResult, TError> errorSelector) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<T, TError>> FlattenAsync<TResult, TErrorResult>(Task<IEither<T, TError>> either,
+            Func<T, Task<IEither<TResult, TErrorResult>>> compose, Func<TErrorResult, TError> errorSelector) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<T, TError>> FlattenAsync<TResult>(Task<IEither<T, TError>> either,
+            Func<T, Task<IEither<TResult, TError>>> compose) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<TResult, TErrorResult>> FullCastAsync<TResult, TErrorResult>(
+            Task<IEither<T, TError>> either) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<TResult, TResult>> FullCastAsync<TResult>(Task<IEither<T, TError>> either) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<T, TResult>> CastErrorAsync<TResult>(Task<IEither<T, TError>> either) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<TResult, TError>> SafeCastAsync<TResult>(Task<IEither<T, TError>> either,
+            Func<T, TError> errorSelector) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<TResult, TErrorResult>> FullFlatMapAsync<TFlatMap, TErrorResult, TResult>(
+            Task<IEither<T, TError>> either, Func<T, Task<IEither<TFlatMap, TErrorResult>>> compose,
+            Func<T, TFlatMap, TResult> resultSelector, Func<TError, TErrorResult> errorSelector) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<TResult, TErrorResult>> FullFlatMapAsync<TResult, TErrorResult>(
+            Task<IEither<T, TError>> either, Func<T, Task<IEither<TResult, TErrorResult>>> compose,
+            Func<TError, TErrorResult> resultSelector) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<TResult, TError>> JoinAsync<TResult, TInner, TKey>(Task<IEither<T, TError>> either,
+            Task<IEither<TInner, TError>> innerEither, Func<T, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector, Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector,
+            IEqualityComparer<TKey> comparer) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<TResult, TError>> JoinAsync<TResult, TInner, TKey>(Task<IEither<T, TError>> either,
+            Task<IEither<TInner, TError>> innerEither, Func<T, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector, Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector) {
+            throw new NotImplementedException();
+        }
+
+        public static AsyncResult<TResult, TError> ZipAsync<TResult, TOther>(Task<IEither<T, TError>> either,
+            Task<IEither<TOther, TError>> otherEither, Func<T, TOther, TResult> resultSelector) {
+            throw new NotImplementedException();
+        }
+
+        public static AsyncResult<TResult, TError> CastAsync<TResult>(Task<IEither<T, TError>> either) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<T, TErrorResult>> MapErrorAsyncSelector< TErrorResult>(Task<IEither<T, TError>> either, Func<TError, Task<TErrorResult>> selector) {
+            throw new NotImplementedException();
+        }
+
+        public static Task<IEither<T, TErrorResult>> MapErrorAsync<T, TErrorResult >(Task<IEither<T, TError>> either, Func<TError, TErrorResult> selector) {
+            throw new NotImplementedException();
         }
     }
 }
