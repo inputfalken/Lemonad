@@ -181,7 +181,7 @@ namespace Lemonad.ErrorHandling {
 
         /// <inheritdoc cref="ToEnumerable{T,TError}(Result{T,TError})" />
         public static async Task<IEnumerable<T>> ToEnumerable<T, TError>(this AsyncResult<T, TError> result) =>
-            EitherMethods<T, TError>.YieldValues(await result.Either.ConfigureAwait(false));
+            EitherMethods.YieldValues(await result.Either.ConfigureAwait(false));
 
         /// <summary>
         ///     Treat <typeparamref name="TError" /> as enumerable with 0-1 elements in.
@@ -194,7 +194,7 @@ namespace Lemonad.ErrorHandling {
         /// <inheritdoc cref="ToErrorEnumerable{T,TError}(Result{T,TError})" />
         public static async Task<IEnumerable<TError>>
             ToErrorEnumerable<T, TError>(this AsyncResult<T, TError> result) =>
-            EitherMethods<T, TError>.YieldErrors(await result.Either.ConfigureAwait(false));
+            EitherMethods.YieldErrors(await result.Either.ConfigureAwait(false));
 
         /// <summary>
         ///     Converts an <see cref="Maybe{T}" /> to an <see cref="Result{T,TError}" /> with the value <typeparamref name="T" />.
