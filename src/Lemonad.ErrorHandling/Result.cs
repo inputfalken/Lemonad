@@ -13,7 +13,8 @@ namespace Lemonad.ErrorHandling {
     ///     Inspired by 'Haskell's Either a b' and FSharps 'Result&lt;T, TError&gt;'.
     ///     <para></para>
     ///     <para></para>
-    ///     Null values are not allowed and therefore excessively be checked before beginning an <see cref="Result{T,TError}"/> expression chain.
+    ///     Null values are not allowed and therefore excessively be checked before beginning an
+    ///     <see cref="Result{T,TError}" /> expression chain.
     /// </summary>
     /// <typeparam name="T">
     ///     The type which is considered as successful.
@@ -36,7 +37,7 @@ namespace Lemonad.ErrorHandling {
             new NonNullEither(in value, in error, hasError, hasValue);
 
         /// <summary>
-        ///    Gets the <see cref="IEither{T,TError}"/> from the <see cref="Result{T,TError}"/> instance.
+        ///     Gets the <see cref="IEither{T,TError}" /> from the <see cref="Result{T,TError}" /> instance.
         /// </summary>
         public IEither<T, TError> Either { get; }
 
@@ -108,7 +109,7 @@ namespace Lemonad.ErrorHandling {
         ///     The return type of <paramref name="selector" /> and <paramref name="errorSelector" />
         /// </typeparam>
         /// <returns>
-        ///     Either <typeparamref name="T" /> or <typeparamref name="TError" /> as <typeparamref name="TResult"/>.
+        ///     Either <typeparamref name="T" /> or <typeparamref name="TError" /> as <typeparamref name="TResult" />.
         /// </returns>
         [Pure]
         public TResult Match<TResult>(Func<T, TResult> selector, Func<TError, TResult> errorSelector) =>
@@ -141,7 +142,8 @@ namespace Lemonad.ErrorHandling {
         ///     When <paramref name="action" /> is null and needs to be executed.
         /// </exception>
         /// <returns>
-        /// A <see cref="Result{T,TError}"/> whom may have invoked the <paramref name="action"/> if the current <see cref="Result{T,TError}"/> is in a valid state.
+        ///     A <see cref="Result{T,TError}" /> whom may have invoked the <paramref name="action" /> if the current
+        ///     <see cref="Result{T,TError}" /> is in a valid state.
         /// </returns>
         public Result<T, TError> DoWith(Action<T> action) =>
             new Result<T, TError>(EitherMethods.DoWith(Either, action));
@@ -159,7 +161,8 @@ namespace Lemonad.ErrorHandling {
         ///     When <paramref name="action" /> is null.
         /// </exception>
         /// <returns>
-        /// A <see cref="Result{T,TError}"/> who have invoked <paramref name="action"/> no matter what state the current <see cref="Result{T,TError}"/> is in.
+        ///     A <see cref="Result{T,TError}" /> who have invoked <paramref name="action" /> no matter what state the current
+        ///     <see cref="Result{T,TError}" /> is in.
         /// </returns>
         public Result<T, TError> Do(Action action) =>
             new Result<T, TError>(EitherMethods.Do(Either, action));
@@ -173,7 +176,8 @@ namespace Lemonad.ErrorHandling {
         ///     <see cref="Result{T,TError}" /> with side effects.
         /// </returns>
         /// <returns>
-        /// A <see cref="Result{T,TError}"/> whom may have invoked the <paramref name="action"/> if the current <see cref="Result{T,TError}"/> is in a an invalid state.
+        ///     A <see cref="Result{T,TError}" /> whom may have invoked the <paramref name="action" /> if the current
+        ///     <see cref="Result{T,TError}" /> is in a an invalid state.
         /// </returns>
         public Result<T, TError> DoWithError(
             Action<TError> action) => new Result<T, TError>(EitherMethods.DoWithError(Either, action));
@@ -188,9 +192,10 @@ namespace Lemonad.ErrorHandling {
         ///     Is executed when the <paramref name="predicate" /> is false. The in parameter is a <see cref="Maybe{T}" /> since
         ///     the <typeparamref name="T" /> could be unsafe in this context.
         /// </param>
-        ///<returns>
-        ///   A <see cref="Result{T,TError}"/> whose <typeparamref name="T"/> has been tested by the <paramref name="predicate"/>
-        ///   if the current <see cref="Result{T,TError}"/> is in valid state.
+        /// <returns>
+        ///     A <see cref="Result{T,TError}" /> whose <typeparamref name="T" /> has been tested by the
+        ///     <paramref name="predicate" />
+        ///     if the current <see cref="Result{T,TError}" /> is in valid state.
         /// </returns>
         [Pure]
         public Result<T, TError> Filter(Func<T, bool> predicate, Func<T, TError> errorSelector) =>
@@ -602,25 +607,26 @@ namespace Lemonad.ErrorHandling {
             public T Value { get; }
 
             /// <summary>
-            ///  Only one one <typeparamref name="T"/> and <typeparamref name="TError"/> can be available to use.
+            ///     Only one one <typeparamref name="T" /> and <typeparamref name="TError" /> can be available to use.
             /// </summary>
             /// <param name="value">
-            /// The potential value.
+            ///     The potential value.
             /// </param>
             /// <param name="error">
-            /// The potential error.
+            ///     The potential error.
             /// </param>
             /// <param name="hasError">
-            /// Is true when <paramref name="error"/> is available.
+            ///     Is true when <paramref name="error" /> is available.
             /// </param>
             /// <param name="hasValue">
-            /// Is true when <paramref name="value"/> is available.
+            ///     Is true when <paramref name="value" /> is available.
             /// </param>
             /// <exception cref="ArgumentException">
-            /// When <see cref="HasValue"/> and <see cref="HasError"/>  are both either false or true.
+            ///     When <see cref="HasValue" /> and <see cref="HasError" />  are both either false or true.
             /// </exception>
             /// <exception cref="ArgumentNullException">
-            /// When either <see cref="Value"/> or <see cref="Error"/> is null at the same the corresponding <see cref="Boolean"/> value check is true.
+            ///     When either <see cref="Value" /> or <see cref="Error" /> is null at the same the corresponding
+            ///     <see cref="Boolean" /> value check is true.
             /// </exception>
             internal NonNullEither(in T value, in TError error, bool hasError, bool hasValue) {
                 if (hasError == hasValue)

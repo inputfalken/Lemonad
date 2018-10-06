@@ -239,7 +239,7 @@ namespace Lemonad.ErrorHandling {
 
         /// <summary>
         ///     Creates an <see cref="Result{T,TError}" /> based on a predicate function combined with an
-        ///     <paramref name="errorSelector" /> with a <see cref="Maybe{T}"/> in parameter who has been null checked.
+        ///     <paramref name="errorSelector" /> with a <see cref="Maybe{T}" /> in parameter who has been null checked.
         /// </summary>
         /// <typeparam name="T">
         ///     The value type in <see cref="Result{T,TError}" />.

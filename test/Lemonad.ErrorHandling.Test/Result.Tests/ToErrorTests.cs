@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
@@ -16,7 +15,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
         [Fact]
         public void Convert_Null_String_To_ResultError() {
-            Assert.Throws<ArgumentNullException>(AssertionUtilities.EitherErrorName,() => {
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.EitherErrorName, () => {
                 string str = null;
                 var result = str.ToResultError(x => true, x => "");
 

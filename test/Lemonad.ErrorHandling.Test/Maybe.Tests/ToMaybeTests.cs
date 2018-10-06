@@ -4,6 +4,15 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     public class ToMaybeTests {
         [Fact]
+        public void Passing_Null_Value_With_Null_Check_Predicate_Does_Not_Throw() {
+            var exception = Record.Exception(() => {
+                string x = null;
+                var foo = x.ToMaybe(s => s != null);
+            });
+            Assert.Null(exception);
+        }
+
+        [Fact]
         public void Predicate_Overload__Empty_String__Length_Is_Greather_Than_5__Expects_HasValue_To_Be_False() {
             var maybe = string.Empty.ToMaybe(s => s.Length > 5);
 
@@ -37,15 +46,6 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
             Assert.True(maybe.HasValue, "This predicate should have a value.");
             Assert.Equal("Foobar", maybe.Value);
-        }
-
-        [Fact]
-        public void Passing_Null_Value_With_Null_Check_Predicate_Does_Not_Throw() {
-            var exception = Record.Exception(() => {
-                string x = null;
-                var foo = x.ToMaybe(s => s != null);
-            });
-            Assert.Null(exception);
         }
     }
 }

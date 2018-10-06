@@ -23,7 +23,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         public void Result_With_Error__With_Invalid_Casting() {
             var programResult = Program(1);
             Assert.False(programResult.Either.HasValue, "Result should not have value");
-            Assert.True(programResult.Either.HasError, "Resultction ReSharperGotoNextErrorInSolution should have error");
+            Assert.True(programResult.Either.HasError,
+                "Resultction ReSharperGotoNextErrorInSolution should have error");
             Assert.Equal(default, programResult.Either.Value);
             Assert.Equal(ExitCodes.Fail, programResult.Either.Error);
             Assert.Throws<InvalidCastException>(() => programResult.CastError<string>());

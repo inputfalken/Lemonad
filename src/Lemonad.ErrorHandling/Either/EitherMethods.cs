@@ -152,6 +152,17 @@ namespace Lemonad.ErrorHandling.Either {
                 : CreateError<TResult, TError>(errorSelector(eitherSelector.Error));
         }
 
+        public static async Task<IEither<TResult, TError>> FlatMapAsync<T, TResult, TError>(
+            Task<IEither<T, TError>> source,
+            Func<T, Task<IEither<TResult, TError>>> compose) {
+            if (compose == null) throw new ArgumentNullException(nameof(compose));
+            var either = await source.ConfigureAwait(false);
+
+            return either.HasValue
+                ? await compose(either.Value).ConfigureAwait(false)
+                : CreateError<TResult, TError>(either.Error);
+        }
+
         [Pure]
         internal static async Task<IEither<TResult, TError>> FlatMapAsync<T, TResult, TError, TErrorResult>(
             Task<IEither<T, TError>> source,
@@ -163,17 +174,6 @@ namespace Lemonad.ErrorHandling.Either {
             return okSelector.HasValue
                 ? CreateValue<TResult, TError>(okSelector.Value)
                 : CreateError<TResult, TError>(errorSelector(okSelector.Error));
-        }
-
-        public static async Task<IEither<TResult, TError>> FlatMapAsync<T, TResult, TError>(
-            Task<IEither<T, TError>> source,
-            Func<T, Task<IEither<TResult, TError>>> compose) {
-            if (compose == null) throw new ArgumentNullException(nameof(compose));
-            var either = await source.ConfigureAwait(false);
-
-            return either.HasValue
-                ? await compose(either.Value).ConfigureAwait(false)
-                : CreateError<TResult, TError>(either.Error);
         }
 
         internal static Task<IEither<TResult, TError>> FlatMapAsync<T, TSelector, TResult, TError>(
@@ -422,9 +422,7 @@ namespace Lemonad.ErrorHandling.Either {
 
         internal static async Task<IEither<TResult, TError>> MapAsync<T, TResult, TError>(
             Task<IEither<T, TError>> source,
-            Func<T, TResult> selector) {
-            return Map(await source.ConfigureAwait(false), selector);
-        }
+            Func<T, TResult> selector) => Map(await source.ConfigureAwait(false), selector);
 
         [Pure]
         internal static async Task<IEither<TResult, TError>> MapAsyncSelector<T, TResult, TError>(

@@ -3,7 +3,6 @@ using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class OkWhenTests {
-
         [Fact]
         public void
             Result_With_Error__Expects_Predicate_Never_To_Be_Executed_And_ErrorSelector_Never_To_Be_Invoked_With_Parameter_ErrorSelector() {
@@ -27,7 +26,6 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.False(result.Either.HasValue, "Result should not have value.");
         }
 
-
         [Fact]
         public void
             Result_With_Value_With_Falsy_Predicate__Expects_Predicate_To_Be_Executed_And_ErrorSelector_To_Be_Invoked_With_Parameter_ErrorSelector() {
@@ -49,7 +47,6 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
             Assert.True(result.Either.HasError, "Result should have error.");
             Assert.False(result.Either.HasValue, "Result should not have value.");
         }
-
 
         [Fact]
         public void
