@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
-using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling.Either {
     internal static class EitherMethods {

@@ -414,7 +414,6 @@ namespace Lemonad.ErrorHandling {
         /// </exception>
         void Match(Action<T> action, Action<TError> errorAction);
 
-
         /// <summary>
         ///     Attempts to cast <typeparamref name="T" /> into <typeparamref name="TResult" />.
         /// </summary>

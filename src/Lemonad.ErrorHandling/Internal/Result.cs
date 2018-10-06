@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Linq;
 using Lemonad.ErrorHandling.Either;
 
 namespace Lemonad.ErrorHandling.Internal {
@@ -23,9 +22,11 @@ namespace Lemonad.ErrorHandling.Internal {
     /// </typeparam>
     internal readonly struct Result<T, TError> : IEquatable<Result<T, TError>>, IComparable<Result<T, TError>>,
         IResult<T, TError> {
-        internal static IResult<T, TError> ValueFactory(in T element) => new Result<T, TError>(in element, default, false, true);
+        internal static IResult<T, TError> ValueFactory(in T element) =>
+            new Result<T, TError>(in element, default, false, true);
 
-        internal static IResult<T, TError> ErrorFactory(in TError error) => new Result<T, TError>(default, in error, true, false);
+        internal static IResult<T, TError> ErrorFactory(in TError error) =>
+            new Result<T, TError>(default, in error, true, false);
 
         /// <summary>
         ///     Gets the <see cref="IEither{T,TError}" /> from the <see cref="Result{T,TError}" /> instance.

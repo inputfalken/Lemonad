@@ -1,193 +1,120 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Either;
 using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
-    public static class Extensions {
+    public static class AsyncResult {
         public static TaskAwaiter<IEither<T, TError>> GetAwaiter<T, TError>(this IAsyncResult<T, TError> result) =>
             result.Either.GetAwaiter();
-    }
 
-    /// <summary>
-    ///     An asynchronous version of <see cref="Result{T,TError}" /> with the same functionality.
-    /// </summary>
-    internal readonly struct AsyncResult<T, TError> : IAsyncResult<T, TError> {
-        private AsyncResult(Task<IEither<T, TError>> either) => Either = either;
+        /// <summary>
+        ///     Evaluates the <see cref="Result{T,TError}" />.
+        /// </summary>
+        /// <param name="source">
+        ///     The <see cref="Result{T,TError}" /> to evaluate.
+        /// </param>
+        /// <typeparam name="T">
+        ///     The type of the value.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        ///     The type of the error.
+        /// </typeparam>
+        public static Task<T> Match<T, TError>(this IAsyncResult<T, TError> source) where TError : T =>
+            source.Match(x => x, x => x);
 
-        public Task<IEither<T, TError>> Either { get; }
+        /// <summary>
+        ///     Evaluates the <see cref="Result{T,TError}" />.
+        /// </summary>
+        /// <param name="source">
+        ///     The <see cref="Result{T,TError}" /> to evaluate.
+        /// </param>
+        /// <param name="selector">
+        ///     A function to map <typeparamref name="T" /> to <typeparamref name="TResult" />.
+        /// </param>
+        /// <typeparam name="T">
+        ///     The value type of the <see cref="Result{T,TError}" />.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        ///     The error type of the <see cref="Result{T,TError}" />.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        ///     The type returned from function <paramref name="selector" />>
+        /// </typeparam>
+        [Pure]
+        public static Task<TResult> Match<T, TResult, TError>(this IAsyncResult<T, TError> source,
+            Func<T, TResult> selector)
+            where T : TError => source.Match(selector, x => selector((T) x));
 
-        public static AsyncResult<T, TError> Factory(Task<IResult<T, TError>> result) =>
-            new AsyncResult<T, TError>(FactoryInternal(result));
+        /// <summary>
+        ///     Converts the <see cref="Task" /> with <see cref="Result{T,TError}" /> into <see cref="AsyncResult{T,TError}" />.
+        /// </summary>
+        /// <param name="result">
+        ///     The  <see cref="Result{T,TError}" /> wrapped in a <see cref="Task{TResult}" />.
+        /// </param>
+        /// <typeparam name="T">
+        ///     The 'successful' value.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        ///     The 'failure' value.
+        /// </typeparam>
+        public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<IResult<T, TError>> result) =>
+            AsyncResult<T, TError>.Factory(result);
 
-        public static AsyncResult<T, TError> ValueFactory(T value) =>
-            new AsyncResult<T, TError>(Task.FromResult(Result.Value<T, TError>(value).Either));
-
-        private static async Task<IEither<T, TError>> FactoryInternal(Task<IResult<T, TError>> value) =>
-            (await value.ConfigureAwait(false)).Either;
-
-        private static async Task<IEither<T, TError>> ValueFactoryInternal(Task<T> value) =>
-            Result.Value<T, TError>(await value.ConfigureAwait(false)).Either;
-
-        private static async Task<IEither<T, TError>> ErrorFactoryInternal(Task<TError> error) =>
-            Result.Error<T, TError>(await error.ConfigureAwait(false)).Either;
-
-        public static AsyncResult<T, TError> ValueFactory(Task<T> value) => new AsyncResult<T, TError>(ValueFactoryInternal(value));
-
-        public static AsyncResult<T, TError> ErrorFactory(Task<TError> error) => new AsyncResult<T, TError>(ErrorFactoryInternal(error));
-
-        public static AsyncResult<T, TError> ErrorFactory(TError error) =>
-            new AsyncResult<T, TError>(Task.FromResult(Result.Error<T, TError>(error).Either));
-
-        public IAsyncResult<TResult, TError> Join<TInner, TKey, TResult>(
-            IAsyncResult<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
-            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector, IEqualityComparer<TKey> comparer) =>
-            new AsyncResult<TResult, TError>(EitherMethods.JoinAsync(Either, inner.Either, outerKeySelector,
-                innerKeySelector, resultSelector,
-                errorSelector, comparer));
-
-        public IAsyncResult<TResult, TError> Join<TInner, TKey, TResult>(
-            IAsyncResult<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
-            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector) =>
-            new AsyncResult<TResult, TError>(EitherMethods.JoinAsync(Either, inner.Either, outerKeySelector,
-                innerKeySelector, resultSelector,
-                errorSelector));
+        /// <summary>
+        ///     Converts an <see cref="Result{T,TError}" /> into an <see cref="AsyncResult{T,TError}" />.
+        /// </summary>
+        /// <param name="result">
+        ///     The  <see cref="Result{T,TError}" />.
+        /// </param>
+        /// <typeparam name="T">
+        ///     The 'successful' value.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        ///     The 'failure' value.
+        /// </typeparam>
+        public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this IResult<T, TError> result) =>
+            ToAsyncResult(Task.FromResult(result));
 
         [Pure]
-        public IAsyncResult<TResult, TError> Zip<TOther, TResult>(IAsyncResult<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector) =>
-            new AsyncResult<TResult, TError>(EitherMethods.ZipAsync(Either, other.Either, resultSelector));
+        public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T> source, Func<T, bool> predicate,
+            Func<Maybe<T>, TError> errorSelector) {
+            async Task<IResult<T, TError>> Factory(Task<T> x, Func<T, bool> y, Func<Maybe<T>, TError> z) =>
+                (await x.ConfigureAwait(false)).ToResult(y, z);
 
-        public IAsyncResult<T, TError> Filter(Func<T, bool> predicate, Func<T, TError> errorSelector) =>
-            new AsyncResult<T, TError>(EitherMethods.FilterAsync(Either, predicate, errorSelector));
-
-        public IAsyncResult<T, TError> Filter(Func<T, Task<bool>> predicate, Func<T, TError> errorSelector) =>
-            new AsyncResult<T, TError>(EitherMethods.FilterAsyncPredicate(Either, predicate, errorSelector));
-
-        public IAsyncResult<T, TError> IsErrorWhen(
-            Func<T, bool> predicate,
-            Func<T, TError> errorSelector) =>
-            new AsyncResult<T, TError>(EitherMethods.IsErrorWhenAsync(Either, predicate, errorSelector));
-
-        public IAsyncResult<T, TError> IsErrorWhen(
-            Func<T, Task<bool>> predicate,
-            Func<Maybe<T>, TError> errorSelector) =>
-            new AsyncResult<T, TError>(
-                EitherMethods.IsErrorWhenAsyncPredicate(Either, predicate, errorSelector));
-
-        public IAsyncResult<T, IReadOnlyList<TError>> Multiple(
-            params Func<IAsyncResult<T, TError>, IAsyncResult<T, TError>>[] validations) {
-            var tmp = this;
-            return new AsyncResult<T, IReadOnlyList<TError>>(EitherMethods.MultipleAsync(Either,
-                validations.Select(x => x.Compose(y => y.Either)(tmp)).ToArray()));
+            return AsyncResult<T, TError>.Factory(Factory(source, predicate, errorSelector));
         }
 
-        public IAsyncResult<TResult, TError> Map<TResult>(Func<T, TResult> selector) =>
-            new AsyncResult<TResult, TError>(EitherMethods.MapAsync(Either, selector));
+        [Pure]
+        public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T?> source,
+            Func<TError> errorSelector)
+            where T : struct {
+            async Task<IResult<T, TError>> Factory(Task<T?> x, Func<TError> y) =>
+                (await x.ConfigureAwait(false)).ToResult(y);
 
-        public IAsyncResult<TResult, TError> Map<TResult>(Func<T, Task<TResult>> selector) =>
-            new AsyncResult<TResult, TError>(EitherMethods.MapAsyncSelector(Either, selector));
-
-        public IAsyncResult<T, TErrorResult> MapError<TErrorResult>(Func<TError, TErrorResult> selector) =>
-            new AsyncResult<T, TErrorResult>(EitherMethods.MapErrorAsync(Either, selector));
-
-        public IAsyncResult<T, TErrorResult> MapError<TErrorResult>(Func<TError, Task<TErrorResult>> selector) =>
-            new AsyncResult<T, TErrorResult>(EitherMethods.MapErrorAsyncSelector(Either, selector));
-
-        /// <inheritdoc cref="Result{T,TError}.Do" />
-        public IAsyncResult<T, TError> Do(Action action) =>
-            new AsyncResult<T, TError>(EitherMethods.DoAsync(Either, action));
-
-        /// <inheritdoc cref="Result{T,TError}.DoWithError" />
-        public IAsyncResult<T, TError> DoWithError(Action<TError> action) =>
-            new AsyncResult<T, TError>(EitherMethods.DoWithErrorAsync(Either, action));
-
-        /// <inheritdoc cref="Result{T,TError}.DoWith" />
-        public IAsyncResult<T, TError> DoWith(Action<T> action) =>
-            new AsyncResult<T, TError>(EitherMethods.DoWithAsync(Either, action));
-
-        /// <inheritdoc cref="Result{T,TError}.FullMap{TResult,TErrorResult}" />
-        public IAsyncResult<TResult, TErrorResult> FullMap<TResult, TErrorResult>(
-            Func<T, TResult> selector,
-            Func<TError, TErrorResult> errorSelector
-        ) => new AsyncResult<TResult, TErrorResult>(
-            EitherMethods.FullMapAsync(Either, selector, errorSelector));
-
-        /// <inheritdoc cref="Result{T,TError}.Match{TResult}" />
-        public Task<TResult> Match<TResult>(Func<T, TResult> selector, Func<TError, TResult> errorSelector) =>
-            EitherMethods.MatchAsync(Either, selector, errorSelector);
-
-        /// <inheritdoc cref="Result{T,TError}.Match" />
-        public Task Match(Action<T> action, Action<TError> errorAction) =>
-            EitherMethods.MatchAsync(Either, action, errorAction);
-
-        public IAsyncResult<TResult, TError> FlatMap<TResult>(Func<T, IAsyncResult<TResult, TError>> flatSelector) =>
-            new AsyncResult<TResult, TError>(
-                EitherMethods.FlatMapAsync(Either, flatSelector.Compose(y => y.Either)));
-
-        public IAsyncResult<TResult, TError> FlatMap<TSelector, TResult>(
-            Func<T, IAsyncResult<TSelector, TError>> flatSelector,
-            Func<T, TSelector, TResult> resultSelector) => new AsyncResult<TResult, TError>(
-            EitherMethods.FlatMapAsync(Either, flatSelector.Compose(y => y.Either), resultSelector));
-
-        public IAsyncResult<TResult, TError> FlatMap<TResult, TErrorResult>(
-            Func<T, IAsyncResult<TResult, TErrorResult>> flatMapSelector, Func<TErrorResult, TError> errorSelector) {
-            return new AsyncResult<TResult, TError>(
-                EitherMethods.FlatMapAsync(Either,
-                    flatMapSelector.Compose(x => x.Either),
-                    errorSelector)
-            );
+            return AsyncResult<T, TError>.Factory(Factory(source, errorSelector));
         }
 
-        public IAsyncResult<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, IAsyncResult<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
-            Func<TErrorResult, TError> errorSelector) =>
-            new AsyncResult<TResult, TError>(EitherMethods.FlatMapAsync(Either, flatMapSelector.Compose(y => y.Either),
-                resultSelector, errorSelector));
+        [Pure]
+        public static IAsyncResult<T, TError> ToAsyncResultError<T, TError>(this Task<TError> source,
+            Func<TError, bool> predicate,
+            Func<TError, T> valueSelector) {
+            async Task<IResult<T, TError>> Factory(Task<TError> x, Func<TError, bool> y, Func<TError, T> z) =>
+                (await x.ConfigureAwait(false)).ToResultError(y, z);
 
-        /// <inheritdoc cref="Result{T,TError}.Cast{TResult}" />
-        public IAsyncResult<TResult, TError> Cast<TResult>() =>
-            new AsyncResult<TResult, TError>(EitherMethods.CastAsync<T, TResult, TError>(Either));
+            return AsyncResult<T, TError>.Factory(Factory(source, predicate, valueSelector));
+        }
 
-        public IAsyncResult<T, TError> Flatten<TResult, TErrorResult>(
-            Func<T, IAsyncResult<TResult, TErrorResult>> selector, Func<TErrorResult, TError> errorSelector) =>
-            new AsyncResult<T, TError>(
-                EitherMethods.FlattenAsync(Either, selector.Compose(y => y.Either), errorSelector));
+        /// <inheritdoc cref="ToEnumerable{T,TError}" />
+        public static async Task<IEnumerable<T>> ToEnumerable<T, TError>(this IAsyncResult<T, TError> result) =>
+            EitherMethods.YieldValues(await result.Either.ConfigureAwait(false));
 
-        public IAsyncResult<T, TError> Flatten<TResult>(Func<T, IAsyncResult<TResult, TError>> selector) =>
-            new AsyncResult<T, TError>(EitherMethods.FlattenAsync(Either, selector.Compose(y => y.Either)));
-
-        /// <inheritdoc cref="Result{T,TError}.FullCast{TResult,TErrorResult}" />
-        public IAsyncResult<TResult, TErrorResult> FullCast<TResult, TErrorResult>() =>
-            new AsyncResult<TResult, TErrorResult>(
-                EitherMethods.FullCastAsync<T, TResult, TError, TErrorResult>(Either));
-
-        /// <inheritdoc cref="Result{T,TError}.FullCast{TResult}" />
-        public IAsyncResult<TResult, TResult> FullCast<TResult>() =>
-            new AsyncResult<TResult, TResult>(EitherMethods.FullCastAsync<T, TResult, TError>(Either));
-
-        /// <inheritdoc cref="Result{T,TError}.CastError{TResult}" />
-        public IAsyncResult<T, TResult> CastError<TResult>() =>
-            new AsyncResult<T, TResult>(EitherMethods.CastErrorAsync<T, TResult, TError>(Either));
-
-        /// <inheritdoc cref="Result{T,TError}.SafeCast{TResult}" />
-        public IAsyncResult<TResult, TError> SafeCast<TResult>(Func<T, TError> errorSelector) =>
-            new AsyncResult<TResult, TError>(EitherMethods.SafeCastAsync<T, TResult, TError>(Either, errorSelector));
-
-        public IAsyncResult<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, IAsyncResult<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
-            Func<TError, TErrorResult> errorSelector) =>
-            new AsyncResult<TResult, TErrorResult>(EitherMethods.FullFlatMapAsync(Either,
-                flatMapSelector.Compose(y => y.Either), resultSelector, errorSelector));
-
-        public IAsyncResult<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
-            Func<T, IAsyncResult<TResult, TErrorResult>> flatMapSelector, Func<TError, TErrorResult> errorSelector) =>
-            new AsyncResult<TResult, TErrorResult>(
-                EitherMethods.FullFlatMapAsync(Either, flatMapSelector.Compose(y => y.Either),
-                    errorSelector));
+        /// <inheritdoc cref="ToErrorEnumerable{T,TError}" />
+        public static async Task<IEnumerable<TError>>
+            ToErrorEnumerable<T, TError>(this IAsyncResult<T, TError> result) =>
+            EitherMethods.YieldErrors(await result.Either.ConfigureAwait(false));
     }
 }
