@@ -329,9 +329,8 @@ namespace Lemonad.ErrorHandling.Either {
                 : CreateValue<TResult, TErrorResult>(selector(either.Value));
         }
 
-        internal static Task<IEither<TResult, TErrorResult>> FullMapAsync<T, TResult, TError, TErrorResult>(
-            Task<IEither<T, TError>> taskResult, Func<T, TResult> selector, Func<TError, TErrorResult> errorSelector) =>
-            throw new NotImplementedException();
+        internal static async Task<IEither<TResult, TErrorResult>> FullMapAsync<T, TResult, TError, TErrorResult>(
+            Task<IEither<T, TError>> source, Func<T, TResult> selector, Func<TError, TErrorResult> errorSelector) => FullMap(await source.ConfigureAwait(false), selector, errorSelector);
 
         [Pure]
         internal static IEither<T, TError> IsErrorWhen<T, TError>(IEither<T, TError> either,

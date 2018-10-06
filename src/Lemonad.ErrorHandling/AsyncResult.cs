@@ -2,16 +2,21 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Either;
 using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
+    public static class Extensions {
+        public static TaskAwaiter<IEither<T, TError>> GetAwaiter<T, TError>(this AsyncResult<T, TError> result) => result.Either.GetAwaiter();
+    }
+
     /// <summary>
     ///     An asynchronous version of <see cref="Result{T,TError}" /> with the same functionality.
     /// </summary>
     public readonly struct AsyncResult<T, TError> {
-        public AsyncResult(Task<IEither<T, TError>> either) => Either = either;
+        private AsyncResult(Task<IEither<T, TError>> either) => Either = either;
 
         internal Task<IEither<T, TError>> Either { get; }
 
@@ -76,7 +81,8 @@ namespace Lemonad.ErrorHandling {
         public AsyncResult<T, IReadOnlyList<TError>> Multiple(
             params Func<AsyncResult<T, TError>, AsyncResult<T, TError>>[] validations) {
             var tmp = this;
-            return new AsyncResult<T, IReadOnlyList<TError>>(EitherMethods.MultipleAsync(Either, validations.Select(x => x.Compose(y => y.Either)(tmp)).ToArray()));
+            return new AsyncResult<T, IReadOnlyList<TError>>(EitherMethods.MultipleAsync(Either,
+                validations.Select(x => x.Compose(y => y.Either)(tmp)).ToArray()));
         }
 
         public AsyncResult<TResult, TError> Map<TResult>(Func<T, TResult> selector) =>
