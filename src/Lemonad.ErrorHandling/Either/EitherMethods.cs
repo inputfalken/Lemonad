@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
+using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling.Either {
     internal static class EitherMethods {
@@ -339,7 +340,7 @@ namespace Lemonad.ErrorHandling.Either {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
             if (either.HasError)
-                return ResultExtensions.Error<T, TError>(either.Error).Either;
+                return Result.Error<T, TError>(either.Error).Either;
 
             return predicate(either.Value)
                 ? CreateError<T, TError>(errorSelector(either.Value))
@@ -357,7 +358,7 @@ namespace Lemonad.ErrorHandling.Either {
             if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
             var either = await source.ConfigureAwait(false);
             if (either.HasError)
-                return ResultExtensions.Error<T, TError>(either.Error).Either;
+                return Result.Error<T, TError>(either.Error).Either;
 
             return await predicate(either.Value).ConfigureAwait(false)
                 ? CreateError<T, TError>(errorSelector(either.Value))

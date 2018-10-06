@@ -7,7 +7,7 @@ using Lemonad.ErrorHandling.Either;
 using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
-    public static class ResultExtensions {
+    public static class Result {
         /// <summary>
         ///     Creates a <see cref="Result{T,TError}" /> with <typeparamref name="TError" />.
         /// </summary>
@@ -21,7 +21,8 @@ namespace Lemonad.ErrorHandling {
         ///     The <typeparamref name="TError" /> of <see cref="Result{T,TError}" />.
         /// </typeparam>
         [Pure]
-        public static Result<T, TError> Error<T, TError>(TError error) => error;
+        public static IResult<T, TError> Error<T, TError>(TError error) =>
+            new Result<T, TError>(default, in error, true, false);
 
         /// <summary>
         ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="Result{T,TError}" /> to an <see cref="IEnumerable{T}" /> of
@@ -37,7 +38,7 @@ namespace Lemonad.ErrorHandling {
         ///     The type of the errors in <see cref="Result{T,TError}" />.
         /// </typeparam>
         public static IEnumerable<TError> Errors<T, TError>(
-            this IEnumerable<Result<T, TError>> enumerable) => enumerable.SelectMany(x => x.ToErrorEnumerable());
+            this IEnumerable<IResult<T, TError>> enumerable) => enumerable.SelectMany(x => x.ToErrorEnumerable());
 
         /// <summary>
         ///     Evaluates the <see cref="Result{T,TError}" />.
@@ -52,7 +53,7 @@ namespace Lemonad.ErrorHandling {
         ///     The type of the error.
         /// </typeparam>
         [Pure]
-        public static T Match<T, TError>(this Result<T, TError> source) where TError : T =>
+        public static T Match<T, TError>(this IResult<T, TError> source) where TError : T =>
             source.Match(x => x, x => x);
 
         /// <summary>
@@ -74,7 +75,7 @@ namespace Lemonad.ErrorHandling {
         ///     The type returned from function <paramref name="selector" />>
         /// </typeparam>
         [Pure]
-        public static TResult Match<T, TResult, TError>(this Result<T, TError> source, Func<T, TResult> selector)
+        public static TResult Match<T, TResult, TError>(this IResult<T, TError> source, Func<T, TResult> selector)
             where T : TError => source.Match(selector, x => selector((T) x));
 
         /// <summary>
@@ -127,7 +128,7 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TError">
         ///     The 'failure' value.
         /// </typeparam>
-        public static AsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<Result<T, TError>> result) => result;
+        public static AsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<IResult<T, TError>> result) => result;
 
         /// <summary>
         ///     Converts an <see cref="Result{T,TError}" /> into an <see cref="AsyncResult{T,TError}" />.
@@ -141,13 +142,13 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TError">
         ///     The 'failure' value.
         /// </typeparam>
-        public static AsyncResult<T, TError> ToAsyncResult<T, TError>(this Result<T, TError> result) =>
+        public static AsyncResult<T, TError> ToAsyncResult<T, TError>(this IResult<T, TError> result) =>
             Task.FromResult(result);
 
         [Pure]
         public static AsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T> source, Func<T, bool> predicate,
             Func<Maybe<T>, TError> errorSelector) {
-            async Task<Result<T, TError>> Factory(Task<T> x, Func<T, bool> y, Func<Maybe<T>, TError> z) =>
+            async Task<IResult<T, TError>> Factory(Task<T> x, Func<T, bool> y, Func<Maybe<T>, TError> z) =>
                 (await x.ConfigureAwait(false)).ToResult(y, z);
 
             return Factory(source, predicate, errorSelector);
@@ -157,7 +158,7 @@ namespace Lemonad.ErrorHandling {
         public static AsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T?> source,
             Func<TError> errorSelector)
             where T : struct {
-            async Task<Result<T, TError>> Factory(Task<T?> x, Func<TError> y) =>
+            async Task<IResult<T, TError>> Factory(Task<T?> x, Func<TError> y) =>
                 (await x.ConfigureAwait(false)).ToResult(y);
 
             return Factory(source, errorSelector);
@@ -166,7 +167,7 @@ namespace Lemonad.ErrorHandling {
         public static AsyncResult<T, TError> ToAsyncResultError<T, TError>(this Task<TError> source,
             Func<TError, bool> predicate,
             Func<TError, T> valueSelector) {
-            async Task<Result<T, TError>> Factory(Task<TError> x, Func<TError, bool> y, Func<TError, T> z) =>
+            async Task<IResult<T, TError>> Factory(Task<TError> x, Func<TError, bool> y, Func<TError, T> z) =>
                 (await x.ConfigureAwait(false)).ToResultError(y, z);
 
             return Factory(source, predicate, valueSelector);
@@ -177,7 +178,7 @@ namespace Lemonad.ErrorHandling {
         ///     This is handy when combining <see cref="Result{T,TError}" /> with LINQ's API.
         /// </summary>
         /// <param name="result"></param>
-        public static IEnumerable<T> ToEnumerable<T, TError>(this Result<T, TError> result) => YieldValues(result);
+        public static IEnumerable<T> ToEnumerable<T, TError>(this IResult<T, TError> result) => YieldValues(result);
 
         /// <inheritdoc cref="ToEnumerable{T,TError}(Result{T,TError})" />
         public static async Task<IEnumerable<T>> ToEnumerable<T, TError>(this AsyncResult<T, TError> result) =>
@@ -188,7 +189,7 @@ namespace Lemonad.ErrorHandling {
         ///     This is handy when combining <see cref="Result{T,TError}" /> with LINQs API.
         /// </summary>
         /// <param name="result"></param>
-        public static IEnumerable<TError> ToErrorEnumerable<T, TError>(this Result<T, TError> result) =>
+        public static IEnumerable<TError> ToErrorEnumerable<T, TError>(this IResult<T, TError> result) =>
             YieldErrors(result);
 
         /// <inheritdoc cref="ToErrorEnumerable{T,TError}(Result{T,TError})" />
@@ -209,7 +210,7 @@ namespace Lemonad.ErrorHandling {
         ///     The <typeparamref name="TError" /> from the <see cref="Result{T,TError}" />.
         /// </typeparam>
         [Pure]
-        public static Maybe<T> ToMaybe<T, TError>(this Result<T, TError> source) =>
+        public static Maybe<T> ToMaybe<T, TError>(this IResult<T, TError> source) =>
             source.Either.HasValue ? source.Either.Value : Maybe<T>.None;
 
         /// <summary>
@@ -229,7 +230,7 @@ namespace Lemonad.ErrorHandling {
         ///     The type returned by the <paramref name="errorSelector" /> function.
         /// </typeparam>
         [Pure]
-        public static Result<T, TError> ToResult<T, TError>(this T? source, Func<TError> errorSelector)
+        public static IResult<T, TError> ToResult<T, TError>(this T? source, Func<TError> errorSelector)
             where T : struct =>
             // ReSharper disable once PossibleInvalidOperationException
             source.ToResult(x => x.HasValue, x => errorSelector == null
@@ -258,7 +259,7 @@ namespace Lemonad.ErrorHandling {
         /// </param>
         /// <returns></returns>
         [Pure]
-        public static Result<T, TError> ToResult<T, TError>(this T source, Func<T, bool> predicate,
+        public static IResult<T, TError> ToResult<T, TError>(this T source, Func<T, bool> predicate,
             Func<Maybe<T>, TError> errorSelector) {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             return predicate(source)
@@ -287,7 +288,7 @@ namespace Lemonad.ErrorHandling {
         /// <param name="valueSelector">
         ///     Is executed when the predicate fails.
         /// </param>
-        public static Result<T, TError> ToResultError<T, TError>(this TError source,
+        public static IResult<T, TError> ToResultError<T, TError>(this TError source,
             Func<TError, bool> predicate,
             Func<TError, T> valueSelector) {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
@@ -311,7 +312,8 @@ namespace Lemonad.ErrorHandling {
         ///     The <typeparamref name="TError" /> of <see cref="Result{T,TError}" />.
         /// </typeparam>
         [Pure]
-        public static Result<T, TError> Value<T, TError>(T element) => element;
+        public static IResult<T, TError> Value<T, TError>(T element) =>
+            new Result<T, TError>(in element, default, false, true);
 
         /// <summary>
         ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="Result{T,TError}" /> to an <see cref="IEnumerable{T}" /> of
@@ -327,15 +329,15 @@ namespace Lemonad.ErrorHandling {
         ///     The type of the errors in <see cref="Result{T,TError}" />.
         /// </typeparam>
         public static IEnumerable<T> Values<T, TError>(
-            this IEnumerable<Result<T, TError>> enumerable) =>
+            this IEnumerable<IResult<T, TError>> enumerable) =>
             enumerable.SelectMany(x => x.ToEnumerable());
 
-        private static IEnumerable<TError> YieldErrors<T, TError>(Result<T, TError> result) {
+        private static IEnumerable<TError> YieldErrors<T, TError>(IResult<T, TError> result) {
             if (result.Either.HasError)
                 yield return result.Either.Error;
         }
 
-        private static IEnumerable<T> YieldValues<T, TError>(Result<T, TError> result) {
+        private static IEnumerable<T> YieldValues<T, TError>(IResult<T, TError> result) {
             if (result.Either.HasValue)
                 yield return result.Either.Value;
         }

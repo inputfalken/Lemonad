@@ -45,18 +45,18 @@ namespace ReadFileAsync {
             return result.ExitCode;
         }
 
-        private static async Task<Result<string, ExitCode>> ProcessText(
+        private static async Task<IResult<string, ExitCode>> ProcessText(
             string text, string filePath) {
             // You can also handle exceptions more effectivly with Result<T, TError>.
             try {
                 await File.WriteAllTextAsync(filePath, text.ToUpper(CultureInfo.InvariantCulture));
                 // Return a message indicating a success.
-                return "Successfully precessed file.";
+                return Result.Value<string, ExitCode>("Successfully precessed file.");
             }
             catch (Exception e) {
                 LogFatal($"Could not write to file {filePath}.", e);
                 // Return an error indicating a failure.
-                return ExitCode.FailedWritingText;
+                return Result.Error<string, ExitCode>(ExitCode.FailedWritingText);
             }
         }
     }

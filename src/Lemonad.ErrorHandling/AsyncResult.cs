@@ -21,27 +21,27 @@ namespace Lemonad.ErrorHandling {
 
         internal Task<IEither<T, TError>> Either { get; }
 
-        public static implicit operator AsyncResult<T, TError>(Task<Result<T, TError>> result) =>
+        public static implicit operator AsyncResult<T, TError>(Task<IResult<T, TError>> result) =>
             new AsyncResult<T, TError>(Factory(result));
 
         public static implicit operator AsyncResult<T, TError>(T value) =>
-            new AsyncResult<T, TError>(Task.FromResult(ResultExtensions.Value<T, TError>(value).Either));
+            new AsyncResult<T, TError>(Task.FromResult(Result.Value<T, TError>(value).Either));
 
-        private static async Task<IEither<T, TError>> Factory(Task<Result<T, TError>> value) =>
+        private static async Task<IEither<T, TError>> Factory(Task<IResult<T, TError>> value) =>
             (await value.ConfigureAwait(false)).Either;
 
-        private static async Task<Result<T, TError>> Factory(Task<T> value) =>
-            ResultExtensions.Value<T, TError>(await value.ConfigureAwait(false));
+        private static async Task<IResult<T, TError>> Factory(Task<T> value) =>
+            Result.Value<T, TError>(await value.ConfigureAwait(false));
 
-        private static async Task<Result<T, TError>> ErrorFactory(Task<TError> error) =>
-            ResultExtensions.Error<T, TError>(await error.ConfigureAwait(false));
+        private static async Task<IResult<T, TError>> ErrorFactory(Task<TError> error) =>
+            Result.Error<T, TError>(await error.ConfigureAwait(false));
 
         public static implicit operator AsyncResult<T, TError>(Task<T> value) => Factory(value);
 
         public static implicit operator AsyncResult<T, TError>(Task<TError> error) => ErrorFactory(error);
 
         public static implicit operator AsyncResult<T, TError>(TError error) =>
-            new AsyncResult<T, TError>(Task.FromResult(ResultExtensions.Error<T, TError>(error).Either));
+            new AsyncResult<T, TError>(Task.FromResult(Result.Error<T, TError>(error).Either));
 
         public AsyncResult<TResult, TError> Join<TInner, TKey, TResult>(
             AsyncResult<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,

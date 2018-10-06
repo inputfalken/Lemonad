@@ -16,11 +16,9 @@ namespace ConsoleInputValidation {
                 .Match();
         }
 
-        private static Result<string, ExitCode> OnlyAlphanumericLetters(string input) {
-            if (input.All(c => char.IsLetter(c) || char.IsNumber(c)))
-                return input;
-            return ExitCode.NameContainsNoneAlphaNumericChars;
-        }
+        private static IResult<string, ExitCode> OnlyAlphanumericLetters(string input) => input.ToResult(
+            x => x.All(c => char.IsLetter(c) || char.IsNumber(c)),
+            x => ExitCode.NameContainsNoneAlphaNumericChars);
 
         private enum ExitCode {
             Success = 0,
