@@ -136,6 +136,7 @@ function Build-Documentation {
   $previousSha1 = Invoke-RestMethod -Uri $appveyorBuildUri -ErrorAction Stop `
     | Select-Object -ExpandProperty builds `
     | Select-Object buildNumber, commitId, pullRequestId `
+    | Where-Object { $_.pullRequestId -eq $null } `
     | Sort-Object buildNumber -Descending `
     | Select-Object -ExpandProperty commitId `
     | Where-Object {$_ -ne $currentSha1} `
