@@ -14,7 +14,7 @@ namespace Lemonad.ErrorHandling.Test {
             )
             .Map(x => x.left / x.right);
 
-        internal static AsyncResult<double, string> DivisionAsync(double left, double right) {
+        internal static IAsyncResult<double, string> DivisionAsync(double left, double right) {
             return (left, right).ToResult(
                     x => right != 0,
                     x => $"Can not divide '{x.Value.left}' with '{x.Value.right}'."
@@ -40,7 +40,7 @@ namespace Lemonad.ErrorHandling.Test {
                 }).FlatMap(x => x);
         }
 
-        internal static AsyncResult<Gender, string> GetGenderAsync(int identity) {
+        internal static IAsyncResult<Gender, string> GetGenderAsync(int identity) {
             return ErrorHandling.Result.Value<int, string>(identity)
                 .ToAsyncResult()
                 .Map(async i => {
@@ -70,7 +70,7 @@ namespace Lemonad.ErrorHandling.Test {
                 }).FlatMap(x => x);
         }
 
-        internal static AsyncResult<string, ExitCodes> ProgramAsync(int code) {
+        internal static IAsyncResult<string, ExitCodes> ProgramAsync(int code) {
             return ErrorHandling.Result.Value<int, ExitCodes>(code)
                 .ToAsyncResult()
                 .Map(async i => {
