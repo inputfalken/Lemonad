@@ -12,7 +12,7 @@ namespace MvcValidation.Controller {
                 .ToResult(x => true, x => default(PersonPostApiError))
                 .Multiple(
                     x => x.Filter(y => y.Age > 10,
-                        y=> new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
+                        y => new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
                     x => x.Flatten(y => ValidateName(y.FirstName),
                         s => new PersonPostApiError {Message = s, Model = model}),
                     x => x.Flatten(y => ValidateName(y.LastName),

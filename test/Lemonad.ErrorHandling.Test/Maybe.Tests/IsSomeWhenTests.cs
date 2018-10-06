@@ -3,7 +3,6 @@ using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     public class SomWhenTests {
-
         [Fact]
         public void
             Maybe_String_Whose_Property_HasValue_Is_True__Pasing_Null_Predicate__ArgumentNullReferenceException_Thrown() {
@@ -37,7 +36,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void When_Predicate_Checks_For_Null__Using_Type_Without_Value__Maybe_Is_Expected_To_Throw() {
-            Assert.Throws<ArgumentNullException>(AssertionUtilities.EitherValueName,() => {
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.EitherValueName, () => {
                 string value = null;
                 var maybe = value.ToMaybe(s => s == null);
                 Assert.True(maybe.HasValue, "Maybe should have value.");

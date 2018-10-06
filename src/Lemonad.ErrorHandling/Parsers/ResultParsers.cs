@@ -34,7 +34,7 @@ namespace Lemonad.ErrorHandling.Parsers {
             Decimal(string input, NumberStyles style, IFormatProvider provider) =>
             decimal.TryParse(input, style, provider, out var number)
                 ? ResultExtensions.Value<decimal, string>(number)
-                : ResultExtensions.Error<decimal, String>(FormatStringParserMessage<decimal>(input));
+                : ResultExtensions.Error<decimal, string>(FormatStringParserMessage<decimal>(input));
 
         public static Result<decimal, string> Decimal(string input) =>
             decimal.TryParse(input, out var number)

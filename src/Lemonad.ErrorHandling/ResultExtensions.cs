@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
+using Lemonad.ErrorHandling.Either;
 using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
@@ -180,7 +181,7 @@ namespace Lemonad.ErrorHandling {
 
         /// <inheritdoc cref="ToEnumerable{T,TError}(Result{T,TError})" />
         public static async Task<IEnumerable<T>> ToEnumerable<T, TError>(this AsyncResult<T, TError> result) =>
-            (await result.TaskResult.ConfigureAwait(false)).ToEnumerable();
+            EitherMethods.YieldValues(await result.Either.ConfigureAwait(false));
 
         /// <summary>
         ///     Treat <typeparamref name="TError" /> as enumerable with 0-1 elements in.
@@ -193,7 +194,7 @@ namespace Lemonad.ErrorHandling {
         /// <inheritdoc cref="ToErrorEnumerable{T,TError}(Result{T,TError})" />
         public static async Task<IEnumerable<TError>>
             ToErrorEnumerable<T, TError>(this AsyncResult<T, TError> result) =>
-            (await result.TaskResult.ConfigureAwait(false)).ToErrorEnumerable();
+            EitherMethods.YieldErrors(await result.Either.ConfigureAwait(false));
 
         /// <summary>
         ///     Converts an <see cref="Maybe{T}" /> to an <see cref="Result{T,TError}" /> with the value <typeparamref name="T" />.
@@ -238,7 +239,7 @@ namespace Lemonad.ErrorHandling {
 
         /// <summary>
         ///     Creates an <see cref="Result{T,TError}" /> based on a predicate function combined with an
-        ///     <paramref name="errorSelector" /> with a <see cref="Maybe{T}"/> in parameter who has been null checked.
+        ///     <paramref name="errorSelector" /> with a <see cref="Maybe{T}" /> in parameter who has been null checked.
         /// </summary>
         /// <typeparam name="T">
         ///     The value type in <see cref="Result{T,TError}" />.
