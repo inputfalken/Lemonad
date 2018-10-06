@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling.Either {
     /// <summary>
-    ///     This class will be used to share the logic between <see cref="AsyncResult{T,TError}" /> and
-    ///     <see cref="Result{T,TError}" />.
-    ///     The goal is to make <see cref="AsyncResult{T,TError}" /> methods execute <see cref="Result{T,TError}" /> so they
+    ///     This class will be used to share the logic between <see cref="IAsyncResult{T,TError}" /> and
+    ///     <see cref="IResult{T,TError}" />.
+    ///     The goal is to make <see cref="IAsyncResult{T,TError}" /> methods execute <see cref="IResult{T,TError}" /> so they
     ///     both have exactly the same logic.
     /// </summary>
     internal static class EitherMethods {
