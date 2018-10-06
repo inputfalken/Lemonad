@@ -9,7 +9,8 @@ using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
     public static class Extensions {
-        public static TaskAwaiter<IEither<T, TError>> GetAwaiter<T, TError>(this AsyncResult<T, TError> result) => result.Either.GetAwaiter();
+        public static TaskAwaiter<IEither<T, TError>> GetAwaiter<T, TError>(this AsyncResult<T, TError> result) =>
+            result.Either.GetAwaiter();
     }
 
     /// <summary>

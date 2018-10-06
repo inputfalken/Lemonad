@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Xunit;
-using  static Lemonad.ErrorHandling.Test.AssertionUtilities;
+using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
 namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
     public class MatchTests {
@@ -18,7 +18,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
         public async Task Result_With_Error__Expect_ErrorSelector() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
-            var result =  await DivisionAsync(10, 0).Match(d => {
+            var result = await DivisionAsync(10, 0).Match(d => {
                 selectorExectued = true;
                 return d;
             }, s => {
@@ -47,7 +47,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
             Result_With_Value__Expect_Selector() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
-            var result =  await DivisionAsync(10, 2).Match(d => {
+            var result = await DivisionAsync(10, 2).Match(d => {
                 selectorExectued = true;
                 return d;
             }, s => {

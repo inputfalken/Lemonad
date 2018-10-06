@@ -14,27 +14,6 @@ namespace Lemonad.ErrorHandling.Test {
             return left / right;
         }
 
-        internal static Result<string, ExitCodes> Program(int code) {
-            switch (code) {
-                case 0:
-                    return "Success";
-                case 1:
-                    return ExitCodes.Fail;
-                default:
-                    return ExitCodes.Unhandled;
-            }
-        }
-        internal static Result<Gender, string> GetGender(int identity) {
-            switch (identity) {
-                case 0:
-                    return Gender.Male;
-                case 1:
-                    return Gender.Female;
-                default:
-                    return "Could not determine gender";
-            }
-        }
-
         internal static AsyncResult<double, string> DivisionAsync(double left, double right) {
             return (left, right).ToResult(
                     x => right != 0,
@@ -45,6 +24,17 @@ namespace Lemonad.ErrorHandling.Test {
                     await Delay;
                     return x.left / x.right;
                 });
+        }
+
+        internal static Result<Gender, string> GetGender(int identity) {
+            switch (identity) {
+                case 0:
+                    return Gender.Male;
+                case 1:
+                    return Gender.Female;
+                default:
+                    return "Could not determine gender";
+            }
         }
 
         internal static AsyncResult<Gender, string> GetGenderAsync(int identity) {
@@ -61,6 +51,17 @@ namespace Lemonad.ErrorHandling.Test {
                             return ResultExtensions.Error<Gender, string>("Could not determine gender");
                     }
                 }).FlatMap(x => x.ToAsyncResult());
+        }
+
+        internal static Result<string, ExitCodes> Program(int code) {
+            switch (code) {
+                case 0:
+                    return "Success";
+                case 1:
+                    return ExitCodes.Fail;
+                default:
+                    return ExitCodes.Unhandled;
+            }
         }
 
         internal static AsyncResult<string, ExitCodes> ProgramAsync(int code) {

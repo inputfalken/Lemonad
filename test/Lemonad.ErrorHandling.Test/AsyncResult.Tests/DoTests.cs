@@ -7,7 +7,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
         public async Task
             Result_With_Error__Expects_Action_To_Be_Invoked() {
             var actionExectued = false;
-            var result =  await AssertionUtilities.DivisionAsync(10, 0).Do(() => actionExectued = true);
+            var result = await AssertionUtilities.DivisionAsync(10, 0).Do(() => actionExectued = true);
 
             Assert.True(actionExectued, "Should not get exectued since there's an error.");
             Assert.Equal(default, result.Value);
@@ -19,7 +19,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
         [Fact]
         public async Task Result_With_Value__Expects_Action_To_be_Invoked() {
             var actionExectued = false;
-            var result =  await AssertionUtilities.DivisionAsync(10, 2).Do(() => actionExectued = true);
+            var result = await AssertionUtilities.DivisionAsync(10, 2).Do(() => actionExectued = true);
 
             Assert.True(actionExectued, "Should not get exectued since there's an error.");
             Assert.Equal(5, result.Value);

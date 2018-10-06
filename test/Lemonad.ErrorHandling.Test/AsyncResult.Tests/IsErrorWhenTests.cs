@@ -8,7 +8,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
             Result_With_Error__Expects_Predicate_Never_To_Be_Executed_And_ErrorSelector_Never_To_Be_Invoked() {
             var predicateExectued = false;
             var errorSelectorExectued = false;
-            var result =  await AssertionUtilities.DivisionAsync(10, 0).IsErrorWhen(d => {
+            var result = await AssertionUtilities.DivisionAsync(10, 0).IsErrorWhen(d => {
                 predicateExectued = true;
                 return d == 2;
             }, x => {
@@ -31,7 +31,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
             Result_With_Value_With_Falsy_Predicate__Expects_Predicate_To_Be_Executed_And_ErrorSelector_To_Never_Be_Invoked() {
             var predicateExectued = false;
             var errorSelectorExectued = false;
-            var result =  await AssertionUtilities.DivisionAsync(10, 2).IsErrorWhen(d => {
+            var result = await AssertionUtilities.DivisionAsync(10, 2).IsErrorWhen(d => {
                 predicateExectued = true;
                 return false;
             }, x => {
@@ -54,7 +54,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
             Result_With_Value_With_Truthy_Predicate__Expects_Predicate_To_Be_Executed_And_ErrorSelector_To_Be_Invoked() {
             var predicateExectued = false;
             var errorSelectorExectued = false;
-            var result =  await AssertionUtilities.DivisionAsync(10, 2).IsErrorWhen(d => {
+            var result = await AssertionUtilities.DivisionAsync(10, 2).IsErrorWhen(d => {
                 predicateExectued = true;
                 return true;
             }, x => {

@@ -6,7 +6,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
         [Fact]
         public async Task Result_With_Error__Expects_Error_To_Be_Mapped() {
             var errorSelectorInvoked = false;
-            var result =  await AssertionUtilities.DivisionAsync(10, 0).MapError(s => {
+            var result = await AssertionUtilities.DivisionAsync(10, 0).MapError(s => {
                 errorSelectorInvoked = true;
                 return s.ToUpper();
             });
@@ -22,7 +22,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
         [Fact]
         public async Task Result_With_Value__Expects_Error_To_Not_Be_Mapped() {
             var errorSelectorInvoked = false;
-            var result =  await AssertionUtilities.DivisionAsync(10, 2).MapError(s => {
+            var result = await AssertionUtilities.DivisionAsync(10, 2).MapError(s => {
                 errorSelectorInvoked = true;
                 return s.ToUpper();
             });

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 using Xunit;
+using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
 namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
     public class MatchExtensionTests {
