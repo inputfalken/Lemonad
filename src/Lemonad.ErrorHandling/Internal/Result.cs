@@ -23,18 +23,19 @@ namespace Lemonad.ErrorHandling.Internal {
     /// </typeparam>
     internal readonly struct Result<T, TError> : IEquatable<Result<T, TError>>, IComparable<Result<T, TError>>,
         IResult<T, TError> {
-        internal static IEither<T, TError> EitherFactory(in T value, in TError error, bool hasError, bool hasValue) =>
-            new NonNullableEither<T, TError>(in value, in error, hasError, hasValue);
+        internal static IResult<T, TError> ValueFactory(in T element) => new Result<T, TError>(in element, default, false, true);
+
+        internal static IResult<T, TError> ErrorFactory(in TError error) => new Result<T, TError>(default, in error, true, false);
 
         /// <summary>
         ///     Gets the <see cref="IEither{T,TError}" /> from the <see cref="Result{T,TError}" /> instance.
         /// </summary>
         public IEither<T, TError> Either { get; }
 
-        internal Result(in T value, in TError error, bool hasError, bool hasValue) =>
+        private Result(in T value, in TError error, bool hasError, bool hasValue) =>
             Either = new NonNullableEither<T, TError>(in value, in error, hasError, hasValue);
 
-        internal Result(IEither<T, TError> either) =>
+        private Result(IEither<T, TError> either) =>
             Either = new NonNullableEither<T, TError>(either.Value, either.Error, either.HasError, either.HasValue);
 
         /// <inheritdoc />

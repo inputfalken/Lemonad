@@ -15,11 +15,15 @@ namespace Lemonad.ErrorHandling {
         /// <param name="validations">
         ///     A <see cref="IReadOnlyList{T}" /> containing <typeparamref name="TError" />.
         /// </param>
-        public static IResult<T, IReadOnlyList<TError>> Multiple<T,TError>(this IResult<T,TError> source,
+        public static IResult<T, IReadOnlyList<TError>> Multiple<T, TError>(this IResult<T, TError> source,
             params Func<IResult<T, TError>, IResult<T, TError>>[] validations) {
-            var validation = validations.Select(x => x.Compose(y => y.Either)(source)).ToArray();
-            return new Result<T, IReadOnlyList<TError>>(EitherMethods.Multiple(source.Either, validation));
+            var either =
+                EitherMethods.Multiple(source.Either, validations.Select(x => x.Compose(y => y.Either)(source)));
+            return either.HasValue
+                ? Value<T, IReadOnlyList<TError>>(either.Value)
+                : Error<T, IReadOnlyList<TError>>(either.Error);
         }
+
         /// <summary>
         ///     Creates a <see cref="Result{T,TError}" /> with <typeparamref name="TError" />.
         /// </summary>
@@ -34,7 +38,7 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         [Pure]
         public static IResult<T, TError> Error<T, TError>(TError error) =>
-            new Result<T, TError>(default, in error, true, false);
+            Result<T, TError>.ErrorFactory(in error);
 
         /// <summary>
         ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="Result{T,TError}" /> to an <see cref="IEnumerable{T}" /> of
@@ -324,8 +328,7 @@ namespace Lemonad.ErrorHandling {
         ///     The <typeparamref name="TError" /> of <see cref="Result{T,TError}" />.
         /// </typeparam>
         [Pure]
-        public static IResult<T, TError> Value<T, TError>(T element) =>
-            new Result<T, TError>(in element, default, false, true);
+        public static IResult<T, TError> Value<T, TError>(T element) => Result<T, TError>.ValueFactory(in element);
 
         /// <summary>
         ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="Result{T,TError}" /> to an <see cref="IEnumerable{T}" /> of
