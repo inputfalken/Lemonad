@@ -24,7 +24,7 @@
           "hash": "nNtROp+Y+nEAP7rh7E50/Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -36,16 +36,28 @@
           "hash": "G7k3840lQBPmKeH87sV/wA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.AsyncResult-2.yml",
+      "source_relative_path": "api/Lemonad.ErrorHandling.AsyncResult.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.AsyncResult-2.html",
-          "hash": "/SVlUV8aQJAvqjq6VDcEBA=="
+          "relative_path": "api/Lemonad.ErrorHandling.AsyncResult.html",
+          "hash": "pd9YVQKU+qx6cR+TgLkXwg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.IAsyncResult-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.IAsyncResult-2.html",
+          "hash": "JY8t0rUHvE475Iyg4yV9zw=="
         }
       },
       "is_incremental": false,
@@ -57,10 +69,22 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.IEither-2.html",
-          "hash": "ntfBw1yaGLp1ADkiLJ7Rug=="
+          "hash": "DEVKJkbxY127hGxrvY+ECA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.IResult-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.IResult-2.html",
+          "hash": "2RQVwqRWQgQlsY1FlWlpIA=="
+        }
+      },
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -69,7 +93,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Maybe-1.html",
-          "hash": "lp0ffzWPcybPDChoj25wHQ=="
+          "hash": "R8iu56mwlOpxUqC5EWAYRw=="
         }
       },
       "is_incremental": false,
@@ -81,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.MaybeExtensions.html",
-          "hash": "RtcGvHI9IyYG9CnUGfXHYg=="
+          "hash": "wwLc0w5HUR+4mw0awOdi+A=="
         }
       },
       "is_incremental": false,
@@ -93,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Parsers.MaybeParsers.html",
-          "hash": "+aXoYXcGHvi71UgzBUFBsg=="
+          "hash": "lUqPCBRH0R3Im/csfHi/3A=="
         }
       },
       "is_incremental": false,
@@ -105,7 +129,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Parsers.ResultParsers.html",
-          "hash": "DRAcH0NeRd/wJBmIh92PHA=="
+          "hash": "FgmcTdOZmzgR2JGzusd7MA=="
         }
       },
       "is_incremental": false,
@@ -125,23 +149,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.Result-2.yml",
+      "source_relative_path": "api/Lemonad.ErrorHandling.Result.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.Result-2.html",
-          "hash": "fGILw7j9a9GRBF1j16wrCQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.ResultExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.ResultExtensions.html",
-          "hash": "jb30SSAZW6IUNXhdiGmcPg=="
+          "relative_path": "api/Lemonad.ErrorHandling.Result.html",
+          "hash": "haLDtGVZ3utJotuAIP4yYA=="
         }
       },
       "is_incremental": false,
@@ -153,7 +165,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.html",
-          "hash": "aWPkU28MWfnlRebSfgYpZQ=="
+          "hash": "LbHIip3YmaraJhfpuv/jMQ=="
         }
       },
       "is_incremental": false,
@@ -168,7 +180,7 @@
           "hash": "mr8pLLT6bbNQs2JNNmvsVQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -177,7 +189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "+6gvxVB9zQKbZG76E6E2XA=="
+          "hash": "GLuuc8yF4b+dJcWcpzD4pQ=="
         }
       },
       "is_incremental": false,
