@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
     /// <summary>
@@ -8,9 +9,9 @@ namespace Lemonad.ErrorHandling {
     /// <typeparam name="T">
     ///     The potential value.
     /// </typeparam>
-    public readonly struct Maybe<T> : IEquatable<Maybe<T>>, IComparable<Maybe<T>> {
-        public static Maybe<T> None { get; } = new Maybe<T>(ResultExtensions.Error<T, Unit>(default));
-        private readonly Result<T, Unit> _result;
+    public readonly struct Maybe<T> {
+        public static Maybe<T> None { get; } = new Maybe<T>(Result.Error<T, Unit>(default));
+        private readonly IResult<T, Unit> _result;
 
         /// <summary>
         ///     Gets a value indicating whether the current <see cref="Maybe{T}" /> object has a valid value of
@@ -36,36 +37,13 @@ namespace Lemonad.ErrorHandling {
         /// </example>
         public T Value { get; }
 
-        private Maybe(Result<T, Unit> result) {
+        private Maybe(IResult<T, Unit> result) {
             HasValue = result.Either.HasValue;
             Value = result.Either.Value;
             _result = result;
         }
 
-        /// <inheritdoc />
-        public bool Equals(Maybe<T> other) => other._result.Equals(_result);
-
-        public static implicit operator Maybe<T>(T item) => new Maybe<T>(ResultExtensions.Value<T, Unit>(item));
-
-        public override bool Equals(object obj) => obj is Maybe<T> maybe && Equals(maybe);
-
-        public static bool operator ==(Maybe<T> left, Maybe<T> right) => left.Equals(right);
-
-        public static bool operator !=(Maybe<T> left, Maybe<T> right) => !left.Equals(right);
-
-        /// <inheritdoc />
-        public override int GetHashCode() => _result.GetHashCode();
-
-        /// <inheritdoc />
-        public int CompareTo(Maybe<T> other) => _result.CompareTo(other._result);
-
-        public static bool operator <(Maybe<T> left, Maybe<T> right) => left.CompareTo(right) < 0;
-
-        public static bool operator <=(Maybe<T> left, Maybe<T> right) => left.CompareTo(right) <= 0;
-
-        public static bool operator >(Maybe<T> left, Maybe<T> right) => left.CompareTo(right) > 0;
-
-        public static bool operator >=(Maybe<T> left, Maybe<T> right) => left.CompareTo(right) >= 0;
+        public static implicit operator Maybe<T>(T item) => new Maybe<T>(Result.Value<T, Unit>(item));
 
         /// <inheritdoc />
         public override string ToString() =>
@@ -132,7 +110,7 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         [Pure]
-        public Maybe<T> Filter(Func<T, bool> predicate) => new Maybe<T>(_result.Filter(predicate, Unit.Selector));
+        public Maybe<T> Filter(Func<T, bool> predicate) => new Maybe<T>(_result.Filter(predicate, x => Unit.Default));
 
         /// <summary>
         ///     Flatmaps another <see cref="Maybe{T}" />.
@@ -190,15 +168,6 @@ namespace Lemonad.ErrorHandling {
             new Maybe<TResult>(_result.FlatMap(x => flatSelector(x).ToResult(Unit.Selector)));
 
         /// <summary>
-        ///     Filters the <see cref="Maybe{T}" /> to see if <typeparamref name="T" /> is null.
-        /// </summary>
-        /// <returns>
-        ///     A <see cref="Maybe{T}" /> whose <typeparamref name="T" /> has value if <typeparamref name="T" /> is not null.
-        /// </returns>
-        [Pure]
-        public Maybe<T> IsNoneWhenNull() => new Maybe<T>(_result.IsErrorWhenNull(Unit.Selector));
-
-        /// <summary>
         ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
         /// </summary>
         /// <param name="predicate">
@@ -206,7 +175,7 @@ namespace Lemonad.ErrorHandling {
         /// </param>
         [Pure]
         public Maybe<T> IsNoneWhen(Func<T, bool> predicate) =>
-            new Maybe<T>(_result.IsErrorWhen(predicate, Unit.Selector));
+            new Maybe<T>(_result.IsErrorWhen(predicate, maybe => default));
 
         [Pure]
         public Maybe<T> Flatten<TResult>(Func<T, Maybe<TResult>> selector) => new Maybe<T>(

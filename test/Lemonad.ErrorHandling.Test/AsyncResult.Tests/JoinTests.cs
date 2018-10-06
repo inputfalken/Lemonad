@@ -1,15 +1,17 @@
-﻿using Xunit;
+﻿using System.Threading.Tasks;
+using Xunit;
 
-namespace Lemonad.ErrorHandling.Test.Result.Tests {
+namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
     public class JoinTests {
         [Fact]
-        public void Result_With_No_Value_Joins_Result_With_No_Value_Using_Matching_Key__Expects_Result_With_No_Value() {
+        public async Task
+            Result_With_No_Value_Joins_Result_With_No_Value_Using_Matching_Key__Expects_Result_With_No_Value() {
             var outerSelectorInvoked = false;
             var innerSelectorInvoked = false;
             var resultSelectorInvoked = false;
-            var outer = new {Id = 1, Text = "Hello"}.ToResult(x => false, x => "ERROR 1");
-            var inner = new {Id = 1, Text = "world"}.ToResult(x => false, x => "ERROR 2");
-            var result = outer.Join(inner, x => {
+            var outer = new {Id = 1, Text = "Hello"}.ToResult(x => false, x => "ERROR 1").ToAsyncResult();
+            var inner = new {Id = 1, Text = "world"}.ToResult(x => false, x => "ERROR 2").ToAsyncResult();
+            var result = await outer.Join(inner, x => {
                 outerSelectorInvoked = true;
                 return x.Id;
             }, x => {
@@ -20,8 +22,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 return $"{x.Text} {y.Text}";
             }, () => string.Empty);
 
-            Assert.Equal(default, result.Either.Value);
-            Assert.Equal("ERROR 1", result.Either.Error);
+            Assert.Equal(default, result.Value);
+            Assert.Equal("ERROR 1", result.Error);
 
             Assert.False(outerSelectorInvoked, "outerSelectorInvoked");
             Assert.False(innerSelectorInvoked, "innerSelectorInvoked");
@@ -29,13 +31,14 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_No_Value_Joins_Result_With_Value_Using_Matching_Key__Expects_Result_With_No_Value() {
+        public async Task
+            Result_With_No_Value_Joins_Result_With_Value_Using_Matching_Key__Expects_Result_With_No_Value() {
             var outerSelectorInvoked = false;
             var innerSelectorInvoked = false;
             var resultSelectorInvoked = false;
-            var outer = new {Id = 1, Text = "Hello"}.ToResult(x => false, x => "ERROR 1");
-            var inner = new {Id = 1, Text = "world"}.ToResult(x => true, x => "ERROR 2");
-            var result = outer.Join(inner, x => {
+            var outer = new {Id = 1, Text = "Hello"}.ToResult(x => false, x => "ERROR 1").ToAsyncResult();
+            var inner = new {Id = 1, Text = "world"}.ToResult(x => true, x => "ERROR 2").ToAsyncResult();
+            var result = await outer.Join(inner, x => {
                 outerSelectorInvoked = true;
                 return x.Id;
             }, x => {
@@ -46,8 +49,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 return $"{x.Text} {y.Text}";
             }, () => string.Empty);
 
-            Assert.Equal(default, result.Either.Value);
-            Assert.Equal("ERROR 1", result.Either.Error);
+            Assert.Equal(default, result.Value);
+            Assert.Equal("ERROR 1", result.Error);
 
             Assert.False(outerSelectorInvoked, "outerSelectorInvoked");
             Assert.False(innerSelectorInvoked, "innerSelectorInvoked");
@@ -55,13 +58,14 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Value_Joins_Result_With_No_Value_Using_Matching_Key__Expects_Result_With_No_Value() {
+        public async Task
+            Result_With_Value_Joins_Result_With_No_Value_Using_Matching_Key__Expects_Result_With_No_Value() {
             var outerSelectorInvoked = false;
             var innerSelectorInvoked = false;
             var resultSelectorInvoked = false;
-            var outer = new {Id = 1, Text = "Hello"}.ToResult(x => true, x => "ERROR 1");
-            var inner = new {Id = 1, Text = "world"}.ToResult(x => false, x => "ERROR 2");
-            var result = outer.Join(inner, x => {
+            var outer = new {Id = 1, Text = "Hello"}.ToResult(x => true, x => "ERROR 1").ToAsyncResult();
+            var inner = new {Id = 1, Text = "world"}.ToResult(x => false, x => "ERROR 2").ToAsyncResult();
+            var result = await outer.Join(inner, x => {
                 outerSelectorInvoked = true;
                 return x.Id;
             }, x => {
@@ -72,8 +76,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 return $"{x.Text} {y.Text}";
             }, () => string.Empty);
 
-            Assert.Equal(default, result.Either.Value);
-            Assert.Equal("ERROR 2", result.Either.Error);
+            Assert.Equal(default, result.Value);
+            Assert.Equal("ERROR 2", result.Error);
 
             Assert.False(outerSelectorInvoked, "outerSelectorInvoked");
             Assert.False(innerSelectorInvoked, "innerSelectorInvoked");
@@ -81,13 +85,13 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Value_Joins_Result_With_Value_Using_Matching_Key__Expects_Result_With_Value() {
+        public async Task Result_With_Value_Joins_Result_With_Value_Using_Matching_Key__Expects_Result_With_Value() {
             var outerSelectorInvoked = false;
             var innerSelectorInvoked = false;
             var resultSelectorInvoked = false;
-            var outer = new {Id = 1, Text = "Hello"}.ToResult(x => true, x => "ERROR 1");
-            var inner = new {Id = 1, Text = "world"}.ToResult(x => true, x => "ERROR 2");
-            var result = outer.Join(inner, x => {
+            var outer = new {Id = 1, Text = "Hello"}.ToResult(x => true, x => "ERROR 1").ToAsyncResult();
+            var inner = new {Id = 1, Text = "world"}.ToResult(x => true, x => "ERROR 2").ToAsyncResult();
+            var result = await outer.Join(inner, x => {
                 outerSelectorInvoked = true;
                 return x.Id;
             }, x => {
@@ -98,8 +102,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 return $"{x.Text} {y.Text}";
             }, () => "");
 
-            Assert.Equal("Hello world", result.Either.Value);
-            Assert.Equal(default, result.Either.Error);
+            Assert.Equal("Hello world", result.Value);
+            Assert.Equal(default, result.Error);
 
             Assert.True(outerSelectorInvoked, "outerSelectorInvoked");
             Assert.True(innerSelectorInvoked, "innerSelectorInvoked");
@@ -107,13 +111,14 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Value_Joins_Result_With_Value_Using_No_Matching_Key__Expects_Result_With_No_Value() {
+        public async Task
+            Result_With_Value_Joins_Result_With_Value_Using_No_Matching_Key__Expects_Result_With_No_Value() {
             var outerSelectorInvoked = false;
             var innerSelectorInvoked = false;
             var resultSelectorInvoked = false;
-            var outer = new {Id = 2, Text = "Hello"}.ToResult(x => true, x => "ERROR 1");
-            var inner = new {Id = 1, Text = "world"}.ToResult(x => true, x => "ERROR 2");
-            var result = outer.Join(inner, x => {
+            var outer = new {Id = 2, Text = "Hello"}.ToResult(x => true, x => "ERROR 1").ToAsyncResult();
+            var inner = new {Id = 1, Text = "world"}.ToResult(x => true, x => "ERROR 2").ToAsyncResult();
+            var result = await outer.Join(inner, x => {
                 outerSelectorInvoked = true;
                 return x.Id;
             }, x => {
@@ -124,8 +129,8 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
                 return $"{x.Text} {y.Text}";
             }, () => "No key match");
 
-            Assert.Equal(default, result.Either.Value);
-            Assert.Equal("No key match", result.Either.Error);
+            Assert.Equal(default, result.Value);
+            Assert.Equal("No key match", result.Error);
 
             Assert.True(outerSelectorInvoked, "outerSelectorInvoked");
             Assert.True(innerSelectorInvoked, "innerSelectorInvoked");

@@ -1,184 +1,120 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Lemonad.ErrorHandling.Either;
 using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
-    /// <summary>
-    ///     An asynchronous version of <see cref="Result{T,TError}" /> with the same functionality.
-    /// </summary>
-    public readonly struct AsyncResult<T, TError> {
-        private AsyncResult(Task<Result<T, TError>> result) =>
-            TaskResult = result ?? throw new ArgumentNullException(nameof(result));
+    public static class AsyncResult {
+        public static TaskAwaiter<IEither<T, TError>> GetAwaiter<T, TError>(this IAsyncResult<T, TError> result) =>
+            result.Either.GetAwaiter();
 
-        internal Task<Result<T, TError>> TaskResult { get; }
+        /// <summary>
+        ///     Evaluates the <see cref="Result{T,TError}" />.
+        /// </summary>
+        /// <param name="source">
+        ///     The <see cref="Result{T,TError}" /> to evaluate.
+        /// </param>
+        /// <typeparam name="T">
+        ///     The type of the value.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        ///     The type of the error.
+        /// </typeparam>
+        public static Task<T> Match<T, TError>(this IAsyncResult<T, TError> source) where TError : T =>
+            source.Match(x => x, x => x);
 
-        public static implicit operator AsyncResult<T, TError>(Task<Result<T, TError>> result) =>
-            new AsyncResult<T, TError>(result);
+        /// <summary>
+        ///     Evaluates the <see cref="Result{T,TError}" />.
+        /// </summary>
+        /// <param name="source">
+        ///     The <see cref="Result{T,TError}" /> to evaluate.
+        /// </param>
+        /// <param name="selector">
+        ///     A function to map <typeparamref name="T" /> to <typeparamref name="TResult" />.
+        /// </param>
+        /// <typeparam name="T">
+        ///     The value type of the <see cref="Result{T,TError}" />.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        ///     The error type of the <see cref="Result{T,TError}" />.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        ///     The type returned from function <paramref name="selector" />>
+        /// </typeparam>
+        [Pure]
+        public static Task<TResult> Match<T, TResult, TError>(this IAsyncResult<T, TError> source,
+            Func<T, TResult> selector)
+            where T : TError => source.Match(selector, x => selector((T) x));
 
-        public static implicit operator AsyncResult<T, TError>(T value) =>
-            new AsyncResult<T, TError>(Task.FromResult(ResultExtensions.Value<T, TError>(value)));
+        /// <summary>
+        ///     Converts the <see cref="Task" /> with <see cref="Result{T,TError}" /> into <see cref="AsyncResult{T,TError}" />.
+        /// </summary>
+        /// <param name="result">
+        ///     The  <see cref="Result{T,TError}" /> wrapped in a <see cref="Task{TResult}" />.
+        /// </param>
+        /// <typeparam name="T">
+        ///     The 'successful' value.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        ///     The 'failure' value.
+        /// </typeparam>
+        public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<IResult<T, TError>> result) =>
+            AsyncResult<T, TError>.Factory(result);
 
-        public AsyncResult<TResult, TError> Join<TInner, TKey, TResult>(
-            AsyncResult<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
-            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector, IEqualityComparer<TKey> comparer) =>
-            TaskResultFunctions.Join(TaskResult, inner.TaskResult, outerKeySelector, innerKeySelector, resultSelector,
-                errorSelector, comparer);
-
-        public AsyncResult<TResult, TError> Join<TInner, TKey, TResult>(
-            AsyncResult<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
-            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector) =>
-            TaskResultFunctions.Join(TaskResult, inner.TaskResult, outerKeySelector, innerKeySelector, resultSelector,
-                errorSelector);
+        /// <summary>
+        ///     Converts an <see cref="Result{T,TError}" /> into an <see cref="AsyncResult{T,TError}" />.
+        /// </summary>
+        /// <param name="result">
+        ///     The  <see cref="Result{T,TError}" />.
+        /// </param>
+        /// <typeparam name="T">
+        ///     The 'successful' value.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        ///     The 'failure' value.
+        /// </typeparam>
+        public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this IResult<T, TError> result) =>
+            ToAsyncResult(Task.FromResult(result));
 
         [Pure]
-        public AsyncResult<TResult, TError> Zip<TOther, TResult>(AsyncResult<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector) =>
-            TaskResultFunctions.Zip(TaskResult, other.TaskResult, resultSelector);
+        public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T> source, Func<T, bool> predicate,
+            Func<Maybe<T>, TError> errorSelector) {
+            async Task<IResult<T, TError>> Factory(Task<T> x, Func<T, bool> y, Func<Maybe<T>, TError> z) =>
+                (await x.ConfigureAwait(false)).ToResult(y, z);
 
-        private static async Task<Result<T, TError>> Factory(Task<T> foo) => await foo.ConfigureAwait(false);
-        private static async Task<Result<T, TError>> ErrorFactory(Task<TError> foo) => await foo.ConfigureAwait(false);
+            return AsyncResult<T, TError>.Factory(Factory(source, predicate, errorSelector));
+        }
 
-        public static implicit operator AsyncResult<T, TError>(Task<T> value) => Factory(value);
+        [Pure]
+        public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T?> source,
+            Func<TError> errorSelector)
+            where T : struct {
+            async Task<IResult<T, TError>> Factory(Task<T?> x, Func<TError> y) =>
+                (await x.ConfigureAwait(false)).ToResult(y);
 
-        public static implicit operator AsyncResult<T, TError>(Task<TError> error) => ErrorFactory(error);
+            return AsyncResult<T, TError>.Factory(Factory(source, errorSelector));
+        }
 
-        public static implicit operator AsyncResult<T, TError>(TError error) =>
-            new AsyncResult<T, TError>(Task.FromResult(ResultExtensions.Error<T, TError>(error)));
+        [Pure]
+        public static IAsyncResult<T, TError> ToAsyncResultError<T, TError>(this Task<TError> source,
+            Func<TError, bool> predicate,
+            Func<TError, T> valueSelector) {
+            async Task<IResult<T, TError>> Factory(Task<TError> x, Func<TError, bool> y, Func<TError, T> z) =>
+                (await x.ConfigureAwait(false)).ToResultError(y, z);
 
-        /// <inheritdoc cref="Result{T,TError}.Filter(System.Func{T,bool},System.Func{TError})" />
-        public AsyncResult<T, TError> Filter(Func<T, bool> predicate, Func<TError> errorSelector) =>
-            TaskResultFunctions.Filter(TaskResult, predicate, errorSelector);
+            return AsyncResult<T, TError>.Factory(Factory(source, predicate, valueSelector));
+        }
 
-        /// <inheritdoc cref="Result{T,TError}.Filter(System.Func{T,bool},System.Func{Maybe{T},TError})" />
-        public AsyncResult<T, TError> Filter(Func<T, bool> predicate, Func<Maybe<T>, TError> errorSelector) =>
-            TaskResultFunctions.Filter(TaskResult, predicate, errorSelector);
+        /// <inheritdoc cref="ToEnumerable{T,TError}" />
+        public static async Task<IEnumerable<T>> ToEnumerable<T, TError>(this IAsyncResult<T, TError> result) =>
+            EitherMethods.YieldValues(await result.Either.ConfigureAwait(false));
 
-        public AsyncResult<T, TError> Filter(Func<T, Task<bool>> predicate, Func<TError> errorSelector) =>
-            TaskResultFunctions.Filter(TaskResult, predicate, errorSelector);
-
-        /// <inheritdoc cref="Result{T,TError}.Filter(System.Func{T,bool},System.Func{Maybe{T},TError})" />
-        public AsyncResult<T, TError> Filter(Func<T, Task<bool>> predicate, Func<Maybe<T>, TError> errorSelector) =>
-            TaskResultFunctions.Filter(TaskResult, predicate, errorSelector);
-
-        public Task<Either<T, TError>> Either => TaskResultFunctions.Either(TaskResult);
-
-        /// <inheritdoc cref="Result{T,TError}.Multiple" />
-        public AsyncResult<T, IReadOnlyList<TError>> Multiple(
-            params Func<Result<T, TError>, Result<T, TError>>[] validations) =>
-            TaskResultFunctions.Multiple(TaskResult, validations);
-
-        /// <inheritdoc cref="Result{T,TError}.IsErrorWhen(Func{T,bool},Func{TError})" />
-        public AsyncResult<T, TError> IsErrorWhen(
-            Func<T, bool> predicate,
-            Func<TError> errorSelector) =>
-            TaskResultFunctions.IsErrorWhen(TaskResult, predicate, errorSelector);
-
-        public AsyncResult<T, TError> IsErrorWhen(
-            Func<T, bool> predicate,
-            Func<Maybe<T>, TError> errorSelector) =>
-            TaskResultFunctions.IsErrorWhen(TaskResult, predicate, errorSelector);
-
-        public AsyncResult<T, TError> IsErrorWhen(
-            Func<T, Task<bool>> predicate,
-            Func<TError> errorSelector) => TaskResultFunctions.IsErrorWhen(TaskResult, predicate, errorSelector);
-
-        public AsyncResult<T, TError> IsErrorWhen(
-            Func<T, Task<bool>> predicate,
-            Func<Maybe<T>, TError> errorSelector) =>
-            TaskResultFunctions.IsErrorWhen(TaskResult, predicate, errorSelector);
-
-        /// <inheritdoc cref="Result{T,TError}.IsErrorWhenNull(System.Func{TError})" />
-        public AsyncResult<T, TError> IsErrorWhenNull(Func<TError> errorSelector) =>
-            TaskResultFunctions.IsErrorWhenNull(TaskResult, errorSelector);
-
-        public AsyncResult<TResult, TError> Map<TResult>(Func<T, TResult> selector) =>
-            TaskResultFunctions.Map(TaskResult, selector);
-
-        public AsyncResult<TResult, TError> Map<TResult>(Func<T, Task<TResult>> selector) =>
-            TaskResultFunctions.Map(TaskResult, selector);
-
-        public AsyncResult<T, TErrorResult> MapError<TErrorResult>(Func<TError, TErrorResult> selector) =>
-            TaskResultFunctions.MapError(TaskResult, selector);
-
-        public AsyncResult<T, TErrorResult> MapError<TErrorResult>(Func<TError, Task<TErrorResult>> selector) =>
-            TaskResultFunctions.MapError(TaskResult, selector);
-
-        /// <inheritdoc cref="Result{T,TError}.Do" />
-        public AsyncResult<T, TError> Do(Action action) => TaskResultFunctions.Do(TaskResult, action);
-
-        /// <inheritdoc cref="Result{T,TError}.DoWithError" />
-        public AsyncResult<T, TError> DoWithError(Action<TError> action) =>
-            TaskResultFunctions.DoWithError(TaskResult, action);
-
-        /// <inheritdoc cref="Result{T,TError}.DoWith" />
-        public AsyncResult<T, TError> DoWith(Action<T> action) => TaskResultFunctions.DoWith(TaskResult, action);
-
-        /// <inheritdoc cref="Result{T,TError}.FullMap{TResult,TErrorResult}" />
-        public AsyncResult<TResult, TErrorResult> FullMap<TResult, TErrorResult>(
-            Func<T, TResult> selector,
-            Func<TError, TErrorResult> errorSelector
-        ) => TaskResultFunctions.FullMap(TaskResult, selector, errorSelector);
-
-        /// <inheritdoc cref="Result{T,TError}.Match{TResult}" />
-        public Task<TResult> Match<TResult>(Func<T, TResult> selector, Func<TError, TResult> errorSelector) =>
-            TaskResultFunctions.Match(TaskResult, selector, errorSelector);
-
-        /// <inheritdoc cref="Result{T,TError}.Match" />
-        public Task Match(Action<T> action, Action<TError> errorAction) =>
-            TaskResultFunctions.Match(TaskResult, action, errorAction);
-
-        public AsyncResult<TResult, TError> FlatMap<TResult>(Func<T, AsyncResult<TResult, TError>> flatSelector) =>
-            TaskResultFunctions.FlatMap(TaskResult, x => flatSelector(x).TaskResult);
-
-        public AsyncResult<TResult, TError> FlatMap<TSelector, TResult>(
-            Func<T, AsyncResult<TSelector, TError>> flatSelector,
-            Func<T, TSelector, TResult> resultSelector) =>
-            TaskResultFunctions.FlatMap(TaskResult, x => flatSelector(x).TaskResult, resultSelector);
-
-        public AsyncResult<TResult, TError> FlatMap<TResult, TErrorResult>(
-            Func<T, AsyncResult<TResult, TErrorResult>> flatMapSelector, Func<TErrorResult, TError> errorSelector) =>
-            TaskResultFunctions.FlatMap(TaskResult, x => flatMapSelector(x).TaskResult, errorSelector);
-
-        public AsyncResult<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, AsyncResult<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
-            Func<TErrorResult, TError> errorSelector) =>
-            TaskResultFunctions.FlatMap(TaskResult, x => flatMapSelector(x).TaskResult, resultSelector, errorSelector);
-
-        /// <inheritdoc cref="Result{T,TError}.Cast{TResult}" />
-        public AsyncResult<TResult, TError> Cast<TResult>() => TaskResultFunctions.Cast<T, TResult, TError>(TaskResult);
-
-        public AsyncResult<T, TError> Flatten<TResult, TErrorResult>(
-            Func<T, AsyncResult<TResult, TErrorResult>> selector, Func<TErrorResult, TError> errorSelector) =>
-            TaskResultFunctions.Flatten(TaskResult, x => selector(x).TaskResult, errorSelector);
-
-        public AsyncResult<T, TError> Flatten<TResult>(Func<T, AsyncResult<TResult, TError>> selector) =>
-            TaskResultFunctions.Flatten(TaskResult, x => selector(x).TaskResult);
-
-        /// <inheritdoc cref="Result{T,TError}.FullCast{TResult,TErrorResult}" />
-        public AsyncResult<TResult, TErrorResult> FullCast<TResult, TErrorResult>() =>
-            TaskResultFunctions.FullCast<T, TResult, TError, TErrorResult>(TaskResult);
-
-        /// <inheritdoc cref="Result{T,TError}.FullCast{TResult}" />
-        public AsyncResult<TResult, TResult> FullCast<TResult>() => FullCast<TResult, TResult>();
-
-        /// <inheritdoc cref="Result{T,TError}.CastError{TResult}" />
-        public AsyncResult<T, TResult> CastError<TResult>() =>
-            TaskResultFunctions.CastError<T, TError, TResult>(TaskResult);
-
-        /// <inheritdoc cref="Result{T,TError}.SafeCast{TResult}" />
-        public AsyncResult<TResult, TError> SafeCast<TResult>(Func<TError> errorSelector) =>
-            TaskResultFunctions.SafeCast<T, TResult, TError>(TaskResult, errorSelector);
-
-        public AsyncResult<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, AsyncResult<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
-            Func<TError, TErrorResult> errorSelector) =>
-            TaskResultFunctions.FullFlatMap(TaskResult, x => flatMapSelector(x).TaskResult, resultSelector,
-                errorSelector);
-
-        public AsyncResult<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
-            Func<T, AsyncResult<TResult, TErrorResult>> flatMapSelector, Func<TError, TErrorResult> errorSelector) =>
-            TaskResultFunctions.FullFlatMap(TaskResult, x => flatMapSelector(x).TaskResult, errorSelector);
+        /// <inheritdoc cref="ToErrorEnumerable{T,TError}" />
+        public static async Task<IEnumerable<TError>>
+            ToErrorEnumerable<T, TError>(this IAsyncResult<T, TError> result) =>
+            EitherMethods.YieldErrors(await result.Either.ConfigureAwait(false));
     }
 }

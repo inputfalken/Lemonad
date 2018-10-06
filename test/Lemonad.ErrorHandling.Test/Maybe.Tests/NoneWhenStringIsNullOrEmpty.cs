@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     public class NoneWhenStringIsNullOrEmpty {
@@ -12,11 +13,13 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Null_String() {
-            string f = null;
-            var noneWhenStringIsNullOrEmpty = f.ToMaybeNone(string.IsNullOrWhiteSpace);
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.EitherValueName, () => {
+                string f = null;
+                var noneWhenStringIsNullOrEmpty = f.ToMaybeNone(string.IsNullOrWhiteSpace);
 
-            Assert.False(noneWhenStringIsNullOrEmpty.HasValue);
-            Assert.Equal(default, noneWhenStringIsNullOrEmpty.Value);
+                Assert.False(noneWhenStringIsNullOrEmpty.HasValue);
+                Assert.Equal(default, noneWhenStringIsNullOrEmpty.Value);
+            });
         }
 
         [Fact]

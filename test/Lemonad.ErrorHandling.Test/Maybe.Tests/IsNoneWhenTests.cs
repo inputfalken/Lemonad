@@ -5,18 +5,6 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     public class NoneWhenTests {
         [Fact]
         public void
-            Maybe_String_Whose_Property_HasValue_Is_False__Pasing_Null_Predicate__No_ArgumentNullReferenceException_Thrown() {
-            var exception = Record.Exception(() => {
-                Func<string, bool> predicate = null;
-                var someWhen = "foo".ToMaybeNone().IsNoneWhen(predicate);
-                Assert.False(someWhen.HasValue, "Maybe should not have value.");
-                Assert.Equal(default, someWhen.Value);
-            });
-            Assert.Null(exception);
-        }
-
-        [Fact]
-        public void
             Maybe_String_Whose_Property_HasValue_Is_True__Pasing_Null_Predicate__ArgumentNullReferenceException_Thrown() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, bool> predicate = null;

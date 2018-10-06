@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
     public static class MaybeExtensions {
@@ -122,7 +123,7 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static Maybe<TSource> ToMaybe<TSource>(this TSource source, Func<TSource, bool> predicate) {
             if (predicate != null)
-                return ToMaybe(source).Filter(predicate);
+                return predicate(source) ? ToMaybe(source) : Maybe<TSource>.None;
             throw new ArgumentNullException(nameof(predicate));
         }
 
@@ -200,8 +201,11 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         /// <returns></returns>
         [Pure]
-        public static Result<T, TError> ToResult<T, TError>(this Maybe<T> source, Func<TError> errorSelector) =>
-            source.ToResult(x => x.HasValue, errorSelector).Map(x => x.Value);
+        public static IResult<T, TError>
+            ToResult<T, TError>(this Maybe<T> source, Func<TError> errorSelector) =>
+            source.ToResult(x => x.HasValue, x => errorSelector == null
+                ? throw new ArgumentNullException(nameof(errorSelector))
+                : errorSelector()).Map(x => x.Value);
 
         /// <summary>
         ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="Maybe{T}" /> into an <see cref="IEnumerable{T}" /> with the

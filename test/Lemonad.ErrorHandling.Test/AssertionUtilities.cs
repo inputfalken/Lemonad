@@ -5,43 +5,85 @@ namespace Lemonad.ErrorHandling.Test {
     internal static class AssertionUtilities {
         private static Task Delay => Task.Delay(RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? 200 : 50);
 
-        internal static Result<double, string> Division(double left, double right) {
-            if (right == 0)
-                return $"Can not divide '{left}' with '{right}'.";
-            return left / right;
+        public static string EitherValueName { get; } = nameof(IEither<object, object>.Value);
+        public static string EitherErrorName { get; } = nameof(IEither<object, object>.Error);
+
+        internal static IResult<double, string> Division(double left, double right) => (left, right).ToResult(
+                x => right != 0,
+                x => $"Can not divide '{x.Value.left}' with '{x.Value.right}'."
+            )
+            .Map(x => x.left / x.right);
+
+        internal static IAsyncResult<double, string> DivisionAsync(double left, double right) {
+            return (left, right).ToResult(
+                    x => right != 0,
+                    x => $"Can not divide '{x.Value.left}' with '{x.Value.right}'."
+                )
+                .ToAsyncResult()
+                .Map(async x => {
+                    await Delay;
+                    return x.left / x.right;
+                });
         }
 
-        internal static async Task<Result<double, string>> DivisionAsync(double left, double right) {
-            await Delay;
-
-            if (right == 0)
-                return $"Can not divide '{left}' with '{right}'.";
-            return left / right;
+        internal static IResult<Gender, string> GetGender(int identity) {
+            return ErrorHandling.Result.Value<int, string>(identity)
+                .Map(i => {
+                    switch (identity) {
+                        case 0:
+                            return ErrorHandling.Result.Value<Gender, string>(Gender.Male);
+                        case 1:
+                            return ErrorHandling.Result.Value<Gender, string>(Gender.Female);
+                        default:
+                            return ErrorHandling.Result.Error<Gender, string>("Could not determine gender");
+                    }
+                }).FlatMap(x => x);
         }
 
-        internal static async Task<Result<Gender, string>> GetGender(int identity) {
-            await Delay;
-            switch (identity) {
-                case 0:
-                    return Gender.Male;
-                case 1:
-                    return Gender.Female;
-                default:
-                    return "Could not determine gender";
-            }
+        internal static IAsyncResult<Gender, string> GetGenderAsync(int identity) {
+            return ErrorHandling.Result.Value<int, string>(identity)
+                .ToAsyncResult()
+                .Map(async i => {
+                    await Delay;
+                    switch (identity) {
+                        case 0:
+                            return ErrorHandling.Result.Value<Gender, string>(Gender.Male);
+                        case 1:
+                            return ErrorHandling.Result.Value<Gender, string>(Gender.Female);
+                        default:
+                            return ErrorHandling.Result.Error<Gender, string>("Could not determine gender");
+                    }
+                }).FlatMap(x => x.ToAsyncResult());
         }
 
-        internal static async Task<Result<string, ExitCodes>> Program(int code) {
-            await Delay;
+        internal static IResult<string, ExitCodes> Program(int code) {
+            return ErrorHandling.Result.Value<int, ExitCodes>(code)
+                .Map(i => {
+                    switch (code) {
+                        case 0:
+                            return ErrorHandling.Result.Value<string, ExitCodes>("Success");
+                        case 1:
+                            return ErrorHandling.Result.Error<string, ExitCodes>(ExitCodes.Fail);
+                        default:
+                            return ErrorHandling.Result.Error<string, ExitCodes>(ExitCodes.Unhandled);
+                    }
+                }).FlatMap(x => x);
+        }
 
-            switch (code) {
-                case 0:
-                    return "Success";
-                case 1:
-                    return ExitCodes.Fail;
-                default:
-                    return ExitCodes.Unhandled;
-            }
+        internal static IAsyncResult<string, ExitCodes> ProgramAsync(int code) {
+            return ErrorHandling.Result.Value<int, ExitCodes>(code)
+                .ToAsyncResult()
+                .Map(async i => {
+                    await Delay;
+                    switch (code) {
+                        case 0:
+                            return ErrorHandling.Result.Value<string, ExitCodes>("Success");
+                        case 1:
+                            return ErrorHandling.Result.Error<string, ExitCodes>(ExitCodes.Fail);
+                        default:
+                            return ErrorHandling.Result.Error<string, ExitCodes>(ExitCodes.Unhandled);
+                    }
+                }).FlatMap(x => x.ToAsyncResult());
         }
 
         internal enum ExitCodes {
