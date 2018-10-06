@@ -12,10 +12,42 @@ namespace Lemonad.ErrorHandling {
             result.Either.GetAwaiter();
 
         /// <summary>
-        ///     Evaluates the <see cref="Result{T,TError}" />.
+        ///     Creates a <see cref="IAsyncResult{T,TError}" /> with <typeparamref name="T" />.
+        /// </summary>
+        /// <param name="element">
+        ///     The type of the <typeparamref name="T" />.
+        /// </param>
+        /// <typeparam name="T">
+        ///     The <typeparamref name="T" /> of <see cref="IAsyncResult{T,TError}" />.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        ///     The <typeparamref name="TError" /> of <see cref="IAsyncResult{T,TError}" />.
+        /// </typeparam>
+        [Pure]
+        public static IAsyncResult<T, TError> Value<T, TError>(T element) =>
+            AsyncResult<T, TError>.ValueFactory(in element);
+
+        /// <summary>
+        ///     Creates a <see cref="IAsyncResult{T,TError}" /> with <typeparamref name="TError" />.
+        /// </summary>
+        /// <param name="error">
+        ///     The type of the <typeparamref name="TError" />.
+        /// </param>
+        /// <typeparam name="T">
+        ///     The <typeparamref name="T" /> of <see cref="IAsyncResult{T,TError}" />.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        ///     The <typeparamref name="TError" /> of <see cref="IAsyncResult{T,TError}" />.
+        /// </typeparam>
+        [Pure]
+        public static IAsyncResult<T, TError> Error<T, TError>(TError error) =>
+            AsyncResult<T, TError>.ErrorFactory(in error);
+
+        /// <summary>
+        ///     Evaluates the <see cref="IAsyncResult{T,TError}" />.
         /// </summary>
         /// <param name="source">
-        ///     The <see cref="Result{T,TError}" /> to evaluate.
+        ///     The <see cref="IAsyncResult{T,TError}" /> to evaluate.
         /// </param>
         /// <typeparam name="T">
         ///     The type of the value.
@@ -27,19 +59,19 @@ namespace Lemonad.ErrorHandling {
             source.Match(x => x, x => x);
 
         /// <summary>
-        ///     Evaluates the <see cref="Result{T,TError}" />.
+        ///     Evaluates the <see cref="IAsyncResult{T,TError}" />.
         /// </summary>
         /// <param name="source">
-        ///     The <see cref="Result{T,TError}" /> to evaluate.
+        ///     The <see cref="IAsyncResult{T,TError}" /> to evaluate.
         /// </param>
         /// <param name="selector">
         ///     A function to map <typeparamref name="T" /> to <typeparamref name="TResult" />.
         /// </param>
         /// <typeparam name="T">
-        ///     The value type of the <see cref="Result{T,TError}" />.
+        ///     The value type of the <see cref="IAsyncResult{T,TError}" />.
         /// </typeparam>
         /// <typeparam name="TError">
-        ///     The error type of the <see cref="Result{T,TError}" />.
+        ///     The error type of the <see cref="IAsyncResult{T,TError}" />.
         /// </typeparam>
         /// <typeparam name="TResult">
         ///     The type returned from function <paramref name="selector" />>
@@ -50,10 +82,10 @@ namespace Lemonad.ErrorHandling {
             where T : TError => source.Match(selector, x => selector((T) x));
 
         /// <summary>
-        ///     Converts the <see cref="Task" /> with <see cref="Result{T,TError}" /> into <see cref="AsyncResult{T,TError}" />.
+        ///     Converts the <see cref="Task" /> with <see cref="IAsyncResult{T,TError}" /> into <see cref="AsyncIAsyncResult{T,TError}" />.
         /// </summary>
         /// <param name="result">
-        ///     The  <see cref="Result{T,TError}" /> wrapped in a <see cref="Task{TResult}" />.
+        ///     The  <see cref="IAsyncResult{T,TError}" /> wrapped in a <see cref="Task{TResult}" />.
         /// </param>
         /// <typeparam name="T">
         ///     The 'successful' value.
@@ -65,10 +97,10 @@ namespace Lemonad.ErrorHandling {
             AsyncResult<T, TError>.Factory(result);
 
         /// <summary>
-        ///     Converts an <see cref="Result{T,TError}" /> into an <see cref="AsyncResult{T,TError}" />.
+        ///     Converts an <see cref="IAsyncResult{T,TError}" /> into an <see cref="AsyncIAsyncResult{T,TError}" />.
         /// </summary>
         /// <param name="result">
-        ///     The  <see cref="Result{T,TError}" />.
+        ///     The  <see cref="IAsyncResult{T,TError}" />.
         /// </param>
         /// <typeparam name="T">
         ///     The 'successful' value.

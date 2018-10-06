@@ -10,6 +10,7 @@ namespace Lemonad.ErrorHandling.Internal {
     ///     An asynchronous version of <see cref="Result{T,TError}" /> with the same functionality.
     /// </summary>
     internal readonly struct AsyncResult<T, TError> : IAsyncResult<T, TError> {
+
         private AsyncResult(Task<IEither<T, TError>> either) => Either = either;
 
         public Task<IEither<T, TError>> Either { get; }
@@ -17,7 +18,7 @@ namespace Lemonad.ErrorHandling.Internal {
         public static AsyncResult<T, TError> Factory(Task<IResult<T, TError>> result) =>
             new AsyncResult<T, TError>(FactoryInternal(result));
 
-        public static AsyncResult<T, TError> ValueFactory(T value) =>
+        public static AsyncResult<T, TError> ValueFactory(in T value) =>
             new AsyncResult<T, TError>(Task.FromResult(Result.Value<T, TError>(value).Either));
 
         private static async Task<IEither<T, TError>> FactoryInternal(Task<IResult<T, TError>> value) =>
@@ -35,7 +36,7 @@ namespace Lemonad.ErrorHandling.Internal {
         public static AsyncResult<T, TError> ErrorFactory(Task<TError> error) =>
             new AsyncResult<T, TError>(ErrorFactoryInternal(error));
 
-        public static AsyncResult<T, TError> ErrorFactory(TError error) =>
+        public static AsyncResult<T, TError> ErrorFactory(in TError error) =>
             new AsyncResult<T, TError>(Task.FromResult(Result.Error<T, TError>(error).Either));
 
         public IAsyncResult<TResult, TError> Join<TInner, TKey, TResult>(
