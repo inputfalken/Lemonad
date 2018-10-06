@@ -2,9 +2,9 @@
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class MatchExtensionTests {
-        private static Result<double, double> Division(double left, double right) => right == 0
-            ? ResultExtensions.Error<double, double>(-1)
-            : ResultExtensions.Value<double, double>(left / right);
+        private static IResult<double, double> Division(double left, double right) => right == 0
+            ? ErrorHandling.Result.Error<double, double>(-1)
+            : ErrorHandling.Result.Value<double, double>(left / right);
 
         [Fact]
         public void Result_With_Error() {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
     public static class MaybeExtensions {
@@ -200,7 +201,7 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         /// <returns></returns>
         [Pure]
-        public static Result<T, TError>
+        public static IResult<T, TError>
             ToResult<T, TError>(this Maybe<T> source, Func<TError> errorSelector) =>
             source.ToResult(x => x.HasValue, x => errorSelector == null
                 ? throw new ArgumentNullException(nameof(errorSelector))

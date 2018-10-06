@@ -9,9 +9,9 @@ namespace Lemonad.ErrorHandling {
     /// <typeparam name="T">
     ///     The potential value.
     /// </typeparam>
-    public readonly struct Maybe<T> : IEquatable<Maybe<T>>, IComparable<Maybe<T>> {
-        public static Maybe<T> None { get; } = new Maybe<T>(ResultExtensions.Error<T, Unit>(default));
-        private readonly Result<T, Unit> _result;
+    public readonly struct Maybe<T> {
+        public static Maybe<T> None { get; } = new Maybe<T>(Result.Error<T, Unit>(default));
+        private readonly IResult<T, Unit> _result;
 
         /// <summary>
         ///     Gets a value indicating whether the current <see cref="Maybe{T}" /> object has a valid value of
@@ -37,36 +37,13 @@ namespace Lemonad.ErrorHandling {
         /// </example>
         public T Value { get; }
 
-        private Maybe(Result<T, Unit> result) {
+        private Maybe(IResult<T, Unit> result) {
             HasValue = result.Either.HasValue;
             Value = result.Either.Value;
             _result = result;
         }
 
-        /// <inheritdoc />
-        public bool Equals(Maybe<T> other) => other._result.Equals(_result);
-
-        public static implicit operator Maybe<T>(T item) => new Maybe<T>(ResultExtensions.Value<T, Unit>(item));
-
-        public override bool Equals(object obj) => obj is Maybe<T> maybe && Equals(maybe);
-
-        public static bool operator ==(Maybe<T> left, Maybe<T> right) => left.Equals(right);
-
-        public static bool operator !=(Maybe<T> left, Maybe<T> right) => !left.Equals(right);
-
-        /// <inheritdoc />
-        public override int GetHashCode() => _result.GetHashCode();
-
-        /// <inheritdoc />
-        public int CompareTo(Maybe<T> other) => _result.CompareTo(other._result);
-
-        public static bool operator <(Maybe<T> left, Maybe<T> right) => left.CompareTo(right) < 0;
-
-        public static bool operator <=(Maybe<T> left, Maybe<T> right) => left.CompareTo(right) <= 0;
-
-        public static bool operator >(Maybe<T> left, Maybe<T> right) => left.CompareTo(right) > 0;
-
-        public static bool operator >=(Maybe<T> left, Maybe<T> right) => left.CompareTo(right) >= 0;
+        public static implicit operator Maybe<T>(T item) => new Maybe<T>(Result.Value<T, Unit>(item));
 
         /// <inheritdoc />
         public override string ToString() =>

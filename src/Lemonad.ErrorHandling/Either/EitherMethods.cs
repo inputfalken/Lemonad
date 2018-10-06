@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling.Either {
     /// <summary>
-    ///     This class will be used to share the logic between <see cref="AsyncResult{T,TError}" /> and
-    ///     <see cref="Result{T,TError}" />.
-    ///     The goal is to make <see cref="AsyncResult{T,TError}" /> methods execute <see cref="Result{T,TError}" /> so they
+    ///     This class will be used to share the logic between <see cref="IAsyncResult{T,TError}" /> and
+    ///     <see cref="IResult{T,TError}" />.
+    ///     The goal is to make <see cref="IAsyncResult{T,TError}" /> methods execute <see cref="IResult{T,TError}" /> so they
     ///     both have exactly the same logic.
     /// </summary>
     internal static class EitherMethods {
@@ -30,10 +30,10 @@ namespace Lemonad.ErrorHandling.Either {
             Task<IEither<T, TError>> either) => CastError<T, TResult, TError>(await either.ConfigureAwait(false));
 
         private static IEither<T1, T2> CreateError<T1, T2>(in T2 error) =>
-            Result<T1, T2>.EitherFactory(default, error, true, false);
+            new NonNullableEither<T1, T2>(default, error, true, false);
 
         private static IEither<T1, T2> CreateValue<T1, T2>(in T1 value) =>
-            Result<T1, T2>.EitherFactory(value, default, false, true);
+            new NonNullableEither<T1, T2>(value, default, false, true);
 
         internal static IEither<T, TError> Do<T, TError>(IEither<T, TError> either, Action action) {
             if (action == null)
@@ -345,7 +345,7 @@ namespace Lemonad.ErrorHandling.Either {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
             if (either.HasError)
-                return ResultExtensions.Error<T, TError>(either.Error).Either;
+                return either;
 
             return predicate(either.Value)
                 ? CreateError<T, TError>(errorSelector(either.Value))
@@ -363,7 +363,7 @@ namespace Lemonad.ErrorHandling.Either {
             if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
             var either = await source.ConfigureAwait(false);
             if (either.HasError)
-                return ResultExtensions.Error<T, TError>(either.Error).Either;
+                return either;
 
             return await predicate(either.Value).ConfigureAwait(false)
                 ? CreateError<T, TError>(errorSelector(either.Value))
