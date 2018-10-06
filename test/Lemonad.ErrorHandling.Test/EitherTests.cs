@@ -1,4 +1,5 @@
 ﻿using System;
+using Lemonad.ErrorHandling.Either;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test {
@@ -7,9 +8,8 @@ namespace Lemonad.ErrorHandling.Test {
         public void String_Int_Either_With_Error() {
             var value = "foo";
             var error = 2;
-            var either =
-                new Result<string, int>.NonNullEither(in value, in error, true,
-                    false);
+            var either = new NonNullableEither<string, int>(in value, in error, true,
+                false);
             Assert.Equal("foo", either.Value);
             Assert.Equal(2, either.Error);
             Assert.NotEqual(either.HasError, either.HasValue);
@@ -21,7 +21,7 @@ namespace Lemonad.ErrorHandling.Test {
             var value = "foo";
             var error = 2;
             Assert.Throws<ArgumentException>(() =>
-                new Result<string, int>.NonNullEither(in value, in error, true,
+                new NonNullableEither<string, int>(in value, in error, true,
                     true));
         }
 
@@ -34,7 +34,7 @@ namespace Lemonad.ErrorHandling.Test {
                 var value = "foo";
                 int? error = null;
                 var either =
-                    new Result<string, int?>.NonNullEither(in value, in error, true,
+                    new NonNullableEither<string, int?>(in value, in error, true,
                         false);
                 Assert.Equal("foo", either.Value);
                 Assert.Null(either.Error);
@@ -51,7 +51,7 @@ namespace Lemonad.ErrorHandling.Test {
             string value = null;
             var error = 2;
             var either =
-                new Result<string, int>.NonNullEither(in value, in error, true,
+                new NonNullableEither<string, int>(in value, in error, true,
                     false);
             Assert.Null(either.Value);
             Assert.Equal(2, either.Error);
@@ -64,7 +64,7 @@ namespace Lemonad.ErrorHandling.Test {
             var value = "foo";
             var error = 2;
             var either =
-                new Result<string, int>.NonNullEither(in value, in error, false,
+                new NonNullableEither<string, int>(in value, in error, false,
                     true);
             Assert.Equal("foo", either.Value);
             Assert.Equal(2, either.Error);

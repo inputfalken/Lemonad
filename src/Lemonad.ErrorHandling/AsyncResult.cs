@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Linq;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Either;
 using Lemonad.ErrorHandling.Internal;
@@ -71,6 +72,12 @@ namespace Lemonad.ErrorHandling {
             Func<Maybe<T>, TError> errorSelector) =>
             new AsyncResult<T, TError>(
                 EitherMethods.IsErrorWhenAsyncPredicate(Either, predicate, errorSelector));
+
+        public AsyncResult<T, IReadOnlyList<TError>> Multiple(
+            params Func<AsyncResult<T, TError>, AsyncResult<T, TError>>[] validations) {
+            var tmp = this;
+            return new AsyncResult<T, IReadOnlyList<TError>>(EitherMethods.MultipleAsync(Either, validations.Select(x => x.Compose(y => y.Either)(tmp)).ToArray()));
+        }
 
         public AsyncResult<TResult, TError> Map<TResult>(Func<T, TResult> selector) =>
             new AsyncResult<TResult, TError>(EitherMethods.MapAsync(Either, selector));

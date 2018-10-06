@@ -2,7 +2,7 @@
 using System.Diagnostics.Contracts;
 using System.Linq;
 
-namespace Lemonad.ErrorHandling.Either {
+namespace Lemonad.ErrorHandling.Internal {
     internal static class StringFunctions {
         [Pure]
         public static string PrettyTypeString(object item) {

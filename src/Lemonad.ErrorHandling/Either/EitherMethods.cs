@@ -505,6 +505,11 @@ namespace Lemonad.ErrorHandling.Either {
                 : CreateValue<T, IReadOnlyList<TError>>(either.Value);
         }
 
+        internal static async Task<IEither<T, IReadOnlyList<TError>>> MultipleAsync<T, TError>(
+            Task<IEither<T, TError>> source,
+            IEnumerable<Task<IEither<T, TError>>> validations) => Multiple(await source.ConfigureAwait(false),
+            await Task.WhenAll(validations).ConfigureAwait(false));
+
         [Pure]
         internal static IEither<TResult, TError> SafeCast<T, TResult, TError>(IEither<T, TError> either,
             Func<T, TError> errorSelector) {
