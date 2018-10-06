@@ -5,6 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling.Either {
+    /// <summary>
+    ///     This class will be used to share the logic between <see cref="AsyncResult{T,TError}" /> and
+    ///     <see cref="Result{T,TError}" />.
+    ///     The goal is to make <see cref="AsyncResult{T,TError}" /> methods execute <see cref="Result{T,TError}" /> so they
+    ///     both have exactly the same logic.
+    /// </summary>
     internal static class EitherMethods {
         [Pure]
         internal static IEither<TResult, TError> Cast<T, TResult, TError>(IEither<T, TError> either) => either.HasError
