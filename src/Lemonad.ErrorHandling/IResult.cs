@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
-    public interface IResult<T, TError> {
+    public interface IResult<out T, TError> {
         /// <summary>
         ///     Gets the <see cref="IEither{T,TError}" /> from the <see cref="Result{T,TError}" /> instance.
         /// </summary>
@@ -414,14 +414,6 @@ namespace Lemonad.ErrorHandling {
         /// </exception>
         void Match(Action<T> action, Action<TError> errorAction);
 
-        /// <summary>
-        ///     Executes each function and saves all potential errors to a list which will be the <typeparamref name="TError" />.
-        /// </summary>
-        /// <param name="validations">
-        ///     A <see cref="IReadOnlyList{T}" /> containing <typeparamref name="TError" />.
-        /// </param>
-        IResult<T, IReadOnlyList<TError>> Multiple(
-            params Func<IResult<T, TError>, IResult<T, TError>>[] validations);
 
         /// <summary>
         ///     Attempts to cast <typeparamref name="T" /> into <typeparamref name="TResult" />.

@@ -34,7 +34,7 @@ namespace Lemonad.ErrorHandling.Internal {
         internal Result(in T value, in TError error, bool hasError, bool hasValue) =>
             Either = new NonNullableEither<T, TError>(in value, in error, hasError, hasValue);
 
-        private Result(IEither<T, TError> either) =>
+        internal Result(IEither<T, TError> either) =>
             Either = new NonNullableEither<T, TError>(either.Value, either.Error, either.HasError, either.HasValue);
 
         /// <inheritdoc />
@@ -390,19 +390,6 @@ namespace Lemonad.ErrorHandling.Internal {
         [Pure]
         public IResult<T, TError> Flatten<TResult>(Func<T, IResult<TResult, TError>> selector) =>
             new Result<T, TError>(EitherMethods.Flatten(Either, selector.Compose(x => x.Either)));
-
-        /// <summary>
-        ///     Executes each function and saves all potential errors to a list which will be the <typeparamref name="TError" />.
-        /// </summary>
-        /// <param name="validations">
-        ///     A <see cref="IReadOnlyList{T}" /> containing <typeparamref name="TError" />.
-        /// </param>
-        public IResult<T, IReadOnlyList<TError>> Multiple(
-            params Func<IResult<T, TError>, IResult<T, TError>>[] validations) {
-            var foo = this;
-            var validation = validations.Select(x => x.Compose(y => y.Either)(foo)).ToArray();
-            return new Result<T, IReadOnlyList<TError>>(EitherMethods.Multiple(Either, validation));
-        }
 
         /// <summary>
         ///     Fully flatmaps another <see cref="Result{T,TError}" />.

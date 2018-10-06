@@ -9,6 +9,18 @@ using Lemonad.ErrorHandling.Internal;
 namespace Lemonad.ErrorHandling {
     public static class Result {
         /// <summary>
+        ///     Executes each function and saves all potential errors to a list which will be the <typeparamref name="TError" />.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="validations">
+        ///     A <see cref="IReadOnlyList{T}" /> containing <typeparamref name="TError" />.
+        /// </param>
+        public static IResult<T, IReadOnlyList<TError>> Multiple<T,TError>(this IResult<T,TError> source,
+            params Func<IResult<T, TError>, IResult<T, TError>>[] validations) {
+            var validation = validations.Select(x => x.Compose(y => y.Either)(source)).ToArray();
+            return new Result<T, IReadOnlyList<TError>>(EitherMethods.Multiple(source.Either, validation));
+        }
+        /// <summary>
         ///     Creates a <see cref="Result{T,TError}" /> with <typeparamref name="TError" />.
         /// </summary>
         /// <param name="error">
