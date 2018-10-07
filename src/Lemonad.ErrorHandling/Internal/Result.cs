@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using Lemonad.ErrorHandling.Either;
+using Lemonad.ErrorHandling.Internal.Either;
 
 namespace Lemonad.ErrorHandling.Internal {
     /// <summary>

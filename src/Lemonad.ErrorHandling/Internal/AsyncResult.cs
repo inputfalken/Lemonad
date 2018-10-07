@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
-using Lemonad.ErrorHandling.Either;
+using Lemonad.ErrorHandling.Internal.Either;
 
 namespace Lemonad.ErrorHandling.Internal {
     /// <summary>

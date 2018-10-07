@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Lemonad.ErrorHandling.Either;
 using Lemonad.ErrorHandling.Internal;
+using Lemonad.ErrorHandling.Internal.Either;
 using Lemonad.ErrorHandling.Internal.TaskExtensions;
 
 namespace Lemonad.ErrorHandling {
