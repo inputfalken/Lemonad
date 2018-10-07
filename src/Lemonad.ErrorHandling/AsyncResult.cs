@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Lemonad.ErrorHandling.Either;
 using Lemonad.ErrorHandling.Internal;
+using Lemonad.ErrorHandling.Internal.Either;
+using Lemonad.ErrorHandling.Internal.TaskExtensions;
 
 namespace Lemonad.ErrorHandling {
     public static class AsyncResult {
@@ -82,7 +83,7 @@ namespace Lemonad.ErrorHandling {
             where T : TError => source.Match(selector, x => selector((T) x));
 
         /// <summary>
-        ///     Converts the <see cref="Task" /> with <see cref="IAsyncResult{T,TError}" /> into <see cref="AsyncIAsyncResult{T,TError}" />.
+        ///     Converts the <see cref="Task" /> with <see cref="IAsyncResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" />.
         /// </summary>
         /// <param name="result">
         ///     The  <see cref="IAsyncResult{T,TError}" /> wrapped in a <see cref="Task{TResult}" />.
@@ -94,10 +95,10 @@ namespace Lemonad.ErrorHandling {
         ///     The 'failure' value.
         /// </typeparam>
         public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<IResult<T, TError>> result) =>
-            AsyncResult<T, TError>.Factory(result);
+            AsyncResult<T, TError>.Factory(result.Map(x => x.Either));
 
         /// <summary>
-        ///     Converts an <see cref="IAsyncResult{T,TError}" /> into an <see cref="AsyncIAsyncResult{T,TError}" />.
+        ///     Converts an <see cref="IAsyncResult{T,TError}" /> into an <see cref="IAsyncResult{T,TError}" />.
         /// </summary>
         /// <param name="result">
         ///     The  <see cref="IAsyncResult{T,TError}" />.
@@ -113,32 +114,19 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T> source, Func<T, bool> predicate,
-            Func<Maybe<T>, TError> errorSelector) {
-            async Task<IResult<T, TError>> Factory(Task<T> x, Func<T, bool> y, Func<Maybe<T>, TError> z) =>
-                (await x.ConfigureAwait(false)).ToResult(y, z);
-
-            return AsyncResult<T, TError>.Factory(Factory(source, predicate, errorSelector));
-        }
+            Func<Maybe<T>, TError> errorSelector) =>
+            AsyncResult<T, TError>.Factory(source.Map(x => x.ToResult(predicate, errorSelector).Either));
 
         [Pure]
         public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T?> source,
             Func<TError> errorSelector)
-            where T : struct {
-            async Task<IResult<T, TError>> Factory(Task<T?> x, Func<TError> y) =>
-                (await x.ConfigureAwait(false)).ToResult(y);
-
-            return AsyncResult<T, TError>.Factory(Factory(source, errorSelector));
-        }
+            where T : struct => AsyncResult<T, TError>.Factory(source.Map(x => x.ToResult(errorSelector).Either));
 
         [Pure]
         public static IAsyncResult<T, TError> ToAsyncResultError<T, TError>(this Task<TError> source,
             Func<TError, bool> predicate,
-            Func<TError, T> valueSelector) {
-            async Task<IResult<T, TError>> Factory(Task<TError> x, Func<TError, bool> y, Func<TError, T> z) =>
-                (await x.ConfigureAwait(false)).ToResultError(y, z);
-
-            return AsyncResult<T, TError>.Factory(Factory(source, predicate, valueSelector));
-        }
+            Func<TError, T> valueSelector) =>
+            AsyncResult<T, TError>.Factory(source.Map(x => x.ToResultError(predicate, valueSelector).Either));
 
         /// <inheritdoc cref="ToEnumerable{T,TError}" />
         public static async Task<IEnumerable<T>> ToEnumerable<T, TError>(this IAsyncResult<T, TError> result) =>

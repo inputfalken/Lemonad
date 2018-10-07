@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Lemonad.Async.Extensions {
+namespace Lemonad.ErrorHandling.Internal.TaskExtensions {
     public static partial class TaskExtensions {
         public static Task<T> Do<T>(this Task<T> task, Action<T> action) => task != null
             ? action != null

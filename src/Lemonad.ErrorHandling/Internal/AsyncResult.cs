@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
-using Lemonad.ErrorHandling.Either;
+using Lemonad.ErrorHandling.Internal.Either;
 
 namespace Lemonad.ErrorHandling.Internal {
     /// <summary>
@@ -15,14 +15,14 @@ namespace Lemonad.ErrorHandling.Internal {
 
         public Task<IEither<T, TError>> Either { get; }
 
-        public static AsyncResult<T, TError> Factory(Task<IResult<T, TError>> result) =>
+        public static AsyncResult<T, TError> Factory(Task<IEither<T, TError>> result) =>
             new AsyncResult<T, TError>(FactoryInternal(result));
 
         public static AsyncResult<T, TError> ValueFactory(in T value) =>
             new AsyncResult<T, TError>(Task.FromResult(Result.Value<T, TError>(value).Either));
 
-        private static async Task<IEither<T, TError>> FactoryInternal(Task<IResult<T, TError>> value) =>
-            (await value.ConfigureAwait(false)).Either;
+        private static async Task<IEither<T, TError>> FactoryInternal(Task<IEither<T, TError>> value) =>
+            (await value.ConfigureAwait(false));
 
         private static async Task<IEither<T, TError>> ValueFactoryInternal(Task<T> value) =>
             Result.Value<T, TError>(await value.ConfigureAwait(false)).Either;

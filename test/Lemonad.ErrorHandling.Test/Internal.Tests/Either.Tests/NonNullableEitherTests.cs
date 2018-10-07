@@ -1,9 +1,9 @@
 ﻿using System;
-using Lemonad.ErrorHandling.Either;
+using Lemonad.ErrorHandling.Internal.Either;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Test {
-    public class EitherTests {
+namespace Lemonad.ErrorHandling.Test.Internal.Tests.Either.Tests {
+    public class NonNullableEitherTests {
         [Fact]
         public void String_Int_Either_With_Error() {
             var value = "foo";

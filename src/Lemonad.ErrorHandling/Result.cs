@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using Lemonad.ErrorHandling.Either;
 using Lemonad.ErrorHandling.Internal;
+using Lemonad.ErrorHandling.Internal.Either;
 
 namespace Lemonad.ErrorHandling {
     public static class Result {

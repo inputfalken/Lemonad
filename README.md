@@ -4,11 +4,15 @@
 [Logo](https://s8.postimg.cc/mbxqv2gx1/LOGO_LEMONAD_README.jpg) by [area55git](https://github.com/area55git) is licensed under [CC 4.0 International License.](https://creativecommons.org/licenses/by/4.0/)
 
 ## Status
-[![Build status](https://ci.appveyor.com/api/projects/status/y57renjt90pk5huy/branch/master?svg=true)](https://ci.appveyor.com/project/inputfalken/lemonad/branch/master)
+
 [![Build Status](https://travis-ci.org/inputfalken/Lemonad.svg?branch=master)](https://travis-ci.org/inputfalken/Lemonad)
+[![Build status](https://lemonad-ci.visualstudio.com/Lemonad/_apis/build/status/ErrorHandling%20Release%20Build?branchName=master)](https://lemonad-ci.visualstudio.com/Lemonad/_build/latest?definitionId=3) 
+[![Build status](https://lemonad-ci.visualstudio.com/Lemonad/_apis/build/status/ErrorHandling%20PR%20build?branchName=master)](https://lemonad-ci.visualstudio.com/Lemonad/_apis/build/status/ErrorHandling%20PR%20build?branchName=master)
 
 ### WIP (A lot may change)
+
 [![NuGet](https://img.shields.io/nuget/v/Lemonad.ErrorHandling.svg)](https://www.nuget.org/packages/Lemonad.ErrorHandling/)
+[![Build Status](https://lemonad-ci.vsrm.visualstudio.com/_apis/public/Release/badge/99c63ac5-7b1f-436d-b755-fbfa106c1853/2/2)](https://lemonad-ci.vsrm.visualstudio.com/_apis/public/Release/badge/99c63ac5-7b1f-436d-b755-fbfa106c1853/2/2)
 
 
 ## Summary
