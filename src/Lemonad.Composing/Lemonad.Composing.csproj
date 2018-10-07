@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Version>0.0.0</Version>
+    <RepositoryType>Git</RepositoryType>
+    <RepositoryUrl>https://github.com/inputfalken/Lemonad</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/inputfalken/Lemonad/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://inputfalken.github.io/Lemonad/</PackageProjectUrl>
+    <PackageReleaseNotes>Initial version</PackageReleaseNotes>
+    <AssemblyName>Lemonad.Composing</AssemblyName>
+    <Authors>Robert Andersson</Authors>
+    <Product>Lemonad.Composing</Product>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\Lemonad.ErrorHandling.xml</DocumentationFile>
+  </PropertyGroup>
+
+</Project>
