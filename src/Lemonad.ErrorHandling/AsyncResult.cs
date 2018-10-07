@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Either;
 using Lemonad.ErrorHandling.Internal;
+using Lemonad.ErrorHandling.Internal.TaskExtensions;
 
 namespace Lemonad.ErrorHandling {
     public static class AsyncResult {
@@ -82,7 +83,7 @@ namespace Lemonad.ErrorHandling {
             where T : TError => source.Match(selector, x => selector((T) x));
 
         /// <summary>
-        ///     Converts the <see cref="Task" /> with <see cref="IAsyncResult{T,TError}" /> into <see cref="AsyncIAsyncResult{T,TError}" />.
+        ///     Converts the <see cref="Task" /> with <see cref="IAsyncResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" />.
         /// </summary>
         /// <param name="result">
         ///     The  <see cref="IAsyncResult{T,TError}" /> wrapped in a <see cref="Task{TResult}" />.
@@ -94,10 +95,10 @@ namespace Lemonad.ErrorHandling {
         ///     The 'failure' value.
         /// </typeparam>
         public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<IResult<T, TError>> result) =>
-            AsyncResult<T, TError>.Factory(result);
+            AsyncResult<T, TError>.Factory(result.Map(x => x.Either));
 
         /// <summary>
-        ///     Converts an <see cref="IAsyncResult{T,TError}" /> into an <see cref="AsyncIAsyncResult{T,TError}" />.
+        ///     Converts an <see cref="IAsyncResult{T,TError}" /> into an <see cref="IAsyncResult{T,TError}" />.
         /// </summary>
         /// <param name="result">
         ///     The  <see cref="IAsyncResult{T,TError}" />.
@@ -117,7 +118,7 @@ namespace Lemonad.ErrorHandling {
             async Task<IResult<T, TError>> Factory(Task<T> x, Func<T, bool> y, Func<Maybe<T>, TError> z) =>
                 (await x.ConfigureAwait(false)).ToResult(y, z);
 
-            return AsyncResult<T, TError>.Factory(Factory(source, predicate, errorSelector));
+            return AsyncResult<T, TError>.Factory(Factory(source, predicate, errorSelector).Map(x => x.Either));
         }
 
         [Pure]
@@ -127,7 +128,7 @@ namespace Lemonad.ErrorHandling {
             async Task<IResult<T, TError>> Factory(Task<T?> x, Func<TError> y) =>
                 (await x.ConfigureAwait(false)).ToResult(y);
 
-            return AsyncResult<T, TError>.Factory(Factory(source, errorSelector));
+            return AsyncResult<T, TError>.Factory(Factory(source, errorSelector).Map(x => x.Either));
         }
 
         [Pure]
@@ -137,7 +138,7 @@ namespace Lemonad.ErrorHandling {
             async Task<IResult<T, TError>> Factory(Task<TError> x, Func<TError, bool> y, Func<TError, T> z) =>
                 (await x.ConfigureAwait(false)).ToResultError(y, z);
 
-            return AsyncResult<T, TError>.Factory(Factory(source, predicate, valueSelector));
+            return AsyncResult<T, TError>.Factory(Factory(source, predicate, valueSelector).Map(x => x.Either));
         }
 
         /// <inheritdoc cref="ToEnumerable{T,TError}" />
