@@ -114,32 +114,19 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T> source, Func<T, bool> predicate,
-            Func<Maybe<T>, TError> errorSelector) {
-            async Task<IResult<T, TError>> Factory(Task<T> x, Func<T, bool> y, Func<Maybe<T>, TError> z) =>
-                (await x.ConfigureAwait(false)).ToResult(y, z);
-
-            return AsyncResult<T, TError>.Factory(Factory(source, predicate, errorSelector).Map(x => x.Either));
-        }
+            Func<Maybe<T>, TError> errorSelector) =>
+            AsyncResult<T, TError>.Factory(source.Map(x => x.ToResult(predicate, errorSelector).Either));
 
         [Pure]
         public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T?> source,
             Func<TError> errorSelector)
-            where T : struct {
-            async Task<IResult<T, TError>> Factory(Task<T?> x, Func<TError> y) =>
-                (await x.ConfigureAwait(false)).ToResult(y);
-
-            return AsyncResult<T, TError>.Factory(Factory(source, errorSelector).Map(x => x.Either));
-        }
+            where T : struct => AsyncResult<T, TError>.Factory(source.Map(x => x.ToResult(errorSelector).Either));
 
         [Pure]
         public static IAsyncResult<T, TError> ToAsyncResultError<T, TError>(this Task<TError> source,
             Func<TError, bool> predicate,
-            Func<TError, T> valueSelector) {
-            async Task<IResult<T, TError>> Factory(Task<TError> x, Func<TError, bool> y, Func<TError, T> z) =>
-                (await x.ConfigureAwait(false)).ToResultError(y, z);
-
-            return AsyncResult<T, TError>.Factory(Factory(source, predicate, valueSelector).Map(x => x.Either));
-        }
+            Func<TError, T> valueSelector) =>
+            AsyncResult<T, TError>.Factory(source.Map(x => x.ToResultError(predicate, valueSelector).Either));
 
         /// <inheritdoc cref="ToEnumerable{T,TError}" />
         public static async Task<IEnumerable<T>> ToEnumerable<T, TError>(this IAsyncResult<T, TError> result) =>
