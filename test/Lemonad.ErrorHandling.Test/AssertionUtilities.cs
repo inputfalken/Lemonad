@@ -10,14 +10,14 @@ namespace Lemonad.ErrorHandling.Test {
 
         internal static IResult<double, string> Division(double left, double right) => (left, right).ToResult(
                 x => right != 0,
-                x => $"Can not divide '{x.Value.left}' with '{x.Value.right}'."
+                x => $"Can not divide '{x.left}' with '{x.right}'."
             )
             .Map(x => x.left / x.right);
 
         internal static IAsyncResult<double, string> DivisionAsync(double left, double right) {
             return (left, right).ToResult(
                     x => right != 0,
-                    x => $"Can not divide '{x.Value.left}' with '{x.Value.right}'."
+                    x => $"Can not divide '{x.left}' with '{x.right}'."
                 )
                 .ToAsyncResult()
                 .Map(async x => {

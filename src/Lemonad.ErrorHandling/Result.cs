@@ -24,7 +24,8 @@ namespace Lemonad.ErrorHandling {
             Result<T, TError>.ErrorFactory(in error);
 
         /// <summary>
-        ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="IResult{T,TError}" /> to an <see cref="IEnumerable{T}" /> of
+        ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="IResult{T,TError}" /> to an <see cref="IEnumerable{T}" />
+        ///     of
         ///     <typeparamref name="TError" />.
         /// </summary>
         /// <param name="enumerable">
@@ -109,7 +110,8 @@ namespace Lemonad.ErrorHandling {
             YieldErrors(result);
 
         /// <summary>
-        ///     Converts an <see cref="Maybe{T}" /> to an <see cref="IResult{T,TError}" /> with the value <typeparamref name="T" />.
+        ///     Converts an <see cref="Maybe{T}" /> to an <see cref="IResult{T,TError}" /> with the value <typeparamref name="T" />
+        ///     .
         /// </summary>
         /// <param name="source">
         ///     The <see cref="Maybe{T}" /> to convert.
@@ -150,8 +152,8 @@ namespace Lemonad.ErrorHandling {
                 .Map(x => x.Value);
 
         /// <summary>
-        ///     Creates an <see cref="IResult{T,TError}" /> based on a predicate function combined with an
-        ///     <paramref name="errorSelector" /> with a <see cref="Maybe{T}" /> in parameter who has been null checked.
+        ///     Creates an <see cref="IResult{T,TError}" /> based on a predicate function combined with a
+        ///     <paramref name="errorSelector" /> for the <see cref="TError"/> type.
         /// </summary>
         /// <typeparam name="T">
         ///     The value type in <see cref="IResult{T,TError}" />.
@@ -171,13 +173,13 @@ namespace Lemonad.ErrorHandling {
         /// <returns></returns>
         [Pure]
         public static IResult<T, TError> ToResult<T, TError>(this T source, Func<T, bool> predicate,
-            Func<Maybe<T>, TError> errorSelector) {
+            Func<T, TError> errorSelector) {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             return predicate(source)
                 ? Value<T, TError>(source)
                 : errorSelector == null
                     ? throw new ArgumentNullException(nameof(errorSelector))
-                    : Error<T, TError>(errorSelector(source.ToMaybe(EqualityFunctions.IsNotNull)));
+                    : Error<T, TError>(errorSelector(source));
         }
 
         /// <summary>
@@ -226,7 +228,8 @@ namespace Lemonad.ErrorHandling {
         public static IResult<T, TError> Value<T, TError>(T element) => Result<T, TError>.ValueFactory(in element);
 
         /// <summary>
-        ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="IResult{T,TError}" /> to an <see cref="IEnumerable{T}" /> of
+        ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="IResult{T,TError}" /> to an <see cref="IEnumerable{T}" />
+        ///     of
         ///     <typeparamref name="T" />.
         /// </summary>
         /// <param name="enumerable">

@@ -9,25 +9,6 @@ using Lemonad.ErrorHandling.Internal.TaskExtensions;
 
 namespace Lemonad.ErrorHandling {
     public static class AsyncResult {
-        public static TaskAwaiter<IEither<T, TError>> GetAwaiter<T, TError>(this IAsyncResult<T, TError> result) =>
-            result.Either.GetAwaiter();
-
-        /// <summary>
-        ///     Creates a <see cref="IAsyncResult{T,TError}" /> with <typeparamref name="T" />.
-        /// </summary>
-        /// <param name="element">
-        ///     The type of the <typeparamref name="T" />.
-        /// </param>
-        /// <typeparam name="T">
-        ///     The <typeparamref name="T" /> of <see cref="IAsyncResult{T,TError}" />.
-        /// </typeparam>
-        /// <typeparam name="TError">
-        ///     The <typeparamref name="TError" /> of <see cref="IAsyncResult{T,TError}" />.
-        /// </typeparam>
-        [Pure]
-        public static IAsyncResult<T, TError> Value<T, TError>(T element) =>
-            AsyncResult<T, TError>.ValueFactory(in element);
-
         /// <summary>
         ///     Creates a <see cref="IAsyncResult{T,TError}" /> with <typeparamref name="TError" />.
         /// </summary>
@@ -43,6 +24,9 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static IAsyncResult<T, TError> Error<T, TError>(TError error) =>
             AsyncResult<T, TError>.ErrorFactory(in error);
+
+        public static TaskAwaiter<IEither<T, TError>> GetAwaiter<T, TError>(this IAsyncResult<T, TError> result) =>
+            result.Either.GetAwaiter();
 
         /// <summary>
         ///     Evaluates the <see cref="IAsyncResult{T,TError}" />.
@@ -83,7 +67,8 @@ namespace Lemonad.ErrorHandling {
             where T : TError => source.Match(selector, x => selector((T) x));
 
         /// <summary>
-        ///     Converts the <see cref="Task" /> with <see cref="IAsyncResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" />.
+        ///     Converts the <see cref="Task" /> with <see cref="IAsyncResult{T,TError}" /> into
+        ///     <see cref="IAsyncResult{T,TError}" />.
         /// </summary>
         /// <param name="result">
         ///     The  <see cref="IAsyncResult{T,TError}" /> wrapped in a <see cref="Task{TResult}" />.
@@ -114,8 +99,9 @@ namespace Lemonad.ErrorHandling {
 
         [Pure]
         public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T> source, Func<T, bool> predicate,
-            Func<Maybe<T>, TError> errorSelector) =>
+            Func<T, TError> errorSelector) =>
             AsyncResult<T, TError>.Factory(source.Map(x => x.ToResult(predicate, errorSelector).Either));
+
 
         [Pure]
         public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T?> source,
@@ -136,5 +122,21 @@ namespace Lemonad.ErrorHandling {
         public static async Task<IEnumerable<TError>>
             ToErrorEnumerable<T, TError>(this IAsyncResult<T, TError> result) =>
             EitherMethods.YieldErrors(await result.Either.ConfigureAwait(false));
+
+        /// <summary>
+        ///     Creates a <see cref="IAsyncResult{T,TError}" /> with <typeparamref name="T" />.
+        /// </summary>
+        /// <param name="element">
+        ///     The type of the <typeparamref name="T" />.
+        /// </param>
+        /// <typeparam name="T">
+        ///     The <typeparamref name="T" /> of <see cref="IAsyncResult{T,TError}" />.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        ///     The <typeparamref name="TError" /> of <see cref="IAsyncResult{T,TError}" />.
+        /// </typeparam>
+        [Pure]
+        public static IAsyncResult<T, TError> Value<T, TError>(T element) =>
+            AsyncResult<T, TError>.ValueFactory(in element);
     }
 }
