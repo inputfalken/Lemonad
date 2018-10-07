@@ -44,6 +44,26 @@ namespace Lemonad.ErrorHandling.Test.Parsers.Tests {
         }
 
         [Fact]
+        public void Mail_With_More_Than_One_At_Symbol() {
+            var mailAddress = ResultParsers.MailAddress("foo@bar@.com").Either;
+            Assert.True(mailAddress.HasError);
+            Assert.False(mailAddress.HasValue);
+            Assert.Equal(
+                "Failed parsing input 'foo@bar@.com'. Mail with more than one '@' sign is not allowed.",
+                mailAddress.Error
+            );
+        }
+
+        [Fact]
+        public void Mail_Without_At_Symbol() {
+            var mailAddress = ResultParsers.MailAddress("foobar.com").Either;
+            Assert.True(mailAddress.HasError);
+            Assert.False(mailAddress.HasValue);
+            Assert.Equal("Failed parsing input 'foobar.com'. Mail with out '@' sign is not allowed.",
+                mailAddress.Error);
+        }
+
+        [Fact]
         public void Null_String() {
             var mailAddress = ResultParsers.MailAddress(null).Either;
             Assert.True(mailAddress.HasError);
@@ -73,26 +93,6 @@ namespace Lemonad.ErrorHandling.Test.Parsers.Tests {
             Assert.False(mailAddress.HasError);
             Assert.True(mailAddress.HasValue);
             Assert.Equal("foo@bar.com", mailAddress.Value.Address);
-        }
-
-        [Fact]
-        public void Mail_Without_At_Symbol() {
-            var mailAddress = ResultParsers.MailAddress("foobar.com").Either;
-            Assert.True(mailAddress.HasError);
-            Assert.False(mailAddress.HasValue);
-            Assert.Equal("Failed parsing input 'foobar.com'. Mail with out '@' sign is not allowed.",
-                mailAddress.Error);
-        }
-
-        [Fact]
-        public void Mail_With_More_Than_One_At_Symbol() {
-            var mailAddress = ResultParsers.MailAddress("foo@bar@.com").Either;
-            Assert.True(mailAddress.HasError);
-            Assert.False(mailAddress.HasValue);
-            Assert.Equal(
-                "Failed parsing input 'foo@bar@.com'. Mail with more than one '@' sign is not allowed.",
-                mailAddress.Error
-            );
         }
     }
 }

@@ -100,16 +100,16 @@ namespace Lemonad.ErrorHandling.Parsers {
             input.ToResult(
                     x => string.IsNullOrWhiteSpace(x) == false,
                     x => {
-                        if (x.Value == null) return "Failed parsing input ''. Mail with null string is not allowed.";
-                        switch (x.Value.Length) {
+                        if (x == null) return "Failed parsing input ''. Mail with null string is not allowed.";
+                        switch (x.Length) {
                             case 0:
-                                return $"Failed parsing input '{x.Value}'. Mail with empty string is not allowed.";
+                                return $"Failed parsing input '{x}'. Mail with empty string is not allowed.";
                             case 1:
-                                return $"Failed parsing input '{x.Value}'. Mail with white space is not allowed.";
+                                return $"Failed parsing input '{x}'. Mail with white space is not allowed.";
                             default:
-                                return x.Value.Length > 2
+                                return x.Length > 2
                                     ? "Failed parsing input '  ...'. Mail with white spaces are not allowed."
-                                    : $"Failed parsing input '{x.Value}'. Mail with white spaces are not allowed.";
+                                    : $"Failed parsing input '{x}'. Mail with white spaces are not allowed.";
                         }
                     }
                 )
@@ -118,7 +118,7 @@ namespace Lemonad.ErrorHandling.Parsers {
                     x => x.Length >= 3,
                     x => $"Failed parsing input '{x}'. Mail with less than 3 characters are not allowed."
                 )
-                .Map(s => (atCount: s.Count(c => c == '@'), mail: s))
+                .Map(x => (atCount: x.Count(y => y == '@'), mail: x))
                 .Filter(
                     x => x.atCount == 1,
                     x => x.atCount == 0
@@ -127,8 +127,8 @@ namespace Lemonad.ErrorHandling.Parsers {
                 )
                 .Map(x => x.mail)
                 .Filter(
-                    x => Regex.IsMatch(input, "^[^@]+@[^@]+", Compiled),
-                    x => $"Failed parsing input '{x}'. Mail with more than one '@' sign is not allowed.."
+                    x => Regex.IsMatch(x, "^[^@]+@[^@]+", Compiled),
+                    x => $"Failed parsing input '{x}'. Mail with more than one '@' sign is not allowed."
                 )
                 .Map(x => x.ToLowerInvariant())
                 .FlatMap(x => {
@@ -136,7 +136,9 @@ namespace Lemonad.ErrorHandling.Parsers {
                         return Result.Value<MailAddress, string>(new MailAddress(x));
                     }
                     catch (FormatException e) {
-                        return Result.Error<MailAddress, string>(e.Message);
+                        return Result.Error<MailAddress, string>(
+                            $"Failed parsing input '{x}'. Exception:{Environment.NewLine}{e}"
+                        );
                     }
                 });
     }

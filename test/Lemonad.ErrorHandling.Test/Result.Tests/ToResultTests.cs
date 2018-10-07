@@ -43,7 +43,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         [Fact]
         public void Passing_None_Null_Value_With_Null_Check_Predicate_Does_Not_Throw() {
             var exception = Record.Exception(() => {
-                var foo = "foo".ToResult(s => s != null, s => s.Match(y => y, () => "null value"));
+                var foo = "foo".ToResult(s => s != null, _ => "null value");
                 Assert.Equal(default, foo.Either.Error);
                 Assert.Equal("foo", foo.Either.Value);
                 Assert.False(foo.Either.HasError);
@@ -56,7 +56,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
         public void Passing_Null_Value_With_Null_Check_Predicate_Does_Not_Throw() {
             var exception = Record.Exception(() => {
                 string x = null;
-                var foo = x.ToResult(s => s != null, s => s.Match(y => y, () => "null value"));
+                var foo = x.ToResult(s => s != null, s => s ?? "null value");
                 Assert.Equal("null value", foo.Either.Error);
                 Assert.Equal(default, foo.Either.Value);
                 Assert.True(foo.Either.HasError);
