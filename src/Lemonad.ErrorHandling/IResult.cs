@@ -3,6 +3,18 @@ using System.Collections.Generic;
 using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
+    /// <summary>
+    ///     Represents a data structure commonly used for error-handling where only one value can be present.
+    ///     Either it's <typeparamref name="TError" /> or it's <typeparamref name="T" />. Which makes it possible to handle
+    ///     error without throwing exceptions.
+    ///     Inspired the Either a b' structure from Haskell and The 'Result&lt;T, TError&gt;' structure from FSharp.
+    /// </summary>
+    /// <typeparam name="T">
+    ///     The type which is considered as successful.
+    /// </typeparam>
+    /// <typeparam name="TError">
+    ///     The type which is considered as failure.
+    /// </typeparam>
     public interface IResult<out T, TError> {
         /// <summary>
         ///     Gets the <see cref="IEither{T,TError}" /> from the <see cref="Result{T,TError}" /> instance.
