@@ -1,7 +1,6 @@
 using System;
-using Lemonad.ErrorHandling.Internal;
 
-namespace Lemonad.ErrorHandling.Either {
+namespace Lemonad.ErrorHandling.Internal.Either {
     internal readonly struct NonNullableEither<T, TError> : IEither<T, TError> {
         public bool HasValue { get; }
         public bool HasError { get; }

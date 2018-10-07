@@ -4,7 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Lemonad.ErrorHandling.Either {
+namespace Lemonad.ErrorHandling.Internal.Either {
     /// <summary>
     ///     This class will be used to share the logic between <see cref="IAsyncResult{T,TError}" /> and
     ///     <see cref="IResult{T,TError}" />.

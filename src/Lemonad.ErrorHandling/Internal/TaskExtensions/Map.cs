@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Lemonad.Async.Extensions {
+namespace Lemonad.ErrorHandling.Internal.TaskExtensions {
     public static partial class TaskExtensions {
         public static async Task<TResult> Map<TSource, TResult>(this Task<TSource> task,
             Func<TSource, TResult> selector) {

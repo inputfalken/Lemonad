@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lemonad.Async.Extensions;
+using Lemonad.ErrorHandling.Internal.TaskExtensions;
 using Xunit;
 
-namespace Lemonad.Async.Test {
+namespace Lemonad.ErrorHandling.Test.Internal.Tests.TaskExtensions.Tests {
     public class SelectTests {
         private const string Text = "hello";
 

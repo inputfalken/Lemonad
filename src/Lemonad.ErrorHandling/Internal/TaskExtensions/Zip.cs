@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Lemonad.Async.Extensions {
+namespace Lemonad.ErrorHandling.Internal.TaskExtensions {
     public static partial class TaskExtensions {
         public static Task<T3> Zip<T, T2, T3>(this Task<T> task, Task<T2> second, Func<T, T2, T3> resultSelector) =>
             task.FlatMap(arg => second, resultSelector);
