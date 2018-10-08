@@ -86,6 +86,8 @@ namespace Lemonad.ErrorHandling.Parsers {
                 ? Result.Value<long, string>(number)
                 : Result.Error<long, string>(FormatStringParserMessage<long>(input));
 
+        private const string EmailPattern = "^[^@]+@[^@]+";
+
         // TODO add check for max length of a mail address.
         /// <summary>
         ///     Attempts to create <see cref="MailAddress" />.
@@ -127,8 +129,8 @@ namespace Lemonad.ErrorHandling.Parsers {
                 )
                 .Map(x => x.mail)
                 .Filter(
-                    x => Regex.IsMatch(x, "^[^@]+@[^@]+", Compiled),
-                    x => $"Failed parsing input '{x}'. Mail with more than one '@' sign is not allowed."
+                    x => Regex.IsMatch(x, EmailPattern, Compiled),
+                    x => $"Failed parsing input '{x}'. Mail does not match regex pattern '{EmailPattern}'."
                 )
                 .Map(x => x.ToLowerInvariant())
                 .FlatMap(x => {
