@@ -86,6 +86,8 @@ namespace Lemonad.ErrorHandling.Parsers {
                 ? Result.Value<long, string>(number)
                 : Result.Error<long, string>(FormatStringParserMessage<long>(input));
 
+        private const string EmailPattern = "^[^@]+@[^@]+";
+
         // TODO add check for max length of a mail address.
         /// <summary>
         ///     Attempts to create <see cref="MailAddress" />.
@@ -96,50 +98,49 @@ namespace Lemonad.ErrorHandling.Parsers {
         /// <returns>
         ///     A formatted <see cref="MailAddress" />.
         /// </returns>
-        public static IResult<MailAddress, string> MailAddress(string input) =>
-            input.ToResult(
-                    x => string.IsNullOrWhiteSpace(x) == false,
-                    x => {
-                        if (x == null) return "Failed parsing input ''. Mail with null string is not allowed.";
-                        switch (x.Length) {
-                            case 0:
-                                return $"Failed parsing input '{x}'. Mail with empty string is not allowed.";
-                            case 1:
-                                return $"Failed parsing input '{x}'. Mail with white space is not allowed.";
-                            default:
-                                return x.Length > 2
-                                    ? "Failed parsing input '  ...'. Mail with white spaces are not allowed."
-                                    : $"Failed parsing input '{x}'. Mail with white spaces are not allowed.";
-                        }
+        public static IResult<MailAddress, string> MailAddress(string input) => input.ToResult(
+                x => string.IsNullOrWhiteSpace(x) == false,
+                x => {
+                    if (x == null) return "Failed parsing input ''. Mail with null string is not allowed.";
+                    switch (x.Length) {
+                        case 0:
+                            return $"Failed parsing input '{x}'. Mail with empty string is not allowed.";
+                        case 1:
+                            return $"Failed parsing input '{x}'. Mail with white space is not allowed.";
+                        default:
+                            return x.Length > 2
+                                ? "Failed parsing input '  ...'. Mail with white spaces are not allowed."
+                                : $"Failed parsing input '{x}'. Mail with white spaces are not allowed.";
                     }
-                )
-                .Map(x => x.Trim())
-                .Filter(
-                    x => x.Length >= 3,
-                    x => $"Failed parsing input '{x}'. Mail with less than 3 characters are not allowed."
-                )
-                .Map(x => (atCount: x.Count(y => y == '@'), mail: x))
-                .Filter(
-                    x => x.atCount == 1,
-                    x => x.atCount == 0
-                        ? $"Failed parsing input '{x.mail}'. Mail with out '@' sign is not allowed."
-                        : $"Failed parsing input '{x.mail}'. Mail with more than one '@' sign is not allowed."
-                )
-                .Map(x => x.mail)
-                .Filter(
-                    x => Regex.IsMatch(x, "^[^@]+@[^@]+", Compiled),
-                    x => $"Failed parsing input '{x}'. Mail with more than one '@' sign is not allowed."
-                )
-                .Map(x => x.ToLowerInvariant())
-                .FlatMap(x => {
-                    try {
-                        return Result.Value<MailAddress, string>(new MailAddress(x));
-                    }
-                    catch (FormatException e) {
-                        return Result.Error<MailAddress, string>(
-                            $"Failed parsing input '{x}'. Exception:{Environment.NewLine}{e}"
-                        );
-                    }
-                });
+                }
+            )
+            .Map(x => x.Trim())
+            .Filter(
+                x => x.Length >= 3,
+                x => $"Failed parsing input '{x}'. Mail with less than 3 characters are not allowed."
+            )
+            .Map(x => (atCount: x.Count(y => y == '@'), mail: x))
+            .Filter(
+                x => x.atCount == 1,
+                x => x.atCount == 0
+                    ? $"Failed parsing input '{x.mail}'. Mail with out '@' sign is not allowed."
+                    : $"Failed parsing input '{x.mail}'. Mail with more than one '@' sign is not allowed."
+            )
+            .Map(x => x.mail)
+            .Filter(
+                x => Regex.IsMatch(x, EmailPattern, Compiled),
+                x => $"Failed parsing input '{x}'. Mail does not match regex pattern '{EmailPattern}'."
+            )
+            .Map(x => x.ToLowerInvariant())
+            .FlatMap(x => {
+                try {
+                    return Result.Value<MailAddress, string>(new MailAddress(x));
+                }
+                catch (FormatException e) {
+                    return Result.Error<MailAddress, string>(
+                        $"Failed parsing input '{x}'. Exception:{Environment.NewLine}{e}"
+                    );
+                }
+            });
     }
 }
