@@ -48,7 +48,7 @@ namespace Lemonad.ErrorHandling.Test.Parsers.Tests {
             var mailAddress = ResultParsers.MailAddress("foo@bar@.com").Either;
             Assert.False(mailAddress.HasError);
             Assert.True(mailAddress.HasValue);
-            Assert.Equal("foo@bar@.com", mailAddress.Value);
+            Assert.Equal("foo@bar@.com", mailAddress.Value.Address);
         }
 
         [Fact]
