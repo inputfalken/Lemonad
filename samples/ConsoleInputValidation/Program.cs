@@ -16,6 +16,12 @@ namespace ConsoleInputValidation {
                 .Match();
         }
 
+        private static IResult<int, string> Divide(int left, int right) {
+            return (left: left, right: right)
+                .ToResult(((int left, int right) x) => x.right == 0, ((int left, int right) x) => $"Cannot divide '{x.left}' with '{x.right}'.")
+                .Map(((int left, int right) x) => x.left / x.right);
+        }
+
         private static IResult<string, ExitCode> OnlyAlphanumericLetters(string input) => input.ToResult(
             x => x.All(c => char.IsLetter(c) || char.IsNumber(c)),
             x => ExitCode.NameContainsNoneAlphaNumericChars);
