@@ -22,3 +22,6 @@ PM> Install-Package Lemonad.ErrorHandling
 > dotnet add package Lemonad.ErrorHandling
  ```
 
+### Examples
+
+Look at [samples](https://github.com/inputfalken/Lemonad/tree/master/samples) in GitHub for some concrete examples.
