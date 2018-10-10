@@ -1,4 +1,5 @@
-﻿using Lemonad.ErrorHandling.Parsers;
+﻿using System;
+using Lemonad.ErrorHandling.Parsers;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Parsers.Tests {
@@ -44,11 +45,11 @@ namespace Lemonad.ErrorHandling.Test.Parsers.Tests {
         }
 
         [Fact]
-        public void Mail_With_More_Than_One_At_Symbol() {
+        public void Mail_With_More_Than_One_At_Symbol_Before_Domain() {
             var mailAddress = ResultParsers.MailAddress("foo@bar@.com").Either;
-            Assert.False(mailAddress.HasError);
-            Assert.True(mailAddress.HasValue);
-            Assert.Equal("foo@bar@.com", mailAddress.Value.Address);
+            Assert.True(mailAddress.HasError);
+            Assert.False(mailAddress.HasValue);
+            Assert.Contains("Exception", mailAddress.Error, StringComparison.InvariantCultureIgnoreCase);
         }
 
         [Fact]
