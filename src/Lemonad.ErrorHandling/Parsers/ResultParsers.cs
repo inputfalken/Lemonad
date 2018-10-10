@@ -122,10 +122,8 @@ namespace Lemonad.ErrorHandling.Parsers {
                 )
                 .Map(x => (atCount: x.Count(y => y == '@'), mail: x))
                 .Filter(
-                    x => x.atCount == 1,
-                    x => x.atCount == 0
-                        ? $"Failed parsing input '{x.mail}'. Mail with out '@' sign is not allowed."
-                        : $"Failed parsing input '{x.mail}'. Mail with more than one '@' sign is not allowed."
+                    x => x.atCount > 0,
+                    x => $"Failed parsing input '{x.mail}'. Mail with out '@' sign is not allowed."
                 )
                 .Map(x => x.mail)
                 .Filter(
