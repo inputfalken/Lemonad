@@ -41,8 +41,8 @@ namespace Lemonad.ErrorHandling {
         /// </exception>
         void Match(Action<T> someAction, Action noneAction);
 
-        Maybe<T> DoWith(Action<T> someAction);
-        Maybe<T> Do(Action action);
+        IMaybe<T> DoWith(Action<T> someAction);
+        IMaybe<T> Do(Action action);
 
         /// <summary>
         ///     Evaluates the <see cref="Maybe{T}" />.
@@ -67,8 +67,7 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TResult">
         ///     The type returned from the function <paramref name="selector" />.
         /// </typeparam>
-        Maybe<TResult>
-            Map<TResult>(Func<T, TResult> selector);
+        IMaybe<TResult> Map<TResult>(Func<T, TResult> selector);
 
         /// <summary>
         ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
@@ -76,7 +75,7 @@ namespace Lemonad.ErrorHandling {
         /// <param name="predicate">
         ///     A function to test <typeparamref name="T" />.
         /// </param>
-        Maybe<T> Filter(Func<T, bool> predicate);
+        IMaybe<T> Filter(Func<T, bool> predicate);
 
         /// <summary>
         ///     Flatmaps another <see cref="Maybe{T}" />.
@@ -118,7 +117,7 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TResult">
         ///     The type <typeparamref name="T" /> returned from the <paramref name="flatSelector" /> function.
         /// </typeparam>
-        Maybe<TResult> FlatMap<TResult>(Func<T, TResult?> flatSelector) where TResult : struct;
+        IMaybe<TResult> FlatMap<TResult>(Func<T, TResult?> flatSelector) where TResult : struct;
 
         /// <summary>
         ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
@@ -126,7 +125,7 @@ namespace Lemonad.ErrorHandling {
         /// <param name="predicate">
         ///     A function to test <typeparamref name="T" />.
         /// </param>
-        Maybe<T> IsNoneWhen(Func<T, bool> predicate);
+        IMaybe<T> IsNoneWhen(Func<T, bool> predicate);
 
         Maybe<T> Flatten<TResult>(Func<T, Maybe<TResult>> selector);
 

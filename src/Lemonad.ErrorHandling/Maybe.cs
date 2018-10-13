@@ -67,9 +67,9 @@ namespace Lemonad.ErrorHandling {
             noneAction();
         });
 
-        public Maybe<T> DoWith(Action<T> someAction) => new Maybe<T>(_result.DoWith(someAction));
+        public IMaybe<T> DoWith(Action<T> someAction) => new Maybe<T>(_result.DoWith(someAction));
 
-        public Maybe<T> Do(Action action) => new Maybe<T>(_result.Do(action));
+        public IMaybe<T> Do(Action action) => new Maybe<T>(_result.Do(action));
 
         /// <summary>
         ///     Evaluates the <see cref="Maybe{T}" />.
@@ -100,8 +100,7 @@ namespace Lemonad.ErrorHandling {
         ///     The type returned from the function <paramref name="selector" />.
         /// </typeparam>
         [Pure]
-        public Maybe<TResult>
-            Map<TResult>(Func<T, TResult> selector) => new Maybe<TResult>(_result.Map(selector));
+        public IMaybe<TResult> Map<TResult>(Func<T, TResult> selector) => new Maybe<TResult>(_result.Map(selector));
 
         /// <summary>
         ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
@@ -110,7 +109,7 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         [Pure]
-        public Maybe<T> Filter(Func<T, bool> predicate) => new Maybe<T>(_result.Filter(predicate, x => Unit.Default));
+        public IMaybe<T> Filter(Func<T, bool> predicate) => new Maybe<T>(_result.Filter(predicate, x => Unit.Default));
 
         /// <summary>
         ///     Flatmaps another <see cref="Maybe{T}" />.
@@ -164,7 +163,7 @@ namespace Lemonad.ErrorHandling {
         ///     The type <typeparamref name="T" /> returned from the <paramref name="flatSelector" /> function.
         /// </typeparam>
         [Pure]
-        public Maybe<TResult> FlatMap<TResult>(Func<T, TResult?> flatSelector) where TResult : struct =>
+        public IMaybe<TResult> FlatMap<TResult>(Func<T, TResult?> flatSelector) where TResult : struct =>
             new Maybe<TResult>(_result.FlatMap(x => flatSelector(x).ToResult(Unit.Selector)));
 
         /// <summary>
@@ -174,7 +173,7 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         [Pure]
-        public Maybe<T> IsNoneWhen(Func<T, bool> predicate) =>
+        public IMaybe<T> IsNoneWhen(Func<T, bool> predicate) =>
             new Maybe<T>(_result.IsErrorWhen(predicate, maybe => default));
 
         [Pure]
