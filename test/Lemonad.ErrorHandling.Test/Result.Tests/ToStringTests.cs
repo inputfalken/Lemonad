@@ -38,7 +38,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
         [Fact]
         public void Ok_Result_With_Char__Expects_Char_To_have__Single_Quotes() {
-            var result = 'I'.ToMaybe().ToResult(() => 2);
+            var result = ErrorHandling.Maybe.Value('I').ToResult(() => 2);
 
             Assert.False(result.Either.HasError, "Result should not have a error value.");
             Assert.True(result.Either.HasValue, "Result should have a Ok value.");
@@ -49,7 +49,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
         [Fact]
         public void Ok_Result_With_String__Expects_String_To_have__Doble_Quotes() {
-            var result = "hello".ToMaybe().ToResult(() => 2);
+            var result = ErrorHandling.Maybe.Value("hello").ToResult(() => 2);
 
             Assert.False(result.Either.HasError, "Result should not have a error value.");
             Assert.True(result.Either.HasValue, "Result should have a Ok value.");
@@ -60,7 +60,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
         [Fact]
         public void Ok_Result_With_String_Using_Backslash__Expects_String_To_have__Backslash() {
-            var result = "hello\\".ToMaybe().ToResult(() => 2);
+            var result = ErrorHandling.Maybe.Value("hello\\").ToResult(() => 2);
 
             Assert.False(result.Either.HasError, "Result should not have a error value.");
             Assert.True(result.Either.HasValue, "Result should have a Ok value.");
@@ -71,7 +71,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
         [Fact]
         public void Ok_Result_With_String_Using_NewLines__Expects_String_To_have__Escaped_Values() {
-            var result = "hello\r\nfoo".ToMaybe().ToResult(() => 2);
+            var result = ErrorHandling.Maybe.Value("hello\r\nfoo").ToResult(() => 2);
 
             Assert.False(result.Either.HasError, "Result should not have a error value.");
             Assert.True(result.Either.HasValue, "Result should have a Ok value.");
@@ -82,7 +82,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
         [Fact]
         public void Ok_Result_With_String_Using_Tab__Expects_String_To_have__Escaped_Values() {
-            var result = "hello\tfoo".ToMaybe().ToResult(() => 2);
+            var result = ErrorHandling.Maybe.Value("hello\tfoo").ToResult(() => 2);
 
             Assert.False(result.Either.HasError, "Result should not have a error value.");
             Assert.True(result.Either.HasValue, "Result should have a Ok value.");

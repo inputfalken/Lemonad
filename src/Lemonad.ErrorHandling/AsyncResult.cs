@@ -102,7 +102,6 @@ namespace Lemonad.ErrorHandling {
             Func<T, TError> errorSelector) =>
             AsyncResult<T, TError>.Factory(source.Map(x => x.ToResult(predicate, errorSelector).Either));
 
-
         [Pure]
         public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T?> source,
             Func<TError> errorSelector)

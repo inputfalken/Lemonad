@@ -5,7 +5,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     public class MapTests {
         [Fact]
         public void Mapping_Integer_With_Multiplication() {
-            var maybe = 20.ToMaybe().Map(s => s * 2);
+            var maybe = ErrorHandling.Maybe.Value(20).Map(s => s * 2);
 
             Assert.True(maybe.HasValue,
                 "Should have value since value is not null and no failed predicates has been used.");
@@ -14,7 +14,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Mapping_String_Length() {
-            var maybe = "hello".ToMaybe().Map(s => s.Length);
+            var maybe = ErrorHandling.Maybe.Value("hello").Map(s => s.Length);
 
             Assert.True(maybe.HasValue,
                 "Should have value since value is not null and no failed predicates has been used.");
@@ -26,7 +26,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Maybe_String_Whose_Property_HasValue_Is_True__Pasing_Null_Predicate__ArgumentNullReferenceException_Thrown() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, bool> function = null;
-                "foo".ToMaybe().Map(function);
+                ErrorHandling.Maybe.Value("foo").Map(function);
             });
         }
     }

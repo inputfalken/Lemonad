@@ -21,7 +21,7 @@ namespace Lemonad.ErrorHandling.Internal {
             new AsyncResult<T, TError>(Task.FromResult(Result.Value<T, TError>(value).Either));
 
         private static async Task<IEither<T, TError>> FactoryInternal(Task<IEither<T, TError>> value) =>
-            (await value.ConfigureAwait(false));
+            await value.ConfigureAwait(false);
 
         private static async Task<IEither<T, TError>> ValueFactoryInternal(Task<T> value) =>
             Result.Value<T, TError>(await value.ConfigureAwait(false)).Either;
@@ -70,9 +70,8 @@ namespace Lemonad.ErrorHandling.Internal {
 
         public IAsyncResult<T, TError> IsErrorWhen(
             Func<T, Task<bool>> predicate,
-            Func<Maybe<T>, TError> errorSelector) =>
-            new AsyncResult<T, TError>(
-                EitherMethods.IsErrorWhenAsyncPredicate(Either, predicate, errorSelector));
+            Func<T, TError> errorSelector) =>
+            new AsyncResult<T, TError>(EitherMethods.IsErrorWhenAsyncPredicate(Either, predicate, errorSelector));
 
         public IAsyncResult<T, IReadOnlyList<TError>> Multiple(
             params Func<IAsyncResult<T, TError>, IAsyncResult<T, TError>>[] validations) {

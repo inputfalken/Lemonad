@@ -7,6 +7,8 @@ using static System.Text.RegularExpressions.RegexOptions;
 
 namespace Lemonad.ErrorHandling.Parsers {
     public static class ResultParsers {
+        private const string EmailPattern = "^[^@]+@[^@]+";
+
         public static IResult<bool, string> Bool(string input) => bool.TryParse(input, out var boolean)
             ? Result.Value<bool, string>(boolean)
             : Result.Error<bool, string>(FormatStringParserMessage<bool>(input));
@@ -85,8 +87,6 @@ namespace Lemonad.ErrorHandling.Parsers {
             long.TryParse(input, out var number)
                 ? Result.Value<long, string>(number)
                 : Result.Error<long, string>(FormatStringParserMessage<long>(input));
-
-        private const string EmailPattern = "^[^@]+@[^@]+";
 
         // TODO add check for max length of a mail address.
         /// <summary>

@@ -28,24 +28,6 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         }
 
         [Fact]
-        public void
-            Action_Overload_With_Null_None_Selector__Match_Maybe_With_Value__Expects_No_ArgumentNullException_Thrown() {
-            Action action = null;
-            var exception = Record.Exception(() =>
-                "hello".ToMaybe(s => true).Match(s => { Assert.Equal("hello", s); }, action));
-            Assert.Null(exception);
-        }
-
-        [Fact]
-        public void
-            Action_Overload_With_Null_Some_Selector__Match_Maybe_Without_Value__Expects_No_ArgumentNullException_Thrown() {
-            Action<string> action = null;
-            var exception = Record.Exception(() =>
-                "hello".ToMaybe(s => false).Match(action, () => Assert.True(true)));
-            Assert.Null(exception);
-        }
-
-        [Fact]
         public void Match_Maybe_With_Value__Expects_Value_Of_SomeSelector() {
             var match = "hello".ToMaybe(s => true).Match(s => s.Length, () => 0);
             Assert.Equal(5, match);
@@ -68,14 +50,6 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Func<int> noneSelector = null;
             Func<string, int> someSelector = null;
             Assert.Throws<ArgumentNullException>(() => "hello".ToMaybe(s => false).Match(someSelector, noneSelector));
-        }
-
-        [Fact]
-        public void Null_SomeSelector__Does_Not_Throw() {
-            // Since there Hasvalue is false it should not be invoked.
-            Func<string, int> someSelector = null;
-            var exception = Record.Exception(() => "hello".ToMaybe(s => false).Match(someSelector, () => 2));
-            Assert.Null(exception);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Maybe_String_Whose_Property_HasValue_Is_True__Pasing_Null_Predicate__ArgumentNullReferenceException_Thrown() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, bool> predicate = null;
-                "foo".ToMaybe().Filter(predicate);
+                ErrorHandling.Maybe.Value("foo").Filter(predicate);
             });
         }
 
@@ -36,7 +36,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void When_Predicate_Checks_For_Null__Using_Type_Without_Value__Maybe_Is_Expected_To_Throw() {
-            Assert.Throws<ArgumentNullException>(AssertionUtilities.EitherValueName, () => {
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.MaybeValueName, () => {
                 string value = null;
                 var maybe = value.ToMaybe(s => s == null);
                 Assert.True(maybe.HasValue, "Maybe should have value.");

@@ -24,23 +24,6 @@ namespace Lemonad.ErrorHandling {
             Result<T, TError>.ErrorFactory(in error);
 
         /// <summary>
-        ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="IResult{T,TError}" /> to an <see cref="IEnumerable{T}" />
-        ///     of
-        ///     <typeparamref name="TError" />.
-        /// </summary>
-        /// <param name="enumerable">
-        ///     The <see cref="IEnumerable{T}" /> of <see cref="IResult{T,TError}" />.
-        /// </param>
-        /// <typeparam name="T">
-        ///     The type of the values in <see cref="IResult{T,TError}" />.
-        /// </typeparam>
-        /// <typeparam name="TError">
-        ///     The type of the errors in <see cref="IResult{T,TError}" />.
-        /// </typeparam>
-        public static IEnumerable<TError> Errors<T, TError>(
-            this IEnumerable<IResult<T, TError>> enumerable) => enumerable.SelectMany(x => x.ToErrorEnumerable());
-
-        /// <summary>
         ///     Evaluates the <see cref="IResult{T,TError}" />.
         /// </summary>
         /// <param name="source">
@@ -95,36 +78,41 @@ namespace Lemonad.ErrorHandling {
         }
 
         /// <summary>
-        ///     Treat <typeparamref name="T" /> as enumerable with 0-1 elements in.
+        ///     Treat <typeparamref name="T" /> as enumerable with 0-1 elements.
         ///     This is handy when combining <see cref="IResult{T,TError}" /> with LINQ's API.
         /// </summary>
         /// <param name="result"></param>
-        public static IEnumerable<T> ToEnumerable<T, TError>(this IResult<T, TError> result) => YieldValues(result);
+        public static IEnumerable<T> ToEnumerable<T, TError>(this IResult<T, TError> result) {
+            if (result.Either.HasValue)
+                yield return result.Either.Value;
+        }
 
         /// <summary>
-        ///     Treat <typeparamref name="TError" /> as enumerable with 0-1 elements in.
+        ///     Treat <typeparamref name="TError" /> as enumerable with 0-1 elements.
         ///     This is handy when combining <see cref="IResult{T,TError}" /> with LINQs API.
         /// </summary>
         /// <param name="result"></param>
-        public static IEnumerable<TError> ToErrorEnumerable<T, TError>(this IResult<T, TError> result) =>
-            YieldErrors(result);
+        public static IEnumerable<TError> ToErrorEnumerable<T, TError>(this IResult<T, TError> result) {
+            if (result.Either.HasError)
+                yield return result.Either.Error;
+        }
 
         /// <summary>
-        ///     Converts an <see cref="Maybe{T}" /> to an <see cref="IResult{T,TError}" /> with the value <typeparamref name="T" />
+        ///     Converts an <see cref="IMaybe{T}" /> to an <see cref="IResult{T,TError}" /> with the value <typeparamref name="T" />
         ///     .
         /// </summary>
         /// <param name="source">
-        ///     The <see cref="Maybe{T}" /> to convert.
+        ///     The <see cref="IMaybe{T}" /> to convert.
         /// </param>
         /// <typeparam name="T">
-        ///     The type in the <see cref="Maybe{T}" />.
+        ///     The type in the <see cref="IMaybe{T}" />.
         /// </typeparam>
         /// <typeparam name="TError">
         ///     The <typeparamref name="TError" /> from the <see cref="IResult{T,TError}" />.
         /// </typeparam>
         [Pure]
-        public static Maybe<T> ToMaybe<T, TError>(this IResult<T, TError> source) =>
-            source.Either.HasValue ? source.Either.Value : Maybe<T>.None;
+        public static IMaybe<T> ToMaybe<T, TError>(this IResult<T, TError> source) =>
+            source.Either.HasValue ? Maybe.Value(source.Either.Value) : Maybe.None<T>();
 
         /// <summary>
         ///     Converts an <see cref="Nullable{T}" /> to an <see cref="IResult{T,TError}" /> with the value
@@ -153,7 +141,7 @@ namespace Lemonad.ErrorHandling {
 
         /// <summary>
         ///     Creates an <see cref="IResult{T,TError}" /> based on a predicate function combined with a
-        ///     <paramref name="errorSelector" /> for the <see cref="TError"/> type.
+        ///     <paramref name="errorSelector" /> for the <see cref="TError" /> type.
         /// </summary>
         /// <typeparam name="T">
         ///     The value type in <see cref="IResult{T,TError}" />.
@@ -226,33 +214,5 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         [Pure]
         public static IResult<T, TError> Value<T, TError>(T element) => Result<T, TError>.ValueFactory(in element);
-
-        /// <summary>
-        ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="IResult{T,TError}" /> to an <see cref="IEnumerable{T}" />
-        ///     of
-        ///     <typeparamref name="T" />.
-        /// </summary>
-        /// <param name="enumerable">
-        ///     The <see cref="IEnumerable{T}" /> of <see cref="IResult{T,TError}" />.
-        /// </param>
-        /// <typeparam name="T">
-        ///     The type of the values in <see cref="IResult{T,TError}" />.
-        /// </typeparam>
-        /// <typeparam name="TError">
-        ///     The type of the errors in <see cref="IResult{T,TError}" />.
-        /// </typeparam>
-        public static IEnumerable<T> Values<T, TError>(
-            this IEnumerable<IResult<T, TError>> enumerable) =>
-            enumerable.SelectMany(x => x.ToEnumerable());
-
-        private static IEnumerable<TError> YieldErrors<T, TError>(IResult<T, TError> result) {
-            if (result.Either.HasError)
-                yield return result.Either.Error;
-        }
-
-        private static IEnumerable<T> YieldValues<T, TError>(IResult<T, TError> result) {
-            if (result.Either.HasValue)
-                yield return result.Either.Value;
-        }
     }
 }

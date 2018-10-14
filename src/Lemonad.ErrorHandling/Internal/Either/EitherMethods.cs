@@ -358,7 +358,7 @@ namespace Lemonad.ErrorHandling.Internal.Either {
 
         internal static async Task<IEither<T, TError>> IsErrorWhenAsyncPredicate<T, TError>(
             Task<IEither<T, TError>> source,
-            Func<T, Task<bool>> predicate, Func<Maybe<T>, TError> errorSelector) {
+            Func<T, Task<bool>> predicate, Func<T, TError> errorSelector) {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
             var either = await source.ConfigureAwait(false);
