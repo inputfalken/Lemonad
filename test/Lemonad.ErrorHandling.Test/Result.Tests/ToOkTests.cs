@@ -15,7 +15,7 @@ namespace Lemonad.ErrorHandling.Test.Result.Tests {
 
         [Fact]
         public void Convert_Null_String_To_ResultOk() {
-            Assert.Throws<ArgumentNullException>(AssertionUtilities.EitherValueName, () => {
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.MaybeValueName, () => {
                 string str = null;
                 var result = str.ToResult(x => true, x => "");
 

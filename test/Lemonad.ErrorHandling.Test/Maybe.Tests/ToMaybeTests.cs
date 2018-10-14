@@ -22,7 +22,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Predicate_Overload__Nullable_Bool_Whose_Value_Is_Null__Expects_HasValue_To_Be_True() {
-            Assert.Throws<ArgumentNullException>(AssertionUtilities.EitherValueName, () => {
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.MaybeValueName, () => {
                 bool? foo = null;
                 var maybe = foo.ToMaybe(_ => true);
 

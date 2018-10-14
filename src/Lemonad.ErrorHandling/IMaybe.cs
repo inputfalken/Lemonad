@@ -86,7 +86,7 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TResult">
         ///     The type <typeparamref name="T" /> returned from the <paramref name="flatMapSelector" /> function.
         /// </typeparam>
-        Maybe<TResult> FlatMap<TResult>(Func<T, Maybe<TResult>> flatMapSelector);
+        IMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> flatMapSelector);
 
         /// <summary>
         ///     Flatmaps another <see cref="Maybe{T}" />.
@@ -104,8 +104,8 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TResult">
         ///     The type returned by the function <paramref name="resultSelector" />.
         /// </typeparam>
-        Maybe<TResult> FlatMap<TFlatMap, TResult>(
-            Func<T, Maybe<TFlatMap>> flatMapSelector,
+        IMaybe<TResult> FlatMap<TFlatMap, TResult>(
+            Func<T, IMaybe<TFlatMap>> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector);
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace Lemonad.ErrorHandling {
         /// </param>
         IMaybe<T> IsNoneWhen(Func<T, bool> predicate);
 
-        Maybe<T> Flatten<TResult>(Func<T, Maybe<TResult>> selector);
+        IMaybe<T> Flatten<TResult>(Func<T, IMaybe<TResult>> selector);
 
         /// <summary>
         ///     Flatmaps another <see cref="Maybe{T}" />.
@@ -145,7 +145,7 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TResult">
         ///     The type returned by the function <paramref name="resultSelector" />.
         /// </typeparam>
-        Maybe<TResult> FlatMap<TFlatMap, TResult>(
+        IMaybe<TResult> FlatMap<TFlatMap, TResult>(
             Func<T, TFlatMap?> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct;
     }

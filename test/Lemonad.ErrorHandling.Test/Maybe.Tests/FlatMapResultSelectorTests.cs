@@ -86,7 +86,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         [Fact]
         public void Passing_Null_Selector_Function__Throws_ArgumentNullException() {
             Assert.Throws<ArgumentNullException>(() => {
-                Func<string, Maybe<bool>> function = null;
+                Func<string, IMaybe<bool>> function = null;
                 "foo".ToMaybe().FlatMap(function, (s, b) => s);
             });
         }

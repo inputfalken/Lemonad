@@ -66,9 +66,7 @@ namespace Lemonad.ErrorHandling {
             Func<T, bool> predicate,
             Func<T, TError> errorSelector);
 
-        IAsyncResult<T, TError> IsErrorWhen(
-            Func<T, Task<bool>> predicate,
-            Func<Maybe<T>, TError> errorSelector);
+        IAsyncResult<T, TError> IsErrorWhen(Func<T, Task<bool>> predicate, Func<T, TError> errorSelector);
 
         IAsyncResult<TResult, TError> Join<TInner, TKey, TResult>(
             IAsyncResult<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,

@@ -70,9 +70,8 @@ namespace Lemonad.ErrorHandling.Internal {
 
         public IAsyncResult<T, TError> IsErrorWhen(
             Func<T, Task<bool>> predicate,
-            Func<Maybe<T>, TError> errorSelector) =>
-            new AsyncResult<T, TError>(
-                EitherMethods.IsErrorWhenAsyncPredicate(Either, predicate, errorSelector));
+            Func<T, TError> errorSelector) =>
+            new AsyncResult<T, TError>( EitherMethods.IsErrorWhenAsyncPredicate(Either, predicate, errorSelector));
 
         public IAsyncResult<T, IReadOnlyList<TError>> Multiple(
             params Func<IAsyncResult<T, TError>, IAsyncResult<T, TError>>[] validations) {

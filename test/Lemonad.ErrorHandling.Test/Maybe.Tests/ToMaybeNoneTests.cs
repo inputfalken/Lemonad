@@ -2,7 +2,7 @@
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
-    public class NoneWhenStringIsNullOrEmpty {
+    public class ToMaybeNoneTests {
         [Fact]
         public void Empty_String() {
             var noneWhenStringIsNullOrEmpty = string.Empty.ToMaybeNone(string.IsNullOrWhiteSpace);
@@ -12,10 +12,10 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         }
 
         [Fact]
-        public void Null_String() {
-            Assert.Throws<ArgumentNullException>(AssertionUtilities.EitherValueName, () => {
+        public void Null_String_With_Value_Should_Throw() {
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.MaybeValueName, () => {
                 string f = null;
-                var noneWhenStringIsNullOrEmpty = f.ToMaybeNone(string.IsNullOrWhiteSpace);
+                var noneWhenStringIsNullOrEmpty = f.ToMaybeNone(_ => false);
 
                 Assert.False(noneWhenStringIsNullOrEmpty.HasValue);
                 Assert.Equal(default, noneWhenStringIsNullOrEmpty.Value);

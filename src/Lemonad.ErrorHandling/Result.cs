@@ -123,8 +123,8 @@ namespace Lemonad.ErrorHandling {
         ///     The <typeparamref name="TError" /> from the <see cref="IResult{T,TError}" />.
         /// </typeparam>
         [Pure]
-        public static Maybe<T> ToMaybe<T, TError>(this IResult<T, TError> source) =>
-            source.Either.HasValue ? source.Either.Value : Maybe<T>.None;
+        public static IMaybe<T> ToMaybe<T, TError>(this IResult<T, TError> source) =>
+            source.Either.HasValue ? source.Either.Value.ToMaybe() : Maybe<T>.None;
 
         /// <summary>
         ///     Converts an <see cref="Nullable{T}" /> to an <see cref="IResult{T,TError}" /> with the value

@@ -68,7 +68,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Some_Maybe_String_With_Null_String__Expects_String_To_Be_Empty() {
-            Assert.Throws<ArgumentNullException>(AssertionUtilities.EitherValueName, () => {
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.MaybeValueName, () => {
                 string hello = null;
                 var maybe = hello.ToMaybe();
                 Assert.True(maybe.HasValue, "Should have value.");
