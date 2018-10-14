@@ -109,10 +109,10 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         /// <returns></returns>
         [Pure]
-        public static IResult<T, TError> ToResult<T, TError>(this IMaybe<T> source, Func<TError> errorSelector) =>
-            source.ToResult(x => x.HasValue, x => errorSelector == null
-                ? throw new ArgumentNullException(nameof(errorSelector))
-                : errorSelector()).Map(x => x.Value);
+        public static IResult<T, TError> ToResult<T, TError>(this IMaybe<T> source,
+            Func<TError> errorSelector) => errorSelector == null
+            ? throw new ArgumentNullException(nameof(errorSelector))
+            : source.ToResult(x => x.HasValue, x => errorSelector()).Map(x => x.Value);
 
         /// <summary>
         ///     Creates a <see cref="Maybe{T}" /> who will have the value <paramref name="item" />.
