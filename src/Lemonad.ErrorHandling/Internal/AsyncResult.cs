@@ -73,13 +73,6 @@ namespace Lemonad.ErrorHandling.Internal {
             Func<T, TError> errorSelector) =>
             new AsyncResult<T, TError>(EitherMethods.IsErrorWhenAsyncPredicate(Either, predicate, errorSelector));
 
-        public IAsyncResult<T, IReadOnlyList<TError>> Multiple(
-            params Func<IAsyncResult<T, TError>, IAsyncResult<T, TError>>[] validations) {
-            var tmp = this;
-            return new AsyncResult<T, IReadOnlyList<TError>>(EitherMethods.MultipleAsync(Either,
-                validations.Select(x => x.Compose(y => y.Either)(tmp)).ToArray()));
-        }
-
         public IAsyncResult<TResult, TError> Map<TResult>(Func<T, TResult> selector) =>
             new AsyncResult<TResult, TError>(EitherMethods.MapAsync(Either, selector));
 
