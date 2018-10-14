@@ -2,7 +2,7 @@
 using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
-    public interface IMaybe<T> {
+    public interface IMaybe<out T> {
         /// <summary>
         ///     Gets a value indicating whether the current <see cref="Maybe{T}" /> object has a valid value of
         ///     its underlying type.
