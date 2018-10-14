@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling.EnumerableExtensions {
     public static class MaybeEnumerable {
@@ -84,7 +83,8 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
             Func<TResult> selector) => source.Where(x => x.HasValue == false).Select(_ => selector());
 
         /// <summary>
-        ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="IMaybe{T}" /> into an <see cref="IEnumerable{T}" /> with the
+        ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="IMaybe{T}" /> into an <see cref="IEnumerable{T}" /> with
+        ///     the
         ///     value of the <see cref="IMaybe{T}" />.
         /// </summary>
         /// <param name="source">

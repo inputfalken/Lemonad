@@ -67,6 +67,11 @@ namespace Lemonad.ErrorHandling {
             Func<T, TResult> selector)
             where T : TError => source.Match(selector, x => selector((T) x));
 
+        public static IAsyncResult<T, IReadOnlyList<TError>> Multiple<T, TError>(this IAsyncResult<T, TError> source,
+            params Func<IAsyncResult<T, TError>, IAsyncResult<T, TError>>[] validations) =>
+            AsyncResult<T, IReadOnlyList<TError>>.Factory(EitherMethods.MultipleAsync(source.Either,
+                validations.Select(x => x.Compose(y => y.Either)(source)).ToArray()));
+
         /// <summary>
         ///     Converts the <see cref="Task" /> with <see cref="IAsyncResult{T,TError}" /> into
         ///     <see cref="IAsyncResult{T,TError}" />.
@@ -138,10 +143,5 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static IAsyncResult<T, TError> Value<T, TError>(T element) =>
             AsyncResult<T, TError>.ValueFactory(in element);
-
-        public static IAsyncResult<T, IReadOnlyList<TError>> Multiple<T, TError>(this IAsyncResult<T, TError> source,
-            params Func<IAsyncResult<T, TError>, IAsyncResult<T, TError>>[] validations) =>
-            AsyncResult<T, IReadOnlyList<TError>>.Factory(EitherMethods.MultipleAsync(source.Either,
-                validations.Select(x => x.Compose(y => y.Either)(source)).ToArray()));
     }
 }
