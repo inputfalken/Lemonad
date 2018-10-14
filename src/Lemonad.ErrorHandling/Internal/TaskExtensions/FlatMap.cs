@@ -2,13 +2,13 @@ using System;
 using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling.Internal.TaskExtensions {
-    public static partial class TaskExtensions {
-        public static async Task FlatMap(this Task task, Func<Task> fn) {
+    internal static partial class TaskExtensions {
+        internal static async Task FlatMap(this Task task, Func<Task> fn) {
             await task.ConfigureAwait(false);
             await fn().ConfigureAwait(false);
         }
 
-        public static async Task<TSource> FlatMap<TSource>(this Task task, Func<Task> fn,
+        internal static async Task<TSource> FlatMap<TSource>(this Task task, Func<Task> fn,
             Func<TSource> resultSelector) {
             if (task == null) throw new ArgumentNullException(nameof(task));
             if (fn == null) throw new ArgumentNullException(nameof(fn));
@@ -18,7 +18,7 @@ namespace Lemonad.ErrorHandling.Internal.TaskExtensions {
             return resultSelector();
         }
 
-        public static async Task<TResult> FlatMap<TResult>(this Task task,
+        internal static async Task<TResult> FlatMap<TResult>(this Task task,
             Func<Task<TResult>> selector) {
             if (task == null) throw new ArgumentNullException(nameof(task));
             if (selector == null) throw new ArgumentNullException(nameof(selector));
@@ -26,7 +26,7 @@ namespace Lemonad.ErrorHandling.Internal.TaskExtensions {
             return await selector().ConfigureAwait(false);
         }
 
-        public static async Task<TResult> FlatMap<TTask, TResult>(this Task task,
+        internal static async Task<TResult> FlatMap<TTask, TResult>(this Task task,
             Func<Task<TTask>> selector, Func<TTask, TResult> resultSelector) {
             if (task == null) throw new ArgumentNullException(nameof(task));
             if (selector == null) throw new ArgumentNullException(nameof(selector));
@@ -34,13 +34,13 @@ namespace Lemonad.ErrorHandling.Internal.TaskExtensions {
             return resultSelector(await selector().ConfigureAwait(false));
         }
 
-        public static async Task FlatMap<TSource>(this Task<TSource> task, Func<TSource, Task> fn) {
+        internal static async Task FlatMap<TSource>(this Task<TSource> task, Func<TSource, Task> fn) {
             if (task == null) throw new ArgumentNullException(nameof(task));
             if (fn == null) throw new ArgumentNullException(nameof(fn));
             await fn(await task.ConfigureAwait(false)).ConfigureAwait(false);
         }
 
-        public static async Task<TResult> FlatMap<TSource, TTask, TResult>(this Task<TSource> task,
+        internal static async Task<TResult> FlatMap<TSource, TTask, TResult>(this Task<TSource> task,
             Func<TSource, Task<TTask>> selector, Func<TSource, TTask, TResult> resultSelector) {
             if (task == null) throw new ArgumentNullException(nameof(task));
             if (selector == null) throw new ArgumentNullException(nameof(selector));
@@ -49,7 +49,7 @@ namespace Lemonad.ErrorHandling.Internal.TaskExtensions {
             return resultSelector(source, await selector(source).ConfigureAwait(false));
         }
 
-        public static async Task<TResult> FlatMap<TSource, TResult>(this Task<TSource> task,
+        internal static async Task<TResult> FlatMap<TSource, TResult>(this Task<TSource> task,
             Func<TSource, Task> selector, Func<TSource, TResult> resultSelector) {
             if (task == null) throw new ArgumentNullException(nameof(task));
             if (selector == null) throw new ArgumentNullException(nameof(selector));
@@ -59,7 +59,7 @@ namespace Lemonad.ErrorHandling.Internal.TaskExtensions {
             return resultSelector(source);
         }
 
-        public static async Task<TResult> FlatMap<TSource, TResult>(this Task<TSource> task,
+        internal static async Task<TResult> FlatMap<TSource, TResult>(this Task<TSource> task,
             Func<TSource, Task<TResult>> selector) {
             if (task == null) throw new ArgumentNullException(nameof(task));
             if (selector == null) throw new ArgumentNullException(nameof(selector));

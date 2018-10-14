@@ -2,14 +2,14 @@
 using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling.Internal.TaskExtensions {
-    public static partial class TaskExtensions {
-        public static Task<T> Do<T>(this Task<T> task, Action<T> action) => task != null
+    internal static partial class TaskExtensions {
+        internal static Task<T> Do<T>(this Task<T> task, Action<T> action) => task != null
             ? action != null
                 ? Run(task, action)
                 : throw new ArgumentNullException(nameof(action))
             : throw new ArgumentNullException(nameof(action));
 
-        public static Task Do(this Task task, Action action) => task != null
+        internal static Task Do(this Task task, Action action) => task != null
             ? action != null
                 ? Run(task, action)
                 : throw new ArgumentNullException(nameof(action))
