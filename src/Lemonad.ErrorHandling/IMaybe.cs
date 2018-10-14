@@ -27,47 +27,9 @@ namespace Lemonad.ErrorHandling {
         /// </example>
         T Value { get; }
 
-        /// <summary>
-        ///     Evaluates the <see cref="Maybe{T}" />.
-        /// </summary>
-        /// <param name="someAction">
-        ///     Is executed when the <see cref="Maybe{T}" /> has a value.
-        /// </param>
-        /// <param name="noneAction">
-        ///     Is executed when he <see cref="Maybe{T}" /> has no value.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        ///     When either <paramref name="someAction" /> or <paramref name="noneAction" /> needs to be executed.
-        /// </exception>
-        void Match(Action<T> someAction, Action noneAction);
-
-        IMaybe<T> DoWith(Action<T> someAction);
         IMaybe<T> Do(Action action);
 
-        /// <summary>
-        ///     Evaluates the <see cref="Maybe{T}" />.
-        /// </summary>
-        /// <param name="someSelector">
-        ///     Is executed when the <see cref="Maybe{T}" /> has a value.
-        /// </param>
-        /// <param name="noneSelector">
-        ///     Is executed when he <see cref="Maybe{T}" /> has no value.
-        /// </param>
-        /// <typeparam name="TResult">
-        ///     The type returned by the functions <paramref name="someSelector" /> and <paramref name="noneSelector" />.
-        /// </typeparam>
-        TResult Match<TResult>(Func<T, TResult> someSelector, Func<TResult> noneSelector);
-
-        /// <summary>
-        ///     Maps <typeparamref name="T" />.
-        /// </summary>
-        /// <param name="selector">
-        ///     Is executed if <see cref="Maybe{T}" /> has a value.
-        /// </param>
-        /// <typeparam name="TResult">
-        ///     The type returned from the function <paramref name="selector" />.
-        /// </typeparam>
-        IMaybe<TResult> Map<TResult>(Func<T, TResult> selector);
+        IMaybe<T> DoWith(Action<T> someAction);
 
         /// <summary>
         ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
@@ -120,16 +82,6 @@ namespace Lemonad.ErrorHandling {
         IMaybe<TResult> FlatMap<TResult>(Func<T, TResult?> flatSelector) where TResult : struct;
 
         /// <summary>
-        ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
-        /// </summary>
-        /// <param name="predicate">
-        ///     A function to test <typeparamref name="T" />.
-        /// </param>
-        IMaybe<T> IsNoneWhen(Func<T, bool> predicate);
-
-        IMaybe<T> Flatten<TResult>(Func<T, IMaybe<TResult>> selector);
-
-        /// <summary>
         ///     Flatmaps another <see cref="Maybe{T}" />.
         /// </summary>
         /// <param name="flatMapSelector">
@@ -148,5 +100,54 @@ namespace Lemonad.ErrorHandling {
         IMaybe<TResult> FlatMap<TFlatMap, TResult>(
             Func<T, TFlatMap?> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct;
+
+        IMaybe<T> Flatten<TResult>(Func<T, IMaybe<TResult>> selector);
+
+        /// <summary>
+        ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
+        /// </summary>
+        /// <param name="predicate">
+        ///     A function to test <typeparamref name="T" />.
+        /// </param>
+        IMaybe<T> IsNoneWhen(Func<T, bool> predicate);
+
+        /// <summary>
+        ///     Maps <typeparamref name="T" />.
+        /// </summary>
+        /// <param name="selector">
+        ///     Is executed if <see cref="Maybe{T}" /> has a value.
+        /// </param>
+        /// <typeparam name="TResult">
+        ///     The type returned from the function <paramref name="selector" />.
+        /// </typeparam>
+        IMaybe<TResult> Map<TResult>(Func<T, TResult> selector);
+
+        /// <summary>
+        ///     Evaluates the <see cref="Maybe{T}" />.
+        /// </summary>
+        /// <param name="someAction">
+        ///     Is executed when the <see cref="Maybe{T}" /> has a value.
+        /// </param>
+        /// <param name="noneAction">
+        ///     Is executed when he <see cref="Maybe{T}" /> has no value.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        ///     When either <paramref name="someAction" /> or <paramref name="noneAction" /> needs to be executed.
+        /// </exception>
+        void Match(Action<T> someAction, Action noneAction);
+
+        /// <summary>
+        ///     Evaluates the <see cref="Maybe{T}" />.
+        /// </summary>
+        /// <param name="someSelector">
+        ///     Is executed when the <see cref="Maybe{T}" /> has a value.
+        /// </param>
+        /// <param name="noneSelector">
+        ///     Is executed when he <see cref="Maybe{T}" /> has no value.
+        /// </param>
+        /// <typeparam name="TResult">
+        ///     The type returned by the functions <paramref name="someSelector" /> and <paramref name="noneSelector" />.
+        /// </typeparam>
+        TResult Match<TResult>(Func<T, TResult> someSelector, Func<TResult> noneSelector);
     }
 }

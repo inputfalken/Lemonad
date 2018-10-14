@@ -1,25 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Linq;
 using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
     public static class Maybe {
         /// <summary>
-        ///     Creates a <see cref="Maybe{T}" /> who will have the value <paramref name="item" />.
+        ///     Creates a <see cref="Maybe{T}" /> who will have no value.
         /// </summary>
-        /// <param name="item">
-        ///     The value of <see cref="Maybe{T}" />.
-        /// </param>
         /// <typeparam name="TSource">
         ///     The type of the <see cref="Maybe{T}" />.
         /// </typeparam>
         /// <returns>
-        ///     A <see cref="Maybe{T}" /> whose value will be <paramref name="item" />.
+        ///     A <see cref="Maybe{T}" /> who will have no value.
         /// </returns>
         [Pure]
-        public static IMaybe<TSource> Value<TSource>(TSource item) => Maybe<TSource>.Create(item);
+        public static IMaybe<TSource> None<TSource>() => Maybe<TSource>.None;
 
         /// <summary>
         ///     Works like <see cref="Value{TSource}(TSource)" /> but with an <paramref name="predicate" /> to test the element.
@@ -52,18 +47,6 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static IMaybe<TSource> ToMaybe<TSource>(this TSource? source) where TSource : struct =>
             source.HasValue ? Value(source.Value) : None<TSource>();
-
-        /// <summary>
-        ///     Creates a <see cref="Maybe{T}" /> who will have no value.
-        /// </summary>
-        /// <typeparam name="TSource">
-        ///     The type of the <see cref="Maybe{T}" />.
-        /// </typeparam>
-        /// <returns>
-        ///     A <see cref="Maybe{T}" /> who will have no value.
-        /// </returns>
-        [Pure]
-        public static IMaybe<TSource> None<TSource>() => Maybe<TSource>.None;
 
         /// <summary>
         ///     Creates a <see cref="Maybe{T}" /> who will have no value.
@@ -120,5 +103,20 @@ namespace Lemonad.ErrorHandling {
             source.ToResult(x => x.HasValue, x => errorSelector == null
                 ? throw new ArgumentNullException(nameof(errorSelector))
                 : errorSelector()).Map(x => x.Value);
+
+        /// <summary>
+        ///     Creates a <see cref="Maybe{T}" /> who will have the value <paramref name="item" />.
+        /// </summary>
+        /// <param name="item">
+        ///     The value of <see cref="Maybe{T}" />.
+        /// </param>
+        /// <typeparam name="TSource">
+        ///     The type of the <see cref="Maybe{T}" />.
+        /// </typeparam>
+        /// <returns>
+        ///     A <see cref="Maybe{T}" /> whose value will be <paramref name="item" />.
+        /// </returns>
+        [Pure]
+        public static IMaybe<TSource> Value<TSource>(TSource item) => Maybe<TSource>.Create(item);
     }
 }

@@ -21,12 +21,12 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
         public static IMaybe<TSource> FirstMaybe<TSource>(this IEnumerable<TSource> source) {
             switch (source) {
                 case IList<TSource> list when list.Count > 0:
-                    return ErrorHandling.Maybe.Value(list[0]);
+                    return Maybe.Value(list[0]);
                 case IReadOnlyList<TSource> readOnlyList when readOnlyList.Count > 0:
-                    return ErrorHandling.Maybe.Value(readOnlyList[0]);
+                    return Maybe.Value(readOnlyList[0]);
                 default:
                     using (var e = source.GetEnumerator()) {
-                        return e.MoveNext() ? ErrorHandling.Maybe.Value(e.Current) : ErrorHandling.Maybe.None<TSource>();
+                        return e.MoveNext() ? Maybe.Value(e.Current) : Maybe.None<TSource>();
                     }
             }
         }
@@ -52,9 +52,9 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
             Func<TSource, bool> predicate) {
             foreach (var element in source)
                 if (predicate(element))
-                    return ErrorHandling.Maybe.Value(element);
+                    return Maybe.Value(element);
 
-            return ErrorHandling.Maybe.None<TSource>();
+            return Maybe.None<TSource>();
         }
 
         /// <summary>
