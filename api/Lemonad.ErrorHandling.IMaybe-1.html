@@ -395,7 +395,6 @@ its underlying type.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">IMaybe&lt;TResult&gt; FlatMap&lt;TResult&gt;(Func&lt;T, TResult? &gt; flatSelector)
-
     where TResult : struct</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -539,7 +538,6 @@ any type.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">IMaybe&lt;TResult&gt; FlatMap&lt;TFlatMap, TResult&gt;(Func&lt;T, TFlatMap? &gt; flatMapSelector, Func&lt;T, TFlatMap, TResult&gt; resultSelector)
-
     where TFlatMap : struct</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>

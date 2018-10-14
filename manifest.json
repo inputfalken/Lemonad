@@ -21,10 +21,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.AsyncResult.html",
-          "hash": "eby8o24iiDWH/z+Hjr7fmg=="
+          "hash": "o6JZMhFBC+oA7N0GKZFcGA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -36,7 +36,7 @@
           "hash": "560wgBFqndMFlxYZd2DyCw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -60,7 +60,7 @@
           "hash": "0aogjdZha+mP4a5ewtt1AQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -93,10 +93,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.IMaybe-1.html",
-          "hash": "eSQ30bI3BVim37QMjqon+Q=="
+          "hash": "sAAuaoeEGdVIf03yba4tMg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -113,38 +113,14 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html",
-          "hash": "LtSffQb0fxvUlylMnJ93GQ=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Lemonad.ErrorHandling.Internal.TaskExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Lemonad.ErrorHandling.Internal.TaskExtensions.html",
-          "hash": "4CcMpUDZkFgJ5IF8V1S+Tw=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/Lemonad.ErrorHandling.Maybe.yml",
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Maybe.html",
-          "hash": "YdJB3hRHRn8+U8nxDJIvsQ=="
+          "hash": "xi/135tfFftLR7T2sfIx0Q=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -153,10 +129,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Parsers.MaybeParsers.html",
-          "hash": "WeQUXD3CJvq52likbR5PZw=="
+          "hash": "tiALFVMDY2XoOzU2SHqQWQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -165,10 +141,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Parsers.ResultParsers.html",
-          "hash": "1EV4CpmliMBc7EN+IXcDow=="
+          "hash": "Ehe64QfMRekS7yojEdO9PQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -180,7 +156,7 @@
           "hash": "KvpGaWsrwcw7nbL4b1p0PA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -189,10 +165,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Result.html",
-          "hash": "CtSKa6de6gmUgwIXcUmdEw=="
+          "hash": "EjB/KOer3Hw6sxjXY8T+8A=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -204,7 +180,7 @@
           "hash": "7HKcnY7AcgfGG7D2m0A0dw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -225,7 +201,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "JPry9/LAaCpQh9KPZejcOA=="
+          "hash": "TunvA24uBLjXCJGUF1Cxdw=="
         }
       },
       "is_incremental": false,
@@ -287,17 +263,17 @@
         "incrementalPhase": "build"
       },
       "processors": {
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
-        },
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build"
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
+          "incrementalPhase": "build"
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         }
       }

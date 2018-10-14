@@ -199,7 +199,6 @@ public static IResult&lt;T, TError&gt; Error&lt;T, TError&gt;(TError error)</cod
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[Pure]
 public static T Match&lt;T, TError&gt;(this IResult&lt;T, TError&gt; source)
-
     where TError : T</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -272,7 +271,6 @@ public static T Match&lt;T, TError&gt;(this IResult&lt;T, TError&gt; source)
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[Pure]
 public static TResult Match&lt;T, TResult, TError&gt;(this IResult&lt;T, TError&gt; source, Func&lt;T, TResult&gt; selector)
-
     where T : TError</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -723,7 +721,6 @@ public static IResult&lt;T, TError&gt; ToResult&lt;T, TError&gt;(this T source, 
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[Pure]
 public static IResult&lt;T, TError&gt; ToResult&lt;T, TError&gt;(this T? source, Func&lt;TError&gt; errorSelector)
-
     where T : struct</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
