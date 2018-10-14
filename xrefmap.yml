@@ -1,178 +1,6 @@
 ### YamlMime:XRefMap
 sorted: true
 references:
-- uid: Lemonad.Async.Extensions
-  name: Lemonad.Async.Extensions
-  href: api/Lemonad.Async.Extensions.html
-  commentId: N:Lemonad.Async.Extensions
-  fullName: Lemonad.Async.Extensions
-  nameWithType: Lemonad.Async.Extensions
-- uid: Lemonad.Async.Extensions.TaskExtensions
-  name: TaskExtensions
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html
-  commentId: T:Lemonad.Async.Extensions.TaskExtensions
-  fullName: Lemonad.Async.Extensions.TaskExtensions
-  nameWithType: TaskExtensions
-- uid: Lemonad.Async.Extensions.TaskExtensions.Do(System.Threading.Tasks.Task,System.Action)
-  name: Do(Task, Action)
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html#Lemonad_Async_Extensions_TaskExtensions_Do_System_Threading_Tasks_Task_System_Action_
-  commentId: M:Lemonad.Async.Extensions.TaskExtensions.Do(System.Threading.Tasks.Task,System.Action)
-  fullName: Lemonad.Async.Extensions.TaskExtensions.Do(System.Threading.Tasks.Task, System.Action)
-  nameWithType: TaskExtensions.Do(Task, Action)
-- uid: Lemonad.Async.Extensions.TaskExtensions.Do*
-  name: Do
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html#Lemonad_Async_Extensions_TaskExtensions_Do_
-  commentId: Overload:Lemonad.Async.Extensions.TaskExtensions.Do
-  isSpec: "True"
-  fullName: Lemonad.Async.Extensions.TaskExtensions.Do
-  nameWithType: TaskExtensions.Do
-- uid: Lemonad.Async.Extensions.TaskExtensions.Do``1(System.Threading.Tasks.Task{``0},System.Action{``0})
-  name: Do<T>(Task<T>, Action<T>)
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html#Lemonad_Async_Extensions_TaskExtensions_Do__1_System_Threading_Tasks_Task___0__System_Action___0__
-  commentId: M:Lemonad.Async.Extensions.TaskExtensions.Do``1(System.Threading.Tasks.Task{``0},System.Action{``0})
-  name.vb: Do(Of T)(Task(Of T), Action(Of T))
-  fullName: Lemonad.Async.Extensions.TaskExtensions.Do<T>(System.Threading.Tasks.Task<T>, System.Action<T>)
-  fullName.vb: Lemonad.Async.Extensions.TaskExtensions.Do(Of T)(System.Threading.Tasks.Task(Of T), System.Action(Of T))
-  nameWithType: TaskExtensions.Do<T>(Task<T>, Action<T>)
-  nameWithType.vb: TaskExtensions.Do(Of T)(Task(Of T), Action(Of T))
-- uid: Lemonad.Async.Extensions.TaskExtensions.FlatMap(System.Threading.Tasks.Task,System.Func{System.Threading.Tasks.Task})
-  name: FlatMap(Task, Func<Task>)
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html#Lemonad_Async_Extensions_TaskExtensions_FlatMap_System_Threading_Tasks_Task_System_Func_System_Threading_Tasks_Task__
-  commentId: M:Lemonad.Async.Extensions.TaskExtensions.FlatMap(System.Threading.Tasks.Task,System.Func{System.Threading.Tasks.Task})
-  name.vb: FlatMap(Task, Func(Of Task))
-  fullName: Lemonad.Async.Extensions.TaskExtensions.FlatMap(System.Threading.Tasks.Task, System.Func<System.Threading.Tasks.Task>)
-  fullName.vb: Lemonad.Async.Extensions.TaskExtensions.FlatMap(System.Threading.Tasks.Task, System.Func(Of System.Threading.Tasks.Task))
-  nameWithType: TaskExtensions.FlatMap(Task, Func<Task>)
-  nameWithType.vb: TaskExtensions.FlatMap(Task, Func(Of Task))
-- uid: Lemonad.Async.Extensions.TaskExtensions.FlatMap*
-  name: FlatMap
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html#Lemonad_Async_Extensions_TaskExtensions_FlatMap_
-  commentId: Overload:Lemonad.Async.Extensions.TaskExtensions.FlatMap
-  isSpec: "True"
-  fullName: Lemonad.Async.Extensions.TaskExtensions.FlatMap
-  nameWithType: TaskExtensions.FlatMap
-- uid: Lemonad.Async.Extensions.TaskExtensions.FlatMap``1(System.Threading.Tasks.Task,System.Func{System.Threading.Tasks.Task{``0}})
-  name: FlatMap<TResult>(Task, Func<Task<TResult>>)
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html#Lemonad_Async_Extensions_TaskExtensions_FlatMap__1_System_Threading_Tasks_Task_System_Func_System_Threading_Tasks_Task___0___
-  commentId: M:Lemonad.Async.Extensions.TaskExtensions.FlatMap``1(System.Threading.Tasks.Task,System.Func{System.Threading.Tasks.Task{``0}})
-  name.vb: FlatMap(Of TResult)(Task, Func(Of Task(Of TResult)))
-  fullName: Lemonad.Async.Extensions.TaskExtensions.FlatMap<TResult>(System.Threading.Tasks.Task, System.Func<System.Threading.Tasks.Task<TResult>>)
-  fullName.vb: Lemonad.Async.Extensions.TaskExtensions.FlatMap(Of TResult)(System.Threading.Tasks.Task, System.Func(Of System.Threading.Tasks.Task(Of TResult)))
-  nameWithType: TaskExtensions.FlatMap<TResult>(Task, Func<Task<TResult>>)
-  nameWithType.vb: TaskExtensions.FlatMap(Of TResult)(Task, Func(Of Task(Of TResult)))
-- uid: Lemonad.Async.Extensions.TaskExtensions.FlatMap``1(System.Threading.Tasks.Task,System.Func{System.Threading.Tasks.Task},System.Func{``0})
-  name: FlatMap<TSource>(Task, Func<Task>, Func<TSource>)
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html#Lemonad_Async_Extensions_TaskExtensions_FlatMap__1_System_Threading_Tasks_Task_System_Func_System_Threading_Tasks_Task__System_Func___0__
-  commentId: M:Lemonad.Async.Extensions.TaskExtensions.FlatMap``1(System.Threading.Tasks.Task,System.Func{System.Threading.Tasks.Task},System.Func{``0})
-  name.vb: FlatMap(Of TSource)(Task, Func(Of Task), Func(Of TSource))
-  fullName: Lemonad.Async.Extensions.TaskExtensions.FlatMap<TSource>(System.Threading.Tasks.Task, System.Func<System.Threading.Tasks.Task>, System.Func<TSource>)
-  fullName.vb: Lemonad.Async.Extensions.TaskExtensions.FlatMap(Of TSource)(System.Threading.Tasks.Task, System.Func(Of System.Threading.Tasks.Task), System.Func(Of TSource))
-  nameWithType: TaskExtensions.FlatMap<TSource>(Task, Func<Task>, Func<TSource>)
-  nameWithType.vb: TaskExtensions.FlatMap(Of TSource)(Task, Func(Of Task), Func(Of TSource))
-- uid: Lemonad.Async.Extensions.TaskExtensions.FlatMap``1(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task})
-  name: FlatMap<TSource>(Task<TSource>, Func<TSource, Task>)
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html#Lemonad_Async_Extensions_TaskExtensions_FlatMap__1_System_Threading_Tasks_Task___0__System_Func___0_System_Threading_Tasks_Task__
-  commentId: M:Lemonad.Async.Extensions.TaskExtensions.FlatMap``1(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task})
-  name.vb: FlatMap(Of TSource)(Task(Of TSource), Func(Of TSource, Task))
-  fullName: Lemonad.Async.Extensions.TaskExtensions.FlatMap<TSource>(System.Threading.Tasks.Task<TSource>, System.Func<TSource, System.Threading.Tasks.Task>)
-  fullName.vb: Lemonad.Async.Extensions.TaskExtensions.FlatMap(Of TSource)(System.Threading.Tasks.Task(Of TSource), System.Func(Of TSource, System.Threading.Tasks.Task))
-  nameWithType: TaskExtensions.FlatMap<TSource>(Task<TSource>, Func<TSource, Task>)
-  nameWithType.vb: TaskExtensions.FlatMap(Of TSource)(Task(Of TSource), Func(Of TSource, Task))
-- uid: Lemonad.Async.Extensions.TaskExtensions.FlatMap``2(System.Threading.Tasks.Task,System.Func{System.Threading.Tasks.Task{``0}},System.Func{``0,``1})
-  name: FlatMap<TTask, TResult>(Task, Func<Task<TTask>>, Func<TTask, TResult>)
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html#Lemonad_Async_Extensions_TaskExtensions_FlatMap__2_System_Threading_Tasks_Task_System_Func_System_Threading_Tasks_Task___0___System_Func___0___1__
-  commentId: M:Lemonad.Async.Extensions.TaskExtensions.FlatMap``2(System.Threading.Tasks.Task,System.Func{System.Threading.Tasks.Task{``0}},System.Func{``0,``1})
-  name.vb: FlatMap(Of TTask, TResult)(Task, Func(Of Task(Of TTask)), Func(Of TTask, TResult))
-  fullName: Lemonad.Async.Extensions.TaskExtensions.FlatMap<TTask, TResult>(System.Threading.Tasks.Task, System.Func<System.Threading.Tasks.Task<TTask>>, System.Func<TTask, TResult>)
-  fullName.vb: Lemonad.Async.Extensions.TaskExtensions.FlatMap(Of TTask, TResult)(System.Threading.Tasks.Task, System.Func(Of System.Threading.Tasks.Task(Of TTask)), System.Func(Of TTask, TResult))
-  nameWithType: TaskExtensions.FlatMap<TTask, TResult>(Task, Func<Task<TTask>>, Func<TTask, TResult>)
-  nameWithType.vb: TaskExtensions.FlatMap(Of TTask, TResult)(Task, Func(Of Task(Of TTask)), Func(Of TTask, TResult))
-- uid: Lemonad.Async.Extensions.TaskExtensions.FlatMap``2(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task{``1}})
-  name: FlatMap<TSource, TResult>(Task<TSource>, Func<TSource, Task<TResult>>)
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html#Lemonad_Async_Extensions_TaskExtensions_FlatMap__2_System_Threading_Tasks_Task___0__System_Func___0_System_Threading_Tasks_Task___1___
-  commentId: M:Lemonad.Async.Extensions.TaskExtensions.FlatMap``2(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task{``1}})
-  name.vb: FlatMap(Of TSource, TResult)(Task(Of TSource), Func(Of TSource, Task(Of TResult)))
-  fullName: Lemonad.Async.Extensions.TaskExtensions.FlatMap<TSource, TResult>(System.Threading.Tasks.Task<TSource>, System.Func<TSource, System.Threading.Tasks.Task<TResult>>)
-  fullName.vb: Lemonad.Async.Extensions.TaskExtensions.FlatMap(Of TSource, TResult)(System.Threading.Tasks.Task(Of TSource), System.Func(Of TSource, System.Threading.Tasks.Task(Of TResult)))
-  nameWithType: TaskExtensions.FlatMap<TSource, TResult>(Task<TSource>, Func<TSource, Task<TResult>>)
-  nameWithType.vb: TaskExtensions.FlatMap(Of TSource, TResult)(Task(Of TSource), Func(Of TSource, Task(Of TResult)))
-- uid: Lemonad.Async.Extensions.TaskExtensions.FlatMap``2(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task},System.Func{``0,``1})
-  name: FlatMap<TSource, TResult>(Task<TSource>, Func<TSource, Task>, Func<TSource, TResult>)
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html#Lemonad_Async_Extensions_TaskExtensions_FlatMap__2_System_Threading_Tasks_Task___0__System_Func___0_System_Threading_Tasks_Task__System_Func___0___1__
-  commentId: M:Lemonad.Async.Extensions.TaskExtensions.FlatMap``2(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task},System.Func{``0,``1})
-  name.vb: FlatMap(Of TSource, TResult)(Task(Of TSource), Func(Of TSource, Task), Func(Of TSource, TResult))
-  fullName: Lemonad.Async.Extensions.TaskExtensions.FlatMap<TSource, TResult>(System.Threading.Tasks.Task<TSource>, System.Func<TSource, System.Threading.Tasks.Task>, System.Func<TSource, TResult>)
-  fullName.vb: Lemonad.Async.Extensions.TaskExtensions.FlatMap(Of TSource, TResult)(System.Threading.Tasks.Task(Of TSource), System.Func(Of TSource, System.Threading.Tasks.Task), System.Func(Of TSource, TResult))
-  nameWithType: TaskExtensions.FlatMap<TSource, TResult>(Task<TSource>, Func<TSource, Task>, Func<TSource, TResult>)
-  nameWithType.vb: TaskExtensions.FlatMap(Of TSource, TResult)(Task(Of TSource), Func(Of TSource, Task), Func(Of TSource, TResult))
-- uid: Lemonad.Async.Extensions.TaskExtensions.FlatMap``3(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task{``1}},System.Func{``0,``1,``2})
-  name: FlatMap<TSource, TTask, TResult>(Task<TSource>, Func<TSource, Task<TTask>>, Func<TSource, TTask, TResult>)
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html#Lemonad_Async_Extensions_TaskExtensions_FlatMap__3_System_Threading_Tasks_Task___0__System_Func___0_System_Threading_Tasks_Task___1___System_Func___0___1___2__
-  commentId: M:Lemonad.Async.Extensions.TaskExtensions.FlatMap``3(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task{``1}},System.Func{``0,``1,``2})
-  name.vb: FlatMap(Of TSource, TTask, TResult)(Task(Of TSource), Func(Of TSource, Task(Of TTask)), Func(Of TSource, TTask, TResult))
-  fullName: Lemonad.Async.Extensions.TaskExtensions.FlatMap<TSource, TTask, TResult>(System.Threading.Tasks.Task<TSource>, System.Func<TSource, System.Threading.Tasks.Task<TTask>>, System.Func<TSource, TTask, TResult>)
-  fullName.vb: Lemonad.Async.Extensions.TaskExtensions.FlatMap(Of TSource, TTask, TResult)(System.Threading.Tasks.Task(Of TSource), System.Func(Of TSource, System.Threading.Tasks.Task(Of TTask)), System.Func(Of TSource, TTask, TResult))
-  nameWithType: TaskExtensions.FlatMap<TSource, TTask, TResult>(Task<TSource>, Func<TSource, Task<TTask>>, Func<TSource, TTask, TResult>)
-  nameWithType.vb: TaskExtensions.FlatMap(Of TSource, TTask, TResult)(Task(Of TSource), Func(Of TSource, Task(Of TTask)), Func(Of TSource, TTask, TResult))
-- uid: Lemonad.Async.Extensions.TaskExtensions.Map*
-  name: Map
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html#Lemonad_Async_Extensions_TaskExtensions_Map_
-  commentId: Overload:Lemonad.Async.Extensions.TaskExtensions.Map
-  isSpec: "True"
-  fullName: Lemonad.Async.Extensions.TaskExtensions.Map
-  nameWithType: TaskExtensions.Map
-- uid: Lemonad.Async.Extensions.TaskExtensions.Map``1(System.Threading.Tasks.Task,System.Func{``0})
-  name: Map<TResult>(Task, Func<TResult>)
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html#Lemonad_Async_Extensions_TaskExtensions_Map__1_System_Threading_Tasks_Task_System_Func___0__
-  commentId: M:Lemonad.Async.Extensions.TaskExtensions.Map``1(System.Threading.Tasks.Task,System.Func{``0})
-  name.vb: Map(Of TResult)(Task, Func(Of TResult))
-  fullName: Lemonad.Async.Extensions.TaskExtensions.Map<TResult>(System.Threading.Tasks.Task, System.Func<TResult>)
-  fullName.vb: Lemonad.Async.Extensions.TaskExtensions.Map(Of TResult)(System.Threading.Tasks.Task, System.Func(Of TResult))
-  nameWithType: TaskExtensions.Map<TResult>(Task, Func<TResult>)
-  nameWithType.vb: TaskExtensions.Map(Of TResult)(Task, Func(Of TResult))
-- uid: Lemonad.Async.Extensions.TaskExtensions.Map``2(System.Threading.Tasks.Task{``0},System.Func{``0,``1})
-  name: Map<TSource, TResult>(Task<TSource>, Func<TSource, TResult>)
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html#Lemonad_Async_Extensions_TaskExtensions_Map__2_System_Threading_Tasks_Task___0__System_Func___0___1__
-  commentId: M:Lemonad.Async.Extensions.TaskExtensions.Map``2(System.Threading.Tasks.Task{``0},System.Func{``0,``1})
-  name.vb: Map(Of TSource, TResult)(Task(Of TSource), Func(Of TSource, TResult))
-  fullName: Lemonad.Async.Extensions.TaskExtensions.Map<TSource, TResult>(System.Threading.Tasks.Task<TSource>, System.Func<TSource, TResult>)
-  fullName.vb: Lemonad.Async.Extensions.TaskExtensions.Map(Of TSource, TResult)(System.Threading.Tasks.Task(Of TSource), System.Func(Of TSource, TResult))
-  nameWithType: TaskExtensions.Map<TSource, TResult>(Task<TSource>, Func<TSource, TResult>)
-  nameWithType.vb: TaskExtensions.Map(Of TSource, TResult)(Task(Of TSource), Func(Of TSource, TResult))
-- uid: Lemonad.Async.Extensions.TaskExtensions.Zip*
-  name: Zip
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html#Lemonad_Async_Extensions_TaskExtensions_Zip_
-  commentId: Overload:Lemonad.Async.Extensions.TaskExtensions.Zip
-  isSpec: "True"
-  fullName: Lemonad.Async.Extensions.TaskExtensions.Zip
-  nameWithType: TaskExtensions.Zip
-- uid: Lemonad.Async.Extensions.TaskExtensions.Zip``1(System.Threading.Tasks.Task,System.Threading.Tasks.Task,System.Func{``0})
-  name: Zip<T>(Task, Task, Func<T>)
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html#Lemonad_Async_Extensions_TaskExtensions_Zip__1_System_Threading_Tasks_Task_System_Threading_Tasks_Task_System_Func___0__
-  commentId: M:Lemonad.Async.Extensions.TaskExtensions.Zip``1(System.Threading.Tasks.Task,System.Threading.Tasks.Task,System.Func{``0})
-  name.vb: Zip(Of T)(Task, Task, Func(Of T))
-  fullName: Lemonad.Async.Extensions.TaskExtensions.Zip<T>(System.Threading.Tasks.Task, System.Threading.Tasks.Task, System.Func<T>)
-  fullName.vb: Lemonad.Async.Extensions.TaskExtensions.Zip(Of T)(System.Threading.Tasks.Task, System.Threading.Tasks.Task, System.Func(Of T))
-  nameWithType: TaskExtensions.Zip<T>(Task, Task, Func<T>)
-  nameWithType.vb: TaskExtensions.Zip(Of T)(Task, Task, Func(Of T))
-- uid: Lemonad.Async.Extensions.TaskExtensions.Zip``2(System.Threading.Tasks.Task,System.Threading.Tasks.Task{``1},System.Func{``1,``0})
-  name: Zip<T, T2>(Task, Task<T2>, Func<T2, T>)
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html#Lemonad_Async_Extensions_TaskExtensions_Zip__2_System_Threading_Tasks_Task_System_Threading_Tasks_Task___1__System_Func___1___0__
-  commentId: M:Lemonad.Async.Extensions.TaskExtensions.Zip``2(System.Threading.Tasks.Task,System.Threading.Tasks.Task{``1},System.Func{``1,``0})
-  name.vb: Zip(Of T, T2)(Task, Task(Of T2), Func(Of T2, T))
-  fullName: Lemonad.Async.Extensions.TaskExtensions.Zip<T, T2>(System.Threading.Tasks.Task, System.Threading.Tasks.Task<T2>, System.Func<T2, T>)
-  fullName.vb: Lemonad.Async.Extensions.TaskExtensions.Zip(Of T, T2)(System.Threading.Tasks.Task, System.Threading.Tasks.Task(Of T2), System.Func(Of T2, T))
-  nameWithType: TaskExtensions.Zip<T, T2>(Task, Task<T2>, Func<T2, T>)
-  nameWithType.vb: TaskExtensions.Zip(Of T, T2)(Task, Task(Of T2), Func(Of T2, T))
-- uid: Lemonad.Async.Extensions.TaskExtensions.Zip``3(System.Threading.Tasks.Task{``0},System.Threading.Tasks.Task{``1},System.Func{``0,``1,``2})
-  name: Zip<T, T2, T3>(Task<T>, Task<T2>, Func<T, T2, T3>)
-  href: api/Lemonad.Async.Extensions.TaskExtensions.html#Lemonad_Async_Extensions_TaskExtensions_Zip__3_System_Threading_Tasks_Task___0__System_Threading_Tasks_Task___1__System_Func___0___1___2__
-  commentId: M:Lemonad.Async.Extensions.TaskExtensions.Zip``3(System.Threading.Tasks.Task{``0},System.Threading.Tasks.Task{``1},System.Func{``0,``1,``2})
-  name.vb: Zip(Of T, T2, T3)(Task(Of T), Task(Of T2), Func(Of T, T2, T3))
-  fullName: Lemonad.Async.Extensions.TaskExtensions.Zip<T, T2, T3>(System.Threading.Tasks.Task<T>, System.Threading.Tasks.Task<T2>, System.Func<T, T2, T3>)
-  fullName.vb: Lemonad.Async.Extensions.TaskExtensions.Zip(Of T, T2, T3)(System.Threading.Tasks.Task(Of T), System.Threading.Tasks.Task(Of T2), System.Func(Of T, T2, T3))
-  nameWithType: TaskExtensions.Zip<T, T2, T3>(Task<T>, Task<T2>, Func<T, T2, T3>)
-  nameWithType.vb: TaskExtensions.Zip(Of T, T2, T3)(Task(Of T), Task(Of T2), Func(Of T, T2, T3))
 - uid: Lemonad.ErrorHandling
   name: Lemonad.ErrorHandling
   href: api/Lemonad.ErrorHandling.html
@@ -242,6 +70,22 @@ references:
   fullName.vb: Lemonad.ErrorHandling.AsyncResult.Match(Of T, TResult, TError)(Lemonad.ErrorHandling.IAsyncResult(Of T, TError), System.Func(Of T, TResult))
   nameWithType: AsyncResult.Match<T, TResult, TError>(IAsyncResult<T, TError>, Func<T, TResult>)
   nameWithType.vb: AsyncResult.Match(Of T, TResult, TError)(IAsyncResult(Of T, TError), Func(Of T, TResult))
+- uid: Lemonad.ErrorHandling.AsyncResult.Multiple*
+  name: Multiple
+  href: api/Lemonad.ErrorHandling.AsyncResult.html#Lemonad_ErrorHandling_AsyncResult_Multiple_
+  commentId: Overload:Lemonad.ErrorHandling.AsyncResult.Multiple
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.AsyncResult.Multiple
+  nameWithType: AsyncResult.Multiple
+- uid: Lemonad.ErrorHandling.AsyncResult.Multiple``2(Lemonad.ErrorHandling.IAsyncResult{``0,``1},System.Func{Lemonad.ErrorHandling.IAsyncResult{``0,``1},Lemonad.ErrorHandling.IAsyncResult{``0,``1}}[])
+  name: Multiple<T, TError>(IAsyncResult<T, TError>, Func<IAsyncResult<T, TError>, IAsyncResult<T, TError>>[])
+  href: api/Lemonad.ErrorHandling.AsyncResult.html#Lemonad_ErrorHandling_AsyncResult_Multiple__2_Lemonad_ErrorHandling_IAsyncResult___0___1__System_Func_Lemonad_ErrorHandling_IAsyncResult___0___1__Lemonad_ErrorHandling_IAsyncResult___0___1_____
+  commentId: M:Lemonad.ErrorHandling.AsyncResult.Multiple``2(Lemonad.ErrorHandling.IAsyncResult{``0,``1},System.Func{Lemonad.ErrorHandling.IAsyncResult{``0,``1},Lemonad.ErrorHandling.IAsyncResult{``0,``1}}[])
+  name.vb: Multiple(Of T, TError)(IAsyncResult(Of T, TError), Func(Of IAsyncResult(Of T, TError), IAsyncResult(Of T, TError))())
+  fullName: Lemonad.ErrorHandling.AsyncResult.Multiple<T, TError>(Lemonad.ErrorHandling.IAsyncResult<T, TError>, System.Func<Lemonad.ErrorHandling.IAsyncResult<T, TError>, Lemonad.ErrorHandling.IAsyncResult<T, TError>>[])
+  fullName.vb: Lemonad.ErrorHandling.AsyncResult.Multiple(Of T, TError)(Lemonad.ErrorHandling.IAsyncResult(Of T, TError), System.Func(Of Lemonad.ErrorHandling.IAsyncResult(Of T, TError), Lemonad.ErrorHandling.IAsyncResult(Of T, TError))())
+  nameWithType: AsyncResult.Multiple<T, TError>(IAsyncResult<T, TError>, Func<IAsyncResult<T, TError>, IAsyncResult<T, TError>>[])
+  nameWithType.vb: AsyncResult.Multiple(Of T, TError)(IAsyncResult(Of T, TError), Func(Of IAsyncResult(Of T, TError), IAsyncResult(Of T, TError))())
 - uid: Lemonad.ErrorHandling.AsyncResult.ToAsyncResult*
   name: ToAsyncResult
   href: api/Lemonad.ErrorHandling.AsyncResult.html#Lemonad_ErrorHandling_AsyncResult_ToAsyncResult_
@@ -258,15 +102,15 @@ references:
   fullName.vb: Lemonad.ErrorHandling.AsyncResult.ToAsyncResult(Of T, TError)(Lemonad.ErrorHandling.IResult(Of T, TError))
   nameWithType: AsyncResult.ToAsyncResult<T, TError>(IResult<T, TError>)
   nameWithType.vb: AsyncResult.ToAsyncResult(Of T, TError)(IResult(Of T, TError))
-- uid: Lemonad.ErrorHandling.AsyncResult.ToAsyncResult``2(System.Threading.Tasks.Task{``0},System.Func{``0,System.Boolean},System.Func{Lemonad.ErrorHandling.Maybe{``0},``1})
-  name: ToAsyncResult<T, TError>(Task<T>, Func<T, Boolean>, Func<Maybe<T>, TError>)
-  href: api/Lemonad.ErrorHandling.AsyncResult.html#Lemonad_ErrorHandling_AsyncResult_ToAsyncResult__2_System_Threading_Tasks_Task___0__System_Func___0_System_Boolean__System_Func_Lemonad_ErrorHandling_Maybe___0____1__
-  commentId: M:Lemonad.ErrorHandling.AsyncResult.ToAsyncResult``2(System.Threading.Tasks.Task{``0},System.Func{``0,System.Boolean},System.Func{Lemonad.ErrorHandling.Maybe{``0},``1})
-  name.vb: ToAsyncResult(Of T, TError)(Task(Of T), Func(Of T, Boolean), Func(Of Maybe(Of T), TError))
-  fullName: Lemonad.ErrorHandling.AsyncResult.ToAsyncResult<T, TError>(System.Threading.Tasks.Task<T>, System.Func<T, System.Boolean>, System.Func<Lemonad.ErrorHandling.Maybe<T>, TError>)
-  fullName.vb: Lemonad.ErrorHandling.AsyncResult.ToAsyncResult(Of T, TError)(System.Threading.Tasks.Task(Of T), System.Func(Of T, System.Boolean), System.Func(Of Lemonad.ErrorHandling.Maybe(Of T), TError))
-  nameWithType: AsyncResult.ToAsyncResult<T, TError>(Task<T>, Func<T, Boolean>, Func<Maybe<T>, TError>)
-  nameWithType.vb: AsyncResult.ToAsyncResult(Of T, TError)(Task(Of T), Func(Of T, Boolean), Func(Of Maybe(Of T), TError))
+- uid: Lemonad.ErrorHandling.AsyncResult.ToAsyncResult``2(System.Threading.Tasks.Task{``0},System.Func{``0,System.Boolean},System.Func{``0,``1})
+  name: ToAsyncResult<T, TError>(Task<T>, Func<T, Boolean>, Func<T, TError>)
+  href: api/Lemonad.ErrorHandling.AsyncResult.html#Lemonad_ErrorHandling_AsyncResult_ToAsyncResult__2_System_Threading_Tasks_Task___0__System_Func___0_System_Boolean__System_Func___0___1__
+  commentId: M:Lemonad.ErrorHandling.AsyncResult.ToAsyncResult``2(System.Threading.Tasks.Task{``0},System.Func{``0,System.Boolean},System.Func{``0,``1})
+  name.vb: ToAsyncResult(Of T, TError)(Task(Of T), Func(Of T, Boolean), Func(Of T, TError))
+  fullName: Lemonad.ErrorHandling.AsyncResult.ToAsyncResult<T, TError>(System.Threading.Tasks.Task<T>, System.Func<T, System.Boolean>, System.Func<T, TError>)
+  fullName.vb: Lemonad.ErrorHandling.AsyncResult.ToAsyncResult(Of T, TError)(System.Threading.Tasks.Task(Of T), System.Func(Of T, System.Boolean), System.Func(Of T, TError))
+  nameWithType: AsyncResult.ToAsyncResult<T, TError>(Task<T>, Func<T, Boolean>, Func<T, TError>)
+  nameWithType.vb: AsyncResult.ToAsyncResult(Of T, TError)(Task(Of T), Func(Of T, Boolean), Func(Of T, TError))
 - uid: Lemonad.ErrorHandling.AsyncResult.ToAsyncResult``2(System.Threading.Tasks.Task{Lemonad.ErrorHandling.IResult{``0,``1}})
   name: ToAsyncResult<T, TError>(Task<IResult<T, TError>>)
   href: api/Lemonad.ErrorHandling.AsyncResult.html#Lemonad_ErrorHandling_AsyncResult_ToAsyncResult__2_System_Threading_Tasks_Task_Lemonad_ErrorHandling_IResult___0___1___
@@ -349,6 +193,129 @@ references:
   fullName.vb: Lemonad.ErrorHandling.AsyncResult.Value(Of T, TError)(T)
   nameWithType: AsyncResult.Value<T, TError>(T)
   nameWithType.vb: AsyncResult.Value(Of T, TError)(T)
+- uid: Lemonad.ErrorHandling.EnumerableExtensions
+  name: Lemonad.ErrorHandling.EnumerableExtensions
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.html
+  commentId: N:Lemonad.ErrorHandling.EnumerableExtensions
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions
+  nameWithType: Lemonad.ErrorHandling.EnumerableExtensions
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable
+  name: MaybeEnumerable
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.html
+  commentId: T:Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable
+  nameWithType: MaybeEnumerable
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.FirstMaybe*
+  name: FirstMaybe
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_MaybeEnumerable_FirstMaybe_
+  commentId: Overload:Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.FirstMaybe
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.FirstMaybe
+  nameWithType: MaybeEnumerable.FirstMaybe
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.FirstMaybe``1(System.Collections.Generic.IEnumerable{``0})
+  name: FirstMaybe<TSource>(IEnumerable<TSource>)
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_MaybeEnumerable_FirstMaybe__1_System_Collections_Generic_IEnumerable___0__
+  commentId: M:Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.FirstMaybe``1(System.Collections.Generic.IEnumerable{``0})
+  name.vb: FirstMaybe(Of TSource)(IEnumerable(Of TSource))
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.FirstMaybe<TSource>(System.Collections.Generic.IEnumerable<TSource>)
+  fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.FirstMaybe(Of TSource)(System.Collections.Generic.IEnumerable(Of TSource))
+  nameWithType: MaybeEnumerable.FirstMaybe<TSource>(IEnumerable<TSource>)
+  nameWithType.vb: MaybeEnumerable.FirstMaybe(Of TSource)(IEnumerable(Of TSource))
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.FirstMaybe``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})
+  name: FirstMaybe<TSource>(IEnumerable<TSource>, Func<TSource, Boolean>)
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_MaybeEnumerable_FirstMaybe__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__
+  commentId: M:Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.FirstMaybe``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})
+  name.vb: FirstMaybe(Of TSource)(IEnumerable(Of TSource), Func(Of TSource, Boolean))
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.FirstMaybe<TSource>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, System.Boolean>)
+  fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.FirstMaybe(Of TSource)(System.Collections.Generic.IEnumerable(Of TSource), System.Func(Of TSource, System.Boolean))
+  nameWithType: MaybeEnumerable.FirstMaybe<TSource>(IEnumerable<TSource>, Func<TSource, Boolean>)
+  nameWithType.vb: MaybeEnumerable.FirstMaybe(Of TSource)(IEnumerable(Of TSource), Func(Of TSource, Boolean))
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.Match*
+  name: Match
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_MaybeEnumerable_Match_
+  commentId: Overload:Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.Match
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.Match
+  nameWithType: MaybeEnumerable.Match
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.Match``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.IMaybe{``0}},System.Func{``0,``1},System.Func{``1})
+  name: Match<TSource, TResult>(IEnumerable<IMaybe<TSource>>, Func<TSource, TResult>, Func<TResult>)
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_MaybeEnumerable_Match__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_IMaybe___0___System_Func___0___1__System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.Match``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.IMaybe{``0}},System.Func{``0,``1},System.Func{``1})
+  name.vb: Match(Of TSource, TResult)(IEnumerable(Of IMaybe(Of TSource)), Func(Of TSource, TResult), Func(Of TResult))
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.Match<TSource, TResult>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.IMaybe<TSource>>, System.Func<TSource, TResult>, System.Func<TResult>)
+  fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.Match(Of TSource, TResult)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.IMaybe(Of TSource)), System.Func(Of TSource, TResult), System.Func(Of TResult))
+  nameWithType: MaybeEnumerable.Match<TSource, TResult>(IEnumerable<IMaybe<TSource>>, Func<TSource, TResult>, Func<TResult>)
+  nameWithType.vb: MaybeEnumerable.Match(Of TSource, TResult)(IEnumerable(Of IMaybe(Of TSource)), Func(Of TSource, TResult), Func(Of TResult))
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.NoValues*
+  name: NoValues
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_MaybeEnumerable_NoValues_
+  commentId: Overload:Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.NoValues
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.NoValues
+  nameWithType: MaybeEnumerable.NoValues
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.NoValues``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.IMaybe{``0}},System.Func{``1})
+  name: NoValues<TSource, TResult>(IEnumerable<IMaybe<TSource>>, Func<TResult>)
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_MaybeEnumerable_NoValues__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_IMaybe___0___System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.NoValues``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.IMaybe{``0}},System.Func{``1})
+  name.vb: NoValues(Of TSource, TResult)(IEnumerable(Of IMaybe(Of TSource)), Func(Of TResult))
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.NoValues<TSource, TResult>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.IMaybe<TSource>>, System.Func<TResult>)
+  fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.NoValues(Of TSource, TResult)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.IMaybe(Of TSource)), System.Func(Of TResult))
+  nameWithType: MaybeEnumerable.NoValues<TSource, TResult>(IEnumerable<IMaybe<TSource>>, Func<TResult>)
+  nameWithType.vb: MaybeEnumerable.NoValues(Of TSource, TResult)(IEnumerable(Of IMaybe(Of TSource)), Func(Of TResult))
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.Values*
+  name: Values
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_MaybeEnumerable_Values_
+  commentId: Overload:Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.Values
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.Values
+  nameWithType: MaybeEnumerable.Values
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.Values``1(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.IMaybe{``0}})
+  name: Values<TSource>(IEnumerable<IMaybe<TSource>>)
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_MaybeEnumerable_Values__1_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_IMaybe___0___
+  commentId: M:Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.Values``1(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.IMaybe{``0}})
+  name.vb: Values(Of TSource)(IEnumerable(Of IMaybe(Of TSource)))
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.Values<TSource>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.IMaybe<TSource>>)
+  fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.MaybeEnumerable.Values(Of TSource)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.IMaybe(Of TSource)))
+  nameWithType: MaybeEnumerable.Values<TSource>(IEnumerable<IMaybe<TSource>>)
+  nameWithType.vb: MaybeEnumerable.Values(Of TSource)(IEnumerable(Of IMaybe(Of TSource)))
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable
+  name: ResultEnumerable
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.html
+  commentId: T:Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable
+  nameWithType: ResultEnumerable
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Errors*
+  name: Errors
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_Errors_
+  commentId: Overload:Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Errors
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Errors
+  nameWithType: ResultEnumerable.Errors
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Errors``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.IResult{``0,``1}})
+  name: Errors<T, TError>(IEnumerable<IResult<T, TError>>)
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_Errors__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_IResult___0___1___
+  commentId: M:Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Errors``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.IResult{``0,``1}})
+  name.vb: Errors(Of T, TError)(IEnumerable(Of IResult(Of T, TError)))
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Errors<T, TError>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.IResult<T, TError>>)
+  fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Errors(Of T, TError)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.IResult(Of T, TError)))
+  nameWithType: ResultEnumerable.Errors<T, TError>(IEnumerable<IResult<T, TError>>)
+  nameWithType.vb: ResultEnumerable.Errors(Of T, TError)(IEnumerable(Of IResult(Of T, TError)))
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Values*
+  name: Values
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_Values_
+  commentId: Overload:Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Values
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Values
+  nameWithType: ResultEnumerable.Values
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Values``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.IResult{``0,``1}})
+  name: Values<T, TError>(IEnumerable<IResult<T, TError>>)
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_Values__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_IResult___0___1___
+  commentId: M:Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Values``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.IResult{``0,``1}})
+  name.vb: Values(Of T, TError)(IEnumerable(Of IResult(Of T, TError)))
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Values<T, TError>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.IResult<T, TError>>)
+  fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Values(Of T, TError)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.IResult(Of T, TError)))
+  nameWithType: ResultEnumerable.Values<T, TError>(IEnumerable<IResult<T, TError>>)
+  nameWithType.vb: ResultEnumerable.Values(Of T, TError)(IEnumerable(Of IResult(Of T, TError)))
 - uid: Lemonad.ErrorHandling.IAsyncResult`2
   name: IAsyncResult<T, TError>
   href: api/Lemonad.ErrorHandling.IAsyncResult-2.html
@@ -644,15 +611,15 @@ references:
   fullName.vb: Lemonad.ErrorHandling.IAsyncResult(Of T, TError).IsErrorWhen(System.Func(Of T, System.Boolean), System.Func(Of T, TError))
   nameWithType: IAsyncResult<T, TError>.IsErrorWhen(Func<T, Boolean>, Func<T, TError>)
   nameWithType.vb: IAsyncResult(Of T, TError).IsErrorWhen(Func(Of T, Boolean), Func(Of T, TError))
-- uid: Lemonad.ErrorHandling.IAsyncResult`2.IsErrorWhen(System.Func{`0,System.Threading.Tasks.Task{System.Boolean}},System.Func{Lemonad.ErrorHandling.Maybe{`0},`1})
-  name: IsErrorWhen(Func<T, Task<Boolean>>, Func<Maybe<T>, TError>)
-  href: api/Lemonad.ErrorHandling.IAsyncResult-2.html#Lemonad_ErrorHandling_IAsyncResult_2_IsErrorWhen_System_Func__0_System_Threading_Tasks_Task_System_Boolean___System_Func_Lemonad_ErrorHandling_Maybe__0___1__
-  commentId: M:Lemonad.ErrorHandling.IAsyncResult`2.IsErrorWhen(System.Func{`0,System.Threading.Tasks.Task{System.Boolean}},System.Func{Lemonad.ErrorHandling.Maybe{`0},`1})
-  name.vb: IsErrorWhen(Func(Of T, Task(Of Boolean)), Func(Of Maybe(Of T), TError))
-  fullName: Lemonad.ErrorHandling.IAsyncResult<T, TError>.IsErrorWhen(System.Func<T, System.Threading.Tasks.Task<System.Boolean>>, System.Func<Lemonad.ErrorHandling.Maybe<T>, TError>)
-  fullName.vb: Lemonad.ErrorHandling.IAsyncResult(Of T, TError).IsErrorWhen(System.Func(Of T, System.Threading.Tasks.Task(Of System.Boolean)), System.Func(Of Lemonad.ErrorHandling.Maybe(Of T), TError))
-  nameWithType: IAsyncResult<T, TError>.IsErrorWhen(Func<T, Task<Boolean>>, Func<Maybe<T>, TError>)
-  nameWithType.vb: IAsyncResult(Of T, TError).IsErrorWhen(Func(Of T, Task(Of Boolean)), Func(Of Maybe(Of T), TError))
+- uid: Lemonad.ErrorHandling.IAsyncResult`2.IsErrorWhen(System.Func{`0,System.Threading.Tasks.Task{System.Boolean}},System.Func{`0,`1})
+  name: IsErrorWhen(Func<T, Task<Boolean>>, Func<T, TError>)
+  href: api/Lemonad.ErrorHandling.IAsyncResult-2.html#Lemonad_ErrorHandling_IAsyncResult_2_IsErrorWhen_System_Func__0_System_Threading_Tasks_Task_System_Boolean___System_Func__0__1__
+  commentId: M:Lemonad.ErrorHandling.IAsyncResult`2.IsErrorWhen(System.Func{`0,System.Threading.Tasks.Task{System.Boolean}},System.Func{`0,`1})
+  name.vb: IsErrorWhen(Func(Of T, Task(Of Boolean)), Func(Of T, TError))
+  fullName: Lemonad.ErrorHandling.IAsyncResult<T, TError>.IsErrorWhen(System.Func<T, System.Threading.Tasks.Task<System.Boolean>>, System.Func<T, TError>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncResult(Of T, TError).IsErrorWhen(System.Func(Of T, System.Threading.Tasks.Task(Of System.Boolean)), System.Func(Of T, TError))
+  nameWithType: IAsyncResult<T, TError>.IsErrorWhen(Func<T, Task<Boolean>>, Func<T, TError>)
+  nameWithType.vb: IAsyncResult(Of T, TError).IsErrorWhen(Func(Of T, Task(Of Boolean)), Func(Of T, TError))
 - uid: Lemonad.ErrorHandling.IAsyncResult`2.IsErrorWhen*
   name: IsErrorWhen
   href: api/Lemonad.ErrorHandling.IAsyncResult-2.html#Lemonad_ErrorHandling_IAsyncResult_2_IsErrorWhen_
@@ -770,24 +737,6 @@ references:
   fullName.vb: Lemonad.ErrorHandling.IAsyncResult(Of T, TError).Match(Of TResult)(System.Func(Of T, TResult), System.Func(Of TError, TResult))
   nameWithType: IAsyncResult<T, TError>.Match<TResult>(Func<T, TResult>, Func<TError, TResult>)
   nameWithType.vb: IAsyncResult(Of T, TError).Match(Of TResult)(Func(Of T, TResult), Func(Of TError, TResult))
-- uid: Lemonad.ErrorHandling.IAsyncResult`2.Multiple(System.Func{Lemonad.ErrorHandling.IAsyncResult{`0,`1},Lemonad.ErrorHandling.IAsyncResult{`0,`1}}[])
-  name: Multiple(Func<IAsyncResult<T, TError>, IAsyncResult<T, TError>>[])
-  href: api/Lemonad.ErrorHandling.IAsyncResult-2.html#Lemonad_ErrorHandling_IAsyncResult_2_Multiple_System_Func_Lemonad_ErrorHandling_IAsyncResult__0__1__Lemonad_ErrorHandling_IAsyncResult__0__1_____
-  commentId: M:Lemonad.ErrorHandling.IAsyncResult`2.Multiple(System.Func{Lemonad.ErrorHandling.IAsyncResult{`0,`1},Lemonad.ErrorHandling.IAsyncResult{`0,`1}}[])
-  name.vb: Multiple(Func(Of IAsyncResult(Of T, TError), IAsyncResult(Of T, TError))())
-  fullName: Lemonad.ErrorHandling.IAsyncResult<T, TError>.Multiple(System.Func<Lemonad.ErrorHandling.IAsyncResult<T, TError>, Lemonad.ErrorHandling.IAsyncResult<T, TError>>[])
-  fullName.vb: Lemonad.ErrorHandling.IAsyncResult(Of T, TError).Multiple(System.Func(Of Lemonad.ErrorHandling.IAsyncResult(Of T, TError), Lemonad.ErrorHandling.IAsyncResult(Of T, TError))())
-  nameWithType: IAsyncResult<T, TError>.Multiple(Func<IAsyncResult<T, TError>, IAsyncResult<T, TError>>[])
-  nameWithType.vb: IAsyncResult(Of T, TError).Multiple(Func(Of IAsyncResult(Of T, TError), IAsyncResult(Of T, TError))())
-- uid: Lemonad.ErrorHandling.IAsyncResult`2.Multiple*
-  name: Multiple
-  href: api/Lemonad.ErrorHandling.IAsyncResult-2.html#Lemonad_ErrorHandling_IAsyncResult_2_Multiple_
-  commentId: Overload:Lemonad.ErrorHandling.IAsyncResult`2.Multiple
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.IAsyncResult<T, TError>.Multiple
-  fullName.vb: Lemonad.ErrorHandling.IAsyncResult(Of T, TError).Multiple
-  nameWithType: IAsyncResult<T, TError>.Multiple
-  nameWithType.vb: IAsyncResult(Of T, TError).Multiple
 - uid: Lemonad.ErrorHandling.IAsyncResult`2.SafeCast*
   name: SafeCast
   href: api/Lemonad.ErrorHandling.IAsyncResult-2.html#Lemonad_ErrorHandling_IAsyncResult_2_SafeCast_
@@ -901,6 +850,400 @@ references:
   fullName.vb: Lemonad.ErrorHandling.IEither(Of T, TError).Value
   nameWithType: IEither<T, TError>.Value
   nameWithType.vb: IEither(Of T, TError).Value
+- uid: Lemonad.ErrorHandling.IMaybe`1
+  name: IMaybe<T>
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html
+  commentId: T:Lemonad.ErrorHandling.IMaybe`1
+  name.vb: IMaybe(Of T)
+  fullName: Lemonad.ErrorHandling.IMaybe<T>
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T)
+  nameWithType: IMaybe<T>
+  nameWithType.vb: IMaybe(Of T)
+- uid: Lemonad.ErrorHandling.IMaybe`1.Do(System.Action)
+  name: Do(Action)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_Do_System_Action_
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.Do(System.Action)
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.Do(System.Action)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).Do(System.Action)
+  nameWithType: IMaybe<T>.Do(Action)
+  nameWithType.vb: IMaybe(Of T).Do(Action)
+- uid: Lemonad.ErrorHandling.IMaybe`1.Do*
+  name: Do
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_Do_
+  commentId: Overload:Lemonad.ErrorHandling.IMaybe`1.Do
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.Do
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).Do
+  nameWithType: IMaybe<T>.Do
+  nameWithType.vb: IMaybe(Of T).Do
+- uid: Lemonad.ErrorHandling.IMaybe`1.DoWith(System.Action{`0})
+  name: DoWith(Action<T>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_DoWith_System_Action__0__
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.DoWith(System.Action{`0})
+  name.vb: DoWith(Action(Of T))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.DoWith(System.Action<T>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).DoWith(System.Action(Of T))
+  nameWithType: IMaybe<T>.DoWith(Action<T>)
+  nameWithType.vb: IMaybe(Of T).DoWith(Action(Of T))
+- uid: Lemonad.ErrorHandling.IMaybe`1.DoWith*
+  name: DoWith
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_DoWith_
+  commentId: Overload:Lemonad.ErrorHandling.IMaybe`1.DoWith
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.DoWith
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).DoWith
+  nameWithType: IMaybe<T>.DoWith
+  nameWithType.vb: IMaybe(Of T).DoWith
+- uid: Lemonad.ErrorHandling.IMaybe`1.Filter(System.Func{`0,System.Boolean})
+  name: Filter(Func<T, Boolean>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_Filter_System_Func__0_System_Boolean__
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.Filter(System.Func{`0,System.Boolean})
+  name.vb: Filter(Func(Of T, Boolean))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.Filter(System.Func<T, System.Boolean>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).Filter(System.Func(Of T, System.Boolean))
+  nameWithType: IMaybe<T>.Filter(Func<T, Boolean>)
+  nameWithType.vb: IMaybe(Of T).Filter(Func(Of T, Boolean))
+- uid: Lemonad.ErrorHandling.IMaybe`1.Filter*
+  name: Filter
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_Filter_
+  commentId: Overload:Lemonad.ErrorHandling.IMaybe`1.Filter
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.Filter
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).Filter
+  nameWithType: IMaybe<T>.Filter
+  nameWithType.vb: IMaybe(Of T).Filter
+- uid: Lemonad.ErrorHandling.IMaybe`1.FlatMap*
+  name: FlatMap
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_FlatMap_
+  commentId: Overload:Lemonad.ErrorHandling.IMaybe`1.FlatMap
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.FlatMap
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).FlatMap
+  nameWithType: IMaybe<T>.FlatMap
+  nameWithType.vb: IMaybe(Of T).FlatMap
+- uid: Lemonad.ErrorHandling.IMaybe`1.FlatMap``1(System.Func{`0,Lemonad.ErrorHandling.IMaybe{``0}})
+  name: FlatMap<TResult>(Func<T, IMaybe<TResult>>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_FlatMap__1_System_Func__0_Lemonad_ErrorHandling_IMaybe___0___
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.FlatMap``1(System.Func{`0,Lemonad.ErrorHandling.IMaybe{``0}})
+  name.vb: FlatMap(Of TResult)(Func(Of T, IMaybe(Of TResult)))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.FlatMap<TResult>(System.Func<T, Lemonad.ErrorHandling.IMaybe<TResult>>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).FlatMap(Of TResult)(System.Func(Of T, Lemonad.ErrorHandling.IMaybe(Of TResult)))
+  nameWithType: IMaybe<T>.FlatMap<TResult>(Func<T, IMaybe<TResult>>)
+  nameWithType.vb: IMaybe(Of T).FlatMap(Of TResult)(Func(Of T, IMaybe(Of TResult)))
+- uid: Lemonad.ErrorHandling.IMaybe`1.FlatMap``1(System.Func{`0,System.Nullable{``0}})
+  name: FlatMap<TResult>(Func<T, Nullable<TResult>>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_FlatMap__1_System_Func__0_System_Nullable___0___
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.FlatMap``1(System.Func{`0,System.Nullable{``0}})
+  name.vb: FlatMap(Of TResult)(Func(Of T, Nullable(Of TResult)))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.FlatMap<TResult>(System.Func<T, System.Nullable<TResult>>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).FlatMap(Of TResult)(System.Func(Of T, System.Nullable(Of TResult)))
+  nameWithType: IMaybe<T>.FlatMap<TResult>(Func<T, Nullable<TResult>>)
+  nameWithType.vb: IMaybe(Of T).FlatMap(Of TResult)(Func(Of T, Nullable(Of TResult)))
+- uid: Lemonad.ErrorHandling.IMaybe`1.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.IMaybe{``0}},System.Func{`0,``0,``1})
+  name: FlatMap<TFlatMap, TResult>(Func<T, IMaybe<TFlatMap>>, Func<T, TFlatMap, TResult>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_IMaybe___0___System_Func__0___0___1__
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.IMaybe{``0}},System.Func{`0,``0,``1})
+  name.vb: FlatMap(Of TFlatMap, TResult)(Func(Of T, IMaybe(Of TFlatMap)), Func(Of T, TFlatMap, TResult))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.FlatMap<TFlatMap, TResult>(System.Func<T, Lemonad.ErrorHandling.IMaybe<TFlatMap>>, System.Func<T, TFlatMap, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).FlatMap(Of TFlatMap, TResult)(System.Func(Of T, Lemonad.ErrorHandling.IMaybe(Of TFlatMap)), System.Func(Of T, TFlatMap, TResult))
+  nameWithType: IMaybe<T>.FlatMap<TFlatMap, TResult>(Func<T, IMaybe<TFlatMap>>, Func<T, TFlatMap, TResult>)
+  nameWithType.vb: IMaybe(Of T).FlatMap(Of TFlatMap, TResult)(Func(Of T, IMaybe(Of TFlatMap)), Func(Of T, TFlatMap, TResult))
+- uid: Lemonad.ErrorHandling.IMaybe`1.FlatMap``2(System.Func{`0,System.Nullable{``0}},System.Func{`0,``0,``1})
+  name: FlatMap<TFlatMap, TResult>(Func<T, Nullable<TFlatMap>>, Func<T, TFlatMap, TResult>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_FlatMap__2_System_Func__0_System_Nullable___0___System_Func__0___0___1__
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.FlatMap``2(System.Func{`0,System.Nullable{``0}},System.Func{`0,``0,``1})
+  name.vb: FlatMap(Of TFlatMap, TResult)(Func(Of T, Nullable(Of TFlatMap)), Func(Of T, TFlatMap, TResult))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.FlatMap<TFlatMap, TResult>(System.Func<T, System.Nullable<TFlatMap>>, System.Func<T, TFlatMap, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).FlatMap(Of TFlatMap, TResult)(System.Func(Of T, System.Nullable(Of TFlatMap)), System.Func(Of T, TFlatMap, TResult))
+  nameWithType: IMaybe<T>.FlatMap<TFlatMap, TResult>(Func<T, Nullable<TFlatMap>>, Func<T, TFlatMap, TResult>)
+  nameWithType.vb: IMaybe(Of T).FlatMap(Of TFlatMap, TResult)(Func(Of T, Nullable(Of TFlatMap)), Func(Of T, TFlatMap, TResult))
+- uid: Lemonad.ErrorHandling.IMaybe`1.Flatten*
+  name: Flatten
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_Flatten_
+  commentId: Overload:Lemonad.ErrorHandling.IMaybe`1.Flatten
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.Flatten
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).Flatten
+  nameWithType: IMaybe<T>.Flatten
+  nameWithType.vb: IMaybe(Of T).Flatten
+- uid: Lemonad.ErrorHandling.IMaybe`1.Flatten``1(System.Func{`0,Lemonad.ErrorHandling.IMaybe{``0}})
+  name: Flatten<TResult>(Func<T, IMaybe<TResult>>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_Flatten__1_System_Func__0_Lemonad_ErrorHandling_IMaybe___0___
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.Flatten``1(System.Func{`0,Lemonad.ErrorHandling.IMaybe{``0}})
+  name.vb: Flatten(Of TResult)(Func(Of T, IMaybe(Of TResult)))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.Flatten<TResult>(System.Func<T, Lemonad.ErrorHandling.IMaybe<TResult>>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).Flatten(Of TResult)(System.Func(Of T, Lemonad.ErrorHandling.IMaybe(Of TResult)))
+  nameWithType: IMaybe<T>.Flatten<TResult>(Func<T, IMaybe<TResult>>)
+  nameWithType.vb: IMaybe(Of T).Flatten(Of TResult)(Func(Of T, IMaybe(Of TResult)))
+- uid: Lemonad.ErrorHandling.IMaybe`1.HasValue
+  name: HasValue
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_HasValue
+  commentId: P:Lemonad.ErrorHandling.IMaybe`1.HasValue
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.HasValue
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).HasValue
+  nameWithType: IMaybe<T>.HasValue
+  nameWithType.vb: IMaybe(Of T).HasValue
+- uid: Lemonad.ErrorHandling.IMaybe`1.HasValue*
+  name: HasValue
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_HasValue_
+  commentId: Overload:Lemonad.ErrorHandling.IMaybe`1.HasValue
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.HasValue
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).HasValue
+  nameWithType: IMaybe<T>.HasValue
+  nameWithType.vb: IMaybe(Of T).HasValue
+- uid: Lemonad.ErrorHandling.IMaybe`1.IsNoneWhen(System.Func{`0,System.Boolean})
+  name: IsNoneWhen(Func<T, Boolean>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_IsNoneWhen_System_Func__0_System_Boolean__
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.IsNoneWhen(System.Func{`0,System.Boolean})
+  name.vb: IsNoneWhen(Func(Of T, Boolean))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.IsNoneWhen(System.Func<T, System.Boolean>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).IsNoneWhen(System.Func(Of T, System.Boolean))
+  nameWithType: IMaybe<T>.IsNoneWhen(Func<T, Boolean>)
+  nameWithType.vb: IMaybe(Of T).IsNoneWhen(Func(Of T, Boolean))
+- uid: Lemonad.ErrorHandling.IMaybe`1.IsNoneWhen*
+  name: IsNoneWhen
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_IsNoneWhen_
+  commentId: Overload:Lemonad.ErrorHandling.IMaybe`1.IsNoneWhen
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.IsNoneWhen
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).IsNoneWhen
+  nameWithType: IMaybe<T>.IsNoneWhen
+  nameWithType.vb: IMaybe(Of T).IsNoneWhen
+- uid: Lemonad.ErrorHandling.IMaybe`1.Map*
+  name: Map
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_Map_
+  commentId: Overload:Lemonad.ErrorHandling.IMaybe`1.Map
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.Map
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).Map
+  nameWithType: IMaybe<T>.Map
+  nameWithType.vb: IMaybe(Of T).Map
+- uid: Lemonad.ErrorHandling.IMaybe`1.Map``1(System.Func{`0,``0})
+  name: Map<TResult>(Func<T, TResult>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_Map__1_System_Func__0___0__
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.Map``1(System.Func{`0,``0})
+  name.vb: Map(Of TResult)(Func(Of T, TResult))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.Map<TResult>(System.Func<T, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).Map(Of TResult)(System.Func(Of T, TResult))
+  nameWithType: IMaybe<T>.Map<TResult>(Func<T, TResult>)
+  nameWithType.vb: IMaybe(Of T).Map(Of TResult)(Func(Of T, TResult))
+- uid: Lemonad.ErrorHandling.IMaybe`1.Match(System.Action{`0},System.Action)
+  name: Match(Action<T>, Action)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_Match_System_Action__0__System_Action_
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.Match(System.Action{`0},System.Action)
+  name.vb: Match(Action(Of T), Action)
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.Match(System.Action<T>, System.Action)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).Match(System.Action(Of T), System.Action)
+  nameWithType: IMaybe<T>.Match(Action<T>, Action)
+  nameWithType.vb: IMaybe(Of T).Match(Action(Of T), Action)
+- uid: Lemonad.ErrorHandling.IMaybe`1.Match*
+  name: Match
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_Match_
+  commentId: Overload:Lemonad.ErrorHandling.IMaybe`1.Match
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.Match
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).Match
+  nameWithType: IMaybe<T>.Match
+  nameWithType.vb: IMaybe(Of T).Match
+- uid: Lemonad.ErrorHandling.IMaybe`1.Match``1(System.Func{`0,``0},System.Func{``0})
+  name: Match<TResult>(Func<T, TResult>, Func<TResult>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_Match__1_System_Func__0___0__System_Func___0__
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.Match``1(System.Func{`0,``0},System.Func{``0})
+  name.vb: Match(Of TResult)(Func(Of T, TResult), Func(Of TResult))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.Match<TResult>(System.Func<T, TResult>, System.Func<TResult>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).Match(Of TResult)(System.Func(Of T, TResult), System.Func(Of TResult))
+  nameWithType: IMaybe<T>.Match<TResult>(Func<T, TResult>, Func<TResult>)
+  nameWithType.vb: IMaybe(Of T).Match(Of TResult)(Func(Of T, TResult), Func(Of TResult))
+- uid: Lemonad.ErrorHandling.IMaybe`1.Value
+  name: Value
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_Value
+  commentId: P:Lemonad.ErrorHandling.IMaybe`1.Value
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.Value
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).Value
+  nameWithType: IMaybe<T>.Value
+  nameWithType.vb: IMaybe(Of T).Value
+- uid: Lemonad.ErrorHandling.IMaybe`1.Value*
+  name: Value
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_Value_
+  commentId: Overload:Lemonad.ErrorHandling.IMaybe`1.Value
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.Value
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).Value
+  nameWithType: IMaybe<T>.Value
+  nameWithType.vb: IMaybe(Of T).Value
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions
+  name: Lemonad.ErrorHandling.Internal.TaskExtensions
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.html
+  commentId: N:Lemonad.ErrorHandling.Internal.TaskExtensions
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions
+  nameWithType: Lemonad.ErrorHandling.Internal.TaskExtensions
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions
+  name: TaskExtensions
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html
+  commentId: T:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions
+  nameWithType: TaskExtensions
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Do(System.Threading.Tasks.Task,System.Action)
+  name: Do(Task, Action)
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html#Lemonad_ErrorHandling_Internal_TaskExtensions_TaskExtensions_Do_System_Threading_Tasks_Task_System_Action_
+  commentId: M:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Do(System.Threading.Tasks.Task,System.Action)
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Do(System.Threading.Tasks.Task, System.Action)
+  nameWithType: TaskExtensions.Do(Task, Action)
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Do*
+  name: Do
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html#Lemonad_ErrorHandling_Internal_TaskExtensions_TaskExtensions_Do_
+  commentId: Overload:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Do
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Do
+  nameWithType: TaskExtensions.Do
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Do``1(System.Threading.Tasks.Task{``0},System.Action{``0})
+  name: Do<T>(Task<T>, Action<T>)
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html#Lemonad_ErrorHandling_Internal_TaskExtensions_TaskExtensions_Do__1_System_Threading_Tasks_Task___0__System_Action___0__
+  commentId: M:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Do``1(System.Threading.Tasks.Task{``0},System.Action{``0})
+  name.vb: Do(Of T)(Task(Of T), Action(Of T))
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Do<T>(System.Threading.Tasks.Task<T>, System.Action<T>)
+  fullName.vb: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Do(Of T)(System.Threading.Tasks.Task(Of T), System.Action(Of T))
+  nameWithType: TaskExtensions.Do<T>(Task<T>, Action<T>)
+  nameWithType.vb: TaskExtensions.Do(Of T)(Task(Of T), Action(Of T))
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap(System.Threading.Tasks.Task,System.Func{System.Threading.Tasks.Task})
+  name: FlatMap(Task, Func<Task>)
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html#Lemonad_ErrorHandling_Internal_TaskExtensions_TaskExtensions_FlatMap_System_Threading_Tasks_Task_System_Func_System_Threading_Tasks_Task__
+  commentId: M:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap(System.Threading.Tasks.Task,System.Func{System.Threading.Tasks.Task})
+  name.vb: FlatMap(Task, Func(Of Task))
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap(System.Threading.Tasks.Task, System.Func<System.Threading.Tasks.Task>)
+  fullName.vb: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap(System.Threading.Tasks.Task, System.Func(Of System.Threading.Tasks.Task))
+  nameWithType: TaskExtensions.FlatMap(Task, Func<Task>)
+  nameWithType.vb: TaskExtensions.FlatMap(Task, Func(Of Task))
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap*
+  name: FlatMap
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html#Lemonad_ErrorHandling_Internal_TaskExtensions_TaskExtensions_FlatMap_
+  commentId: Overload:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap
+  nameWithType: TaskExtensions.FlatMap
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap``1(System.Threading.Tasks.Task,System.Func{System.Threading.Tasks.Task{``0}})
+  name: FlatMap<TResult>(Task, Func<Task<TResult>>)
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html#Lemonad_ErrorHandling_Internal_TaskExtensions_TaskExtensions_FlatMap__1_System_Threading_Tasks_Task_System_Func_System_Threading_Tasks_Task___0___
+  commentId: M:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap``1(System.Threading.Tasks.Task,System.Func{System.Threading.Tasks.Task{``0}})
+  name.vb: FlatMap(Of TResult)(Task, Func(Of Task(Of TResult)))
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap<TResult>(System.Threading.Tasks.Task, System.Func<System.Threading.Tasks.Task<TResult>>)
+  fullName.vb: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap(Of TResult)(System.Threading.Tasks.Task, System.Func(Of System.Threading.Tasks.Task(Of TResult)))
+  nameWithType: TaskExtensions.FlatMap<TResult>(Task, Func<Task<TResult>>)
+  nameWithType.vb: TaskExtensions.FlatMap(Of TResult)(Task, Func(Of Task(Of TResult)))
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap``1(System.Threading.Tasks.Task,System.Func{System.Threading.Tasks.Task},System.Func{``0})
+  name: FlatMap<TSource>(Task, Func<Task>, Func<TSource>)
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html#Lemonad_ErrorHandling_Internal_TaskExtensions_TaskExtensions_FlatMap__1_System_Threading_Tasks_Task_System_Func_System_Threading_Tasks_Task__System_Func___0__
+  commentId: M:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap``1(System.Threading.Tasks.Task,System.Func{System.Threading.Tasks.Task},System.Func{``0})
+  name.vb: FlatMap(Of TSource)(Task, Func(Of Task), Func(Of TSource))
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap<TSource>(System.Threading.Tasks.Task, System.Func<System.Threading.Tasks.Task>, System.Func<TSource>)
+  fullName.vb: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap(Of TSource)(System.Threading.Tasks.Task, System.Func(Of System.Threading.Tasks.Task), System.Func(Of TSource))
+  nameWithType: TaskExtensions.FlatMap<TSource>(Task, Func<Task>, Func<TSource>)
+  nameWithType.vb: TaskExtensions.FlatMap(Of TSource)(Task, Func(Of Task), Func(Of TSource))
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap``1(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task})
+  name: FlatMap<TSource>(Task<TSource>, Func<TSource, Task>)
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html#Lemonad_ErrorHandling_Internal_TaskExtensions_TaskExtensions_FlatMap__1_System_Threading_Tasks_Task___0__System_Func___0_System_Threading_Tasks_Task__
+  commentId: M:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap``1(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task})
+  name.vb: FlatMap(Of TSource)(Task(Of TSource), Func(Of TSource, Task))
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap<TSource>(System.Threading.Tasks.Task<TSource>, System.Func<TSource, System.Threading.Tasks.Task>)
+  fullName.vb: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap(Of TSource)(System.Threading.Tasks.Task(Of TSource), System.Func(Of TSource, System.Threading.Tasks.Task))
+  nameWithType: TaskExtensions.FlatMap<TSource>(Task<TSource>, Func<TSource, Task>)
+  nameWithType.vb: TaskExtensions.FlatMap(Of TSource)(Task(Of TSource), Func(Of TSource, Task))
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap``2(System.Threading.Tasks.Task,System.Func{System.Threading.Tasks.Task{``0}},System.Func{``0,``1})
+  name: FlatMap<TTask, TResult>(Task, Func<Task<TTask>>, Func<TTask, TResult>)
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html#Lemonad_ErrorHandling_Internal_TaskExtensions_TaskExtensions_FlatMap__2_System_Threading_Tasks_Task_System_Func_System_Threading_Tasks_Task___0___System_Func___0___1__
+  commentId: M:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap``2(System.Threading.Tasks.Task,System.Func{System.Threading.Tasks.Task{``0}},System.Func{``0,``1})
+  name.vb: FlatMap(Of TTask, TResult)(Task, Func(Of Task(Of TTask)), Func(Of TTask, TResult))
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap<TTask, TResult>(System.Threading.Tasks.Task, System.Func<System.Threading.Tasks.Task<TTask>>, System.Func<TTask, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap(Of TTask, TResult)(System.Threading.Tasks.Task, System.Func(Of System.Threading.Tasks.Task(Of TTask)), System.Func(Of TTask, TResult))
+  nameWithType: TaskExtensions.FlatMap<TTask, TResult>(Task, Func<Task<TTask>>, Func<TTask, TResult>)
+  nameWithType.vb: TaskExtensions.FlatMap(Of TTask, TResult)(Task, Func(Of Task(Of TTask)), Func(Of TTask, TResult))
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap``2(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task{``1}})
+  name: FlatMap<TSource, TResult>(Task<TSource>, Func<TSource, Task<TResult>>)
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html#Lemonad_ErrorHandling_Internal_TaskExtensions_TaskExtensions_FlatMap__2_System_Threading_Tasks_Task___0__System_Func___0_System_Threading_Tasks_Task___1___
+  commentId: M:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap``2(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task{``1}})
+  name.vb: FlatMap(Of TSource, TResult)(Task(Of TSource), Func(Of TSource, Task(Of TResult)))
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap<TSource, TResult>(System.Threading.Tasks.Task<TSource>, System.Func<TSource, System.Threading.Tasks.Task<TResult>>)
+  fullName.vb: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap(Of TSource, TResult)(System.Threading.Tasks.Task(Of TSource), System.Func(Of TSource, System.Threading.Tasks.Task(Of TResult)))
+  nameWithType: TaskExtensions.FlatMap<TSource, TResult>(Task<TSource>, Func<TSource, Task<TResult>>)
+  nameWithType.vb: TaskExtensions.FlatMap(Of TSource, TResult)(Task(Of TSource), Func(Of TSource, Task(Of TResult)))
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap``2(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task},System.Func{``0,``1})
+  name: FlatMap<TSource, TResult>(Task<TSource>, Func<TSource, Task>, Func<TSource, TResult>)
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html#Lemonad_ErrorHandling_Internal_TaskExtensions_TaskExtensions_FlatMap__2_System_Threading_Tasks_Task___0__System_Func___0_System_Threading_Tasks_Task__System_Func___0___1__
+  commentId: M:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap``2(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task},System.Func{``0,``1})
+  name.vb: FlatMap(Of TSource, TResult)(Task(Of TSource), Func(Of TSource, Task), Func(Of TSource, TResult))
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap<TSource, TResult>(System.Threading.Tasks.Task<TSource>, System.Func<TSource, System.Threading.Tasks.Task>, System.Func<TSource, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap(Of TSource, TResult)(System.Threading.Tasks.Task(Of TSource), System.Func(Of TSource, System.Threading.Tasks.Task), System.Func(Of TSource, TResult))
+  nameWithType: TaskExtensions.FlatMap<TSource, TResult>(Task<TSource>, Func<TSource, Task>, Func<TSource, TResult>)
+  nameWithType.vb: TaskExtensions.FlatMap(Of TSource, TResult)(Task(Of TSource), Func(Of TSource, Task), Func(Of TSource, TResult))
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap``3(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task{``1}},System.Func{``0,``1,``2})
+  name: FlatMap<TSource, TTask, TResult>(Task<TSource>, Func<TSource, Task<TTask>>, Func<TSource, TTask, TResult>)
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html#Lemonad_ErrorHandling_Internal_TaskExtensions_TaskExtensions_FlatMap__3_System_Threading_Tasks_Task___0__System_Func___0_System_Threading_Tasks_Task___1___System_Func___0___1___2__
+  commentId: M:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap``3(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task{``1}},System.Func{``0,``1,``2})
+  name.vb: FlatMap(Of TSource, TTask, TResult)(Task(Of TSource), Func(Of TSource, Task(Of TTask)), Func(Of TSource, TTask, TResult))
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap<TSource, TTask, TResult>(System.Threading.Tasks.Task<TSource>, System.Func<TSource, System.Threading.Tasks.Task<TTask>>, System.Func<TSource, TTask, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.FlatMap(Of TSource, TTask, TResult)(System.Threading.Tasks.Task(Of TSource), System.Func(Of TSource, System.Threading.Tasks.Task(Of TTask)), System.Func(Of TSource, TTask, TResult))
+  nameWithType: TaskExtensions.FlatMap<TSource, TTask, TResult>(Task<TSource>, Func<TSource, Task<TTask>>, Func<TSource, TTask, TResult>)
+  nameWithType.vb: TaskExtensions.FlatMap(Of TSource, TTask, TResult)(Task(Of TSource), Func(Of TSource, Task(Of TTask)), Func(Of TSource, TTask, TResult))
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Map*
+  name: Map
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html#Lemonad_ErrorHandling_Internal_TaskExtensions_TaskExtensions_Map_
+  commentId: Overload:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Map
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Map
+  nameWithType: TaskExtensions.Map
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Map``1(System.Threading.Tasks.Task,System.Func{``0})
+  name: Map<TResult>(Task, Func<TResult>)
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html#Lemonad_ErrorHandling_Internal_TaskExtensions_TaskExtensions_Map__1_System_Threading_Tasks_Task_System_Func___0__
+  commentId: M:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Map``1(System.Threading.Tasks.Task,System.Func{``0})
+  name.vb: Map(Of TResult)(Task, Func(Of TResult))
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Map<TResult>(System.Threading.Tasks.Task, System.Func<TResult>)
+  fullName.vb: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Map(Of TResult)(System.Threading.Tasks.Task, System.Func(Of TResult))
+  nameWithType: TaskExtensions.Map<TResult>(Task, Func<TResult>)
+  nameWithType.vb: TaskExtensions.Map(Of TResult)(Task, Func(Of TResult))
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Map``2(System.Threading.Tasks.Task{``0},System.Func{``0,``1})
+  name: Map<TSource, TResult>(Task<TSource>, Func<TSource, TResult>)
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html#Lemonad_ErrorHandling_Internal_TaskExtensions_TaskExtensions_Map__2_System_Threading_Tasks_Task___0__System_Func___0___1__
+  commentId: M:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Map``2(System.Threading.Tasks.Task{``0},System.Func{``0,``1})
+  name.vb: Map(Of TSource, TResult)(Task(Of TSource), Func(Of TSource, TResult))
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Map<TSource, TResult>(System.Threading.Tasks.Task<TSource>, System.Func<TSource, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Map(Of TSource, TResult)(System.Threading.Tasks.Task(Of TSource), System.Func(Of TSource, TResult))
+  nameWithType: TaskExtensions.Map<TSource, TResult>(Task<TSource>, Func<TSource, TResult>)
+  nameWithType.vb: TaskExtensions.Map(Of TSource, TResult)(Task(Of TSource), Func(Of TSource, TResult))
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Zip*
+  name: Zip
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html#Lemonad_ErrorHandling_Internal_TaskExtensions_TaskExtensions_Zip_
+  commentId: Overload:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Zip
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Zip
+  nameWithType: TaskExtensions.Zip
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Zip``1(System.Threading.Tasks.Task,System.Threading.Tasks.Task,System.Func{``0})
+  name: Zip<T>(Task, Task, Func<T>)
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html#Lemonad_ErrorHandling_Internal_TaskExtensions_TaskExtensions_Zip__1_System_Threading_Tasks_Task_System_Threading_Tasks_Task_System_Func___0__
+  commentId: M:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Zip``1(System.Threading.Tasks.Task,System.Threading.Tasks.Task,System.Func{``0})
+  name.vb: Zip(Of T)(Task, Task, Func(Of T))
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Zip<T>(System.Threading.Tasks.Task, System.Threading.Tasks.Task, System.Func<T>)
+  fullName.vb: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Zip(Of T)(System.Threading.Tasks.Task, System.Threading.Tasks.Task, System.Func(Of T))
+  nameWithType: TaskExtensions.Zip<T>(Task, Task, Func<T>)
+  nameWithType.vb: TaskExtensions.Zip(Of T)(Task, Task, Func(Of T))
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Zip``2(System.Threading.Tasks.Task,System.Threading.Tasks.Task{``1},System.Func{``1,``0})
+  name: Zip<T, T2>(Task, Task<T2>, Func<T2, T>)
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html#Lemonad_ErrorHandling_Internal_TaskExtensions_TaskExtensions_Zip__2_System_Threading_Tasks_Task_System_Threading_Tasks_Task___1__System_Func___1___0__
+  commentId: M:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Zip``2(System.Threading.Tasks.Task,System.Threading.Tasks.Task{``1},System.Func{``1,``0})
+  name.vb: Zip(Of T, T2)(Task, Task(Of T2), Func(Of T2, T))
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Zip<T, T2>(System.Threading.Tasks.Task, System.Threading.Tasks.Task<T2>, System.Func<T2, T>)
+  fullName.vb: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Zip(Of T, T2)(System.Threading.Tasks.Task, System.Threading.Tasks.Task(Of T2), System.Func(Of T2, T))
+  nameWithType: TaskExtensions.Zip<T, T2>(Task, Task<T2>, Func<T2, T>)
+  nameWithType.vb: TaskExtensions.Zip(Of T, T2)(Task, Task(Of T2), Func(Of T2, T))
+- uid: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Zip``3(System.Threading.Tasks.Task{``0},System.Threading.Tasks.Task{``1},System.Func{``0,``1,``2})
+  name: Zip<T, T2, T3>(Task<T>, Task<T2>, Func<T, T2, T3>)
+  href: api/Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.html#Lemonad_ErrorHandling_Internal_TaskExtensions_TaskExtensions_Zip__3_System_Threading_Tasks_Task___0__System_Threading_Tasks_Task___1__System_Func___0___1___2__
+  commentId: M:Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Zip``3(System.Threading.Tasks.Task{``0},System.Threading.Tasks.Task{``1},System.Func{``0,``1,``2})
+  name.vb: Zip(Of T, T2, T3)(Task(Of T), Task(Of T2), Func(Of T, T2, T3))
+  fullName: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Zip<T, T2, T3>(System.Threading.Tasks.Task<T>, System.Threading.Tasks.Task<T2>, System.Func<T, T2, T3>)
+  fullName.vb: Lemonad.ErrorHandling.Internal.TaskExtensions.TaskExtensions.Zip(Of T, T2, T3)(System.Threading.Tasks.Task(Of T), System.Threading.Tasks.Task(Of T2), System.Func(Of T, T2, T3))
+  nameWithType: TaskExtensions.Zip<T, T2, T3>(Task<T>, Task<T2>, Func<T, T2, T3>)
+  nameWithType.vb: TaskExtensions.Zip(Of T, T2, T3)(Task(Of T), Task(Of T2), Func(Of T, T2, T3))
 - uid: Lemonad.ErrorHandling.IResult`2
   name: IResult<T, TError>
   href: api/Lemonad.ErrorHandling.IResult-2.html
@@ -1322,460 +1665,126 @@ references:
   fullName.vb: Lemonad.ErrorHandling.IResult(Of T, TError).Zip(Of TOther, TResult)(Lemonad.ErrorHandling.IResult(Of TOther, TError), System.Func(Of T, TOther, TResult))
   nameWithType: IResult<T, TError>.Zip<TOther, TResult>(IResult<TOther, TError>, Func<T, TOther, TResult>)
   nameWithType.vb: IResult(Of T, TError).Zip(Of TOther, TResult)(IResult(Of TOther, TError), Func(Of T, TOther, TResult))
-- uid: Lemonad.ErrorHandling.Maybe`1
-  name: Maybe<T>
-  href: api/Lemonad.ErrorHandling.Maybe-1.html
-  commentId: T:Lemonad.ErrorHandling.Maybe`1
-  name.vb: Maybe(Of T)
-  fullName: Lemonad.ErrorHandling.Maybe<T>
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T)
-  nameWithType: Maybe<T>
-  nameWithType.vb: Maybe(Of T)
-- uid: Lemonad.ErrorHandling.Maybe`1.Do(System.Action)
-  name: Do(Action)
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_Do_System_Action_
-  commentId: M:Lemonad.ErrorHandling.Maybe`1.Do(System.Action)
-  fullName: Lemonad.ErrorHandling.Maybe<T>.Do(System.Action)
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).Do(System.Action)
-  nameWithType: Maybe<T>.Do(Action)
-  nameWithType.vb: Maybe(Of T).Do(Action)
-- uid: Lemonad.ErrorHandling.Maybe`1.Do*
-  name: Do
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_Do_
-  commentId: Overload:Lemonad.ErrorHandling.Maybe`1.Do
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Maybe<T>.Do
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).Do
-  nameWithType: Maybe<T>.Do
-  nameWithType.vb: Maybe(Of T).Do
-- uid: Lemonad.ErrorHandling.Maybe`1.DoWith(System.Action{`0})
-  name: DoWith(Action<T>)
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_DoWith_System_Action__0__
-  commentId: M:Lemonad.ErrorHandling.Maybe`1.DoWith(System.Action{`0})
-  name.vb: DoWith(Action(Of T))
-  fullName: Lemonad.ErrorHandling.Maybe<T>.DoWith(System.Action<T>)
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).DoWith(System.Action(Of T))
-  nameWithType: Maybe<T>.DoWith(Action<T>)
-  nameWithType.vb: Maybe(Of T).DoWith(Action(Of T))
-- uid: Lemonad.ErrorHandling.Maybe`1.DoWith*
-  name: DoWith
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_DoWith_
-  commentId: Overload:Lemonad.ErrorHandling.Maybe`1.DoWith
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Maybe<T>.DoWith
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).DoWith
-  nameWithType: Maybe<T>.DoWith
-  nameWithType.vb: Maybe(Of T).DoWith
-- uid: Lemonad.ErrorHandling.Maybe`1.Filter(System.Func{`0,System.Boolean})
-  name: Filter(Func<T, Boolean>)
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_Filter_System_Func__0_System_Boolean__
-  commentId: M:Lemonad.ErrorHandling.Maybe`1.Filter(System.Func{`0,System.Boolean})
-  name.vb: Filter(Func(Of T, Boolean))
-  fullName: Lemonad.ErrorHandling.Maybe<T>.Filter(System.Func<T, System.Boolean>)
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).Filter(System.Func(Of T, System.Boolean))
-  nameWithType: Maybe<T>.Filter(Func<T, Boolean>)
-  nameWithType.vb: Maybe(Of T).Filter(Func(Of T, Boolean))
-- uid: Lemonad.ErrorHandling.Maybe`1.Filter*
-  name: Filter
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_Filter_
-  commentId: Overload:Lemonad.ErrorHandling.Maybe`1.Filter
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Maybe<T>.Filter
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).Filter
-  nameWithType: Maybe<T>.Filter
-  nameWithType.vb: Maybe(Of T).Filter
-- uid: Lemonad.ErrorHandling.Maybe`1.FlatMap*
-  name: FlatMap
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_FlatMap_
-  commentId: Overload:Lemonad.ErrorHandling.Maybe`1.FlatMap
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Maybe<T>.FlatMap
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).FlatMap
-  nameWithType: Maybe<T>.FlatMap
-  nameWithType.vb: Maybe(Of T).FlatMap
-- uid: Lemonad.ErrorHandling.Maybe`1.FlatMap``1(System.Func{`0,Lemonad.ErrorHandling.Maybe{``0}})
-  name: FlatMap<TResult>(Func<T, Maybe<TResult>>)
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_FlatMap__1_System_Func__0_Lemonad_ErrorHandling_Maybe___0___
-  commentId: M:Lemonad.ErrorHandling.Maybe`1.FlatMap``1(System.Func{`0,Lemonad.ErrorHandling.Maybe{``0}})
-  name.vb: FlatMap(Of TResult)(Func(Of T, Maybe(Of TResult)))
-  fullName: Lemonad.ErrorHandling.Maybe<T>.FlatMap<TResult>(System.Func<T, Lemonad.ErrorHandling.Maybe<TResult>>)
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).FlatMap(Of TResult)(System.Func(Of T, Lemonad.ErrorHandling.Maybe(Of TResult)))
-  nameWithType: Maybe<T>.FlatMap<TResult>(Func<T, Maybe<TResult>>)
-  nameWithType.vb: Maybe(Of T).FlatMap(Of TResult)(Func(Of T, Maybe(Of TResult)))
-- uid: Lemonad.ErrorHandling.Maybe`1.FlatMap``1(System.Func{`0,System.Nullable{``0}})
-  name: FlatMap<TResult>(Func<T, Nullable<TResult>>)
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_FlatMap__1_System_Func__0_System_Nullable___0___
-  commentId: M:Lemonad.ErrorHandling.Maybe`1.FlatMap``1(System.Func{`0,System.Nullable{``0}})
-  name.vb: FlatMap(Of TResult)(Func(Of T, Nullable(Of TResult)))
-  fullName: Lemonad.ErrorHandling.Maybe<T>.FlatMap<TResult>(System.Func<T, System.Nullable<TResult>>)
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).FlatMap(Of TResult)(System.Func(Of T, System.Nullable(Of TResult)))
-  nameWithType: Maybe<T>.FlatMap<TResult>(Func<T, Nullable<TResult>>)
-  nameWithType.vb: Maybe(Of T).FlatMap(Of TResult)(Func(Of T, Nullable(Of TResult)))
-- uid: Lemonad.ErrorHandling.Maybe`1.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Maybe{``0}},System.Func{`0,``0,``1})
-  name: FlatMap<TFlatMap, TResult>(Func<T, Maybe<TFlatMap>>, Func<T, TFlatMap, TResult>)
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_Maybe___0___System_Func__0___0___1__
-  commentId: M:Lemonad.ErrorHandling.Maybe`1.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.Maybe{``0}},System.Func{`0,``0,``1})
-  name.vb: FlatMap(Of TFlatMap, TResult)(Func(Of T, Maybe(Of TFlatMap)), Func(Of T, TFlatMap, TResult))
-  fullName: Lemonad.ErrorHandling.Maybe<T>.FlatMap<TFlatMap, TResult>(System.Func<T, Lemonad.ErrorHandling.Maybe<TFlatMap>>, System.Func<T, TFlatMap, TResult>)
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).FlatMap(Of TFlatMap, TResult)(System.Func(Of T, Lemonad.ErrorHandling.Maybe(Of TFlatMap)), System.Func(Of T, TFlatMap, TResult))
-  nameWithType: Maybe<T>.FlatMap<TFlatMap, TResult>(Func<T, Maybe<TFlatMap>>, Func<T, TFlatMap, TResult>)
-  nameWithType.vb: Maybe(Of T).FlatMap(Of TFlatMap, TResult)(Func(Of T, Maybe(Of TFlatMap)), Func(Of T, TFlatMap, TResult))
-- uid: Lemonad.ErrorHandling.Maybe`1.FlatMap``2(System.Func{`0,System.Nullable{``0}},System.Func{`0,``0,``1})
-  name: FlatMap<TFlatMap, TResult>(Func<T, Nullable<TFlatMap>>, Func<T, TFlatMap, TResult>)
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_FlatMap__2_System_Func__0_System_Nullable___0___System_Func__0___0___1__
-  commentId: M:Lemonad.ErrorHandling.Maybe`1.FlatMap``2(System.Func{`0,System.Nullable{``0}},System.Func{`0,``0,``1})
-  name.vb: FlatMap(Of TFlatMap, TResult)(Func(Of T, Nullable(Of TFlatMap)), Func(Of T, TFlatMap, TResult))
-  fullName: Lemonad.ErrorHandling.Maybe<T>.FlatMap<TFlatMap, TResult>(System.Func<T, System.Nullable<TFlatMap>>, System.Func<T, TFlatMap, TResult>)
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).FlatMap(Of TFlatMap, TResult)(System.Func(Of T, System.Nullable(Of TFlatMap)), System.Func(Of T, TFlatMap, TResult))
-  nameWithType: Maybe<T>.FlatMap<TFlatMap, TResult>(Func<T, Nullable<TFlatMap>>, Func<T, TFlatMap, TResult>)
-  nameWithType.vb: Maybe(Of T).FlatMap(Of TFlatMap, TResult)(Func(Of T, Nullable(Of TFlatMap)), Func(Of T, TFlatMap, TResult))
-- uid: Lemonad.ErrorHandling.Maybe`1.Flatten*
-  name: Flatten
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_Flatten_
-  commentId: Overload:Lemonad.ErrorHandling.Maybe`1.Flatten
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Maybe<T>.Flatten
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).Flatten
-  nameWithType: Maybe<T>.Flatten
-  nameWithType.vb: Maybe(Of T).Flatten
-- uid: Lemonad.ErrorHandling.Maybe`1.Flatten``1(System.Func{`0,Lemonad.ErrorHandling.Maybe{``0}})
-  name: Flatten<TResult>(Func<T, Maybe<TResult>>)
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_Flatten__1_System_Func__0_Lemonad_ErrorHandling_Maybe___0___
-  commentId: M:Lemonad.ErrorHandling.Maybe`1.Flatten``1(System.Func{`0,Lemonad.ErrorHandling.Maybe{``0}})
-  name.vb: Flatten(Of TResult)(Func(Of T, Maybe(Of TResult)))
-  fullName: Lemonad.ErrorHandling.Maybe<T>.Flatten<TResult>(System.Func<T, Lemonad.ErrorHandling.Maybe<TResult>>)
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).Flatten(Of TResult)(System.Func(Of T, Lemonad.ErrorHandling.Maybe(Of TResult)))
-  nameWithType: Maybe<T>.Flatten<TResult>(Func<T, Maybe<TResult>>)
-  nameWithType.vb: Maybe(Of T).Flatten(Of TResult)(Func(Of T, Maybe(Of TResult)))
-- uid: Lemonad.ErrorHandling.Maybe`1.HasValue
-  name: HasValue
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_HasValue
-  commentId: P:Lemonad.ErrorHandling.Maybe`1.HasValue
-  fullName: Lemonad.ErrorHandling.Maybe<T>.HasValue
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).HasValue
-  nameWithType: Maybe<T>.HasValue
-  nameWithType.vb: Maybe(Of T).HasValue
-- uid: Lemonad.ErrorHandling.Maybe`1.HasValue*
-  name: HasValue
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_HasValue_
-  commentId: Overload:Lemonad.ErrorHandling.Maybe`1.HasValue
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Maybe<T>.HasValue
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).HasValue
-  nameWithType: Maybe<T>.HasValue
-  nameWithType.vb: Maybe(Of T).HasValue
-- uid: Lemonad.ErrorHandling.Maybe`1.IsNoneWhen(System.Func{`0,System.Boolean})
-  name: IsNoneWhen(Func<T, Boolean>)
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_IsNoneWhen_System_Func__0_System_Boolean__
-  commentId: M:Lemonad.ErrorHandling.Maybe`1.IsNoneWhen(System.Func{`0,System.Boolean})
-  name.vb: IsNoneWhen(Func(Of T, Boolean))
-  fullName: Lemonad.ErrorHandling.Maybe<T>.IsNoneWhen(System.Func<T, System.Boolean>)
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).IsNoneWhen(System.Func(Of T, System.Boolean))
-  nameWithType: Maybe<T>.IsNoneWhen(Func<T, Boolean>)
-  nameWithType.vb: Maybe(Of T).IsNoneWhen(Func(Of T, Boolean))
-- uid: Lemonad.ErrorHandling.Maybe`1.IsNoneWhen*
-  name: IsNoneWhen
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_IsNoneWhen_
-  commentId: Overload:Lemonad.ErrorHandling.Maybe`1.IsNoneWhen
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Maybe<T>.IsNoneWhen
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).IsNoneWhen
-  nameWithType: Maybe<T>.IsNoneWhen
-  nameWithType.vb: Maybe(Of T).IsNoneWhen
-- uid: Lemonad.ErrorHandling.Maybe`1.Map*
-  name: Map
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_Map_
-  commentId: Overload:Lemonad.ErrorHandling.Maybe`1.Map
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Maybe<T>.Map
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).Map
-  nameWithType: Maybe<T>.Map
-  nameWithType.vb: Maybe(Of T).Map
-- uid: Lemonad.ErrorHandling.Maybe`1.Map``1(System.Func{`0,``0})
-  name: Map<TResult>(Func<T, TResult>)
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_Map__1_System_Func__0___0__
-  commentId: M:Lemonad.ErrorHandling.Maybe`1.Map``1(System.Func{`0,``0})
-  name.vb: Map(Of TResult)(Func(Of T, TResult))
-  fullName: Lemonad.ErrorHandling.Maybe<T>.Map<TResult>(System.Func<T, TResult>)
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).Map(Of TResult)(System.Func(Of T, TResult))
-  nameWithType: Maybe<T>.Map<TResult>(Func<T, TResult>)
-  nameWithType.vb: Maybe(Of T).Map(Of TResult)(Func(Of T, TResult))
-- uid: Lemonad.ErrorHandling.Maybe`1.Match(System.Action{`0},System.Action)
-  name: Match(Action<T>, Action)
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_Match_System_Action__0__System_Action_
-  commentId: M:Lemonad.ErrorHandling.Maybe`1.Match(System.Action{`0},System.Action)
-  name.vb: Match(Action(Of T), Action)
-  fullName: Lemonad.ErrorHandling.Maybe<T>.Match(System.Action<T>, System.Action)
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).Match(System.Action(Of T), System.Action)
-  nameWithType: Maybe<T>.Match(Action<T>, Action)
-  nameWithType.vb: Maybe(Of T).Match(Action(Of T), Action)
-- uid: Lemonad.ErrorHandling.Maybe`1.Match*
-  name: Match
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_Match_
-  commentId: Overload:Lemonad.ErrorHandling.Maybe`1.Match
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Maybe<T>.Match
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).Match
-  nameWithType: Maybe<T>.Match
-  nameWithType.vb: Maybe(Of T).Match
-- uid: Lemonad.ErrorHandling.Maybe`1.Match``1(System.Func{`0,``0},System.Func{``0})
-  name: Match<TResult>(Func<T, TResult>, Func<TResult>)
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_Match__1_System_Func__0___0__System_Func___0__
-  commentId: M:Lemonad.ErrorHandling.Maybe`1.Match``1(System.Func{`0,``0},System.Func{``0})
-  name.vb: Match(Of TResult)(Func(Of T, TResult), Func(Of TResult))
-  fullName: Lemonad.ErrorHandling.Maybe<T>.Match<TResult>(System.Func<T, TResult>, System.Func<TResult>)
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).Match(Of TResult)(System.Func(Of T, TResult), System.Func(Of TResult))
-  nameWithType: Maybe<T>.Match<TResult>(Func<T, TResult>, Func<TResult>)
-  nameWithType.vb: Maybe(Of T).Match(Of TResult)(Func(Of T, TResult), Func(Of TResult))
-- uid: Lemonad.ErrorHandling.Maybe`1.None
+- uid: Lemonad.ErrorHandling.Maybe
+  name: Maybe
+  href: api/Lemonad.ErrorHandling.Maybe.html
+  commentId: T:Lemonad.ErrorHandling.Maybe
+  fullName: Lemonad.ErrorHandling.Maybe
+  nameWithType: Maybe
+- uid: Lemonad.ErrorHandling.Maybe.None*
   name: None
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_None
-  commentId: P:Lemonad.ErrorHandling.Maybe`1.None
-  fullName: Lemonad.ErrorHandling.Maybe<T>.None
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).None
-  nameWithType: Maybe<T>.None
-  nameWithType.vb: Maybe(Of T).None
-- uid: Lemonad.ErrorHandling.Maybe`1.None*
-  name: None
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_None_
-  commentId: Overload:Lemonad.ErrorHandling.Maybe`1.None
+  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_None_
+  commentId: Overload:Lemonad.ErrorHandling.Maybe.None
   isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Maybe<T>.None
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).None
-  nameWithType: Maybe<T>.None
-  nameWithType.vb: Maybe(Of T).None
-- uid: Lemonad.ErrorHandling.Maybe`1.op_Implicit(`0)~Lemonad.ErrorHandling.Maybe{`0}
-  name: Implicit(T to Maybe<T>)
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_op_Implicit__0__Lemonad_ErrorHandling_Maybe__0_
-  commentId: M:Lemonad.ErrorHandling.Maybe`1.op_Implicit(`0)~Lemonad.ErrorHandling.Maybe{`0}
-  name.vb: Widening(T to Maybe(Of T))
-  fullName: Lemonad.ErrorHandling.Maybe<T>.Implicit(T to Lemonad.ErrorHandling.Maybe<T>)
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).Widening(T to Lemonad.ErrorHandling.Maybe(Of T))
-  nameWithType: Maybe<T>.Implicit(T to Maybe<T>)
-  nameWithType.vb: Maybe(Of T).Widening(T to Maybe(Of T))
-- uid: Lemonad.ErrorHandling.Maybe`1.op_Implicit*
-  name: Implicit
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_op_Implicit_
-  commentId: Overload:Lemonad.ErrorHandling.Maybe`1.op_Implicit
-  isSpec: "True"
-  name.vb: Widening
-  fullName: Lemonad.ErrorHandling.Maybe<T>.Implicit
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).Widening
-  nameWithType: Maybe<T>.Implicit
-  nameWithType.vb: Maybe(Of T).Widening
-- uid: Lemonad.ErrorHandling.Maybe`1.ToString
-  name: ToString()
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_ToString
-  commentId: M:Lemonad.ErrorHandling.Maybe`1.ToString
-  fullName: Lemonad.ErrorHandling.Maybe<T>.ToString()
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).ToString()
-  nameWithType: Maybe<T>.ToString()
-  nameWithType.vb: Maybe(Of T).ToString()
-- uid: Lemonad.ErrorHandling.Maybe`1.ToString*
-  name: ToString
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_ToString_
-  commentId: Overload:Lemonad.ErrorHandling.Maybe`1.ToString
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Maybe<T>.ToString
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).ToString
-  nameWithType: Maybe<T>.ToString
-  nameWithType.vb: Maybe(Of T).ToString
-- uid: Lemonad.ErrorHandling.Maybe`1.Value
-  name: Value
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_Value
-  commentId: P:Lemonad.ErrorHandling.Maybe`1.Value
-  fullName: Lemonad.ErrorHandling.Maybe<T>.Value
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).Value
-  nameWithType: Maybe<T>.Value
-  nameWithType.vb: Maybe(Of T).Value
-- uid: Lemonad.ErrorHandling.Maybe`1.Value*
-  name: Value
-  href: api/Lemonad.ErrorHandling.Maybe-1.html#Lemonad_ErrorHandling_Maybe_1_Value_
-  commentId: Overload:Lemonad.ErrorHandling.Maybe`1.Value
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Maybe<T>.Value
-  fullName.vb: Lemonad.ErrorHandling.Maybe(Of T).Value
-  nameWithType: Maybe<T>.Value
-  nameWithType.vb: Maybe(Of T).Value
-- uid: Lemonad.ErrorHandling.MaybeExtensions
-  name: MaybeExtensions
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html
-  commentId: T:Lemonad.ErrorHandling.MaybeExtensions
-  fullName: Lemonad.ErrorHandling.MaybeExtensions
-  nameWithType: MaybeExtensions
-- uid: Lemonad.ErrorHandling.MaybeExtensions.FirstMaybe*
-  name: FirstMaybe
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_FirstMaybe_
-  commentId: Overload:Lemonad.ErrorHandling.MaybeExtensions.FirstMaybe
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.FirstMaybe
-  nameWithType: MaybeExtensions.FirstMaybe
-- uid: Lemonad.ErrorHandling.MaybeExtensions.FirstMaybe``1(System.Collections.Generic.IEnumerable{``0})
-  name: FirstMaybe<TSource>(IEnumerable<TSource>)
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_FirstMaybe__1_System_Collections_Generic_IEnumerable___0__
-  commentId: M:Lemonad.ErrorHandling.MaybeExtensions.FirstMaybe``1(System.Collections.Generic.IEnumerable{``0})
-  name.vb: FirstMaybe(Of TSource)(IEnumerable(Of TSource))
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.FirstMaybe<TSource>(System.Collections.Generic.IEnumerable<TSource>)
-  fullName.vb: Lemonad.ErrorHandling.MaybeExtensions.FirstMaybe(Of TSource)(System.Collections.Generic.IEnumerable(Of TSource))
-  nameWithType: MaybeExtensions.FirstMaybe<TSource>(IEnumerable<TSource>)
-  nameWithType.vb: MaybeExtensions.FirstMaybe(Of TSource)(IEnumerable(Of TSource))
-- uid: Lemonad.ErrorHandling.MaybeExtensions.FirstMaybe``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})
-  name: FirstMaybe<TSource>(IEnumerable<TSource>, Func<TSource, Boolean>)
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_FirstMaybe__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__
-  commentId: M:Lemonad.ErrorHandling.MaybeExtensions.FirstMaybe``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})
-  name.vb: FirstMaybe(Of TSource)(IEnumerable(Of TSource), Func(Of TSource, Boolean))
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.FirstMaybe<TSource>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, System.Boolean>)
-  fullName.vb: Lemonad.ErrorHandling.MaybeExtensions.FirstMaybe(Of TSource)(System.Collections.Generic.IEnumerable(Of TSource), System.Func(Of TSource, System.Boolean))
-  nameWithType: MaybeExtensions.FirstMaybe<TSource>(IEnumerable<TSource>, Func<TSource, Boolean>)
-  nameWithType.vb: MaybeExtensions.FirstMaybe(Of TSource)(IEnumerable(Of TSource), Func(Of TSource, Boolean))
-- uid: Lemonad.ErrorHandling.MaybeExtensions.Match*
-  name: Match
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_Match_
-  commentId: Overload:Lemonad.ErrorHandling.MaybeExtensions.Match
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.Match
-  nameWithType: MaybeExtensions.Match
-- uid: Lemonad.ErrorHandling.MaybeExtensions.Match``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.Maybe{``0}},System.Func{``0,``1},System.Func{``1})
-  name: Match<TSource, TResult>(IEnumerable<Maybe<TSource>>, Func<TSource, TResult>, Func<TResult>)
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_Match__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_Maybe___0___System_Func___0___1__System_Func___1__
-  commentId: M:Lemonad.ErrorHandling.MaybeExtensions.Match``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.Maybe{``0}},System.Func{``0,``1},System.Func{``1})
-  name.vb: Match(Of TSource, TResult)(IEnumerable(Of Maybe(Of TSource)), Func(Of TSource, TResult), Func(Of TResult))
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.Match<TSource, TResult>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.Maybe<TSource>>, System.Func<TSource, TResult>, System.Func<TResult>)
-  fullName.vb: Lemonad.ErrorHandling.MaybeExtensions.Match(Of TSource, TResult)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.Maybe(Of TSource)), System.Func(Of TSource, TResult), System.Func(Of TResult))
-  nameWithType: MaybeExtensions.Match<TSource, TResult>(IEnumerable<Maybe<TSource>>, Func<TSource, TResult>, Func<TResult>)
-  nameWithType.vb: MaybeExtensions.Match(Of TSource, TResult)(IEnumerable(Of Maybe(Of TSource)), Func(Of TSource, TResult), Func(Of TResult))
-- uid: Lemonad.ErrorHandling.MaybeExtensions.NoValues*
-  name: NoValues
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_NoValues_
-  commentId: Overload:Lemonad.ErrorHandling.MaybeExtensions.NoValues
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.NoValues
-  nameWithType: MaybeExtensions.NoValues
-- uid: Lemonad.ErrorHandling.MaybeExtensions.NoValues``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.Maybe{``0}},System.Func{``1})
-  name: NoValues<TSource, TResult>(IEnumerable<Maybe<TSource>>, Func<TResult>)
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_NoValues__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_Maybe___0___System_Func___1__
-  commentId: M:Lemonad.ErrorHandling.MaybeExtensions.NoValues``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.Maybe{``0}},System.Func{``1})
-  name.vb: NoValues(Of TSource, TResult)(IEnumerable(Of Maybe(Of TSource)), Func(Of TResult))
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.NoValues<TSource, TResult>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.Maybe<TSource>>, System.Func<TResult>)
-  fullName.vb: Lemonad.ErrorHandling.MaybeExtensions.NoValues(Of TSource, TResult)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.Maybe(Of TSource)), System.Func(Of TResult))
-  nameWithType: MaybeExtensions.NoValues<TSource, TResult>(IEnumerable<Maybe<TSource>>, Func<TResult>)
-  nameWithType.vb: MaybeExtensions.NoValues(Of TSource, TResult)(IEnumerable(Of Maybe(Of TSource)), Func(Of TResult))
-- uid: Lemonad.ErrorHandling.MaybeExtensions.ToEnumerable*
+  fullName: Lemonad.ErrorHandling.Maybe.None
+  nameWithType: Maybe.None
+- uid: Lemonad.ErrorHandling.Maybe.None``1
+  name: None<TSource>()
+  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_None__1
+  commentId: M:Lemonad.ErrorHandling.Maybe.None``1
+  name.vb: None(Of TSource)()
+  fullName: Lemonad.ErrorHandling.Maybe.None<TSource>()
+  fullName.vb: Lemonad.ErrorHandling.Maybe.None(Of TSource)()
+  nameWithType: Maybe.None<TSource>()
+  nameWithType.vb: Maybe.None(Of TSource)()
+- uid: Lemonad.ErrorHandling.Maybe.ToEnumerable*
   name: ToEnumerable
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_ToEnumerable_
-  commentId: Overload:Lemonad.ErrorHandling.MaybeExtensions.ToEnumerable
+  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToEnumerable_
+  commentId: Overload:Lemonad.ErrorHandling.Maybe.ToEnumerable
   isSpec: "True"
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.ToEnumerable
-  nameWithType: MaybeExtensions.ToEnumerable
-- uid: Lemonad.ErrorHandling.MaybeExtensions.ToEnumerable``1(Lemonad.ErrorHandling.Maybe{``0})
-  name: ToEnumerable<TSource>(Maybe<TSource>)
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_ToEnumerable__1_Lemonad_ErrorHandling_Maybe___0__
-  commentId: M:Lemonad.ErrorHandling.MaybeExtensions.ToEnumerable``1(Lemonad.ErrorHandling.Maybe{``0})
-  name.vb: ToEnumerable(Of TSource)(Maybe(Of TSource))
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.ToEnumerable<TSource>(Lemonad.ErrorHandling.Maybe<TSource>)
-  fullName.vb: Lemonad.ErrorHandling.MaybeExtensions.ToEnumerable(Of TSource)(Lemonad.ErrorHandling.Maybe(Of TSource))
-  nameWithType: MaybeExtensions.ToEnumerable<TSource>(Maybe<TSource>)
-  nameWithType.vb: MaybeExtensions.ToEnumerable(Of TSource)(Maybe(Of TSource))
-- uid: Lemonad.ErrorHandling.MaybeExtensions.ToMaybe*
+  fullName: Lemonad.ErrorHandling.Maybe.ToEnumerable
+  nameWithType: Maybe.ToEnumerable
+- uid: Lemonad.ErrorHandling.Maybe.ToEnumerable``1(Lemonad.ErrorHandling.IMaybe{``0})
+  name: ToEnumerable<TSource>(IMaybe<TSource>)
+  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToEnumerable__1_Lemonad_ErrorHandling_IMaybe___0__
+  commentId: M:Lemonad.ErrorHandling.Maybe.ToEnumerable``1(Lemonad.ErrorHandling.IMaybe{``0})
+  name.vb: ToEnumerable(Of TSource)(IMaybe(Of TSource))
+  fullName: Lemonad.ErrorHandling.Maybe.ToEnumerable<TSource>(Lemonad.ErrorHandling.IMaybe<TSource>)
+  fullName.vb: Lemonad.ErrorHandling.Maybe.ToEnumerable(Of TSource)(Lemonad.ErrorHandling.IMaybe(Of TSource))
+  nameWithType: Maybe.ToEnumerable<TSource>(IMaybe<TSource>)
+  nameWithType.vb: Maybe.ToEnumerable(Of TSource)(IMaybe(Of TSource))
+- uid: Lemonad.ErrorHandling.Maybe.ToMaybe*
   name: ToMaybe
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_ToMaybe_
-  commentId: Overload:Lemonad.ErrorHandling.MaybeExtensions.ToMaybe
+  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToMaybe_
+  commentId: Overload:Lemonad.ErrorHandling.Maybe.ToMaybe
   isSpec: "True"
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.ToMaybe
-  nameWithType: MaybeExtensions.ToMaybe
-- uid: Lemonad.ErrorHandling.MaybeExtensions.ToMaybe``1(``0)
-  name: ToMaybe<TSource>(TSource)
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_ToMaybe__1___0_
-  commentId: M:Lemonad.ErrorHandling.MaybeExtensions.ToMaybe``1(``0)
-  name.vb: ToMaybe(Of TSource)(TSource)
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.ToMaybe<TSource>(TSource)
-  fullName.vb: Lemonad.ErrorHandling.MaybeExtensions.ToMaybe(Of TSource)(TSource)
-  nameWithType: MaybeExtensions.ToMaybe<TSource>(TSource)
-  nameWithType.vb: MaybeExtensions.ToMaybe(Of TSource)(TSource)
-- uid: Lemonad.ErrorHandling.MaybeExtensions.ToMaybe``1(``0,System.Func{``0,System.Boolean})
+  fullName: Lemonad.ErrorHandling.Maybe.ToMaybe
+  nameWithType: Maybe.ToMaybe
+- uid: Lemonad.ErrorHandling.Maybe.ToMaybe``1(``0,System.Func{``0,System.Boolean})
   name: ToMaybe<TSource>(TSource, Func<TSource, Boolean>)
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_ToMaybe__1___0_System_Func___0_System_Boolean__
-  commentId: M:Lemonad.ErrorHandling.MaybeExtensions.ToMaybe``1(``0,System.Func{``0,System.Boolean})
+  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToMaybe__1___0_System_Func___0_System_Boolean__
+  commentId: M:Lemonad.ErrorHandling.Maybe.ToMaybe``1(``0,System.Func{``0,System.Boolean})
   name.vb: ToMaybe(Of TSource)(TSource, Func(Of TSource, Boolean))
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.ToMaybe<TSource>(TSource, System.Func<TSource, System.Boolean>)
-  fullName.vb: Lemonad.ErrorHandling.MaybeExtensions.ToMaybe(Of TSource)(TSource, System.Func(Of TSource, System.Boolean))
-  nameWithType: MaybeExtensions.ToMaybe<TSource>(TSource, Func<TSource, Boolean>)
-  nameWithType.vb: MaybeExtensions.ToMaybe(Of TSource)(TSource, Func(Of TSource, Boolean))
-- uid: Lemonad.ErrorHandling.MaybeExtensions.ToMaybe``1(System.Nullable{``0})
+  fullName: Lemonad.ErrorHandling.Maybe.ToMaybe<TSource>(TSource, System.Func<TSource, System.Boolean>)
+  fullName.vb: Lemonad.ErrorHandling.Maybe.ToMaybe(Of TSource)(TSource, System.Func(Of TSource, System.Boolean))
+  nameWithType: Maybe.ToMaybe<TSource>(TSource, Func<TSource, Boolean>)
+  nameWithType.vb: Maybe.ToMaybe(Of TSource)(TSource, Func(Of TSource, Boolean))
+- uid: Lemonad.ErrorHandling.Maybe.ToMaybe``1(System.Nullable{``0})
   name: ToMaybe<TSource>(Nullable<TSource>)
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_ToMaybe__1_System_Nullable___0__
-  commentId: M:Lemonad.ErrorHandling.MaybeExtensions.ToMaybe``1(System.Nullable{``0})
+  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToMaybe__1_System_Nullable___0__
+  commentId: M:Lemonad.ErrorHandling.Maybe.ToMaybe``1(System.Nullable{``0})
   name.vb: ToMaybe(Of TSource)(Nullable(Of TSource))
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.ToMaybe<TSource>(System.Nullable<TSource>)
-  fullName.vb: Lemonad.ErrorHandling.MaybeExtensions.ToMaybe(Of TSource)(System.Nullable(Of TSource))
-  nameWithType: MaybeExtensions.ToMaybe<TSource>(Nullable<TSource>)
-  nameWithType.vb: MaybeExtensions.ToMaybe(Of TSource)(Nullable(Of TSource))
-- uid: Lemonad.ErrorHandling.MaybeExtensions.ToMaybeNone*
+  fullName: Lemonad.ErrorHandling.Maybe.ToMaybe<TSource>(System.Nullable<TSource>)
+  fullName.vb: Lemonad.ErrorHandling.Maybe.ToMaybe(Of TSource)(System.Nullable(Of TSource))
+  nameWithType: Maybe.ToMaybe<TSource>(Nullable<TSource>)
+  nameWithType.vb: Maybe.ToMaybe(Of TSource)(Nullable(Of TSource))
+- uid: Lemonad.ErrorHandling.Maybe.ToMaybeNone*
   name: ToMaybeNone
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_ToMaybeNone_
-  commentId: Overload:Lemonad.ErrorHandling.MaybeExtensions.ToMaybeNone
+  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToMaybeNone_
+  commentId: Overload:Lemonad.ErrorHandling.Maybe.ToMaybeNone
   isSpec: "True"
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.ToMaybeNone
-  nameWithType: MaybeExtensions.ToMaybeNone
-- uid: Lemonad.ErrorHandling.MaybeExtensions.ToMaybeNone``1
-  name: ToMaybeNone<TSource>()
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_ToMaybeNone__1
-  commentId: M:Lemonad.ErrorHandling.MaybeExtensions.ToMaybeNone``1
-  name.vb: ToMaybeNone(Of TSource)()
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.ToMaybeNone<TSource>()
-  fullName.vb: Lemonad.ErrorHandling.MaybeExtensions.ToMaybeNone(Of TSource)()
-  nameWithType: MaybeExtensions.ToMaybeNone<TSource>()
-  nameWithType.vb: MaybeExtensions.ToMaybeNone(Of TSource)()
-- uid: Lemonad.ErrorHandling.MaybeExtensions.ToMaybeNone``1(``0)
+  fullName: Lemonad.ErrorHandling.Maybe.ToMaybeNone
+  nameWithType: Maybe.ToMaybeNone
+- uid: Lemonad.ErrorHandling.Maybe.ToMaybeNone``1(``0)
   name: ToMaybeNone<TSource>(TSource)
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_ToMaybeNone__1___0_
-  commentId: M:Lemonad.ErrorHandling.MaybeExtensions.ToMaybeNone``1(``0)
+  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToMaybeNone__1___0_
+  commentId: M:Lemonad.ErrorHandling.Maybe.ToMaybeNone``1(``0)
   name.vb: ToMaybeNone(Of TSource)(TSource)
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.ToMaybeNone<TSource>(TSource)
-  fullName.vb: Lemonad.ErrorHandling.MaybeExtensions.ToMaybeNone(Of TSource)(TSource)
-  nameWithType: MaybeExtensions.ToMaybeNone<TSource>(TSource)
-  nameWithType.vb: MaybeExtensions.ToMaybeNone(Of TSource)(TSource)
-- uid: Lemonad.ErrorHandling.MaybeExtensions.ToMaybeNone``1(``0,System.Func{``0,System.Boolean})
+  fullName: Lemonad.ErrorHandling.Maybe.ToMaybeNone<TSource>(TSource)
+  fullName.vb: Lemonad.ErrorHandling.Maybe.ToMaybeNone(Of TSource)(TSource)
+  nameWithType: Maybe.ToMaybeNone<TSource>(TSource)
+  nameWithType.vb: Maybe.ToMaybeNone(Of TSource)(TSource)
+- uid: Lemonad.ErrorHandling.Maybe.ToMaybeNone``1(``0,System.Func{``0,System.Boolean})
   name: ToMaybeNone<TSource>(TSource, Func<TSource, Boolean>)
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_ToMaybeNone__1___0_System_Func___0_System_Boolean__
-  commentId: M:Lemonad.ErrorHandling.MaybeExtensions.ToMaybeNone``1(``0,System.Func{``0,System.Boolean})
+  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToMaybeNone__1___0_System_Func___0_System_Boolean__
+  commentId: M:Lemonad.ErrorHandling.Maybe.ToMaybeNone``1(``0,System.Func{``0,System.Boolean})
   name.vb: ToMaybeNone(Of TSource)(TSource, Func(Of TSource, Boolean))
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.ToMaybeNone<TSource>(TSource, System.Func<TSource, System.Boolean>)
-  fullName.vb: Lemonad.ErrorHandling.MaybeExtensions.ToMaybeNone(Of TSource)(TSource, System.Func(Of TSource, System.Boolean))
-  nameWithType: MaybeExtensions.ToMaybeNone<TSource>(TSource, Func<TSource, Boolean>)
-  nameWithType.vb: MaybeExtensions.ToMaybeNone(Of TSource)(TSource, Func(Of TSource, Boolean))
-- uid: Lemonad.ErrorHandling.MaybeExtensions.ToResult*
+  fullName: Lemonad.ErrorHandling.Maybe.ToMaybeNone<TSource>(TSource, System.Func<TSource, System.Boolean>)
+  fullName.vb: Lemonad.ErrorHandling.Maybe.ToMaybeNone(Of TSource)(TSource, System.Func(Of TSource, System.Boolean))
+  nameWithType: Maybe.ToMaybeNone<TSource>(TSource, Func<TSource, Boolean>)
+  nameWithType.vb: Maybe.ToMaybeNone(Of TSource)(TSource, Func(Of TSource, Boolean))
+- uid: Lemonad.ErrorHandling.Maybe.ToResult*
   name: ToResult
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_ToResult_
-  commentId: Overload:Lemonad.ErrorHandling.MaybeExtensions.ToResult
+  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToResult_
+  commentId: Overload:Lemonad.ErrorHandling.Maybe.ToResult
   isSpec: "True"
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.ToResult
-  nameWithType: MaybeExtensions.ToResult
-- uid: Lemonad.ErrorHandling.MaybeExtensions.ToResult``2(Lemonad.ErrorHandling.Maybe{``0},System.Func{``1})
-  name: ToResult<T, TError>(Maybe<T>, Func<TError>)
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_ToResult__2_Lemonad_ErrorHandling_Maybe___0__System_Func___1__
-  commentId: M:Lemonad.ErrorHandling.MaybeExtensions.ToResult``2(Lemonad.ErrorHandling.Maybe{``0},System.Func{``1})
-  name.vb: ToResult(Of T, TError)(Maybe(Of T), Func(Of TError))
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.ToResult<T, TError>(Lemonad.ErrorHandling.Maybe<T>, System.Func<TError>)
-  fullName.vb: Lemonad.ErrorHandling.MaybeExtensions.ToResult(Of T, TError)(Lemonad.ErrorHandling.Maybe(Of T), System.Func(Of TError))
-  nameWithType: MaybeExtensions.ToResult<T, TError>(Maybe<T>, Func<TError>)
-  nameWithType.vb: MaybeExtensions.ToResult(Of T, TError)(Maybe(Of T), Func(Of TError))
-- uid: Lemonad.ErrorHandling.MaybeExtensions.Values*
-  name: Values
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_Values_
-  commentId: Overload:Lemonad.ErrorHandling.MaybeExtensions.Values
+  fullName: Lemonad.ErrorHandling.Maybe.ToResult
+  nameWithType: Maybe.ToResult
+- uid: Lemonad.ErrorHandling.Maybe.ToResult``2(Lemonad.ErrorHandling.IMaybe{``0},System.Func{``1})
+  name: ToResult<T, TError>(IMaybe<T>, Func<TError>)
+  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToResult__2_Lemonad_ErrorHandling_IMaybe___0__System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.Maybe.ToResult``2(Lemonad.ErrorHandling.IMaybe{``0},System.Func{``1})
+  name.vb: ToResult(Of T, TError)(IMaybe(Of T), Func(Of TError))
+  fullName: Lemonad.ErrorHandling.Maybe.ToResult<T, TError>(Lemonad.ErrorHandling.IMaybe<T>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.Maybe.ToResult(Of T, TError)(Lemonad.ErrorHandling.IMaybe(Of T), System.Func(Of TError))
+  nameWithType: Maybe.ToResult<T, TError>(IMaybe<T>, Func<TError>)
+  nameWithType.vb: Maybe.ToResult(Of T, TError)(IMaybe(Of T), Func(Of TError))
+- uid: Lemonad.ErrorHandling.Maybe.Value*
+  name: Value
+  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_Value_
+  commentId: Overload:Lemonad.ErrorHandling.Maybe.Value
   isSpec: "True"
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.Values
-  nameWithType: MaybeExtensions.Values
-- uid: Lemonad.ErrorHandling.MaybeExtensions.Values``1(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.Maybe{``0}})
-  name: Values<TSource>(IEnumerable<Maybe<TSource>>)
-  href: api/Lemonad.ErrorHandling.MaybeExtensions.html#Lemonad_ErrorHandling_MaybeExtensions_Values__1_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_Maybe___0___
-  commentId: M:Lemonad.ErrorHandling.MaybeExtensions.Values``1(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.Maybe{``0}})
-  name.vb: Values(Of TSource)(IEnumerable(Of Maybe(Of TSource)))
-  fullName: Lemonad.ErrorHandling.MaybeExtensions.Values<TSource>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.Maybe<TSource>>)
-  fullName.vb: Lemonad.ErrorHandling.MaybeExtensions.Values(Of TSource)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.Maybe(Of TSource)))
-  nameWithType: MaybeExtensions.Values<TSource>(IEnumerable<Maybe<TSource>>)
-  nameWithType.vb: MaybeExtensions.Values(Of TSource)(IEnumerable(Of Maybe(Of TSource)))
+  fullName: Lemonad.ErrorHandling.Maybe.Value
+  nameWithType: Maybe.Value
+- uid: Lemonad.ErrorHandling.Maybe.Value``1(``0)
+  name: Value<TSource>(TSource)
+  href: api/Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_Value__1___0_
+  commentId: M:Lemonad.ErrorHandling.Maybe.Value``1(``0)
+  name.vb: Value(Of TSource)(TSource)
+  fullName: Lemonad.ErrorHandling.Maybe.Value<TSource>(TSource)
+  fullName.vb: Lemonad.ErrorHandling.Maybe.Value(Of TSource)(TSource)
+  nameWithType: Maybe.Value<TSource>(TSource)
+  nameWithType.vb: Maybe.Value(Of TSource)(TSource)
 - uid: Lemonad.ErrorHandling.Parsers
   name: Lemonad.ErrorHandling.Parsers
   href: api/Lemonad.ErrorHandling.Parsers.html
@@ -2104,6 +2113,19 @@ references:
   isSpec: "True"
   fullName: Lemonad.ErrorHandling.Parsers.ResultParsers.Long
   nameWithType: ResultParsers.Long
+- uid: Lemonad.ErrorHandling.Parsers.ResultParsers.MailAddress(System.String)
+  name: MailAddress(String)
+  href: api/Lemonad.ErrorHandling.Parsers.ResultParsers.html#Lemonad_ErrorHandling_Parsers_ResultParsers_MailAddress_System_String_
+  commentId: M:Lemonad.ErrorHandling.Parsers.ResultParsers.MailAddress(System.String)
+  fullName: Lemonad.ErrorHandling.Parsers.ResultParsers.MailAddress(System.String)
+  nameWithType: ResultParsers.MailAddress(String)
+- uid: Lemonad.ErrorHandling.Parsers.ResultParsers.MailAddress*
+  name: MailAddress
+  href: api/Lemonad.ErrorHandling.Parsers.ResultParsers.html#Lemonad_ErrorHandling_Parsers_ResultParsers_MailAddress_
+  commentId: Overload:Lemonad.ErrorHandling.Parsers.ResultParsers.MailAddress
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Parsers.ResultParsers.MailAddress
+  nameWithType: ResultParsers.MailAddress
 - uid: Lemonad.ErrorHandling.Result
   name: Result
   href: api/Lemonad.ErrorHandling.Result.html
@@ -2126,22 +2148,6 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Result.Error(Of T, TError)(TError)
   nameWithType: Result.Error<T, TError>(TError)
   nameWithType.vb: Result.Error(Of T, TError)(TError)
-- uid: Lemonad.ErrorHandling.Result.Errors*
-  name: Errors
-  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_Errors_
-  commentId: Overload:Lemonad.ErrorHandling.Result.Errors
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Result.Errors
-  nameWithType: Result.Errors
-- uid: Lemonad.ErrorHandling.Result.Errors``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.IResult{``0,``1}})
-  name: Errors<T, TError>(IEnumerable<IResult<T, TError>>)
-  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_Errors__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_IResult___0___1___
-  commentId: M:Lemonad.ErrorHandling.Result.Errors``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.IResult{``0,``1}})
-  name.vb: Errors(Of T, TError)(IEnumerable(Of IResult(Of T, TError)))
-  fullName: Lemonad.ErrorHandling.Result.Errors<T, TError>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.IResult<T, TError>>)
-  fullName.vb: Lemonad.ErrorHandling.Result.Errors(Of T, TError)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.IResult(Of T, TError)))
-  nameWithType: Result.Errors<T, TError>(IEnumerable<IResult<T, TError>>)
-  nameWithType.vb: Result.Errors(Of T, TError)(IEnumerable(Of IResult(Of T, TError)))
 - uid: Lemonad.ErrorHandling.Result.Match*
   name: Match
   href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_Match_
@@ -2238,15 +2244,15 @@ references:
   isSpec: "True"
   fullName: Lemonad.ErrorHandling.Result.ToResult
   nameWithType: Result.ToResult
-- uid: Lemonad.ErrorHandling.Result.ToResult``2(``0,System.Func{``0,System.Boolean},System.Func{Lemonad.ErrorHandling.Maybe{``0},``1})
-  name: ToResult<T, TError>(T, Func<T, Boolean>, Func<Maybe<T>, TError>)
-  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ToResult__2___0_System_Func___0_System_Boolean__System_Func_Lemonad_ErrorHandling_Maybe___0____1__
-  commentId: M:Lemonad.ErrorHandling.Result.ToResult``2(``0,System.Func{``0,System.Boolean},System.Func{Lemonad.ErrorHandling.Maybe{``0},``1})
-  name.vb: ToResult(Of T, TError)(T, Func(Of T, Boolean), Func(Of Maybe(Of T), TError))
-  fullName: Lemonad.ErrorHandling.Result.ToResult<T, TError>(T, System.Func<T, System.Boolean>, System.Func<Lemonad.ErrorHandling.Maybe<T>, TError>)
-  fullName.vb: Lemonad.ErrorHandling.Result.ToResult(Of T, TError)(T, System.Func(Of T, System.Boolean), System.Func(Of Lemonad.ErrorHandling.Maybe(Of T), TError))
-  nameWithType: Result.ToResult<T, TError>(T, Func<T, Boolean>, Func<Maybe<T>, TError>)
-  nameWithType.vb: Result.ToResult(Of T, TError)(T, Func(Of T, Boolean), Func(Of Maybe(Of T), TError))
+- uid: Lemonad.ErrorHandling.Result.ToResult``2(``0,System.Func{``0,System.Boolean},System.Func{``0,``1})
+  name: ToResult<T, TError>(T, Func<T, Boolean>, Func<T, TError>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ToResult__2___0_System_Func___0_System_Boolean__System_Func___0___1__
+  commentId: M:Lemonad.ErrorHandling.Result.ToResult``2(``0,System.Func{``0,System.Boolean},System.Func{``0,``1})
+  name.vb: ToResult(Of T, TError)(T, Func(Of T, Boolean), Func(Of T, TError))
+  fullName: Lemonad.ErrorHandling.Result.ToResult<T, TError>(T, System.Func<T, System.Boolean>, System.Func<T, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result.ToResult(Of T, TError)(T, System.Func(Of T, System.Boolean), System.Func(Of T, TError))
+  nameWithType: Result.ToResult<T, TError>(T, Func<T, Boolean>, Func<T, TError>)
+  nameWithType.vb: Result.ToResult(Of T, TError)(T, Func(Of T, Boolean), Func(Of T, TError))
 - uid: Lemonad.ErrorHandling.Result.ToResult``2(System.Nullable{``0},System.Func{``1})
   name: ToResult<T, TError>(Nullable<T>, Func<TError>)
   href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ToResult__2_System_Nullable___0__System_Func___1__
@@ -2288,19 +2294,3 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Result.Value(Of T, TError)(T)
   nameWithType: Result.Value<T, TError>(T)
   nameWithType.vb: Result.Value(Of T, TError)(T)
-- uid: Lemonad.ErrorHandling.Result.Values*
-  name: Values
-  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_Values_
-  commentId: Overload:Lemonad.ErrorHandling.Result.Values
-  isSpec: "True"
-  fullName: Lemonad.ErrorHandling.Result.Values
-  nameWithType: Result.Values
-- uid: Lemonad.ErrorHandling.Result.Values``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.IResult{``0,``1}})
-  name: Values<T, TError>(IEnumerable<IResult<T, TError>>)
-  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_Values__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_IResult___0___1___
-  commentId: M:Lemonad.ErrorHandling.Result.Values``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.IResult{``0,``1}})
-  name.vb: Values(Of T, TError)(IEnumerable(Of IResult(Of T, TError)))
-  fullName: Lemonad.ErrorHandling.Result.Values<T, TError>(System.Collections.Generic.IEnumerable<Lemonad.ErrorHandling.IResult<T, TError>>)
-  fullName.vb: Lemonad.ErrorHandling.Result.Values(Of T, TError)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.IResult(Of T, TError)))
-  nameWithType: Result.Values<T, TError>(IEnumerable<IResult<T, TError>>)
-  nameWithType.vb: Result.Values(Of T, TError)(IEnumerable(Of IResult(Of T, TError)))

@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>This is the HOMEPAGE. </title>
+    <title>Lemonad </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="This is the HOMEPAGE. ">
+    <meta name="title" content="Lemonad ">
     <meta name="generator" content="docfx 2.39.2.0">
     
     <link rel="shortcut icon" href="favicon.ico">
@@ -60,13 +60,21 @@
         <div class="article row grid">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="this-is-the-homepage">This is the <strong>HOMEPAGE</strong>.</h1>
+<h1 id="lemonad">Lemonad</h1>
 
-<p>Refer to <a href="http://daringfireball.net/projects/markdown/">Markdown</a> for how to write markdown files.</p>
-<h2 id="quick-start-notes">Quick Start Notes:</h2>
-<ol>
-<li>Add images to the <em>images</em> folder if the file is referencing an image.</li>
-</ol>
+<h2 id="description">Description</h2>
+<p>A functional C# library with data structures and functions whose main goal is to have an declarative approach to problem solving by using various HOF's to achieve cleaner code bases &amp; code which is easier to think about.</p>
+<p>For example the Result&lt;T, TError&gt; type, which enables you to skip using exceptions for error handling. The way Result&lt;T, TError&gt; works is that there's always one value present. Either it's the value to the left or the value to the right (TError). In this library, the value to the Left is considered successfull and the right value is considered to be a failure.</p>
+<p>The following example illustrates how you can perform a division and return a string with an error message rather than throwing an exception using a similiar message.</p>
+<h2 id="how-to-install">How to install</h2>
+<h3 id="nuget-package-manager">NuGet Package Manager:</h3>
+<pre><code class="lang-PowerShell">PM&gt; Install-Package Lemonad.ErrorHandling
+</code></pre>
+<h3 id="net-cli">.NET CLI:</h3>
+<pre><code class="lang-PowerShell">&gt; dotnet add package Lemonad.ErrorHandling
+</code></pre>
+<h3 id="examples">Examples</h3>
+<p>Look at <a href="https://github.com/inputfalken/Lemonad/tree/master/samples">samples</a> in GitHub for some concrete examples.</p>
 </article>
           </div>
           
@@ -75,7 +83,7 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/inputfalken/Lemonad/blob/master/docs/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/inputfalken/Lemonad/blob/update-readme/docs/index.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>
