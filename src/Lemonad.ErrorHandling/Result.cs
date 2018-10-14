@@ -98,14 +98,14 @@ namespace Lemonad.ErrorHandling {
         }
 
         /// <summary>
-        ///     Converts an <see cref="Maybe{T}" /> to an <see cref="IResult{T,TError}" /> with the value <typeparamref name="T" />
+        ///     Converts an <see cref="IMaybe{T}" /> to an <see cref="IResult{T,TError}" /> with the value <typeparamref name="T" />
         ///     .
         /// </summary>
         /// <param name="source">
-        ///     The <see cref="Maybe{T}" /> to convert.
+        ///     The <see cref="IMaybe{T}" /> to convert.
         /// </param>
         /// <typeparam name="T">
-        ///     The type in the <see cref="Maybe{T}" />.
+        ///     The type in the <see cref="IMaybe{T}" />.
         /// </typeparam>
         /// <typeparam name="TError">
         ///     The <typeparamref name="TError" /> from the <see cref="IResult{T,TError}" />.

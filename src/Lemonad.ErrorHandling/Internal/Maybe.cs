@@ -13,17 +13,17 @@ namespace Lemonad.ErrorHandling.Internal {
         internal static IMaybe<T> Create(in T value) => new Maybe<T>(in value, true);
 
         /// <summary>
-        ///     Gets a value indicating whether the current <see cref="Maybe{T}" /> object has a valid value of
+        ///     Gets a value indicating whether the current <see cref="IMaybe{T}" /> object has a valid value of
         ///     its underlying type.
         /// </summary>
         /// <returns>
-        ///     true if the current <see cref="Maybe{T}"></see> object has a value; false if the current
-        ///     <see cref="Maybe{T}"></see> object has no value.
+        ///     true if the current <see cref="IMaybe{T}"></see> object has a value; false if the current
+        ///     <see cref="IMaybe{T}"></see> object has no value.
         /// </returns>
         public bool HasValue { get; }
 
         /// <summary>
-        ///     Gets the value of the current <see cref="Maybe{T}"></see> object if <see cref="HasValue" /> is true.
+        ///     Gets the value of the current <see cref="IMaybe{T}"></see> object if <see cref="HasValue" /> is true.
         /// </summary>
         /// <example>
         ///     <code language="c#">
@@ -47,13 +47,13 @@ namespace Lemonad.ErrorHandling.Internal {
             $"{(HasValue ? "Some" : "None")} ==> {typeof(Maybe<T>).ToHumanString()}{StringFunctions.PrettyTypeString(Value)}";
 
         /// <summary>
-        ///     Evaluates the <see cref="Maybe{T}" />.
+        ///     Evaluates the <see cref="IMaybe{T}" />.
         /// </summary>
         /// <param name="someAction">
-        ///     Is executed when the <see cref="Maybe{T}" /> has a value.
+        ///     Is executed when the <see cref="IMaybe{T}" /> has a value.
         /// </param>
         /// <param name="noneAction">
-        ///     Is executed when he <see cref="Maybe{T}" /> has no value.
+        ///     Is executed when he <see cref="IMaybe{T}" /> has no value.
         /// </param>
         /// <exception cref="ArgumentNullException">
         ///     When either <paramref name="someAction" /> or <paramref name="noneAction" /> needs to be executed.
@@ -81,13 +81,13 @@ namespace Lemonad.ErrorHandling.Internal {
         }
 
         /// <summary>
-        ///     Evaluates the <see cref="Maybe{T}" />.
+        ///     Evaluates the <see cref="IMaybe{T}" />.
         /// </summary>
         /// <param name="someSelector">
-        ///     Is executed when the <see cref="Maybe{T}" /> has a value.
+        ///     Is executed when the <see cref="IMaybe{T}" /> has a value.
         /// </param>
         /// <param name="noneSelector">
-        ///     Is executed when he <see cref="Maybe{T}" /> has no value.
+        ///     Is executed when he <see cref="IMaybe{T}" /> has no value.
         /// </param>
         /// <typeparam name="TResult">
         ///     The type returned by the functions <paramref name="someSelector" /> and <paramref name="noneSelector" />.
@@ -105,7 +105,7 @@ namespace Lemonad.ErrorHandling.Internal {
         ///     Maps <typeparamref name="T" />.
         /// </summary>
         /// <param name="selector">
-        ///     Is executed if <see cref="Maybe{T}" /> has a value.
+        ///     Is executed if <see cref="IMaybe{T}" /> has a value.
         /// </param>
         /// <typeparam name="TResult">
         ///     The type returned from the function <paramref name="selector" />.
@@ -118,7 +118,7 @@ namespace Lemonad.ErrorHandling.Internal {
         }
 
         /// <summary>
-        ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
+        ///     Filters the <typeparamref name="T" /> if <see cref="IMaybe{T}" /> has a value.
         /// </summary>
         /// <param name="predicate">
         ///     A function to test <typeparamref name="T" />.
@@ -133,10 +133,10 @@ namespace Lemonad.ErrorHandling.Internal {
         }
 
         /// <summary>
-        ///     Flatmaps another <see cref="Maybe{T}" />.
+        ///     Flatmaps another <see cref="IMaybe{T}" />.
         /// </summary>
         /// <param name="flatMapSelector">
-        ///     A function who expects a <see cref="Maybe{T}" /> as its return type.
+        ///     A function who expects a <see cref="IMaybe{T}" /> as its return type.
         /// </param>
         /// <typeparam name="TResult">
         ///     The type <typeparamref name="T" /> returned from the <paramref name="flatMapSelector" /> function.
@@ -149,10 +149,10 @@ namespace Lemonad.ErrorHandling.Internal {
                 : Maybe<TResult>.None;
 
         /// <summary>
-        ///     Flatmaps another <see cref="Maybe{T}" />.
+        ///     Flatmaps another <see cref="IMaybe{T}" />.
         /// </summary>
         /// <param name="flatMapSelector">
-        ///     A function who expects a <see cref="Maybe{T}" /> as its return type.
+        ///     A function who expects a <see cref="IMaybe{T}" /> as its return type.
         /// </param>
         /// <param name="resultSelector">
         ///     A function whose in-parameters are <typeparamref name="T" /> and <typeparamref name="TFlatMap" /> which can return
@@ -198,7 +198,7 @@ namespace Lemonad.ErrorHandling.Internal {
         }
 
         /// <summary>
-        ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
+        ///     Filters the <typeparamref name="T" /> if <see cref="IMaybe{T}" /> has a value.
         /// </summary>
         /// <param name="predicate">
         ///     A function to test <typeparamref name="T" />.
@@ -224,7 +224,7 @@ namespace Lemonad.ErrorHandling.Internal {
         }
 
         /// <summary>
-        ///     Flatmaps another <see cref="Maybe{T}" />.
+        ///     Flatmaps another <see cref="IMaybe{T}" />.
         /// </summary>
         /// <param name="flatMapSelector">
         ///     A function who expects a <see cref="Nullable{T}" /> as its return type.

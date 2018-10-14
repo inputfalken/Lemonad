@@ -7,7 +7,7 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
     public static class MaybeEnumerable {
         /// <summary>
         ///     Works just like <see cref="Enumerable.FirstOrDefault{TSource}(System.Collections.Generic.IEnumerable{TSource})" />
-        ///     but returns a <see cref="Maybe{T}" />.
+        ///     but returns a <see cref="IMaybe{T}" />.
         /// </summary>
         /// <param name="source">
         ///     The <see cref="IEnumerable{T}" />.
@@ -16,7 +16,7 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
         ///     The type of the <see cref="IEnumerable{T}" />.
         /// </typeparam>
         /// <returns>
-        ///     Returns the first element of a sequence inside a <see cref="Maybe{T}" />.
+        ///     Returns the first element of a sequence inside a <see cref="IMaybe{T}" />.
         /// </returns>
         public static IMaybe<TSource> FirstMaybe<TSource>(this IEnumerable<TSource> source) {
             switch (source) {
@@ -33,7 +33,7 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
 
         /// <summary>
         ///     Works just like <see cref="Enumerable.FirstOrDefault{TSource}(System.Collections.Generic.IEnumerable{TSource})" />
-        ///     but returns a <see cref="Maybe{T}" />.
+        ///     but returns a <see cref="IMaybe{T}" />.
         /// </summary>
         /// <param name="source">
         ///     The <see cref="IEnumerable{T}" />.
@@ -46,7 +46,7 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
         /// </typeparam>
         /// <returns>
         ///     Returns the first element of a sequence who matches the <paramref name="predicate" /> inside a
-        ///     <see cref="Maybe{T}" />.
+        ///     <see cref="IMaybe{T}" />.
         /// </returns>
         public static IMaybe<TSource> FirstMaybe<TSource>(this IEnumerable<TSource> source,
             Func<TSource, bool> predicate) {
@@ -58,24 +58,24 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
         }
 
         /// <summary>
-        ///     Executes <see cref="Maybe{T}.Match" /> for each element in the sequence.
+        ///     Executes <see cref="IMaybe{T}.Match" /> for each element in the sequence.
         /// </summary>
         public static IEnumerable<TResult> Match<TSource, TResult>(this IEnumerable<IMaybe<TSource>> source,
             Func<TSource, TResult> someSelector, Func<TResult> noneSelector) =>
             source.Select(x => x.Match(someSelector, noneSelector));
 
         /// <summary>
-        ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="Maybe{T}" /> into an <see cref="IEnumerable{T}" /> of
+        ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="IMaybe{T}" /> into an <see cref="IEnumerable{T}" /> of
         ///     <typeparamref name="TResult" /> for each element which do not have a value.
         /// </summary>
         /// <param name="source">
-        ///     The <see cref="IEnumerable{T}" /> of <see cref="Maybe{T}" />.
+        ///     The <see cref="IEnumerable{T}" /> of <see cref="IMaybe{T}" />.
         /// </param>
         /// <param name="selector">
-        ///     A function to return a value for each <see cref="Maybe{T}" />.
+        ///     A function to return a value for each <see cref="IMaybe{T}" />.
         /// </param>
         /// <typeparam name="TSource">
-        ///     The type of the <see cref="Maybe{T}" />.
+        ///     The type of the <see cref="IMaybe{T}" />.
         /// </typeparam>
         /// <typeparam name="TResult">
         ///     The return type returned by the function <paramref name="selector" />.
@@ -84,14 +84,14 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
             Func<TResult> selector) => source.Where(x => x.HasValue == false).Select(_ => selector());
 
         /// <summary>
-        ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="Maybe{T}" /> into an <see cref="IEnumerable{T}" /> with the
-        ///     value of the <see cref="Maybe{T}" />.
+        ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="IMaybe{T}" /> into an <see cref="IEnumerable{T}" /> with the
+        ///     value of the <see cref="IMaybe{T}" />.
         /// </summary>
         /// <param name="source">
-        ///     The <see cref="IEnumerable{T}" /> of <see cref="Maybe{T}" />.
+        ///     The <see cref="IEnumerable{T}" /> of <see cref="IMaybe{T}" />.
         /// </param>
         /// <typeparam name="TSource">
-        ///     The type inside the <see cref="Maybe{T}" />.
+        ///     The type inside the <see cref="IMaybe{T}" />.
         /// </typeparam>
         /// <returns>
         ///     A sequence which can contain 0-n amount of values.
