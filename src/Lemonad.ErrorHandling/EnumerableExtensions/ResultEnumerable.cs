@@ -17,23 +17,28 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
         /// <typeparam name="TError">
         ///     The type of the errors in <see cref="IResult{T,TError}" />.
         /// </typeparam>
-        public static IEnumerable<TError> Errors<T, TError>(
-            this IEnumerable<IResult<T, TError>> enumerable) => enumerable.SelectMany(x => x.ToErrorEnumerable());
+        public static IEnumerable<TError> Errors<T, TError>(this IEnumerable<IResult<T, TError>> enumerable) =>
+            enumerable.SelectMany(x => x.ToErrorEnumerable());
 
         /// <summary>
-        ///     Treat <typeparamref name="T" /> as enumerable with 0-1 elements in.
+        ///     Treat <typeparamref name="T" /> as enumerable with 0-1 elements.
         ///     This is handy when combining <see cref="IResult{T,TError}" /> with LINQ's API.
         /// </summary>
         /// <param name="result"></param>
-        public static IEnumerable<T> ToEnumerable<T, TError>(this IResult<T, TError> result) => YieldValues(result);
+        public static IEnumerable<T> ToEnumerable<T, TError>(this IResult<T, TError> result) {
+            if (result.Either.HasValue)
+                yield return result.Either.Value;
+        }
 
         /// <summary>
-        ///     Treat <typeparamref name="TError" /> as enumerable with 0-1 elements in.
+        ///     Treat <typeparamref name="TError" /> as enumerable with 0-1 elements.
         ///     This is handy when combining <see cref="IResult{T,TError}" /> with LINQs API.
         /// </summary>
         /// <param name="result"></param>
-        public static IEnumerable<TError> ToErrorEnumerable<T, TError>(this IResult<T, TError> result) =>
-            YieldErrors(result);
+        public static IEnumerable<TError> ToErrorEnumerable<T, TError>(this IResult<T, TError> result) {
+            if (result.Either.HasError)
+                yield return result.Either.Error;
+        }
 
         /// <summary>
         ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="IResult{T,TError}" /> to an <see cref="IEnumerable{T}" />
@@ -49,18 +54,7 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
         /// <typeparam name="TError">
         ///     The type of the errors in <see cref="IResult{T,TError}" />.
         /// </typeparam>
-        public static IEnumerable<T> Values<T, TError>(
-            this IEnumerable<IResult<T, TError>> enumerable) =>
+        public static IEnumerable<T> Values<T, TError>(this IEnumerable<IResult<T, TError>> enumerable) =>
             enumerable.SelectMany(x => x.ToEnumerable());
-
-        private static IEnumerable<TError> YieldErrors<T, TError>(IResult<T, TError> result) {
-            if (result.Either.HasError)
-                yield return result.Either.Error;
-        }
-
-        private static IEnumerable<T> YieldValues<T, TError>(IResult<T, TError> result) {
-            if (result.Either.HasValue)
-                yield return result.Either.Value;
-        }
     }
 }
