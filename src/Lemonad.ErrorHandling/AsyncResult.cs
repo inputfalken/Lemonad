@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Internal;
@@ -102,7 +103,6 @@ namespace Lemonad.ErrorHandling {
             Func<T, TError> errorSelector) =>
             AsyncResult<T, TError>.Factory(source.Map(x => x.ToResult(predicate, errorSelector).Either));
 
-
         [Pure]
         public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T?> source,
             Func<TError> errorSelector)
@@ -138,5 +138,10 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static IAsyncResult<T, TError> Value<T, TError>(T element) =>
             AsyncResult<T, TError>.ValueFactory(in element);
+
+        public static IAsyncResult<T, IReadOnlyList<TError>> Multiple<T, TError>(this IAsyncResult<T, TError> source,
+            params Func<IAsyncResult<T, TError>, IAsyncResult<T, TError>>[] validations) =>
+            AsyncResult<T, IReadOnlyList<TError>>.Factory(EitherMethods.MultipleAsync(source.Either,
+                validations.Select(x => x.Compose(y => y.Either)(source)).ToArray()));
     }
 }

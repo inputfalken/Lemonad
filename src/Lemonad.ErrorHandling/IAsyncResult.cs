@@ -89,9 +89,6 @@ namespace Lemonad.ErrorHandling {
         /// <inheritdoc cref="Result{T,TError}.Match" />
         Task Match(Action<T> action, Action<TError> errorAction);
 
-        IAsyncResult<T, IReadOnlyList<TError>> Multiple(
-            params Func<IAsyncResult<T, TError>, IAsyncResult<T, TError>>[] validations);
-
         /// <inheritdoc cref="Result{T,TError}.SafeCast{TResult}" />
         IAsyncResult<TResult, TError> SafeCast<TResult>(Func<T, TError> errorSelector);
 
