@@ -24,7 +24,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Convert_Maybe_Int_Whose_Property_HasValue_Is_True__Expects_Result_With_Ok_Value() {
-            var result = 2.ToMaybe().ToResult(() => "ERROR");
+            var result = ErrorHandling.Maybe.Value(2).ToResult(() => "ERROR");
 
             Assert.True(result.Either.HasValue, "Result should have value.");
             Assert.False(result.Either.HasError, "Result should not have a error value.");
@@ -37,7 +37,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Convert_Maybe_Int_Whose_Property_HasValue_Is_True_Pass_Null_error_Selector__Expects_No_ArgumentNullException_Thrown() {
             var exception = Record.Exception(() => {
                 Func<int> errorSelector = null;
-                var result = 2.ToMaybe().ToResult(errorSelector);
+                var result = ErrorHandling.Maybe.Value(2).ToResult(errorSelector);
                 Assert.True(result.Either.HasValue, "Result should have value.");
                 Assert.Equal(2, result.Either.Value);
             });
@@ -56,7 +56,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Convert_Maybe_String_Whose_Property_HasValue_Is_True__Expects_Result_With_Ok_Value() {
-            var result = 2.ToMaybe().ToResult(() => "ERROR");
+            var result = ErrorHandling.Maybe.Value(2).ToResult(() => "ERROR");
 
             Assert.True(result.Either.HasValue, "Result should have value.");
             Assert.False(result.Either.HasError, "Result should not have a error value.");
@@ -78,7 +78,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         [Fact]
         public void Convert_Maybe_String_With_Null_Whose_Property_HasValue_Is_True__Expects_Result_With_Ok_value() {
             string str = null;
-            var result = 2.ToMaybe().ToResult(() => str);
+            var result = ErrorHandling.Maybe.Value(2).ToResult(() => str);
             Assert.True(result.Either.HasValue, "Result should have value.");
             Assert.False(result.Either.HasError, "Result should not have a error value.");
             Assert.Equal(2, result.Either.Value);

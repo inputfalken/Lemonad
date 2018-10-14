@@ -5,8 +5,8 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     public class ComparisonTests {
         [Fact]
         public void Comparing_Some_With_Not_Same_Int_Value__Expects_Equality_To_be_False() {
-            var intFirst = 2.ToMaybe();
-            var intSecond = 3.ToMaybe();
+            var intFirst = ErrorHandling.Maybe.Value(2);
+            var intSecond = ErrorHandling.Maybe.Value(3);
 
             Assert.NotEqual(intFirst, intSecond);
             Assert.Equal(2, intFirst.Value);
@@ -15,8 +15,8 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Comparing_Some_With_Not_Same_String_Value__Expects_Equality_To_be_False() {
-            var stringFirst = "p".ToMaybe();
-            var stringSecond = "f".ToMaybe();
+            var stringFirst = ErrorHandling.Maybe.Value("p");
+            var stringSecond = ErrorHandling.Maybe.Value("f");
 
             Assert.NotEqual(stringFirst, stringSecond);
             Assert.Equal("p", stringFirst.Value);
@@ -25,8 +25,8 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Comparing_Some_With_Same_Int_Value__Expects_Equality_To_be_False() {
-            var intFirst = 3.ToMaybe();
-            var intSecond = 3.ToMaybe();
+            var intFirst = ErrorHandling.Maybe.Value(3);
+            var intSecond = ErrorHandling.Maybe.Value(3);
 
             Assert.Equal(intFirst, intSecond);
             Assert.Equal(3, intFirst.Value);
@@ -35,8 +35,8 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Comparing_Some_With_Same_String_Value__Expects_Equality_To_be_True() {
-            var stringFirst = "f".ToMaybe();
-            var stringSecond = "f".ToMaybe();
+            var stringFirst = ErrorHandling.Maybe.Value("f");
+            var stringSecond = ErrorHandling.Maybe.Value("f");
 
             Assert.Equal(stringFirst, stringSecond);
             Assert.Equal("f", stringFirst.Value);
@@ -45,12 +45,12 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Noones_Are_Expected_To_Be_Equal() {
-            var first = ErrorHandling.Maybe.ToMaybeNone<string>();
-            var second = ErrorHandling.Maybe.ToMaybeNone<string>();
+            var first = ErrorHandling.Maybe.None<string>();
+            var second = ErrorHandling.Maybe.None<string>();
 
             Assert.Equal(first, second);
-            Assert.Equal(first, Maybe<string>.None);
-            Assert.Equal(second, Maybe<string>.None);
+            Assert.Equal(first, ErrorHandling.Maybe.None<string>());
+            Assert.Equal(second, ErrorHandling.Maybe.None<string>());
         }
     }
 }

@@ -39,14 +39,14 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Some_Maybe_Char_With__Expects_String_To_have__Doble_Quotes() {
-            var maybe = 'x'.ToMaybe();
+            var maybe = ErrorHandling.Maybe.Value('x');
             Assert.True(maybe.HasValue, "Should have value.");
             Assert.Equal("Some ==> Maybe<Char>(\'x\')", maybe.ToString());
         }
 
         [Fact]
         public void Some_Maybe_Integer_With__Expects_Integer_Inside_Parantheses() {
-            var maybe = 2.ToMaybe();
+            var maybe = ErrorHandling.Maybe.Value(2);
             Assert.True(maybe.HasValue, "Should have value.");
             Assert.Equal($"Some ==> Maybe<Int32>({2})", maybe.ToString());
         }
@@ -61,7 +61,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
 
         [Fact]
         public void Some_Maybe_String_With_Content__Expects_String_To_have__Doble_Quotes() {
-            var maybe = "hello".ToMaybe();
+            var maybe = ErrorHandling.Maybe.Value("hello");
             Assert.True(maybe.HasValue, "Should have value.");
             Assert.Equal("Some ==> Maybe<String>(\"hello\")", maybe.ToString());
         }
@@ -70,7 +70,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void Some_Maybe_String_With_Null_String__Expects_String_To_Be_Empty() {
             Assert.Throws<ArgumentNullException>(AssertionUtilities.MaybeValueName, () => {
                 string hello = null;
-                var maybe = hello.ToMaybe();
+                var maybe = ErrorHandling.Maybe.Value(hello);
                 Assert.True(maybe.HasValue, "Should have value.");
                 Assert.Equal("Some ==> Maybe<String>(null)", maybe.ToString());
             });
@@ -79,7 +79,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         [Fact]
         public void Some_Maybe_String_Without_Content__Expects_String_To_have__Doble_Quotes() {
             var hello = string.Empty;
-            var maybe = hello.ToMaybe();
+            var maybe = ErrorHandling.Maybe.Value(hello);
             Assert.True(maybe.HasValue, "Should have value.");
             Assert.Equal("Some ==> Maybe<String>(\"\")", maybe.ToString());
         }

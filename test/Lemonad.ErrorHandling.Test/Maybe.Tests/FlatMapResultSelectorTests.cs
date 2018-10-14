@@ -71,7 +71,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void Passing_Both_Null_ResultSelector_Function_And_SelectorFunction__Throws_ArgumentNullException() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, string, string> function = null;
-                "foo".ToMaybe().FlatMap(s => s.ToMaybe(), function);
+                ErrorHandling.Maybe.Value("foo").FlatMap(ErrorHandling.Maybe.Value, function);
             });
         }
 
@@ -79,7 +79,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void Passing_Null_ResultSelector_Function__Throws_ArgumentNullException() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, string, string> function = null;
-                "foo".ToMaybe().FlatMap(s => s.ToMaybe(), function);
+                ErrorHandling.Maybe.Value("foo").FlatMap(ErrorHandling.Maybe.Value, function);
             });
         }
 
@@ -87,7 +87,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void Passing_Null_Selector_Function__Throws_ArgumentNullException() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, IMaybe<bool>> function = null;
-                "foo".ToMaybe().FlatMap(function, (s, b) => s);
+                ErrorHandling.Maybe.Value("foo").FlatMap(function, (s, b) => s);
             });
         }
 

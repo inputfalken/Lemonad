@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Lemonad.ErrorHandling.EnumerableExtensions;
 using Lemonad.ErrorHandling.Internal;
 using Xunit;
 
@@ -7,11 +8,8 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     public class MaybeEnumerableExtensionTests {
         [Fact]
         public void Getting_ValueIEnumerable_Of_Maybes() {
-            IMaybe<int> Divide(int left, int right) {
-                if (right != 0)
-                    return (left / right).ToMaybe();
-                return Maybe<int>.None;
-            }
+            IMaybe<int> Divide(int left, int right) =>
+                right != 0 ? ErrorHandling.Maybe.Value((left / right)) : ErrorHandling.Maybe.None<int>();
 
             var maybes = new List<IMaybe<int>> {
                 Divide(4, 2),

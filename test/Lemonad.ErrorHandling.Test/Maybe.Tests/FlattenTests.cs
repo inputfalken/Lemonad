@@ -22,7 +22,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Flattening_From_String_Maybe_With_No_Value_To_Maybe_Int_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
             var lengthMaybe = input.ToMaybeNone();
-            var maybe2 = 2.ToMaybe();
+            var maybe2 = ErrorHandling.Maybe.Value(2);
 
             var flatMappedMaybe = lengthMaybe.Flatten(x => maybe2);
 
@@ -52,7 +52,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
             Flattening_From_String_Maybe_With_Value_To_Maybe_Int_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
             var lengthMaybe = input.ToMaybe(s => s.Length > 4);
-            var maybe2 = 2.ToMaybe();
+            var maybe2 = ErrorHandling.Maybe.Value(2);
 
             var flatMappedMaybe = lengthMaybe.Flatten(x => maybe2);
 

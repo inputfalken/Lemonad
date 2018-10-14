@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Lemonad.ErrorHandling.EnumerableExtensions;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
@@ -33,7 +34,7 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         public void Predicate_Overload__Passing_Null_Predicate__Throws_ArgumentNullException() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, IEnumerable<string>> func = null;
-                "foo".ToMaybe().ToEnumerable().SelectMany(func);
+                ErrorHandling.Maybe.Value("foo").ToEnumerable().SelectMany(func);
             });
         }
     }

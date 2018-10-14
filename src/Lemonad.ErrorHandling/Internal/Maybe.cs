@@ -172,14 +172,11 @@ namespace Lemonad.ErrorHandling.Internal {
                 throw new ArgumentNullException(nameof(flatMapSelector));
             if (resultSelector == null)
                 throw new ArgumentNullException(nameof(resultSelector));
-            if (HasValue) {
-                var mapSelector = flatMapSelector(Value);
-                if (mapSelector.HasValue) {
-                    return new Maybe<TResult>(resultSelector(Value, mapSelector.Value), true);
-                }
-            }
-
-            return Maybe<TResult>.None;
+            if (!HasValue) return Maybe<TResult>.None;
+            var mapSelector = flatMapSelector(Value);
+            return mapSelector.HasValue
+                ? Maybe<TResult>.Create(resultSelector(Value, mapSelector.Value))
+                : Maybe<TResult>.None;
         }
 
         /// <summary>
@@ -197,7 +194,7 @@ namespace Lemonad.ErrorHandling.Internal {
                 throw new ArgumentNullException(nameof(flatSelector));
             if (!HasValue) return Maybe<TResult>.None;
             var selector = flatSelector(Value);
-            return selector.HasValue ? new Maybe<TResult>(selector.Value, true) : Maybe<TResult>.None;
+            return selector.HasValue ? Maybe<TResult>.Create(selector.Value) : Maybe<TResult>.None;
         }
 
         /// <summary>
@@ -253,7 +250,7 @@ namespace Lemonad.ErrorHandling.Internal {
 
             var mapSelector = flatMapSelector(Value);
             return mapSelector.HasValue
-                ? new Maybe<TResult>(resultSelector(Value, mapSelector.Value), true)
+                ? Maybe<TResult>.Create(resultSelector(Value, mapSelector.Value))
                 : Maybe<TResult>.None;
         }
     }
