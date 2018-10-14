@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Internal;
 using Lemonad.ErrorHandling.Internal.Either;
 
@@ -224,5 +225,15 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         [Pure]
         public static IResult<T, TError> Value<T, TError>(T element) => Result<T, TError>.ValueFactory(in element);
+        
+        /// Should this stay as extensions or be a part of <see cref="IResult{T,TError}"/>
+        /// Pros: <typeparamref name="T"/> and <typeparamref name="TError"/> does not need to be specified in the method signature when it's an interface member.
+        /// Cons: The interface gets mixed with IResult & IAsyncResult
+        /// Maybe an interface like the one below would make sense.
+        // interface IResultAsyncBridge<out T, TError> {
+        //    IAsyncResult<TResult, TError> MapAsync<TResult>(Func<T, Task<TResult>> selector);
+        // }
+        public static IAsyncResult<TResult, TError> MapAsync<T, TError, TResult>(this IResult<T, TError> source,
+            Func<T, Task<TResult>> selector) => source.ToAsyncResult().Map(selector);
     }
 }
