@@ -33,18 +33,6 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         }
 
         [Fact]
-        public void
-            Convert_Maybe_Int_Whose_Property_HasValue_Is_True_Pass_Null_error_Selector__Expects_No_ArgumentNullException_Thrown() {
-            var exception = Record.Exception(() => {
-                Func<int> errorSelector = null;
-                var result = ErrorHandling.Maybe.Value(2).ToResult(errorSelector);
-                Assert.True(result.Either.HasValue, "Result should have value.");
-                Assert.Equal(2, result.Either.Value);
-            });
-            Assert.Null(exception);
-        }
-
-        [Fact]
         public void Convert_Maybe_String_Whose_Property_HasValue_Is_False__Expects_Result_With_error_Value() {
             var result = 2.ToMaybeNone().ToResult(() => "ERROR");
 
