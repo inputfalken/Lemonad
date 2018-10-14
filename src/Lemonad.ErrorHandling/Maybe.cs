@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using Lemonad.ErrorHandling.Internal;
 
@@ -15,6 +16,15 @@ namespace Lemonad.ErrorHandling {
         /// </returns>
         [Pure]
         public static IMaybe<TSource> None<TSource>() => Maybe<TSource>.None;
+
+        /// <summary>
+        ///     Treat <typeparamref name="TSource" /> as enumerable with 0-1 elements in.
+        ///     This is handy when combining <see cref="Maybe{T}" /> with LINQ's API.
+        /// </summary>
+        public static IEnumerable<TSource> ToEnumerable<TSource>(this IMaybe<TSource> source) {
+            if (source.HasValue)
+                yield return source.Value;
+        }
 
         /// <summary>
         ///     Works like <see cref="Value{TSource}(TSource)" /> but with an <paramref name="predicate" /> to test the element.

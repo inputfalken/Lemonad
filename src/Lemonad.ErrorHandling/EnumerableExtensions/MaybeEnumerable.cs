@@ -84,15 +84,6 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
             Func<TResult> selector) => source.Where(x => x.HasValue == false).Select(_ => selector());
 
         /// <summary>
-        ///     Treat <typeparamref name="TSource" /> as enumerable with 0-1 elements in.
-        ///     This is handy when combining <see cref="Maybe{T}" /> with LINQ's API.
-        /// </summary>
-        public static IEnumerable<TSource> ToEnumerable<TSource>(this IMaybe<TSource> source) {
-            if (source.HasValue)
-                yield return source.Value;
-        }
-
-        /// <summary>
         ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="Maybe{T}" /> into an <see cref="IEnumerable{T}" /> with the
         ///     value of the <see cref="Maybe{T}" />.
         /// </summary>
