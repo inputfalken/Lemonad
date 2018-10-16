@@ -17,7 +17,7 @@ namespace Lemonad.ErrorHandling.Test.EnumerableTests {
 
         [Fact]
         public void Predicate_Truthy__Expects_Value() {
-            var result = Enumerable.Range(10, 2).FirstOrError(i => i == 11, () => "The integer 2 does not exist.");
+            var result = Enumerable.Range(10, 2).FirstOrError(i => i == 11, () => "The integer 11 does not exist.");
 
             Assert.False(result.Either.HasError);
             Assert.True(result.Either.HasValue);
