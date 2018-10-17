@@ -1,10 +1,36 @@
-using System.Collections;
 using System.Linq;
 using Lemonad.ErrorHandling.EnumerableExtensions;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.EnumerableTests {
     public class FirstOrErrorTests {
+        [Fact]
+        public void Predicate_Truthy_Collection_With_Same_Elements__Expects_Value() {
+            var result = Enumerable.Repeat(11, 10).FirstOrError(i => i == 11, () => "ERROR");
+            Assert.False(result.Either.HasError);
+            Assert.True(result.Either.HasValue);
+            Assert.Equal(default, result.Either.Error);
+            Assert.Equal(11, result.Either.Value);
+        }
+
+        [Fact]
+        public void Predicate_Falsy_Collection_With_Same_Elements__Expects_Error() {
+            var result = Enumerable.Repeat(11, 10).FirstOrError(i => i == 10, () => "ERROR");
+            Assert.True(result.Either.HasError);
+            Assert.False(result.Either.HasValue);
+            Assert.Equal("ERROR", result.Either.Error);
+            Assert.Equal(default, result.Either.Value);
+        }
+
+        [Fact]
+        public void No_Predicate_Collection_With_Same_Elements__Expects_Error() {
+            var result = Enumerable.Repeat(11, 10).FirstOrError(() => "ERROR");
+            Assert.False(result.Either.HasError);
+            Assert.True(result.Either.HasValue);
+            Assert.Equal(default, result.Either.Error);
+            Assert.Equal(11, result.Either.Value);
+        }
+
         [Fact]
         public void Predicate_Falsy__Expects_Error() {
             var result = Enumerable.Range(10, 2).FirstOrError(i => i == 2, () => "The integer 2 does not exist.");
