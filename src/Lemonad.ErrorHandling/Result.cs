@@ -225,15 +225,20 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         [Pure]
         public static IResult<T, TError> Value<T, TError>(T element) => Result<T, TError>.ValueFactory(in element);
-        
-        /// Should this stay as extensions or be a part of <see cref="IResult{T,TError}"/>
-        /// Pros: <typeparamref name="T"/> and <typeparamref name="TError"/> does not need to be specified in the method signature when it's an interface member.
-        /// Cons: The interface gets mixed with IResult & IAsyncResult
-        /// Maybe an interface like the one below would make sense.
-        // interface IResultAsyncBridge<out T, TError> {
-        //    IAsyncResult<TResult, TError> MapAsync<TResult>(Func<T, Task<TResult>> selector);
-        // }
+
         public static IAsyncResult<TResult, TError> MapAsync<T, TError, TResult>(this IResult<T, TError> source,
             Func<T, Task<TResult>> selector) => source.ToAsyncResult().Map(selector);
+
+        public static IAsyncResult<T, TError> FilterAsync<T, TError>(this IResult<T, TError> source,
+            Func<T, Task<bool>> predicate, Func<T, TError> errorSelector) =>
+            source.ToAsyncResult().Filter(predicate, errorSelector);
+
+        public static IAsyncResult<TResult, TError> FlatMapAsync<T, TResult, TError>(this IResult<T, TError> source,
+            Func<T, IAsyncResult<TResult, TError>> flatSelector) => source.ToAsyncResult().FlatMap(flatSelector);
+
+        public static IAsyncResult<TResult, TError> FlatMapAsync<T, TSelector, TResult, TError>(
+            this IResult<T, TError> source,
+            Func<T, IAsyncResult<TSelector, TError>> flatSelector, Func<T, TSelector, TResult> resultSelector) =>
+            source.ToAsyncResult().FlatMap(flatSelector, resultSelector);
     }
 }
