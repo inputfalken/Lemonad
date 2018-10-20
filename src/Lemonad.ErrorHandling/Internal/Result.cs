@@ -11,9 +11,6 @@ namespace Lemonad.ErrorHandling.Internal {
         internal static IResult<T, TError> ErrorFactory(in TError error) =>
             new Result<T, TError>(default, in error, true, false);
 
-        /// <summary>
-        ///     Gets the <see cref="IEither{T,TError}" /> from the <see cref="Result{T,TError}" /> instance.
-        /// </summary>
         public IEither<T, TError> Either { get; }
 
         private Result(in T value, in TError error, bool hasError, bool hasValue) =>
@@ -22,111 +19,25 @@ namespace Lemonad.ErrorHandling.Internal {
         private Result(IEither<T, TError> either) =>
             Either = new NonNullableEither<T, TError>(either.Value, either.Error, either.HasError, either.HasValue);
 
-        /// <inheritdoc />
         public override string ToString() =>
             $"{(Either.HasValue ? "Ok" : "Error")} ==> {typeof(Result<T, TError>).ToHumanString()}{StringFunctions.PrettyTypeString(Either.HasValue ? (object) Either.Value : Either.Error)}";
 
-        /// <summary>
-        ///     Evaluates the <see cref="Result{T,TError}" />.
-        /// </summary>
-        /// <param name="selector">
-        ///     Is executed when the <see cref="Result{T,TError}" /> contains <see cref="T" />.
-        /// </param>
-        /// <param name="errorSelector">
-        ///     Is executed when the <see cref="Result{T,TError}" /> contains <see cref="TError" />.
-        /// </param>
-        /// <typeparam name="TResult">
-        ///     The return type of <paramref name="selector" /> and <paramref name="errorSelector" />
-        /// </typeparam>
-        /// <returns>
-        ///     Either <typeparamref name="T" /> or <typeparamref name="TError" /> as <typeparamref name="TResult" />.
-        /// </returns>
         [Pure]
         public TResult Match<TResult>(Func<T, TResult> selector, Func<TError, TResult> errorSelector) =>
             EitherMethods.Match(Either, selector, errorSelector);
 
-        /// <summary>
-        ///     Evaluates the <see cref="Result{T,TError}" />.
-        /// </summary>
-        /// <param name="action">
-        ///     Is executed when the <see cref="Result{T,TError}" /> contains <see cref="T" />.
-        /// </param>
-        /// <param name="errorAction">
-        ///     Is executed when the <see cref="Result{T,TError}" /> contains <see cref="TError" />.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        ///     When either <paramref name="action" /> or <paramref name="errorAction" /> and needs to be executed.
-        /// </exception>
         public void Match(Action<T> action, Action<TError> errorAction) =>
             EitherMethods.Match(Either, action, errorAction);
 
-        /// <summary>
-        ///     Executes the <paramref name="action" /> if <typeparamref name="T" /> is the active type.
-        /// </summary>
-        /// <param name="action">
-        /// </param>
-        /// <returns>
-        ///     <see cref="Result{T,TError}" /> with side effects.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        ///     When <paramref name="action" /> is null and needs to be executed.
-        /// </exception>
-        /// <returns>
-        ///     A <see cref="Result{T,TError}" /> whom may have invoked the <paramref name="action" /> if the current
-        ///     <see cref="Result{T,TError}" /> is in a valid state.
-        /// </returns>
         public IResult<T, TError> DoWith(Action<T> action) =>
             new Result<T, TError>(EitherMethods.DoWith(Either, action));
 
-        /// <summary>
-        ///     Executes  <paramref name="action" />.
-        /// </summary>
-        /// <param name="action">
-        ///     Is executed no matter what state <see cref="Result{T,TError}" /> is in.
-        /// </param>
-        /// <returns>
-        ///     <see cref="Result{T,TError}" /> with side effects.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        ///     When <paramref name="action" /> is null.
-        /// </exception>
-        /// <returns>
-        ///     A <see cref="Result{T,TError}" /> who have invoked <paramref name="action" /> no matter what state the current
-        ///     <see cref="Result{T,TError}" /> is in.
-        /// </returns>
         public IResult<T, TError> Do(Action action) =>
             new Result<T, TError>(EitherMethods.Do(Either, action));
 
-        /// <summary>
-        ///     Executes the <paramref name="action" /> if <typeparamref name="TError" /> is the active type.
-        /// </summary>
-        /// <param name="action">
-        /// </param>
-        /// <returns>
-        ///     <see cref="Result{T,TError}" /> with side effects.
-        /// </returns>
-        /// <returns>
-        ///     A <see cref="Result{T,TError}" /> whom may have invoked the <paramref name="action" /> if the current
-        ///     <see cref="Result{T,TError}" /> is in a an invalid state.
-        /// </returns>
         public IResult<T, TError> DoWithError(
             Action<TError> action) => new Result<T, TError>(EitherMethods.DoWithError(Either, action));
 
-        /// <summary>
-        ///     Filters the <typeparamref name="T" /> if <typeparamref name="T" /> is the active type.
-        /// </summary>
-        /// <param name="predicate">
-        ///     A function to test <typeparamref name="T" />.
-        /// </param>
-        /// <param name="errorSelector">
-        ///     Is executed when the <paramref name="predicate" /> is false. The in parameter is a <see cref="Maybe{T}" /> since
-        ///     the <typeparamref name="T" /> could be unsafe in this context.
-        /// </param>
-        /// <returns>
-        ///     A <see cref="Result{T,TError}" /> whose <typeparamref name="T" /> has been tested by the
-        ///     <paramref name="predicate" />
-        ///     if the current <see cref="Result{T,TError}" /> is in valid state.
-        /// </returns>
         [Pure]
         public IResult<T, TError> Filter(Func<T, bool> predicate, Func<T, TError> errorSelector) =>
             new Result<T, TError>(EitherMethods.Filter(Either, predicate, errorSelector));
@@ -136,149 +47,37 @@ namespace Lemonad.ErrorHandling.Internal {
             Func<T, bool> predicate, Func<T, TError> errorSelector) =>
             new Result<T, TError>(EitherMethods.IsErrorWhen(Either, predicate, errorSelector));
 
-        /// <summary>
-        ///     Maps both <typeparamref name="T" /> and <typeparamref name="TError" /> but only one is executed.
-        /// </summary>
-        /// <param name="selector">
-        ///     Is executed if <typeparamref name="T" /> is the active type.
-        /// </param>
-        /// <param name="errorSelector">
-        ///     Is executed if <typeparamref name="TError" /> is the active type.
-        /// </param>
-        /// <typeparam name="TErrorResult">
-        ///     The result from the function <paramref name="errorSelector" />.
-        /// </typeparam>
-        /// <typeparam name="TResult">
-        ///     The result from the function <paramref name="selector" />.
-        /// </typeparam>
-        /// <returns>
-        ///     A mapped <see cref="Result{T,TError}" />.
-        /// </returns>
         [Pure]
         public IResult<TResult, TErrorResult> FullMap<TResult, TErrorResult>(
             Func<T, TResult> selector,
             Func<TError, TErrorResult> errorSelector
         ) => new Result<TResult, TErrorResult>(EitherMethods.FullMap(Either, selector, errorSelector));
 
-        /// <summary>
-        ///     Maps <typeparamref name="T" />.
-        /// </summary>
-        /// <param name="selector">
-        ///     Is executed if <typeparamref name="T" /> is the active type.
-        /// </param>
-        /// <typeparam name="TResult">
-        ///     The result from the function <paramref name="selector" />.
-        /// </typeparam>
-        /// <returns>
-        ///     A <see cref="Result{T,TError}" />  with its <typeparamref name="T" /> mapped.
-        /// </returns>
         [Pure]
         public IResult<TResult, TError> Map<TResult>(Func<T, TResult> selector) =>
             new Result<TResult, TError>(EitherMethods.Map(Either, selector));
 
-        /// <summary>
-        ///     Maps <typeparamref name="TError" />.
-        /// </summary>
-        /// <param name="selector">
-        ///     Is executed if <typeparamref name="TError" /> is the active type.
-        /// </param>
-        /// <typeparam name="TErrorResult">
-        ///     The result from the function <paramref name="selector" />.
-        /// </typeparam>
-        /// <returns>
-        ///     A <see cref="Result{T,TError}" />  with its <typeparamref name="TError" /> mapped.
-        /// </returns>
         [Pure]
         public IResult<T, TErrorResult> MapError<TErrorResult>(Func<TError, TErrorResult> selector) =>
             new Result<T, TErrorResult>(EitherMethods.MapError(Either, selector));
 
-        /// <summary>
-        ///     Flatten another <see cref="Result{T,TError}" /> who shares the same <typeparamref name="TError" />.
-        ///     And maps <typeparamref name="T" /> to <typeparamref name="TResult" />.
-        /// </summary>
-        /// <param name="flatSelector">
-        ///     A function who expects a <see cref="Result{T,TError}" /> as an return type.
-        /// </param>
-        /// <typeparam name="TResult">
-        ///     The return type of the function <paramref name="flatSelector" />.
-        /// </typeparam>
         [Pure]
         public IResult<TResult, TError> FlatMap<TResult>(
-            Func<T, IResult<TResult, TError>> flatSelector) {
-            return new Result<TResult, TError>(
-                EitherMethods.FlatMap(Either, flatSelector.Compose(x => x.Either)));
-        }
+            Func<T, IResult<TResult, TError>> flatSelector) => new Result<TResult, TError>(
+            EitherMethods.FlatMap(Either, flatSelector.Compose(x => x.Either)));
 
-        /// <summary>
-        ///     Flatten another <see cref="Result{T,TError}" /> who shares the same <typeparamref name="TError" />.
-        ///     And maps <typeparamref name="T" /> together with <typeparamref name="TSelector" /> to
-        ///     <typeparamref name="TResult" />.
-        /// </summary>
-        /// <param name="flatSelector">
-        ///     A function who expects a <see cref="Result{T,TError}" /> as an return type.
-        /// </param>
-        /// <param name="resultSelector">
-        ///     A function whose in-parameters are <typeparamref name="T" /> and  <typeparamref name="TSelector" />  which can
-        ///     return any type.
-        /// </param>
-        /// <typeparam name="TSelector">
-        ///     The value retrieved from the the <see cref="Result{T,TError}" /> given by the <paramref name="flatSelector" />.
-        /// </typeparam>
-        /// <typeparam name="TResult">
-        ///     The return type of the function  <paramref name="resultSelector" />.
-        /// </typeparam>
         [Pure]
         public IResult<TResult, TError> FlatMap<TSelector, TResult>(
             Func<T, IResult<TSelector, TError>> flatSelector,
             Func<T, TSelector, TResult> resultSelector) => new Result<TResult, TError>(
             EitherMethods.FlatMap(Either, flatSelector.Compose(x => x.Either), resultSelector));
 
-        /// <summary>
-        ///     Flatmaps another <see cref="Result{T,TError}" /> but the <typeparamref name="TError" /> remains as the same type.
-        /// </summary>
-        /// <param name="flatMapSelector">
-        ///     A function who expects a <see cref="Result{T,TError}" /> as its return type.
-        /// </param>
-        /// <param name="errorSelector">
-        ///     A function which maps <typeparamref name="TErrorResult" /> to <typeparamref name="TError" />.
-        /// </param>
-        /// <typeparam name="TErrorResult">
-        ///     The error type of the <see cref="Result{T,TError}" /> returned by the <paramref name="flatMapSelector" />.
-        /// </typeparam>
-        /// <typeparam name="TResult">
-        ///     The value type of the <see cref="Result{T,TError}" /> returned by the <paramref name="flatMapSelector" />.
-        /// </typeparam>
-        /// <exception cref="ArgumentNullException">
-        ///     When any of the function parameters are null and needs to be executed.
-        /// </exception>
         [Pure]
         public IResult<TResult, TError> FlatMap<TResult, TErrorResult>(
             Func<T, IResult<TResult, TErrorResult>> flatMapSelector, Func<TErrorResult, TError> errorSelector) =>
             new Result<TResult, TError>(EitherMethods.FlatMap(Either, flatMapSelector.Compose(x => x.Either),
                 errorSelector));
 
-        /// <summary>
-        ///     Flatmaps another <see cref="Result{T,TError}" /> but the <typeparamref name="TError" /> remains as the same type.
-        /// </summary>
-        /// <param name="flatMapSelector">
-        ///     A function who expects a <see cref="Result{T,TError}" /> as its return type.
-        /// </param>
-        /// <param name="resultSelector">
-        ///     A function whose in-parameters are <typeparamref name="T" /> and <typeparamref name="TFlatMap" /> which can return
-        ///     any type.
-        /// </param>
-        /// <param name="errorSelector">
-        ///     A function which maps <typeparamref name="TErrorResult" />. to <typeparamref name="TError" />.
-        /// </param>
-        /// <typeparam name="TErrorResult">
-        ///     The error type of the <see cref="Result{T,TError}" /> returned by the <paramref name="flatMapSelector" /> function.
-        /// </typeparam>
-        /// <typeparam name="TFlatMap">
-        ///     The value type of the <see cref="Result{T,TError}" /> returned by the <paramref name="flatMapSelector" />.
-        /// </typeparam>
-        /// <typeparam name="TResult">
-        ///     The type returned by the function <paramref name="resultSelector" />.
-        /// </typeparam>
         [Pure]
         public IResult<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
             Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
@@ -286,210 +85,56 @@ namespace Lemonad.ErrorHandling.Internal {
             EitherMethods.FlatMap(Either, flatMapSelector.Compose(x => x.Either), resultSelector,
                 errorSelector));
 
-        /// <summary>
-        ///     Flatten another <see cref="Result{T,TError}" />.
-        /// </summary>
-        /// <remarks>
-        ///     The <see cref="Result{T,TError}" /> returned is not the the result from <paramref name="selector" />.
-        /// </remarks>
-        /// <param name="selector">
-        ///     A function who expects a <see cref="Result{T,TError}" /> as an return type.
-        /// </param>
-        /// <param name="errorSelector">
-        ///     Maps the error to from <typeparamref name="TErrorResult" /> to <typeparamref name="TError" />.
-        /// </param>
-        /// <typeparam name="TResult">
-        ///     The value of the <see cref="Result{T,TError}" /> returned by the function <paramref name="selector" />.
-        /// </typeparam>
-        /// <typeparam name="TErrorResult">
-        ///     The error of the <see cref="Result{T,TError}" /> returned by the function <paramref name="selector" />.
-        /// </typeparam>
-        /// <returns>
-        ///     The same <see cref="Result{T,TError}" /> but it's state is dependent on the <see cref="Result{T,TError}" />
-        ///     returned by the <paramref name="selector" />.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        ///     When any of the function parameters are null and needs to be executed.
-        /// </exception>
         [Pure]
         public IResult<T, TError> Flatten<TResult, TErrorResult>(
             Func<T, IResult<TResult, TErrorResult>> selector, Func<TErrorResult, TError> errorSelector) =>
             new Result<T, TError>(EitherMethods.Flatten(Either, selector.Compose(x => x.Either),
                 errorSelector));
 
-        /// <summary>
-        ///     Flatten another <see cref="Result{T,TError}" />  who shares the same <typeparamref name="TError" />.
-        /// </summary>
-        /// <remarks>
-        ///     The <see cref="Result{T,TError}" /> returned is not the the result from <paramref name="selector" />.
-        /// </remarks>
-        /// <param name="selector"></param>
-        /// <typeparam name="TResult"></typeparam>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
         [Pure]
         public IResult<T, TError> Flatten<TResult>(Func<T, IResult<TResult, TError>> selector) =>
             new Result<T, TError>(EitherMethods.Flatten(Either, selector.Compose(x => x.Either)));
 
-        /// <summary>
-        ///     Fully flatmaps another <see cref="Result{T,TError}" />.
-        /// </summary>
-        /// <param name="flatMapSelector">
-        ///     A function who expects a <see cref="Result{T,TError}" /> as its return type.
-        /// </param>
-        /// <param name="errorSelector">
-        ///     A function which maps <typeparamref name="TError" /> to <typeparamref name="TErrorResult" />.
-        /// </param>
-        /// <typeparam name="TErrorResult">
-        ///     The error type of the <see cref="Result{T,TError}" /> returned by the <paramref name="flatMapSelector" />.
-        /// </typeparam>
-        /// <typeparam name="TResult">
-        ///     The value type of the <see cref="Result{T,TError}" /> returned by the <paramref name="flatMapSelector" />.
-        /// </typeparam>
-        /// <exception cref="ArgumentNullException">
-        ///     When any of the function parameters are null and needs to be executed.
-        /// </exception>
         [Pure]
         public IResult<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
             Func<T, IResult<TResult, TErrorResult>> flatMapSelector, Func<TError, TErrorResult> errorSelector) =>
             new Result<TResult, TErrorResult>(EitherMethods.FullFlatMap(Either,
                 flatMapSelector.Compose(x => x.Either), errorSelector));
 
-        /// <summary>
-        ///     Casts <typeparamref name="TError" /> into <typeparamref name="TResult" />.
-        /// </summary>
-        /// <typeparam name="TResult">
-        ///     The type to <typeparamref name="TError" /> cast to.
-        /// </typeparam>
-        /// <returns>
-        ///     A <see cref="Result{T,TError}" /> whose <typeparamref name="TError" /> has been cast to
-        ///     <typeparamref name="TResult" />.
-        /// </returns>
         [Pure]
         public IResult<T, TResult> CastError<TResult>() =>
             new Result<T, TResult>(EitherMethods.CastError<T, TResult, TError>(Either));
 
-        /// <summary>
-        ///     Casts both <typeparamref name="T" /> into <typeparamref name="TResult" /> and <typeparamref name="TError" /> into
-        ///     <typeparamref name="TErrorResult" />
-        /// </summary>
-        /// <typeparam name="TResult">
-        ///     The type to cast <typeparamref name="T" /> into.
-        /// </typeparam>
-        /// <typeparam name="TErrorResult">
-        ///     The type to cast <typeparamref name="TErrorResult" /> into.
-        /// </typeparam>
         [Pure]
         public IResult<TResult, TErrorResult> FullCast<TResult, TErrorResult>() =>
             new Result<TResult, TErrorResult>(EitherMethods.FullCast<T, TResult, TError, TErrorResult>(Either));
 
-        /// <summary>
-        ///     Casts both <typeparamref name="T" /> into <typeparamref name="TResult" /> and <typeparamref name="TError" /> into
-        ///     <typeparamref name="TResult" />
-        /// </summary>
-        /// <typeparam name="TResult">
-        ///     The type to cast to.
-        /// </typeparam>
-        /// <returns></returns>
         [Pure]
         public IResult<TResult, TResult> FullCast<TResult>() =>
             new Result<TResult, TResult>(EitherMethods.FullCast<T, TResult, TError>(Either));
 
-        /// <summary>
-        ///     Casts <typeparamref name="T" /> into <typeparamref name="TResult" />.
-        /// </summary>
-        /// <typeparam name="TResult">
-        ///     The type to cast to.
-        /// </typeparam>
-        /// <returns>
-        ///     A <see cref="Result{T,TError}" /> whose <typeparamref name="T" /> has been cast to
-        ///     <typeparamref name="TResult" />.
-        /// </returns>
         [Pure]
         public IResult<TResult, TError> Cast<TResult>() =>
             new Result<TResult, TError>(EitherMethods.Cast<T, TResult, TError>(Either));
 
-        /// <summary>
-        ///     Attempts to cast <typeparamref name="T" /> into <typeparamref name="TResult" />.
-        /// </summary>
-        /// <param name="errorSelector">
-        ///     Is executed if the cast would fail.
-        /// </param>
-        /// <typeparam name="TResult">
-        ///     The type to cast to.
-        /// </typeparam>
-        /// <returns>
-        ///     A <see cref="Result{T,TError}" /> whose <typeparamref name="T" /> has been cast to
-        ///     <typeparamref name="TResult" />.
-        /// </returns>
         [Pure]
         public IResult<TResult, TError> SafeCast<TResult>(Func<T, TError> errorSelector) =>
             new Result<TResult, TError>(EitherMethods.SafeCast<T, TResult, TError>(Either, errorSelector));
 
-        /// <summary>
-        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
-        /// </summary>
-        /// <typeparam name="TInner"></typeparam>
-        /// <typeparam name="TKey"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="inner">The other <see cref="Result{T,TError}" />.</param>
-        /// <param name="outerKeySelector">The key selector for this <see cref="Result{T,TError}" />.</param>
-        /// <param name="innerKeySelector">The key selector for the other <see cref="Result{T,TError}" />.</param>
-        /// <param name="resultSelector">The selector to determine the returning <see cref="Result{T,TError}" />.</param>
-        /// <param name="errorSelector">Is invoked when keys do not match.</param>
-        /// <returns>
-        ///     A <see cref="Result{T,TError}" />.
-        /// </returns>
+        [Pure]
         public IResult<TResult, TError> Join<TInner, TKey, TResult>(
             IResult<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
             Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector) => new Result<TResult, TError>(
             EitherMethods.Join(Either, inner.Either, outerKeySelector, innerKeySelector, resultSelector,
                 errorSelector));
 
-        /// <summary>
-        ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
-        /// </summary>
-        /// <typeparam name="TInner"></typeparam>
-        /// <typeparam name="TKey"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="inner">The other <see cref="Result{T,TError}" />.</param>
-        /// <param name="outerKeySelector">The key selector for this <see cref="Result{T,TError}" />.</param>
-        /// <param name="innerKeySelector">The key selector for the other <see cref="Result{T,TError}" />.</param>
-        /// <param name="resultSelector">The selector to determine the returning <see cref="Result{T,TError}" />.</param>
-        /// <param name="errorSelector">Is invoked when keys do not match.</param>
-        /// <param name="comparer">The <see cref="IEqualityComparer{T}" /> to be used when matching keys.</param>
-        /// <returns>
-        ///     A <see cref="Result{T,TError}" />.
-        /// </returns>
+        [Pure]
         public IResult<TResult, TError> Join<TInner, TKey, TResult>(
             IResult<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
             Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector, IEqualityComparer<TKey> comparer) =>
             new Result<TResult, TError>(EitherMethods.Join(Either, inner.Either, outerKeySelector,
                 innerKeySelector, resultSelector, errorSelector, comparer));
 
-        /// <summary>
-        ///     Fully flatmaps another <see cref="Result{T,TError}" />.
-        /// </summary>
-        /// <param name="flatMapSelector">
-        ///     A function who expects a <see cref="Result{T,TError}" /> as its return type.
-        /// </param>
-        /// <param name="resultSelector">
-        ///     A function whose in-parameters are <typeparamref name="T" /> and <typeparamref name="TFlatMap" /> which can return
-        ///     any type.
-        /// </param>
-        /// <param name="errorSelector">
-        ///     A function which maps <typeparamref name="TError" /> to <typeparamref name="TErrorResult" />.
-        /// </param>
-        /// <typeparam name="TErrorResult">
-        ///     The error type of the <see cref="Result{T,TError}" /> returned by the <paramref name="flatMapSelector" />.
-        /// </typeparam>
-        /// <typeparam name="TFlatMap">
-        ///     The value type of the <see cref="Result{T,TError}" /> returned by the <paramref name="flatMapSelector" />.
-        /// </typeparam>
-        /// <typeparam name="TResult">
-        ///     The type returned by the function <paramref name="resultSelector" />.
-        /// </typeparam>
-        /// <returns></returns>
         [Pure]
         public IResult<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
             Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
@@ -497,21 +142,6 @@ namespace Lemonad.ErrorHandling.Internal {
             EitherMethods.FullFlatMap(Either, flatMapSelector.Compose(x => x.Either), resultSelector,
                 errorSelector));
 
-        /// <summary>
-        ///     Merges two <see cref="Result{T,TError}" /> together to create a new <see cref="Result{T,TError}" />.
-        /// </summary>
-        /// <param name="other">
-        ///     The other <see cref="Result{T,TError}" />.
-        /// </param>
-        /// <param name="resultSelector">
-        ///     The selector which will determine the type of the returning <see cref="Result{T,TError}" />.
-        /// </param>
-        /// <typeparam name="TOther">The type of the other <see cref="Result{T,TError}" />.</typeparam>
-        /// <typeparam name="TResult">The type of the returning <see cref="Result{T,TError}" />.</typeparam>
-        /// <returns>
-        ///     A <see cref="Result{T,TError}" /> whose value is the result for merging two <see cref="Result{T,TError}" />
-        ///     together.
-        /// </returns>
         [Pure]
         public IResult<TResult, TError> Zip<TOther, TResult>(IResult<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector) =>
