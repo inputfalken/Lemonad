@@ -20,8 +20,8 @@ namespace Lemonad.ErrorHandling {
         ///     The <typeparamref name="TError" /> of <see cref="IResult{T,TError}" />.
         /// </typeparam>
         [Pure]
-        public static IResult<T, TError> Error<T, TError>(TError error) =>
-            Result<T, TError>.ErrorFactory(in error);
+        public static IResult<T, TError> Error<T, TError>(TError error)
+            => Result<T, TError>.ErrorFactory(in error);
 
         /// <summary>
         ///     Evaluates the <see cref="IResult{T,TError}" />.
@@ -36,8 +36,8 @@ namespace Lemonad.ErrorHandling {
         ///     The type of the error.
         /// </typeparam>
         [Pure]
-        public static T Match<T, TError>(this IResult<T, TError> source) where TError : T =>
-            source.Match(x => x, x => x);
+        public static T Match<T, TError>(this IResult<T, TError> source) where TError : T
+            => source.Match(x => x, x => x);
 
         /// <summary>
         ///     Evaluates the <see cref="IResult{T,TError}" />.
@@ -68,10 +68,15 @@ namespace Lemonad.ErrorHandling {
         /// <param name="validations">
         ///     A <see cref="IReadOnlyList{T}" /> containing <typeparamref name="TError" />.
         /// </param>
-        public static IResult<T, IReadOnlyList<TError>> Multiple<T, TError>(this IResult<T, TError> source,
-            params Func<IResult<T, TError>, IResult<T, TError>>[] validations) {
-            var either =
-                EitherMethods.Multiple(source.Either, validations.Select(x => x.Compose(y => y.Either)(source)));
+        public static IResult<T, IReadOnlyList<TError>> Multiple<T, TError>(
+            this IResult<T, TError> source,
+            params Func<IResult<T, TError>, IResult<T, TError>>[] validations
+        ) {
+            var either = EitherMethods.Multiple(
+                source.Either,
+                validations.Select(x => x.Compose(y => y.Either)(source)
+                )
+            );
             return either.HasValue
                 ? Value<T, IReadOnlyList<TError>>(either.Value)
                 : Error<T, IReadOnlyList<TError>>(either.Error);
@@ -112,8 +117,8 @@ namespace Lemonad.ErrorHandling {
         ///     The <typeparamref name="TError" /> from the <see cref="IResult{T,TError}" />.
         /// </typeparam>
         [Pure]
-        public static IMaybe<T> ToMaybe<T, TError>(this IResult<T, TError> source) =>
-            source.Either.HasValue ? Maybe.Value(source.Either.Value) : Maybe.None<T>();
+        public static IMaybe<T> ToMaybe<T, TError>(this IResult<T, TError> source)
+            => source.Either.HasValue ? Maybe.Value(source.Either.Value) : Maybe.None<T>();
 
         /// <summary>
         ///     Converts an <see cref="Nullable{T}" /> to an <see cref="IResult{T,TError}" /> with the value
@@ -133,12 +138,13 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         [Pure]
         public static IResult<T, TError> ToResult<T, TError>(this T? source, Func<TError> errorSelector)
-            where T : struct =>
-            // ReSharper disable once PossibleInvalidOperationException
-            source.ToResult(x => x.HasValue, x => errorSelector == null
+            where T : struct => source.ToResult(
+                x => x.HasValue,
+                x => errorSelector == null
                     ? throw new ArgumentNullException(nameof(errorSelector))
-                    : errorSelector())
-                .Map(x => x.Value);
+                    : errorSelector()
+            )
+            .Map(x => x.Value);
 
         /// <summary>
         ///     Creates an <see cref="IResult{T,TError}" /> based on a predicate function combined with a
@@ -161,7 +167,9 @@ namespace Lemonad.ErrorHandling {
         /// </param>
         /// <returns></returns>
         [Pure]
-        public static IResult<T, TError> ToResult<T, TError>(this T source, Func<T, bool> predicate,
+        public static IResult<T, TError> ToResult<T, TError>(
+            this T source,
+            Func<T, bool> predicate,
             Func<T, TError> errorSelector) {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             return predicate(source)
@@ -190,7 +198,8 @@ namespace Lemonad.ErrorHandling {
         /// <param name="valueSelector">
         ///     Is executed when the predicate fails.
         /// </param>
-        public static IResult<T, TError> ToResultError<T, TError>(this TError source,
+        public static IResult<T, TError> ToResultError<T, TError>(
+            this TError source,
             Func<TError, bool> predicate,
             Func<TError, T> valueSelector) {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
