@@ -16,7 +16,7 @@ namespace Lemonad.ErrorHandling.Internal {
         private Result(in T value, in TError error, bool hasError, bool hasValue) =>
             Either = new NonNullableEither<T, TError>(in value, in error, hasError, hasValue);
 
-        private Result(IEither<T, TError> either) =>
+        private Result(in IEither<T, TError> either) =>
             Either = new NonNullableEither<T, TError>(either.Value, either.Error, either.HasError, either.HasValue);
 
         public override string ToString() =>
