@@ -8,8 +8,8 @@ namespace Lemonad.ErrorHandling.Internal.Either {
     /// <summary>
     ///     This class will be used to share the logic between <see cref="IAsyncResult{T,TError}" /> and
     ///     <see cref="IResult{T,TError}" />.
-    ///     The goal is to make <see cref="IAsyncResult{T,TError}" /> methods execute <see cref="IResult{T,TError}" /> so they
-    ///     both have exactly the same logic.
+    ///     The goal is to make <see cref="IAsyncResult{T,TError}" /> methods execute <see cref="IResult{T,TError}" />  methods so they
+    ///     share as much logic as possible.
     /// </summary>
     internal static class EitherMethods {
         [Pure]
