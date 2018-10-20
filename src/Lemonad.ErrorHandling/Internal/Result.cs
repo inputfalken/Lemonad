@@ -4,8 +4,7 @@ using System.Diagnostics.Contracts;
 using Lemonad.ErrorHandling.Internal.Either;
 
 namespace Lemonad.ErrorHandling.Internal {
-    internal readonly struct Result<T, TError> : IEquatable<Result<T, TError>>, IComparable<Result<T, TError>>,
-        IResult<T, TError> {
+    internal readonly struct Result<T, TError> : IResult<T, TError> {
         internal static IResult<T, TError> ValueFactory(in T element) =>
             new Result<T, TError>(in element, default, false, true);
 
@@ -24,53 +23,8 @@ namespace Lemonad.ErrorHandling.Internal {
             Either = new NonNullableEither<T, TError>(either.Value, either.Error, either.HasError, either.HasValue);
 
         /// <inheritdoc />
-        public bool Equals(Result<T, TError> other) {
-            if (!Either.HasValue && !other.Either.HasValue)
-                return EqualityComparer<TError>.Default.Equals(Either.Error, other.Either.Error);
-
-            if (Either.HasValue && other.Either.HasValue)
-                return EqualityComparer<T>.Default.Equals(Either.Value, other.Either.Value);
-
-            return false;
-        }
-
-        /// <inheritdoc />
         public override string ToString() =>
             $"{(Either.HasValue ? "Ok" : "Error")} ==> {typeof(Result<T, TError>).ToHumanString()}{StringFunctions.PrettyTypeString(Either.HasValue ? (object) Either.Value : Either.Error)}";
-
-        public static bool operator ==(Result<T, TError> left, Result<T, TError> right) => left.Equals(right);
-        public static bool operator !=(Result<T, TError> left, Result<T, TError> right) => !left.Equals(right);
-
-        public static bool operator <(Result<T, TError> left, Result<T, TError> right) =>
-            left.CompareTo(right) < 0;
-
-        public static bool operator <=(Result<T, TError> left, Result<T, TError> right) =>
-            left.CompareTo(right) <= 0;
-
-        public static bool operator >(Result<T, TError> left, Result<T, TError> right) =>
-            left.CompareTo(right) > 0;
-
-        public static bool operator >=(Result<T, TError> left, Result<T, TError> right) =>
-            left.CompareTo(right) >= 0;
-
-        /// <inheritdoc />
-        public override bool Equals(object obj) => obj is Result<T, TError> option && Equals(option);
-
-        /// <inheritdoc />
-        public override int GetHashCode() =>
-            Either.HasValue
-                ? (Either.Value == null ? 1 : Either.Value.GetHashCode())
-                : (Either.Error == null ? 0 : Either.Error.GetHashCode());
-
-        /// <inheritdoc />
-        public int CompareTo(Result<T, TError> other) {
-            if (Either.HasValue && !other.Either.HasValue) return 1;
-            if (!Either.HasValue && other.Either.HasValue) return -1;
-
-            return Either.HasValue
-                ? Comparer<T>.Default.Compare(Either.Value, other.Either.Value)
-                : Comparer<TError>.Default.Compare(Either.Error, other.Either.Error);
-        }
 
         /// <summary>
         ///     Evaluates the <see cref="Result{T,TError}" />.
