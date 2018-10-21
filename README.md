@@ -41,7 +41,7 @@ than throwing an exception using a similiar message.
 // They are there to make the example clearer.
 private static IResult<int, string> Divide(int left, int right) {
     return (left: left, right: right)
-        .ToResult(((int left, int right) x) => x.right == 0, ((int left, int right) x) => $"Cannot divide '{x.left}' with '{x.right}'.")
+        .ToResult(((int left, int right) x) => x.right == 0, ((int left, int right) x) => $"Can not divide '{x.left}' with '{x.right}'.")
         .Map(((int left, int right) x) => x.left / x.right);
 }
 
@@ -68,8 +68,8 @@ IEnumerable<string> failedDivisions = eithers.Errors();
 foreach (int division in successFulDivisions) { Console.WriteLine(division); }
 
 // Prints all the messages where the 'y' parameter from the function is 0.
-// Cannot {left} with {right}
-// Cannot {left} with {right}
+// Can not divide {left} with {right}
+// Can not divide {left} with {right}
 // …
 foreach (int message in failedDivisions) { Console.WriteLine(message); }
 
