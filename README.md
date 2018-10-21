@@ -67,7 +67,7 @@ IEnumerable<string> failedDivisions = eithers.Errors();
 // 5
 foreach (int division in successFulDivisions) { Console.WriteLine(division); }
 
-// Prints all the messages where the 'y' parameter from the function is 0.
+// Prints all the messages where the parameter 'right' is equal to 0.
 // Can not divide {left} with {right}
 // Can not divide {left} with {right}
 // …
