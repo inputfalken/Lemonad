@@ -226,19 +226,61 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static IResult<T, TError> Value<T, TError>(T element) => Result<T, TError>.ValueFactory(in element);
 
-        public static IAsyncResult<TResult, TError> MapAsync<T, TError, TResult>(this IResult<T, TError> source,
-            Func<T, Task<TResult>> selector) => source.ToAsyncResult().Map(selector);
+        public static IAsyncResult<TResult, TError> MapAsync<T, TError, TResult>(
+            this IResult<T, TError> source,
+            Func<T, Task<TResult>> selector
+        ) => source.ToAsyncResult().Map(selector);
 
-        public static IAsyncResult<T, TError> FilterAsync<T, TError>(this IResult<T, TError> source,
-            Func<T, Task<bool>> predicate, Func<T, TError> errorSelector) =>
-            source.ToAsyncResult().Filter(predicate, errorSelector);
+        public static IAsyncResult<T, TError> FilterAsync<T, TError>(
+            this IResult<T, TError> source,
+            Func<T, Task<bool>> predicate,
+            Func<T, TError> errorSelector
+        ) => source.ToAsyncResult().Filter(predicate, errorSelector);
 
-        public static IAsyncResult<TResult, TError> FlatMapAsync<T, TResult, TError>(this IResult<T, TError> source,
-            Func<T, IAsyncResult<TResult, TError>> flatSelector) => source.ToAsyncResult().FlatMap(flatSelector);
+        public static IAsyncResult<TResult, TError> FlatMapAsync<T, TResult, TError>(
+            this IResult<T, TError> source,
+            Func<T, IAsyncResult<TResult, TError>> flatSelector
+        ) => source.ToAsyncResult().FlatMap(flatSelector);
 
         public static IAsyncResult<TResult, TError> FlatMapAsync<T, TSelector, TResult, TError>(
             this IResult<T, TError> source,
-            Func<T, IAsyncResult<TSelector, TError>> flatSelector, Func<T, TSelector, TResult> resultSelector) =>
-            source.ToAsyncResult().FlatMap(flatSelector, resultSelector);
+            Func<T, IAsyncResult<TSelector, TError>> flatSelector,
+            Func<T, TSelector, TResult> resultSelector
+        ) => source.ToAsyncResult().FlatMap(flatSelector, resultSelector);
+
+        public static IAsyncResult<TResult, TError> Zip<T, TOther, TResult, TError>(
+            this IResult<T, TError> source,
+            IAsyncResult<TOther, TError> other,
+            Func<T, TOther, TResult> resultSelector
+        ) => source.ToAsyncResult().Zip(other, resultSelector);
+
+        public static IAsyncResult<T, TError> FlattenAsync<T, TResult, TError, TErrorResult>(
+            this IResult<T, TError> source,
+            Func<T, IAsyncResult<T, TErrorResult>> selector,
+            Func<TErrorResult, TError> errorSelector
+        ) => source.ToAsyncResult().Flatten(selector, errorSelector);
+
+        public static IAsyncResult<T, TError> FlattenAsync<T, TResult, TError>(
+            this IResult<T, TError> source,
+            Func<T, IAsyncResult<TResult, TError>> selector
+        ) => source.ToAsyncResult().Flatten(selector);
+
+        public static IAsyncResult<T, TErrorResult> MapErrorAsync<T, TError, TErrorResult>(
+            this IResult<T, TError> source,
+            Func<TError, Task<TErrorResult>> selector
+        ) => source.ToAsyncResult().MapError(selector);
+
+        public static IAsyncResult<T, TError> IsErrorWhenAsync<T, TError>(
+            this IResult<T, TError> source,
+            Func<T, TError> errorSelector,
+            Func<T, Task<bool>> predicate
+        ) => source.ToAsyncResult().IsErrorWhen(predicate, errorSelector);
+
+        // This signature is missing...
+        public static IAsyncResult<TResult, TErrorResult> FullMapAsync<T, TResult, TError, TErrorResult>(
+            this IResult<T, TResult> source, 
+            Func<T, Task<TError>> selector,
+            Func<TError, Task<TError>> errorSelector
+            ) => default;
     }
 }
