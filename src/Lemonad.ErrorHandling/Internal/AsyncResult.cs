@@ -103,6 +103,15 @@ namespace Lemonad.ErrorHandling.Internal {
         ) => new AsyncResult<TResult, TErrorResult>(
             EitherMethods.FullMapAsync(Either, selector, errorSelector));
 
+        public IAsyncResult<TResult, TErrorResult> FullMap<TResult, TErrorResult>(Func<T, TResult> selector,
+            Func<TError, Task<TErrorResult>> errorSelector) => throw new NotImplementedException();
+
+        public IAsyncResult<TResult, TErrorResult> FullMap<TResult, TErrorResult>(Func<T, Task<TResult>> selector,
+            Func<TError, Task<TErrorResult>> errorSelector) => throw new NotImplementedException();
+
+        public IAsyncResult<TResult, TErrorResult> FullMap<TResult, TErrorResult>(Func<T, Task<TResult>> selector,
+            Func<TError, TErrorResult> errorSelector) => throw new NotImplementedException();
+
         /// <inheritdoc cref="Result{T,TError}.Match{TResult}" />
         public Task<TResult> Match<TResult>(Func<T, TResult> selector, Func<TError, TResult> errorSelector) =>
             EitherMethods.MatchAsync(Either, selector, errorSelector);

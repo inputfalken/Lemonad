@@ -62,6 +62,21 @@ namespace Lemonad.ErrorHandling {
             Func<TError, TErrorResult> errorSelector
         );
 
+        IAsyncResult<TResult, TErrorResult> FullMap<TResult, TErrorResult>(
+            Func<T, Task<TResult>> selector,
+            Func<TError, Task<TErrorResult>> errorSelector
+        );
+
+        IAsyncResult<TResult, TErrorResult> FullMap<TResult, TErrorResult>(
+            Func<T, Task<TResult>> selector,
+            Func<TError, TErrorResult> errorSelector
+        );
+
+        IAsyncResult<TResult, TErrorResult> FullMap<TResult, TErrorResult>(
+            Func<T, TResult> selector,
+            Func<TError, Task<TErrorResult>> errorSelector
+        );
+
         IAsyncResult<T, TError> IsErrorWhen(
             Func<T, bool> predicate,
             Func<T, TError> errorSelector);
