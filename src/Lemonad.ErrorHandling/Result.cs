@@ -278,9 +278,23 @@ namespace Lemonad.ErrorHandling {
 
         // This signature is missing...
         public static IAsyncResult<TResult, TErrorResult> FullMapAsync<T, TResult, TError, TErrorResult>(
-            this IResult<T, TResult> source, 
+            this IResult<T, TResult> source,
             Func<T, Task<TError>> selector,
             Func<TError, Task<TError>> errorSelector
-            ) => default;
+        ) => default;
+
+        // This signature is missing...
+        public static IAsyncResult<TResult, TErrorResult> FullMapAsync<T, TResult, TError, TErrorResult>(
+            this IResult<T, TResult> source,
+            Func<T, Task<TError>> selector,
+            Func<TError, TError> errorSelector
+        ) => default;
+
+        // This signature is missing...
+        public static IAsyncResult<TResult, TErrorResult> FullMapAsync<T, TResult, TError, TErrorResult>(
+            this IResult<T, TResult> source,
+            Func<T, TError> selector,
+            Func<TError, Task<TError>> errorSelector
+        ) => default;
     }
 }
