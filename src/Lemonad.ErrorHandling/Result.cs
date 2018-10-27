@@ -276,25 +276,22 @@ namespace Lemonad.ErrorHandling {
             Func<T, Task<bool>> predicate
         ) => source.ToAsyncResult().IsErrorWhen(predicate, errorSelector);
 
-        // This signature is missing...
         public static IAsyncResult<TResult, TErrorResult> FullMapAsync<T, TResult, TError, TErrorResult>(
-            this IResult<T, TResult> source,
-            Func<T, Task<TError>> selector,
-            Func<TError, Task<TError>> errorSelector
-        ) => default;
+            this IResult<T, TError> source,
+            Func<T, Task<TResult>> selector,
+            Func<TError, Task<TErrorResult>> errorSelector
+        ) => source.ToAsyncResult().FullMap(selector, errorSelector);
 
-        // This signature is missing...
         public static IAsyncResult<TResult, TErrorResult> FullMapAsync<T, TResult, TError, TErrorResult>(
-            this IResult<T, TResult> source,
-            Func<T, Task<TError>> selector,
-            Func<TError, TError> errorSelector
-        ) => default;
+            this IResult<T, TError> source,
+            Func<T, Task<TResult>> selector,
+            Func<TError, TErrorResult> errorSelector
+        ) => source.ToAsyncResult().FullMap(selector, errorSelector);
 
-        // This signature is missing...
         public static IAsyncResult<TResult, TErrorResult> FullMapAsync<T, TResult, TError, TErrorResult>(
-            this IResult<T, TResult> source,
-            Func<T, TError> selector,
-            Func<TError, Task<TError>> errorSelector
-        ) => default;
+            this IResult<T, TError> source,
+            Func<T, TResult> selector,
+            Func<TError, Task<TErrorResult>> errorSelector
+        ) => source.ToAsyncResult().FullMap(selector, errorSelector);
     }
 }
