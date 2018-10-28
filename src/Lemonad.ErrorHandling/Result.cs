@@ -322,5 +322,11 @@ namespace Lemonad.ErrorHandling {
             Func<T, IAsyncResult<TResult, TErrorResult>> flatMapSelector,
             Func<TError, TErrorResult> errorSelector
         ) => source.ToAsyncResult().FullFlatMap(flatMapSelector, errorSelector);
+
+        public static IAsyncResult<TResult, TError> ZipAsync<T, TOther, TResult, TError>(
+            this IResult<T, TError> source,
+            IAsyncResult<TOther, TError> other,
+            Func<T, TOther, TResult> resultSelector
+        ) => source.ToAsyncResult().Zip(other, resultSelector);
     }
 }
