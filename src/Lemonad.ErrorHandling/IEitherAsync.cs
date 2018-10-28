@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Lemonad.ErrorHandling.Internal.TaskExtensions;
 
 namespace Lemonad.ErrorHandling {
     public interface IEitherAsync<out T, out TError> {
@@ -43,13 +44,29 @@ namespace Lemonad.ErrorHandling {
 
     /// Try :awaiting <see cref="IEitherAsync{T,TError}.HasError"/> could perform await on a task with <typeparamref name="TError"/> and then assign <typeparamref name="TError"/> after.
     /// Try: awaiting <see cref="IEitherAsync{T,TError}.HasValue"/> could perform await on a task with <typeparamref name="T"/> and then assign <typeparamref name="T"/> after.
-    internal readonly struct EitherAsync<T, TError> : IEitherAsync<T, TError> {
-        public Task<bool> HasValue => throw new System.NotImplementedException();
+    internal class EitherAsync<T, TError> : IEitherAsync<T, TError> {
+        private readonly Task<IEither<T, TError>> _either;
+        public Task<bool> HasValue => ResolveValue();
+        public Task<bool> HasError => ResolveError();
+        
+        public EitherAsync(Task<IEither<T, TError>> either) => _either = either;
 
-        public Task<bool> HasError => throw new System.NotImplementedException();
+        private async Task<bool> ResolveValue() {
+            var either = await _either;
+            if (either.HasValue)
+                Value = either.Value;
+            return either.HasValue;
+        }
 
-        public TError Error => throw new System.NotImplementedException();
+        private async Task<bool> ResolveError() {
+            var either = await _either;
+            if (either.HasError)
+                Error = either.Error;
+            return either.HasError;
+        }
 
-        public T Value => throw new System.NotImplementedException();
+        public TError Error { get; private set; }
+
+        public T Value { get; private set; }
     }
 }
