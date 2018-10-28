@@ -328,5 +328,40 @@ namespace Lemonad.ErrorHandling {
             IAsyncResult<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector
         ) => source.ToAsyncResult().Zip(other, resultSelector);
+
+        public static IAsyncResult<TResult, TError> JoinAsync<T, TInner, TKey, TResult, TError>(
+            this IResult<T, TError> source,
+            IAsyncResult<TInner, TError> inner,
+            Func<T, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector,
+            Func<TError> errorSelector,
+            IEqualityComparer<TKey> comparer)
+            => source
+                .ToAsyncResult()
+                .Join(
+                    inner,
+                    outerKeySelector,
+                    innerKeySelector,
+                    resultSelector,
+                    errorSelector,
+                    comparer
+                );
+
+        public static IAsyncResult<TResult, TError> JoinAsync<T, TInner, TKey, TResult, TError>(
+            this IResult<T, TError> source,
+            IAsyncResult<TInner, TError> inner,
+            Func<T, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector,
+            Func<TError> errorSelector) => source
+            .ToAsyncResult()
+            .Join(
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                errorSelector
+            );
     }
 }
