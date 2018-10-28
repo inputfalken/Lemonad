@@ -309,5 +309,18 @@ namespace Lemonad.ErrorHandling {
             this IResult<T, TError> source,
             Action<TError> action
         ) => source.ToAsyncResult().DoWithError(action);
+
+        public static IAsyncResult<TResult, TErrorResult> FullFlatMapAsync<T, TFlatMap, TResult, TError, TErrorResult>(
+            this IResult<T, TError> source,
+            Func<T, IAsyncResult<TFlatMap, TErrorResult>> flatMapSelector,
+            Func<T, TFlatMap, TResult> resultSelector,
+            Func<TError, TErrorResult> errorSelector
+        ) => source.ToAsyncResult().FullFlatMap(flatMapSelector, resultSelector, errorSelector);
+
+        public static IAsyncResult<TResult, TErrorResult> FullFlatMapAsync<T, TResult, TError, TErrorResult>(
+            this IResult<T, TError> source,
+            Func<T, IAsyncResult<TResult, TErrorResult>> flatMapSelector,
+            Func<TError, TErrorResult> errorSelector
+        ) => source.ToAsyncResult().FullFlatMap(flatMapSelector, errorSelector);
     }
 }
