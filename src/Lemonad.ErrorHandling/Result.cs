@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
@@ -293,5 +294,20 @@ namespace Lemonad.ErrorHandling {
             Func<T, TResult> selector,
             Func<TError, Task<TErrorResult>> errorSelector
         ) => source.ToAsyncResult().FullMap(selector, errorSelector);
+
+        public static IAsyncResult<T, TError> DoAsync<T, TError>(
+            this IResult<T, TError> source,
+            Action action
+        ) => source.ToAsyncResult().Do(action);
+
+        public static IAsyncResult<T, TError> DoWithAsync<T, TError>(
+            this IResult<T, TError> source,
+            Action<T> action
+        ) => source.ToAsyncResult().DoWith(action);
+
+        public static IAsyncResult<T, TError> DoWithErrorAsync<T, TError>(
+            this IResult<T, TError> source,
+            Action<TError> action
+        ) => source.ToAsyncResult().DoWithError(action);
     }
 }
