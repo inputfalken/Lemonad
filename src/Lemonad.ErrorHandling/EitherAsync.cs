@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling {
+    // Can this be immutable?
     internal class EitherAsync<T, TError> : IEitherAsync<T, TError> {
         private readonly Task<IEither<T, TError>> _either;
         public Task<bool> HasValue => ResolveValue();
