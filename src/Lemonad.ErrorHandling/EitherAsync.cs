@@ -11,9 +11,15 @@ namespace Lemonad.ErrorHandling {
 
         public EitherAsync(Task<IEither<T, TError>> either) => _either = either;
 
-        private async Task<bool> ResolveValue() {
-            // Avoid redundant awaits
-            if (_isAwaited) return _hasValue;
+        private Task<bool> ResolveValue() => _isAwaited
+            ? Task.FromResult(_hasValue)
+            : AwaitValue();
+
+        private Task<bool> ResolveError() => _isAwaited
+            ? Task.FromResult(_hasError)
+            : AwaitError();
+
+        private async Task<bool> AwaitValue() {
             var either = await _either.ConfigureAwait(false);
             _isAwaited = true;
             if (either.HasValue) {
@@ -28,9 +34,7 @@ namespace Lemonad.ErrorHandling {
             return either.HasValue;
         }
 
-        private async Task<bool> ResolveError() {
-            // Avoid redundant awaits
-            if (_isAwaited) return _hasError;
+        private async Task<bool> AwaitError() {
             var either = await _either.ConfigureAwait(false);
             _isAwaited = true;
             if (either.HasError) {
