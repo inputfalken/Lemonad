@@ -5,7 +5,7 @@ namespace Lemonad.ErrorHandling.Test.Internal.Tests.EitherAsyncTests {
     // TODO remove dependency to IResult from tests
     public class EitherAsyncTests {
         [Fact]
-        public async Task Creating_Either_With_Value_After_Delay() {
+        public async Task Creating_Either_With_Value_After_Delay_Awaiting_HasValue() {
             var either = Task.Run(async () => {
                 await Task.Delay(100);
                 return ErrorHandling.Result.Value<int, string>(20).Either;
@@ -23,7 +23,7 @@ namespace Lemonad.ErrorHandling.Test.Internal.Tests.EitherAsyncTests {
         }
 
         [Fact]
-        public async Task Creating_Either_With_Error_After_Delay() {
+        public async Task Creating_Either_With_Error_After_Delay_Awaiting_HasValue() {
             var either = Task.Run(async () => {
                 await Task.Delay(100);
                 return ErrorHandling.Result.Error<int, string>("ERROR").Either;
@@ -41,7 +41,43 @@ namespace Lemonad.ErrorHandling.Test.Internal.Tests.EitherAsyncTests {
         }
 
         [Fact]
-        public async Task Creating_Either_With_Value_After_Delay_Verify_HasValue_And_HasError_Are_Not_The_Equal() {
+        public async Task Creating_Either_With_Value_After_Delay_Awaiting_HasError() {
+            var either = Task.Run(async () => {
+                await Task.Delay(100);
+                return ErrorHandling.Result.Value<int, string>(20).Either;
+            });
+
+            var eitherAsync = new EitherAsync<int, string>(either);
+
+            Assert.Equal(default, eitherAsync.Value);
+            Assert.Equal(default, eitherAsync.Error);
+
+            Assert.False(await eitherAsync.HasError);
+
+            Assert.Equal(20, eitherAsync.Value);
+            Assert.Equal(default, eitherAsync.Error);
+        }
+
+        [Fact]
+        public async Task Creating_Either_With_Error_After_Delay_Awaiting_HasError() {
+            var either = Task.Run(async () => {
+                await Task.Delay(100);
+                return ErrorHandling.Result.Error<int, string>("ERROR").Either;
+            });
+
+            var eitherAsync = new EitherAsync<int, string>(either);
+
+            Assert.Equal(default, eitherAsync.Value);
+            Assert.Equal(default, eitherAsync.Error);
+
+            Assert.False(await eitherAsync.HasValue);
+
+            Assert.Equal(default, eitherAsync.Value);
+            Assert.Equal("ERROR", eitherAsync.Error);
+        }
+
+        [Fact]
+        public async Task Creating_Either_With_Value_After_Delay_Await_Both() {
             var either = Task.Run(async () => {
                 await Task.Delay(100);
                 return ErrorHandling.Result.Value<int, string>(20).Either;
@@ -60,7 +96,7 @@ namespace Lemonad.ErrorHandling.Test.Internal.Tests.EitherAsyncTests {
         }
 
         [Fact]
-        public async Task Creating_Either_With_Error_After_Delay_Verify_HasValue_And_HasError_Are_Not_The_Equal() {
+        public async Task Creating_Either_With_Error_After_Delay_Await_Both() {
             var either = Task.Run(async () => {
                 await Task.Delay(100);
                 return ErrorHandling.Result.Error<int, string>("ERROR").Either;

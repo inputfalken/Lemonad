@@ -1,8 +1,6 @@
 ﻿using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling {
-    /// Try :awaiting <see cref="IEitherAsync{T,TError}.HasError"/> could perform await on a task with <typeparamref name="TError"/> and then assign <typeparamref name="TError"/> after.
-    /// Try: awaiting <see cref="IEitherAsync{T,TError}.HasValue"/> could perform await on a task with <typeparamref name="T"/> and then assign <typeparamref name="T"/> after.
     internal class EitherAsync<T, TError> : IEitherAsync<T, TError> {
         private readonly Task<IEither<T, TError>> _either;
         public Task<bool> HasValue => ResolveValue();
