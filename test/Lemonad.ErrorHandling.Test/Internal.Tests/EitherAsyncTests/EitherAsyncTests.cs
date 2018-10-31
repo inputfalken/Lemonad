@@ -114,21 +114,5 @@ namespace Lemonad.ErrorHandling.Test.Internal.Tests.EitherAsyncTests {
             Assert.Equal(default, eitherAsync.Value);
             Assert.Equal("ERROR", eitherAsync.Error);
         }
-
-        [Fact]
-        public async Task Ensure_Awaited_Value_Is_Assigned_Once() {
-            var either = Task.Run(async () => {
-                await Task.Delay(100);
-                return ErrorHandling.Result.Error<int, string>("ERROR").Either;
-            });
-
-            var eitherAsync = new EitherAsync<int, string>(either);
-
-            Assert.True(await eitherAsync.HasError);
-            Assert.True(await eitherAsync.HasError);
-            Assert.True(await eitherAsync.HasError);
-            Assert.True(await eitherAsync.HasError);
-            Assert.Equal(1, eitherAsync.count);
-        }
     }
 }

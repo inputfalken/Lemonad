@@ -16,6 +16,10 @@ namespace Lemonad.ErrorHandling {
             ? Task.FromResult(_hasError)
             : ResolveError();
 
+        public TError Error { get; private set; }
+
+        public T Value { get; private set; }
+
         public EitherAsync(Task<IEither<T, TError>> either) => _either = either;
 
         private async Task<bool> ResolveValue() {
@@ -47,9 +51,5 @@ namespace Lemonad.ErrorHandling {
 
             return either.HasError;
         }
-
-        public TError Error { get; private set; }
-
-        public T Value { get; private set; }
     }
 }
