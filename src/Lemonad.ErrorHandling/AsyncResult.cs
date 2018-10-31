@@ -10,6 +10,12 @@ using Lemonad.ErrorHandling.Internal.TaskExtensions;
 
 namespace Lemonad.ErrorHandling {
     public static class AsyncResult {
+        // This could be used for mapping.
+        private static async Task<IEither<T, TError>> Map<T, TError>(IEitherAsync<T, TError> left) {
+            var hasValue = await left.HasValue;
+            return hasValue ? Result.Value<T, TError>(left.Value).Either : Result.Error<T, TError>(left.Error).Either;
+        }
+        
         /// <summary>
         ///     Creates a <see cref="IAsyncResult{T,TError}" /> with <typeparamref name="TError" />.
         /// </summary>
