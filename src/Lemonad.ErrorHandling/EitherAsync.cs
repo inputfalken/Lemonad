@@ -9,7 +9,7 @@ namespace Lemonad.ErrorHandling {
         public EitherAsync(Task<IEither<T, TError>> either) => _either = either;
 
         private async Task<bool> ResolveValue() {
-            var either = await _either;
+            var either = await _either.ConfigureAwait(false);
             if (either.HasValue)
                 Value = either.Value;
             else
@@ -18,7 +18,7 @@ namespace Lemonad.ErrorHandling {
         }
 
         private async Task<bool> ResolveError() {
-            var either = await _either;
+            var either = await _either.ConfigureAwait(false);
             if (either.HasError)
                 Error = either.Error;
             else
