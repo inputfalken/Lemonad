@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Lemonad.ErrorHandling.Internal.TaskExtensions;
 
 namespace Lemonad.ErrorHandling {
     public interface IEitherAsync<out T, out TError> {
