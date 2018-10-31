@@ -3,21 +3,20 @@
 namespace Lemonad.ErrorHandling {
     internal class EitherAsync<T, TError> : IEitherAsync<T, TError> {
         private readonly Task<IEither<T, TError>> _either;
-        public Task<bool> HasValue => ResolveValue();
-        public Task<bool> HasError => ResolveError();
+
         private bool _hasValue;
         private bool _hasError;
         private bool _isAwaited;
 
-        public EitherAsync(Task<IEither<T, TError>> either) => _either = either;
-
-        private Task<bool> ResolveValue() => _isAwaited
+        public Task<bool> HasValue => _isAwaited
             ? Task.FromResult(_hasValue)
             : AwaitValue();
 
-        private Task<bool> ResolveError() => _isAwaited
+        public Task<bool> HasError => _isAwaited
             ? Task.FromResult(_hasError)
             : AwaitError();
+
+        public EitherAsync(Task<IEither<T, TError>> either) => _either = either;
 
         private async Task<bool> AwaitValue() {
             var either = await _either.ConfigureAwait(false);
