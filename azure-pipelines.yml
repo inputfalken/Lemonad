@@ -37,7 +37,7 @@ phases:
       summaryFileLocation: $(Build.SourcesDirectory)\results\coverage.cobertura.xml
       reportDirectory: $(Build.SourcesDirectory)\results
       codecoverageTool: cobertura
-  
+
   - task: DotNetCoreCLI@2
     inputs:
       command: publish
