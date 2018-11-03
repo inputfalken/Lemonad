@@ -1,0 +1,138 @@
+name: 0.6$(Rev:.r)
+
+resources:
+- repo: self
+
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    exclude:
+      - samples/*
+      - build/*
+    include:
+      - src/*
+      - docs/*
+      - build/* 
+
+phases:
+- phase: Phase_1
+  displayName: Windows
+
+  condition: succeededOrFailed()
+  queue:
+    name: Hosted VS2017
+  variables:
+    BuildConfiguration: 'Release'
+  steps:
+  - task: DotNetCoreCLI@2
+    displayName: Build
+    inputs:
+      projects: |  
+       src/**/*.csproj
+       test/**/*.csproj
+
+      arguments: '--configuration $(BuildConfiguration)'
+
+
+  - task: DotNetCoreCLI@2
+    displayName: Test
+    inputs:
+      command: test
+
+      projects: 'test/**/*.csproj'
+
+      arguments: '--configuration $(BuildConfiguration) --no-build'
+
+
+
+- phase: Phase_2
+  displayName: Mac
+
+  condition: succeededOrFailed()
+  queue:
+    name: Hosted macOS
+  variables:
+    BuildConfiguration: 'Release'
+  steps:
+  - task: DotNetCoreCLI@2
+    displayName: Build
+    inputs:
+      projects: |  
+       src/**/*.csproj
+       test/**/*.csproj
+
+      arguments: '--configuration $(BuildConfiguration)'
+
+
+  - task: DotNetCoreCLI@2
+    displayName: Test
+    inputs:
+      command: test
+
+      projects: 'test/**/*.csproj'
+
+      arguments: '--configuration $(BuildConfiguration) --no-build'
+
+
+
+- phase: Phase_3
+  displayName: Ubuntu
+
+  dependsOn: 
+   - Phase_2
+   - Phase_1
+  condition: succeeded()
+  queue:
+    name: Hosted Ubuntu 1604
+  variables:
+    BuildConfiguration: 'Release'
+  steps:
+  - task: DotNetCoreCLI@2
+    displayName: Build
+    inputs:
+      projects: |  
+       src/**/*.csproj
+       test/**/*.csproj
+
+      arguments: '--configuration $(BuildConfiguration)'
+
+
+  - task: DotNetCoreCLI@2
+    displayName: Test
+    inputs:
+      command: test
+
+      projects: 'test/**/*.csproj'
+
+      arguments: '--configuration $(BuildConfiguration) --no-build'
+
+
+  - task: DotNetCoreCLI@2
+    displayName: Pack
+    inputs:
+      command: pack
+
+      packagesToPack: 'src/Lemonad.ErrorHandling/*.csproj'
+
+      nobuild: true
+
+      versioningScheme: byBuildNumber
+
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Package'
+    inputs:
+      ArtifactName: Lemonad
+
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish DocFx Docs'
+    inputs:
+      PathtoPublish: docs
+
+      ArtifactName: 'DocFx_Docs'
+
+
+
