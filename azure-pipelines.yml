@@ -14,8 +14,6 @@ phases:
   condition: succeededOrFailed()
   queue:
     name: Hosted VS2017
-  variables:
-    BuildConfiguration: 'Release'
   steps:
 
   - script: dotnet build --configuration $(buildConfiguration)
@@ -55,8 +53,6 @@ phases:
   condition: succeededOrFailed()
   queue:
     name: Hosted macOS
-  variables:
-    BuildConfiguration: 'Release'
   steps:
   - task: DotNetCoreCLI@2
     displayName: Build
@@ -65,7 +61,7 @@ phases:
        src/**/*.csproj
        test/**/*.csproj
 
-      arguments: '--configuration $(BuildConfiguration)'
+      arguments: '--configuration $(buildConfiguration)'
 
 
   - task: DotNetCoreCLI@2
@@ -75,7 +71,7 @@ phases:
 
       projects: 'test/**/*.csproj'
 
-      arguments: '--configuration $(BuildConfiguration) --no-build'
+      arguments: '--configuration $(buildConfiguration) --no-build'
 
 
 
@@ -88,8 +84,6 @@ phases:
   condition: succeeded()
   queue:
     name: Hosted Ubuntu 1604
-  variables:
-    BuildConfiguration: 'Release'
   steps:
   - task: DotNetCoreCLI@2
     displayName: Build
@@ -98,7 +92,7 @@ phases:
        src/**/*.csproj
        test/**/*.csproj
 
-      arguments: '--configuration $(BuildConfiguration)'
+      arguments: '--configuration $(buildConfiguration)'
 
 
   - task: DotNetCoreCLI@2
@@ -108,7 +102,7 @@ phases:
 
       projects: 'test/**/*.csproj'
 
-      arguments: '--configuration $(BuildConfiguration) --no-build'
+      arguments: '--configuration $(buildConfiguration) --no-build'
 
 
   - task: DotNetCoreCLI@2
