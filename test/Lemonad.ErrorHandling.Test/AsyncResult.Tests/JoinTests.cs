@@ -22,8 +22,8 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
                 return $"{x.Text} {y.Text}";
             }, () => string.Empty);
 
-            Assert.Equal(default, result.Value);
-            Assert.Equal("ERROR 1", result.Error);
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("ERROR 1", result.Either.Error);
 
             Assert.False(outerSelectorInvoked, "outerSelectorInvoked");
             Assert.False(innerSelectorInvoked, "innerSelectorInvoked");
@@ -49,8 +49,8 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
                 return $"{x.Text} {y.Text}";
             }, () => string.Empty);
 
-            Assert.Equal(default, result.Value);
-            Assert.Equal("ERROR 1", result.Error);
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("ERROR 1", result.Either.Error);
 
             Assert.False(outerSelectorInvoked, "outerSelectorInvoked");
             Assert.False(innerSelectorInvoked, "innerSelectorInvoked");
@@ -76,8 +76,8 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
                 return $"{x.Text} {y.Text}";
             }, () => string.Empty);
 
-            Assert.Equal(default, result.Value);
-            Assert.Equal("ERROR 2", result.Error);
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("ERROR 2", result.Either.Error);
 
             Assert.False(outerSelectorInvoked, "outerSelectorInvoked");
             Assert.False(innerSelectorInvoked, "innerSelectorInvoked");
@@ -102,8 +102,8 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
                 return $"{x.Text} {y.Text}";
             }, () => "");
 
-            Assert.Equal("Hello world", result.Value);
-            Assert.Equal(default, result.Error);
+            Assert.Equal("Hello world", result.Either.Value);
+            Assert.Equal(default, result.Either.Error);
 
             Assert.True(outerSelectorInvoked, "outerSelectorInvoked");
             Assert.True(innerSelectorInvoked, "innerSelectorInvoked");
@@ -129,8 +129,8 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
                 return $"{x.Text} {y.Text}";
             }, () => "No key match");
 
-            Assert.Equal(default, result.Value);
-            Assert.Equal("No key match", result.Error);
+            Assert.Equal(default, result.Either.Value);
+            Assert.Equal("No key match", result.Either.Error);
 
             Assert.True(outerSelectorInvoked, "outerSelectorInvoked");
             Assert.True(innerSelectorInvoked, "innerSelectorInvoked");

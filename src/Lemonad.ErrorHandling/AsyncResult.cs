@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -125,8 +126,26 @@ namespace Lemonad.ErrorHandling {
             ToErrorEnumerable<T, TError>(this IAsyncResult<T, TError> result) =>
             EitherMethods.YieldErrors(await result.Either.ToTaskEither().ConfigureAwait(false));
 
-        public static TaskAwaiter<IEither<T, TError>> GetAwaiter<T, TError>(this IAsyncResult<T, TError> result) =>
-            result.Either.ToTaskEither().GetAwaiter();
+        private static async Task<IResult<T, TError>> Mapper<T, TError>(IAsyncResult<T, TError> asyncResult)
+            => await asyncResult.Either.HasValue.ConfigureAwait(false)
+                ? Result.Value<T, TError>(asyncResult.Either.Value)
+                : Result.Error<T, TError>(asyncResult.Either.Error);
+
+        /// <summary>
+        /// Returns an <see cref="IResult{T,TError}"/> perform and await operation.
+        /// </summary>
+        /// <param name="source">
+        /// The <see cref="IAsyncResult{T,TError}"/>.
+        /// </param>
+        /// <typeparam name="T"> of <see cref="IAsyncResult{T,TError}"/>.
+        /// The <typeparamref name="T"/>
+        /// </typeparam>
+        /// <typeparam name="TError">
+        /// The <typeparamref name="TError"/> of <see cref="IAsyncResult{T,TError}"/>.
+        /// </typeparam>
+        /// <returns></returns>
+        public static TaskAwaiter<IResult<T, TError>> GetAwaiter<T, TError>(this IAsyncResult<T, TError> source)
+            => Mapper(source).GetAwaiter();
 
         /// <summary>
         ///     Creates a <see cref="IAsyncResult{T,TError}" /> with <typeparamref name="T" />.
