@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Lemonad.ErrorHandling.Internal.Either;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Internal.Tests.EitherAsyncTests {

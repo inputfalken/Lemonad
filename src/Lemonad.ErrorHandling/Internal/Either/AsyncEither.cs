@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Lemonad.ErrorHandling {
+namespace Lemonad.ErrorHandling.Internal.Either {
     internal class AsyncEither<T, TError> : IAsyncEither<T, TError> {
         private readonly Task<IEither<T, TError>> _either;
         private bool _hasError;
