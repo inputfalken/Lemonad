@@ -1,5 +1,8 @@
+name: $(Build.DefinitionName)-$(date:yyyyMMdd)$(rev:.r)
 resources:
 - repo: self
+trigger: none
+
 phases:
 - phase: Phase_1
   displayName: Windows
