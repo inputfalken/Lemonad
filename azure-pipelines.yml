@@ -23,7 +23,7 @@ phases:
   - script: |
       mkdir $(Build.SourcesDirectory)\results
       dotnet test --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura test\Lemonad.ErrorHandling
-      dotnet test --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:MergeWtih=$(Build.SourcesDirectory)\test\Lemonad.ErrorHandling\coverage.cobertura.xml StrikesRepository.Test
+      dotnet test --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:MergeWtih=$(Build.SourcesDirectory)\test\Lemonad.ErrorHandling\coverage.cobertura.xml test\Lemonad.ErrorHandling
       copy $(Build.SourcesDirectory)\test\Lemonad.ErrorHandling\coverage.cobertura.xml $(Build.SourcesDirectory)\results
       dotnet tool install dotnet-reportgenerator-globaltool --tool-path . --version 4.0.0-rc4
       .\reportgenerator "-reports:$(Build.SourcesDirectory)\\test\Lemonad.ErrorHandling\coverage.cobertura.xml" "-targetdir:results" "-reporttypes:HTMLInline;HTMLChart"
