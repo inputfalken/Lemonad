@@ -1,5 +1,8 @@
 name: $(Build.DefinitionName)-$(date:yyyyMMdd)$(rev:.r)
-trigger:
+pr:
+  branches:
+    include:
+    - master
   paths:
     include:
     - src/*
