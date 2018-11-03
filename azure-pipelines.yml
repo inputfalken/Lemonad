@@ -1,16 +1,105 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+resources:
+- repo: self
+phases:
+- phase: Phase_1
+  displayName: Windows
 
-pool:
-  vmImage: 'Ubuntu 16.04'
+  condition: succeededOrFailed()
+  queue:
+    name: Hosted VS2017
+  variables:
+    BuildConfiguration: 'Release'
+  steps:
+  - task: DotNetCoreCLI@2
+    displayName: Build
+    inputs:
+      projects: |  
+       src/**/*.csproj
+       test/**/*.csproj
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+      arguments: '--configuration $(BuildConfiguration)'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+
+  - task: DotNetCoreCLI@2
+    displayName: Test
+    inputs:
+      command: test
+
+      projects: 'test/**/*.csproj'
+
+      arguments: '--configuration $(BuildConfiguration) --no-build'
+
+
+
+- phase: Phase_2
+  displayName: Mac
+
+  condition: succeededOrFailed()
+  queue:
+    name: Hosted macOS
+  variables:
+    BuildConfiguration: 'Release'
+  steps:
+  - task: DotNetCoreCLI@2
+    displayName: Build
+    inputs:
+      projects: |  
+       src/**/*.csproj
+       test/**/*.csproj
+
+      arguments: '--configuration $(BuildConfiguration)'
+
+
+  - task: DotNetCoreCLI@2
+    displayName: Test
+    inputs:
+      command: test
+
+      projects: 'test/**/*.csproj'
+
+      arguments: '--configuration $(BuildConfiguration) --no-build'
+
+
+
+- phase: Phase_3
+  displayName: Ubuntu
+
+  dependsOn: 
+   - Phase_2
+   - Phase_1
+  condition: succeeded()
+  queue:
+    name: Hosted Ubuntu 1604
+  variables:
+    BuildConfiguration: 'Release'
+  steps:
+  - task: DotNetCoreCLI@2
+    displayName: Build
+    inputs:
+      projects: |  
+       src/**/*.csproj
+       test/**/*.csproj
+
+      arguments: '--configuration $(BuildConfiguration)'
+
+
+  - task: DotNetCoreCLI@2
+    displayName: Test
+    inputs:
+      command: test
+
+      projects: 'test/**/*.csproj'
+
+      arguments: '--configuration $(BuildConfiguration) --no-build'
+
+
+  - task: DotNetCoreCLI@2
+    displayName: Pack
+    inputs:
+      command: pack
+
+      packagesToPack: 'src/Lemonad.ErrorHandling/*.csproj'
+
+      nobuild: true
+
+
