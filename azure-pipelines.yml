@@ -3,106 +3,97 @@ resources:
 - repo: self
 trigger: none
 
+
+variables:
+  buildConfiguration: 'Release'
+
 phases:
 - phase: Phase_1
   displayName: Windows
-
   condition: succeededOrFailed()
   queue:
     name: Hosted VS2017
-  variables:
-    BuildConfiguration: 'Release'
   steps:
-  - task: DotNetCoreCLI@2
-    displayName: Build
+
+  - script: dotnet build --configuration $(buildConfiguration)
+    displayName: 'Dotnet $(buildConfiguration) Build'
+  - script: |
+      mkdir $(Build.SourcesDirectory)\results
+      dotnet test --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura test\Lemonad.ErrorHandling.Test
+      dotnet test --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:MergeWtih=$(Build.SourcesDirectory)\test\Lemonad.ErrorHandling.Test\coverage.cobertura.xml test\Lemonad.ErrorHandling.Test
+      copy $(Build.SourcesDirectory)\test\Lemonad.ErrorHandling.Test\coverage.cobertura.xml $(Build.SourcesDirectory)\results
+      dotnet tool install dotnet-reportgenerator-globaltool --tool-path . --version 4.0.0-rc4
+      .\reportgenerator "-reports:$(Build.SourcesDirectory)\\test\Lemonad.ErrorHandling.Test\coverage.cobertura.xml" "-targetdir:results" "-reporttypes:HTMLInline;HTMLChart"
+    displayName: 'Unit testing'
+  - task: PublishTestResults@2
     inputs:
-      projects: |  
-       src/**/*.csproj
-       test/**/*.csproj
-
-      arguments: '--configuration $(BuildConfiguration)'
-
+      testRunner: VSTest
+      testResultsFiles: '**/*.trx'
+  - task: PublishCodeCoverageResults@1
+    inputs:
+      summaryFileLocation: $(Build.SourcesDirectory)\results\coverage.cobertura.xml
+      reportDirectory: $(Build.SourcesDirectory)\results
+      codecoverageTool: cobertura
 
   - task: DotNetCoreCLI@2
-    displayName: Test
     inputs:
-      command: test
-
-      projects: 'test/**/*.csproj'
-
-      arguments: '--configuration $(BuildConfiguration) --no-build'
+      command: publish
+      arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+      projects: test\Lemonad.ErrorHandling.Test\Lemonad.ErrorHandling.Test.csproj
+      publishWebProjects: false
+      modifyOutputPath: true
+      zipAfterPublish: true
 
 
 
 - phase: Phase_2
   displayName: Mac
-
   condition: succeededOrFailed()
   queue:
     name: Hosted macOS
-  variables:
-    BuildConfiguration: 'Release'
   steps:
   - task: DotNetCoreCLI@2
-    displayName: Build
+    displayName: 'Dotnet $(buildConfiguration) Build'
     inputs:
       projects: |  
        src/**/*.csproj
        test/**/*.csproj
 
-      arguments: '--configuration $(BuildConfiguration)'
+      arguments: '--configuration $(buildConfiguration)'
 
 
   - task: DotNetCoreCLI@2
-    displayName: Test
+    displayName: 'Dotnet $(buildConfiguration) Test'
     inputs:
       command: test
 
       projects: 'test/**/*.csproj'
 
-      arguments: '--configuration $(BuildConfiguration) --no-build'
+      arguments: '--configuration $(buildConfiguration) --no-build'
 
 
 
 - phase: Phase_3
   displayName: Ubuntu
-
-  dependsOn: 
-   - Phase_2
-   - Phase_1
   condition: succeeded()
   queue:
     name: Hosted Ubuntu 1604
-  variables:
-    BuildConfiguration: 'Release'
   steps:
   - task: DotNetCoreCLI@2
-    displayName: Build
+    displayName: 'Dotnet $(buildConfiguration) Build'
     inputs:
       projects: |  
        src/**/*.csproj
        test/**/*.csproj
 
-      arguments: '--configuration $(BuildConfiguration)'
+      arguments: '--configuration $(buildConfiguration)'
 
 
   - task: DotNetCoreCLI@2
-    displayName: Test
+    displayName: 'Dotnet $(buildConfiguration) Test'
     inputs:
       command: test
 
       projects: 'test/**/*.csproj'
 
-      arguments: '--configuration $(BuildConfiguration) --no-build'
-
-
-  - task: DotNetCoreCLI@2
-    displayName: Pack
-    inputs:
-      command: pack
-
-      packagesToPack: 'src/Lemonad.ErrorHandling/*.csproj'
-
-      nobuild: true
-
-
+      arguments: '--configuration $(buildConfiguration) --no-build'

@@ -16,6 +16,7 @@ trigger:
       - docs/*
       - build/* 
 
+
 phases:
 - phase: Phase_1
   displayName: Windows
