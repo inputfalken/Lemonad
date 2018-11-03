@@ -17,24 +17,16 @@ phases:
   variables:
     BuildConfiguration: 'Release'
   steps:
-  - task: DotNetCoreCLI@2
-    displayName: Build
-    inputs:
-      projects: |  
-       src/**/*.csproj
-       test/**/*.csproj
-
-      arguments: '--configuration $(BuildConfiguration)'
 
   - script: dotnet build --configuration $(buildConfiguration)
-    displayName: 'dotnet build $(buildConfiguration)'
+    displayName: 'Dotnet $(buildConfiguration) Build'
   - script: |
       mkdir $(Build.SourcesDirectory)\results
-      dotnet test --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura  StrikesLibrary.Test
-      dotnet test --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:MergeWtih=$(Build.SourcesDirectory)\StrikesLibrary.Test\coverage.cobertura.xml StrikesRepository.Test
-      copy $(Build.SourcesDirectory)\StrikesLibrary.Test\coverage.cobertura.xml $(Build.SourcesDirectory)\results
+      dotnet test --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura test\Lemonad.ErrorHandling
+      dotnet test --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:MergeWtih=$(Build.SourcesDirectory)\test\Lemonad.ErrorHandling\coverage.cobertura.xml StrikesRepository.Test
+      copy $(Build.SourcesDirectory)\test\Lemonad.ErrorHandling\coverage.cobertura.xml $(Build.SourcesDirectory)\results
       dotnet tool install dotnet-reportgenerator-globaltool --tool-path . --version 4.0.0-rc4
-      .\reportgenerator "-reports:$(Build.SourcesDirectory)\StrikesRepository.Test\coverage.cobertura.xml" "-targetdir:results" "-reporttypes:HTMLInline;HTMLChart"
+      .\reportgenerator "-reports:$(Build.SourcesDirectory)\\test\Lemonad.ErrorHandling\coverage.cobertura.xml" "-targetdir:results" "-reporttypes:HTMLInline;HTMLChart"
     displayName: 'Unit testing'
   - task: PublishTestResults@2
     inputs:
@@ -50,7 +42,7 @@ phases:
     inputs:
       command: publish
       arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-      projects: StrikesRepository/StrikesRepository.csproj
+      projects: test\Lemonad.ErrorHandling.Test\Lemonad.ErrorHandling.Test.csproj
       publishWebProjects: false
       modifyOutputPath: true
       zipAfterPublish: true
