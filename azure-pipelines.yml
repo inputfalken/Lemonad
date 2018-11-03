@@ -55,7 +55,7 @@ phases:
     name: Hosted macOS
   steps:
   - task: DotNetCoreCLI@2
-    displayName: Build
+    displayName: 'Dotnet $(buildConfiguration) Build'
     inputs:
       projects: |  
        src/**/*.csproj
@@ -65,7 +65,7 @@ phases:
 
 
   - task: DotNetCoreCLI@2
-    displayName: Test
+    displayName: 'Dotnet $(buildConfiguration) Test'
     inputs:
       command: test
 
@@ -86,7 +86,7 @@ phases:
     name: Hosted Ubuntu 1604
   steps:
   - task: DotNetCoreCLI@2
-    displayName: Build
+    displayName: 'Dotnet $(buildConfiguration) Build'
     inputs:
       projects: |  
        src/**/*.csproj
@@ -96,22 +96,10 @@ phases:
 
 
   - task: DotNetCoreCLI@2
-    displayName: Test
+    displayName: 'Dotnet $(buildConfiguration) Test'
     inputs:
       command: test
 
       projects: 'test/**/*.csproj'
 
       arguments: '--configuration $(buildConfiguration) --no-build'
-
-
-  - task: DotNetCoreCLI@2
-    displayName: Pack
-    inputs:
-      command: pack
-
-      packagesToPack: 'src/Lemonad.ErrorHandling/*.csproj'
-
-      nobuild: true
-
-
