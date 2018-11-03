@@ -10,7 +10,6 @@ variables:
 phases:
 - phase: Phase_1
   displayName: Windows
-
   condition: succeededOrFailed()
   queue:
     name: Hosted VS2017
@@ -49,7 +48,6 @@ phases:
 
 - phase: Phase_2
   displayName: Mac
-
   condition: succeededOrFailed()
   queue:
     name: Hosted macOS
@@ -77,10 +75,6 @@ phases:
 
 - phase: Phase_3
   displayName: Ubuntu
-
-  dependsOn: 
-   - Phase_2
-   - Phase_1
   condition: succeeded()
   queue:
     name: Hosted Ubuntu 1604
