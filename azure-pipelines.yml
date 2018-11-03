@@ -1,19 +1,8 @@
 name: $(Build.DefinitionName)-$(date:yyyyMMdd)$(rev:.r)
-pr:
-  branches:
-    include:
-    - master
-  paths:
-    include:
-    - src/*
-    - test/*
-    - docs/*
-    - azure-pipelines.yml
-    exclude:
-    - samples/*
-
 resources:
 - repo: self
+trigger: none
+
 phases:
 - phase: Phase_1
   displayName: Windows
