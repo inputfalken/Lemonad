@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
-    public interface IAsyncResult<T, TError> {
-        Task<IEither<T, TError>> Either { get; }
+    public interface IAsyncResult<out T, TError> {
+        IAsyncEither<T, TError> Either { get; }
 
         /// <inheritdoc cref="Result{T,TError}.Cast{TResult}" />
         IAsyncResult<TResult, TError> Cast<TResult>();

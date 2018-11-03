@@ -12,7 +12,7 @@ namespace Lemonad.ErrorHandling.Test.Internal.Tests.EitherAsyncTests {
                 return ErrorHandling.Result.Value<int, string>(20).Either;
             });
 
-            var eitherAsync = new EitherAsync<int, string>(either);
+            var eitherAsync = new AsyncEither<int, string>(either);
 
             Assert.Equal(default, eitherAsync.Value);
             Assert.Equal(default, eitherAsync.Error);
@@ -30,7 +30,7 @@ namespace Lemonad.ErrorHandling.Test.Internal.Tests.EitherAsyncTests {
                 return ErrorHandling.Result.Error<int, string>("ERROR").Either;
             });
 
-            var eitherAsync = new EitherAsync<int, string>(either);
+            var eitherAsync = new AsyncEither<int, string>(either);
 
             Assert.Equal(default, eitherAsync.Value);
             Assert.Equal(default, eitherAsync.Error);
@@ -48,7 +48,7 @@ namespace Lemonad.ErrorHandling.Test.Internal.Tests.EitherAsyncTests {
                 return ErrorHandling.Result.Value<int, string>(20).Either;
             });
 
-            var eitherAsync = new EitherAsync<int, string>(either);
+            var eitherAsync = new AsyncEither<int, string>(either);
 
             Assert.Equal(default, eitherAsync.Value);
             Assert.Equal(default, eitherAsync.Error);
@@ -66,7 +66,7 @@ namespace Lemonad.ErrorHandling.Test.Internal.Tests.EitherAsyncTests {
                 return ErrorHandling.Result.Error<int, string>("ERROR").Either;
             });
 
-            var eitherAsync = new EitherAsync<int, string>(either);
+            var eitherAsync = new AsyncEither<int, string>(either);
 
             Assert.Equal(default, eitherAsync.Value);
             Assert.Equal(default, eitherAsync.Error);
@@ -84,7 +84,7 @@ namespace Lemonad.ErrorHandling.Test.Internal.Tests.EitherAsyncTests {
                 return ErrorHandling.Result.Value<int, string>(20).Either;
             });
 
-            var eitherAsync = new EitherAsync<int, string>(either);
+            var eitherAsync = new AsyncEither<int, string>(either);
 
             Assert.Equal(default, eitherAsync.Value);
             Assert.Equal(default, eitherAsync.Error);
@@ -103,7 +103,7 @@ namespace Lemonad.ErrorHandling.Test.Internal.Tests.EitherAsyncTests {
                 return ErrorHandling.Result.Error<int, string>("ERROR").Either;
             });
 
-            var eitherAsync = new EitherAsync<int, string>(either);
+            var eitherAsync = new AsyncEither<int, string>(either);
 
             Assert.Equal(default, eitherAsync.Value);
             Assert.Equal(default, eitherAsync.Error);

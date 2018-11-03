@@ -9,9 +9,9 @@ namespace Lemonad.ErrorHandling.Internal {
     ///     An asynchronous version of <see cref="Result{T,TError}" /> with the same functionality.
     /// </summary>
     internal readonly struct AsyncResult<T, TError> : IAsyncResult<T, TError> {
-        private AsyncResult(Task<IEither<T, TError>> either) => Either = either;
+        private AsyncResult(Task<IEither<T, TError>> either) => Either = either.ToAsyncEither();
 
-        public Task<IEither<T, TError>> Either { get; }
+        public IAsyncEither<T, TError> Either { get; }
 
         public static AsyncResult<T, TError> Factory(Task<IEither<T, TError>> result)
             => new AsyncResult<T, TError>(FactoryInternal(result));
@@ -46,8 +46,8 @@ namespace Lemonad.ErrorHandling.Internal {
             IEqualityComparer<TKey> comparer
         ) => new AsyncResult<TResult, TError>(
             EitherMethods.JoinAsync(
-                Either,
-                inner.Either,
+                Either.ToTaskEither(),
+                inner.Either.ToTaskEither(),
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
@@ -64,8 +64,8 @@ namespace Lemonad.ErrorHandling.Internal {
             Func<TError> errorSelector
         ) => new AsyncResult<TResult, TError>(
             EitherMethods.JoinAsync(
-                Either,
-                inner.Either,
+                Either.ToTaskEither(),
+                inner.Either.ToTaskEither(),
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
@@ -77,84 +77,84 @@ namespace Lemonad.ErrorHandling.Internal {
         public IAsyncResult<TResult, TError> Zip<TOther, TResult>(
             IAsyncResult<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector
-        ) => new AsyncResult<TResult, TError>(EitherMethods.ZipAsync(Either, other.Either, resultSelector));
+        ) => new AsyncResult<TResult, TError>(EitherMethods.ZipAsync(Either.ToTaskEither(), other.Either.ToTaskEither(), resultSelector));
 
         public IAsyncResult<T, TError> Filter(Func<T, bool> predicate, Func<T, TError> errorSelector)
-            => new AsyncResult<T, TError>(EitherMethods.FilterAsync(Either, predicate, errorSelector));
+            => new AsyncResult<T, TError>(EitherMethods.FilterAsync(Either.ToTaskEither(), predicate, errorSelector));
 
         public IAsyncResult<T, TError> Filter(Func<T, Task<bool>> predicate, Func<T, TError> errorSelector)
-            => new AsyncResult<T, TError>(EitherMethods.FilterAsyncPredicate(Either, predicate, errorSelector));
+            => new AsyncResult<T, TError>(EitherMethods.FilterAsyncPredicate(Either.ToTaskEither(), predicate, errorSelector));
 
         public IAsyncResult<T, TError> IsErrorWhen(
             Func<T, bool> predicate,
             Func<T, TError> errorSelector
-        ) => new AsyncResult<T, TError>(EitherMethods.IsErrorWhenAsync(Either, predicate, errorSelector));
+        ) => new AsyncResult<T, TError>(EitherMethods.IsErrorWhenAsync(Either.ToTaskEither(), predicate, errorSelector));
 
         public IAsyncResult<T, TError> IsErrorWhen(
             Func<T, Task<bool>> predicate,
             Func<T, TError> errorSelector)
-            => new AsyncResult<T, TError>(EitherMethods.IsErrorWhenAsyncPredicate(Either, predicate, errorSelector));
+            => new AsyncResult<T, TError>(EitherMethods.IsErrorWhenAsyncPredicate(Either.ToTaskEither(), predicate, errorSelector));
 
         public IAsyncResult<TResult, TError> Map<TResult>(Func<T, TResult> selector)
-            => new AsyncResult<TResult, TError>(EitherMethods.MapAsync(Either, selector));
+            => new AsyncResult<TResult, TError>(EitherMethods.MapAsync(Either.ToTaskEither(), selector));
 
         public IAsyncResult<TResult, TError> Map<TResult>(Func<T, Task<TResult>> selector)
-            => new AsyncResult<TResult, TError>(EitherMethods.MapAsyncSelector(Either, selector));
+            => new AsyncResult<TResult, TError>(EitherMethods.MapAsyncSelector(Either.ToTaskEither(), selector));
 
         public IAsyncResult<T, TErrorResult> MapError<TErrorResult>(Func<TError, TErrorResult> selector)
-            => new AsyncResult<T, TErrorResult>(EitherMethods.MapErrorAsync(Either, selector));
+            => new AsyncResult<T, TErrorResult>(EitherMethods.MapErrorAsync(Either.ToTaskEither(), selector));
 
         public IAsyncResult<T, TErrorResult> MapError<TErrorResult>(Func<TError, Task<TErrorResult>> selector)
-            => new AsyncResult<T, TErrorResult>(EitherMethods.MapErrorAsyncSelector(Either, selector));
+            => new AsyncResult<T, TErrorResult>(EitherMethods.MapErrorAsyncSelector(Either.ToTaskEither(), selector));
 
         /// <inheritdoc cref="Result{T,TError}.Do" />
         public IAsyncResult<T, TError> Do(Action action)
-            => new AsyncResult<T, TError>(EitherMethods.DoAsync(Either, action));
+            => new AsyncResult<T, TError>(EitherMethods.DoAsync(Either.ToTaskEither(), action));
 
         /// <inheritdoc cref="Result{T,TError}.DoWithError" />
         public IAsyncResult<T, TError> DoWithError(Action<TError> action)
-            => new AsyncResult<T, TError>(EitherMethods.DoWithErrorAsync(Either, action));
+            => new AsyncResult<T, TError>(EitherMethods.DoWithErrorAsync(Either.ToTaskEither(), action));
 
         /// <inheritdoc cref="Result{T,TError}.DoWith" />
         public IAsyncResult<T, TError> DoWith(Action<T> action)
-            => new AsyncResult<T, TError>(EitherMethods.DoWithAsync(Either, action));
+            => new AsyncResult<T, TError>(EitherMethods.DoWithAsync(Either.ToTaskEither(), action));
 
         /// <inheritdoc cref="Result{T,TError}.FullMap{TResult,TErrorResult}" />
         public IAsyncResult<TResult, TErrorResult> FullMap<TResult, TErrorResult>(
             Func<T, TResult> selector,
             Func<TError, TErrorResult> errorSelector
-        ) => new AsyncResult<TResult, TErrorResult>(EitherMethods.FullMapAsync(Either, selector, errorSelector));
+        ) => new AsyncResult<TResult, TErrorResult>(EitherMethods.FullMapAsync(Either.ToTaskEither(), selector, errorSelector));
 
         public IAsyncResult<TResult, TErrorResult> FullMap<TResult, TErrorResult>(
             Func<T, TResult> selector,
             Func<TError, Task<TErrorResult>> errorSelector
-        ) => new AsyncResult<TResult, TErrorResult>(EitherMethods.FullMapAsync(Either, selector, errorSelector));
+        ) => new AsyncResult<TResult, TErrorResult>(EitherMethods.FullMapAsync(Either.ToTaskEither(), selector, errorSelector));
 
         public IAsyncResult<TResult, TErrorResult> FullMap<TResult, TErrorResult>(
             Func<T, Task<TResult>> selector,
             Func<TError, Task<TErrorResult>> errorSelector
-        ) => new AsyncResult<TResult, TErrorResult>(EitherMethods.FullMapAsync(Either, selector, errorSelector));
+        ) => new AsyncResult<TResult, TErrorResult>(EitherMethods.FullMapAsync(Either.ToTaskEither(), selector, errorSelector));
 
         public IAsyncResult<TResult, TErrorResult> FullMap<TResult, TErrorResult>(
             Func<T, Task<TResult>> selector,
             Func<TError, TErrorResult> errorSelector
-        ) => new AsyncResult<TResult, TErrorResult>(EitherMethods.FullMapAsync(Either, selector, errorSelector));
+        ) => new AsyncResult<TResult, TErrorResult>(EitherMethods.FullMapAsync(Either.ToTaskEither(), selector, errorSelector));
 
         /// <inheritdoc cref="Result{T,TError}.Match{TResult}" />
         public Task<TResult> Match<TResult>(
             Func<T, TResult> selector,
             Func<TError, TResult> errorSelector
-        ) => EitherMethods.MatchAsync(Either, selector, errorSelector);
+        ) => EitherMethods.MatchAsync(Either.ToTaskEither(), selector, errorSelector);
 
         /// <inheritdoc cref="Result{T,TError}.Match" />
         public Task Match(Action<T> action, Action<TError> errorAction)
-            => EitherMethods.MatchAsync(Either, action, errorAction);
+            => EitherMethods.MatchAsync(Either.ToTaskEither(), action, errorAction);
 
         public IAsyncResult<TResult, TError> FlatMap<TResult>(Func<T, IAsyncResult<TResult, TError>> flatSelector)
             => new AsyncResult<TResult, TError>(
                 EitherMethods.FlatMapAsync(
-                    Either,
-                    flatSelector.Compose(y => y.Either)
+                    Either.ToTaskEither(),
+                    flatSelector.Compose(y => y.Either.ToTaskEither())
                 )
             );
 
@@ -163,8 +163,8 @@ namespace Lemonad.ErrorHandling.Internal {
             Func<T, TSelector, TResult> resultSelector
         ) => new AsyncResult<TResult, TError>(
             EitherMethods.FlatMapAsync(
-                Either,
-                flatSelector.Compose(y => y.Either),
+                Either.ToTaskEither(),
+                flatSelector.Compose(y => y.Either.ToTaskEither()),
                 resultSelector
             )
         );
@@ -172,8 +172,8 @@ namespace Lemonad.ErrorHandling.Internal {
         public IAsyncResult<TResult, TError> FlatMap<TResult, TErrorResult>(
             Func<T, IAsyncResult<TResult, TErrorResult>> flatMapSelector, Func<TErrorResult, TError> errorSelector) {
             return new AsyncResult<TResult, TError>(
-                EitherMethods.FlatMapAsync(Either,
-                    flatMapSelector.Compose(x => x.Either),
+                EitherMethods.FlatMapAsync(Either.ToTaskEither(),
+                    flatMapSelector.Compose(x => x.Either.ToTaskEither()),
                     errorSelector)
             );
         }
@@ -184,8 +184,8 @@ namespace Lemonad.ErrorHandling.Internal {
             Func<TErrorResult, TError> errorSelector
         ) => new AsyncResult<TResult, TError>(
             EitherMethods.FlatMapAsync(
-                Either,
-                flatMapSelector.Compose(y => y.Either),
+                Either.ToTaskEither(),
+                flatMapSelector.Compose(y => y.Either.ToTaskEither()),
                 resultSelector,
                 errorSelector
             )
@@ -193,41 +193,41 @@ namespace Lemonad.ErrorHandling.Internal {
 
         /// <inheritdoc cref="Result{T,TError}.Cast{TResult}" />
         public IAsyncResult<TResult, TError> Cast<TResult>()
-            => new AsyncResult<TResult, TError>(EitherMethods.CastAsync<T, TResult, TError>(Either));
+            => new AsyncResult<TResult, TError>(EitherMethods.CastAsync<T, TResult, TError>(Either.ToTaskEither()));
 
         public IAsyncResult<T, TError> Flatten<TResult, TErrorResult>(
             Func<T, IAsyncResult<TResult, TErrorResult>> selector,
             Func<TErrorResult, TError> errorSelector
         ) => new AsyncResult<T, TError>(
             EitherMethods.FlattenAsync(
-                Either,
-                selector.Compose(y => y.Either),
+                Either.ToTaskEither(),
+                selector.Compose(y => y.Either.ToTaskEither()),
                 errorSelector
             )
         );
 
         public IAsyncResult<T, TError> Flatten<TResult>(Func<T, IAsyncResult<TResult, TError>> selector)
-            => new AsyncResult<T, TError>(EitherMethods.FlattenAsync(Either, selector.Compose(y => y.Either)));
+            => new AsyncResult<T, TError>(EitherMethods.FlattenAsync(Either.ToTaskEither(), selector.Compose(y => y.Either.ToTaskEither())));
 
         /// <inheritdoc cref="Result{T,TError}.FullCast{TResult,TErrorResult}" />
         public IAsyncResult<TResult, TErrorResult> FullCast<TResult, TErrorResult>()
             => new AsyncResult<TResult, TErrorResult>(
-                EitherMethods.FullCastAsync<T, TResult, TError, TErrorResult>(Either)
+                EitherMethods.FullCastAsync<T, TResult, TError, TErrorResult>(Either.ToTaskEither())
             );
 
         /// <inheritdoc cref="Result{T,TError}.FullCast{TResult}" />
         public IAsyncResult<TResult, TResult> FullCast<TResult>() =>
             new AsyncResult<TResult, TResult>(
-                EitherMethods.FullCastAsync<T, TResult, TError>(Either)
+                EitherMethods.FullCastAsync<T, TResult, TError>(Either.ToTaskEither())
             );
 
         /// <inheritdoc cref="Result{T,TError}.CastError{TResult}" />
         public IAsyncResult<T, TResult> CastError<TResult>()
-            => new AsyncResult<T, TResult>(EitherMethods.CastErrorAsync<T, TResult, TError>(Either));
+            => new AsyncResult<T, TResult>(EitherMethods.CastErrorAsync<T, TResult, TError>(Either.ToTaskEither()));
 
         /// <inheritdoc cref="Result{T,TError}.SafeCast{TResult}" />
         public IAsyncResult<TResult, TError> SafeCast<TResult>(Func<T, TError> errorSelector)
-            => new AsyncResult<TResult, TError>(EitherMethods.SafeCastAsync<T, TResult, TError>(Either, errorSelector));
+            => new AsyncResult<TResult, TError>(EitherMethods.SafeCastAsync<T, TResult, TError>(Either.ToTaskEither(), errorSelector));
 
         public IAsyncResult<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
             Func<T, IAsyncResult<TFlatMap, TErrorResult>> flatMapSelector,
@@ -235,8 +235,8 @@ namespace Lemonad.ErrorHandling.Internal {
             Func<TError, TErrorResult> errorSelector
         ) => new AsyncResult<TResult, TErrorResult>(
             EitherMethods.FullFlatMapAsync(
-                Either,
-                flatMapSelector.Compose(y => y.Either),
+                Either.ToTaskEither(),
+                flatMapSelector.Compose(y => y.Either.ToTaskEither()),
                 resultSelector,
                 errorSelector
             )
@@ -247,8 +247,8 @@ namespace Lemonad.ErrorHandling.Internal {
             Func<TError, TErrorResult> errorSelector
         ) => new AsyncResult<TResult, TErrorResult>(
             EitherMethods.FullFlatMapAsync(
-                Either,
-                flatMapSelector.Compose(y => y.Either),
+                Either.ToTaskEither(),
+                flatMapSelector.Compose(y => y.Either.ToTaskEither()),
                 errorSelector
             )
         );

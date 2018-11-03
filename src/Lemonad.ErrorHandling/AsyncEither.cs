@@ -1,14 +1,14 @@
 ﻿using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling {
-    internal class EitherAsync<T, TError> : IEitherAsync<T, TError> {
+    internal class AsyncEither<T, TError> : IAsyncEither<T, TError> {
         private readonly Task<IEither<T, TError>> _either;
         private bool _hasError;
 
         private bool _hasValue;
         private bool _isAwaited;
 
-        public EitherAsync(Task<IEither<T, TError>> either) => _either = either;
+        public AsyncEither(Task<IEither<T, TError>> either) => _either = either;
 
         public TError Error { get; private set; }
 

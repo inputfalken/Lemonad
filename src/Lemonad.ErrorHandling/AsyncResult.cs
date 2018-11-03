@@ -10,12 +10,6 @@ using Lemonad.ErrorHandling.Internal.TaskExtensions;
 
 namespace Lemonad.ErrorHandling {
     public static class AsyncResult {
-        // This could be used for mapping.
-        private static async Task<IEither<T, TError>> Map<T, TError>(IEitherAsync<T, TError> left) {
-            var hasValue = await left.HasValue;
-            return hasValue ? Result.Value<T, TError>(left.Value).Either : Result.Error<T, TError>(left.Error).Either;
-        }
-        
         /// <summary>
         ///     Creates a <see cref="IAsyncResult{T,TError}" /> with <typeparamref name="TError" />.
         /// </summary>
@@ -31,9 +25,6 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static IAsyncResult<T, TError> Error<T, TError>(TError error) =>
             AsyncResult<T, TError>.ErrorFactory(in error);
-
-        public static TaskAwaiter<IEither<T, TError>> GetAwaiter<T, TError>(this IAsyncResult<T, TError> result) =>
-            result.Either.GetAwaiter();
 
         /// <summary>
         ///     Evaluates the <see cref="IAsyncResult{T,TError}" />.
@@ -75,8 +66,8 @@ namespace Lemonad.ErrorHandling {
 
         public static IAsyncResult<T, IReadOnlyList<TError>> Multiple<T, TError>(this IAsyncResult<T, TError> source,
             params Func<IAsyncResult<T, TError>, IAsyncResult<T, TError>>[] validations) =>
-            AsyncResult<T, IReadOnlyList<TError>>.Factory(EitherMethods.MultipleAsync(source.Either,
-                validations.Select(x => x.Compose(y => y.Either)(source)).ToArray()));
+            AsyncResult<T, IReadOnlyList<TError>>.Factory(EitherMethods.MultipleAsync(source.Either.ToTaskEither(),
+                validations.Select(x => x.Compose(y => y.Either.ToTaskEither())(source)).ToArray()));
 
         /// <summary>
         ///     Converts the <see cref="Task" /> with <see cref="IAsyncResult{T,TError}" /> into
@@ -127,12 +118,15 @@ namespace Lemonad.ErrorHandling {
 
         /// <inheritdoc cref="ToEnumerable{T,TError}" />
         public static async Task<IEnumerable<T>> ToEnumerable<T, TError>(this IAsyncResult<T, TError> result) =>
-            EitherMethods.YieldValues(await result.Either.ConfigureAwait(false));
+            EitherMethods.YieldValues(await result.Either.ToTaskEither().ConfigureAwait(false));
 
         /// <inheritdoc cref="ToErrorEnumerable{T,TError}" />
         public static async Task<IEnumerable<TError>>
             ToErrorEnumerable<T, TError>(this IAsyncResult<T, TError> result) =>
-            EitherMethods.YieldErrors(await result.Either.ConfigureAwait(false));
+            EitherMethods.YieldErrors(await result.Either.ToTaskEither().ConfigureAwait(false));
+
+        public static TaskAwaiter<IEither<T, TError>> GetAwaiter<T, TError>(this IAsyncResult<T, TError> result) =>
+            result.Either.ToTaskEither().GetAwaiter();
 
         /// <summary>
         ///     Creates a <see cref="IAsyncResult{T,TError}" /> with <typeparamref name="T" />.

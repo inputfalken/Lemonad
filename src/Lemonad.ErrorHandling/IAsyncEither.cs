@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling {
-    public interface IEitherAsync<out T, out TError> {
+    public interface IAsyncEither<out T, out TError> {
         /// <summary>
         ///     Represents a bool to indicate whether property <see cref="Value" /> is available to use.
         /// </summary>
