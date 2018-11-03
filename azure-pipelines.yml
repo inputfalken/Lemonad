@@ -1,4 +1,13 @@
 name: $(Build.DefinitionName)-$(date:yyyyMMdd)$(rev:.r)
+trigger:
+  paths:
+    include:
+    - src/*
+    - test/*
+    - docs/*
+    - azure-pipelines.yml
+    exclude:
+    - samples/*
 
 resources:
 - repo: self
