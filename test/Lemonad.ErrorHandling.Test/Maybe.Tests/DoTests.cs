@@ -2,33 +2,29 @@ using System;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
-    public class DoWithTests {
-        
+    public class DoTests {
         [Fact]
         public void Maybe_With_Value_Null_Action__Expects_Exception() {
-            Action<string> argument = null;
+            Action argument = null;
             Assert.Throws<ArgumentNullException>(
-                "someAction",
-                () => ErrorHandling.Maybe.Value("foobar").DoWith(argument)
+                "action",
+                () => ErrorHandling.Maybe.Value("foobar").Do(argument)
             );
         }
 
         [Fact]
         public void Maybe_With_No_Value_Null_Action__Expects_Exception() {
-            Action<string> argument = null;
+            Action argument = null;
             Assert.Throws<ArgumentNullException>(
-                "someAction",
-                () => ErrorHandling.Maybe.Value("foobar").DoWith(argument)
+                "action",
+                () => ErrorHandling.Maybe.Value("foobar").Do(argument)
             );
         }
 
         [Fact]
         public void Maybe_With_Value__Expects_Action_Executed() {
             var actionExecuted = false;
-            var value = ErrorHandling.Maybe.Value("foobar").DoWith(s => {
-                actionExecuted = true;
-                Assert.Equal("foobar", s);
-            });
+            var value = ErrorHandling.Maybe.Value("foobar").Do(() => actionExecuted = true);
 
             Assert.True(actionExecuted);
             Assert.True(value.HasValue);
@@ -38,9 +34,9 @@ namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
         [Fact]
         public void Maybe_With_No_Value__Expects_Action_Executed() {
             var actionExecuted = false;
-            var value = ErrorHandling.Maybe.None<string>().DoWith(s => { actionExecuted = true; });
+            var value = ErrorHandling.Maybe.None<string>().Do(() => actionExecuted = true);
 
-            Assert.False(actionExecuted);
+            Assert.True(actionExecuted);
             Assert.False(value.HasValue);
             Assert.Equal(default, value.Value);
         }
