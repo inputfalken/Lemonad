@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Lemonad.ErrorHandling.EnumerableExtensions;
 using Xunit;
@@ -79,6 +80,16 @@ namespace Lemonad.ErrorHandling.Test.EnumerableTests {
             Assert.True(result.Either.HasValue);
             Assert.Equal(default, result.Either.Error);
             Assert.Equal(0, result.Either.Value);
+        }
+
+        [Fact]
+        public void No_Predicate_With_No_Element_Using_Queue___Expects_Error() {
+            var result = new Queue<int>(Enumerable.Empty<int>()).FirstOrError(() => "ERROR");
+
+            Assert.True(result.Either.HasError);
+            Assert.False(result.Either.HasValue);
+            Assert.Equal("ERROR", result.Either.Error);
+            Assert.Equal(default, result.Either.Value);
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Lemonad.ErrorHandling.Test {
                         case 1:
                             return ErrorHandling.Result.Value<Gender, string>(Gender.Female);
                         default:
-                            return ErrorHandling.Result.Error<Gender, string>("Could not determine gender");
+                            return ErrorHandling.Result.Error<Gender, string>("Could not determine gender.");
                     }
                 }).FlatMap(x => x);
         }
