@@ -77,7 +77,7 @@ foreach (int message in failedDivisions) { Console.WriteLine(message); }
 ```
 
 Or if you do not care about handling a **failure** type,
-you could use the `Maybe<T>` type. The maybe type works
+you could use the `IMaybe<T>` type. The maybe type works
 just like `IResult<T, TError>` except that there's
 no **failure** (TError) type available.
 It's works exactly as `Nullable<T>` (aka `T?`)
@@ -85,10 +85,10 @@ does except that you can use this with reference
 types (`string`, `object`…) as well.
 
 The following example illustrates how you can perform a division
-and instead of throwing an exception; you could return `Maybe<T>.None`
+and instead of throwing an exception; you could return `IMaybe<T>.None`
 
 ``` csharp
-Maybe<int> Divide(int x, int y) {
+IMaybe<int> Divide(int x, int y) {
     if (y != 0)
         return x / y;
     else {
@@ -96,7 +96,7 @@ Maybe<int> Divide(int x, int y) {
     }
 }
 
-List<Maybe<int>> maybes = new List<Maybe<int>> {
+List<IMaybe<int>> maybes = new List<IMaybe<int>> {
     Divide(4, 2),
     Divide(3, 0),
     Divide(3, 3),
@@ -121,11 +121,13 @@ foreach (int division in successFulDivisions) { Console.WriteLine(division); }
 
 ## Current supported data types
 
-* `IResult<T, TError>`
-* `IAsyncResult<T, TError>`
-* `Maybe<T>`
+* `IResult<out T, TError>`
+* `IAsyncResult<out T, TError>`
+* `IMaybe<out T>`
 
 ## To be added
 
-* `IAsyncMaybe<T>`
+* `IAsyncMaybe<out T>`
 
+The out word means that they are covariant.
+For more info please visit the article [Variance in Generic Interfaces (C#)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/covariance-contravariance/variance-in-generic-interfaces)
