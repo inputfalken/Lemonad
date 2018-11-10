@@ -17,7 +17,7 @@ namespace Lemonad.ErrorHandling {
         /// </summary>
         /// <example>
         ///     <code language="c#">
-        /// if (Either.HasError)
+        /// if (await Either.HasError)
         /// {
         ///     // Safe to use.
         ///     Console.WriteLine(Either.Error)
@@ -31,7 +31,7 @@ namespace Lemonad.ErrorHandling {
         /// </summary>
         /// <example>
         ///     <code language="c#">
-        /// if (Either.HasValue)
+        /// if (await Either.HasValue)
         /// {
         ///     // Safe to use.
         ///     Console.WriteLine(Either.Value)
