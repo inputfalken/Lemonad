@@ -11,18 +11,26 @@ namespace MvcValidation.Controller {
             var apiValidation = model
                 .ToResult(x => true, x => default(PersonPostApiError))
                 .Multiple(
-                    x => x.Filter(y => y.Age > 10,
-                        y => new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
-                    x => x.Flatten(y => ValidateName(y.FirstName),
-                        s => new PersonPostApiError {Message = s, Model = model}),
-                    x => x.Flatten(y => ValidateName(y.LastName),
-                        s => new PersonPostApiError {Message = s, Model = model})
+                    x => x.Filter(
+                        y => y.Age > 10,
+                        y => new PersonPostApiError {Message = "Age has to be older than '10'.", Model = model}
+                    ),
+                    x => x.Flatten(
+                        y => ValidateName(y.FirstName),
+                        s => new PersonPostApiError {Message = s, Model = model}
+                    ),
+                    x => x.Flatten(
+                        y => ValidateName(y.LastName),
+                        s => new PersonPostApiError {Message = s, Model = model}
+                    )
                 );
 
             return apiValidation.Match(Result.Value<PersonPostApiModel, PersonPostApiError>, x =>
                 Result.Error<PersonPostApiModel, PersonPostApiError>(
                     new PersonPostApiError {
-                        Errors = x.Select(y => y.Message).ToArray(), Message = "Invalid Api Validation.", Model = model
+                        Errors = x.Select(y => y.Message).ToArray(),
+                        Message = "Invalid Api Validation.",
+                        Model = model
                     }
                 ));
         }
@@ -30,14 +38,14 @@ namespace MvcValidation.Controller {
         private static async Task<IResult<SuccessModel, ErrorModel>> FirstNameAppService(PersonModel person) {
             await Task.Delay(50);
             return person.FirstName
-                .ToResult(s => s == "Foo", x => new ErrorModel {Message = "Expected a \'Foo\'"})
+                .ToResult(s => s == "Foo", x => new ErrorModel {Message = "Expected a 'Foo'."})
                 .Map(x => new SuccessModel {Count = 4711});
         }
 
         private static async Task<IResult<SuccessModel, ErrorModel>> LastNameAppService(PersonModel person) {
             await Task.Delay(50);
             return person.LastName
-                .ToResult(s => s == "Bar", x => new ErrorModel {Message = "Expected a \'Bar\'"})
+                .ToResult(s => s == "Bar", x => new ErrorModel {Message = "Expected a 'Bar'."})
                 .Map(x => new SuccessModel {Count = 4711});
         }
 
@@ -48,10 +56,14 @@ namespace MvcValidation.Controller {
                 // Using match inside this scope is currently too complex since it requires all type params to be supplied.
                 .Map(x => new PersonModel {FirstName = x.FirstName, LastName = x.LastName})
                 .ToAsyncResult()
-                .Flatten(x => LastNameAppService(x).ToAsyncResult(),
-                    x => new PersonPostApiError {Message = x.Message, Model = model})
-                .FlatMap(x => FirstNameAppService(x).ToAsyncResult(),
-                    x => new PersonPostApiError {Message = x.Message, Model = model})
+                .Flatten(
+                    x => LastNameAppService(x).ToAsyncResult(),
+                    x => new PersonPostApiError {Message = x.Message, Model = model}
+                )
+                .FlatMap(
+                    x => FirstNameAppService(x).ToAsyncResult(),
+                    x => new PersonPostApiError {Message = x.Message, Model = model}
+                )
                 .Match<IActionResult>(Ok, BadRequest);
         }
 

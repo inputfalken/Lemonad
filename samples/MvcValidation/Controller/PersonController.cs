@@ -11,31 +11,39 @@ namespace MvcValidation.Controller {
             var apiValidation = model
                 .ToResult(x => true, x => default(PersonPostApiError))
                 .Multiple(
-                    x => x.Filter(y => y.Age > 10,
-                        y => new PersonPostApiError {Message = "Age needs to be more than 10", Model = model}),
-                    x => x.Flatten(y => ValidateName(y.FirstName),
-                        s => new PersonPostApiError {Message = s, Model = model}),
-                    x => x.Flatten(y => ValidateName(y.LastName),
-                        s => new PersonPostApiError {Message = s, Model = model})
+                    x => x.Filter(
+                        y => y.Age > 10,
+                        y => new PersonPostApiError {Message = "Age has to be older than '10'.", Model = model}
+                    ),
+                    x => x.Flatten(
+                        y => ValidateName(y.FirstName),
+                        s => new PersonPostApiError {Message = s, Model = model}
+                    ),
+                    x => x.Flatten(
+                        y => ValidateName(y.LastName),
+                        s => new PersonPostApiError {Message = s, Model = model}
+                    )
                 );
 
             return apiValidation.Match(Result.Value<PersonPostApiModel, PersonPostApiError>, x =>
                 Result.Error<PersonPostApiModel, PersonPostApiError>(
                     new PersonPostApiError {
-                        Errors = x.Select(y => y.Message).ToArray(), Message = "Invalid Api Validation.", Model = model
+                        Errors = x.Select(y => y.Message).ToArray(),
+                        Message = "Invalid Api Validation.",
+                        Model = model
                     }
                 ));
         }
 
         private static IResult<SuccessModel, ErrorModel> FirstNameAppService(PersonModel person) {
             return person.FirstName
-                .ToResult(s => s == "Foo", x => new ErrorModel {Message = "Expected a \'Foo\'"})
+                .ToResult(s => s == "Foo", x => new ErrorModel {Message = "Expected a 'Foo'."})
                 .Map(x => new SuccessModel {Count = 4711});
         }
 
         private static IResult<SuccessModel, ErrorModel> LastNameAppService(PersonModel person) {
             return person.LastName
-                .ToResult(s => s == "Bar", x => new ErrorModel {Message = "Expected a \'Bar\'"})
+                .ToResult(s => s == "Bar", x => new ErrorModel {Message = "Expected a 'Bar'."})
                 .Map(x => new SuccessModel {Count = 4711});
         }
 
