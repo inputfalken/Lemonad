@@ -129,3 +129,5 @@ foreach (int division in successFulDivisions) { Console.WriteLine(division); }
 
 * `IAsyncMaybe<out T>`
 
+The out word means that they are covariant.
+For more info please visit the article [Variance in Generic Interfaces (C#)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/covariance-contravariance/variance-in-generic-interfaces)
