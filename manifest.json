@@ -21,10 +21,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.AsyncResult.html",
-          "hash": "o6JZMhFBC+oA7N0GKZFcGA=="
+          "hash": "jec8e1FrMMX0Yfv9sRaImA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -36,7 +36,7 @@
           "hash": "560wgBFqndMFlxYZd2DyCw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -45,10 +45,22 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.html",
-          "hash": "hvpCJYHw53roF6Bi9ru+ug=="
+          "hash": "arszdbYRv0qPsEo2wt2Ogw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.html",
+          "hash": "r7MbE7u9KrQ8Mh+rLbkb3g=="
+        }
+      },
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -57,10 +69,22 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.EnumerableExtensions.html",
-          "hash": "0aogjdZha+mP4a5ewtt1AQ=="
+          "hash": "zn85eM3G2/OTe/T2F2UI0g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.IAsyncEither-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.IAsyncEither-2.html",
+          "hash": "CT+rjYh/+KmNoINZCifIUw=="
+        }
+      },
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -69,10 +93,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.IAsyncResult-2.html",
-          "hash": "W7K6UueoArh6bMbxUggkAg=="
+          "hash": "JvFAO2gck+jbLFnon1q6pA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -84,7 +108,7 @@
           "hash": "e0nmu59Xqsr6XUdK3TXamQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -96,7 +120,7 @@
           "hash": "sAAuaoeEGdVIf03yba4tMg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -108,7 +132,7 @@
           "hash": "so0iize9KWW/abFVvHb07Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -120,7 +144,7 @@
           "hash": "xi/135tfFftLR7T2sfIx0Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -132,7 +156,7 @@
           "hash": "tiALFVMDY2XoOzU2SHqQWQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -144,7 +168,7 @@
           "hash": "Ehe64QfMRekS7yojEdO9PQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -156,7 +180,7 @@
           "hash": "KvpGaWsrwcw7nbL4b1p0PA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -165,10 +189,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Result.html",
-          "hash": "EjB/KOer3Hw6sxjXY8T+8A=="
+          "hash": "sJELRtxWi6qM65N47Ys9jA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -177,10 +201,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.html",
-          "hash": "7HKcnY7AcgfGG7D2m0A0dw=="
+          "hash": "TqWXSHWV7G/TJrrSu95uxA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -192,7 +216,7 @@
           "hash": "mr8pLLT6bbNQs2JNNmvsVQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -201,7 +225,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "TunvA24uBLjXCJGUF1Cxdw=="
+          "hash": "buoFFHol91+uRJtwSw4WWw=="
         }
       },
       "is_incremental": false,
@@ -263,17 +287,17 @@
         "incrementalPhase": "build"
       },
       "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build"
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
-          "incrementalPhase": "build"
-        },
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         }
       }

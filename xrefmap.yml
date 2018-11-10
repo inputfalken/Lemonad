@@ -300,6 +300,56 @@ references:
   fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Errors(Of T, TError)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.IResult(Of T, TError)))
   nameWithType: ResultEnumerable.Errors<T, TError>(IEnumerable<IResult<T, TError>>)
   nameWithType.vb: ResultEnumerable.Errors(Of T, TError)(IEnumerable(Of IResult(Of T, TError)))
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.FirstOrError*
+  name: FirstOrError
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_FirstOrError_
+  commentId: Overload:Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.FirstOrError
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.FirstOrError
+  nameWithType: ResultEnumerable.FirstOrError
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.FirstOrError``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``1})
+  name: FirstOrError<TSource, TError>(IEnumerable<TSource>, Func<TSource, Boolean>, Func<TError>)
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_FirstOrError__2_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.FirstOrError``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``1})
+  name.vb: FirstOrError(Of TSource, TError)(IEnumerable(Of TSource), Func(Of TSource, Boolean), Func(Of TError))
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.FirstOrError<TSource, TError>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, System.Boolean>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.FirstOrError(Of TSource, TError)(System.Collections.Generic.IEnumerable(Of TSource), System.Func(Of TSource, System.Boolean), System.Func(Of TError))
+  nameWithType: ResultEnumerable.FirstOrError<TSource, TError>(IEnumerable<TSource>, Func<TSource, Boolean>, Func<TError>)
+  nameWithType.vb: ResultEnumerable.FirstOrError(Of TSource, TError)(IEnumerable(Of TSource), Func(Of TSource, Boolean), Func(Of TError))
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.FirstOrError``2(System.Collections.Generic.IEnumerable{``0},System.Func{``1})
+  name: FirstOrError<TSource, TError>(IEnumerable<TSource>, Func<TError>)
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_FirstOrError__2_System_Collections_Generic_IEnumerable___0__System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.FirstOrError``2(System.Collections.Generic.IEnumerable{``0},System.Func{``1})
+  name.vb: FirstOrError(Of TSource, TError)(IEnumerable(Of TSource), Func(Of TError))
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.FirstOrError<TSource, TError>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.FirstOrError(Of TSource, TError)(System.Collections.Generic.IEnumerable(Of TSource), System.Func(Of TError))
+  nameWithType: ResultEnumerable.FirstOrError<TSource, TError>(IEnumerable<TSource>, Func<TError>)
+  nameWithType.vb: ResultEnumerable.FirstOrError(Of TSource, TError)(IEnumerable(Of TSource), Func(Of TError))
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.SingleOrError*
+  name: SingleOrError
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_SingleOrError_
+  commentId: Overload:Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.SingleOrError
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.SingleOrError
+  nameWithType: ResultEnumerable.SingleOrError
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.SingleOrError``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``1})
+  name: SingleOrError<TSource, TError>(IEnumerable<TSource>, Func<TSource, Boolean>, Func<TError>)
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_SingleOrError__2_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.SingleOrError``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``1})
+  name.vb: SingleOrError(Of TSource, TError)(IEnumerable(Of TSource), Func(Of TSource, Boolean), Func(Of TError))
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.SingleOrError<TSource, TError>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, System.Boolean>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.SingleOrError(Of TSource, TError)(System.Collections.Generic.IEnumerable(Of TSource), System.Func(Of TSource, System.Boolean), System.Func(Of TError))
+  nameWithType: ResultEnumerable.SingleOrError<TSource, TError>(IEnumerable<TSource>, Func<TSource, Boolean>, Func<TError>)
+  nameWithType.vb: ResultEnumerable.SingleOrError(Of TSource, TError)(IEnumerable(Of TSource), Func(Of TSource, Boolean), Func(Of TError))
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.SingleOrError``2(System.Collections.Generic.IEnumerable{``0},System.Func{``1})
+  name: SingleOrError<TSource, TError>(IEnumerable<TSource>, Func<TError>)
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_SingleOrError__2_System_Collections_Generic_IEnumerable___0__System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.SingleOrError``2(System.Collections.Generic.IEnumerable{``0},System.Func{``1})
+  name.vb: SingleOrError(Of TSource, TError)(IEnumerable(Of TSource), Func(Of TError))
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.SingleOrError<TSource, TError>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.SingleOrError(Of TSource, TError)(System.Collections.Generic.IEnumerable(Of TSource), System.Func(Of TError))
+  nameWithType: ResultEnumerable.SingleOrError<TSource, TError>(IEnumerable<TSource>, Func<TError>)
+  nameWithType.vb: ResultEnumerable.SingleOrError(Of TSource, TError)(IEnumerable(Of TSource), Func(Of TError))
 - uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Values*
   name: Values
   href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_Values_
@@ -316,6 +366,175 @@ references:
   fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Values(Of T, TError)(System.Collections.Generic.IEnumerable(Of Lemonad.ErrorHandling.IResult(Of T, TError)))
   nameWithType: ResultEnumerable.Values<T, TError>(IEnumerable<IResult<T, TError>>)
   nameWithType.vb: ResultEnumerable.Values(Of T, TError)(IEnumerable(Of IResult(Of T, TError)))
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable
+  name: ResultQueryable
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.html
+  commentId: T:Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable
+  nameWithType: ResultQueryable
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.FirstOrError*
+  name: FirstOrError
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultQueryable_FirstOrError_
+  commentId: Overload:Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.FirstOrError
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.FirstOrError
+  nameWithType: ResultQueryable.FirstOrError
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.FirstOrError``2(System.Linq.IQueryable{``0},System.Func{``1})
+  name: FirstOrError<TSource, TError>(IQueryable<TSource>, Func<TError>)
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultQueryable_FirstOrError__2_System_Linq_IQueryable___0__System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.FirstOrError``2(System.Linq.IQueryable{``0},System.Func{``1})
+  name.vb: FirstOrError(Of TSource, TError)(IQueryable(Of TSource), Func(Of TError))
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.FirstOrError<TSource, TError>(System.Linq.IQueryable<TSource>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.FirstOrError(Of TSource, TError)(System.Linq.IQueryable(Of TSource), System.Func(Of TError))
+  nameWithType: ResultQueryable.FirstOrError<TSource, TError>(IQueryable<TSource>, Func<TError>)
+  nameWithType.vb: ResultQueryable.FirstOrError(Of TSource, TError)(IQueryable(Of TSource), Func(Of TError))
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.FirstOrError``2(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Func{``1})
+  name: FirstOrError<TSource, TError>(IQueryable<TSource>, Expression<Func<TSource, Boolean>>, Func<TError>)
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultQueryable_FirstOrError__2_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.FirstOrError``2(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Func{``1})
+  name.vb: FirstOrError(Of TSource, TError)(IQueryable(Of TSource), Expression(Of Func(Of TSource, Boolean)), Func(Of TError))
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.FirstOrError<TSource, TError>(System.Linq.IQueryable<TSource>, System.Linq.Expressions.Expression<System.Func<TSource, System.Boolean>>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.FirstOrError(Of TSource, TError)(System.Linq.IQueryable(Of TSource), System.Linq.Expressions.Expression(Of System.Func(Of TSource, System.Boolean)), System.Func(Of TError))
+  nameWithType: ResultQueryable.FirstOrError<TSource, TError>(IQueryable<TSource>, Expression<Func<TSource, Boolean>>, Func<TError>)
+  nameWithType.vb: ResultQueryable.FirstOrError(Of TSource, TError)(IQueryable(Of TSource), Expression(Of Func(Of TSource, Boolean)), Func(Of TError))
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.FirstOrError``2(System.Linq.IQueryable{System.Nullable{``0}},System.Func{``1})
+  name: FirstOrError<TSource, TError>(IQueryable<Nullable<TSource>>, Func<TError>)
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultQueryable_FirstOrError__2_System_Linq_IQueryable_System_Nullable___0___System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.FirstOrError``2(System.Linq.IQueryable{System.Nullable{``0}},System.Func{``1})
+  name.vb: FirstOrError(Of TSource, TError)(IQueryable(Of Nullable(Of TSource)), Func(Of TError))
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.FirstOrError<TSource, TError>(System.Linq.IQueryable<System.Nullable<TSource>>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.FirstOrError(Of TSource, TError)(System.Linq.IQueryable(Of System.Nullable(Of TSource)), System.Func(Of TError))
+  nameWithType: ResultQueryable.FirstOrError<TSource, TError>(IQueryable<Nullable<TSource>>, Func<TError>)
+  nameWithType.vb: ResultQueryable.FirstOrError(Of TSource, TError)(IQueryable(Of Nullable(Of TSource)), Func(Of TError))
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.FirstOrError``2(System.Linq.IQueryable{System.Nullable{``0}},System.Linq.Expressions.Expression{System.Func{System.Nullable{``0},System.Boolean}},System.Func{``1})
+  name: FirstOrError<TSource, TError>(IQueryable<Nullable<TSource>>, Expression<Func<Nullable<TSource>, Boolean>>, Func<TError>)
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultQueryable_FirstOrError__2_System_Linq_IQueryable_System_Nullable___0___System_Linq_Expressions_Expression_System_Func_System_Nullable___0__System_Boolean___System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.FirstOrError``2(System.Linq.IQueryable{System.Nullable{``0}},System.Linq.Expressions.Expression{System.Func{System.Nullable{``0},System.Boolean}},System.Func{``1})
+  name.vb: FirstOrError(Of TSource, TError)(IQueryable(Of Nullable(Of TSource)), Expression(Of Func(Of Nullable(Of TSource), Boolean)), Func(Of TError))
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.FirstOrError<TSource, TError>(System.Linq.IQueryable<System.Nullable<TSource>>, System.Linq.Expressions.Expression<System.Func<System.Nullable<TSource>, System.Boolean>>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.FirstOrError(Of TSource, TError)(System.Linq.IQueryable(Of System.Nullable(Of TSource)), System.Linq.Expressions.Expression(Of System.Func(Of System.Nullable(Of TSource), System.Boolean)), System.Func(Of TError))
+  nameWithType: ResultQueryable.FirstOrError<TSource, TError>(IQueryable<Nullable<TSource>>, Expression<Func<Nullable<TSource>, Boolean>>, Func<TError>)
+  nameWithType.vb: ResultQueryable.FirstOrError(Of TSource, TError)(IQueryable(Of Nullable(Of TSource)), Expression(Of Func(Of Nullable(Of TSource), Boolean)), Func(Of TError))
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.SingleOrError*
+  name: SingleOrError
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultQueryable_SingleOrError_
+  commentId: Overload:Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.SingleOrError
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.SingleOrError
+  nameWithType: ResultQueryable.SingleOrError
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.SingleOrError``2(System.Linq.IQueryable{``0},System.Func{``1})
+  name: SingleOrError<TSource, TError>(IQueryable<TSource>, Func<TError>)
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultQueryable_SingleOrError__2_System_Linq_IQueryable___0__System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.SingleOrError``2(System.Linq.IQueryable{``0},System.Func{``1})
+  name.vb: SingleOrError(Of TSource, TError)(IQueryable(Of TSource), Func(Of TError))
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.SingleOrError<TSource, TError>(System.Linq.IQueryable<TSource>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.SingleOrError(Of TSource, TError)(System.Linq.IQueryable(Of TSource), System.Func(Of TError))
+  nameWithType: ResultQueryable.SingleOrError<TSource, TError>(IQueryable<TSource>, Func<TError>)
+  nameWithType.vb: ResultQueryable.SingleOrError(Of TSource, TError)(IQueryable(Of TSource), Func(Of TError))
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.SingleOrError``2(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Func{``1})
+  name: SingleOrError<TSource, TError>(IQueryable<TSource>, Expression<Func<TSource, Boolean>>, Func<TError>)
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultQueryable_SingleOrError__2_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.SingleOrError``2(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Func{``1})
+  name.vb: SingleOrError(Of TSource, TError)(IQueryable(Of TSource), Expression(Of Func(Of TSource, Boolean)), Func(Of TError))
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.SingleOrError<TSource, TError>(System.Linq.IQueryable<TSource>, System.Linq.Expressions.Expression<System.Func<TSource, System.Boolean>>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.SingleOrError(Of TSource, TError)(System.Linq.IQueryable(Of TSource), System.Linq.Expressions.Expression(Of System.Func(Of TSource, System.Boolean)), System.Func(Of TError))
+  nameWithType: ResultQueryable.SingleOrError<TSource, TError>(IQueryable<TSource>, Expression<Func<TSource, Boolean>>, Func<TError>)
+  nameWithType.vb: ResultQueryable.SingleOrError(Of TSource, TError)(IQueryable(Of TSource), Expression(Of Func(Of TSource, Boolean)), Func(Of TError))
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.SingleOrError``2(System.Linq.IQueryable{System.Nullable{``0}},System.Func{``1})
+  name: SingleOrError<TSource, TError>(IQueryable<Nullable<TSource>>, Func<TError>)
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultQueryable_SingleOrError__2_System_Linq_IQueryable_System_Nullable___0___System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.SingleOrError``2(System.Linq.IQueryable{System.Nullable{``0}},System.Func{``1})
+  name.vb: SingleOrError(Of TSource, TError)(IQueryable(Of Nullable(Of TSource)), Func(Of TError))
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.SingleOrError<TSource, TError>(System.Linq.IQueryable<System.Nullable<TSource>>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.SingleOrError(Of TSource, TError)(System.Linq.IQueryable(Of System.Nullable(Of TSource)), System.Func(Of TError))
+  nameWithType: ResultQueryable.SingleOrError<TSource, TError>(IQueryable<Nullable<TSource>>, Func<TError>)
+  nameWithType.vb: ResultQueryable.SingleOrError(Of TSource, TError)(IQueryable(Of Nullable(Of TSource)), Func(Of TError))
+- uid: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.SingleOrError``2(System.Linq.IQueryable{System.Nullable{``0}},System.Linq.Expressions.Expression{System.Func{System.Nullable{``0},System.Boolean}},System.Func{``1})
+  name: SingleOrError<TSource, TError>(IQueryable<Nullable<TSource>>, Expression<Func<Nullable<TSource>, Boolean>>, Func<TError>)
+  href: api/Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.html#Lemonad_ErrorHandling_EnumerableExtensions_ResultQueryable_SingleOrError__2_System_Linq_IQueryable_System_Nullable___0___System_Linq_Expressions_Expression_System_Func_System_Nullable___0__System_Boolean___System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.SingleOrError``2(System.Linq.IQueryable{System.Nullable{``0}},System.Linq.Expressions.Expression{System.Func{System.Nullable{``0},System.Boolean}},System.Func{``1})
+  name.vb: SingleOrError(Of TSource, TError)(IQueryable(Of Nullable(Of TSource)), Expression(Of Func(Of Nullable(Of TSource), Boolean)), Func(Of TError))
+  fullName: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.SingleOrError<TSource, TError>(System.Linq.IQueryable<System.Nullable<TSource>>, System.Linq.Expressions.Expression<System.Func<System.Nullable<TSource>, System.Boolean>>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.EnumerableExtensions.ResultQueryable.SingleOrError(Of TSource, TError)(System.Linq.IQueryable(Of System.Nullable(Of TSource)), System.Linq.Expressions.Expression(Of System.Func(Of System.Nullable(Of TSource), System.Boolean)), System.Func(Of TError))
+  nameWithType: ResultQueryable.SingleOrError<TSource, TError>(IQueryable<Nullable<TSource>>, Expression<Func<Nullable<TSource>, Boolean>>, Func<TError>)
+  nameWithType.vb: ResultQueryable.SingleOrError(Of TSource, TError)(IQueryable(Of Nullable(Of TSource)), Expression(Of Func(Of Nullable(Of TSource), Boolean)), Func(Of TError))
+- uid: Lemonad.ErrorHandling.IAsyncEither`2
+  name: IAsyncEither<T, TError>
+  href: api/Lemonad.ErrorHandling.IAsyncEither-2.html
+  commentId: T:Lemonad.ErrorHandling.IAsyncEither`2
+  name.vb: IAsyncEither(Of T, TError)
+  fullName: Lemonad.ErrorHandling.IAsyncEither<T, TError>
+  fullName.vb: Lemonad.ErrorHandling.IAsyncEither(Of T, TError)
+  nameWithType: IAsyncEither<T, TError>
+  nameWithType.vb: IAsyncEither(Of T, TError)
+- uid: Lemonad.ErrorHandling.IAsyncEither`2.Error
+  name: Error
+  href: api/Lemonad.ErrorHandling.IAsyncEither-2.html#Lemonad_ErrorHandling_IAsyncEither_2_Error
+  commentId: P:Lemonad.ErrorHandling.IAsyncEither`2.Error
+  fullName: Lemonad.ErrorHandling.IAsyncEither<T, TError>.Error
+  fullName.vb: Lemonad.ErrorHandling.IAsyncEither(Of T, TError).Error
+  nameWithType: IAsyncEither<T, TError>.Error
+  nameWithType.vb: IAsyncEither(Of T, TError).Error
+- uid: Lemonad.ErrorHandling.IAsyncEither`2.Error*
+  name: Error
+  href: api/Lemonad.ErrorHandling.IAsyncEither-2.html#Lemonad_ErrorHandling_IAsyncEither_2_Error_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncEither`2.Error
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncEither<T, TError>.Error
+  fullName.vb: Lemonad.ErrorHandling.IAsyncEither(Of T, TError).Error
+  nameWithType: IAsyncEither<T, TError>.Error
+  nameWithType.vb: IAsyncEither(Of T, TError).Error
+- uid: Lemonad.ErrorHandling.IAsyncEither`2.HasError
+  name: HasError
+  href: api/Lemonad.ErrorHandling.IAsyncEither-2.html#Lemonad_ErrorHandling_IAsyncEither_2_HasError
+  commentId: P:Lemonad.ErrorHandling.IAsyncEither`2.HasError
+  fullName: Lemonad.ErrorHandling.IAsyncEither<T, TError>.HasError
+  fullName.vb: Lemonad.ErrorHandling.IAsyncEither(Of T, TError).HasError
+  nameWithType: IAsyncEither<T, TError>.HasError
+  nameWithType.vb: IAsyncEither(Of T, TError).HasError
+- uid: Lemonad.ErrorHandling.IAsyncEither`2.HasError*
+  name: HasError
+  href: api/Lemonad.ErrorHandling.IAsyncEither-2.html#Lemonad_ErrorHandling_IAsyncEither_2_HasError_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncEither`2.HasError
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncEither<T, TError>.HasError
+  fullName.vb: Lemonad.ErrorHandling.IAsyncEither(Of T, TError).HasError
+  nameWithType: IAsyncEither<T, TError>.HasError
+  nameWithType.vb: IAsyncEither(Of T, TError).HasError
+- uid: Lemonad.ErrorHandling.IAsyncEither`2.HasValue
+  name: HasValue
+  href: api/Lemonad.ErrorHandling.IAsyncEither-2.html#Lemonad_ErrorHandling_IAsyncEither_2_HasValue
+  commentId: P:Lemonad.ErrorHandling.IAsyncEither`2.HasValue
+  fullName: Lemonad.ErrorHandling.IAsyncEither<T, TError>.HasValue
+  fullName.vb: Lemonad.ErrorHandling.IAsyncEither(Of T, TError).HasValue
+  nameWithType: IAsyncEither<T, TError>.HasValue
+  nameWithType.vb: IAsyncEither(Of T, TError).HasValue
+- uid: Lemonad.ErrorHandling.IAsyncEither`2.HasValue*
+  name: HasValue
+  href: api/Lemonad.ErrorHandling.IAsyncEither-2.html#Lemonad_ErrorHandling_IAsyncEither_2_HasValue_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncEither`2.HasValue
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncEither<T, TError>.HasValue
+  fullName.vb: Lemonad.ErrorHandling.IAsyncEither(Of T, TError).HasValue
+  nameWithType: IAsyncEither<T, TError>.HasValue
+  nameWithType.vb: IAsyncEither(Of T, TError).HasValue
+- uid: Lemonad.ErrorHandling.IAsyncEither`2.Value
+  name: Value
+  href: api/Lemonad.ErrorHandling.IAsyncEither-2.html#Lemonad_ErrorHandling_IAsyncEither_2_Value
+  commentId: P:Lemonad.ErrorHandling.IAsyncEither`2.Value
+  fullName: Lemonad.ErrorHandling.IAsyncEither<T, TError>.Value
+  fullName.vb: Lemonad.ErrorHandling.IAsyncEither(Of T, TError).Value
+  nameWithType: IAsyncEither<T, TError>.Value
+  nameWithType.vb: IAsyncEither(Of T, TError).Value
+- uid: Lemonad.ErrorHandling.IAsyncEither`2.Value*
+  name: Value
+  href: api/Lemonad.ErrorHandling.IAsyncEither-2.html#Lemonad_ErrorHandling_IAsyncEither_2_Value_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncEither`2.Value
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncEither<T, TError>.Value
+  fullName.vb: Lemonad.ErrorHandling.IAsyncEither(Of T, TError).Value
+  nameWithType: IAsyncEither<T, TError>.Value
+  nameWithType.vb: IAsyncEither(Of T, TError).Value
 - uid: Lemonad.ErrorHandling.IAsyncResult`2
   name: IAsyncResult<T, TError>
   href: api/Lemonad.ErrorHandling.IAsyncResult-2.html
@@ -602,6 +821,33 @@ references:
   fullName.vb: Lemonad.ErrorHandling.IAsyncResult(Of T, TError).FullMap(Of TResult, TErrorResult)(System.Func(Of T, TResult), System.Func(Of TError, TErrorResult))
   nameWithType: IAsyncResult<T, TError>.FullMap<TResult, TErrorResult>(Func<T, TResult>, Func<TError, TErrorResult>)
   nameWithType.vb: IAsyncResult(Of T, TError).FullMap(Of TResult, TErrorResult)(Func(Of T, TResult), Func(Of TError, TErrorResult))
+- uid: Lemonad.ErrorHandling.IAsyncResult`2.FullMap``2(System.Func{`0,``0},System.Func{`1,System.Threading.Tasks.Task{``1}})
+  name: FullMap<TResult, TErrorResult>(Func<T, TResult>, Func<TError, Task<TErrorResult>>)
+  href: api/Lemonad.ErrorHandling.IAsyncResult-2.html#Lemonad_ErrorHandling_IAsyncResult_2_FullMap__2_System_Func__0___0__System_Func__1_System_Threading_Tasks_Task___1___
+  commentId: M:Lemonad.ErrorHandling.IAsyncResult`2.FullMap``2(System.Func{`0,``0},System.Func{`1,System.Threading.Tasks.Task{``1}})
+  name.vb: FullMap(Of TResult, TErrorResult)(Func(Of T, TResult), Func(Of TError, Task(Of TErrorResult)))
+  fullName: Lemonad.ErrorHandling.IAsyncResult<T, TError>.FullMap<TResult, TErrorResult>(System.Func<T, TResult>, System.Func<TError, System.Threading.Tasks.Task<TErrorResult>>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncResult(Of T, TError).FullMap(Of TResult, TErrorResult)(System.Func(Of T, TResult), System.Func(Of TError, System.Threading.Tasks.Task(Of TErrorResult)))
+  nameWithType: IAsyncResult<T, TError>.FullMap<TResult, TErrorResult>(Func<T, TResult>, Func<TError, Task<TErrorResult>>)
+  nameWithType.vb: IAsyncResult(Of T, TError).FullMap(Of TResult, TErrorResult)(Func(Of T, TResult), Func(Of TError, Task(Of TErrorResult)))
+- uid: Lemonad.ErrorHandling.IAsyncResult`2.FullMap``2(System.Func{`0,System.Threading.Tasks.Task{``0}},System.Func{`1,``1})
+  name: FullMap<TResult, TErrorResult>(Func<T, Task<TResult>>, Func<TError, TErrorResult>)
+  href: api/Lemonad.ErrorHandling.IAsyncResult-2.html#Lemonad_ErrorHandling_IAsyncResult_2_FullMap__2_System_Func__0_System_Threading_Tasks_Task___0___System_Func__1___1__
+  commentId: M:Lemonad.ErrorHandling.IAsyncResult`2.FullMap``2(System.Func{`0,System.Threading.Tasks.Task{``0}},System.Func{`1,``1})
+  name.vb: FullMap(Of TResult, TErrorResult)(Func(Of T, Task(Of TResult)), Func(Of TError, TErrorResult))
+  fullName: Lemonad.ErrorHandling.IAsyncResult<T, TError>.FullMap<TResult, TErrorResult>(System.Func<T, System.Threading.Tasks.Task<TResult>>, System.Func<TError, TErrorResult>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncResult(Of T, TError).FullMap(Of TResult, TErrorResult)(System.Func(Of T, System.Threading.Tasks.Task(Of TResult)), System.Func(Of TError, TErrorResult))
+  nameWithType: IAsyncResult<T, TError>.FullMap<TResult, TErrorResult>(Func<T, Task<TResult>>, Func<TError, TErrorResult>)
+  nameWithType.vb: IAsyncResult(Of T, TError).FullMap(Of TResult, TErrorResult)(Func(Of T, Task(Of TResult)), Func(Of TError, TErrorResult))
+- uid: Lemonad.ErrorHandling.IAsyncResult`2.FullMap``2(System.Func{`0,System.Threading.Tasks.Task{``0}},System.Func{`1,System.Threading.Tasks.Task{``1}})
+  name: FullMap<TResult, TErrorResult>(Func<T, Task<TResult>>, Func<TError, Task<TErrorResult>>)
+  href: api/Lemonad.ErrorHandling.IAsyncResult-2.html#Lemonad_ErrorHandling_IAsyncResult_2_FullMap__2_System_Func__0_System_Threading_Tasks_Task___0___System_Func__1_System_Threading_Tasks_Task___1___
+  commentId: M:Lemonad.ErrorHandling.IAsyncResult`2.FullMap``2(System.Func{`0,System.Threading.Tasks.Task{``0}},System.Func{`1,System.Threading.Tasks.Task{``1}})
+  name.vb: FullMap(Of TResult, TErrorResult)(Func(Of T, Task(Of TResult)), Func(Of TError, Task(Of TErrorResult)))
+  fullName: Lemonad.ErrorHandling.IAsyncResult<T, TError>.FullMap<TResult, TErrorResult>(System.Func<T, System.Threading.Tasks.Task<TResult>>, System.Func<TError, System.Threading.Tasks.Task<TErrorResult>>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncResult(Of T, TError).FullMap(Of TResult, TErrorResult)(System.Func(Of T, System.Threading.Tasks.Task(Of TResult)), System.Func(Of TError, System.Threading.Tasks.Task(Of TErrorResult)))
+  nameWithType: IAsyncResult<T, TError>.FullMap<TResult, TErrorResult>(Func<T, Task<TResult>>, Func<TError, Task<TErrorResult>>)
+  nameWithType.vb: IAsyncResult(Of T, TError).FullMap(Of TResult, TErrorResult)(Func(Of T, Task(Of TResult)), Func(Of TError, Task(Of TErrorResult)))
 - uid: Lemonad.ErrorHandling.IAsyncResult`2.IsErrorWhen(System.Func{`0,System.Boolean},System.Func{`0,`1})
   name: IsErrorWhen(Func<T, Boolean>, Func<T, TError>)
   href: api/Lemonad.ErrorHandling.IAsyncResult-2.html#Lemonad_ErrorHandling_IAsyncResult_2_IsErrorWhen_System_Func__0_System_Boolean__System_Func__0__1__

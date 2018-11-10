@@ -73,7 +73,8 @@
   
   <h1 id="Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable" data-uid="Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable" class="text-break">Class ResultEnumerable
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Contains extension methods for <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span>.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -117,7 +118,7 @@
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_Errors__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_IResult___0___1___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Errors%60%602(System.Collections.Generic.IEnumerable%7BLemonad.ErrorHandling.IResult%7B%60%600%2C%60%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/EnumerableExtensions/ResultEnumerable.cs/#L20">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/EnumerableExtensions/ResultEnumerable.cs/#L25">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_Errors_" data-uid="Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Errors*"></a>
   <h4 id="Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_Errors__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_IResult___0___1___" data-uid="Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Errors``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.IResult{``0,``1}})">Errors&lt;T, TError&gt;(IEnumerable&lt;IResult&lt;T, TError&gt;&gt;)</h4>
@@ -186,10 +187,377 @@ of
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_FirstOrError__2_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__System_Func___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.FirstOrError%60%602(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%600%2CSystem.Boolean%7D%2CSystem.Func%7B%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/EnumerableExtensions/ResultEnumerable.cs/#L90">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_FirstOrError_" data-uid="Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.FirstOrError*"></a>
+  <h4 id="Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_FirstOrError__2_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__System_Func___1__" data-uid="Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.FirstOrError``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``1})">FirstOrError&lt;TSource, TError&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, Boolean&gt;, Func&lt;TError&gt;)</h4>
+  <div class="markdown level1 summary"><p>Returns the first element of the sequence that satisfies a condition or a <code data-dev-comment-type="typeparamref" class="typeparamref">TError</code> if no such
+element is found.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IResult&lt;TSource, TError&gt; FirstOrError&lt;TSource, TError&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate, Func&lt;TError&gt; errorSelector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> to iterate in.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TSource, <span class="xref">System.Boolean</span>&gt;</td>
+        <td><span class="parametername">predicate</span></td>
+        <td><p>A function to test each element until the condition is fulfilled.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TError&gt;</td>
+        <td><span class="parametername">errorSelector</span></td>
+        <td><p>A function that is invoked if either no element is found or the predicate could not be matched with any element.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult</a>&lt;TSource, TError&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TSource</span></td>
+        <td><p>The type of the elements of <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TError</span></td>
+        <td><p>The type returned by function <code data-dev-comment-type="paramref" class="paramref">errorSelector</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>When any of the parameters are null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_FirstOrError__2_System_Collections_Generic_IEnumerable___0__System_Func___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.FirstOrError%60%602(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/EnumerableExtensions/ResultEnumerable.cs/#L46">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_FirstOrError_" data-uid="Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.FirstOrError*"></a>
+  <h4 id="Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_FirstOrError__2_System_Collections_Generic_IEnumerable___0__System_Func___1__" data-uid="Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.FirstOrError``2(System.Collections.Generic.IEnumerable{``0},System.Func{``1})">FirstOrError&lt;TSource, TError&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TError&gt;)</h4>
+  <div class="markdown level1 summary"><p>Returns the first element of the sequence or a <code data-dev-comment-type="typeparamref" class="typeparamref">TError</code> if no such element is found.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IResult&lt;TSource, TError&gt; FirstOrError&lt;TSource, TError&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TError&gt; errorSelector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> to iterate in.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TError&gt;</td>
+        <td><span class="parametername">errorSelector</span></td>
+        <td><p>A function that is invoked if either no element is found.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult</a>&lt;TSource, TError&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TSource</span></td>
+        <td><p>The type of the elements of <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TError</span></td>
+        <td><p>The type returned by function <code data-dev-comment-type="paramref" class="paramref">errorSelector</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>When any of the parameters are null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_SingleOrError__2_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__System_Func___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.SingleOrError%60%602(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%600%2CSystem.Boolean%7D%2CSystem.Func%7B%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/EnumerableExtensions/ResultEnumerable.cs/#L182">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_SingleOrError_" data-uid="Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.SingleOrError*"></a>
+  <h4 id="Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_SingleOrError__2_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__System_Func___1__" data-uid="Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.SingleOrError``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``1})">SingleOrError&lt;TSource, TError&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, Boolean&gt;, Func&lt;TError&gt;)</h4>
+  <div class="markdown level1 summary"><p>Returns the only element of a sequence that satisfies a specified condition <code data-dev-comment-type="typeparamref" class="typeparamref">TError</code> if no
+such element exists.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IResult&lt;TSource, TError&gt; SingleOrError&lt;TSource, TError&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate, Func&lt;TError&gt; errorSelector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>An <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> to return the single element of.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TSource, <span class="xref">System.Boolean</span>&gt;</td>
+        <td><span class="parametername">predicate</span></td>
+        <td><p>A function to test <code data-dev-comment-type="typeparamref" class="typeparamref">TSource</code> for a condition.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TError&gt;</td>
+        <td><span class="parametername">errorSelector</span></td>
+        <td><p>A function that is invoked when no element is found or the predicate could not be matched with any element or more
+than one element is found that matches the predicate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult</a>&lt;TSource, TError&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TSource</span></td>
+        <td><p>The type of the elements of <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TError</span></td>
+        <td><p>The type returned by function <code data-dev-comment-type="paramref" class="paramref">errorSelector</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_SingleOrError__2_System_Collections_Generic_IEnumerable___0__System_Func___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.SingleOrError%60%602(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/EnumerableExtensions/ResultEnumerable.cs/#L125">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_SingleOrError_" data-uid="Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.SingleOrError*"></a>
+  <h4 id="Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_SingleOrError__2_System_Collections_Generic_IEnumerable___0__System_Func___1__" data-uid="Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.SingleOrError``2(System.Collections.Generic.IEnumerable{``0},System.Func{``1})">SingleOrError&lt;TSource, TError&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TError&gt;)</h4>
+  <div class="markdown level1 summary"><p>Returns a single, specific element of a sequence, or a <code data-dev-comment-type="typeparamref" class="typeparamref">TError</code> if that element is not found.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IResult&lt;TSource, TError&gt; SingleOrError&lt;TSource, TError&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TError&gt; errorSelector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>An <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> to return the single element of.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TError&gt;</td>
+        <td><span class="parametername">errorSelector</span></td>
+        <td><p>A function that is invoked when no element is found or the predicate could not be matched with any element or more
+than one element is found.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult</a>&lt;TSource, TError&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TSource</span></td>
+        <td><p>The type of the elements of <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TError</span></td>
+        <td><p>The type returned by function <code data-dev-comment-type="paramref" class="paramref">errorSelector</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_Values__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_IResult___0___1___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Values%60%602(System.Collections.Generic.IEnumerable%7BLemonad.ErrorHandling.IResult%7B%60%600%2C%60%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/EnumerableExtensions/ResultEnumerable.cs/#L37">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/EnumerableExtensions/ResultEnumerable.cs/#L238">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_Values_" data-uid="Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Values*"></a>
   <h4 id="Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable_Values__2_System_Collections_Generic_IEnumerable_Lemonad_ErrorHandling_IResult___0___1___" data-uid="Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable.Values``2(System.Collections.Generic.IEnumerable{Lemonad.ErrorHandling.IResult{``0,``1}})">Values&lt;T, TError&gt;(IEnumerable&lt;IResult&lt;T, TError&gt;&gt;)</h4>
@@ -267,7 +635,7 @@ of
                     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_EnumerableExtensions_ResultEnumerable.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.EnumerableExtensions.ResultEnumerable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/EnumerableExtensions/ResultEnumerable.cs/#L5" class="contribution-link">View Source</a>
+                    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/EnumerableExtensions/ResultEnumerable.cs/#L10" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
