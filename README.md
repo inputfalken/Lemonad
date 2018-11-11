@@ -90,9 +90,9 @@ and instead of throwing an exception; you could return `IMaybe<T>.None`
 ``` csharp
 IMaybe<int> Divide(int x, int y) {
     if (y != 0)
-        return x / y;
+        return Maybe.Value(x / y);
     else {
-        return Maybe<int>.None;
+        return Maybe.None<int>();
     }
 }
 
