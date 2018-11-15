@@ -227,22 +227,35 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static IResult<T, TError> Value<T, TError>(T element) => Result<T, TError>.ValueFactory(in element);
 
+        /// <summary>
+        ///  Lifts <see cref="IResult{T,TError}"/> into <see cref="IAsyncResult{T,TError}"/> and performs <see cref="IAsyncResult{T,TError}.Map{TResult}(System.Func{T,Task{TResult}})"/>.
+        /// </summary>
         public static IAsyncResult<TResult, TError> MapAsync<T, TError, TResult>(
             this IResult<T, TError> source,
             Func<T, Task<TResult>> selector
         ) => source.ToAsyncResult().Map(selector);
 
+        /// <summary>
+        ///  Lifts <see cref="IResult{T,TError}"/> into <see cref="IAsyncResult{T,TError}"/> and performs <see cref="IAsyncResult{T,TError}.Filter(System.Func{T,Task{bool}},System.Func{T,TError})"/>.
+        /// </summary>
         public static IAsyncResult<T, TError> FilterAsync<T, TError>(
             this IResult<T, TError> source,
             Func<T, Task<bool>> predicate,
             Func<T, TError> errorSelector
         ) => source.ToAsyncResult().Filter(predicate, errorSelector);
 
+        /// <summary>
+        ///  Lifts <see cref="IResult{T,TError}"/> into <see cref="IAsyncResult{T,TError}"/> and performs <see cref="IAsyncResult{T,TError}.FlatMap{TResult}"/>.
+        /// </summary>
         public static IAsyncResult<TResult, TError> FlatMapAsync<T, TResult, TError>(
             this IResult<T, TError> source,
             Func<T, IAsyncResult<TResult, TError>> flatSelector
         ) => source.ToAsyncResult().FlatMap(flatSelector);
 
+        /// <summary>
+        ///  Lifts <see cref="IResult{T,TError}"/> into <see cref="IAsyncResult{T,TError}"/> and performs
+        /// <see cref="IAsyncResult{T,TError}.FlatMap{TSelector,TResult}(System.Func{T, IAsyncResult{TSelector, TError}}, System.Func{T, TSelector, TResult})"/>.
+        /// </summary>
         public static IAsyncResult<TResult, TError> FlatMapAsync<T, TSelector, TResult, TError>(
             this IResult<T, TError> source,
             Func<T, IAsyncResult<TSelector, TError>> flatSelector,
