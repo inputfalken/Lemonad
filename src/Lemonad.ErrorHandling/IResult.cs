@@ -275,7 +275,9 @@ namespace Lemonad.ErrorHandling {
         ///     When any of the function parameters are null and needs to be executed.
         /// </exception>
         IResult<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
-            Func<T, IResult<TResult, TErrorResult>> flatMapSelector, Func<TError, TErrorResult> errorSelector);
+            Func<T, IResult<TResult, TErrorResult>> flatMapSelector,
+            Func<TError, TErrorResult> errorSelector
+        );
 
         /// <summary>
         ///     Fully flatmaps another <see cref="Result{T,TError}" />.
