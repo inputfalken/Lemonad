@@ -287,7 +287,7 @@ namespace Lemonad.ErrorHandling {
         /// </summary>
         public static IAsyncResult<T, TError> FlattenAsync<T, TResult, TError, TErrorResult>(
             this IResult<T, TError> source,
-            Func<T, IAsyncResult<T, TErrorResult>> selector,
+            Func<T, IAsyncResult<TResult, TErrorResult>> selector,
             Func<TErrorResult, TError> errorSelector
         ) => source.ToAsyncResult().Flatten(selector, errorSelector);
 
