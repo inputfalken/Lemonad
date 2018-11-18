@@ -2,10 +2,16 @@ using System;
 
 namespace Lemonad.ErrorHandling.Internal.Either {
     internal readonly struct NonNullableEither<T, TError> : IEither<T, TError> {
+        private readonly TError _error;
+        private readonly T _value;
         public bool HasValue { get; }
         public bool HasError { get; }
-        public TError Error { get; }
-        public T Value { get; }
+
+        // TODO create custom exception.
+        public TError Error => HasError ? _error : throw new Exception();
+
+        // TODO create custom exception.
+        public T Value => HasValue ? _value : throw new Exception();
 
         /// <summary>
         ///     Only one one <typeparamref name="T" /> and <typeparamref name="TError" /> can be available to use.
@@ -35,17 +41,17 @@ namespace Lemonad.ErrorHandling.Internal.Either {
                     $"{nameof(IEither<T, TError>)} properties \"{nameof(HasError)}\": {hasError} and \"{nameof(HasValue)}\": ({hasValue}), can not both be {hasValue}."
                 );
 
-            Value = value;
-            Error = error;
+            _value = value;
+            _error = error;
             // Verify that the active value can never be null.
-            if (Value.IsNull() && hasValue)
+            if (_value.IsNull() && hasValue)
                 throw new ArgumentNullException(
                     nameof(Value),
                     $"{nameof(IEither<T, TError>)} property \"{nameof(Value)}\" cannot be null."
                 );
 
             // Verify that the active value can never be null.
-            if (Error.IsNull() && hasError)
+            if (_error.IsNull() && hasError)
                 throw new ArgumentNullException(
                     nameof(Error),
                     $"{nameof(IEither<T, TError>)} property \"{nameof(Error)}\" cannot be null."
