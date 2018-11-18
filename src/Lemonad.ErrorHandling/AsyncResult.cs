@@ -128,7 +128,7 @@ namespace Lemonad.ErrorHandling {
             AsyncResult<T, TError>.Factory(result.Map(x => x.Either));
 
         /// <summary>
-        ///     Converts an <see cref="IAsyncResult{T,TError}" /> into an <see cref="IAsyncResult{T,TError}" />.
+        ///     Converts a <see cref="IResult{T,TError}" /> into a <see cref="IAsyncResult{T,TError}" />.
         /// </summary>
         /// <param name="result">
         ///     The  <see cref="IAsyncResult{T,TError}" />.
@@ -139,8 +139,8 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TError">
         ///     The 'failure' value.
         /// </typeparam>
-        public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this IResult<T, TError> result) =>
-            ToAsyncResult(Task.FromResult(result));
+        public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this IResult<T, TError> result)
+            => ToAsyncResult(Task.FromResult(result));
 
         [Pure]
         public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T> source, Func<T, bool> predicate,
@@ -182,5 +182,15 @@ namespace Lemonad.ErrorHandling {
         [Pure]
         public static IAsyncResult<T, TError> Value<T, TError>(T element) =>
             AsyncResult<T, TError>.ValueFactory(in element);
+
+        /// <summary>
+        ///     Performs <see cref="IAsyncResult{T,TError}.Zip{TOther,TResult}" />.
+        /// </summary>
+        [Pure]
+        public static IAsyncResult<TResult, TError> ZipSync<T, TOther, TResult, TError>(
+            this IAsyncResult<T, TError> source,
+            IResult<TOther, TError> other,
+            Func<T, TOther, TResult> resultSelector
+        ) => source.Zip(other.ToAsyncResult(), resultSelector);
     }
 }
