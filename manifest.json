@@ -24,7 +24,7 @@
           "hash": "WfJh4l+c8PxeWgJaUOfrFg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -48,7 +48,7 @@
           "hash": "arszdbYRv0qPsEo2wt2Ogw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -60,7 +60,7 @@
           "hash": "r7MbE7u9KrQ8Mh+rLbkb3g=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -84,7 +84,7 @@
           "hash": "M02Bh2pEQChK1w8KzbrYcA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -96,7 +96,7 @@
           "hash": "60ujCL2/Q+0cJUGhuOojVw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -108,7 +108,7 @@
           "hash": "e0nmu59Xqsr6XUdK3TXamQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -117,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.IMaybe-1.html",
-          "hash": "sAAuaoeEGdVIf03yba4tMg=="
+          "hash": "G28xKsRpmfpqn8TnOHBDgQ=="
         }
       },
       "is_incremental": false,
@@ -132,7 +132,7 @@
           "hash": "qWJiCEWoN6skQkEfFts07A=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -156,7 +156,7 @@
           "hash": "tiALFVMDY2XoOzU2SHqQWQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -168,7 +168,7 @@
           "hash": "Ehe64QfMRekS7yojEdO9PQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -180,7 +180,7 @@
           "hash": "KvpGaWsrwcw7nbL4b1p0PA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -201,7 +201,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.html",
-          "hash": "A0dIjZAsqZ5X10xeBkicoQ=="
+          "hash": "+EWKG2utvTFi0JyWX23gsg=="
         }
       },
       "is_incremental": false,
@@ -292,11 +292,11 @@
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
-        "ConceptualDocumentProcessor": {
+        "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build"
         },
-        "ManagedReferenceDocumentProcessor": {
+        "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build"
         }
