@@ -2,6 +2,12 @@
 using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
+    /// <summary>
+    ///     Represents a data structure commonly used in cases where you may or may not have a value present.
+    /// </summary>
+    /// <typeparam name="T">
+    ///     The type of to potential value.
+    /// </typeparam>
     public interface IMaybe<out T> {
         /// <summary>
         ///     Gets a value indicating whether the current <see cref="Maybe{T}" /> object has a valid value of
