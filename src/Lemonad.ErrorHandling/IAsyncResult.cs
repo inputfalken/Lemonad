@@ -39,7 +39,9 @@ namespace Lemonad.ErrorHandling {
             Func<TErrorResult, TError> errorSelector);
 
         IAsyncResult<T, TError> Flatten<TResult, TErrorResult>(
-            Func<T, IAsyncResult<TResult, TErrorResult>> selector, Func<TErrorResult, TError> errorSelector);
+            Func<T, IAsyncResult<TResult, TErrorResult>> selector,
+            Func<TErrorResult, TError> errorSelector
+        );
 
         IAsyncResult<T, TError> Flatten<TResult>(Func<T, IAsyncResult<TResult, TError>> selector);
 
@@ -105,7 +107,9 @@ namespace Lemonad.ErrorHandling {
         /// <inheritdoc cref="Result{T,TError}.SafeCast{TResult}" />
         IAsyncResult<TResult, TError> SafeCast<TResult>(Func<T, TError> errorSelector);
 
-        IAsyncResult<TResult, TError> Zip<TOther, TResult>(IAsyncResult<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector);
+        IAsyncResult<TResult, TError> Zip<TOther, TResult>(
+            IAsyncResult<TOther, TError> other,
+            Func<T, TOther, TResult> resultSelector
+        );
     }
 }

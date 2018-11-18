@@ -92,8 +92,7 @@ namespace Lemonad.ErrorHandling {
         ///     A <see cref="Result{T,TError}" /> whom may have invoked the <paramref name="action" /> if the current
         ///     <see cref="Result{T,TError}" /> is in a an invalid state.
         /// </returns>
-        IResult<T, TError> DoWithError(
-            Action<TError> action);
+        IResult<T, TError> DoWithError(Action<TError> action);
 
         /// <summary>
         ///     Filters the <typeparamref name="T" /> if <typeparamref name="T" /> is the active type.
@@ -122,8 +121,7 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TResult">
         ///     The return type of the function <paramref name="flatSelector" />.
         /// </typeparam>
-        IResult<TResult, TError> FlatMap<TResult>(
-            Func<T, IResult<TResult, TError>> flatSelector);
+        IResult<TResult, TError> FlatMap<TResult>(Func<T, IResult<TResult, TError>> flatSelector);
 
         /// <summary>
         ///     Flatten another <see cref="Result{T,TError}" /> who shares the same <typeparamref name="TError" />.
@@ -145,7 +143,8 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         IResult<TResult, TError> FlatMap<TSelector, TResult>(
             Func<T, IResult<TSelector, TError>> flatSelector,
-            Func<T, TSelector, TResult> resultSelector);
+            Func<T, TSelector, TResult> resultSelector
+        );
 
         /// <summary>
         ///     Flatmaps another <see cref="Result{T,TError}" /> but the <typeparamref name="TError" /> remains as the same type.
@@ -166,7 +165,9 @@ namespace Lemonad.ErrorHandling {
         ///     When any of the function parameters are null and needs to be executed.
         /// </exception>
         IResult<TResult, TError> FlatMap<TResult, TErrorResult>(
-            Func<T, IResult<TResult, TErrorResult>> flatMapSelector, Func<TErrorResult, TError> errorSelector);
+            Func<T, IResult<TResult, TErrorResult>> flatMapSelector,
+            Func<TErrorResult, TError> errorSelector
+        );
 
         /// <summary>
         ///     Flatmaps another <see cref="Result{T,TError}" /> but the <typeparamref name="TError" /> remains as the same type.
@@ -191,8 +192,10 @@ namespace Lemonad.ErrorHandling {
         ///     The type returned by the function <paramref name="resultSelector" />.
         /// </typeparam>
         IResult<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
-            Func<TErrorResult, TError> errorSelector);
+            Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector,
+            Func<T, TFlatMap, TResult> resultSelector,
+            Func<TErrorResult, TError> errorSelector
+        );
 
         /// <summary>
         ///     Flatten another <see cref="Result{T,TError}" />.
@@ -220,7 +223,9 @@ namespace Lemonad.ErrorHandling {
         ///     When any of the function parameters are null and needs to be executed.
         /// </exception>
         IResult<T, TError> Flatten<TResult, TErrorResult>(
-            Func<T, IResult<TResult, TErrorResult>> selector, Func<TErrorResult, TError> errorSelector);
+            Func<T, IResult<TResult, TErrorResult>> selector,
+            Func<TErrorResult, TError> errorSelector
+        );
 
         /// <summary>
         ///     Flatten another <see cref="Result{T,TError}" />  who shares the same <typeparamref name="TError" />.
@@ -275,7 +280,9 @@ namespace Lemonad.ErrorHandling {
         ///     When any of the function parameters are null and needs to be executed.
         /// </exception>
         IResult<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
-            Func<T, IResult<TResult, TErrorResult>> flatMapSelector, Func<TError, TErrorResult> errorSelector);
+            Func<T, IResult<TResult, TErrorResult>> flatMapSelector,
+            Func<TError, TErrorResult> errorSelector
+        );
 
         /// <summary>
         ///     Fully flatmaps another <see cref="Result{T,TError}" />.
@@ -301,8 +308,10 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         /// <returns></returns>
         IResult<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
-            Func<TError, TErrorResult> errorSelector);
+            Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector,
+            Func<T, TFlatMap, TResult> resultSelector,
+            Func<TError, TErrorResult> errorSelector
+        );
 
         /// <summary>
         ///     Maps both <typeparamref name="T" /> and <typeparamref name="TError" /> but only one is executed.
@@ -327,8 +336,7 @@ namespace Lemonad.ErrorHandling {
             Func<TError, TErrorResult> errorSelector
         );
 
-        IResult<T, TError> IsErrorWhen(
-            Func<T, bool> predicate, Func<T, TError> errorSelector);
+        IResult<T, TError> IsErrorWhen(Func<T, bool> predicate, Func<T, TError> errorSelector);
 
         /// <summary>
         ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
@@ -345,8 +353,11 @@ namespace Lemonad.ErrorHandling {
         ///     A <see cref="Result{T,TError}" />.
         /// </returns>
         IResult<TResult, TError> Join<TInner, TKey, TResult>(
-            IResult<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
-            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector);
+            IResult<TInner, TError> inner, Func<T, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector,
+            Func<TError> errorSelector
+        );
 
         /// <summary>
         ///     Zip two <see cref="Result{T,TError}" /> when matched with a key.
@@ -364,8 +375,13 @@ namespace Lemonad.ErrorHandling {
         ///     A <see cref="Result{T,TError}" />.
         /// </returns>
         IResult<TResult, TError> Join<TInner, TKey, TResult>(
-            IResult<TInner, TError> inner, Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
-            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector, IEqualityComparer<TKey> comparer);
+            IResult<TInner, TError> inner,
+            Func<T, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector,
+            Func<TError> errorSelector,
+            IEqualityComparer<TKey> comparer
+        );
 
         /// <summary>
         ///     Maps <typeparamref name="T" />.
@@ -456,7 +472,9 @@ namespace Lemonad.ErrorHandling {
         ///     A <see cref="Result{T,TError}" /> whose value is the result for merging two <see cref="Result{T,TError}" />
         ///     together.
         /// </returns>
-        IResult<TResult, TError> Zip<TOther, TResult>(IResult<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector);
+        IResult<TResult, TError> Zip<TOther, TResult>(
+            IResult<TOther, TError> other,
+            Func<T, TOther, TResult> resultSelector
+        );
     }
 }
