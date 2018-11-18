@@ -36,6 +36,15 @@ references:
   isSpec: "True"
   fullName: Lemonad.ErrorHandling.AsyncResult.GetAwaiter
   nameWithType: AsyncResult.GetAwaiter
+- uid: Lemonad.ErrorHandling.AsyncResult.GetAwaiter``2(Lemonad.ErrorHandling.IAsyncEither{``0,``1})
+  name: GetAwaiter<T, TError>(IAsyncEither<T, TError>)
+  href: api/Lemonad.ErrorHandling.AsyncResult.html#Lemonad_ErrorHandling_AsyncResult_GetAwaiter__2_Lemonad_ErrorHandling_IAsyncEither___0___1__
+  commentId: M:Lemonad.ErrorHandling.AsyncResult.GetAwaiter``2(Lemonad.ErrorHandling.IAsyncEither{``0,``1})
+  name.vb: GetAwaiter(Of T, TError)(IAsyncEither(Of T, TError))
+  fullName: Lemonad.ErrorHandling.AsyncResult.GetAwaiter<T, TError>(Lemonad.ErrorHandling.IAsyncEither<T, TError>)
+  fullName.vb: Lemonad.ErrorHandling.AsyncResult.GetAwaiter(Of T, TError)(Lemonad.ErrorHandling.IAsyncEither(Of T, TError))
+  nameWithType: AsyncResult.GetAwaiter<T, TError>(IAsyncEither<T, TError>)
+  nameWithType.vb: AsyncResult.GetAwaiter(Of T, TError)(IAsyncEither(Of T, TError))
 - uid: Lemonad.ErrorHandling.AsyncResult.GetAwaiter``2(Lemonad.ErrorHandling.IAsyncResult{``0,``1})
   name: GetAwaiter<T, TError>(IAsyncResult<T, TError>)
   href: api/Lemonad.ErrorHandling.AsyncResult.html#Lemonad_ErrorHandling_AsyncResult_GetAwaiter__2_Lemonad_ErrorHandling_IAsyncResult___0___1__
@@ -2206,6 +2215,54 @@ references:
   commentId: T:Lemonad.ErrorHandling.Result
   fullName: Lemonad.ErrorHandling.Result
   nameWithType: Result
+- uid: Lemonad.ErrorHandling.Result.DoAsync*
+  name: DoAsync
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_DoAsync_
+  commentId: Overload:Lemonad.ErrorHandling.Result.DoAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.DoAsync
+  nameWithType: Result.DoAsync
+- uid: Lemonad.ErrorHandling.Result.DoAsync``2(Lemonad.ErrorHandling.IResult{``0,``1},System.Action)
+  name: DoAsync<T, TError>(IResult<T, TError>, Action)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_DoAsync__2_Lemonad_ErrorHandling_IResult___0___1__System_Action_
+  commentId: M:Lemonad.ErrorHandling.Result.DoAsync``2(Lemonad.ErrorHandling.IResult{``0,``1},System.Action)
+  name.vb: DoAsync(Of T, TError)(IResult(Of T, TError), Action)
+  fullName: Lemonad.ErrorHandling.Result.DoAsync<T, TError>(Lemonad.ErrorHandling.IResult<T, TError>, System.Action)
+  fullName.vb: Lemonad.ErrorHandling.Result.DoAsync(Of T, TError)(Lemonad.ErrorHandling.IResult(Of T, TError), System.Action)
+  nameWithType: Result.DoAsync<T, TError>(IResult<T, TError>, Action)
+  nameWithType.vb: Result.DoAsync(Of T, TError)(IResult(Of T, TError), Action)
+- uid: Lemonad.ErrorHandling.Result.DoWithAsync*
+  name: DoWithAsync
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_DoWithAsync_
+  commentId: Overload:Lemonad.ErrorHandling.Result.DoWithAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.DoWithAsync
+  nameWithType: Result.DoWithAsync
+- uid: Lemonad.ErrorHandling.Result.DoWithAsync``2(Lemonad.ErrorHandling.IResult{``0,``1},System.Action{``0})
+  name: DoWithAsync<T, TError>(IResult<T, TError>, Action<T>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_DoWithAsync__2_Lemonad_ErrorHandling_IResult___0___1__System_Action___0__
+  commentId: M:Lemonad.ErrorHandling.Result.DoWithAsync``2(Lemonad.ErrorHandling.IResult{``0,``1},System.Action{``0})
+  name.vb: DoWithAsync(Of T, TError)(IResult(Of T, TError), Action(Of T))
+  fullName: Lemonad.ErrorHandling.Result.DoWithAsync<T, TError>(Lemonad.ErrorHandling.IResult<T, TError>, System.Action<T>)
+  fullName.vb: Lemonad.ErrorHandling.Result.DoWithAsync(Of T, TError)(Lemonad.ErrorHandling.IResult(Of T, TError), System.Action(Of T))
+  nameWithType: Result.DoWithAsync<T, TError>(IResult<T, TError>, Action<T>)
+  nameWithType.vb: Result.DoWithAsync(Of T, TError)(IResult(Of T, TError), Action(Of T))
+- uid: Lemonad.ErrorHandling.Result.DoWithErrorAsync*
+  name: DoWithErrorAsync
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_DoWithErrorAsync_
+  commentId: Overload:Lemonad.ErrorHandling.Result.DoWithErrorAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.DoWithErrorAsync
+  nameWithType: Result.DoWithErrorAsync
+- uid: Lemonad.ErrorHandling.Result.DoWithErrorAsync``2(Lemonad.ErrorHandling.IResult{``0,``1},System.Action{``1})
+  name: DoWithErrorAsync<T, TError>(IResult<T, TError>, Action<TError>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_DoWithErrorAsync__2_Lemonad_ErrorHandling_IResult___0___1__System_Action___1__
+  commentId: M:Lemonad.ErrorHandling.Result.DoWithErrorAsync``2(Lemonad.ErrorHandling.IResult{``0,``1},System.Action{``1})
+  name.vb: DoWithErrorAsync(Of T, TError)(IResult(Of T, TError), Action(Of TError))
+  fullName: Lemonad.ErrorHandling.Result.DoWithErrorAsync<T, TError>(Lemonad.ErrorHandling.IResult<T, TError>, System.Action<TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result.DoWithErrorAsync(Of T, TError)(Lemonad.ErrorHandling.IResult(Of T, TError), System.Action(Of TError))
+  nameWithType: Result.DoWithErrorAsync<T, TError>(IResult<T, TError>, Action<TError>)
+  nameWithType.vb: Result.DoWithErrorAsync(Of T, TError)(IResult(Of T, TError), Action(Of TError))
 - uid: Lemonad.ErrorHandling.Result.Error*
   name: Error
   href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_Error_
@@ -2222,6 +2279,204 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Result.Error(Of T, TError)(TError)
   nameWithType: Result.Error<T, TError>(TError)
   nameWithType.vb: Result.Error(Of T, TError)(TError)
+- uid: Lemonad.ErrorHandling.Result.FilterAsync*
+  name: FilterAsync
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_FilterAsync_
+  commentId: Overload:Lemonad.ErrorHandling.Result.FilterAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.FilterAsync
+  nameWithType: Result.FilterAsync
+- uid: Lemonad.ErrorHandling.Result.FilterAsync``2(Lemonad.ErrorHandling.IResult{``0,``1},System.Func{``0,System.Threading.Tasks.Task{System.Boolean}},System.Func{``0,``1})
+  name: FilterAsync<T, TError>(IResult<T, TError>, Func<T, Task<Boolean>>, Func<T, TError>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_FilterAsync__2_Lemonad_ErrorHandling_IResult___0___1__System_Func___0_System_Threading_Tasks_Task_System_Boolean___System_Func___0___1__
+  commentId: M:Lemonad.ErrorHandling.Result.FilterAsync``2(Lemonad.ErrorHandling.IResult{``0,``1},System.Func{``0,System.Threading.Tasks.Task{System.Boolean}},System.Func{``0,``1})
+  name.vb: FilterAsync(Of T, TError)(IResult(Of T, TError), Func(Of T, Task(Of Boolean)), Func(Of T, TError))
+  fullName: Lemonad.ErrorHandling.Result.FilterAsync<T, TError>(Lemonad.ErrorHandling.IResult<T, TError>, System.Func<T, System.Threading.Tasks.Task<System.Boolean>>, System.Func<T, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result.FilterAsync(Of T, TError)(Lemonad.ErrorHandling.IResult(Of T, TError), System.Func(Of T, System.Threading.Tasks.Task(Of System.Boolean)), System.Func(Of T, TError))
+  nameWithType: Result.FilterAsync<T, TError>(IResult<T, TError>, Func<T, Task<Boolean>>, Func<T, TError>)
+  nameWithType.vb: Result.FilterAsync(Of T, TError)(IResult(Of T, TError), Func(Of T, Task(Of Boolean)), Func(Of T, TError))
+- uid: Lemonad.ErrorHandling.Result.FlatMapAsync*
+  name: FlatMapAsync
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_FlatMapAsync_
+  commentId: Overload:Lemonad.ErrorHandling.Result.FlatMapAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.FlatMapAsync
+  nameWithType: Result.FlatMapAsync
+- uid: Lemonad.ErrorHandling.Result.FlatMapAsync``3(Lemonad.ErrorHandling.IResult{``0,``2},System.Func{``0,Lemonad.ErrorHandling.IAsyncResult{``1,``2}})
+  name: FlatMapAsync<T, TResult, TError>(IResult<T, TError>, Func<T, IAsyncResult<TResult, TError>>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_FlatMapAsync__3_Lemonad_ErrorHandling_IResult___0___2__System_Func___0_Lemonad_ErrorHandling_IAsyncResult___1___2___
+  commentId: M:Lemonad.ErrorHandling.Result.FlatMapAsync``3(Lemonad.ErrorHandling.IResult{``0,``2},System.Func{``0,Lemonad.ErrorHandling.IAsyncResult{``1,``2}})
+  name.vb: FlatMapAsync(Of T, TResult, TError)(IResult(Of T, TError), Func(Of T, IAsyncResult(Of TResult, TError)))
+  fullName: Lemonad.ErrorHandling.Result.FlatMapAsync<T, TResult, TError>(Lemonad.ErrorHandling.IResult<T, TError>, System.Func<T, Lemonad.ErrorHandling.IAsyncResult<TResult, TError>>)
+  fullName.vb: Lemonad.ErrorHandling.Result.FlatMapAsync(Of T, TResult, TError)(Lemonad.ErrorHandling.IResult(Of T, TError), System.Func(Of T, Lemonad.ErrorHandling.IAsyncResult(Of TResult, TError)))
+  nameWithType: Result.FlatMapAsync<T, TResult, TError>(IResult<T, TError>, Func<T, IAsyncResult<TResult, TError>>)
+  nameWithType.vb: Result.FlatMapAsync(Of T, TResult, TError)(IResult(Of T, TError), Func(Of T, IAsyncResult(Of TResult, TError)))
+- uid: Lemonad.ErrorHandling.Result.FlatMapAsync``4(Lemonad.ErrorHandling.IResult{``0,``3},System.Func{``0,Lemonad.ErrorHandling.IAsyncResult{``1,``3}},System.Func{``0,``1,``2})
+  name: FlatMapAsync<T, TSelector, TResult, TError>(IResult<T, TError>, Func<T, IAsyncResult<TSelector, TError>>, Func<T, TSelector, TResult>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_FlatMapAsync__4_Lemonad_ErrorHandling_IResult___0___3__System_Func___0_Lemonad_ErrorHandling_IAsyncResult___1___3___System_Func___0___1___2__
+  commentId: M:Lemonad.ErrorHandling.Result.FlatMapAsync``4(Lemonad.ErrorHandling.IResult{``0,``3},System.Func{``0,Lemonad.ErrorHandling.IAsyncResult{``1,``3}},System.Func{``0,``1,``2})
+  name.vb: FlatMapAsync(Of T, TSelector, TResult, TError)(IResult(Of T, TError), Func(Of T, IAsyncResult(Of TSelector, TError)), Func(Of T, TSelector, TResult))
+  fullName: Lemonad.ErrorHandling.Result.FlatMapAsync<T, TSelector, TResult, TError>(Lemonad.ErrorHandling.IResult<T, TError>, System.Func<T, Lemonad.ErrorHandling.IAsyncResult<TSelector, TError>>, System.Func<T, TSelector, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.Result.FlatMapAsync(Of T, TSelector, TResult, TError)(Lemonad.ErrorHandling.IResult(Of T, TError), System.Func(Of T, Lemonad.ErrorHandling.IAsyncResult(Of TSelector, TError)), System.Func(Of T, TSelector, TResult))
+  nameWithType: Result.FlatMapAsync<T, TSelector, TResult, TError>(IResult<T, TError>, Func<T, IAsyncResult<TSelector, TError>>, Func<T, TSelector, TResult>)
+  nameWithType.vb: Result.FlatMapAsync(Of T, TSelector, TResult, TError)(IResult(Of T, TError), Func(Of T, IAsyncResult(Of TSelector, TError)), Func(Of T, TSelector, TResult))
+- uid: Lemonad.ErrorHandling.Result.FlattenAsync*
+  name: FlattenAsync
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_FlattenAsync_
+  commentId: Overload:Lemonad.ErrorHandling.Result.FlattenAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.FlattenAsync
+  nameWithType: Result.FlattenAsync
+- uid: Lemonad.ErrorHandling.Result.FlattenAsync``3(Lemonad.ErrorHandling.IResult{``0,``2},System.Func{``0,Lemonad.ErrorHandling.IAsyncResult{``1,``2}})
+  name: FlattenAsync<T, TResult, TError>(IResult<T, TError>, Func<T, IAsyncResult<TResult, TError>>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_FlattenAsync__3_Lemonad_ErrorHandling_IResult___0___2__System_Func___0_Lemonad_ErrorHandling_IAsyncResult___1___2___
+  commentId: M:Lemonad.ErrorHandling.Result.FlattenAsync``3(Lemonad.ErrorHandling.IResult{``0,``2},System.Func{``0,Lemonad.ErrorHandling.IAsyncResult{``1,``2}})
+  name.vb: FlattenAsync(Of T, TResult, TError)(IResult(Of T, TError), Func(Of T, IAsyncResult(Of TResult, TError)))
+  fullName: Lemonad.ErrorHandling.Result.FlattenAsync<T, TResult, TError>(Lemonad.ErrorHandling.IResult<T, TError>, System.Func<T, Lemonad.ErrorHandling.IAsyncResult<TResult, TError>>)
+  fullName.vb: Lemonad.ErrorHandling.Result.FlattenAsync(Of T, TResult, TError)(Lemonad.ErrorHandling.IResult(Of T, TError), System.Func(Of T, Lemonad.ErrorHandling.IAsyncResult(Of TResult, TError)))
+  nameWithType: Result.FlattenAsync<T, TResult, TError>(IResult<T, TError>, Func<T, IAsyncResult<TResult, TError>>)
+  nameWithType.vb: Result.FlattenAsync(Of T, TResult, TError)(IResult(Of T, TError), Func(Of T, IAsyncResult(Of TResult, TError)))
+- uid: Lemonad.ErrorHandling.Result.FlattenAsync``4(Lemonad.ErrorHandling.IResult{``0,``2},System.Func{``0,Lemonad.ErrorHandling.IAsyncResult{``1,``3}},System.Func{``3,``2})
+  name: FlattenAsync<T, TResult, TError, TErrorResult>(IResult<T, TError>, Func<T, IAsyncResult<TResult, TErrorResult>>, Func<TErrorResult, TError>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_FlattenAsync__4_Lemonad_ErrorHandling_IResult___0___2__System_Func___0_Lemonad_ErrorHandling_IAsyncResult___1___3___System_Func___3___2__
+  commentId: M:Lemonad.ErrorHandling.Result.FlattenAsync``4(Lemonad.ErrorHandling.IResult{``0,``2},System.Func{``0,Lemonad.ErrorHandling.IAsyncResult{``1,``3}},System.Func{``3,``2})
+  name.vb: FlattenAsync(Of T, TResult, TError, TErrorResult)(IResult(Of T, TError), Func(Of T, IAsyncResult(Of TResult, TErrorResult)), Func(Of TErrorResult, TError))
+  fullName: Lemonad.ErrorHandling.Result.FlattenAsync<T, TResult, TError, TErrorResult>(Lemonad.ErrorHandling.IResult<T, TError>, System.Func<T, Lemonad.ErrorHandling.IAsyncResult<TResult, TErrorResult>>, System.Func<TErrorResult, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result.FlattenAsync(Of T, TResult, TError, TErrorResult)(Lemonad.ErrorHandling.IResult(Of T, TError), System.Func(Of T, Lemonad.ErrorHandling.IAsyncResult(Of TResult, TErrorResult)), System.Func(Of TErrorResult, TError))
+  nameWithType: Result.FlattenAsync<T, TResult, TError, TErrorResult>(IResult<T, TError>, Func<T, IAsyncResult<TResult, TErrorResult>>, Func<TErrorResult, TError>)
+  nameWithType.vb: Result.FlattenAsync(Of T, TResult, TError, TErrorResult)(IResult(Of T, TError), Func(Of T, IAsyncResult(Of TResult, TErrorResult)), Func(Of TErrorResult, TError))
+- uid: Lemonad.ErrorHandling.Result.FullFlatMapAsync*
+  name: FullFlatMapAsync
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_FullFlatMapAsync_
+  commentId: Overload:Lemonad.ErrorHandling.Result.FullFlatMapAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.FullFlatMapAsync
+  nameWithType: Result.FullFlatMapAsync
+- uid: Lemonad.ErrorHandling.Result.FullFlatMapAsync``4(Lemonad.ErrorHandling.IResult{``0,``2},System.Func{``0,Lemonad.ErrorHandling.IAsyncResult{``1,``3}},System.Func{``2,``3})
+  name: FullFlatMapAsync<T, TResult, TError, TErrorResult>(IResult<T, TError>, Func<T, IAsyncResult<TResult, TErrorResult>>, Func<TError, TErrorResult>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_FullFlatMapAsync__4_Lemonad_ErrorHandling_IResult___0___2__System_Func___0_Lemonad_ErrorHandling_IAsyncResult___1___3___System_Func___2___3__
+  commentId: M:Lemonad.ErrorHandling.Result.FullFlatMapAsync``4(Lemonad.ErrorHandling.IResult{``0,``2},System.Func{``0,Lemonad.ErrorHandling.IAsyncResult{``1,``3}},System.Func{``2,``3})
+  name.vb: FullFlatMapAsync(Of T, TResult, TError, TErrorResult)(IResult(Of T, TError), Func(Of T, IAsyncResult(Of TResult, TErrorResult)), Func(Of TError, TErrorResult))
+  fullName: Lemonad.ErrorHandling.Result.FullFlatMapAsync<T, TResult, TError, TErrorResult>(Lemonad.ErrorHandling.IResult<T, TError>, System.Func<T, Lemonad.ErrorHandling.IAsyncResult<TResult, TErrorResult>>, System.Func<TError, TErrorResult>)
+  fullName.vb: Lemonad.ErrorHandling.Result.FullFlatMapAsync(Of T, TResult, TError, TErrorResult)(Lemonad.ErrorHandling.IResult(Of T, TError), System.Func(Of T, Lemonad.ErrorHandling.IAsyncResult(Of TResult, TErrorResult)), System.Func(Of TError, TErrorResult))
+  nameWithType: Result.FullFlatMapAsync<T, TResult, TError, TErrorResult>(IResult<T, TError>, Func<T, IAsyncResult<TResult, TErrorResult>>, Func<TError, TErrorResult>)
+  nameWithType.vb: Result.FullFlatMapAsync(Of T, TResult, TError, TErrorResult)(IResult(Of T, TError), Func(Of T, IAsyncResult(Of TResult, TErrorResult)), Func(Of TError, TErrorResult))
+- uid: Lemonad.ErrorHandling.Result.FullFlatMapAsync``5(Lemonad.ErrorHandling.IResult{``0,``3},System.Func{``0,Lemonad.ErrorHandling.IAsyncResult{``1,``4}},System.Func{``0,``1,``2},System.Func{``3,``4})
+  name: FullFlatMapAsync<T, TFlatMap, TResult, TError, TErrorResult>(IResult<T, TError>, Func<T, IAsyncResult<TFlatMap, TErrorResult>>, Func<T, TFlatMap, TResult>, Func<TError, TErrorResult>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_FullFlatMapAsync__5_Lemonad_ErrorHandling_IResult___0___3__System_Func___0_Lemonad_ErrorHandling_IAsyncResult___1___4___System_Func___0___1___2__System_Func___3___4__
+  commentId: M:Lemonad.ErrorHandling.Result.FullFlatMapAsync``5(Lemonad.ErrorHandling.IResult{``0,``3},System.Func{``0,Lemonad.ErrorHandling.IAsyncResult{``1,``4}},System.Func{``0,``1,``2},System.Func{``3,``4})
+  name.vb: FullFlatMapAsync(Of T, TFlatMap, TResult, TError, TErrorResult)(IResult(Of T, TError), Func(Of T, IAsyncResult(Of TFlatMap, TErrorResult)), Func(Of T, TFlatMap, TResult), Func(Of TError, TErrorResult))
+  fullName: Lemonad.ErrorHandling.Result.FullFlatMapAsync<T, TFlatMap, TResult, TError, TErrorResult>(Lemonad.ErrorHandling.IResult<T, TError>, System.Func<T, Lemonad.ErrorHandling.IAsyncResult<TFlatMap, TErrorResult>>, System.Func<T, TFlatMap, TResult>, System.Func<TError, TErrorResult>)
+  fullName.vb: Lemonad.ErrorHandling.Result.FullFlatMapAsync(Of T, TFlatMap, TResult, TError, TErrorResult)(Lemonad.ErrorHandling.IResult(Of T, TError), System.Func(Of T, Lemonad.ErrorHandling.IAsyncResult(Of TFlatMap, TErrorResult)), System.Func(Of T, TFlatMap, TResult), System.Func(Of TError, TErrorResult))
+  nameWithType: Result.FullFlatMapAsync<T, TFlatMap, TResult, TError, TErrorResult>(IResult<T, TError>, Func<T, IAsyncResult<TFlatMap, TErrorResult>>, Func<T, TFlatMap, TResult>, Func<TError, TErrorResult>)
+  nameWithType.vb: Result.FullFlatMapAsync(Of T, TFlatMap, TResult, TError, TErrorResult)(IResult(Of T, TError), Func(Of T, IAsyncResult(Of TFlatMap, TErrorResult)), Func(Of T, TFlatMap, TResult), Func(Of TError, TErrorResult))
+- uid: Lemonad.ErrorHandling.Result.FullMapAsync*
+  name: FullMapAsync
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_FullMapAsync_
+  commentId: Overload:Lemonad.ErrorHandling.Result.FullMapAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.FullMapAsync
+  nameWithType: Result.FullMapAsync
+- uid: Lemonad.ErrorHandling.Result.FullMapAsync``4(Lemonad.ErrorHandling.IResult{``0,``2},System.Func{``0,``1},System.Func{``2,System.Threading.Tasks.Task{``3}})
+  name: FullMapAsync<T, TResult, TError, TErrorResult>(IResult<T, TError>, Func<T, TResult>, Func<TError, Task<TErrorResult>>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_FullMapAsync__4_Lemonad_ErrorHandling_IResult___0___2__System_Func___0___1__System_Func___2_System_Threading_Tasks_Task___3___
+  commentId: M:Lemonad.ErrorHandling.Result.FullMapAsync``4(Lemonad.ErrorHandling.IResult{``0,``2},System.Func{``0,``1},System.Func{``2,System.Threading.Tasks.Task{``3}})
+  name.vb: FullMapAsync(Of T, TResult, TError, TErrorResult)(IResult(Of T, TError), Func(Of T, TResult), Func(Of TError, Task(Of TErrorResult)))
+  fullName: Lemonad.ErrorHandling.Result.FullMapAsync<T, TResult, TError, TErrorResult>(Lemonad.ErrorHandling.IResult<T, TError>, System.Func<T, TResult>, System.Func<TError, System.Threading.Tasks.Task<TErrorResult>>)
+  fullName.vb: Lemonad.ErrorHandling.Result.FullMapAsync(Of T, TResult, TError, TErrorResult)(Lemonad.ErrorHandling.IResult(Of T, TError), System.Func(Of T, TResult), System.Func(Of TError, System.Threading.Tasks.Task(Of TErrorResult)))
+  nameWithType: Result.FullMapAsync<T, TResult, TError, TErrorResult>(IResult<T, TError>, Func<T, TResult>, Func<TError, Task<TErrorResult>>)
+  nameWithType.vb: Result.FullMapAsync(Of T, TResult, TError, TErrorResult)(IResult(Of T, TError), Func(Of T, TResult), Func(Of TError, Task(Of TErrorResult)))
+- uid: Lemonad.ErrorHandling.Result.FullMapAsync``4(Lemonad.ErrorHandling.IResult{``0,``2},System.Func{``0,System.Threading.Tasks.Task{``1}},System.Func{``2,``3})
+  name: FullMapAsync<T, TResult, TError, TErrorResult>(IResult<T, TError>, Func<T, Task<TResult>>, Func<TError, TErrorResult>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_FullMapAsync__4_Lemonad_ErrorHandling_IResult___0___2__System_Func___0_System_Threading_Tasks_Task___1___System_Func___2___3__
+  commentId: M:Lemonad.ErrorHandling.Result.FullMapAsync``4(Lemonad.ErrorHandling.IResult{``0,``2},System.Func{``0,System.Threading.Tasks.Task{``1}},System.Func{``2,``3})
+  name.vb: FullMapAsync(Of T, TResult, TError, TErrorResult)(IResult(Of T, TError), Func(Of T, Task(Of TResult)), Func(Of TError, TErrorResult))
+  fullName: Lemonad.ErrorHandling.Result.FullMapAsync<T, TResult, TError, TErrorResult>(Lemonad.ErrorHandling.IResult<T, TError>, System.Func<T, System.Threading.Tasks.Task<TResult>>, System.Func<TError, TErrorResult>)
+  fullName.vb: Lemonad.ErrorHandling.Result.FullMapAsync(Of T, TResult, TError, TErrorResult)(Lemonad.ErrorHandling.IResult(Of T, TError), System.Func(Of T, System.Threading.Tasks.Task(Of TResult)), System.Func(Of TError, TErrorResult))
+  nameWithType: Result.FullMapAsync<T, TResult, TError, TErrorResult>(IResult<T, TError>, Func<T, Task<TResult>>, Func<TError, TErrorResult>)
+  nameWithType.vb: Result.FullMapAsync(Of T, TResult, TError, TErrorResult)(IResult(Of T, TError), Func(Of T, Task(Of TResult)), Func(Of TError, TErrorResult))
+- uid: Lemonad.ErrorHandling.Result.FullMapAsync``4(Lemonad.ErrorHandling.IResult{``0,``2},System.Func{``0,System.Threading.Tasks.Task{``1}},System.Func{``2,System.Threading.Tasks.Task{``3}})
+  name: FullMapAsync<T, TResult, TError, TErrorResult>(IResult<T, TError>, Func<T, Task<TResult>>, Func<TError, Task<TErrorResult>>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_FullMapAsync__4_Lemonad_ErrorHandling_IResult___0___2__System_Func___0_System_Threading_Tasks_Task___1___System_Func___2_System_Threading_Tasks_Task___3___
+  commentId: M:Lemonad.ErrorHandling.Result.FullMapAsync``4(Lemonad.ErrorHandling.IResult{``0,``2},System.Func{``0,System.Threading.Tasks.Task{``1}},System.Func{``2,System.Threading.Tasks.Task{``3}})
+  name.vb: FullMapAsync(Of T, TResult, TError, TErrorResult)(IResult(Of T, TError), Func(Of T, Task(Of TResult)), Func(Of TError, Task(Of TErrorResult)))
+  fullName: Lemonad.ErrorHandling.Result.FullMapAsync<T, TResult, TError, TErrorResult>(Lemonad.ErrorHandling.IResult<T, TError>, System.Func<T, System.Threading.Tasks.Task<TResult>>, System.Func<TError, System.Threading.Tasks.Task<TErrorResult>>)
+  fullName.vb: Lemonad.ErrorHandling.Result.FullMapAsync(Of T, TResult, TError, TErrorResult)(Lemonad.ErrorHandling.IResult(Of T, TError), System.Func(Of T, System.Threading.Tasks.Task(Of TResult)), System.Func(Of TError, System.Threading.Tasks.Task(Of TErrorResult)))
+  nameWithType: Result.FullMapAsync<T, TResult, TError, TErrorResult>(IResult<T, TError>, Func<T, Task<TResult>>, Func<TError, Task<TErrorResult>>)
+  nameWithType.vb: Result.FullMapAsync(Of T, TResult, TError, TErrorResult)(IResult(Of T, TError), Func(Of T, Task(Of TResult)), Func(Of TError, Task(Of TErrorResult)))
+- uid: Lemonad.ErrorHandling.Result.IsErrorWhenAsync*
+  name: IsErrorWhenAsync
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_IsErrorWhenAsync_
+  commentId: Overload:Lemonad.ErrorHandling.Result.IsErrorWhenAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.IsErrorWhenAsync
+  nameWithType: Result.IsErrorWhenAsync
+- uid: Lemonad.ErrorHandling.Result.IsErrorWhenAsync``2(Lemonad.ErrorHandling.IResult{``0,``1},System.Func{``0,System.Threading.Tasks.Task{System.Boolean}},System.Func{``0,``1})
+  name: IsErrorWhenAsync<T, TError>(IResult<T, TError>, Func<T, Task<Boolean>>, Func<T, TError>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_IsErrorWhenAsync__2_Lemonad_ErrorHandling_IResult___0___1__System_Func___0_System_Threading_Tasks_Task_System_Boolean___System_Func___0___1__
+  commentId: M:Lemonad.ErrorHandling.Result.IsErrorWhenAsync``2(Lemonad.ErrorHandling.IResult{``0,``1},System.Func{``0,System.Threading.Tasks.Task{System.Boolean}},System.Func{``0,``1})
+  name.vb: IsErrorWhenAsync(Of T, TError)(IResult(Of T, TError), Func(Of T, Task(Of Boolean)), Func(Of T, TError))
+  fullName: Lemonad.ErrorHandling.Result.IsErrorWhenAsync<T, TError>(Lemonad.ErrorHandling.IResult<T, TError>, System.Func<T, System.Threading.Tasks.Task<System.Boolean>>, System.Func<T, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result.IsErrorWhenAsync(Of T, TError)(Lemonad.ErrorHandling.IResult(Of T, TError), System.Func(Of T, System.Threading.Tasks.Task(Of System.Boolean)), System.Func(Of T, TError))
+  nameWithType: Result.IsErrorWhenAsync<T, TError>(IResult<T, TError>, Func<T, Task<Boolean>>, Func<T, TError>)
+  nameWithType.vb: Result.IsErrorWhenAsync(Of T, TError)(IResult(Of T, TError), Func(Of T, Task(Of Boolean)), Func(Of T, TError))
+- uid: Lemonad.ErrorHandling.Result.JoinAsync*
+  name: JoinAsync
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_JoinAsync_
+  commentId: Overload:Lemonad.ErrorHandling.Result.JoinAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.JoinAsync
+  nameWithType: Result.JoinAsync
+- uid: Lemonad.ErrorHandling.Result.JoinAsync``5(Lemonad.ErrorHandling.IResult{``0,``4},Lemonad.ErrorHandling.IAsyncResult{``1,``4},System.Func{``0,``2},System.Func{``1,``2},System.Func{``0,``1,``3},System.Func{``4})
+  name: JoinAsync<T, TInner, TKey, TResult, TError>(IResult<T, TError>, IAsyncResult<TInner, TError>, Func<T, TKey>, Func<TInner, TKey>, Func<T, TInner, TResult>, Func<TError>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_JoinAsync__5_Lemonad_ErrorHandling_IResult___0___4__Lemonad_ErrorHandling_IAsyncResult___1___4__System_Func___0___2__System_Func___1___2__System_Func___0___1___3__System_Func___4__
+  commentId: M:Lemonad.ErrorHandling.Result.JoinAsync``5(Lemonad.ErrorHandling.IResult{``0,``4},Lemonad.ErrorHandling.IAsyncResult{``1,``4},System.Func{``0,``2},System.Func{``1,``2},System.Func{``0,``1,``3},System.Func{``4})
+  name.vb: JoinAsync(Of T, TInner, TKey, TResult, TError)(IResult(Of T, TError), IAsyncResult(Of TInner, TError), Func(Of T, TKey), Func(Of TInner, TKey), Func(Of T, TInner, TResult), Func(Of TError))
+  fullName: Lemonad.ErrorHandling.Result.JoinAsync<T, TInner, TKey, TResult, TError>(Lemonad.ErrorHandling.IResult<T, TError>, Lemonad.ErrorHandling.IAsyncResult<TInner, TError>, System.Func<T, TKey>, System.Func<TInner, TKey>, System.Func<T, TInner, TResult>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.Result.JoinAsync(Of T, TInner, TKey, TResult, TError)(Lemonad.ErrorHandling.IResult(Of T, TError), Lemonad.ErrorHandling.IAsyncResult(Of TInner, TError), System.Func(Of T, TKey), System.Func(Of TInner, TKey), System.Func(Of T, TInner, TResult), System.Func(Of TError))
+  nameWithType: Result.JoinAsync<T, TInner, TKey, TResult, TError>(IResult<T, TError>, IAsyncResult<TInner, TError>, Func<T, TKey>, Func<TInner, TKey>, Func<T, TInner, TResult>, Func<TError>)
+  nameWithType.vb: Result.JoinAsync(Of T, TInner, TKey, TResult, TError)(IResult(Of T, TError), IAsyncResult(Of TInner, TError), Func(Of T, TKey), Func(Of TInner, TKey), Func(Of T, TInner, TResult), Func(Of TError))
+- uid: Lemonad.ErrorHandling.Result.JoinAsync``5(Lemonad.ErrorHandling.IResult{``0,``4},Lemonad.ErrorHandling.IAsyncResult{``1,``4},System.Func{``0,``2},System.Func{``1,``2},System.Func{``0,``1,``3},System.Func{``4},System.Collections.Generic.IEqualityComparer{``2})
+  name: JoinAsync<T, TInner, TKey, TResult, TError>(IResult<T, TError>, IAsyncResult<TInner, TError>, Func<T, TKey>, Func<TInner, TKey>, Func<T, TInner, TResult>, Func<TError>, IEqualityComparer<TKey>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_JoinAsync__5_Lemonad_ErrorHandling_IResult___0___4__Lemonad_ErrorHandling_IAsyncResult___1___4__System_Func___0___2__System_Func___1___2__System_Func___0___1___3__System_Func___4__System_Collections_Generic_IEqualityComparer___2__
+  commentId: M:Lemonad.ErrorHandling.Result.JoinAsync``5(Lemonad.ErrorHandling.IResult{``0,``4},Lemonad.ErrorHandling.IAsyncResult{``1,``4},System.Func{``0,``2},System.Func{``1,``2},System.Func{``0,``1,``3},System.Func{``4},System.Collections.Generic.IEqualityComparer{``2})
+  name.vb: JoinAsync(Of T, TInner, TKey, TResult, TError)(IResult(Of T, TError), IAsyncResult(Of TInner, TError), Func(Of T, TKey), Func(Of TInner, TKey), Func(Of T, TInner, TResult), Func(Of TError), IEqualityComparer(Of TKey))
+  fullName: Lemonad.ErrorHandling.Result.JoinAsync<T, TInner, TKey, TResult, TError>(Lemonad.ErrorHandling.IResult<T, TError>, Lemonad.ErrorHandling.IAsyncResult<TInner, TError>, System.Func<T, TKey>, System.Func<TInner, TKey>, System.Func<T, TInner, TResult>, System.Func<TError>, System.Collections.Generic.IEqualityComparer<TKey>)
+  fullName.vb: Lemonad.ErrorHandling.Result.JoinAsync(Of T, TInner, TKey, TResult, TError)(Lemonad.ErrorHandling.IResult(Of T, TError), Lemonad.ErrorHandling.IAsyncResult(Of TInner, TError), System.Func(Of T, TKey), System.Func(Of TInner, TKey), System.Func(Of T, TInner, TResult), System.Func(Of TError), System.Collections.Generic.IEqualityComparer(Of TKey))
+  nameWithType: Result.JoinAsync<T, TInner, TKey, TResult, TError>(IResult<T, TError>, IAsyncResult<TInner, TError>, Func<T, TKey>, Func<TInner, TKey>, Func<T, TInner, TResult>, Func<TError>, IEqualityComparer<TKey>)
+  nameWithType.vb: Result.JoinAsync(Of T, TInner, TKey, TResult, TError)(IResult(Of T, TError), IAsyncResult(Of TInner, TError), Func(Of T, TKey), Func(Of TInner, TKey), Func(Of T, TInner, TResult), Func(Of TError), IEqualityComparer(Of TKey))
+- uid: Lemonad.ErrorHandling.Result.MapAsync*
+  name: MapAsync
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_MapAsync_
+  commentId: Overload:Lemonad.ErrorHandling.Result.MapAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.MapAsync
+  nameWithType: Result.MapAsync
+- uid: Lemonad.ErrorHandling.Result.MapAsync``3(Lemonad.ErrorHandling.IResult{``0,``1},System.Func{``0,System.Threading.Tasks.Task{``2}})
+  name: MapAsync<T, TError, TResult>(IResult<T, TError>, Func<T, Task<TResult>>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_MapAsync__3_Lemonad_ErrorHandling_IResult___0___1__System_Func___0_System_Threading_Tasks_Task___2___
+  commentId: M:Lemonad.ErrorHandling.Result.MapAsync``3(Lemonad.ErrorHandling.IResult{``0,``1},System.Func{``0,System.Threading.Tasks.Task{``2}})
+  name.vb: MapAsync(Of T, TError, TResult)(IResult(Of T, TError), Func(Of T, Task(Of TResult)))
+  fullName: Lemonad.ErrorHandling.Result.MapAsync<T, TError, TResult>(Lemonad.ErrorHandling.IResult<T, TError>, System.Func<T, System.Threading.Tasks.Task<TResult>>)
+  fullName.vb: Lemonad.ErrorHandling.Result.MapAsync(Of T, TError, TResult)(Lemonad.ErrorHandling.IResult(Of T, TError), System.Func(Of T, System.Threading.Tasks.Task(Of TResult)))
+  nameWithType: Result.MapAsync<T, TError, TResult>(IResult<T, TError>, Func<T, Task<TResult>>)
+  nameWithType.vb: Result.MapAsync(Of T, TError, TResult)(IResult(Of T, TError), Func(Of T, Task(Of TResult)))
+- uid: Lemonad.ErrorHandling.Result.MapErrorAsync*
+  name: MapErrorAsync
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_MapErrorAsync_
+  commentId: Overload:Lemonad.ErrorHandling.Result.MapErrorAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.MapErrorAsync
+  nameWithType: Result.MapErrorAsync
+- uid: Lemonad.ErrorHandling.Result.MapErrorAsync``3(Lemonad.ErrorHandling.IResult{``0,``1},System.Func{``1,System.Threading.Tasks.Task{``2}})
+  name: MapErrorAsync<T, TError, TErrorResult>(IResult<T, TError>, Func<TError, Task<TErrorResult>>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_MapErrorAsync__3_Lemonad_ErrorHandling_IResult___0___1__System_Func___1_System_Threading_Tasks_Task___2___
+  commentId: M:Lemonad.ErrorHandling.Result.MapErrorAsync``3(Lemonad.ErrorHandling.IResult{``0,``1},System.Func{``1,System.Threading.Tasks.Task{``2}})
+  name.vb: MapErrorAsync(Of T, TError, TErrorResult)(IResult(Of T, TError), Func(Of TError, Task(Of TErrorResult)))
+  fullName: Lemonad.ErrorHandling.Result.MapErrorAsync<T, TError, TErrorResult>(Lemonad.ErrorHandling.IResult<T, TError>, System.Func<TError, System.Threading.Tasks.Task<TErrorResult>>)
+  fullName.vb: Lemonad.ErrorHandling.Result.MapErrorAsync(Of T, TError, TErrorResult)(Lemonad.ErrorHandling.IResult(Of T, TError), System.Func(Of TError, System.Threading.Tasks.Task(Of TErrorResult)))
+  nameWithType: Result.MapErrorAsync<T, TError, TErrorResult>(IResult<T, TError>, Func<TError, Task<TErrorResult>>)
+  nameWithType.vb: Result.MapErrorAsync(Of T, TError, TErrorResult)(IResult(Of T, TError), Func(Of TError, Task(Of TErrorResult)))
 - uid: Lemonad.ErrorHandling.Result.Match*
   name: Match
   href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_Match_
@@ -2368,3 +2623,19 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Result.Value(Of T, TError)(T)
   nameWithType: Result.Value<T, TError>(T)
   nameWithType.vb: Result.Value(Of T, TError)(T)
+- uid: Lemonad.ErrorHandling.Result.ZipAsync*
+  name: ZipAsync
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ZipAsync_
+  commentId: Overload:Lemonad.ErrorHandling.Result.ZipAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Result.ZipAsync
+  nameWithType: Result.ZipAsync
+- uid: Lemonad.ErrorHandling.Result.ZipAsync``4(Lemonad.ErrorHandling.IResult{``0,``3},Lemonad.ErrorHandling.IAsyncResult{``1,``3},System.Func{``0,``1,``2})
+  name: ZipAsync<T, TOther, TResult, TError>(IResult<T, TError>, IAsyncResult<TOther, TError>, Func<T, TOther, TResult>)
+  href: api/Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ZipAsync__4_Lemonad_ErrorHandling_IResult___0___3__Lemonad_ErrorHandling_IAsyncResult___1___3__System_Func___0___1___2__
+  commentId: M:Lemonad.ErrorHandling.Result.ZipAsync``4(Lemonad.ErrorHandling.IResult{``0,``3},Lemonad.ErrorHandling.IAsyncResult{``1,``3},System.Func{``0,``1,``2})
+  name.vb: ZipAsync(Of T, TOther, TResult, TError)(IResult(Of T, TError), IAsyncResult(Of TOther, TError), Func(Of T, TOther, TResult))
+  fullName: Lemonad.ErrorHandling.Result.ZipAsync<T, TOther, TResult, TError>(Lemonad.ErrorHandling.IResult<T, TError>, Lemonad.ErrorHandling.IAsyncResult<TOther, TError>, System.Func<T, TOther, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.Result.ZipAsync(Of T, TOther, TResult, TError)(Lemonad.ErrorHandling.IResult(Of T, TError), Lemonad.ErrorHandling.IAsyncResult(Of TOther, TError), System.Func(Of T, TOther, TResult))
+  nameWithType: Result.ZipAsync<T, TOther, TResult, TError>(IResult<T, TError>, IAsyncResult<TOther, TError>, Func<T, TOther, TResult>)
+  nameWithType.vb: Result.ZipAsync(Of T, TOther, TResult, TError)(IResult(Of T, TError), IAsyncResult(Of TOther, TError), Func(Of T, TOther, TResult))
