@@ -4,6 +4,9 @@ using System.Diagnostics.Contracts;
 using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
+    /// <summary>
+    ///  Provides a set of static methods for <see cref="IMaybe{T}"/>.
+    /// </summary>
     public static class Maybe {
         /// <summary>
         ///     Creates a <see cref="Maybe{T}" /> who will have no value.

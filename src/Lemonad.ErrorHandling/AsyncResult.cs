@@ -10,6 +10,9 @@ using Lemonad.ErrorHandling.Internal.Either;
 using Lemonad.ErrorHandling.Internal.TaskExtensions;
 
 namespace Lemonad.ErrorHandling {
+    /// <summary>
+    ///  Provides a set of static methods for <see cref="IAsyncResult{T,TError}"/>.
+    /// </summary>
     public static class AsyncResult {
         /// <summary>
         ///     Creates a <see cref="IAsyncResult{T,TError}" /> with <typeparamref name="TError" />.

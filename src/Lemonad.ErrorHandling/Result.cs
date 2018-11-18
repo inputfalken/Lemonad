@@ -6,6 +6,9 @@ using Lemonad.ErrorHandling.Internal;
 using Lemonad.ErrorHandling.Internal.Either;
 
 namespace Lemonad.ErrorHandling {
+    /// <summary>
+    ///  Provides a set of static methods for <see cref="IResult{T,TError}"/>.
+    /// </summary>
     public static class Result {
         /// <summary>
         ///     Creates a <see cref="IResult{T,TError}" /> with <typeparamref name="TError" />.
