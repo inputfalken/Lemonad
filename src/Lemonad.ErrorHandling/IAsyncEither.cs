@@ -1,6 +1,9 @@
 ﻿using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling {
+    /// <summary>
+    ///     Represents an asynchronous version of <see cref="IEither{T,TError}" />.
+    /// </summary>
     public interface IAsyncEither<out T, out TError> {
         /// <summary>
         ///     Represents a bool to indicate whether property <see cref="Value" /> is available to use.
