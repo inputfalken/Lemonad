@@ -23,6 +23,7 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             ? Task.FromResult(_hasValue)
             : ResolveValue();
 
+        /// Should this throw exception when <see cref="IAsyncEither{T,TError}.HasValue"/> is true?
         public TError Error {
             get => _isAwaited
                 ? _error
@@ -33,6 +34,7 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             private set => _error = value;
         }
 
+        /// Should this throw exception when <see cref="IAsyncEither{T,TError}.HasError"/> is true?
         public T Value {
             get => _isAwaited
                 ? _value
