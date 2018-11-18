@@ -132,7 +132,7 @@ namespace Lemonad.ErrorHandling {
                 : Result.Error<T, TError>(asyncResult.Either.Error);
 
         /// <summary>
-        /// Returns an <see cref="IResult{T,TError}"/> perform and await operation.
+        /// Returns a <see cref="IResult{T,TError}"/> when awaited.
         /// </summary>
         /// <param name="source">
         /// The <see cref="IAsyncResult{T,TError}"/>.
@@ -146,6 +146,22 @@ namespace Lemonad.ErrorHandling {
         /// <returns></returns>
         public static TaskAwaiter<IResult<T, TError>> GetAwaiter<T, TError>(this IAsyncResult<T, TError> source)
             => Mapper(source).GetAwaiter();
+
+        /// <summary>
+        /// Returns a <see cref="IEither{T,TError}"/> when awaited.
+        /// </summary>
+        /// <param name="source">
+        /// The <see cref="IAsyncEither{T,TError}"/>.
+        /// </param>
+        /// <typeparam name="T"> of <see cref="IAsyncEither{T,TError}"/>.
+        /// The <typeparamref name="T"/>
+        /// </typeparam>
+        /// <typeparam name="TError">
+        /// The <typeparamref name="TError"/> of <see cref="IAsyncEither{T,TError}"/>.
+        /// </typeparam>
+        /// <returns></returns>
+        public static TaskAwaiter<IEither<T, TError>> GetAwaiter<T, TError>(this IAsyncEither<T, TError> source)
+            => source.ToTaskEither().GetAwaiter();
 
         /// <summary>
         ///     Creates a <see cref="IAsyncResult{T,TError}" /> with <typeparamref name="T" />.
