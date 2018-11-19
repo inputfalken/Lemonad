@@ -37,13 +37,15 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             private set => _value = value;
         }
 
+        /// Worst case scenario,  <see cref="Value"/> or <see cref="Error"/> gets assigned multiple times.
         private async Task<bool> Resolve(bool returnHasValue) {
             var either = await _either.ConfigureAwait(false);
             _isAwaited = true;
-            _hasError = either.HasError;
-            _hasValue = either.HasValue;
             if (either.HasValue) Value = either.Value;
             else Error = either.Error;
+            
+            _hasError = either.HasError;
+            _hasValue = either.HasValue;
 
             return returnHasValue ? _hasValue : _hasError;
         }
