@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Exceptions;
 
@@ -18,7 +17,7 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             _semaphoreSlim = new SemaphoreSlim(1, 1);
         }
 
-        public Task<bool> HasError => _isAssigned ? Task.FromResult(_hasValue) :Resolve(false);
+        public Task<bool> HasError => _isAssigned ? Task.FromResult(_hasError) :Resolve(false);
 
         public Task<bool> HasValue => _isAssigned ? Task.FromResult(_hasValue) : Resolve(true);
 
@@ -43,11 +42,12 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             private set => _value = value;
         }
 
+        // A SemaphoreSlim might not be needed for this...
         private async Task<bool> Resolve(bool returnHasValue) {
             await _semaphoreSlim.WaitAsync().ConfigureAwait(false);
             if (_isAssigned) return returnHasValue ? _hasValue : _hasError;
             try {
-                await AssignProperties();
+                await AssignProperties().ConfigureAwait(false);
             }
             finally {
                 _semaphoreSlim.Release();
