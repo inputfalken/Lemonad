@@ -6,7 +6,7 @@ namespace Lemonad.ErrorHandling.Internal.Either {
         private readonly Task<IEither<T, TError>> _either;
         private bool _hasError;
         private bool _hasValue;
-        private bool _isAwaited;
+        private bool _hasBeenAssigned;
         private T _value;
         private TError _error;
 
@@ -18,7 +18,7 @@ namespace Lemonad.ErrorHandling.Internal.Either {
 
         /// Should this throw exception when <see cref="IAsyncEither{T,TError}.HasValue"/> is true?
         public TError Error {
-            get => _isAwaited
+            get => _hasBeenAssigned
                 ? _error
                 : throw new InvalidEitherStateException(
                     $"Can not access property '{nameof(IAsyncEither<T, TError>.Error)}' of '{nameof(IAsyncEither<T, TError>)}', before property '{nameof(IAsyncEither<T, TError>.HasError)}' or '{nameof(IAsyncEither<T, TError>.HasError)}' has been awaited."
@@ -29,7 +29,7 @@ namespace Lemonad.ErrorHandling.Internal.Either {
 
         /// Should this throw exception when <see cref="IAsyncEither{T,TError}.HasError"/> is true?
         public T Value {
-            get => _isAwaited
+            get => _hasBeenAssigned
                 ? _value
                 : throw new InvalidEitherStateException(
                     $"Can not access property '{nameof(IAsyncEither<T, TError>.Value)}' of '{nameof(IAsyncEither<T, TError>)}', before property '{nameof(IAsyncEither<T, TError>.HasError)}' or '{nameof(IAsyncEither<T, TError>.HasError)}' has been awaited."
@@ -40,12 +40,12 @@ namespace Lemonad.ErrorHandling.Internal.Either {
         /// Worst case scenario,  <see cref="Value"/> or <see cref="Error"/> gets assigned multiple times.
         private async Task<bool> Resolve(bool returnHasValue) {
             var either = await _either.ConfigureAwait(false);
-            _isAwaited = true;
             if (either.HasValue) Value = either.Value;
             else Error = either.Error;
-            
+
             _hasError = either.HasError;
             _hasValue = either.HasValue;
+            _hasBeenAssigned = true;
 
             return returnHasValue ? _hasValue : _hasError;
         }
