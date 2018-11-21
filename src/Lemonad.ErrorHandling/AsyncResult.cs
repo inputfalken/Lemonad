@@ -202,7 +202,7 @@ namespace Lemonad.ErrorHandling {
             this IAsyncResult<T, TError> source,
             Func<T, IResult<TResult, TErrorResult>> selector,
             Func<TErrorResult, TError> errorSelector
-        ) => source.Flatten(selector.Compose(x => x.ToAsyncResult()), errorSelector);
+        ) => source.Flatten(selector.Compose(ToAsyncResult), errorSelector);
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
@@ -211,8 +211,8 @@ namespace Lemonad.ErrorHandling {
         public static IAsyncResult<T, TError> FlattenSync<T, TResult, TError>(
             this IAsyncResult<T, TError> source,
             Func<T, IResult<TResult, TError>> selector
-        ) => source.Flatten(selector.Compose(x => x.ToAsyncResult()));
-        
+        ) => source.Flatten(selector.Compose(ToAsyncResult));
+
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
         ///     <see cref="IAsyncResult{T,TError}.FullFlatMap{TResult, TErrorResult}(Func{T, IAsyncResult{TResult, TErrorResult}}, Func{TError, TErrorResult})" />.
@@ -221,8 +221,8 @@ namespace Lemonad.ErrorHandling {
             this IAsyncResult<T, TError> source,
             Func<T, IResult<TResult, TErrorResult>> flatMapSelector,
             Func<TError, TErrorResult> errorSelector
-        ) => source.FullFlatMap(flatMapSelector.Compose(x => x.ToAsyncResult()), errorSelector);
-        
+        ) => source.FullFlatMap(flatMapSelector.Compose(ToAsyncResult), errorSelector);
+
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
         ///     <see cref="IAsyncResult{T,TError}.FullFlatMap{TFlatMap,TResult,TErrorResult}(Func{T, IAsyncResult{TFlatMap, TErrorResult}}, Func{T, TFlatMap, TResult}, Func{TError, TErrorResult})" />.
@@ -232,7 +232,26 @@ namespace Lemonad.ErrorHandling {
             Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector
-        ) => source.FullFlatMap(flatMapSelector.Compose(x => x.ToAsyncResult()), resultSelector, errorSelector);
+        ) => source.FullFlatMap(flatMapSelector.Compose(ToAsyncResult), resultSelector, errorSelector);
+
+        /// <summary>
+        ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
+        ///     <see cref="IAsyncResult{T,TError}.FlatMap{TResult}" />.
+        /// </summary>
+        public static IAsyncResult<TResult, TError> FlatMapSync<T, TResult, TError>(
+            this IAsyncResult<T, TError> source,
+            Func<T, IResult<TResult, TError>> flatSelector
+        ) => source.FlatMap(flatSelector.Compose(ToAsyncResult));
+
+        /// <summary>
+        ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
+        ///     <see cref="IAsyncResult{T,TError}.FlatMap{TSelector,TResult}(System.Func{T, IAsyncResult{TSelector, TError}}, System.Func{T, TSelector, TResult})" />.
+        /// </summary>
+        public static IAsyncResult<TResult, TError> FlatMapSync<T, TSelector, TResult, TError>(
+            this IAsyncResult<T, TError> source,
+            Func<T, IResult<TSelector, TError>> flatSelector,
+            Func<T, TSelector, TResult> resultSelector
+        ) => source.FlatMap(flatSelector.Compose(ToAsyncResult), resultSelector);
 
     }
 }
