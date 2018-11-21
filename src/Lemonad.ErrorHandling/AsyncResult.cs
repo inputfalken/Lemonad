@@ -253,5 +253,45 @@ namespace Lemonad.ErrorHandling {
             Func<T, TSelector, TResult> resultSelector
         ) => source.FlatMap(flatSelector.Compose(ToAsyncResult), resultSelector);
 
+        /// <summary>
+        ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
+        ///     <see cref="IAsyncResult{T,TError}.Join{TInner,TKey,TResult}(Lemonad.ErrorHandling.IAsyncResult{TInner,TError},System.Func{T,TKey},System.Func{TInner,TKey},System.Func{T,TInner,TResult},System.Func{TError},IEqualityComparer{TKey})" />.
+        /// </summary>
+        public static IAsyncResult<TResult, TError> JoinSync<T, TInner, TKey, TResult, TError>(
+            this IAsyncResult<T, TError> source,
+            IResult<TInner, TError> inner,
+            Func<T, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector,
+            Func<TError> errorSelector,
+            IEqualityComparer<TKey> comparer)
+            => source
+                .Join(
+                    inner.ToAsyncResult(),
+                    outerKeySelector,
+                    innerKeySelector,
+                    resultSelector,
+                    errorSelector,
+                    comparer
+                );
+
+        /// <summary>
+        ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
+        ///     <see cref="IAsyncResult{T,TError}.Join{TInner,TKey,TResult}(Lemonad.ErrorHandling.IAsyncResult{TInner,TError},System.Func{T,TKey},System.Func{TInner,TKey},System.Func{T,TInner,TResult},System.Func{TError})" />.
+        /// </summary>
+        public static IAsyncResult<TResult, TError> JoinSync<T, TInner, TKey, TResult, TError>(
+            this IAsyncResult<T, TError> source,
+            IResult<TInner, TError> inner,
+            Func<T, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector,
+            Func<TError> errorSelector) => source
+            .Join(
+                inner.ToAsyncResult(),
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                errorSelector
+            );
     }
 }
