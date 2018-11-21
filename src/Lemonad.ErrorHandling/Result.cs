@@ -257,116 +257,116 @@ namespace Lemonad.ErrorHandling {
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
-        ///     <see cref="IAsyncResult{T,TError}.Filter(System.Func{T,Task{bool}},System.Func{T,TError})" />.
+        ///     <see cref="IAsyncResult{T,TError}.FilterAsync" />.
         /// </summary>
         public static IAsyncResult<T, TError> FilterAsync<T, TError>(
             this IResult<T, TError> source,
             Func<T, Task<bool>> predicate,
             Func<T, TError> errorSelector
-        ) => source.ToAsyncResult().Filter(predicate, errorSelector);
+        ) => source.ToAsyncResult().FilterAsync(predicate, errorSelector);
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
-        ///     <see cref="IAsyncResult{T,TError}.FlatMap{TResult}" />.
+        ///     <see cref="IAsyncResult{T,TError}.FlatMapAsync{TResult}" />.
         /// </summary>
         public static IAsyncResult<TResult, TError> FlatMapAsync<T, TResult, TError>(
             this IResult<T, TError> source,
             Func<T, IAsyncResult<TResult, TError>> flatSelector
-        ) => source.ToAsyncResult().FlatMap(flatSelector);
+        ) => source.ToAsyncResult().FlatMapAsync(flatSelector);
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
-        ///     <see cref="IAsyncResult{T,TError}.FlatMap{TSelector,TResult}(System.Func{T, IAsyncResult{TSelector, TError}}, System.Func{T, TSelector, TResult})" />.
+        ///     <see cref="IAsyncResult{T,TError}.FlatMapAsync{TSelector,TResult}" />.
         /// </summary>
         public static IAsyncResult<TResult, TError> FlatMapAsync<T, TSelector, TResult, TError>(
             this IResult<T, TError> source,
             Func<T, IAsyncResult<TSelector, TError>> flatSelector,
             Func<T, TSelector, TResult> resultSelector
-        ) => source.ToAsyncResult().FlatMap(flatSelector, resultSelector);
+        ) => source.ToAsyncResult().FlatMapAsync(flatSelector, resultSelector);
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
-        ///     <see cref="IAsyncResult{T,TError}.Flatten{TResult, TErrorResult}(System.Func{T, IAsyncResult{TResult, TErrorResult}}, System.Func{TErrorResult, TError })" />.
+        ///     <see cref="IAsyncResult{T,TError}.FlattenAsync{TResult,TErrorResult}" />.
         /// </summary>
         public static IAsyncResult<T, TError> FlattenAsync<T, TResult, TError, TErrorResult>(
             this IResult<T, TError> source,
             Func<T, IAsyncResult<TResult, TErrorResult>> selector,
             Func<TErrorResult, TError> errorSelector
-        ) => source.ToAsyncResult().Flatten(selector, errorSelector);
+        ) => source.ToAsyncResult().FlattenAsync(selector, errorSelector);
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
-        ///     <see cref="IAsyncResult{T,TError}.Flatten{TResult}(System.Func{T, IAsyncResult{TResult, TError}})" />.
+        ///     <see cref="IAsyncResult{T,TError}.FlattenAsync{TResult}" />.
         /// </summary>
         public static IAsyncResult<T, TError> FlattenAsync<T, TResult, TError>(
             this IResult<T, TError> source,
             Func<T, IAsyncResult<TResult, TError>> selector
-        ) => source.ToAsyncResult().Flatten(selector);
+        ) => source.ToAsyncResult().FlattenAsync(selector);
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
-        ///     <see cref="IAsyncResult{T,TError}.FullFlatMap{TFlatMap,TResult,TErrorResult}(Func{T, IAsyncResult{TFlatMap, TErrorResult}}, Func{T, TFlatMap, TResult}, Func{TError, TErrorResult})" />.
+        ///     <see cref="IAsyncResult{T,TError}.FullFlatMapAsync{TFlatMap,TResult,TErrorResult}" />.
         /// </summary>
         public static IAsyncResult<TResult, TErrorResult> FullFlatMapAsync<T, TFlatMap, TResult, TError, TErrorResult>(
             this IResult<T, TError> source,
             Func<T, IAsyncResult<TFlatMap, TErrorResult>> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector
-        ) => source.ToAsyncResult().FullFlatMap(flatMapSelector, resultSelector, errorSelector);
+        ) => source.ToAsyncResult().FullFlatMapAsync(flatMapSelector, resultSelector, errorSelector);
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
-        ///     <see cref="IAsyncResult{T,TError}.FullFlatMap{TResult, TErrorResult}(Func{T, IAsyncResult{TResult, TErrorResult}}, Func{TError, TErrorResult})" />.
+        ///     <see cref="IAsyncResult{T,TError}.FullFlatMapAsync{TResult,TErrorResult}" />.
         /// </summary>
         public static IAsyncResult<TResult, TErrorResult> FullFlatMapAsync<T, TResult, TError, TErrorResult>(
             this IResult<T, TError> source,
             Func<T, IAsyncResult<TResult, TErrorResult>> flatMapSelector,
             Func<TError, TErrorResult> errorSelector
-        ) => source.ToAsyncResult().FullFlatMap(flatMapSelector, errorSelector);
+        ) => source.ToAsyncResult().FullFlatMapAsync(flatMapSelector, errorSelector);
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
-        ///     <see cref="IAsyncResult{T,TError}.FullMap{TResult,TErrorResult}(System.Func{T,Task{TResult}},System.Func{TError,Task{TErrorResult}})" />.
+        ///     <see cref="IAsyncResult{T,TError}.FullMapAsync{TResult,TErrorResult}(System.Func{T,System.Threading.Tasks.Task{TResult}},System.Func{TError,System.Threading.Tasks.Task{TErrorResult}})" />.
         /// </summary>
         public static IAsyncResult<TResult, TErrorResult> FullMapAsync<T, TResult, TError, TErrorResult>(
             this IResult<T, TError> source,
             Func<T, Task<TResult>> selector,
             Func<TError, Task<TErrorResult>> errorSelector
-        ) => source.ToAsyncResult().FullMap(selector, errorSelector);
+        ) => source.ToAsyncResult().FullMapAsync(selector, errorSelector);
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
-        ///     <see cref="IAsyncResult{T,TError}.FullMap{TResult,TErrorResult}(System.Func{T,Task{TResult}},System.Func{TError,TErrorResult})" />.
+        ///     <see cref="IAsyncResult{T,TError}.FullMapAsync{TResult,TErrorResult}(System.Func{T,System.Threading.Tasks.Task{TResult}},System.Func{TError,TErrorResult})" />.
         /// </summary>
         public static IAsyncResult<TResult, TErrorResult> FullMapAsync<T, TResult, TError, TErrorResult>(
             this IResult<T, TError> source,
             Func<T, Task<TResult>> selector,
             Func<TError, TErrorResult> errorSelector
-        ) => source.ToAsyncResult().FullMap(selector, errorSelector);
+        ) => source.ToAsyncResult().FullMapAsync(selector, errorSelector);
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
-        ///     <see cref="IAsyncResult{T,TError}.FullMap{TResult,TErrorResult}(System.Func{T,TResult},System.Func{TError,Task{TErrorResult}})" />.
+        ///     <see cref="IAsyncResult{T,TError}.FullMapAsync{TResult,TErrorResult}(System.Func{T,TResult},System.Func{TError,System.Threading.Tasks.Task{TErrorResult}})" />.
         /// </summary>
         public static IAsyncResult<TResult, TErrorResult> FullMapAsync<T, TResult, TError, TErrorResult>(
             this IResult<T, TError> source,
             Func<T, TResult> selector,
             Func<TError, Task<TErrorResult>> errorSelector
-        ) => source.ToAsyncResult().FullMap(selector, errorSelector);
+        ) => source.ToAsyncResult().FullMapAsync(selector, errorSelector);
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
-        ///     <see cref="IAsyncResult{T,TError}.IsErrorWhen(System.Func{T, Task{bool}},System.Func{T,TError})" />.
+        ///     <see cref="IAsyncResult{T,TError}.IsErrorWhenAsync" />.
         /// </summary>
         public static IAsyncResult<T, TError> IsErrorWhenAsync<T, TError>(
             this IResult<T, TError> source,
             Func<T, Task<bool>> predicate,
             Func<T, TError> errorSelector
-        ) => source.ToAsyncResult().IsErrorWhen(predicate, errorSelector);
+        ) => source.ToAsyncResult().IsErrorWhenAsync(predicate, errorSelector);
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
-        ///     <see cref="IAsyncResult{T,TError}.Join{TInner,TKey,TResult}(Lemonad.ErrorHandling.IAsyncResult{TInner,TError},System.Func{T,TKey},System.Func{TInner,TKey},System.Func{T,TInner,TResult},System.Func{TError},IEqualityComparer{TKey})" />.
+        ///     <see cref="IAsyncResult{T,TError}.JoinAsync{TInner,TKey,TResult}(Lemonad.ErrorHandling.IAsyncResult{TInner,TError},System.Func{T,TKey},System.Func{TInner,TKey},System.Func{T,TInner,TResult},System.Func{TError},System.Collections.Generic.IEqualityComparer{TKey})" />.
         /// </summary>
         public static IAsyncResult<TResult, TError> JoinAsync<T, TInner, TKey, TResult, TError>(
             this IResult<T, TError> source,
@@ -378,7 +378,7 @@ namespace Lemonad.ErrorHandling {
             IEqualityComparer<TKey> comparer)
             => source
                 .ToAsyncResult()
-                .Join(
+                .JoinAsync(
                     inner,
                     outerKeySelector,
                     innerKeySelector,
@@ -389,7 +389,7 @@ namespace Lemonad.ErrorHandling {
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
-        ///     <see cref="IAsyncResult{T,TError}.Join{TInner,TKey,TResult}(Lemonad.ErrorHandling.IAsyncResult{TInner,TError},System.Func{T,TKey},System.Func{TInner,TKey},System.Func{T,TInner,TResult},System.Func{TError})" />.
+        ///     <see cref="IAsyncResult{T,TError}.JoinAsync{TInner,TKey,TResult}" />.
         /// </summary>
         public static IAsyncResult<TResult, TError> JoinAsync<T, TInner, TKey, TResult, TError>(
             this IResult<T, TError> source,
@@ -399,7 +399,7 @@ namespace Lemonad.ErrorHandling {
             Func<T, TInner, TResult> resultSelector,
             Func<TError> errorSelector) => source
             .ToAsyncResult()
-            .Join(
+            .JoinAsync(
                 inner,
                 outerKeySelector,
                 innerKeySelector,
@@ -409,21 +409,21 @@ namespace Lemonad.ErrorHandling {
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
-        ///     <see cref="IAsyncResult{T,TError}.Map{TResult}(System.Func{T,Task{TResult}})" />.
+        ///     <see cref="IAsyncResult{T,TError}.MapAsync{TResult}" />.
         /// </summary>
         public static IAsyncResult<TResult, TError> MapAsync<T, TError, TResult>(
             this IResult<T, TError> source,
             Func<T, Task<TResult>> selector
-        ) => source.ToAsyncResult().Map(selector);
+        ) => source.ToAsyncResult().MapAsync(selector);
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
-        ///     <see cref="IAsyncResult{T,TError}.MapError{TErrorResult}(System.Func{TError, Task{TErrorResult}})" />.
+        ///     <see cref="IAsyncResult{T,TError}.MapErrorAsync{TErrorResult}" />.
         /// </summary>
         public static IAsyncResult<T, TErrorResult> MapErrorAsync<T, TError, TErrorResult>(
             this IResult<T, TError> source,
             Func<TError, Task<TErrorResult>> selector
-        ) => source.ToAsyncResult().MapError(selector);
+        ) => source.ToAsyncResult().MapErrorAsync(selector);
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs

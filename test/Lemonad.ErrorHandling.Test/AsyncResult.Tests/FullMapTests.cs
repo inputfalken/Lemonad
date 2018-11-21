@@ -48,7 +48,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
             Result_With_Error_Expects__Selector_Never__To_Be_Executed_And_ErrorSelector_To_Be_Invoked_With_async_Value() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
-            var result = await AssertionUtilities.DivisionAsync(10, 0).FullMap(async d => {
+            var result = await AssertionUtilities.DivisionAsync(10, 0).FullMapAsync(async d => {
                 await Task.Delay(50);
                 selectorExectued = true;
                 return d * 2;
@@ -70,7 +70,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
             Result_With_Value_Expects__Selector_To_Be_Executed_And_ErrorSelector_To_Never_Be_Invoked_With_async_Value() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
-            var result = await AssertionUtilities.DivisionAsync(10, 2).FullMap(async d => {
+            var result = await AssertionUtilities.DivisionAsync(10, 2).FullMapAsync(async d => {
                 await Task.Delay(50);
                 selectorExectued = true;
                 return d * 10;
@@ -92,7 +92,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
             Result_With_Error_Expects__Selector_Never__To_Be_Executed_And_ErrorSelector_To_Be_Invoked_With_async_Error() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
-            var result = await AssertionUtilities.DivisionAsync(10, 0).FullMap(d => {
+            var result = await AssertionUtilities.DivisionAsync(10, 0).FullMapAsync(d => {
                 selectorExectued = true;
                 return d * 2;
             }, async s => {
@@ -114,7 +114,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
             Result_With_Value_Expects__Selector_To_Be_Executed_And_ErrorSelector_To_Never_Be_Invoked_With_async_Error() {
             var selectorExectued = false;
             var errorSelectorExectued = false;
-            var result = await AssertionUtilities.DivisionAsync(10, 2).FullMap(d => {
+            var result = await AssertionUtilities.DivisionAsync(10, 2).FullMapAsync(d => {
                 selectorExectued = true;
                 return d * 10;
             }, async s => {
