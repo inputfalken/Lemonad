@@ -74,7 +74,7 @@ namespace Lemonad.ErrorHandling.Internal {
         );
 
         [Pure]
-        public IAsyncResult<TResult, TError> Zip<TOther, TResult>(
+        public IAsyncResult<TResult, TError> ZipAsync<TOther, TResult>(
             IAsyncResult<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector
         ) => new AsyncResult<TResult, TError>(EitherMethods.ZipAsync(Either.ToTaskEither(), other.Either.ToTaskEither(),
@@ -111,7 +111,7 @@ namespace Lemonad.ErrorHandling.Internal {
         public IAsyncResult<TResult, TError> Zip<TOther, TResult>(
             IResult<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector
-        ) => Zip(other.ToAsyncResult(), resultSelector);
+        ) => ZipAsync(other.ToAsyncResult(), resultSelector);
 
         public IAsyncResult<T, TError> Flatten<TResult, TErrorResult>(
             Func<T, IResult<TResult, TErrorResult>> selector,

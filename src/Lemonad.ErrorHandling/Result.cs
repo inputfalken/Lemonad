@@ -428,12 +428,12 @@ namespace Lemonad.ErrorHandling {
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
         ///     <see
-        ///         cref="IAsyncResult{T,TError}.Zip{TOther, TResult}(IAsyncResult{TOther, TError}, System.Func{T, TOther, TResult})" />.
+        ///         cref="IAsyncResult{T,TError}.ZipAsync{TOther,TResult}" />.
         /// </summary>
         public static IAsyncResult<TResult, TError> ZipAsync<T, TOther, TResult, TError>(
             this IResult<T, TError> source,
             IAsyncResult<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector
-        ) => source.ToAsyncResult().Zip(other, resultSelector);
+        ) => source.ToAsyncResult().ZipAsync(other, resultSelector);
     }
 }

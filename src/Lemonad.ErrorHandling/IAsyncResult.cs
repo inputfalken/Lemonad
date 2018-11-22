@@ -331,7 +331,7 @@ namespace Lemonad.ErrorHandling {
         ///     <see cref="IResult{T,TError}.Zip{TOther,TResult}(IResult{TOther, TError}, Func{T, TOther, TResult})" />.
         ///     who expects an <see cref="IAsyncResult{T,TError}" /> instead of <see cref="IResult{T,TError}" />.
         /// </summary>
-        IAsyncResult<TResult, TError> Zip<TOther, TResult>(
+        IAsyncResult<TResult, TError> ZipAsync<TOther, TResult>(
             IAsyncResult<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector
         );
