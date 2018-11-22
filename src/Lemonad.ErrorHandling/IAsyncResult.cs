@@ -56,6 +56,15 @@ namespace Lemonad.ErrorHandling {
         /// </summary>
         IAsyncResult<T, TError> FilterAsync(Func<T, Task<bool>> predicate, Func<T, TError> errorSelector);
 
+        IAsyncResult<TResult, TError> FlatMap<TResult>(
+            Func<T, IResult<TResult, TError>> flatSelector
+        );
+
+        IAsyncResult<TResult, TError> FlatMap<TSelector, TResult>(
+            Func<T, IResult<TSelector, TError>> flatSelector,
+            Func<T, TSelector, TResult> resultSelector
+        );
+
         /// <summary>
         ///     An asynchronous version of <see cref="Result{T,TError}.FlatMap{TResult}" />
         ///     who expects an
@@ -97,6 +106,15 @@ namespace Lemonad.ErrorHandling {
             Func<TErrorResult, TError> errorSelector
         );
 
+        IAsyncResult<T, TError> Flatten<TResult, TErrorResult>(
+            Func<T, IResult<TResult, TErrorResult>> selector,
+            Func<TErrorResult, TError> errorSelector
+        );
+
+        IAsyncResult<T, TError> Flatten<TResult>(
+            Func<T, IResult<TResult, TError>> selector
+        );
+
         /// <summary>
         ///     An asynchronous version of
         ///     <see
@@ -126,6 +144,17 @@ namespace Lemonad.ErrorHandling {
         ///     <see cref="IResult{T,TError}.FullCast{TResult}()" />>
         /// </summary>
         IAsyncResult<TResult, TResult> FullCast<TResult>();
+
+        IAsyncResult<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
+            Func<T, IResult<TResult, TErrorResult>> flatMapSelector,
+            Func<TError, TErrorResult> errorSelector
+        );
+
+        IAsyncResult<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
+            Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector,
+            Func<T, TFlatMap, TResult> resultSelector,
+            Func<TError, TErrorResult> errorSelector
+        );
 
         /// <summary>
         ///     An asynchronous version of
@@ -204,6 +233,21 @@ namespace Lemonad.ErrorHandling {
         ///     with an predicate expecting a Task&lt;bool&gt;.
         /// </summary>
         IAsyncResult<T, TError> IsErrorWhenAsync(Func<T, Task<bool>> predicate, Func<T, TError> errorSelector);
+
+        IAsyncResult<TResult, TError> Join<TInner, TKey, TResult>(
+            IResult<TInner, TError> inner,
+            Func<T, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector,
+            Func<TError> errorSelector);
+
+        IAsyncResult<TResult, TError> Join<TInner, TKey, TResult>(
+            IResult<TInner, TError> inner,
+            Func<T, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector,
+            Func<TError> errorSelector,
+            IEqualityComparer<TKey> comparer);
 
         /// <summary>
         ///     An asynchronous version of
@@ -292,53 +336,9 @@ namespace Lemonad.ErrorHandling {
             Func<T, TOther, TResult> resultSelector
         );
 
-        IAsyncResult<TResult, TError> Join<TInner, TKey, TResult>(
-            IResult<TInner, TError> inner,
-            Func<T, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<T, TInner, TResult> resultSelector,
-            Func<TError> errorSelector);
-
-        IAsyncResult<TResult, TError> Join<TInner, TKey, TResult>(
-            IResult<TInner, TError> inner,
-            Func<T, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<T, TInner, TResult> resultSelector,
-            Func<TError> errorSelector,
-            IEqualityComparer<TKey> comparer);
-
         IAsyncResult<TResult, TError> Zip<TOther, TResult>(
             IResult<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector
-        );
-
-        IAsyncResult<T, TError> Flatten<TResult, TErrorResult>(
-            Func<T, IResult<TResult, TErrorResult>> selector,
-            Func<TErrorResult, TError> errorSelector
-        );
-
-        IAsyncResult<T, TError> Flatten<TResult>(
-            Func<T, IResult<TResult, TError>> selector
-        );
-
-        IAsyncResult<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
-            Func<T, IResult<TResult, TErrorResult>> flatMapSelector,
-            Func<TError, TErrorResult> errorSelector
-        );
-
-        IAsyncResult<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector,
-            Func<T, TFlatMap, TResult> resultSelector,
-            Func<TError, TErrorResult> errorSelector
-        );
-
-        IAsyncResult<TResult, TError> FlatMap<TResult>(
-            Func<T, IResult<TResult, TError>> flatSelector
-        );
-
-        IAsyncResult<TResult, TError> FlatMap<TSelector, TResult>(
-            Func<T, IResult<TSelector, TError>> flatSelector,
-            Func<T, TSelector, TResult> resultSelector
         );
     }
 }
