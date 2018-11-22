@@ -326,6 +326,11 @@ namespace Lemonad.ErrorHandling {
         /// </summary>
         IAsyncResult<TResult, TError> SafeCast<TResult>(Func<T, TError> errorSelector);
 
+        IAsyncResult<TResult, TError> Zip<TOther, TResult>(
+            IResult<TOther, TError> other,
+            Func<T, TOther, TResult> resultSelector
+        );
+
         /// <summary>
         ///     An asynchronous version of
         ///     <see cref="IResult{T,TError}.Zip{TOther,TResult}(IResult{TOther, TError}, Func{T, TOther, TResult})" />.
@@ -333,11 +338,6 @@ namespace Lemonad.ErrorHandling {
         /// </summary>
         IAsyncResult<TResult, TError> ZipAsync<TOther, TResult>(
             IAsyncResult<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector
-        );
-
-        IAsyncResult<TResult, TError> Zip<TOther, TResult>(
-            IResult<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector
         );
     }
