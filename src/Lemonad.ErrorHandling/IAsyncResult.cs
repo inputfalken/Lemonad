@@ -30,6 +30,8 @@ namespace Lemonad.ErrorHandling {
         ///     <see cref="IResult{T,TError}.Do" />.
         /// </summary>
         IAsyncResult<T, TError> Do(Action action);
+        
+        IAsyncResult<T, TError> DoAsync(Func<T, Task> selector);
 
         /// <summary>
         ///     An asynchronous version of

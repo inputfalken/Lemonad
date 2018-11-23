@@ -601,5 +601,13 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Task<IEither<T, TError>> either,
             Task<IEither<TOther, TError>> otherEither, Func<T, TOther, TResult> resultSelector) => Zip(
             await either.ConfigureAwait(false), await otherEither.ConfigureAwait(false), resultSelector);
+
+        public static async Task<IEither<T, TError>> DoAsyncTmp<T, TError>(Task<IEither<T, TError>> source,
+            Func<T, Task> selector) {
+            var either = await source.ConfigureAwait(false);
+            if (either.HasValue) await selector(either.Value);
+
+            return either;
+        }
     }
 }

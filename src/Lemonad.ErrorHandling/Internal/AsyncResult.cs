@@ -177,6 +177,9 @@ namespace Lemonad.ErrorHandling.Internal {
         public IAsyncResult<T, TError> Do(Action action)
             => new AsyncResult<T, TError>(EitherMethods.DoAsync(Either.ToTaskEither(), action));
 
+        public IAsyncResult<T, TError> DoAsync(Func<T, Task> selector) =>
+            new AsyncResult<T, TError>(EitherMethods.DoAsyncTmp(Either.ToTaskEither(), selector));
+
         /// <inheritdoc cref="Result{T,TError}.DoWithError" />
         public IAsyncResult<T, TError> DoWithError(Action<TError> action)
             => new AsyncResult<T, TError>(EitherMethods.DoWithErrorAsync(Either.ToTaskEither(), action));
