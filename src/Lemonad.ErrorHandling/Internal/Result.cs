@@ -22,13 +22,13 @@ namespace Lemonad.ErrorHandling.Internal {
                 false
             );
 
-        public IAsyncResult<T, TError> DoAsync(Func<Task> selector) 
+        public IAsyncResult<T, TError> DoAsync(Func<Task> selector)
             => this.ToAsyncResult().DoAsync(selector);
 
-        public IAsyncResult<T, TError> DoWithAsync(Func<T, Task> selector) 
+        public IAsyncResult<T, TError> DoWithAsync(Func<T, Task> selector)
             => this.ToAsyncResult().DoWithAsync(selector);
 
-        public IAsyncResult<T, TError> DoWithErrorAsync(Func<TError, Task> selector) 
+        public IAsyncResult<T, TError> DoWithErrorAsync(Func<TError, Task> selector)
             => this.ToAsyncResult().DoWithErrorAsync(selector);
 
         public IAsyncResult<T, TError> FilterAsync(

@@ -25,7 +25,7 @@ namespace Lemonad.ErrorHandling {
         /// </summary>
         IAsyncResult<T, TResult> CastError<TResult>();
 
-        /// <inheritdoc cref="IResult{T,TError}.Do"/>
+        /// <inheritdoc cref="IResult{T,TError}.Do" />
         IAsyncResult<T, TError> Do(Action action);
 
         /// <summary>
@@ -34,23 +34,23 @@ namespace Lemonad.ErrorHandling {
         /// </summary>
         IAsyncResult<T, TError> DoAsync(Func<Task> selector);
 
+        /// <inheritdoc cref="IResult{T,TError}.DoWith" />
+        IAsyncResult<T, TError> DoWith(Action<T> action);
+
         /// <summary>
         ///     An asynchronous version of
         ///     <see cref="IResult{T,TError}.DoWith" />.
         /// </summary>
         IAsyncResult<T, TError> DoWithAsync(Func<T, Task> selector);
 
+        /// <inheritdoc cref="IResult{T,TError}.DoWithError" />
+        IAsyncResult<T, TError> DoWithError(Action<TError> action);
+
         /// <summary>
         ///     An asynchronous version of
         ///     <see cref="IResult{T,TError}.DoWith" />.
         /// </summary>
         IAsyncResult<T, TError> DoWithErrorAsync(Func<TError, Task> action);
-
-        /// <inheritdoc cref="IResult{T,TError}.DoWith"/>
-        IAsyncResult<T, TError> DoWith(Action<T> action);
-
-        /// <inheritdoc cref="IResult{T,TError}.DoWithError"/>
-        IAsyncResult<T, TError> DoWithError(Action<TError> action);
 
         /// <summary>
         ///     An asynchronous version of
