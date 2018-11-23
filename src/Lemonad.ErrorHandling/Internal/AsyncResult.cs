@@ -175,14 +175,20 @@ namespace Lemonad.ErrorHandling.Internal {
 
         /// <inheritdoc cref="Result{T,TError}.Do" />
         public IAsyncResult<T, TError> Do(Action action)
-            => new AsyncResult<T, TError>(EitherMethods.DoAsync(Either.ToTaskEither(), action));
+            => new AsyncResult<T, TError>(EitherMethods.Do(Either.ToTaskEither(), action));
 
-        public IAsyncResult<T, TError> DoAsync(Func<T, Task> selector) =>
-            new AsyncResult<T, TError>(EitherMethods.DoAsyncTmp(Either.ToTaskEither(), selector));
+        public IAsyncResult<T, TError> DoAsync(Func<Task> selector)
+            => new AsyncResult<T, TError>(EitherMethods.DoAsync(Either.ToTaskEither(), selector));
+
+        public IAsyncResult<T, TError> DoWithAsync(Func<T, Task> selector) =>
+            new AsyncResult<T, TError>(EitherMethods.DoWithAsync(Either.ToTaskEither(), selector));
+
+        public IAsyncResult<T, TError> DoWithErrorAsync(Func<TError, Task> action)
+            => new AsyncResult<T, TError>(EitherMethods.DoWithErrorAsync(Either.ToTaskEither(), action));
 
         /// <inheritdoc cref="Result{T,TError}.DoWithError" />
         public IAsyncResult<T, TError> DoWithError(Action<TError> action)
-            => new AsyncResult<T, TError>(EitherMethods.DoWithErrorAsync(Either.ToTaskEither(), action));
+            => new AsyncResult<T, TError>(EitherMethods.DoWithError(Either.ToTaskEither(), action));
 
         /// <inheritdoc cref="Result{T,TError}.DoWith" />
         public IAsyncResult<T, TError> DoWith(Action<T> action)

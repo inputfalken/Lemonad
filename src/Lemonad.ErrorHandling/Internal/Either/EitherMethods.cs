@@ -43,8 +43,8 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             return either;
         }
 
-        internal static async Task<IEither<T, TError>>
-            DoAsync<T, TError>(Task<IEither<T, TError>> taskResult, Action action) =>
+        internal static async Task<IEither<T, TError>> Do<T, TError>(Task<IEither<T, TError>> taskResult,
+            Action action) =>
             Do(await taskResult.ConfigureAwait(false), action);
 
         internal static IEither<T, TError> DoWith<T, TError>(IEither<T, TError> either, Action<T> action) {
@@ -72,7 +72,7 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             return either;
         }
 
-        internal static async Task<IEither<T, TError>> DoWithErrorAsync<T, TError>(Task<IEither<T, TError>> taskResult,
+        internal static async Task<IEither<T, TError>> DoWithError<T, TError>(Task<IEither<T, TError>> taskResult,
             Action<TError> action) => DoWithError(await taskResult.ConfigureAwait(false), action);
 
         [Pure]
@@ -602,10 +602,30 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Task<IEither<TOther, TError>> otherEither, Func<T, TOther, TResult> resultSelector) => Zip(
             await either.ConfigureAwait(false), await otherEither.ConfigureAwait(false), resultSelector);
 
-        public static async Task<IEither<T, TError>> DoAsyncTmp<T, TError>(Task<IEither<T, TError>> source,
-            Func<T, Task> selector) {
+        public static async Task<IEither<T, TError>> DoWithAsync<T, TError>(
+            Task<IEither<T, TError>> source,
+            Func<T, Task> selector
+        ) {
             var either = await source.ConfigureAwait(false);
             if (either.HasValue) await selector(either.Value);
+
+            return either;
+        }
+
+        public static async Task<IEither<T, TError>> DoAsync<T, TError>(
+            Task<IEither<T, TError>> source,
+            Func<Task> selector
+        ) {
+            await selector();
+            return await source;
+        }
+
+        public static async Task<IEither<T, TError>> DoWithErrorAsync<T, TError>(
+            Task<IEither<T, TError>> source,
+            Func<TError, Task> selector
+        ) {
+            var either = await source.ConfigureAwait(false);
+            if (either.HasError) await selector(either.Error);
 
             return either;
         }

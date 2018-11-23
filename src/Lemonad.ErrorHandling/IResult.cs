@@ -68,7 +68,7 @@ namespace Lemonad.ErrorHandling {
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
         ///     <see cref="IAsyncResult{T,TError}.Do(Action)" />.
         /// </summary>
-        IAsyncResult<T, TError> DoAsync(Action action);
+        IAsyncResult<T, TError> DoAsync(Func<Task> selector);
 
         /// <summary>
         ///     Executes the <paramref name="action" /> if <typeparamref name="T" /> is the active type.
@@ -91,7 +91,7 @@ namespace Lemonad.ErrorHandling {
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
         ///     <see cref="IAsyncResult{T,TError}.DoWith(Action{T})" />.
         /// </summary>
-        IAsyncResult<T, TError> DoWithAsync(Action<T> action);
+        IAsyncResult<T, TError> DoWithAsync(Func<T, Task> selector);
 
         /// <summary>
         ///     Executes the <paramref name="action" /> if <typeparamref name="TError" /> is the active type.
@@ -111,7 +111,7 @@ namespace Lemonad.ErrorHandling {
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
         ///     <see cref="IAsyncResult{T,TError}.DoWithError(Action{TError})" />.
         /// </summary>
-        IAsyncResult<T, TError> DoWithErrorAsync(Action<TError> action);
+        IAsyncResult<T, TError> DoWithErrorAsync(Func<TError, Task> selector);
 
         /// <summary>
         ///     Filters the <typeparamref name="T" /> if <typeparamref name="T" /> is the active type.
