@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Internal.Either;
 
 namespace Lemonad.ErrorHandling.Internal {
@@ -20,6 +21,113 @@ namespace Lemonad.ErrorHandling.Internal {
                 true,
                 false
             );
+
+        public IAsyncResult<T, TError> DoAsync(Func<Task> selector)
+            => this.ToAsyncResult().DoAsync(selector);
+
+        public IAsyncResult<T, TError> DoWithAsync(Func<T, Task> selector)
+            => this.ToAsyncResult().DoWithAsync(selector);
+
+        public IAsyncResult<T, TError> DoWithErrorAsync(Func<TError, Task> selector)
+            => this.ToAsyncResult().DoWithErrorAsync(selector);
+
+        public IAsyncResult<T, TError> FilterAsync(
+            Func<T, Task<bool>> predicate,
+            Func<T, TError> errorSelector
+        ) => this.ToAsyncResult().FilterAsync(predicate, errorSelector);
+
+        public IAsyncResult<TResult, TError> FlatMapAsync<TResult>(
+            Func<T, IAsyncResult<TResult, TError>> flatSelector
+        ) => this.ToAsyncResult().FlatMapAsync(flatSelector);
+
+        public IAsyncResult<TResult, TError> FlatMapAsync<TSelector, TResult>(
+            Func<T, IAsyncResult<TSelector, TError>> flatSelector,
+            Func<T, TSelector, TResult> resultSelector
+        ) => this.ToAsyncResult().FlatMapAsync(flatSelector, resultSelector);
+
+        public IAsyncResult<T, TError> FlattenAsync<TResult, TErrorResult>(
+            Func<T, IAsyncResult<TResult, TErrorResult>> selector,
+            Func<TErrorResult, TError> errorSelector
+        ) => this.ToAsyncResult().FlattenAsync(selector, errorSelector);
+
+        public IAsyncResult<T, TError> FlattenAsync<TResult>(Func<T, IAsyncResult<TResult, TError>> selector)
+            => this.ToAsyncResult().FlattenAsync(selector);
+
+        public IAsyncResult<TResult, TErrorResult> FullFlatMapAsync<TFlatMap, TResult, TErrorResult>(
+            Func<T, IAsyncResult<TFlatMap, TErrorResult>> flatMapSelector,
+            Func<T, TFlatMap, TResult> resultSelector,
+            Func<TError, TErrorResult> errorSelector
+        ) => this.ToAsyncResult().FullFlatMapAsync(flatMapSelector, resultSelector, errorSelector);
+
+        public IAsyncResult<TResult, TErrorResult> FullFlatMapAsync<TResult, TErrorResult>(
+            Func<T, IAsyncResult<TResult, TErrorResult>> flatMapSelector,
+            Func<TError, TErrorResult> errorSelector
+        ) => this.ToAsyncResult().FullFlatMapAsync(flatMapSelector, errorSelector);
+
+        public IAsyncResult<TResult, TErrorResult> FullMapAsync<TResult, TErrorResult>(
+            Func<T, Task<TResult>> selector,
+            Func<TError, Task<TErrorResult>> errorSelector
+        ) => this.ToAsyncResult().FullMapAsync(selector, errorSelector);
+
+        public IAsyncResult<TResult, TErrorResult> FullMapAsync<TResult, TErrorResult>(
+            Func<T, Task<TResult>> selector,
+            Func<TError, TErrorResult> errorSelector
+        ) => this.ToAsyncResult().FullMapAsync(selector, errorSelector);
+
+        public IAsyncResult<TResult, TErrorResult> FullMapAsync<TResult, TErrorResult>(
+            Func<T, TResult> selector,
+            Func<TError, Task<TErrorResult>> errorSelector
+        ) => this.ToAsyncResult().FullMapAsync(selector, errorSelector);
+
+        public IAsyncResult<T, TError> IsErrorWhenAsync(
+            Func<T, Task<bool>> predicate,
+            Func<T, TError> errorSelector
+        ) => this.ToAsyncResult().IsErrorWhenAsync(predicate, errorSelector);
+
+        public IAsyncResult<TResult, TError> JoinAsync<TInner, TKey, TResult>(
+            IAsyncResult<TInner, TError> inner,
+            Func<T, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector,
+            Func<TError> errorSelector,
+            IEqualityComparer<TKey> comparer
+        ) => this
+            .ToAsyncResult()
+            .JoinAsync(
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                errorSelector,
+                comparer
+            );
+
+        public IAsyncResult<TResult, TError> JoinAsync<TInner, TKey, TResult>(
+            IAsyncResult<TInner, TError> inner,
+            Func<T, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector,
+            Func<TError> errorSelector
+        ) => this
+            .ToAsyncResult()
+            .JoinAsync(
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                errorSelector
+            );
+
+        public IAsyncResult<TResult, TError> MapAsync<TResult>(Func<T, Task<TResult>> selector)
+            => this.ToAsyncResult().MapAsync(selector);
+
+        public IAsyncResult<T, TErrorResult> MapErrorAsync<TErrorResult>(Func<TError, Task<TErrorResult>> selector)
+            => this.ToAsyncResult().MapErrorAsync(selector);
+
+        public IAsyncResult<TResult, TError> ZipAsync<TOther, TResult>(
+            IAsyncResult<TOther, TError> other,
+            Func<T, TOther, TResult> resultSelector
+        ) => this.ToAsyncResult().ZipAsync(other, resultSelector);
 
         public IEither<T, TError> Either { get; }
 

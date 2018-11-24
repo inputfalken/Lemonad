@@ -7,7 +7,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
         public async Task Result_With_Error_Flatmaps_Result_with_Error__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
-            var result = await AssertionUtilities.DivisionAsync(2, 0).Flatten(x => {
+            var result = await AssertionUtilities.DivisionAsync(2, 0).FlattenAsync(x => {
                 flatSelectorExecuted = true;
                 return AssertionUtilities.DivisionAsync(x, 0);
             }, s => {
@@ -29,7 +29,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
         public async Task
             Result_With_Error_Flatmaps_Result_with_Error_Without_ErrorSelector__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
-            var result = await AssertionUtilities.DivisionAsync(2, 0).Flatten(x => {
+            var result = await AssertionUtilities.DivisionAsync(2, 0).FlattenAsync(x => {
                 flatSelectorExecuted = true;
                 return AssertionUtilities.DivisionAsync(x, 0);
             });
@@ -46,7 +46,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
         public async Task Result_With_Error_Flatmaps_Result_with_Value__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
-            var result = await AssertionUtilities.DivisionAsync(2, 0).Flatten(x => {
+            var result = await AssertionUtilities.DivisionAsync(2, 0).FlattenAsync(x => {
                 flatSelectorExecuted = true;
                 return AssertionUtilities.DivisionAsync(x, 2);
             }, s => {
@@ -68,7 +68,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
         public async Task
             Result_With_Error_Flatmaps_Result_with_Value_Without_ErrorSelector__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
-            var result = await AssertionUtilities.DivisionAsync(2, 0).Flatten(x => {
+            var result = await AssertionUtilities.DivisionAsync(2, 0).FlattenAsync(x => {
                 flatSelectorExecuted = true;
                 return AssertionUtilities.DivisionAsync(x, 2);
             });
@@ -85,7 +85,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
         public async Task Result_With_Value_Flatmaps_Result_with_Error__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
-            var result = await AssertionUtilities.DivisionAsync(2, 2).FlatMap(x => {
+            var result = await AssertionUtilities.DivisionAsync(2, 2).FlatMapAsync(x => {
                 flatSelectorExecuted = true;
                 return AssertionUtilities.DivisionAsync(x, 0);
             }, s => {
@@ -107,7 +107,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
         public async Task
             Result_With_Value_Flatmaps_Result_with_Error_Without_ErrorSelector__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
-            var result = await AssertionUtilities.DivisionAsync(2, 2).FlatMap(x => {
+            var result = await AssertionUtilities.DivisionAsync(2, 2).FlatMapAsync(x => {
                 flatSelectorExecuted = true;
                 return AssertionUtilities.DivisionAsync(x, 0);
             });
@@ -124,7 +124,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
         public async Task Result_With_Value_Flatmaps_Result_with_Value__Expects_Result_With_Value() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
-            var result = await AssertionUtilities.DivisionAsync(2, 2).Flatten(x => {
+            var result = await AssertionUtilities.DivisionAsync(2, 2).FlattenAsync(x => {
                 flatSelectorExecuted = true;
                 return AssertionUtilities.DivisionAsync(x, 2);
             }, s => {
@@ -143,7 +143,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
         public async Task
             Result_With_Value_Flatmaps_Result_with_Value_Without_ErrorSelector__Expects_Result_With_Value() {
             var flatSelectorExecuted = false;
-            var result = await AssertionUtilities.DivisionAsync(2, 2).Flatten(x => {
+            var result = await AssertionUtilities.DivisionAsync(2, 2).FlattenAsync(x => {
                 flatSelectorExecuted = true;
                 return AssertionUtilities.DivisionAsync(x, 2);
             });
@@ -158,7 +158,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
         public async Task Result_With_Value_FlatmapsRS_Result_with_Error__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
-            var result = await AssertionUtilities.DivisionAsync(2, 2).Flatten(x => {
+            var result = await AssertionUtilities.DivisionAsync(2, 2).FlattenAsync(x => {
                 flatSelectorExecuted = true;
                 return AssertionUtilities.DivisionAsync(x, 0);
             }, s => {
@@ -184,7 +184,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
         public async Task
             Result_With_Value_FlatmapsRS_Result_with_Error_Without_ErrorSelector__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
-            var result = await AssertionUtilities.DivisionAsync(2, 2).Flatten(x => {
+            var result = await AssertionUtilities.DivisionAsync(2, 2).FlattenAsync(x => {
                 flatSelectorExecuted = true;
                 return AssertionUtilities.DivisionAsync(x, 0);
             });

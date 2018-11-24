@@ -11,7 +11,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
             var resultSelectorInvoked = false;
             var outer = new {Id = 1, Text = "Hello"}.ToResult(x => false, x => "ERROR 1").ToAsyncResult();
             var inner = new {Id = 1, Text = "world"}.ToResult(x => false, x => "ERROR 2").ToAsyncResult();
-            var result = await outer.Join(inner, x => {
+            var result = await outer.JoinAsync(inner, x => {
                 outerSelectorInvoked = true;
                 return x.Id;
             }, x => {
@@ -38,7 +38,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
             var resultSelectorInvoked = false;
             var outer = new {Id = 1, Text = "Hello"}.ToResult(x => false, x => "ERROR 1").ToAsyncResult();
             var inner = new {Id = 1, Text = "world"}.ToResult(x => true, x => "ERROR 2").ToAsyncResult();
-            var result = await outer.Join(inner, x => {
+            var result = await outer.JoinAsync(inner, x => {
                 outerSelectorInvoked = true;
                 return x.Id;
             }, x => {
@@ -65,7 +65,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
             var resultSelectorInvoked = false;
             var outer = new {Id = 1, Text = "Hello"}.ToResult(x => true, x => "ERROR 1").ToAsyncResult();
             var inner = new {Id = 1, Text = "world"}.ToResult(x => false, x => "ERROR 2").ToAsyncResult();
-            var result = await outer.Join(inner, x => {
+            var result = await outer.JoinAsync(inner, x => {
                 outerSelectorInvoked = true;
                 return x.Id;
             }, x => {
@@ -91,7 +91,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
             var resultSelectorInvoked = false;
             var outer = new {Id = 1, Text = "Hello"}.ToResult(x => true, x => "ERROR 1").ToAsyncResult();
             var inner = new {Id = 1, Text = "world"}.ToResult(x => true, x => "ERROR 2").ToAsyncResult();
-            var result = await outer.Join(inner, x => {
+            var result = await outer.JoinAsync(inner, x => {
                 outerSelectorInvoked = true;
                 return x.Id;
             }, x => {
@@ -118,7 +118,7 @@ namespace Lemonad.ErrorHandling.Test.AsyncResult.Tests {
             var resultSelectorInvoked = false;
             var outer = new {Id = 2, Text = "Hello"}.ToResult(x => true, x => "ERROR 1").ToAsyncResult();
             var inner = new {Id = 1, Text = "world"}.ToResult(x => true, x => "ERROR 2").ToAsyncResult();
-            var result = await outer.Join(inner, x => {
+            var result = await outer.JoinAsync(inner, x => {
                 outerSelectorInvoked = true;
                 return x.Id;
             }, x => {

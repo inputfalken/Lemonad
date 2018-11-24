@@ -22,7 +22,7 @@ namespace Lemonad.ErrorHandling.Test {
                     x => $"Can not divide '{x.left}' with '{x.right}'."
                 )
                 .ToAsyncResult()
-                .Map(async x => {
+                .MapAsync(async x => {
                     await Delay;
                     return x.left / x.right;
                 });
@@ -45,7 +45,7 @@ namespace Lemonad.ErrorHandling.Test {
         internal static IAsyncResult<Gender, string> GetGenderAsync(int identity) {
             return ErrorHandling.Result.Value<int, string>(identity)
                 .ToAsyncResult()
-                .Map(async i => {
+                .MapAsync(async i => {
                     await Delay;
                     switch (identity) {
                         case 0:
@@ -55,7 +55,7 @@ namespace Lemonad.ErrorHandling.Test {
                         default:
                             return ErrorHandling.Result.Error<Gender, string>("Could not determine gender");
                     }
-                }).FlatMap(x => x.ToAsyncResult());
+                }).FlatMapAsync(x => x.ToAsyncResult());
         }
 
         internal static IResult<string, ExitCodes> Program(int code) {
@@ -75,7 +75,7 @@ namespace Lemonad.ErrorHandling.Test {
         internal static IAsyncResult<string, ExitCodes> ProgramAsync(int code) {
             return ErrorHandling.Result.Value<int, ExitCodes>(code)
                 .ToAsyncResult()
-                .Map(async i => {
+                .MapAsync(async i => {
                     await Delay;
                     switch (code) {
                         case 0:
@@ -85,7 +85,7 @@ namespace Lemonad.ErrorHandling.Test {
                         default:
                             return ErrorHandling.Result.Error<string, ExitCodes>(ExitCodes.Unhandled);
                     }
-                }).FlatMap(x => x.ToAsyncResult());
+                }).FlatMapAsync(x => x.ToAsyncResult());
         }
 
         internal enum ExitCodes {
