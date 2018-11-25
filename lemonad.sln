@@ -24,6 +24,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleInputValidation", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadFileAsync", "samples\ReadFileAsync\ReadFileAsync.csproj", "{C5C60F00-9764-44BF-9254-AED407AB8817}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImplicitResult", "samples\ImplicitResult\ImplicitResult.csproj", "{4CC4B17B-E3CD-4D84-AB15-160B95019D21}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -94,6 +96,18 @@ Global
 		{C5C60F00-9764-44BF-9254-AED407AB8817}.Release|x64.Build.0 = Release|Any CPU
 		{C5C60F00-9764-44BF-9254-AED407AB8817}.Release|x86.ActiveCfg = Release|Any CPU
 		{C5C60F00-9764-44BF-9254-AED407AB8817}.Release|x86.Build.0 = Release|Any CPU
+		{4CC4B17B-E3CD-4D84-AB15-160B95019D21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CC4B17B-E3CD-4D84-AB15-160B95019D21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CC4B17B-E3CD-4D84-AB15-160B95019D21}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4CC4B17B-E3CD-4D84-AB15-160B95019D21}.Debug|x64.Build.0 = Debug|Any CPU
+		{4CC4B17B-E3CD-4D84-AB15-160B95019D21}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4CC4B17B-E3CD-4D84-AB15-160B95019D21}.Debug|x86.Build.0 = Debug|Any CPU
+		{4CC4B17B-E3CD-4D84-AB15-160B95019D21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CC4B17B-E3CD-4D84-AB15-160B95019D21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CC4B17B-E3CD-4D84-AB15-160B95019D21}.Release|x64.ActiveCfg = Release|Any CPU
+		{4CC4B17B-E3CD-4D84-AB15-160B95019D21}.Release|x64.Build.0 = Release|Any CPU
+		{4CC4B17B-E3CD-4D84-AB15-160B95019D21}.Release|x86.ActiveCfg = Release|Any CPU
+		{4CC4B17B-E3CD-4D84-AB15-160B95019D21}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +118,7 @@ Global
 		{91C42619-20F7-45F6-98F6-74E671A19C21} = {03FFFAEA-2C89-453B-B210-F4B664504456}
 		{E7E824C2-2008-492B-8F24-02D264792218} = {03FFFAEA-2C89-453B-B210-F4B664504456}
 		{C5C60F00-9764-44BF-9254-AED407AB8817} = {03FFFAEA-2C89-453B-B210-F4B664504456}
+		{4CC4B17B-E3CD-4D84-AB15-160B95019D21} = {03FFFAEA-2C89-453B-B210-F4B664504456}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {942AC6F2-4256-4AAA-B28F-23EE5EA28CAD}
