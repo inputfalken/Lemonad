@@ -32,23 +32,22 @@ namespace Lemonad.ErrorHandling.Internal.Either {
         internal NonNullableEither(in T value, in TError error, bool hasError, bool hasValue) {
             if (hasError == hasValue)
                 throw new ArgumentException(
-                    $"{nameof(IEither<T, TError>)} properties \"{nameof(HasError)}\": {hasError} and \"{nameof(HasValue)}\": ({hasValue}), can not both be {hasValue}."
+                    $"{nameof(IEither<T, TError>)} properties \"{nameof(HasError)}\": ({hasError}) and \"{nameof(HasValue)}\": ({hasValue}), can not have the same value ({hasValue})."
                 );
 
             Value = value;
             Error = error;
-            // Verify that the active value can never be null.
+            
             if (Value.IsNull() && hasValue)
                 throw new ArgumentNullException(
                     nameof(Value),
-                    $"{nameof(IEither<T, TError>)} property \"{nameof(Value)}\" cannot be null."
+                    $"{nameof(IEither<T, TError>)} property \"{nameof(Value)}\" cannot be null when property \"{nameof(HasValue)}\" is expected to be true."
                 );
 
-            // Verify that the active value can never be null.
             if (Error.IsNull() && hasError)
                 throw new ArgumentNullException(
                     nameof(Error),
-                    $"{nameof(IEither<T, TError>)} property \"{nameof(Error)}\" cannot be null."
+                    $"{nameof(IEither<T, TError>)} property \"{nameof(Error)}\" cannot be null when property \"{nameof(hasError)}\" is expected to be true."
                 );
 
             HasValue = hasValue;
