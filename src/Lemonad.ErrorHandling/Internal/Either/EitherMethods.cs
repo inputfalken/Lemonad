@@ -384,14 +384,9 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Task<IEither<T, TError>> source,
             Func<T, Task<TResult>> selector,
             Func<TError, Task<TErrorResult>> errorSelector
-        ) {
-            if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-            var either = await source.ConfigureAwait(false);
-            return either.HasError
-                ? CreateError<TResult, TErrorResult>(await errorSelector(either.Error).ConfigureAwait(false))
-                : CreateValue<TResult, TErrorResult>(await selector(either.Value).ConfigureAwait(false));
-        }
+        ) => await ResolveNestedTasks(
+            FullMap(await source.ConfigureAwait(false), selector, errorSelector)
+        ).ConfigureAwait(false);
 
         public static async Task<IEither<TResult, TErrorResult>> FullMapAsync<TResult, TErrorResult, T, TError>(
             Task<IEither<T, TError>> source,
@@ -578,6 +573,11 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Task<IEither<T, TError>> source,
             IEnumerable<Task<IEither<T, TError>>> validations) => Multiple(await source.ConfigureAwait(false),
             await Task.WhenAll(validations).ConfigureAwait(false));
+
+        private static async Task<IEither<T, TError>> ResolveNestedTasks<T, TError>(
+            IEither<Task<T>, Task<TError>> source) => source.HasError
+            ? CreateError<T, TError>(await source.Error.ConfigureAwait(false))
+            : CreateValue<T, TError>(await source.Value.ConfigureAwait(false));
 
         private static async Task<IEither<T, TError>> ResolveNestedTaskError<T, TError>(
             Task<IEither<T, Task<TError>>> source) {
