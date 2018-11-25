@@ -49,6 +49,7 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Task<IEither<T, TError>> source,
             Func<Task> selector
         ) {
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
             await selector();
             return await source;
         }
@@ -67,6 +68,7 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Task<IEither<T, TError>> source,
             Func<T, Task> selector
         ) {
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
             var either = await source.ConfigureAwait(false);
             if (either.HasValue) await selector(either.Value);
 
@@ -95,6 +97,7 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Task<IEither<T, TError>> source,
             Func<TError, Task> selector
         ) {
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
             var either = await source.ConfigureAwait(false);
             if (either.HasError) await selector(either.Error);
 
@@ -369,12 +372,10 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Func<T, Task<TResult>> selector,
             Func<TError, Task<TErrorResult>> errorSelector
         ) {
-            if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-            var either = await source.ConfigureAwait(false);
-            return either.HasError
-                ? CreateError<TResult, TErrorResult>(await errorSelector(either.Error).ConfigureAwait(false))
-                : CreateValue<TResult, TErrorResult>(await selector(either.Value).ConfigureAwait(false));
+            var fullMap = FullMap(await source.ConfigureAwait(false), selector, errorSelector);
+            return fullMap.HasError
+                ? CreateError<TResult, TErrorResult>(await fullMap.Error.ConfigureAwait(false))
+                : CreateValue<TResult, TErrorResult>(await fullMap.Value.ConfigureAwait(false));
         }
 
         public static async Task<IEither<TResult, TErrorResult>> FullMapAsync<TResult, TErrorResult, T, TError>(
@@ -487,14 +488,16 @@ namespace Lemonad.ErrorHandling.Internal.Either {
         internal static async Task<IEither<TResult, TError>> MapAsyncSelector<T, TResult, TError>(
             Task<IEither<T, TError>> source,
             Func<T, Task<TResult>> selector) {
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-            var either = await source.ConfigureAwait(false);
-            return either.HasValue
-                ? CreateValue<TResult, TError>(await selector(either.Value).ConfigureAwait(false))
-                : CreateError<TResult, TError>(either.Error);
+            var either = await MapAsync(source, selector).ConfigureAwait(false);
+
+            return either.HasError
+                ? CreateError<TResult, TError>(either.Error)
+                : CreateValue<TResult, TError>(await either.Value.ConfigureAwait(false));
         }
 
-        internal static IEither<T, TErrorResult> MapError<T, TError, TErrorResult>(IEither<T, TError> either,
+
+        internal static IEither<T, TErrorResult> MapError<T, TError, TErrorResult>(
+            IEither<T, TError> either,
             Func<TError, TErrorResult> selector) {
             if (selector == null) throw new ArgumentNullException(nameof(selector));
             return either.HasError
@@ -507,13 +510,14 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Func<TError, TErrorResult> selector) => MapError(await either.ConfigureAwait(false), selector);
 
         internal static async Task<IEither<T, TErrorResult>> MapErrorAsyncSelector<T, TError, TErrorResult>(
-            Task<IEither<T, TError>> either, Func<TError, Task<TErrorResult>> selector) {
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-            var res = await either.ConfigureAwait(false);
+            Task<IEither<T, TError>> source,
+            Func<TError, Task<TErrorResult>> selector
+        ) {
+            var either = await MapErrorAsync(source, selector).ConfigureAwait(false);
 
-            return res.HasError
-                ? CreateError<T, TErrorResult>(await selector(res.Error).ConfigureAwait(false))
-                : CreateValue<T, TErrorResult>(res.Value);
+            return either.HasError
+                ? CreateError<T, TErrorResult>(await either.Error.ConfigureAwait(false))
+                : CreateValue<T, TErrorResult>(either.Value);
         }
 
         internal static TResult Match<T, TError, TResult>(IEither<T, TError> either,
