@@ -21,7 +21,6 @@ namespace Lemonad.ErrorHandling.Internal {
         ///     True if the value is equal to this type's
         ///     default value
         /// </returns>
-        [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsDefault<T>(this T value) =>
             Check<T>.IsDefault(value);
@@ -44,7 +43,6 @@ namespace Lemonad.ErrorHandling.Internal {
         ///     boxing of any value-types.  Value-types will always
         ///     return false.
         /// </returns>
-        [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNull<T>(this T value) =>
             Check<T>.IsNull(value);

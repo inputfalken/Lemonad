@@ -150,7 +150,6 @@ namespace Lemonad.ErrorHandling.Internal {
         public override string ToString() =>
             $"{(Either.HasValue ? "Ok" : "Error")} ==> {typeof(Result<T, TError>).ToHumanString()}{StringFunctions.PrettyTypeString(Either.HasValue ? (object) Either.Value : Either.Error)}";
 
-        [Pure]
         public TResult Match<TResult>(Func<T, TResult> selector, Func<TError, TResult> errorSelector)
             => EitherMethods.Match(
                 Either,
@@ -189,7 +188,6 @@ namespace Lemonad.ErrorHandling.Internal {
                 )
             );
 
-        [Pure]
         public IResult<T, TError> Filter(
             Func<T, bool> predicate,
             Func<T, TError> errorSelector)
@@ -201,7 +199,6 @@ namespace Lemonad.ErrorHandling.Internal {
                 )
             );
 
-        [Pure]
         public IResult<T, TError> IsErrorWhen(
             Func<T, bool> predicate,
             Func<T, TError> errorSelector)
@@ -213,7 +210,6 @@ namespace Lemonad.ErrorHandling.Internal {
                 )
             );
 
-        [Pure]
         public IResult<TResult, TErrorResult> FullMap<TResult, TErrorResult>(
             Func<T, TResult> selector,
             Func<TError, TErrorResult> errorSelector)
@@ -225,7 +221,6 @@ namespace Lemonad.ErrorHandling.Internal {
                 )
             );
 
-        [Pure]
         public IResult<TResult, TError> Map<TResult>(Func<T, TResult> selector)
             => new Result<TResult, TError>(
                 EitherMethods.Map(
@@ -234,7 +229,6 @@ namespace Lemonad.ErrorHandling.Internal {
                 )
             );
 
-        [Pure]
         public IResult<T, TErrorResult> MapError<TErrorResult>(Func<TError, TErrorResult> selector)
             => new Result<T, TErrorResult>(
                 EitherMethods.MapError(
@@ -243,7 +237,6 @@ namespace Lemonad.ErrorHandling.Internal {
                 )
             );
 
-        [Pure]
         public IResult<TResult, TError> FlatMap<TResult>(Func<T, IResult<TResult, TError>> flatSelector)
             => new Result<TResult, TError>(
                 EitherMethods.FlatMap(
@@ -253,7 +246,6 @@ namespace Lemonad.ErrorHandling.Internal {
                 )
             );
 
-        [Pure]
         public IResult<TResult, TError> FlatMap<TSelector, TResult>(
             Func<T, IResult<TSelector, TError>> flatSelector,
             Func<T, TSelector, TResult> resultSelector)
@@ -265,7 +257,6 @@ namespace Lemonad.ErrorHandling.Internal {
                 )
             );
 
-        [Pure]
         public IResult<TResult, TError> FlatMap<TResult, TErrorResult>(
             Func<T, IResult<TResult, TErrorResult>> flatMapSelector,
             Func<TErrorResult, TError> errorSelector)
@@ -277,7 +268,6 @@ namespace Lemonad.ErrorHandling.Internal {
                 )
             );
 
-        [Pure]
         public IResult<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
             Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector,
@@ -290,7 +280,6 @@ namespace Lemonad.ErrorHandling.Internal {
                 )
             );
 
-        [Pure]
         public IResult<T, TError> Flatten<TResult, TErrorResult>(
             Func<T, IResult<TResult, TErrorResult>> selector,
             Func<TErrorResult, TError> errorSelector
@@ -302,7 +291,6 @@ namespace Lemonad.ErrorHandling.Internal {
             )
         );
 
-        [Pure]
         public IResult<T, TError> Flatten<TResult>(Func<T, IResult<TResult, TError>> selector)
             => new Result<T, TError>(
                 EitherMethods.Flatten(
@@ -311,7 +299,6 @@ namespace Lemonad.ErrorHandling.Internal {
                 )
             );
 
-        [Pure]
         public IResult<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
             Func<T, IResult<TResult, TErrorResult>> flatMapSelector,
             Func<TError, TErrorResult> errorSelector)
@@ -323,37 +310,31 @@ namespace Lemonad.ErrorHandling.Internal {
                 )
             );
 
-        [Pure]
         public IResult<T, TResult> CastError<TResult>()
             => new Result<T, TResult>(
                 EitherMethods.CastError<T, TResult, TError>(Either)
             );
 
-        [Pure]
         public IResult<TResult, TErrorResult> FullCast<TResult, TErrorResult>()
             => new Result<TResult, TErrorResult>(
                 EitherMethods.FullCast<T, TResult, TError, TErrorResult>(Either)
             );
 
-        [Pure]
         public IResult<TResult, TResult> FullCast<TResult>()
             => new Result<TResult, TResult>(
                 EitherMethods.FullCast<T, TResult, TError>(Either)
             );
 
-        [Pure]
         public IResult<TResult, TError> Cast<TResult>()
             => new Result<TResult, TError>(
                 EitherMethods.Cast<T, TResult, TError>(Either)
             );
 
-        [Pure]
         public IResult<TResult, TError> SafeCast<TResult>(Func<T, TError> errorSelector)
             => new Result<TResult, TError>(
                 EitherMethods.SafeCast<T, TResult, TError>(Either, errorSelector)
             );
 
-        [Pure]
         public IResult<TResult, TError> Join<TInner, TKey, TResult>(
             IResult<TInner, TError> inner,
             Func<T, TKey> outerKeySelector,
@@ -371,7 +352,6 @@ namespace Lemonad.ErrorHandling.Internal {
                 )
             );
 
-        [Pure]
         public IResult<TResult, TError> Join<TInner, TKey, TResult>(
             IResult<TInner, TError> inner,
             Func<T, TKey> outerKeySelector,
@@ -391,7 +371,6 @@ namespace Lemonad.ErrorHandling.Internal {
                 )
             );
 
-        [Pure]
         public IResult<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
             Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector,
@@ -405,7 +384,6 @@ namespace Lemonad.ErrorHandling.Internal {
                 )
             );
 
-        [Pure]
         public IResult<TResult, TError> Zip<TOther, TResult>(
             IResult<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector)
