@@ -503,19 +503,15 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Func<T, TResult> selector) => Map(await source.ConfigureAwait(false), selector);
 
         [Pure]
-        internal static async Task<IEither<TResult, TError>> MapAsyncSelector<T, TResult, TError>(
+        internal static Task<IEither<TResult, TError>> MapAsyncSelector<T, TResult, TError>(
             Task<IEither<T, TError>> source,
-            Func<T, Task<TResult>> selector) {
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-            var either = await source.ConfigureAwait(false);
-            return either.HasValue
-                ? CreateValue<TResult, TError>(await selector(either.Value).ConfigureAwait(false))
-                : CreateError<TResult, TError>(either.Error);
-        }
+            Func<T, Task<TResult>> selector) => ResolveNestedTaskValue(MapAsync(source, selector));
 
         [Pure]
-        internal static IEither<T, TErrorResult> MapError<T, TError, TErrorResult>(IEither<T, TError> either,
-            Func<TError, TErrorResult> selector) {
+        internal static IEither<T, TErrorResult> MapError<T, TError, TErrorResult>(
+            IEither<T, TError> either,
+            Func<TError, TErrorResult> selector
+        ) {
             if (selector == null) throw new ArgumentNullException(nameof(selector));
             return either.HasError
                 ? CreateError<T, TErrorResult>(selector(either.Error))
@@ -526,15 +522,10 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Task<IEither<T, TError>> either,
             Func<TError, TErrorResult> selector) => MapError(await either.ConfigureAwait(false), selector);
 
-        internal static async Task<IEither<T, TErrorResult>> MapErrorAsyncSelector<T, TError, TErrorResult>(
-            Task<IEither<T, TError>> either, Func<TError, Task<TErrorResult>> selector) {
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-            var res = await either.ConfigureAwait(false);
-
-            return res.HasError
-                ? CreateError<T, TErrorResult>(await selector(res.Error).ConfigureAwait(false))
-                : CreateValue<T, TErrorResult>(res.Value);
-        }
+        internal static Task<IEither<T, TErrorResult>> MapErrorAsyncSelector<T, TError, TErrorResult>(
+            Task<IEither<T, TError>> either,
+            Func<TError, Task<TErrorResult>> selector
+        ) => ResolveNestedTaskError(MapErrorAsync(either, selector));
 
         [Pure]
         internal static TResult Match<T, TError, TResult>(IEither<T, TError> either,
@@ -587,6 +578,24 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Task<IEither<T, TError>> source,
             IEnumerable<Task<IEither<T, TError>>> validations) => Multiple(await source.ConfigureAwait(false),
             await Task.WhenAll(validations).ConfigureAwait(false));
+
+        private static async Task<IEither<T, TError>> ResolveNestedTaskError<T, TError>(
+            Task<IEither<T, Task<TError>>> source) {
+            var either = await source.ConfigureAwait(false);
+
+            return either.HasError
+                ? CreateError<T, TError>(await either.Error.ConfigureAwait(false))
+                : CreateValue<T, TError>(either.Value);
+        }
+
+        private static async Task<IEither<T, TError>> ResolveNestedTaskValue<T, TError>(
+            Task<IEither<Task<T>, TError>> source) {
+            var either = await source.ConfigureAwait(false);
+
+            return either.HasError
+                ? CreateError<T, TError>(either.Error)
+                : CreateValue<T, TError>(await either.Value.ConfigureAwait(false));
+        }
 
         [Pure]
         internal static IEither<TResult, TError> SafeCast<T, TResult, TError>(IEither<T, TError> either,
