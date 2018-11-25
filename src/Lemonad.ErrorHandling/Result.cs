@@ -22,7 +22,6 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TError">
         ///     The <typeparamref name="TError" /> of <see cref="IResult{T,TError}" />.
         /// </typeparam>
-        [Pure]
         public static IResult<T, TError> Error<T, TError>(TError error)
             => Result<T, TError>.ErrorFactory(in error);
 
@@ -38,7 +37,6 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TError">
         ///     The type of the error.
         /// </typeparam>
-        [Pure]
         public static T Match<T, TError>(this IResult<T, TError> source) where TError : T
             => source.Match(x => x, x => x);
 
@@ -60,7 +58,6 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TResult">
         ///     The type returned from function <paramref name="selector" />>
         /// </typeparam>
-        [Pure]
         public static TResult Match<T, TResult, TError>(this IResult<T, TError> source, Func<T, TResult> selector)
             where T : TError => source.Match(selector, x => selector((T) x));
 
@@ -118,7 +115,6 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TError">
         ///     The <typeparamref name="TError" /> from the <see cref="IResult{T,TError}" />.
         /// </typeparam>
-        [Pure]
         public static IMaybe<T> ToMaybe<T, TError>(this IResult<T, TError> source)
             => source.Either.HasValue ? Maybe.Value(source.Either.Value) : Maybe.None<T>();
 
@@ -138,7 +134,6 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TError">
         ///     The type returned by the <paramref name="errorSelector" /> function.
         /// </typeparam>
-        [Pure]
         public static IResult<T, TError> ToResult<T, TError>(this T? source, Func<TError> errorSelector)
             where T : struct => source.ToResult(
                 x => x.HasValue,
@@ -168,7 +163,6 @@ namespace Lemonad.ErrorHandling {
         ///     Is executed when the predicate fails.
         /// </param>
         /// <returns></returns>
-        [Pure]
         public static IResult<T, TError> ToResult<T, TError>(
             this T source,
             Func<T, bool> predicate,
@@ -224,7 +218,6 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TError">
         ///     The <typeparamref name="TError" /> of <see cref="IResult{T,TError}" />.
         /// </typeparam>
-        [Pure]
         public static IResult<T, TError> Value<T, TError>(T element) => Result<T, TError>.ValueFactory(in element);
     }
 }

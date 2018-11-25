@@ -17,7 +17,6 @@ namespace Lemonad.ErrorHandling {
         /// <returns>
         ///     A <see cref="Maybe{T}" /> who will have no value.
         /// </returns>
-        [Pure]
         public static IMaybe<TSource> None<TSource>() => Maybe<TSource>.None;
 
         /// <summary>
@@ -41,7 +40,6 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TSource">
         ///     The type of the <paramref name="source" />.
         /// </typeparam>
-        [Pure]
         public static IMaybe<TSource> ToMaybe<TSource>(this TSource source, Func<TSource, bool> predicate) {
             if (predicate != null)
                 return predicate(source) ? Value(source) : None<TSource>();
@@ -57,7 +55,6 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TSource">
         ///     The type of the <paramref name="source" />.
         /// </typeparam>
-        [Pure]
         public static IMaybe<TSource> ToMaybe<TSource>(this TSource? source) where TSource : struct =>
             source.HasValue ? Value(source.Value) : None<TSource>();
 
@@ -73,7 +70,6 @@ namespace Lemonad.ErrorHandling {
         /// <returns>
         ///     A <see cref="Maybe{T}" /> who will have no value.
         /// </returns>
-        [Pure]
         public static IMaybe<TSource> ToMaybeNone<TSource>(this TSource item) => None<TSource>();
 
         /// <summary>
@@ -89,7 +85,6 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TSource">
         ///     The type of the <paramref name="source" />.
         /// </typeparam>
-        [Pure]
         public static IMaybe<TSource> ToMaybeNone<TSource>(this TSource source, Func<TSource, bool> predicate) {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             return predicate(source) ? None<TSource>() : Value(source);
@@ -111,7 +106,6 @@ namespace Lemonad.ErrorHandling {
         ///     The type representing an error for the <see cref="Result{T,TError}" />.
         /// </typeparam>
         /// <returns></returns>
-        [Pure]
         public static IResult<T, TError> ToResult<T, TError>(this IMaybe<T> source,
             Func<TError> errorSelector) => errorSelector == null
             ? throw new ArgumentNullException(nameof(errorSelector))
@@ -129,7 +123,6 @@ namespace Lemonad.ErrorHandling {
         /// <returns>
         ///     A <see cref="Maybe{T}" /> whose value will be <paramref name="item" />.
         /// </returns>
-        [Pure]
         public static IMaybe<TSource> Value<TSource>(TSource item) => Maybe<TSource>.Create(item);
     }
 }

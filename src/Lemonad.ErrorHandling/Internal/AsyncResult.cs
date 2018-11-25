@@ -73,7 +73,6 @@ namespace Lemonad.ErrorHandling.Internal {
             )
         );
 
-        [Pure]
         public IAsyncResult<TResult, TError> ZipAsync<TOther, TResult>(
             IAsyncResult<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector

@@ -13,7 +13,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
     ///     share as much logic as possible.
     /// </summary>
     internal static class EitherMethods {
-        [Pure]
         internal static IEither<TResult, TError> Cast<T, TResult, TError>(IEither<T, TError> either) => either.HasError
             ? CreateError<TResult, TError>(either.Error)
             : CreateValue<TResult, TError>((TResult) (object) either.Value);
@@ -22,7 +21,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Task<IEither<T, TError>> either) =>
             Cast<T, TResult, TError>(await either.ConfigureAwait(false));
 
-        [Pure]
         internal static IEither<T, TResult> CastError<T, TResult, TError>(IEither<T, TError> either) => either.HasValue
             ? CreateValue<T, TResult>(either.Value)
             : CreateError<T, TResult>((TResult) (object) either.Error);
@@ -106,7 +104,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             return either;
         }
 
-        [Pure]
         internal static IEither<T, TError> Filter<T, TError>(IEither<T, TError> either, Func<T, bool> predicate,
             Func<T, TError> errorSelector) {
             if (errorSelector == null)
@@ -119,13 +116,11 @@ namespace Lemonad.ErrorHandling.Internal.Either {
                 : CreateError<T, TError>(errorSelector(either.Value));
         }
 
-        [Pure]
         internal static async Task<IEither<T, TError>> FilterAsync<T, TError>(
             Task<IEither<T, TError>> source,
             Func<T, bool> predicate,
             Func<T, TError> errorSelector) => Filter(await source.ConfigureAwait(false), predicate, errorSelector);
 
-        [Pure]
         internal static async Task<IEither<T, TError>> FilterAsyncPredicate<T, TError>(Task<IEither<T, TError>> source,
             Func<T, Task<bool>> predicate,
             Func<T, TError> errorSelector) {
@@ -140,7 +135,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
                 : CreateError<T, TError>(errorSelector(either.Value));
         }
 
-        [Pure]
         internal static IEither<TResult, TError> FlatMap<T, TResult, TError>(IEither<T, TError> either,
             Func<T, IEither<TResult, TError>> flatSelector) {
             if (flatSelector == null) throw new ArgumentNullException(nameof(flatSelector));
@@ -148,7 +142,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             return either.HasValue ? flatSelector(either.Value) : CreateError<TResult, TError>(either.Error);
         }
 
-        [Pure]
         internal static IEither<TResult, TError> FlatMap<T, TSelector, TResult, TError>(IEither<T, TError> either,
             Func<T, IEither<TSelector, TError>> flatSelector,
             Func<T, TSelector, TResult> resultSelector) {
@@ -162,7 +155,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
                 : CreateError<TResult, TError>(eitherFunc.Error);
         }
 
-        [Pure]
         internal static IEither<TResult, TError> FlatMap<T, TResult, TError, TErrorResult>(IEither<T, TError> either,
             Func<T, IEither<TResult, TErrorResult>> flatMapSelector, Func<TErrorResult, TError> errorSelector) {
             if (flatMapSelector == null) throw new ArgumentNullException(nameof(flatMapSelector));
@@ -173,7 +165,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
                 : CreateError<TResult, TError>(errorSelector(okSelector.Error));
         }
 
-        [Pure]
         internal static IEither<TResult, TError> FlatMap<T, TFlatMap, TResult, TError, TErrorResult>(
             IEither<T, TError> either,
             Func<T, IEither<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
@@ -201,7 +192,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
                 : CreateError<TResult, TError>(either.Error);
         }
 
-        [Pure]
         internal static async Task<IEither<TResult, TError>> FlatMapAsync<T, TResult, TError, TErrorResult>(
             Task<IEither<T, TError>> source,
             Func<T, Task<IEither<TResult, TErrorResult>>> flatMapSelector, Func<TErrorResult, TError> errorSelector) {
@@ -237,7 +227,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
                 : CreateError<TResult, TError>(errorSelector(eitherSelector.Error));
         }
 
-        [Pure]
         internal static IEither<T, TError> Flatten<T, TResult, TError, TErrorResult>(IEither<T, TError> either,
             Func<T, IEither<TResult, TErrorResult>> selector, Func<TErrorResult, TError> errorSelector) {
             if (selector == null) throw new ArgumentNullException(nameof(selector));
@@ -248,7 +237,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
                 : CreateError<T, TError>(errorSelector(okSelector.Error));
         }
 
-        [Pure]
         internal static IEither<T, TError> Flatten<T, TResult, TError>(IEither<T, TError> either,
             Func<T, IEither<TResult, TError>> selector) {
             if (selector == null) throw new ArgumentNullException(nameof(selector));
@@ -282,14 +270,12 @@ namespace Lemonad.ErrorHandling.Internal.Either {
                 : CreateError<T, TError>(okSelector.Error);
         }
 
-        [Pure]
         internal static IEither<TResult, TErrorResult> FullCast<T, TResult, TError, TErrorResult>(
             IEither<T, TError> either) =>
             either.HasValue
                 ? CreateValue<TResult, TErrorResult>((TResult) (object) either.Value)
                 : CreateError<TResult, TErrorResult>((TErrorResult) (object) either.Error);
 
-        [Pure]
         internal static IEither<TResult, TResult> FullCast<T, TResult, TError>(IEither<T, TError> either) =>
             FullCast<T, TResult, TError, TResult>(either);
 
@@ -311,7 +297,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
                 : CreateError<TResult, TErrorResult>(errorSelector(either.Error));
         }
 
-        [Pure]
         internal static IEither<TResult, TErrorResult> FullFlatMap<T, TFlatMap, TResult, TError, TErrorResult>(
             IEither<T, TError> either,
             Func<T, IEither<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
@@ -353,7 +338,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
                 : CreateError<TResult, TErrorResult>(errorSelector(either.Error));
         }
 
-        [Pure]
         internal static IEither<TResult, TErrorResult> FullMap<T, TResult, TError, TErrorResult>(
             IEither<T, TError> either,
             Func<T, TResult> selector,
@@ -412,7 +396,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Task<IEither<T, TError>> source, Func<T, TResult> selector, Func<TError, TErrorResult> errorSelector) =>
             FullMap(await source.ConfigureAwait(false), selector, errorSelector);
 
-        [Pure]
         internal static IEither<T, TError> IsErrorWhen<T, TError>(IEither<T, TError> either,
             Func<T, bool> predicate, Func<T, TError> errorSelector) {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
@@ -490,7 +473,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Join(await either.ConfigureAwait(false), await innerEither.ConfigureAwait(false), outerKeySelector,
                 innerKeySelector, resultSelector, errorSelector);
 
-        [Pure]
         internal static IEither<TResult, TError> Map<T, TResult, TError>(IEither<T, TError> either,
             Func<T, TResult> selector) {
             if (selector == null) throw new ArgumentNullException(nameof(selector));
@@ -503,7 +485,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Task<IEither<T, TError>> source,
             Func<T, TResult> selector) => Map(await source.ConfigureAwait(false), selector);
 
-        [Pure]
         internal static async Task<IEither<TResult, TError>> MapAsyncSelector<T, TResult, TError>(
             Task<IEither<T, TError>> source,
             Func<T, Task<TResult>> selector) {
@@ -514,11 +495,10 @@ namespace Lemonad.ErrorHandling.Internal.Either {
                 : CreateValue<TResult, TError>(await either.Value.ConfigureAwait(false));
         }
 
-        [Pure]
+
         internal static IEither<T, TErrorResult> MapError<T, TError, TErrorResult>(
             IEither<T, TError> either,
-            Func<TError, TErrorResult> selector
-        ) {
+            Func<TError, TErrorResult> selector) {
             if (selector == null) throw new ArgumentNullException(nameof(selector));
             return either.HasError
                 ? CreateError<T, TErrorResult>(selector(either.Error))
@@ -540,7 +520,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
                 : CreateValue<T, TErrorResult>(either.Value);
         }
 
-        [Pure]
         internal static TResult Match<T, TError, TResult>(IEither<T, TError> either,
             Func<T, TResult> selector, Func<TError, TResult> errorSelector) {
             if (either.HasError)
@@ -592,7 +571,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             IEnumerable<Task<IEither<T, TError>>> validations) => Multiple(await source.ConfigureAwait(false),
             await Task.WhenAll(validations).ConfigureAwait(false));
 
-        [Pure]
         internal static IEither<TResult, TError> SafeCast<T, TResult, TError>(IEither<T, TError> either,
             Func<T, TError> errorSelector) {
             if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
@@ -618,7 +596,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
                 yield return result.Value;
         }
 
-        [Pure]
         internal static IEither<TResult, TError> Zip<T, TOther, TResult, TError>(IEither<T, TError> either,
             IEither<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector) {

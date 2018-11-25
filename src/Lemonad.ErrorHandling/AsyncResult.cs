@@ -25,7 +25,6 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TError">
         ///     The <typeparamref name="TError" /> of <see cref="IAsyncResult{T,TError}" />.
         /// </typeparam>
-        [Pure]
         public static IAsyncResult<T, TError> Error<T, TError>(TError error) =>
             AsyncResult<T, TError>.ErrorFactory(in error);
 
@@ -101,7 +100,6 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TResult">
         ///     The type returned from function <paramref name="selector" />>
         /// </typeparam>
-        [Pure]
         public static Task<TResult> Match<T, TResult, TError>(this IAsyncResult<T, TError> source,
             Func<T, TResult> selector)
             where T : TError => source.Match(selector, x => selector((T) x));
@@ -142,17 +140,14 @@ namespace Lemonad.ErrorHandling {
         public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this IResult<T, TError> result)
             => ToAsyncResult(Task.FromResult(result));
 
-        [Pure]
         public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T> source, Func<T, bool> predicate,
             Func<T, TError> errorSelector) =>
             AsyncResult<T, TError>.Factory(source.Map(x => x.ToResult(predicate, errorSelector).Either));
 
-        [Pure]
         public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T?> source,
             Func<TError> errorSelector)
             where T : struct => AsyncResult<T, TError>.Factory(source.Map(x => x.ToResult(errorSelector).Either));
 
-        [Pure]
         public static IAsyncResult<T, TError> ToAsyncResultError<T, TError>(this Task<TError> source,
             Func<TError, bool> predicate,
             Func<TError, T> valueSelector) =>
@@ -179,7 +174,6 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TError">
         ///     The <typeparamref name="TError" /> of <see cref="IAsyncResult{T,TError}" />.
         /// </typeparam>
-        [Pure]
         public static IAsyncResult<T, TError> Value<T, TError>(T element) =>
             AsyncResult<T, TError>.ValueFactory(in element);
     }
