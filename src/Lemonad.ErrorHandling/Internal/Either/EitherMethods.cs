@@ -51,6 +51,7 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Task<IEither<T, TError>> source,
             Func<Task> selector
         ) {
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
             await selector();
             return await source;
         }
@@ -69,6 +70,7 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Task<IEither<T, TError>> source,
             Func<T, Task> selector
         ) {
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
             var either = await source.ConfigureAwait(false);
             if (either.HasValue) await selector(either.Value);
 
@@ -97,6 +99,7 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Task<IEither<T, TError>> source,
             Func<TError, Task> selector
         ) {
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
             var either = await source.ConfigureAwait(false);
             if (either.HasError) await selector(either.Error);
 
