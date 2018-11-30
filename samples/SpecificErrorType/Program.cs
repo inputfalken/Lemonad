@@ -8,7 +8,7 @@ namespace SpecificErrorType {
         private static async Task Main(string[] args) => await ReadFile(Console.ReadLine()).DoWith(Console.WriteLine);
 
         private static IAsyncResult<string, ErrorModel> ReadFile(string input) {
-            return new ModelResult<string>(input)
+            return new ResultModel<string>(input)
                 .IsErrorWhen(
                     string.IsNullOrWhiteSpace,
                     s => new ErrorModel {Message = "String cannot be null or empty", Code = 2}

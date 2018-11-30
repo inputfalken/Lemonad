@@ -4,18 +4,18 @@ using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
 
 namespace SpecificErrorType {
-    public class ModelResult<T> : IResult<T, ErrorModel> {
-        public static implicit operator ModelResult<T>(T value) =>
-            new ModelResult<T>(Result.Value<T, ErrorModel>(value));
+    public class ResultModel<T> : IResult<T, ErrorModel> {
+        public static implicit operator ResultModel<T>(T value) =>
+            new ResultModel<T>(Result.Value<T, ErrorModel>(value));
 
-        public static implicit operator ModelResult<T>(ErrorModel error) =>
-            new ModelResult<T>(Result.Error<T, ErrorModel>(error));
+        public static implicit operator ResultModel<T>(ErrorModel error) =>
+            new ResultModel<T>(Result.Error<T, ErrorModel>(error));
 
         private readonly IResult<T, ErrorModel> _resultImplementation;
 
-        public ModelResult(T element) : this(Result.Value<T, ErrorModel>(element)) { }
+        public ResultModel(T element) : this(Result.Value<T, ErrorModel>(element)) { }
 
-        private ModelResult(IResult<T, ErrorModel> resultImplementation)
+        private ResultModel(IResult<T, ErrorModel> resultImplementation)
             => _resultImplementation = resultImplementation;
 
         public IEither<T, ErrorModel> Either => _resultImplementation.Either;
