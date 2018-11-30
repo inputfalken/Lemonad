@@ -1,30 +1,25 @@
-﻿using System.Threading.Tasks;
-using Lemonad.ErrorHandling.Internal;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling {
     public interface IAsyncMaybe<out T> {
-        /// <summary>
-        ///     Gets a value indicating whether the current <see cref="Maybe{T}" /> object has a valid value of
-        ///     its underlying type.
-        /// </summary>
-        /// <returns>
-        ///     true if the current <see cref="Maybe{T}"></see> object has a value; false if the current
-        ///     <see cref="Maybe{T}"></see> object has no value.
-        /// </returns>
         Task<bool> HasValue { get; }
-
-        /// <summary>
-        ///     Gets the value of the current <see cref="Maybe{T}"></see> object if <see cref="HasValue" /> is true.
-        /// </summary>
-        /// <example>
-        ///     <code language="c#">
-        ///  if (Either.HasValue)
-        ///  {
-        ///      // Safe to use.
-        ///      Console.WriteLine(Either.Value)
-        ///  }
-        ///  </code>
-        /// </example>
         T Value { get; }
+        IAsyncMaybe<T> Do(Action action);
+        IAsyncMaybe<T> DoWith(Action<T> someAction);
+        IAsyncMaybe<T> Filter(Func<T, bool> predicate);
+        IAsyncMaybe<TResult> FlatMap<TResult>(Func<T, IAsyncMaybe<TResult>> flatMapSelector);
+
+        IAsyncMaybe<TResult> FlatMap<TFlatMap, TResult>(
+            Func<T, IAsyncMaybe<TFlatMap>> flatMapSelector,
+            Func<T, TFlatMap, TResult> resultSelector
+        );
+
+        IAsyncMaybe<TResult> FlatMap<TResult>(Func<T, TResult?> flatSelector) where TResult : struct;
+        IAsyncMaybe<T> Flatten<TResult>(Func<T, IAsyncMaybe<TResult>> selector);
+        IAsyncMaybe<T> IsNoneWhen(Func<T, bool> predicate);
+        IAsyncMaybe<TResult> Map<TResult>(Func<T, TResult> selector);
+        Task Match(Action<T> someAction, Action noneAction);
+        TResult Match<TResult>(Func<T, TResult> someSelector, Func<TResult> noneSelector);
     }
 }
