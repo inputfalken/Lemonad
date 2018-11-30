@@ -5,12 +5,6 @@ using Lemonad.ErrorHandling;
 
 namespace SpecificErrorType {
     public class ResultModel<T> : IResult<T, ErrorModel> {
-        public static implicit operator ResultModel<T>(T value) =>
-            new ResultModel<T>(Result.Value<T, ErrorModel>(value));
-
-        public static implicit operator ResultModel<T>(ErrorModel error) =>
-            new ResultModel<T>(Result.Error<T, ErrorModel>(error));
-
         private readonly IResult<T, ErrorModel> _resultImplementation;
 
         public ResultModel(T element) : this(Result.Value<T, ErrorModel>(element)) { }
