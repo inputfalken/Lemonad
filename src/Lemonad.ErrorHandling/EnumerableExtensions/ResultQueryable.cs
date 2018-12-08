@@ -25,8 +25,10 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
         /// <exception cref="ArgumentNullException">
         ///     When any of the parameters are null.
         /// </exception>
-        public static IResult<TSource, TError> FirstOrError<TSource, TError>(this IQueryable<TSource> source,
-            Func<TError> errorSelector) where TSource : class => errorSelector == null
+        public static IResult<TSource, TError> FirstOrError<TSource, TError>(
+            this IQueryable<TSource> source,
+            Func<TError> errorSelector
+        ) => errorSelector == null
             ? throw new ArgumentNullException(nameof(errorSelector))
             : source.Cast<object>()
                 .FirstOrDefault()
@@ -55,14 +57,16 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
         /// <exception cref="ArgumentNullException">
         ///     When any of the parameters are null.
         /// </exception>
-        public static IResult<TSource, TError> FirstOrError<TSource, TError>(this IQueryable<TSource> source,
-            Expression<Func<TSource, bool>> predicate, Func<TError> errorSelector) where TSource : class =>
-            errorSelector == null
-                ? throw new ArgumentNullException(nameof(errorSelector))
-                : source.Where(predicate)
-                    .Cast<object>()
-                    .FirstOrDefault()
-                    .ToResult(x => x != null, _ => errorSelector())
-                    .Cast<TSource>();
+        public static IResult<TSource, TError> FirstOrError<TSource, TError>(
+            this IQueryable<TSource> source,
+            Expression<Func<TSource, bool>> predicate,
+            Func<TError> errorSelector
+        ) => errorSelector == null
+            ? throw new ArgumentNullException(nameof(errorSelector))
+            : source.Where(predicate)
+                .Cast<object>()
+                .FirstOrDefault()
+                .ToResult(x => x != null, _ => errorSelector())
+                .Cast<TSource>();
     }
 }
