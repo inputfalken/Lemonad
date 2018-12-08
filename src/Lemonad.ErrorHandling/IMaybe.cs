@@ -77,17 +77,6 @@ namespace Lemonad.ErrorHandling {
             Func<T, TFlatMap, TResult> resultSelector);
 
         /// <summary>
-        ///     Flatmaps a <see cref="Nullable{T}" />.
-        /// </summary>
-        /// <param name="flatSelector">
-        ///     A function who expects a <see cref="Nullable{T}" /> as its return type.
-        /// </param>
-        /// <typeparam name="TResult">
-        ///     The type <typeparamref name="T" /> returned from the <paramref name="flatSelector" /> function.
-        /// </typeparam>
-        IMaybe<TResult> FlatMap<TResult>(Func<T, TResult?> flatSelector) where TResult : struct;
-
-        /// <summary>
         ///     Flatmaps another <see cref="Maybe{T}" />.
         /// </summary>
         /// <param name="flatMapSelector">
