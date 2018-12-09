@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling.EnumerableExtensions {
     /// <summary>
@@ -28,12 +29,19 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
         public static IResult<TSource, TError> FirstOrError<TSource, TError>(
             this IQueryable<TSource> source,
             Func<TError> errorSelector
-        ) => errorSelector == null
-            ? throw new ArgumentNullException(nameof(errorSelector))
-            : source.Cast<object>()
-                .FirstOrDefault()
-                .ToResult(x => x != null, _ => errorSelector())
-                .Cast<TSource>();
+        ) {
+            if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
+
+            return default(TSource).IsValueType()
+                ? source
+                    .Select(x => new {LemonadValueTypeWrapper = x})
+                    .FirstOrDefault()
+                    .ToResult(x => x != null, _ => errorSelector())
+                    .Map(x => x.LemonadValueTypeWrapper)
+                : source
+                    .FirstOrDefault()
+                    .ToResult(x => x != null, _ => errorSelector());
+        }
 
         /// <summary>
         ///     Returns the first element of the sequence that satisfies a condition or a <typeparamref name="TError" /> if no such
@@ -61,12 +69,20 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
             this IQueryable<TSource> source,
             Expression<Func<TSource, bool>> predicate,
             Func<TError> errorSelector
-        ) => errorSelector == null
-            ? throw new ArgumentNullException(nameof(errorSelector))
-            : source.Where(predicate)
-                .Cast<object>()
+        ) {
+            if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
+            if (default(TSource).IsValueType())
+                return source
+                    .Where(predicate)
+                    .Select(x => new {LemonadValueTypeWrapper = x})
+                    .FirstOrDefault()
+                    .ToResult(x => x != null, _ => errorSelector())
+                    .Map(x => x.LemonadValueTypeWrapper);
+
+            return source
+                .Where(predicate)
                 .FirstOrDefault()
-                .ToResult(x => x != null, _ => errorSelector())
-                .Cast<TSource>();
+                .ToResult(x => x != null, _ => errorSelector());
+        }
     }
 }
