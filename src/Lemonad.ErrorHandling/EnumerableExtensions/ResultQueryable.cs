@@ -32,6 +32,7 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
         ) {
             if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
 
+            // Since anonymous types are reference types, It's possible to wrap the value type in an anonymous type and perform a null check.
             return default(TSource).IsValueType()
                 ? source
                     .Select(x => new {LemonadValueTypeWrapper = x})
@@ -71,6 +72,9 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
             Func<TError> errorSelector
         ) {
             if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+
+            // Since anonymous types are reference types, It's possible to wrap the value type in an anonymous type and perform a null check.
             if (default(TSource).IsValueType())
                 return source
                     .Where(predicate)
