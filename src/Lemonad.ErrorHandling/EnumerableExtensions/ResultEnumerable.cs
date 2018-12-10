@@ -45,24 +45,16 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
         /// </exception>
         public static IResult<TSource, TError>
             FirstOrError<TSource, TError>(this IEnumerable<TSource> source, Func<TError> errorSelector) {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
-            switch (source) {
-                case ICollection<TSource> collection when collection.Count == 0:
-                    return Result.Error<TSource, TError>(errorSelector());
-                case IList<TSource> list when list.Count > 0:
-                    return Result.Value<TSource, TError>(list[0]);
-                case IReadOnlyCollection<TSource> collection when collection.Count == 0:
-                    return Result.Error<TSource, TError>(errorSelector());
-                case IReadOnlyList<TSource> readOnlyList when readOnlyList.Count > 0:
-                    return Result.Value<TSource, TError>(readOnlyList[0]);
-                default:
-                    using (var e = source.GetEnumerator()) {
-                        return e.MoveNext()
-                            ? Result.Value<TSource, TError>(e.Current)
-                            : Result.Error<TSource, TError>(errorSelector());
-                    }
-            }
+            // Since anonymous types are reference types, It's possible to wrap the value type in an anonymous type and perform a null check.
+            return default(TSource).IsValueType()
+                ? source
+                    .Select(x => new {LemonadValueTypeWrapper = x})
+                    .FirstOrDefault()
+                    .ToResult(x => x != null, _ => errorSelector())
+                    .Map(x => x.LemonadValueTypeWrapper)
+                : source
+                    .FirstOrDefault()
+                    .ToResult(x => x != null, _ => errorSelector());
         }
 
         /// <summary>
@@ -90,18 +82,22 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
         public static IResult<TSource, TError>
             FirstOrError<TSource, TError>(this IEnumerable<TSource> source, Func<TSource, bool> predicate,
                 Func<TError> errorSelector) {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
 
-            if (source is ICollection<TSource> collection && collection.Count == 0)
-                return Result.Error<TSource, TError>(errorSelector());
+            // Since anonymous types are reference types, It's possible to wrap the value type in an anonymous type and perform a null check.
+            if (default(TSource).IsValueType())
+                return source
+                    .Where(predicate)
+                    .Select(x => new {LemonadValueTypeWrapper = x})
+                    .FirstOrDefault()
+                    .ToResult(x => x != null, _ => errorSelector())
+                    .Map(x => x.LemonadValueTypeWrapper);
 
-            foreach (var val in source)
-                if (val.IsNotNull() && predicate(val))
-                    return Result.Value<TSource, TError>(val);
-
-            return Result.Error<TSource, TError>(errorSelector());
+            return source
+                .Where(predicate)
+                .FirstOrDefault()
+                .ToResult(x => x != null, _ => errorSelector());
         }
 
         /// <summary>
