@@ -41,8 +41,51 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
                     .Map(x => x.LemonadValueTypeWrapper)
                 : source
                     .FirstOrDefault()
-                    .ToResult(x => !((object)x is null), _ => errorSelector());
+                    .ToResult(x => !((object) x is null), _ => errorSelector());
         }
+
+        /// <summary>
+        ///  Returns the only element of a sequence, or a <see cref="SingleOrErrorCase.NoElement"/> if the sequence is empty and returns <see cref="SingleOrErrorCase.ManyElements"/> if more than one element was found.
+        /// </summary>
+        /// <param name="source">
+        /// A <see cref="IQueryable{T}"/> to return an <see cref="Result{T,TError}"/> from.
+        /// </param>
+        /// <typeparam name="TSource">
+        /// The type of the elements in <see cref="IQueryable{T}"/>.
+        /// </typeparam>
+        /// <returns>
+        /// The single element of the input sequence, or <see cref="SingleOrErrorCase"/> otherwise inside a <see cref="Result{T,TError}"/>.
+        /// </returns>
+        public static IResult<TSource, SingleOrErrorCase> SingleOrError<TSource>(this IQueryable<TSource> source) {
+            var sources = source
+                .Take(2)
+                .ToArray();
+            if (sources.Length == 1) return Result.Value<TSource, SingleOrErrorCase>(sources[0]);
+            return Result.Error<TSource, SingleOrErrorCase>(sources.Length == 0
+                ? SingleOrErrorCase.NoElement
+                : SingleOrErrorCase.ManyElements
+            );
+        }
+
+        /// <summary>
+        ///  Returns the only element of a sequence, or a <see cref="SingleOrErrorCase.NoElement"/> if the sequence is empty and returns <see cref="SingleOrErrorCase.ManyElements"/> if more than one element was found.
+        /// </summary>
+        /// <param name="source">
+        /// A <see cref="IQueryable{T}"/> to return an <see cref="Result{T,TError}"/> from.
+        /// </param>
+        /// <param name="predicate">
+        /// A <see cref="Expression{TDelegate}"/> to test each element for a condition.
+        /// </param>
+        /// <typeparam name="TSource">
+        /// The type of the elements in <see cref="IQueryable{T}"/>.
+        /// </typeparam>
+        /// <returns>
+        /// The single element of the input sequence, or <see cref="SingleOrErrorCase"/> otherwise inside a <see cref="Result{T,TError}"/>.
+        /// </returns>
+        public static IResult<TSource, SingleOrErrorCase> SingleOrError<TSource>(
+            this IQueryable<TSource> source,
+            Expression<Func<TSource, bool>> predicate
+        ) => source.Where(predicate).SingleOrError();
 
         /// <summary>
         ///     Returns the first element of the sequence that satisfies a condition or a <typeparamref name="TError" /> if no such
@@ -73,19 +116,7 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
         ) {
             if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
-
-            // Since anonymous types are reference types, It's possible to wrap the value type in an anonymous type and perform a null check.
-            return default(TSource).IsValueType()
-                ? source
-                    .Where(predicate)
-                    .Select(x => new {LemonadValueTypeWrapper = x})
-                    .FirstOrDefault()
-                    .ToResult(x => !(x is null), _ => errorSelector())
-                    .Map(x => x.LemonadValueTypeWrapper)
-                : source
-                    .Where(predicate)
-                    .FirstOrDefault()
-                    .ToResult(x => !((object)x is null), _ => errorSelector());
+            return source.Where(predicate).FirstOrError(errorSelector);
         }
     }
 }

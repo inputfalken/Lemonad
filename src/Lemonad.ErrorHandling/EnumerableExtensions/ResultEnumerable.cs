@@ -54,7 +54,7 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
                     .Map(x => x.LemonadValueTypeWrapper)
                 : source
                     .FirstOrDefault()
-                    .ToResult(x => !((object)x is null), _ => errorSelector());
+                    .ToResult(x => !((object) x is null), _ => errorSelector());
         }
 
         /// <summary>
@@ -84,19 +84,7 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
                 Func<TError> errorSelector) {
             if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
-
-            // Since anonymous types are reference types, It's possible to wrap the value type in an anonymous type and perform a null check.
-            return default(TSource).IsValueType()
-                ? source
-                    .Where(predicate)
-                    .Select(x => new {LemonadValueTypeWrapper = x})
-                    .FirstOrDefault()
-                    .ToResult(x => !(x is null), _ => errorSelector())
-                    .Map(x => x.LemonadValueTypeWrapper)
-                : source
-                    .Where(predicate)
-                    .FirstOrDefault()
-                    .ToResult(x => !((object)x is null), _ => errorSelector());
+            return source.Where(predicate).FirstOrError(errorSelector);
         }
 
         /// <summary>
@@ -105,116 +93,41 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
         /// <param name="source">
         ///     An <see cref="IEnumerable{T}" /> to return the single element of.
         /// </param>
-        /// <param name="errorSelector">
-        ///     A function that is invoked when no element is found or the predicate could not be matched with any element or more
-        ///     than one element is found.
-        /// </param>
         /// <typeparam name="TSource">
         ///     The type of the elements of <paramref name="source" />.
-        /// </typeparam>
-        /// <typeparam name="TError">
-        ///     The type returned by function <paramref name="errorSelector" />.
         /// </typeparam>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public static IResult<TSource, TError> SingleOrError<TSource, TError>(this IEnumerable<TSource> source,
-            Func<TError> errorSelector) {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
-
-            switch (source) {
-                case ICollection<TSource> collection when collection.Count == 0:
-                    return Result.Error<TSource, TError>(errorSelector());
-                case IReadOnlyCollection<TSource> readOnlyCollection when readOnlyCollection.Count == 0:
-                    return Result.Error<TSource, TError>(errorSelector());
-                case IList<TSource> list:
-                    return list.Count == 0
-                        ? Result.Error<TSource, TError>(errorSelector())
-                        : list.Count == 1
-                            ? Result.Value<TSource, TError>(list[0])
-                            : Result.Error<TSource, TError>(errorSelector());
-                case IReadOnlyList<TSource> readOnlyList:
-                    return readOnlyList.Count == 0
-                        ? Result.Error<TSource, TError>(errorSelector())
-                        : readOnlyList.Count == 1
-                            ? Result.Value<TSource, TError>(readOnlyList[0])
-                            : Result.Error<TSource, TError>(errorSelector());
-                default: {
-                    using (var e = source.GetEnumerator()) {
-                        if (!e.MoveNext())
-                            return Result.Error<TSource, TError>(errorSelector());
-
-                        var result = e.Current;
-                        if (!e.MoveNext())
-                            return Result.Value<TSource, TError>(result);
-                    }
-
-                    return Result.Error<TSource, TError>(errorSelector());
-                }
-            }
+        public static IResult<TSource, SingleOrErrorCase> SingleOrError<TSource>(this IEnumerable<TSource> source) {
+            var sources = source
+                .Take(2)
+                .ToArray();
+            if (sources.Length == 1) return Result.Value<TSource, SingleOrErrorCase>(sources[0]);
+            return Result.Error<TSource, SingleOrErrorCase>(sources.Length == 0
+                ? SingleOrErrorCase.NoElement
+                : SingleOrErrorCase.ManyElements
+            );
         }
 
         /// <summary>
-        ///     Returns the only element of a sequence that satisfies a specified condition <typeparamref name="TError" /> if no
-        ///     such element exists.
+        ///  Returns the only element of a sequence, or a <see cref="SingleOrErrorCase.NoElement"/> if the sequence is empty and returns <see cref="SingleOrErrorCase.ManyElements"/> if more than one element was found.
         /// </summary>
         /// <param name="source">
-        ///     An <see cref="IEnumerable{T}" /> to return the single element of.
+        /// A <see cref="IQueryable{T}"/> to return an <see cref="Result{T,TError}"/> from.
         /// </param>
         /// <param name="predicate">
-        ///     A function to test <typeparamref name="TSource" /> for a condition.
-        /// </param>
-        /// <param name="errorSelector">
-        ///     A function that is invoked when no element is found or the predicate could not be matched with any element or more
-        ///     than one element is found that matches the predicate.
+        /// A function to test each element for a condition.
         /// </param>
         /// <typeparam name="TSource">
-        ///     The type of the elements of <paramref name="source" />.
+        /// The type of the elements in <see cref="IQueryable{T}"/>.
         /// </typeparam>
-        /// <typeparam name="TError">
-        ///     The type returned by function <paramref name="errorSelector" />.
-        /// </typeparam>
-        public static IResult<TSource, TError> SingleOrError<TSource, TError>(this IEnumerable<TSource> source,
-            Func<TSource, bool> predicate,
-            Func<TError> errorSelector) {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
-            if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
-
-            switch (source) {
-                case ICollection<TSource> collection when collection.Count == 0:
-                    return Result.Error<TSource, TError>(errorSelector());
-                case IReadOnlyCollection<TSource> readOnlyCollection when readOnlyCollection.Count == 0:
-                    return Result.Error<TSource, TError>(errorSelector());
-                case IList<TSource> list:
-                    return list.Count == 0
-                        ? Result.Error<TSource, TError>(errorSelector())
-                        : list.Count == 1 && predicate(list[0])
-                            ? Result.Value<TSource, TError>(list[0])
-                            : Result.Error<TSource, TError>(errorSelector());
-                case IReadOnlyList<TSource> readOnlyList:
-                    return readOnlyList.Count == 0
-                        ? Result.Error<TSource, TError>(errorSelector())
-                        : readOnlyList.Count == 1 && predicate(readOnlyList[0])
-                            ? Result.Value<TSource, TError>(readOnlyList[0])
-                            : Result.Error<TSource, TError>(errorSelector());
-                default: {
-                    using (var e = source.GetEnumerator()) {
-                        while (e.MoveNext()) {
-                            var result = e.Current;
-                            if (!predicate(result)) continue;
-                            while (e.MoveNext())
-                                if (predicate(e.Current))
-                                    return Result.Error<TSource, TError>(errorSelector());
-
-                            return Result.Value<TSource, TError>(result);
-                        }
-                    }
-
-                    return Result.Error<TSource, TError>(errorSelector());
-                }
-            }
-        }
+        /// <returns>
+        /// The single element of the input sequence, or <see cref="SingleOrErrorCase"/> otherwise inside a <see cref="Result{T,TError}"/>.
+        /// </returns>
+        public static IResult<TSource, SingleOrErrorCase> SingleOrError<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate
+        ) => source.Where(predicate).SingleOrError();
 
         /// <summary>
         ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="IResult{T,TError}" /> to an <see cref="IEnumerable{T}" />
