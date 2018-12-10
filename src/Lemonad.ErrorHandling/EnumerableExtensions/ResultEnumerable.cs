@@ -50,7 +50,7 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
                 ? source
                     .Select(x => new {LemonadValueTypeWrapper = x})
                     .FirstOrDefault()
-                    .ToResult(x => x != null, _ => errorSelector())
+                    .ToResult(x => !(x is null), _ => errorSelector())
                     .Map(x => x.LemonadValueTypeWrapper)
                 : source
                     .FirstOrDefault()
@@ -91,7 +91,7 @@ namespace Lemonad.ErrorHandling.EnumerableExtensions {
                     .Where(predicate)
                     .Select(x => new {LemonadValueTypeWrapper = x})
                     .FirstOrDefault()
-                    .ToResult(x => x != null, _ => errorSelector())
+                    .ToResult(x => !(x is null), _ => errorSelector())
                     .Map(x => x.LemonadValueTypeWrapper)
                 : source
                     .Where(predicate)
