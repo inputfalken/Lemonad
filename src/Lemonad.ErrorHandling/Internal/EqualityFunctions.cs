@@ -44,8 +44,10 @@ namespace Lemonad.ErrorHandling.Internal {
         ///     return false.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsNull<T>(this T value) =>
-            Check<T>.IsNull(value);
+        public static bool IsNull<T>(this T value) => Check<T>.IsNull(value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsValueType<T>(this T value) => Check<T>.IsValueType(value);
 
         private static class Check<T> {
             private static readonly EqualityComparer<T> DefaultEqualityComparer;
@@ -57,6 +59,8 @@ namespace Lemonad.ErrorHandling.Internal {
                 IsReferenceType = !typeof(T).GetTypeInfo().IsValueType;
                 DefaultEqualityComparer = EqualityComparer<T>.Default;
             }
+
+            internal static bool IsValueType(T value) => IsReferenceType == false;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal static bool IsDefault(T value) =>

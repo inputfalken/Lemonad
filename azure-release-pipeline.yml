@@ -42,7 +42,7 @@ phases:
     inputs:
       command: test
 
-      projects: 'test/**/*.csproj'
+      projects: 'test/Lemonad.ErrorHandling.Test/**/*.csproj'
 
       arguments: '--configuration $(BuildConfiguration) --no-build'
 
@@ -72,7 +72,7 @@ phases:
     inputs:
       command: test
 
-      projects: 'test/**/*.csproj'
+      projects: 'test/Lemonad.ErrorHandling.Test/**/*.csproj'
 
       arguments: '--configuration $(BuildConfiguration) --no-build'
 
@@ -105,7 +105,7 @@ phases:
     inputs:
       command: test
 
-      projects: 'test/**/*.csproj'
+      projects: 'test/Lemonad.ErrorHandling.Test/**/*.csproj'
 
       arguments: '--configuration $(BuildConfiguration) --no-build'
 
