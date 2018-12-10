@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Lemonad.ErrorHandling.EnumerableExtensions;
+using Lemonad.ErrorHandling.EnumerableFunctions;
 using Xunit;
 using static Lemonad.ErrorHandling.Test.AssertionUtilities;
 
