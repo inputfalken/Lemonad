@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Lemonad.ErrorHandling.EnumerableFunctions;
+using Lemonad.ErrorHandling.Extensions.Enumerable;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {

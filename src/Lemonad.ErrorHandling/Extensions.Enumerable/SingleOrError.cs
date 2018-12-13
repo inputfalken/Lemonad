@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Lemonad.ErrorHandling.EnumerableFunctions {
+namespace Lemonad.ErrorHandling.Extensions.Enumerable {
     public static partial class EnumerableExtensions {
         /// <summary>
         ///  Returns the only element of a sequence, or a <see cref="SingleOrErrorCase.NoElement"/> if the sequence is empty and returns <see cref="SingleOrErrorCase.ManyElements"/> if more than one element was found.
@@ -21,8 +21,8 @@ namespace Lemonad.ErrorHandling.EnumerableFunctions {
             var sources = source
                 .Take(2)
                 .ToArray();
-            if (sources.Length == 1) return Result.Value<TSource, SingleOrErrorCase>(sources[0]);
-            return Result.Error<TSource, SingleOrErrorCase>(sources.Length == 0
+            if (sources.Length == 1) return ErrorHandling.Result.Value<TSource, SingleOrErrorCase>(sources[0]);
+            return ErrorHandling.Result.Error<TSource, SingleOrErrorCase>(sources.Length == 0
                 ? SingleOrErrorCase.NoElement
                 : SingleOrErrorCase.ManyElements
             );
@@ -64,8 +64,8 @@ namespace Lemonad.ErrorHandling.EnumerableFunctions {
             var sources = source
                 .Take(2)
                 .ToArray();
-            if (sources.Length == 1) return Result.Value<TSource, SingleOrErrorCase>(sources[0]);
-            return Result.Error<TSource, SingleOrErrorCase>(sources.Length == 0
+            if (sources.Length == 1) return ErrorHandling.Result.Value<TSource, SingleOrErrorCase>(sources[0]);
+            return ErrorHandling.Result.Error<TSource, SingleOrErrorCase>(sources.Length == 0
                 ? SingleOrErrorCase.NoElement
                 : SingleOrErrorCase.ManyElements
             );

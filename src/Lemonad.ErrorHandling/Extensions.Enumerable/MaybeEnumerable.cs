@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Lemonad.ErrorHandling.EnumerableFunctions {
+namespace Lemonad.ErrorHandling.Extensions.Enumerable {
     public static class MaybeEnumerable {
         /// <summary>
         ///     Works just like <see cref="Enumerable.FirstOrDefault{TSource}(System.Collections.Generic.IEnumerable{TSource})" />

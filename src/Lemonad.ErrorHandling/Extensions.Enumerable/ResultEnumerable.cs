@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Lemonad.ErrorHandling.EnumerableFunctions {
+namespace Lemonad.ErrorHandling.Extensions.Enumerable {
     /// <summary>
     ///     Contains extension methods for <see cref="IEnumerable{T}" />.
     /// </summary>

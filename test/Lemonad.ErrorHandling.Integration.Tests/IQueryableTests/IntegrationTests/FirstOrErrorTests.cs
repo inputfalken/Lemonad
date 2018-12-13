@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using DatabaseManager;
 using EntityFramework;
-using Lemonad.ErrorHandling.EnumerableFunctions;
+using Lemonad.ErrorHandling.Extensions.Enumerable;
 using Xunit;
 
 namespace IntegrationTests {
