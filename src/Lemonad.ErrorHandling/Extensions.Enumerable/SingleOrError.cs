@@ -21,8 +21,8 @@ namespace Lemonad.ErrorHandling.Extensions.Enumerable {
             var sources = source
                 .Take(2)
                 .ToArray();
-            if (sources.Length == 1) return ErrorHandling.Result.Value<TSource, SingleOrErrorCase>(sources[0]);
-            return ErrorHandling.Result.Error<TSource, SingleOrErrorCase>(sources.Length == 0
+            if (sources.Length == 1) return Result.Value<TSource, SingleOrErrorCase>(sources[0]);
+            return Result.Error<TSource, SingleOrErrorCase>(sources.Length == 0
                 ? SingleOrErrorCase.NoElement
                 : SingleOrErrorCase.ManyElements
             );
@@ -64,8 +64,8 @@ namespace Lemonad.ErrorHandling.Extensions.Enumerable {
             var sources = source
                 .Take(2)
                 .ToArray();
-            if (sources.Length == 1) return ErrorHandling.Result.Value<TSource, SingleOrErrorCase>(sources[0]);
-            return ErrorHandling.Result.Error<TSource, SingleOrErrorCase>(sources.Length == 0
+            if (sources.Length == 1) return Result.Value<TSource, SingleOrErrorCase>(sources[0]);
+            return Result.Error<TSource, SingleOrErrorCase>(sources.Length == 0
                 ? SingleOrErrorCase.NoElement
                 : SingleOrErrorCase.ManyElements
             );
