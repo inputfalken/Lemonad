@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using Lemonad.ErrorHandling.Extensions;
 using static System.Text.RegularExpressions.RegexOptions;
 
 namespace Lemonad.ErrorHandling.Parsers {

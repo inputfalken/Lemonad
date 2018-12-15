@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using Lemonad.ErrorHandling.Extensions;
+using Lemonad.ErrorHandling.Extensions.Maybe;
+using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {
     public class ToStringTests {

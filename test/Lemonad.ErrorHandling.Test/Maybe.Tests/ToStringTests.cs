@@ -1,4 +1,5 @@
 ﻿using System;
+using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Internal;
 using Xunit;
 

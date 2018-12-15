@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using Lemonad.ErrorHandling.Extensions;
+using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {
     public class FlattenTests {

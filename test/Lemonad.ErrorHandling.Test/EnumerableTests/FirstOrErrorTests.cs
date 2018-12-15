@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Lemonad.ErrorHandling.Extensions.Enumerable;
+using Lemonad.ErrorHandling.Extensions.Result;
+using Lemonad.ErrorHandling.Extensions.Result.Enumerable;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.EnumerableTests {

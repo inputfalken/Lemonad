@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling.Test {
