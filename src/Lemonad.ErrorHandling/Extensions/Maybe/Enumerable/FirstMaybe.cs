@@ -4,7 +4,8 @@ using System.Collections.Generic;
 namespace Lemonad.ErrorHandling.Extensions.Maybe.Enumerable {
     public static partial class MaybeEnumerable {
         /// <summary>
-        ///     Works just like <see cref="System.Linq.Enumerable.FirstOrDefault{TSource}(System.Collections.Generic.IEnumerable{TSource})" />
+        ///     Works just like
+        ///     <see cref="System.Linq.Enumerable.FirstOrDefault{TSource}(System.Collections.Generic.IEnumerable{TSource})" />
         ///     but returns a <see cref="IMaybe{T}" />.
         /// </summary>
         /// <param name="source">
@@ -32,7 +33,8 @@ namespace Lemonad.ErrorHandling.Extensions.Maybe.Enumerable {
         }
 
         /// <summary>
-        ///     Works just like <see cref="System.Linq.Enumerable.FirstOrDefault{TSource}(System.Collections.Generic.IEnumerable{TSource})" />
+        ///     Works just like
+        ///     <see cref="System.Linq.Enumerable.FirstOrDefault{TSource}(System.Collections.Generic.IEnumerable{TSource})" />
         ///     but returns a <see cref="IMaybe{T}" />.
         /// </summary>
         /// <param name="source">

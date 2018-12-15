@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -494,7 +493,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
                 ? CreateError<TResult, TError>(either.Error)
                 : CreateValue<TResult, TError>(await either.Value.ConfigureAwait(false));
         }
-
 
         internal static IEither<T, TErrorResult> MapError<T, TError, TErrorResult>(
             IEither<T, TError> either,

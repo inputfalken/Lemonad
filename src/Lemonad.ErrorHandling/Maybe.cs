@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Lemonad.ErrorHandling.Internal;
+﻿using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
     /// <summary>

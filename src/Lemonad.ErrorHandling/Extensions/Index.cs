@@ -4,6 +4,68 @@ using Lemonad.ErrorHandling.Internal;
 namespace Lemonad.ErrorHandling.Extensions {
     public static class Index {
         /// <summary>
+        ///     Works like <see cref="Maybe.Value{TSource}" /> but with an <paramref name="predicate" /> to test the element.
+        /// </summary>
+        /// <param name="source">
+        ///     The element to be passed into <see cref="Maybe{T}" />.
+        /// </param>
+        /// <param name="predicate">
+        ///     A function to test the element.
+        /// </param>
+        /// <typeparam name="TSource">
+        ///     The type of the <paramref name="source" />.
+        /// </typeparam>
+        public static IMaybe<TSource> ToMaybe<TSource>(this TSource source, Func<TSource, bool> predicate) {
+            if (predicate != null)
+                return predicate(source) ? ErrorHandling.Maybe.Value(source) : ErrorHandling.Maybe.None<TSource>();
+            throw new ArgumentNullException(nameof(predicate));
+        }
+
+        /// <summary>
+        ///     Converts an <see cref="Nullable{T}" /> to an <see cref="Maybe{T}" />.
+        /// </summary>
+        /// <param name="source">
+        ///     The element from the <see cref="Nullable{T}" /> to be passed into <see cref="Maybe{T}" />.
+        /// </param>
+        /// <typeparam name="TSource">
+        ///     The type of the <paramref name="source" />.
+        /// </typeparam>
+        public static IMaybe<TSource> ToMaybe<TSource>(this TSource? source) where TSource : struct =>
+            source.HasValue ? ErrorHandling.Maybe.Value(source.Value) : ErrorHandling.Maybe.None<TSource>();
+
+        /// <summary>
+        ///     Creates a <see cref="Maybe{T}" /> who will have no value.
+        /// </summary>
+        /// <param name="item">
+        ///     The value that will be considered to not have a value.
+        /// </param>
+        /// <typeparam name="TSource">
+        ///     The type of the <see cref="Maybe{T}" />.
+        /// </typeparam>
+        /// <returns>
+        ///     A <see cref="Maybe{T}" /> who will have no value.
+        /// </returns>
+        public static IMaybe<TSource> ToMaybeNone<TSource>(this TSource item) => ErrorHandling.Maybe.None<TSource>();
+
+        /// <summary>
+        ///     Works like <see cref="ToMaybeNone{TSource}(TSource)" /> but with an <paramref name="predicate" /> to test the
+        ///     element.
+        /// </summary>
+        /// <param name="source">
+        ///     The element to be passed into <see cref="Maybe{T}" />.
+        /// </param>
+        /// <param name="predicate">
+        ///     A function to test the element.
+        /// </param>
+        /// <typeparam name="TSource">
+        ///     The type of the <paramref name="source" />.
+        /// </typeparam>
+        public static IMaybe<TSource> ToMaybeNone<TSource>(this TSource source, Func<TSource, bool> predicate) {
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            return predicate(source) ? ErrorHandling.Maybe.None<TSource>() : ErrorHandling.Maybe.Value(source);
+        }
+
+        /// <summary>
         ///     Converts an <see cref="Nullable{T}" /> to an <see cref="IResult{T,TError}" /> with the value
         ///     <typeparamref name="T" />.
         /// </summary>
@@ -89,68 +151,6 @@ namespace Lemonad.ErrorHandling.Extensions {
                 : valueSelector == null
                     ? throw new ArgumentNullException(nameof(valueSelector))
                     : ErrorHandling.Result.Value<T, TError>(valueSelector(source));
-        }
-
-        /// <summary>
-        ///     Works like <see cref="Maybe.Value{TSource}" /> but with an <paramref name="predicate" /> to test the element.
-        /// </summary>
-        /// <param name="source">
-        ///     The element to be passed into <see cref="Maybe{T}" />.
-        /// </param>
-        /// <param name="predicate">
-        ///     A function to test the element.
-        /// </param>
-        /// <typeparam name="TSource">
-        ///     The type of the <paramref name="source" />.
-        /// </typeparam>
-        public static IMaybe<TSource> ToMaybe<TSource>(this TSource source, Func<TSource, bool> predicate) {
-            if (predicate != null)
-                return predicate(source) ? ErrorHandling.Maybe.Value(source) : ErrorHandling.Maybe.None<TSource>();
-            throw new ArgumentNullException(nameof(predicate));
-        }
-
-        /// <summary>
-        ///     Converts an <see cref="Nullable{T}" /> to an <see cref="Maybe{T}" />.
-        /// </summary>
-        /// <param name="source">
-        ///     The element from the <see cref="Nullable{T}" /> to be passed into <see cref="Maybe{T}" />.
-        /// </param>
-        /// <typeparam name="TSource">
-        ///     The type of the <paramref name="source" />.
-        /// </typeparam>
-        public static IMaybe<TSource> ToMaybe<TSource>(this TSource? source) where TSource : struct =>
-            source.HasValue ? ErrorHandling.Maybe.Value(source.Value) : ErrorHandling.Maybe.None<TSource>();
-
-        /// <summary>
-        ///     Creates a <see cref="Maybe{T}" /> who will have no value.
-        /// </summary>
-        /// <param name="item">
-        ///     The value that will be considered to not have a value.
-        /// </param>
-        /// <typeparam name="TSource">
-        ///     The type of the <see cref="Maybe{T}" />.
-        /// </typeparam>
-        /// <returns>
-        ///     A <see cref="Maybe{T}" /> who will have no value.
-        /// </returns>
-        public static IMaybe<TSource> ToMaybeNone<TSource>(this TSource item) => ErrorHandling.Maybe.None<TSource>();
-
-        /// <summary>
-        ///     Works like <see cref="ToMaybeNone{TSource}(TSource)" /> but with an <paramref name="predicate" /> to test the
-        ///     element.
-        /// </summary>
-        /// <param name="source">
-        ///     The element to be passed into <see cref="Maybe{T}" />.
-        /// </param>
-        /// <param name="predicate">
-        ///     A function to test the element.
-        /// </param>
-        /// <typeparam name="TSource">
-        ///     The type of the <paramref name="source" />.
-        /// </typeparam>
-        public static IMaybe<TSource> ToMaybeNone<TSource>(this TSource source, Func<TSource, bool> predicate) {
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
-            return predicate(source) ? ErrorHandling.Maybe.None<TSource>() : ErrorHandling.Maybe.Value(source);
         }
     }
 }

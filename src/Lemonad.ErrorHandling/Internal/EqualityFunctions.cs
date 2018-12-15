@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
@@ -60,8 +59,6 @@ namespace Lemonad.ErrorHandling.Internal {
                 DefaultEqualityComparer = EqualityComparer<T>.Default;
             }
 
-            internal static bool IsValueType(T value) => IsReferenceType == false;
-
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal static bool IsDefault(T value) =>
                 DefaultEqualityComparer.Equals(value, default);
@@ -71,6 +68,8 @@ namespace Lemonad.ErrorHandling.Internal {
                 IsNullable
                     ? value.Equals(default(T))
                     : IsReferenceType && DefaultEqualityComparer.Equals(value, default);
+
+            internal static bool IsValueType(T value) => IsReferenceType == false;
         }
     }
 }

@@ -12,8 +12,6 @@ namespace SpecificErrorType {
         private ResultModel(IResult<T, ErrorModel> resultImplementation)
             => _resultImplementation = resultImplementation;
 
-        public IEither<T, ErrorModel> Either => _resultImplementation.Either;
-
         public IResult<TResult, ErrorModel> Cast<TResult>() => _resultImplementation.Cast<TResult>();
 
         public IResult<T, TResult> CastError<TResult>() => _resultImplementation.CastError<TResult>();
@@ -32,6 +30,8 @@ namespace SpecificErrorType {
 
         public IAsyncResult<T, ErrorModel> DoWithErrorAsync(Func<ErrorModel, Task> selector) =>
             _resultImplementation.DoWithErrorAsync(selector);
+
+        public IEither<T, ErrorModel> Either => _resultImplementation.Either;
 
         public IResult<T, ErrorModel> Filter(Func<T, bool> predicate, Func<T, ErrorModel> errorSelector) =>
             _resultImplementation.Filter(predicate, errorSelector);

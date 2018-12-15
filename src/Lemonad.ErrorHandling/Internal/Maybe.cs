@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
 
 namespace Lemonad.ErrorHandling.Internal {
     internal readonly struct Maybe<T> : IMaybe<T> {
