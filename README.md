@@ -5,8 +5,6 @@
 
 ## Status
 
-[![Build Status](https://travis-ci.org/inputfalken/Lemonad.svg?branch=master)](https://travis-ci.org/inputfalken/Lemonad)
-[![Build status](https://ci.appveyor.com/api/projects/status/y57renjt90pk5huy/branch/master?svg=true)](https://ci.appveyor.com/project/inputfalken/lemonad/branch/master)
 [![Build status](https://lemonad-ci.visualstudio.com/Lemonad/_apis/build/status/Release?branchName=master)](https://lemonad-ci.visualstudio.com/Lemonad/_build/latest?definitionId=6)
 
 ### WIP (A lot may change)
