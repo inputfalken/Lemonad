@@ -37,7 +37,7 @@ namespace Lemonad.ErrorHandling.Internal.Either {
 
             Value = value;
             Error = error;
-            
+
             if (Value.IsNull() && hasValue)
                 throw new ArgumentNullException(
                     nameof(Value),

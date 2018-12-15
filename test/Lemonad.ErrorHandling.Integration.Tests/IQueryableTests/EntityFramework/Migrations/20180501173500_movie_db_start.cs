@@ -3,6 +3,17 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EntityFramework.Migrations {
     public partial class movie_db_start : Migration {
+        protected override void Down(MigrationBuilder migrationBuilder) {
+            migrationBuilder.DropTable(
+                "Ratings");
+
+            migrationBuilder.DropTable(
+                "Movies");
+
+            migrationBuilder.DropTable(
+                "Users");
+        }
+
         protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.CreateTable(
                 "Movies",
@@ -53,17 +64,6 @@ namespace EntityFramework.Migrations {
                 "IX_Ratings_UserId",
                 "Ratings",
                 "UserId");
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder) {
-            migrationBuilder.DropTable(
-                "Ratings");
-
-            migrationBuilder.DropTable(
-                "Movies");
-
-            migrationBuilder.DropTable(
-                "Users");
         }
     }
 }

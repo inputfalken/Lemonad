@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
 
 namespace ImplicitResult {
-    class Program {
+    internal class Program {
         public static int Main(string[] args) {
             return Result.Value<string[], int>(args)
                 .Do(() => Console.WriteLine("Input letters only."))

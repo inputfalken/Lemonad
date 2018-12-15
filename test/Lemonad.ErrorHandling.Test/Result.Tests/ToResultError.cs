@@ -1,3 +1,4 @@
+using Lemonad.ErrorHandling.Extensions;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Result.Tests {

@@ -7,17 +7,7 @@ namespace ImplicitResult {
     public class Result<T, TError> : IResult<T, TError> {
         private readonly IResult<T, TError> _resultImplementation;
 
-        public override string ToString() => _resultImplementation.ToString();
-
         private Result(IResult<T, TError> resultImplementation) => _resultImplementation = resultImplementation;
-
-        public static implicit operator Result<T, TError>(T value) =>
-            new Result<T, TError>(Result.Value<T, TError>(value));
-
-        public static implicit operator Result<T, TError>(TError error) =>
-            new Result<T, TError>(Result.Error<T, TError>(error));
-
-        public IEither<T, TError> Either => _resultImplementation.Either;
 
         public IResult<TResult, TError> Cast<TResult>() => _resultImplementation.Cast<TResult>();
 
@@ -36,6 +26,8 @@ namespace ImplicitResult {
 
         public IAsyncResult<T, TError> DoWithErrorAsync(Func<TError, Task> selector) =>
             _resultImplementation.DoWithErrorAsync(selector);
+
+        public IEither<T, TError> Either => _resultImplementation.Either;
 
         public IResult<T, TError> Filter(Func<T, bool> predicate, Func<T, TError> errorSelector) =>
             _resultImplementation.Filter(predicate, errorSelector);
@@ -184,5 +176,13 @@ namespace ImplicitResult {
 
         public IAsyncResult<TResult, TError> ZipAsync<TOther, TResult>(IAsyncResult<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector) => _resultImplementation.ZipAsync(other, resultSelector);
+
+        public static implicit operator Result<T, TError>(T value) =>
+            new Result<T, TError>(Result.Value<T, TError>(value));
+
+        public static implicit operator Result<T, TError>(TError error) =>
+            new Result<T, TError>(Result.Error<T, TError>(error));
+
+        public override string ToString() => _resultImplementation.ToString();
     }
 }

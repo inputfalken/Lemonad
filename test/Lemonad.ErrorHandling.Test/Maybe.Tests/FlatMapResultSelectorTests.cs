@@ -1,4 +1,6 @@
 ﻿using System;
+using Lemonad.ErrorHandling.Extensions;
+using Lemonad.ErrorHandling.Extensions.Maybe;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Test.Maybe.Tests {

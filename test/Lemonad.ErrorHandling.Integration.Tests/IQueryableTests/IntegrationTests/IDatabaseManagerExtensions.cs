@@ -8,7 +8,7 @@ namespace IntegrationTests {
             var databaseExists = manager.DatabaseExists();
             if (databaseExists && skipCreationWhenDatabaseExistsAnd()) return;
             if (databaseExists) manager.DeleteDatabase();
-            manager.CreateAndSeedDatabase(seed: 20, records: 20000);
+            manager.CreateAndSeedDatabase(20, 20000);
         }
     }
 }

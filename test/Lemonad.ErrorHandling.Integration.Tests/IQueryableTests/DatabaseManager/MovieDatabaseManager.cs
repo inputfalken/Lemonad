@@ -10,28 +10,15 @@ using Sharpy.Core.Linq;
 
 namespace DatabaseManager {
     public interface IDatabaseManager {
-        bool DeleteDatabase();
-        bool DatabaseExists();
         void CreateAndSeedDatabase(int seed, int records);
+        bool DatabaseExists();
+        bool DeleteDatabase();
     }
 
     public class MovieDatabaseManager : IDatabaseManager {
-        internal static void Main() { }
         private readonly MovieContext _movieContext;
 
         public MovieDatabaseManager(MovieContext movieContext) => _movieContext = movieContext;
-
-        public bool DeleteDatabase() {
-            var dbCreator = _movieContext.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
-            return dbCreator?.EnsureDeleted() ??
-                   throw new ArgumentException($"Argument does not implement {nameof(RelationalDatabaseCreator)}");
-        }
-
-        public bool DatabaseExists() {
-            var dbCreator = _movieContext.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
-            return dbCreator?.Exists() ??
-                   throw new ArgumentException($"Argument does not implement {nameof(RelationalDatabaseCreator)}");
-        }
 
         public void CreateAndSeedDatabase(int seed, int records) {
             _movieContext.Database.Migrate();
@@ -78,5 +65,19 @@ namespace DatabaseManager {
 
             _movieContext.SaveChanges();
         }
+
+        public bool DatabaseExists() {
+            var dbCreator = _movieContext.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
+            return dbCreator?.Exists() ??
+                   throw new ArgumentException($"Argument does not implement {nameof(RelationalDatabaseCreator)}");
+        }
+
+        public bool DeleteDatabase() {
+            var dbCreator = _movieContext.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
+            return dbCreator?.EnsureDeleted() ??
+                   throw new ArgumentException($"Argument does not implement {nameof(RelationalDatabaseCreator)}");
+        }
+
+        internal static void Main() { }
     }
 }
