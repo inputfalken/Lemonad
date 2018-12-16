@@ -28,6 +28,7 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
             this IQueryable<TSource> source,
             Func<TError> errorSelector
         ) {
+            if (source is null) throw new ArgumentNullException(nameof(source));
             if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
 
             // Since anonymous types are reference types, It's possible to wrap the value type in an anonymous type and perform a null check.
@@ -69,6 +70,7 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
             Expression<Func<TSource, bool>> predicate,
             Func<TError> errorSelector
         ) {
+            if (source is null) throw new ArgumentNullException(nameof(source));
             if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             return source.Where(predicate).FirstOrError(errorSelector);
@@ -96,6 +98,7 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
             this IEnumerable<TSource> source,
             Func<TError> errorSelector
         ) {
+            if (source is null) throw new ArgumentNullException(nameof(source));
             // Since anonymous types are reference types, It's possible to wrap the value type in an anonymous type and perform a null check.
             return default(TSource).IsValueType()
                 ? source
@@ -135,6 +138,7 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
                 this IEnumerable<TSource> source, Func<TSource, bool> predicate,
                 Func<TError> errorSelector
             ) {
+            if (source is null) throw new ArgumentNullException(nameof(source));
             if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             return source.Where(predicate).FirstOrError(errorSelector);

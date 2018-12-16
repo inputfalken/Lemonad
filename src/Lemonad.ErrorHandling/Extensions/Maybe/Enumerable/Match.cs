@@ -8,7 +8,11 @@ namespace Lemonad.ErrorHandling.Extensions.Maybe.Enumerable {
         ///     Executes <see cref="IMaybe{T}.Match" /> for each element in the sequence.
         /// </summary>
         public static IEnumerable<TResult> Match<TSource, TResult>(this IEnumerable<IMaybe<TSource>> source,
-            Func<TSource, TResult> someSelector, Func<TResult> noneSelector) =>
-            source.Select(x => x.Match(someSelector, noneSelector));
+            Func<TSource, TResult> someSelector, Func<TResult> noneSelector) {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (someSelector is null) throw new ArgumentNullException(nameof(someSelector));
+            if (noneSelector is null) throw new ArgumentNullException(nameof(noneSelector));
+            return source.Select(x => x.Match(someSelector, noneSelector));
+        }
     }
 }

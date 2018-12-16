@@ -19,7 +19,9 @@ namespace Lemonad.ErrorHandling.Extensions.Result {
         ///     The type of the error.
         /// </typeparam>
         public static T Match<T, TError>(this IResult<T, TError> source) where TError : T
-            => source.Match(x => x, x => x);
+            => source is null
+                ? throw new ArgumentNullException(nameof(source))
+                : source.Match(x => x, x => x);
 
         /// <summary>
         ///     Evaluates the <see cref="IResult{T,TError}" />.
@@ -40,7 +42,11 @@ namespace Lemonad.ErrorHandling.Extensions.Result {
         ///     The type returned from function <paramref name="selector" />>
         /// </typeparam>
         public static TResult Match<T, TResult, TError>(this IResult<T, TError> source, Func<T, TResult> selector)
-            where T : TError => source.Match(selector, x => selector((T) x));
+            where T : TError {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            return source.Match(selector, x => selector((T) x));
+        }
 
         /// <summary>
         ///     Executes each function and saves all potential errors to a list which will be the <typeparamref name="TError" />.
@@ -53,6 +59,8 @@ namespace Lemonad.ErrorHandling.Extensions.Result {
             this IResult<T, TError> source,
             params Func<IResult<T, TError>, IResult<T, TError>>[] validations
         ) {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (validations is null) throw new ArgumentNullException(nameof(validations));
             var either = EitherMethods.Multiple(
                 source.Either,
                 validations.Select(x => x.Compose(y => y.Either)(source)
@@ -67,20 +75,22 @@ namespace Lemonad.ErrorHandling.Extensions.Result {
         ///     Treat <typeparamref name="T" /> as enumerable with 0-1 elements.
         ///     This is handy when combining <see cref="IResult{T,TError}" /> with LINQ's API.
         /// </summary>
-        /// <param name="result"></param>
-        public static IEnumerable<T> ToEnumerable<T, TError>(this IResult<T, TError> result) {
-            if (result.Either.HasValue)
-                yield return result.Either.Value;
+        /// <param name="source"></param>
+        public static IEnumerable<T> ToEnumerable<T, TError>(this IResult<T, TError> source) {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (source.Either.HasValue)
+                yield return source.Either.Value;
         }
 
         /// <summary>
         ///     Treat <typeparamref name="TError" /> as enumerable with 0-1 elements.
         ///     This is handy when combining <see cref="IResult{T,TError}" /> with LINQs API.
         /// </summary>
-        /// <param name="result"></param>
-        public static IEnumerable<TError> ToErrorEnumerable<T, TError>(this IResult<T, TError> result) {
-            if (result.Either.HasError)
-                yield return result.Either.Error;
+        /// <param name="source"></param>
+        public static IEnumerable<TError> ToErrorEnumerable<T, TError>(this IResult<T, TError> source) {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (source.Either.HasError)
+                yield return source.Either.Error;
         }
 
         /// <summary>
@@ -97,6 +107,10 @@ namespace Lemonad.ErrorHandling.Extensions.Result {
         ///     The <typeparamref name="TError" /> from the <see cref="IResult{T,TError}" />.
         /// </typeparam>
         public static IMaybe<T> ToMaybe<T, TError>(this IResult<T, TError> source)
-            => source.Either.HasValue ? ErrorHandling.Maybe.Value(source.Either.Value) : ErrorHandling.Maybe.None<T>();
+            => source is null
+                ? throw new ArgumentNullException(nameof(source))
+                : source.Either.HasValue
+                    ? ErrorHandling.Maybe.Value(source.Either.Value)
+                    : ErrorHandling.Maybe.None<T>();
     }
 }

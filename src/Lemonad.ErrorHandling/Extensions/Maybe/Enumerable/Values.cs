@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,6 +19,8 @@ namespace Lemonad.ErrorHandling.Extensions.Maybe.Enumerable {
         ///     A sequence which can contain 0-n amount of values.
         /// </returns>
         public static IEnumerable<TSource> Values<TSource>(this IEnumerable<IMaybe<TSource>> source) =>
-            source.SelectMany(x => x.ToEnumerable());
+            source is null
+                ? throw new ArgumentNullException(nameof(source))
+                : source.SelectMany(x => x.ToEnumerable());
     }
 }
