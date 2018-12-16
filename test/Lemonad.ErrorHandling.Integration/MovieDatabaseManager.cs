@@ -81,7 +81,5 @@ namespace Lemonad.ErrorHandling.Integration {
             return dbCreator?.EnsureDeleted() ??
                    throw new ArgumentException($"Argument does not implement {nameof(RelationalDatabaseCreator)}");
         }
-
-        internal static void Main() { }
     }
 }
