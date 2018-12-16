@@ -16,7 +16,7 @@ namespace Lemonad.ErrorHandling.Extensions {
         ///     The type of the <paramref name="source" />.
         /// </typeparam>
         public static IMaybe<TSource> ToMaybe<TSource>(this TSource source, Func<TSource, bool> predicate) {
-            if (predicate != null)
+            if (predicate is null == false)
                 return predicate(source) ? ErrorHandling.Maybe.Value(source) : ErrorHandling.Maybe.None<TSource>();
             throw new ArgumentNullException(nameof(predicate));
         }
@@ -61,7 +61,7 @@ namespace Lemonad.ErrorHandling.Extensions {
         ///     The type of the <paramref name="source" />.
         /// </typeparam>
         public static IMaybe<TSource> ToMaybeNone<TSource>(this TSource source, Func<TSource, bool> predicate) {
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (predicate is null) throw new ArgumentNullException(nameof(predicate));
             return predicate(source) ? ErrorHandling.Maybe.None<TSource>() : ErrorHandling.Maybe.Value(source);
         }
 
@@ -84,7 +84,7 @@ namespace Lemonad.ErrorHandling.Extensions {
         public static IResult<T, TError> ToResult<T, TError>(this T? source, Func<TError> errorSelector)
             where T : struct => source.ToResult(
                 x => x.HasValue,
-                x => errorSelector == null
+                x => errorSelector is null
                     ? throw new ArgumentNullException(nameof(errorSelector))
                     : errorSelector()
             )
@@ -114,10 +114,10 @@ namespace Lemonad.ErrorHandling.Extensions {
             this T source,
             Func<T, bool> predicate,
             Func<T, TError> errorSelector) {
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (predicate is null) throw new ArgumentNullException(nameof(predicate));
             return predicate(source)
                 ? ErrorHandling.Result.Value<T, TError>(source)
-                : errorSelector == null
+                : errorSelector is null
                     ? throw new ArgumentNullException(nameof(errorSelector))
                     : ErrorHandling.Result.Error<T, TError>(errorSelector(source));
         }
@@ -145,10 +145,10 @@ namespace Lemonad.ErrorHandling.Extensions {
             this TError source,
             Func<TError, bool> predicate,
             Func<TError, T> valueSelector) {
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (predicate is null) throw new ArgumentNullException(nameof(predicate));
             return predicate(source)
                 ? ErrorHandling.Result.Error<T, TError>(source)
-                : valueSelector == null
+                : valueSelector is null
                     ? throw new ArgumentNullException(nameof(valueSelector))
                     : ErrorHandling.Result.Value<T, TError>(valueSelector(source));
         }

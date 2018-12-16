@@ -103,7 +103,7 @@ namespace Lemonad.ErrorHandling.Parsers {
             input.ToResult(
                     x => string.IsNullOrWhiteSpace(x) == false,
                     x => {
-                        if (x == null) return "Failed parsing input ''. Mail with null string is not allowed.";
+                        if (x is null) return "Failed parsing input ''. Mail with null string is not allowed.";
                         switch (x.Length) {
                             case 0:
                                 return $"Failed parsing input '{x}'. Mail with empty string is not allowed.";

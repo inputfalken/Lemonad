@@ -19,50 +19,50 @@ namespace Lemonad.ErrorHandling.Internal {
             $"{(HasValue ? "Some" : "None")} ==> {typeof(Maybe<T>).ToHumanString()}{StringFunctions.PrettyTypeString(Value)}";
 
         public void Match(Action<T> someAction, Action noneAction) {
-            if (someAction == null)
+            if (someAction is null)
                 throw new ArgumentNullException(nameof(someAction));
-            if (noneAction == null)
+            if (noneAction is null)
                 throw new ArgumentNullException(nameof(noneAction));
             if (HasValue) someAction(Value);
             else noneAction();
         }
 
         public IMaybe<T> DoWith(Action<T> someAction) {
-            if (someAction == null) throw new ArgumentNullException(nameof(someAction));
+            if (someAction is null) throw new ArgumentNullException(nameof(someAction));
             if (HasValue) someAction(Value);
 
             return this;
         }
 
         public IMaybe<T> Do(Action action) {
-            if (action == null) throw new ArgumentNullException(nameof(action));
+            if (action is null) throw new ArgumentNullException(nameof(action));
             action();
             return this;
         }
 
         public TResult Match<TResult>(Func<T, TResult> someSelector, Func<TResult> noneSelector) {
-            if (someSelector == null)
+            if (someSelector is null)
                 throw new ArgumentNullException(nameof(someSelector));
-            if (noneSelector == null)
+            if (noneSelector is null)
                 throw new ArgumentNullException(nameof(noneSelector));
             return HasValue ? someSelector(Value) : noneSelector();
         }
 
         public IMaybe<TResult> Map<TResult>(Func<T, TResult> selector) {
-            if (selector == null)
+            if (selector is null)
                 throw new ArgumentNullException(nameof(selector));
             return HasValue ? Maybe<TResult>.Create(selector(Value)) : Maybe<TResult>.None;
         }
 
         public IMaybe<T> Filter(Func<T, bool> predicate) {
-            if (predicate == null)
+            if (predicate is null)
                 throw new ArgumentNullException(nameof(predicate));
             if (HasValue && predicate(Value))
                 return this;
             return None;
         }
 
-        public IMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> flatMapSelector) => flatMapSelector == null
+        public IMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> flatMapSelector) => flatMapSelector is null
             ? throw new ArgumentNullException(nameof(flatMapSelector))
             : HasValue
                 ? flatMapSelector(Value)
@@ -71,9 +71,9 @@ namespace Lemonad.ErrorHandling.Internal {
         public IMaybe<TResult> FlatMap<TFlatMap, TResult>(
             Func<T, IMaybe<TFlatMap>> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector) {
-            if (flatMapSelector == null)
+            if (flatMapSelector is null)
                 throw new ArgumentNullException(nameof(flatMapSelector));
-            if (resultSelector == null)
+            if (resultSelector is null)
                 throw new ArgumentNullException(nameof(resultSelector));
             if (!HasValue) return Maybe<TResult>.None;
             var mapSelector = flatMapSelector(Value);
@@ -83,7 +83,7 @@ namespace Lemonad.ErrorHandling.Internal {
         }
 
         public IMaybe<TResult> FlatMap<TResult>(Func<T, TResult?> flatSelector) where TResult : struct {
-            if (flatSelector == null)
+            if (flatSelector is null)
                 throw new ArgumentNullException(nameof(flatSelector));
             if (!HasValue) return Maybe<TResult>.None;
             var selector = flatSelector(Value);
@@ -91,7 +91,7 @@ namespace Lemonad.ErrorHandling.Internal {
         }
 
         public IMaybe<T> IsNoneWhen(Func<T, bool> predicate) {
-            if (predicate == null)
+            if (predicate is null)
                 throw new ArgumentNullException(nameof(predicate));
             if (HasValue && predicate(Value))
                 return None;
@@ -99,7 +99,7 @@ namespace Lemonad.ErrorHandling.Internal {
         }
 
         public IMaybe<T> Flatten<TResult>(Func<T, IMaybe<TResult>> selector) {
-            if (selector == null)
+            if (selector is null)
                 throw new ArgumentNullException(nameof(selector));
             return HasValue
                 ? selector(Value).HasValue
@@ -110,9 +110,9 @@ namespace Lemonad.ErrorHandling.Internal {
 
         public IMaybe<TResult> FlatMap<TFlatMap, TResult>(Func<T, TFlatMap?> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct {
-            if (flatMapSelector == null)
+            if (flatMapSelector is null)
                 throw new ArgumentNullException(nameof(flatMapSelector));
-            if (resultSelector == null)
+            if (resultSelector is null)
                 throw new ArgumentNullException(nameof(resultSelector));
             if (!HasValue) return Maybe<TResult>.None;
 
