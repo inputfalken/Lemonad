@@ -9,7 +9,7 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         public void Passing_Null_Value_With_Null_Check_Predicate_Does_Not_Throw() {
             var exception = Record.Exception(() => {
                 string x = null;
-                var foo = x.ToMaybe(s => s != null);
+                var foo = x.ToMaybe(s => s is null == false);
             });
             Assert.Null(exception);
         }
