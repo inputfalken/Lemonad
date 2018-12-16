@@ -1,4 +1,5 @@
 ﻿using System;
+using Lemonad.ErrorHandling.Exceptions;
 
 namespace Lemonad.ErrorHandling.Internal {
     internal readonly struct Maybe<T> : IMaybe<T> {
@@ -12,7 +13,10 @@ namespace Lemonad.ErrorHandling.Internal {
         private Maybe(in T value, bool hasValue) {
             Value = value;
             HasValue = hasValue;
-            if (HasValue && Value.IsNull()) throw new ArgumentNullException(nameof(Value));
+            if (HasValue && Value.IsNull())
+                throw new InvalidMaybeStateException(
+                    $"{nameof(IMaybe<T>)} property \"{nameof(Value)}\" cannot be null when property \"{nameof(HasValue)}\" is expected to be true."
+                );
         }
 
         public override string ToString() =>

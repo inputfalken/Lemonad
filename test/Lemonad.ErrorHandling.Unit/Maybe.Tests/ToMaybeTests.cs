@@ -1,4 +1,5 @@
 ﻿using System;
+using Lemonad.ErrorHandling.Exceptions;
 using Lemonad.ErrorHandling.Extensions;
 using Xunit;
 
@@ -23,7 +24,7 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
 
         [Fact]
         public void Predicate_Overload__Nullable_Bool_Whose_Value_Is_Null__Expects_HasValue_To_Be_True() {
-            Assert.Throws<ArgumentNullException>(AssertionUtilities.MaybeValueName, () => {
+            Assert.Throws<InvalidMaybeStateException>( () => {
                 bool? foo = null;
                 var maybe = foo.ToMaybe(_ => true);
 

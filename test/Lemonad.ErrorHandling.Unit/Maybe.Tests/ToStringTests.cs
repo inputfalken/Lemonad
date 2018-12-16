@@ -1,4 +1,5 @@
 ﻿using System;
+using Lemonad.ErrorHandling.Exceptions;
 using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Internal;
 using Xunit;
@@ -69,7 +70,7 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
 
         [Fact]
         public void Some_Maybe_String_With_Null_String__Expects_String_To_Be_Empty() {
-            Assert.Throws<ArgumentNullException>(AssertionUtilities.MaybeValueName, () => {
+            Assert.Throws<InvalidMaybeStateException>(() => {
                 string hello = null;
                 var maybe = ErrorHandling.Maybe.Value(hello);
                 Assert.True(maybe.HasValue, "Should have value.");
