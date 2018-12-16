@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
+using Lemonad.ErrorHandling.Extensions.AsyncResult;
 
 namespace SpecificErrorType {
     internal static class Program {

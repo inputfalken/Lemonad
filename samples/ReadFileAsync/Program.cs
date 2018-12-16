@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
 using Lemonad.ErrorHandling.Extensions;
+using Lemonad.ErrorHandling.Extensions.Result.Task;
 
 namespace ReadFileAsync {
     internal static partial class Program {
