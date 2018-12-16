@@ -1,3 +1,3 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Lemonad.ErrorHandling.Test")]
+[assembly: InternalsVisibleTo("Lemonad.ErrorHandling.Unit")]
