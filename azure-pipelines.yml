@@ -19,11 +19,11 @@ phases:
     displayName: 'Dotnet $(buildConfiguration) Build'
   - script: |
         mkdir $(Build.SourcesDirectory)\results
-        dotnet test --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura test\Lemonad.ErrorHandling.Test
-        dotnet test --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:MergeWith=$(Build.SourcesDirectory)\test\Lemonad.ErrorHandling.Test\coverage.cobertura.xml $(Build.SourcesDirectory)\test\Lemonad.ErrorHandling.Integration.Tests\IQueryableTests\IntegrationTests
-        copy $(Build.SourcesDirectory)\test\Lemonad.ErrorHandling.Test\coverage.cobertura.xml $(Build.SourcesDirectory)\results
+        dotnet test --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura test\Lemonad.ErrorHandling.Unit
+        dotnet test --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:MergeWith=$(Build.SourcesDirectory)\test\Lemonad.ErrorHandling.Unit\coverage.cobertura.xml $(Build.SourcesDirectory)\test\Lemonad.ErrorHandling.Integration
+        copy $(Build.SourcesDirectory)\test\Lemonad.ErrorHandling.Unit\coverage.cobertura.xml $(Build.SourcesDirectory)\results
         dotnet tool install dotnet-reportgenerator-globaltool --tool-path . --version 4.0.0-rc4
-        .\reportgenerator "-reports:$(Build.SourcesDirectory)\test\Lemonad.ErrorHandling.Test\coverage.cobertura.xml" "-targetdir:results" "-reporttypes:HTMLInline;HTMLChart"
+        .\reportgenerator "-reports:$(Build.SourcesDirectory)\test\Lemonad.ErrorHandling.Unit\coverage.cobertura.xml" "-targetdir:results" "-reporttypes:HTMLInline;HTMLChart"
     displayName: 'Unit testing'
   - task: PublishTestResults@2
     inputs:
@@ -39,7 +39,7 @@ phases:
     inputs:
       command: publish
       arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-      projects: test\Lemonad.ErrorHandling.Test\Lemonad.ErrorHandling.Test.csproj
+      projects: test\Lemonad.ErrorHandling.Unit\Lemonad.ErrorHandling.Unit.csproj
       publishWebProjects: false
       modifyOutputPath: true
       zipAfterPublish: true
@@ -67,7 +67,7 @@ phases:
     inputs:
       command: test
 
-      projects: 'test/Lemonad.ErrorHandling.Test/**/*.csproj'
+      projects: 'test/Lemonad.ErrorHandling.Unit/**/*.csproj'
 
       arguments: '--configuration $(buildConfiguration) --no-build'
 
@@ -94,6 +94,6 @@ phases:
     inputs:
       command: test
 
-      projects: 'test/Lemonad.ErrorHandling.Test/**/*.csproj'
+      projects: 'test/Lemonad.ErrorHandling.Unit/**/*.csproj'
 
       arguments: '--configuration $(buildConfiguration) --no-build'
