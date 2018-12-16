@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
 using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Extensions.Result;
+using Lemonad.ErrorHandling.Extensions.Result.Task;
 using Microsoft.AspNetCore.Mvc;
 using MvcValidation.ApiModels;
 using MvcValidation.Models;

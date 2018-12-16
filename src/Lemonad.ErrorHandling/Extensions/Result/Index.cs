@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Internal;
 using Lemonad.ErrorHandling.Internal.Either;
 
@@ -112,5 +113,22 @@ namespace Lemonad.ErrorHandling.Extensions.Result {
                 : source.Either.HasValue
                     ? ErrorHandling.Maybe.Value(source.Either.Value)
                     : ErrorHandling.Maybe.None<T>();
+
+        /// <summary>
+        ///     Converts a <see cref="IResult{T,TError}" /> into a <see cref="IAsyncResult{T,TError}" />.
+        /// </summary>
+        /// <param name="source">
+        ///     The  <see cref="IAsyncResult{T,TError}" />.
+        /// </param>
+        /// <typeparam name="T">
+        ///     The 'successful' value.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        ///     The 'failure' value.
+        /// </typeparam>
+        public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this IResult<T, TError> source)
+            => source is null
+                ? throw new ArgumentNullException(nameof(source))
+                : Task.Index.ToAsyncResult(System.Threading.Tasks.Task.FromResult(source));
     }
 }

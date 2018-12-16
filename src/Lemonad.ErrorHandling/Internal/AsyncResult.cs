@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Lemonad.ErrorHandling.Extensions.Result;
 using Lemonad.ErrorHandling.Internal.Either;
+using Index = Lemonad.ErrorHandling.Extensions.Result.Index;
 
 namespace Lemonad.ErrorHandling.Internal {
     /// <summary>
@@ -114,31 +116,31 @@ namespace Lemonad.ErrorHandling.Internal {
         public IAsyncResult<T, TError> Flatten<TResult, TErrorResult>(
             Func<T, IResult<TResult, TErrorResult>> selector,
             Func<TErrorResult, TError> errorSelector
-        ) => FlattenAsync(selector.Compose(AsyncResult.ToAsyncResult), errorSelector);
+        ) => FlattenAsync(selector.Compose(Index.ToAsyncResult), errorSelector);
 
         public IAsyncResult<T, TError> Flatten<TResult>(
             Func<T, IResult<TResult, TError>> selector
-        ) => FlattenAsync(selector.Compose(AsyncResult.ToAsyncResult));
+        ) => FlattenAsync(selector.Compose(Index.ToAsyncResult));
 
         public IAsyncResult<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
             Func<T, IResult<TResult, TErrorResult>> flatMapSelector,
             Func<TError, TErrorResult> errorSelector
-        ) => FullFlatMapAsync(flatMapSelector.Compose(AsyncResult.ToAsyncResult), errorSelector);
+        ) => FullFlatMapAsync(flatMapSelector.Compose(Index.ToAsyncResult), errorSelector);
 
         public IAsyncResult<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
             Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector
-        ) => FullFlatMapAsync(flatMapSelector.Compose(AsyncResult.ToAsyncResult), resultSelector, errorSelector);
+        ) => FullFlatMapAsync(flatMapSelector.Compose(Index.ToAsyncResult), resultSelector, errorSelector);
 
         public IAsyncResult<TResult, TError> FlatMap<TResult>(
             Func<T, IResult<TResult, TError>> flatSelector
-        ) => FlatMapAsync(flatSelector.Compose(AsyncResult.ToAsyncResult));
+        ) => FlatMapAsync(flatSelector.Compose(Index.ToAsyncResult));
 
         public IAsyncResult<TResult, TError> FlatMap<TSelector, TResult>(
             Func<T, IResult<TSelector, TError>> flatSelector,
             Func<T, TSelector, TResult> resultSelector
-        ) => FlatMapAsync(flatSelector.Compose(AsyncResult.ToAsyncResult), resultSelector);
+        ) => FlatMapAsync(flatSelector.Compose(Index.ToAsyncResult), resultSelector);
 
         public IAsyncResult<T, TError> Filter(Func<T, bool> predicate, Func<T, TError> errorSelector)
             => new AsyncResult<T, TError>(EitherMethods.FilterAsync(Either.ToTaskEither(), predicate, errorSelector));

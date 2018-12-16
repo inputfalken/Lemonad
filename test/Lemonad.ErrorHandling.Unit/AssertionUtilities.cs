@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Extensions;
+using Lemonad.ErrorHandling.Extensions.Result;
 using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling.Unit {
