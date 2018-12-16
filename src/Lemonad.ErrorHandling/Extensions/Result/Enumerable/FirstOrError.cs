@@ -29,7 +29,7 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
             Func<TError> errorSelector
         ) {
             if (source is null) throw new ArgumentNullException(nameof(source));
-            if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
 
             // Since anonymous types are reference types, It's possible to wrap the value type in an anonymous type and perform a null check.
             return default(TSource).IsValueType()
@@ -71,8 +71,8 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
             Func<TError> errorSelector
         ) {
             if (source is null) throw new ArgumentNullException(nameof(source));
-            if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            if (predicate is null) throw new ArgumentNullException(nameof(predicate));
             return source.Where(predicate).FirstOrError(errorSelector);
         }
 
@@ -139,8 +139,9 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
                 Func<TError> errorSelector
             ) {
             if (source is null) throw new ArgumentNullException(nameof(source));
-            if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            if (predicate is null) throw new ArgumentNullException(nameof(predicate));
+
             return source.Where(predicate).FirstOrError(errorSelector);
         }
     }

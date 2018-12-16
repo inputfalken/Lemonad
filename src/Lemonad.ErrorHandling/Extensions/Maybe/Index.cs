@@ -21,7 +21,7 @@ namespace Lemonad.ErrorHandling.Extensions.Maybe {
         /// </typeparam>
         public static IMaybe<TResult> FlatMap<T, TResult>(this IMaybe<T> source, Func<T, TResult?> flatSelector)
             where TResult : struct {
-            if (flatSelector == null) throw new ArgumentNullException(nameof(flatSelector));
+            if (flatSelector is null) throw new ArgumentNullException(nameof(flatSelector));
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (!source.HasValue) return Maybe<TResult>.None;
             var selector = flatSelector(source.Value);
@@ -54,12 +54,12 @@ namespace Lemonad.ErrorHandling.Extensions.Maybe {
         ///     The type representing an error for the <see cref="Result{T,TError}" />.
         /// </typeparam>
         /// <returns></returns>
-        public static IResult<T, TError> ToResult<T, TError>(this IMaybe<T> source,
-            Func<TError> errorSelector) {
+        public static IResult<T, TError> ToResult<T, TError>(this IMaybe<T> source, Func<TError> errorSelector) {
             if (source is null) throw new ArgumentNullException(nameof(source));
-            return errorSelector == null
+            return errorSelector is null
                 ? throw new ArgumentNullException(nameof(errorSelector))
                 : source.ToResult(x => x.HasValue, x => errorSelector()).Map(x => x.Value);
         }
+
     }
 }

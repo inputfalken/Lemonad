@@ -70,6 +70,7 @@ namespace Lemonad.ErrorHandling.Extensions {
                     ? ErrorHandling.Maybe.None<TSource>()
                     : ErrorHandling.Maybe.Value(source);
 
+
         /// <summary>
         ///     Converts an <see cref="Nullable{T}" /> to an <see cref="IResult{T,TError}" /> with the value
         ///     <typeparamref name="T" />.
@@ -89,7 +90,7 @@ namespace Lemonad.ErrorHandling.Extensions {
         public static IResult<T, TError> ToResult<T, TError>(this T? source, Func<TError> errorSelector)
             where T : struct => source.ToResult(
                 x => x.HasValue,
-                x => errorSelector == null
+                x => errorSelector is null
                     ? throw new ArgumentNullException(nameof(errorSelector))
                     : errorSelector()
             )
@@ -120,7 +121,7 @@ namespace Lemonad.ErrorHandling.Extensions {
             Func<T, bool> predicate,
             Func<T, TError> errorSelector) {
             if (predicate is null) throw new ArgumentNullException(nameof(predicate));
-            if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
             return predicate(source)
                 ? ErrorHandling.Result.Value<T, TError>(source)
                 : ErrorHandling.Result.Error<T, TError>(errorSelector(source));
@@ -149,11 +150,12 @@ namespace Lemonad.ErrorHandling.Extensions {
             this TError source,
             Func<TError, bool> predicate,
             Func<TError, T> valueSelector) {
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (predicate is null) throw new ArgumentNullException(nameof(predicate));
             if (valueSelector is null) throw new ArgumentNullException(nameof(valueSelector));
             return predicate(source)
                 ? ErrorHandling.Result.Error<T, TError>(source)
                 : ErrorHandling.Result.Value<T, TError>(valueSelector(source));
+
         }
     }
 }

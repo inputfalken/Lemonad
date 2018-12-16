@@ -1,4 +1,5 @@
 ﻿using System;
+using Lemonad.ErrorHandling.Exceptions;
 using Lemonad.ErrorHandling.Extensions;
 using Xunit;
 
@@ -14,7 +15,7 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
 
         [Fact]
         public void Null_String_With_Value_Should_Throw() {
-            Assert.Throws<ArgumentNullException>(AssertionUtilities.MaybeValueName, () => {
+            Assert.Throws<InvalidMaybeStateException>(() => {
                 string f = null;
                 var noneWhenStringIsNullOrEmpty = f.ToMaybeNone(_ => false);
 

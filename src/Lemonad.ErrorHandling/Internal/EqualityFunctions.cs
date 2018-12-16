@@ -54,7 +54,7 @@ namespace Lemonad.ErrorHandling.Internal {
             private static readonly bool IsReferenceType;
 
             static Check() {
-                IsNullable = Nullable.GetUnderlyingType(typeof(T)) != null;
+                IsNullable = Nullable.GetUnderlyingType(typeof(T)) is null == false;
                 IsReferenceType = !typeof(T).GetTypeInfo().IsValueType;
                 DefaultEqualityComparer = EqualityComparer<T>.Default;
             }

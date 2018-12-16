@@ -16,7 +16,7 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
             var predicateExecuted = false;
             var maybe = ErrorHandling.Maybe.None<string>().Filter(s => {
                 predicateExecuted = true;
-                return s != null;
+                return s is null == false;
             });
             Assert.False(predicateExecuted);
             Assert.False(maybe.HasValue, "Maybe should have value.");
@@ -36,7 +36,7 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
             var predicateExecuted = false;
             var maybe = ErrorHandling.Maybe.Value("foobar").Filter(s => {
                 predicateExecuted = true;
-                return s == null;
+                return s is null;
             });
             Assert.True(predicateExecuted);
             Assert.False(maybe.HasValue, "Maybe should have value.");
@@ -48,7 +48,7 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
             var predicateExecuted = false;
             var maybe = ErrorHandling.Maybe.Value("foobar").Filter(s => {
                 predicateExecuted = true;
-                return s != null;
+                return s is null == false;
             });
             Assert.True(predicateExecuted);
             Assert.True(maybe.HasValue, "Maybe should have value.");
