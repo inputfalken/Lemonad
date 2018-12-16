@@ -15,11 +15,12 @@ namespace Lemonad.ErrorHandling.Extensions {
         /// <typeparam name="TSource">
         ///     The type of the <paramref name="source" />.
         /// </typeparam>
-        public static IMaybe<TSource> ToMaybe<TSource>(this TSource source, Func<TSource, bool> predicate) {
-            if (predicate is null == false)
-                return predicate(source) ? ErrorHandling.Maybe.Value(source) : ErrorHandling.Maybe.None<TSource>();
-            throw new ArgumentNullException(nameof(predicate));
-        }
+        public static IMaybe<TSource> ToMaybe<TSource>(this TSource source, Func<TSource, bool> predicate)
+            => predicate is null
+                ? throw new ArgumentNullException(nameof(predicate))
+                : predicate(source)
+                    ? ErrorHandling.Maybe.Value(source)
+                    : ErrorHandling.Maybe.None<TSource>();
 
         /// <summary>
         ///     Converts an <see cref="Nullable{T}" /> to an <see cref="Maybe{T}" />.
@@ -30,8 +31,10 @@ namespace Lemonad.ErrorHandling.Extensions {
         /// <typeparam name="TSource">
         ///     The type of the <paramref name="source" />.
         /// </typeparam>
-        public static IMaybe<TSource> ToMaybe<TSource>(this TSource? source) where TSource : struct =>
-            source.HasValue ? ErrorHandling.Maybe.Value(source.Value) : ErrorHandling.Maybe.None<TSource>();
+        public static IMaybe<TSource> ToMaybe<TSource>(this TSource? source) where TSource : struct
+            => source.HasValue
+                ? ErrorHandling.Maybe.Value(source.Value)
+                : ErrorHandling.Maybe.None<TSource>();
 
         /// <summary>
         ///     Creates a <see cref="Maybe{T}" /> who will have no value.
@@ -60,10 +63,13 @@ namespace Lemonad.ErrorHandling.Extensions {
         /// <typeparam name="TSource">
         ///     The type of the <paramref name="source" />.
         /// </typeparam>
-        public static IMaybe<TSource> ToMaybeNone<TSource>(this TSource source, Func<TSource, bool> predicate) {
-            if (predicate is null) throw new ArgumentNullException(nameof(predicate));
-            return predicate(source) ? ErrorHandling.Maybe.None<TSource>() : ErrorHandling.Maybe.Value(source);
-        }
+        public static IMaybe<TSource> ToMaybeNone<TSource>(this TSource source, Func<TSource, bool> predicate) =>
+            predicate is null
+                ? throw new ArgumentNullException(nameof(predicate))
+                : predicate(source)
+                    ? ErrorHandling.Maybe.None<TSource>()
+                    : ErrorHandling.Maybe.Value(source);
+
 
         /// <summary>
         ///     Converts an <see cref="Nullable{T}" /> to an <see cref="IResult{T,TError}" /> with the value
@@ -115,11 +121,10 @@ namespace Lemonad.ErrorHandling.Extensions {
             Func<T, bool> predicate,
             Func<T, TError> errorSelector) {
             if (predicate is null) throw new ArgumentNullException(nameof(predicate));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
             return predicate(source)
                 ? ErrorHandling.Result.Value<T, TError>(source)
-                : errorSelector is null
-                    ? throw new ArgumentNullException(nameof(errorSelector))
-                    : ErrorHandling.Result.Error<T, TError>(errorSelector(source));
+                : ErrorHandling.Result.Error<T, TError>(errorSelector(source));
         }
 
         /// <summary>
@@ -146,11 +151,11 @@ namespace Lemonad.ErrorHandling.Extensions {
             Func<TError, bool> predicate,
             Func<TError, T> valueSelector) {
             if (predicate is null) throw new ArgumentNullException(nameof(predicate));
+            if (valueSelector is null) throw new ArgumentNullException(nameof(valueSelector));
             return predicate(source)
                 ? ErrorHandling.Result.Error<T, TError>(source)
-                : valueSelector is null
-                    ? throw new ArgumentNullException(nameof(valueSelector))
-                    : ErrorHandling.Result.Value<T, TError>(valueSelector(source));
+                : ErrorHandling.Result.Value<T, TError>(valueSelector(source));
+
         }
     }
 }

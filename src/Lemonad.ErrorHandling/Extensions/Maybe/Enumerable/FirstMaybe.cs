@@ -18,6 +18,7 @@ namespace Lemonad.ErrorHandling.Extensions.Maybe.Enumerable {
         ///     Returns the first element of a sequence inside a <see cref="IMaybe{T}" />.
         /// </returns>
         public static IMaybe<TSource> FirstMaybe<TSource>(this IEnumerable<TSource> source) {
+            if (source is null) throw new ArgumentNullException(nameof(source));
             switch (source) {
                 case IList<TSource> list when list.Count > 0:
                     return ErrorHandling.Maybe.Value(list[0]);
@@ -52,6 +53,7 @@ namespace Lemonad.ErrorHandling.Extensions.Maybe.Enumerable {
         /// </returns>
         public static IMaybe<TSource> FirstMaybe<TSource>(this IEnumerable<TSource> source,
             Func<TSource, bool> predicate) {
+            if (source is null) throw new ArgumentNullException(nameof(source));
             foreach (var element in source)
                 if (predicate(element))
                     return ErrorHandling.Maybe.Value(element);

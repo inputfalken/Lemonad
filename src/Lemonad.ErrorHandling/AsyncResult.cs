@@ -25,8 +25,8 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TError">
         ///     The <typeparamref name="TError" /> of <see cref="IAsyncResult{T,TError}" />.
         /// </typeparam>
-        public static IAsyncResult<T, TError> Error<T, TError>(TError error) =>
-            AsyncResult<T, TError>.ErrorFactory(in error);
+        public static IAsyncResult<T, TError> Error<T, TError>(TError error)
+            => AsyncResult<T, TError>.ErrorFactory(in error);
 
         /// <summary>
         ///     Returns a <see cref="IResult{T,TError}" /> when awaited.
@@ -42,8 +42,10 @@ namespace Lemonad.ErrorHandling {
         ///     The <typeparamref name="TError" /> of <see cref="IAsyncResult{T,TError}" />.
         /// </typeparam>
         /// <returns></returns>
-        public static TaskAwaiter<IResult<T, TError>> GetAwaiter<T, TError>(this IAsyncResult<T, TError> source)
-            => Mapper(source).GetAwaiter();
+        public static TaskAwaiter<IResult<T, TError>> GetAwaiter<T, TError>(this IAsyncResult<T, TError> source) =>
+            source is null
+                ? throw new ArgumentNullException(nameof(source))
+                : Mapper(source).GetAwaiter();
 
         /// <summary>
         ///     Returns a <see cref="IEither{T,TError}" /> when awaited.
@@ -59,13 +61,15 @@ namespace Lemonad.ErrorHandling {
         ///     The <typeparamref name="TError" /> of <see cref="IAsyncEither{T,TError}" />.
         /// </typeparam>
         /// <returns></returns>
-        public static TaskAwaiter<IEither<T, TError>> GetAwaiter<T, TError>(this IAsyncEither<T, TError> source)
-            => source.ToTaskEither().GetAwaiter();
+        public static TaskAwaiter<IEither<T, TError>> GetAwaiter<T, TError>(this IAsyncEither<T, TError> source) =>
+            source?.ToTaskEither().GetAwaiter() ?? throw new ArgumentNullException(nameof(source));
 
-        private static async Task<IResult<T, TError>> Mapper<T, TError>(IAsyncResult<T, TError> asyncResult)
-            => await asyncResult.Either.HasValue.ConfigureAwait(false)
-                ? Result.Value<T, TError>(asyncResult.Either.Value)
-                : Result.Error<T, TError>(asyncResult.Either.Error);
+        private static async Task<IResult<T, TError>> Mapper<T, TError>(IAsyncResult<T, TError> source) =>
+            source is null
+                ? throw new ArgumentNullException(nameof(source))
+                : await source.Either.HasValue.ConfigureAwait(false)
+                    ? Result.Value<T, TError>(source.Either.Value)
+                    : Result.Error<T, TError>(source.Either.Error);
 
         /// <summary>
         ///     Evaluates the <see cref="IAsyncResult{T,TError}" />.
@@ -80,7 +84,9 @@ namespace Lemonad.ErrorHandling {
         ///     The type of the error.
         /// </typeparam>
         public static Task<T> Match<T, TError>(this IAsyncResult<T, TError> source) where TError : T =>
-            source.Match(x => x, x => x);
+            source is null
+                ? throw new ArgumentNullException(nameof(source))
+                : source.Match(x => x, x => x);
 
         /// <summary>
         ///     Evaluates the <see cref="IAsyncResult{T,TError}" />.
@@ -102,18 +108,26 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         public static Task<TResult> Match<T, TResult, TError>(this IAsyncResult<T, TError> source,
             Func<T, TResult> selector)
-            where T : TError => source.Match(selector, x => selector((T) x));
+            where T : TError {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            return source.Match(selector, x => selector((T) x));
+        }
 
         public static IAsyncResult<T, IReadOnlyList<TError>> Multiple<T, TError>(this IAsyncResult<T, TError> source,
-            params Func<IAsyncResult<T, TError>, IAsyncResult<T, TError>>[] validations) =>
-            AsyncResult<T, IReadOnlyList<TError>>.Factory(EitherMethods.MultipleAsync(source.Either.ToTaskEither(),
+            params Func<IAsyncResult<T, TError>, IAsyncResult<T, TError>>[] validations) {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (validations is null) throw new ArgumentNullException(nameof(validations));
+            return AsyncResult<T, IReadOnlyList<TError>>.Factory(EitherMethods.MultipleAsync(
+                source.Either.ToTaskEither(),
                 validations.Select(x => x.Compose(y => y.Either.ToTaskEither())(source)).ToArray()));
+        }
 
         /// <summary>
         ///     Converts the <see cref="Task" /> with <see cref="IAsyncResult{T,TError}" /> into
         ///     <see cref="IAsyncResult{T,TError}" />.
         /// </summary>
-        /// <param name="result">
+        /// <param name="source">
         ///     The  <see cref="IAsyncResult{T,TError}" /> wrapped in a <see cref="Task{TResult}" />.
         /// </param>
         /// <typeparam name="T">
@@ -122,13 +136,15 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TError">
         ///     The 'failure' value.
         /// </typeparam>
-        public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<IResult<T, TError>> result) =>
-            AsyncResult<T, TError>.Factory(result.Map(x => x.Either));
+        public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<IResult<T, TError>> source)
+            => source is null
+                ? throw new ArgumentNullException(nameof(source))
+                : AsyncResult<T, TError>.Factory(source.Map(x => x.Either));
 
         /// <summary>
         ///     Converts a <see cref="IResult{T,TError}" /> into a <see cref="IAsyncResult{T,TError}" />.
         /// </summary>
-        /// <param name="result">
+        /// <param name="source">
         ///     The  <see cref="IAsyncResult{T,TError}" />.
         /// </param>
         /// <typeparam name="T">
@@ -137,30 +153,48 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TError">
         ///     The 'failure' value.
         /// </typeparam>
-        public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this IResult<T, TError> result)
-            => ToAsyncResult(Task.FromResult(result));
+        public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this IResult<T, TError> source)
+            => source is null
+                ? throw new ArgumentNullException(nameof(source))
+                : ToAsyncResult(Task.FromResult(source));
 
         public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T> source, Func<T, bool> predicate,
-            Func<T, TError> errorSelector) =>
-            AsyncResult<T, TError>.Factory(source.Map(x => x.ToResult(predicate, errorSelector).Either));
+            Func<T, TError> errorSelector) {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (predicate is null) throw new ArgumentNullException(nameof(predicate));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+
+            return AsyncResult<T, TError>.Factory(source.Map(x => x.ToResult(predicate, errorSelector).Either));
+        }
 
         public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T?> source,
             Func<TError> errorSelector)
-            where T : struct => AsyncResult<T, TError>.Factory(source.Map(x => x.ToResult(errorSelector).Either));
+            where T : struct {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return AsyncResult<T, TError>.Factory(source.Map(x => x.ToResult(errorSelector).Either));
+        }
 
         public static IAsyncResult<T, TError> ToAsyncResultError<T, TError>(this Task<TError> source,
             Func<TError, bool> predicate,
-            Func<TError, T> valueSelector) =>
-            AsyncResult<T, TError>.Factory(source.Map(x => x.ToResultError(predicate, valueSelector).Either));
+            Func<TError, T> valueSelector) {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (valueSelector is null) throw new ArgumentNullException(nameof(valueSelector));
+            return AsyncResult<T, TError>.Factory(source.Map(x => x.ToResultError(predicate, valueSelector).Either));
+        }
 
         /// <inheritdoc cref="ToEnumerable{T,TError}" />
-        public static async Task<IEnumerable<T>> ToEnumerable<T, TError>(this IAsyncResult<T, TError> result) =>
-            EitherMethods.YieldValues(await result.Either.ToTaskEither().ConfigureAwait(false));
+        public static async Task<IEnumerable<T>> ToEnumerable<T, TError>(this IAsyncResult<T, TError> source)
+            => source is null
+                ? throw new ArgumentNullException(nameof(source))
+                : EitherMethods.YieldValues(await source.Either.ToTaskEither().ConfigureAwait(false));
 
         /// <inheritdoc cref="ToErrorEnumerable{T,TError}" />
         public static async Task<IEnumerable<TError>>
-            ToErrorEnumerable<T, TError>(this IAsyncResult<T, TError> result) =>
-            EitherMethods.YieldErrors(await result.Either.ToTaskEither().ConfigureAwait(false));
+            ToErrorEnumerable<T, TError>(this IAsyncResult<T, TError> source)
+            => source is null
+                ? throw new ArgumentNullException(nameof(source))
+                : EitherMethods.YieldErrors(await source.Either.ToTaskEither().ConfigureAwait(false));
 
         /// <summary>
         ///     Creates a <see cref="IAsyncResult{T,TError}" /> with <typeparamref name="T" />.

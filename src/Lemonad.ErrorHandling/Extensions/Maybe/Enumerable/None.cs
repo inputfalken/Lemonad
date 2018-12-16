@@ -21,6 +21,10 @@ namespace Lemonad.ErrorHandling.Extensions.Maybe.Enumerable {
         ///     The return type returned by the function <paramref name="selector" />.
         /// </typeparam>
         public static IEnumerable<TResult> None<TSource, TResult>(this IEnumerable<IMaybe<TSource>> source,
-            Func<TResult> selector) => source.Where(x => x.HasValue == false).Select(_ => selector());
+            Func<TResult> selector) {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            return source.Where(x => x.HasValue == false).Select(_ => selector());
+        }
     }
 }

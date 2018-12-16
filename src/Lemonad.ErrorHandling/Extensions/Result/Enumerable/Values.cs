@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,7 +9,7 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
         ///     of
         ///     <typeparamref name="T" />.
         /// </summary>
-        /// <param name="enumerable">
+        /// <param name="source">
         ///     The <see cref="IEnumerable{T}" /> of <see cref="IResult{T,TError}" />.
         /// </param>
         /// <typeparam name="T">
@@ -17,7 +18,9 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
         /// <typeparam name="TError">
         ///     The type of the errors in <see cref="IResult{T,TError}" />.
         /// </typeparam>
-        public static IEnumerable<T> Values<T, TError>(this IEnumerable<IResult<T, TError>> enumerable) =>
-            enumerable.SelectMany(x => x.ToEnumerable());
+        public static IEnumerable<T> Values<T, TError>(this IEnumerable<IResult<T, TError>> source) {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            return source.SelectMany(x => x.ToEnumerable());
+        }
     }
 }

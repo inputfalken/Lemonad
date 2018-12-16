@@ -20,6 +20,7 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
         ///     <see cref="IResult{T,TError}" />.
         /// </returns>
         public static IResult<TSource, SingleOrErrorCase> SingleOrError<TSource>(this IEnumerable<TSource> source) {
+            if (source is null) throw new ArgumentNullException(nameof(source));
             var sources = source
                 .Take(2)
                 .ToArray();
@@ -50,7 +51,11 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
         public static IResult<TSource, SingleOrErrorCase> SingleOrError<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate
-        ) => source.Where(predicate).SingleOrError();
+        ) {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (predicate is null) throw new ArgumentNullException(nameof(predicate));
+            return source.Where(predicate).SingleOrError();
+        }
 
         /// <summary>
         ///     Returns the only element of a sequence, or a <see cref="SingleOrErrorCase.NoElement" /> if the sequence is empty
@@ -67,6 +72,7 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
         ///     <see cref="IResult{T,TError}" />.
         /// </returns>
         public static IResult<TSource, SingleOrErrorCase> SingleOrError<TSource>(this IQueryable<TSource> source) {
+            if (source is null) throw new ArgumentNullException(nameof(source));
             var sources = source
                 .Take(2)
                 .ToArray();
@@ -97,7 +103,11 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
         public static IResult<TSource, SingleOrErrorCase> SingleOrError<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, bool>> predicate
-        ) => source.Where(predicate).SingleOrError();
+        ) {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (predicate is null) throw new ArgumentNullException(nameof(predicate));
+            return source.Where(predicate).SingleOrError();
+        }
     }
 
     /// <summary>
