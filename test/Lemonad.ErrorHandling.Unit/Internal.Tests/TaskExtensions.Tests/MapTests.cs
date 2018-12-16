@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Lemonad.ErrorHandling.Internal.TaskExtensions;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.Internal.Tests.TaskExtensions.Tests {
