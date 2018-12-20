@@ -6,7 +6,9 @@ namespace Lemonad.ErrorHandling {
         Task<bool> HasValue { get; }
         T Value { get; }
         IAsyncMaybe<T> Do(Action action);
+        IAsyncMaybe<T> DoAsync(Func<Task> action);
         IAsyncMaybe<T> DoWith(Action<T> someAction);
+        IAsyncMaybe<T> DoWithAsync(Func<T, Task> someAction);
         IAsyncMaybe<T> Filter(Func<T, bool> predicate);
         IAsyncMaybe<T> Flatten<TResult>(Func<T, IMaybe<TResult>> selector);
         IAsyncMaybe<T> FlattenAsync<TResult>(Func<T, IAsyncMaybe<TResult>> selector);
