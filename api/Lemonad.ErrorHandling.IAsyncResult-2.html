@@ -235,13 +235,11 @@
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_Do_System_Action_.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.Do(System.Action)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L32">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L29">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IAsyncResult_2_Do_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Do*"></a>
   <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_Do_System_Action_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Do(System.Action)">Do(Action)</h4>
-  <div class="markdown level1 summary"><p>An asynchronous version of
-<a class="xref" href="Lemonad.ErrorHandling.IResult-2.html#Lemonad_ErrorHandling_IResult_2_Do_System_Action_">Do(Action)</a>.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -281,6 +279,55 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_DoAsync_System_Func_System_Threading_Tasks_Task__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.DoAsync(System.Func%7BSystem.Threading.Tasks.Task%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L35">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_DoAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.DoAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_DoAsync_System_Func_System_Threading_Tasks_Task__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.DoAsync(System.Func{System.Threading.Tasks.Task})">DoAsync(Func&lt;Task&gt;)</h4>
+  <div class="markdown level1 summary"><p>An asynchronous version of
+<a class="xref" href="Lemonad.ErrorHandling.IResult-2.html#Lemonad_ErrorHandling_IResult_2_Do_System_Action_">Do(Action)</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;T, TError&gt; DoAsync(Func&lt;Task&gt; selector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.Threading.Tasks.Task</span>&gt;</td>
+        <td><span class="parametername">selector</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult</a>&lt;T, TError&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_DoWith_System_Action__0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.DoWith(System.Action%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
@@ -288,9 +335,7 @@
   </span>
   <a id="Lemonad_ErrorHandling_IAsyncResult_2_DoWith_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.DoWith*"></a>
   <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_DoWith_System_Action__0__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.DoWith(System.Action{`0})">DoWith(Action&lt;T&gt;)</h4>
-  <div class="markdown level1 summary"><p>An asynchronous version of
-<a class="xref" href="Lemonad.ErrorHandling.IResult-2.html#Lemonad_ErrorHandling_IResult_2_DoWith_System_Action__0__">DoWith(Action&lt;T&gt;)</a>.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -330,16 +375,63 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_DoWithError_System_Action__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.DoWithError(System.Action%7B%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_DoWithAsync_System_Func__0_System_Threading_Tasks_Task__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.DoWithAsync(System.Func%7B%600%2CSystem.Threading.Tasks.Task%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L44">View Source</a>
   </span>
-  <a id="Lemonad_ErrorHandling_IAsyncResult_2_DoWithError_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.DoWithError*"></a>
-  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_DoWithError_System_Action__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.DoWithError(System.Action{`1})">DoWithError(Action&lt;TError&gt;)</h4>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_DoWithAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.DoWithAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_DoWithAsync_System_Func__0_System_Threading_Tasks_Task__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.DoWithAsync(System.Func{`0,System.Threading.Tasks.Task})">DoWithAsync(Func&lt;T, Task&gt;)</h4>
   <div class="markdown level1 summary"><p>An asynchronous version of
 <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html#Lemonad_ErrorHandling_IResult_2_DoWith_System_Action__0__">DoWith(Action&lt;T&gt;)</a>.</p>
 </div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;T, TError&gt; DoWithAsync(Func&lt;T, Task&gt; selector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;T, <span class="xref">System.Threading.Tasks.Task</span>&gt;</td>
+        <td><span class="parametername">selector</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult</a>&lt;T, TError&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_DoWithError_System_Action__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.DoWithError(System.Action%7B%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L47">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_DoWithError_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.DoWithError*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_DoWithError_System_Action__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.DoWithError(System.Action{`1})">DoWithError(Action&lt;TError&gt;)</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -379,10 +471,59 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_DoWithErrorAsync_System_Func__1_System_Threading_Tasks_Task__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.DoWithErrorAsync(System.Func%7B%601%2CSystem.Threading.Tasks.Task%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L53">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_DoWithErrorAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.DoWithErrorAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_DoWithErrorAsync_System_Func__1_System_Threading_Tasks_Task__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.DoWithErrorAsync(System.Func{`1,System.Threading.Tasks.Task})">DoWithErrorAsync(Func&lt;TError, Task&gt;)</h4>
+  <div class="markdown level1 summary"><p>An asynchronous version of
+<a class="xref" href="Lemonad.ErrorHandling.IResult-2.html#Lemonad_ErrorHandling_IResult_2_DoWith_System_Action__0__">DoWith(Action&lt;T&gt;)</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;T, TError&gt; DoWithErrorAsync(Func&lt;TError, Task&gt; action)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TError, <span class="xref">System.Threading.Tasks.Task</span>&gt;</td>
+        <td><span class="parametername">action</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult</a>&lt;T, TError&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_Filter_System_Func__0_System_Boolean__System_Func__0__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.Filter(System.Func%7B%600%2CSystem.Boolean%7D%2CSystem.Func%7B%600%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L50">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L59">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IAsyncResult_2_Filter_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Filter*"></a>
   <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_Filter_System_Func__0_System_Boolean__System_Func__0__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Filter(System.Func{`0,System.Boolean},System.Func{`0,`1})">Filter(Func&lt;T, Boolean&gt;, Func&lt;T, TError&gt;)</h4>
@@ -433,13 +574,13 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_Filter_System_Func__0_System_Threading_Tasks_Task_System_Boolean___System_Func__0__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.Filter(System.Func%7B%600%2CSystem.Threading.Tasks.Task%7BSystem.Boolean%7D%7D%2CSystem.Func%7B%600%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FilterAsync_System_Func__0_System_Threading_Tasks_Task_System_Boolean___System_Func__0__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FilterAsync(System.Func%7B%600%2CSystem.Threading.Tasks.Task%7BSystem.Boolean%7D%7D%2CSystem.Func%7B%600%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L57">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L66">View Source</a>
   </span>
-  <a id="Lemonad_ErrorHandling_IAsyncResult_2_Filter_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Filter*"></a>
-  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_Filter_System_Func__0_System_Threading_Tasks_Task_System_Boolean___System_Func__0__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Filter(System.Func{`0,System.Threading.Tasks.Task{System.Boolean}},System.Func{`0,`1})">Filter(Func&lt;T, Task&lt;Boolean&gt;&gt;, Func&lt;T, TError&gt;)</h4>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FilterAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FilterAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FilterAsync_System_Func__0_System_Threading_Tasks_Task_System_Boolean___System_Func__0__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FilterAsync(System.Func{`0,System.Threading.Tasks.Task{System.Boolean}},System.Func{`0,`1})">FilterAsync(Func&lt;T, Task&lt;Boolean&gt;&gt;, Func&lt;T, TError&gt;)</h4>
   <div class="markdown level1 summary"><p>An asynchronous version of
 <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html#Lemonad_ErrorHandling_IResult_2_Filter_System_Func__0_System_Boolean__System_Func__0__1__">Filter(Func&lt;T, Boolean&gt;, Func&lt;T, TError&gt;)</a>
 with an predicate expecting a Task&lt;bool&gt;.</p>
@@ -447,7 +588,7 @@ with an predicate expecting a Task&lt;bool&gt;.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IAsyncResult&lt;T, TError&gt; Filter(Func&lt;T, Task&lt;bool&gt;&gt; predicate, Func&lt;T, TError&gt; errorSelector)</code></pre>
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;T, TError&gt; FilterAsync(Func&lt;T, Task&lt;bool&gt;&gt; predicate, Func&lt;T, TError&gt; errorSelector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -488,13 +629,146 @@ with an predicate expecting a Task&lt;bool&gt;.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FlatMap__1_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0__1___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FlatMap%60%601(System.Func%7B%600%2CLemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FlatMap__1_System_Func__0_Lemonad_ErrorHandling_IResult___0__1___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FlatMap%60%601(System.Func%7B%600%2CLemonad.ErrorHandling.IResult%7B%60%600%2C%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L64">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L68">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IAsyncResult_2_FlatMap_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlatMap*"></a>
-  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FlatMap__1_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0__1___" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlatMap``1(System.Func{`0,Lemonad.ErrorHandling.IAsyncResult{``0,`1}})">FlatMap&lt;TResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TError&gt;&gt;)</h4>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FlatMap__1_System_Func__0_Lemonad_ErrorHandling_IResult___0__1___" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlatMap``1(System.Func{`0,Lemonad.ErrorHandling.IResult{``0,`1}})">FlatMap&lt;TResult&gt;(Func&lt;T, IResult&lt;TResult, TError&gt;&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; FlatMap&lt;TResult&gt;(Func&lt;T, IResult&lt;TResult, TError&gt;&gt; flatSelector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;T, <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult</a>&lt;TResult, TError&gt;&gt;</td>
+        <td><span class="parametername">flatSelector</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult</a>&lt;TResult, TError&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_IResult___0__1___System_Func__0___0___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FlatMap%60%602(System.Func%7B%600%2CLemonad.ErrorHandling.IResult%7B%60%600%2C%601%7D%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L72">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FlatMap_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlatMap*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_IResult___0__1___System_Func__0___0___1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.IResult{``0,`1}},System.Func{`0,``0,``1})">FlatMap&lt;TSelector, TResult&gt;(Func&lt;T, IResult&lt;TSelector, TError&gt;&gt;, Func&lt;T, TSelector, TResult&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; FlatMap&lt;TSelector, TResult&gt;(Func&lt;T, IResult&lt;TSelector, TError&gt;&gt; flatSelector, Func&lt;T, TSelector, TResult&gt; resultSelector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;T, <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult</a>&lt;TSelector, TError&gt;&gt;</td>
+        <td><span class="parametername">flatSelector</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;T, TSelector, TResult&gt;</td>
+        <td><span class="parametername">resultSelector</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult</a>&lt;TResult, TError&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TSelector</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FlatMapAsync__1_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0__1___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FlatMapAsync%60%601(System.Func%7B%600%2CLemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L82">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FlatMapAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlatMapAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FlatMapAsync__1_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0__1___" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlatMapAsync``1(System.Func{`0,Lemonad.ErrorHandling.IAsyncResult{``0,`1}})">FlatMapAsync&lt;TResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TError&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>An asynchronous version of <span class="xref">Lemonad.ErrorHandling.Internal.Result`2.FlatMap``1(System.Func{`0,Lemonad.ErrorHandling.IResult{``0,`1}})</span>
 who expects an
 <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult&lt;T, TError&gt;</a> instead of <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult&lt;T, TError&gt;</a>.</p>
@@ -502,7 +776,7 @@ who expects an
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; FlatMap&lt;TResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TError&gt;&gt; flatSelector)</code></pre>
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; FlatMapAsync&lt;TResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TError&gt;&gt; flatSelector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -553,13 +827,13 @@ who expects an
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___1___System_Func___1__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FlatMap%60%602(System.Func%7B%600%2CLemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%60%601%7D%7D%2CSystem.Func%7B%60%601%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FlatMapAsync__2_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___1___System_Func___1__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FlatMapAsync%60%602(System.Func%7B%600%2CLemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%60%601%7D%7D%2CSystem.Func%7B%60%601%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L83">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L101">View Source</a>
   </span>
-  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FlatMap_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlatMap*"></a>
-  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___1___System_Func___1__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.IAsyncResult{``0,``1}},System.Func{``1,`1})">FlatMap&lt;TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TErrorResult&gt;&gt;, Func&lt;TErrorResult, TError&gt;)</h4>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FlatMapAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlatMapAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FlatMapAsync__2_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___1___System_Func___1__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlatMapAsync``2(System.Func{`0,Lemonad.ErrorHandling.IAsyncResult{``0,``1}},System.Func{``1,`1})">FlatMapAsync&lt;TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TErrorResult&gt;&gt;, Func&lt;TErrorResult, TError&gt;)</h4>
   <div class="markdown level1 summary"><p>An asynchronous version of
 <span class="xref">Lemonad.ErrorHandling.Internal.Result`2.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.IResult{``0,``1}},System.Func{``1,`1})</span>
 who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult&lt;T, TError&gt;</a> instead of <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult&lt;T, TError&gt;</a>.</p>
@@ -567,7 +841,7 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; FlatMap&lt;TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TErrorResult&gt;&gt; flatMapSelector, Func&lt;TErrorResult, TError&gt; errorSelector)</code></pre>
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; FlatMapAsync&lt;TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TErrorResult&gt;&gt; flatMapSelector, Func&lt;TErrorResult, TError&gt; errorSelector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -627,13 +901,13 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0__1___System_Func__0___0___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FlatMap%60%602(System.Func%7B%600%2CLemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%601%7D%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FlatMapAsync__2_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0__1___System_Func__0___0___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FlatMapAsync%60%602(System.Func%7B%600%2CLemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%601%7D%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L72">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L90">View Source</a>
   </span>
-  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FlatMap_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlatMap*"></a>
-  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0__1___System_Func__0___0___1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.IAsyncResult{``0,`1}},System.Func{`0,``0,``1})">FlatMap&lt;TSelector, TResult&gt;(Func&lt;T, IAsyncResult&lt;TSelector, TError&gt;&gt;, Func&lt;T, TSelector, TResult&gt;)</h4>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FlatMapAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlatMapAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FlatMapAsync__2_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0__1___System_Func__0___0___1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlatMapAsync``2(System.Func{`0,Lemonad.ErrorHandling.IAsyncResult{``0,`1}},System.Func{`0,``0,``1})">FlatMapAsync&lt;TSelector, TResult&gt;(Func&lt;T, IAsyncResult&lt;TSelector, TError&gt;&gt;, Func&lt;T, TSelector, TResult&gt;)</h4>
   <div class="markdown level1 summary"><p>An asynchronous version of
 <span class="xref">Lemonad.ErrorHandling.Internal.Result`2.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.IResult{``0,`1}},System.Func{`0,``0,``1})</span>
 who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult&lt;T, TError&gt;</a> instead of <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult&lt;T, TError&gt;</a>.</p>
@@ -641,7 +915,7 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; FlatMap&lt;TSelector, TResult&gt;(Func&lt;T, IAsyncResult&lt;TSelector, TError&gt;&gt; flatSelector, Func&lt;T, TSelector, TResult&gt; resultSelector)</code></pre>
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; FlatMapAsync&lt;TSelector, TResult&gt;(Func&lt;T, IAsyncResult&lt;TSelector, TError&gt;&gt; flatSelector, Func&lt;T, TSelector, TResult&gt; resultSelector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -701,13 +975,13 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FlatMap__3_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___2___System_Func__0___0___1__System_Func___2__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FlatMap%60%603(System.Func%7B%600%2CLemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%60%602%7D%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%601%7D%2CSystem.Func%7B%60%602%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FlatMapAsync__3_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___2___System_Func__0___0___1__System_Func___2__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FlatMapAsync%60%603(System.Func%7B%600%2CLemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%60%602%7D%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%601%7D%2CSystem.Func%7B%60%602%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L94">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L112">View Source</a>
   </span>
-  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FlatMap_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlatMap*"></a>
-  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FlatMap__3_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___2___System_Func__0___0___1__System_Func___2__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlatMap``3(System.Func{`0,Lemonad.ErrorHandling.IAsyncResult{``0,``2}},System.Func{`0,``0,``1},System.Func{``2,`1})">FlatMap&lt;TFlatMap, TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TFlatMap, TErrorResult&gt;&gt;, Func&lt;T, TFlatMap, TResult&gt;, Func&lt;TErrorResult, TError&gt;)</h4>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FlatMapAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlatMapAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FlatMapAsync__3_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___2___System_Func__0___0___1__System_Func___2__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlatMapAsync``3(System.Func{`0,Lemonad.ErrorHandling.IAsyncResult{``0,``2}},System.Func{`0,``0,``1},System.Func{``2,`1})">FlatMapAsync&lt;TFlatMap, TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TFlatMap, TErrorResult&gt;&gt;, Func&lt;T, TFlatMap, TResult&gt;, Func&lt;TErrorResult, TError&gt;)</h4>
   <div class="markdown level1 summary"><p>An asynchronous version of
 <span class="xref">Lemonad.ErrorHandling.Internal.Result`2.FlatMap``3(System.Func{`0,Lemonad.ErrorHandling.IResult{``0,``2}},System.Func{`0,``0,``1},System.Func{``2,`1})</span>
 who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult&lt;T, TError&gt;</a> instead of <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult&lt;T, TError&gt;</a>.</p>
@@ -715,7 +989,7 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; FlatMap&lt;TFlatMap, TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TFlatMap, TErrorResult&gt;&gt; flatMapSelector, Func&lt;T, TFlatMap, TResult&gt; resultSelector, Func&lt;TErrorResult, TError&gt; errorSelector)</code></pre>
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; FlatMapAsync&lt;TFlatMap, TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TFlatMap, TErrorResult&gt;&gt; flatMapSelector, Func&lt;T, TFlatMap, TResult&gt; resultSelector, Func&lt;TErrorResult, TError&gt; errorSelector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -784,13 +1058,146 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_Flatten__1_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0__1___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.Flatten%60%601(System.Func%7B%600%2CLemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_Flatten__1_System_Func__0_Lemonad_ErrorHandling_IResult___0__1___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.Flatten%60%601(System.Func%7B%600%2CLemonad.ErrorHandling.IResult%7B%60%600%2C%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L116">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L123">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IAsyncResult_2_Flatten_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Flatten*"></a>
-  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_Flatten__1_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0__1___" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Flatten``1(System.Func{`0,Lemonad.ErrorHandling.IAsyncResult{``0,`1}})">Flatten&lt;TResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TError&gt;&gt;)</h4>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_Flatten__1_System_Func__0_Lemonad_ErrorHandling_IResult___0__1___" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Flatten``1(System.Func{`0,Lemonad.ErrorHandling.IResult{``0,`1}})">Flatten&lt;TResult&gt;(Func&lt;T, IResult&lt;TResult, TError&gt;&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;T, TError&gt; Flatten&lt;TResult&gt;(Func&lt;T, IResult&lt;TResult, TError&gt;&gt; selector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;T, <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult</a>&lt;TResult, TError&gt;&gt;</td>
+        <td><span class="parametername">selector</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult</a>&lt;T, TError&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_Flatten__2_System_Func__0_Lemonad_ErrorHandling_IResult___0___1___System_Func___1__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.Flatten%60%602(System.Func%7B%600%2CLemonad.ErrorHandling.IResult%7B%60%600%2C%60%601%7D%7D%2CSystem.Func%7B%60%601%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L118">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_Flatten_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Flatten*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_Flatten__2_System_Func__0_Lemonad_ErrorHandling_IResult___0___1___System_Func___1__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Flatten``2(System.Func{`0,Lemonad.ErrorHandling.IResult{``0,``1}},System.Func{``1,`1})">Flatten&lt;TResult, TErrorResult&gt;(Func&lt;T, IResult&lt;TResult, TErrorResult&gt;&gt;, Func&lt;TErrorResult, TError&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;T, TError&gt; Flatten&lt;TResult, TErrorResult&gt;(Func&lt;T, IResult&lt;TResult, TErrorResult&gt;&gt; selector, Func&lt;TErrorResult, TError&gt; errorSelector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;T, <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult</a>&lt;TResult, TErrorResult&gt;&gt;</td>
+        <td><span class="parametername">selector</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TErrorResult, TError&gt;</td>
+        <td><span class="parametername">errorSelector</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult</a>&lt;T, TError&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TErrorResult</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FlattenAsync__1_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0__1___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FlattenAsync%60%601(System.Func%7B%600%2CLemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L143">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FlattenAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlattenAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FlattenAsync__1_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0__1___" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlattenAsync``1(System.Func{`0,Lemonad.ErrorHandling.IAsyncResult{``0,`1}})">FlattenAsync&lt;TResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TError&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>An asynchronous version of
 <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html#Lemonad_ErrorHandling_IResult_2_Flatten__1_System_Func__0_Lemonad_ErrorHandling_IResult___0__1___">Flatten&lt;TResult&gt;(Func&lt;T, IResult&lt;TResult, TError&gt;&gt;)</a>
 who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult&lt;T, TError&gt;</a> instead of <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult&lt;T, TError&gt;</a>.</p>
@@ -798,7 +1205,7 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IAsyncResult&lt;T, TError&gt; Flatten&lt;TResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TError&gt;&gt; selector)</code></pre>
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;T, TError&gt; FlattenAsync&lt;TResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TError&gt;&gt; selector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -849,13 +1256,13 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_Flatten__2_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___1___System_Func___1__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.Flatten%60%602(System.Func%7B%600%2CLemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%60%601%7D%7D%2CSystem.Func%7B%60%601%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FlattenAsync__2_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___1___System_Func___1__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FlattenAsync%60%602(System.Func%7B%600%2CLemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%60%601%7D%7D%2CSystem.Func%7B%60%601%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L106">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L133">View Source</a>
   </span>
-  <a id="Lemonad_ErrorHandling_IAsyncResult_2_Flatten_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Flatten*"></a>
-  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_Flatten__2_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___1___System_Func___1__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Flatten``2(System.Func{`0,Lemonad.ErrorHandling.IAsyncResult{``0,``1}},System.Func{``1,`1})">Flatten&lt;TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TErrorResult&gt;&gt;, Func&lt;TErrorResult, TError&gt;)</h4>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FlattenAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlattenAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FlattenAsync__2_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___1___System_Func___1__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FlattenAsync``2(System.Func{`0,Lemonad.ErrorHandling.IAsyncResult{``0,``1}},System.Func{``1,`1})">FlattenAsync&lt;TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TErrorResult&gt;&gt;, Func&lt;TErrorResult, TError&gt;)</h4>
   <div class="markdown level1 summary"><p>An asynchronous version of
 <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html#Lemonad_ErrorHandling_IResult_2_Flatten__2_System_Func__0_Lemonad_ErrorHandling_IResult___0___1___System_Func___1__1__">Flatten&lt;TResult, TErrorResult&gt;(Func&lt;T, IResult&lt;TResult, TErrorResult&gt;&gt;, Func&lt;TErrorResult, TError&gt;)</a>
 who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult&lt;T, TError&gt;</a> instead of <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult&lt;T, TError&gt;</a>.</p>
@@ -863,7 +1270,7 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IAsyncResult&lt;T, TError&gt; Flatten&lt;TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TErrorResult&gt;&gt; selector, Func&lt;TErrorResult, TError&gt; errorSelector)</code></pre>
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;T, TError&gt; FlattenAsync&lt;TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TErrorResult&gt;&gt; selector, Func&lt;TErrorResult, TError&gt; errorSelector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -926,7 +1333,7 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FullCast__1.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FullCast%60%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L128">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L155">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IAsyncResult_2_FullCast_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullCast*"></a>
   <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FullCast__1" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullCast``1">FullCast&lt;TResult&gt;()</h4>
@@ -973,7 +1380,7 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FullCast__2.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FullCast%60%602%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L122">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L149">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IAsyncResult_2_FullCast_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullCast*"></a>
   <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FullCast__2" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullCast``2">FullCast&lt;TResult, TErrorResult&gt;()</h4>
@@ -1021,13 +1428,164 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FullFlatMap__2_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___1___System_Func__1___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FullFlatMap%60%602(System.Func%7B%600%2CLemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%60%601%7D%7D%2CSystem.Func%7B%601%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FullFlatMap__2_System_Func__0_Lemonad_ErrorHandling_IResult___0___1___System_Func__1___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FullFlatMap%60%602(System.Func%7B%600%2CLemonad.ErrorHandling.IResult%7B%60%600%2C%60%601%7D%7D%2CSystem.Func%7B%601%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L148">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L157">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IAsyncResult_2_FullFlatMap_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullFlatMap*"></a>
-  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FullFlatMap__2_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___1___System_Func__1___1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullFlatMap``2(System.Func{`0,Lemonad.ErrorHandling.IAsyncResult{``0,``1}},System.Func{`1,``1})">FullFlatMap&lt;TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TErrorResult&gt;&gt;, Func&lt;TError, TErrorResult&gt;)</h4>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FullFlatMap__2_System_Func__0_Lemonad_ErrorHandling_IResult___0___1___System_Func__1___1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullFlatMap``2(System.Func{`0,Lemonad.ErrorHandling.IResult{``0,``1}},System.Func{`1,``1})">FullFlatMap&lt;TResult, TErrorResult&gt;(Func&lt;T, IResult&lt;TResult, TErrorResult&gt;&gt;, Func&lt;TError, TErrorResult&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TErrorResult&gt; FullFlatMap&lt;TResult, TErrorResult&gt;(Func&lt;T, IResult&lt;TResult, TErrorResult&gt;&gt; flatMapSelector, Func&lt;TError, TErrorResult&gt; errorSelector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;T, <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult</a>&lt;TResult, TErrorResult&gt;&gt;</td>
+        <td><span class="parametername">flatMapSelector</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TError, TErrorResult&gt;</td>
+        <td><span class="parametername">errorSelector</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult</a>&lt;TResult, TErrorResult&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TErrorResult</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FullFlatMap__3_System_Func__0_Lemonad_ErrorHandling_IResult___0___2___System_Func__0___0___1__System_Func__1___2__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FullFlatMap%60%603(System.Func%7B%600%2CLemonad.ErrorHandling.IResult%7B%60%600%2C%60%602%7D%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%601%7D%2CSystem.Func%7B%601%2C%60%602%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L162">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FullFlatMap_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullFlatMap*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FullFlatMap__3_System_Func__0_Lemonad_ErrorHandling_IResult___0___2___System_Func__0___0___1__System_Func__1___2__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullFlatMap``3(System.Func{`0,Lemonad.ErrorHandling.IResult{``0,``2}},System.Func{`0,``0,``1},System.Func{`1,``2})">FullFlatMap&lt;TFlatMap, TResult, TErrorResult&gt;(Func&lt;T, IResult&lt;TFlatMap, TErrorResult&gt;&gt;, Func&lt;T, TFlatMap, TResult&gt;, Func&lt;TError, TErrorResult&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TErrorResult&gt; FullFlatMap&lt;TFlatMap, TResult, TErrorResult&gt;(Func&lt;T, IResult&lt;TFlatMap, TErrorResult&gt;&gt; flatMapSelector, Func&lt;T, TFlatMap, TResult&gt; resultSelector, Func&lt;TError, TErrorResult&gt; errorSelector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;T, <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult</a>&lt;TFlatMap, TErrorResult&gt;&gt;</td>
+        <td><span class="parametername">flatMapSelector</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;T, TFlatMap, TResult&gt;</td>
+        <td><span class="parametername">resultSelector</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TError, TErrorResult&gt;</td>
+        <td><span class="parametername">errorSelector</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult</a>&lt;TResult, TErrorResult&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TFlatMap</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TErrorResult</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FullFlatMapAsync__2_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___1___System_Func__1___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FullFlatMapAsync%60%602(System.Func%7B%600%2CLemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%60%601%7D%7D%2CSystem.Func%7B%601%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L186">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FullFlatMapAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullFlatMapAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FullFlatMapAsync__2_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___1___System_Func__1___1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullFlatMapAsync``2(System.Func{`0,Lemonad.ErrorHandling.IAsyncResult{``0,``1}},System.Func{`1,``1})">FullFlatMapAsync&lt;TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TErrorResult&gt;&gt;, Func&lt;TError, TErrorResult&gt;)</h4>
   <div class="markdown level1 summary"><p>An asynchronous version of
 <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html#Lemonad_ErrorHandling_IResult_2_FullFlatMap__2_System_Func__0_Lemonad_ErrorHandling_IResult___0___1___System_Func__1___1__">FullFlatMap&lt;TResult, TErrorResult&gt;(Func&lt;T, IResult&lt;TResult, TErrorResult&gt;&gt;, Func&lt;TError, TErrorResult&gt;)</a>
 who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult&lt;T, TError&gt;</a> instead of <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult&lt;T, TError&gt;</a>.</p>
@@ -1035,7 +1593,7 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TErrorResult&gt; FullFlatMap&lt;TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TErrorResult&gt;&gt; flatMapSelector, Func&lt;TError, TErrorResult&gt; errorSelector)</code></pre>
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TErrorResult&gt; FullFlatMapAsync&lt;TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TResult, TErrorResult&gt;&gt; flatMapSelector, Func&lt;TError, TErrorResult&gt; errorSelector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1095,13 +1653,13 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FullFlatMap__3_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___2___System_Func__0___0___1__System_Func__1___2__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FullFlatMap%60%603(System.Func%7B%600%2CLemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%60%602%7D%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%601%7D%2CSystem.Func%7B%601%2C%60%602%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FullFlatMapAsync__3_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___2___System_Func__0___0___1__System_Func__1___2__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FullFlatMapAsync%60%603(System.Func%7B%600%2CLemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%60%602%7D%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%601%7D%2CSystem.Func%7B%601%2C%60%602%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L136">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L174">View Source</a>
   </span>
-  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FullFlatMap_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullFlatMap*"></a>
-  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FullFlatMap__3_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___2___System_Func__0___0___1__System_Func__1___2__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullFlatMap``3(System.Func{`0,Lemonad.ErrorHandling.IAsyncResult{``0,``2}},System.Func{`0,``0,``1},System.Func{`1,``2})">FullFlatMap&lt;TFlatMap, TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TFlatMap, TErrorResult&gt;&gt;, Func&lt;T, TFlatMap, TResult&gt;, Func&lt;TError, TErrorResult&gt;)</h4>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FullFlatMapAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullFlatMapAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FullFlatMapAsync__3_System_Func__0_Lemonad_ErrorHandling_IAsyncResult___0___2___System_Func__0___0___1__System_Func__1___2__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullFlatMapAsync``3(System.Func{`0,Lemonad.ErrorHandling.IAsyncResult{``0,``2}},System.Func{`0,``0,``1},System.Func{`1,``2})">FullFlatMapAsync&lt;TFlatMap, TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TFlatMap, TErrorResult&gt;&gt;, Func&lt;T, TFlatMap, TResult&gt;, Func&lt;TError, TErrorResult&gt;)</h4>
   <div class="markdown level1 summary"><p>An asynchronous version of
 <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html#Lemonad_ErrorHandling_IResult_2_FullFlatMap__3_System_Func__0_Lemonad_ErrorHandling_IResult___0___2___System_Func__0___0___1__System_Func__1___2__">FullFlatMap&lt;TFlatMap, TResult, TErrorResult&gt;(Func&lt;T, IResult&lt;TFlatMap, TErrorResult&gt;&gt;, Func&lt;T, TFlatMap, TResult&gt;, Func&lt;TError, TErrorResult&gt;)</a>
 who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult&lt;T, TError&gt;</a> instead of <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult&lt;T, TError&gt;</a>.</p>
@@ -1109,7 +1667,7 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TErrorResult&gt; FullFlatMap&lt;TFlatMap, TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TFlatMap, TErrorResult&gt;&gt; flatMapSelector, Func&lt;T, TFlatMap, TResult&gt; resultSelector, Func&lt;TError, TErrorResult&gt; errorSelector)</code></pre>
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TErrorResult&gt; FullFlatMapAsync&lt;TFlatMap, TResult, TErrorResult&gt;(Func&lt;T, IAsyncResult&lt;TFlatMap, TErrorResult&gt;&gt; flatMapSelector, Func&lt;T, TFlatMap, TResult&gt; resultSelector, Func&lt;TError, TErrorResult&gt; errorSelector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1181,7 +1739,7 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FullMap__2_System_Func__0___0__System_Func__1___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FullMap%60%602(System.Func%7B%600%2C%60%600%7D%2CSystem.Func%7B%601%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L157">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L195">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IAsyncResult_2_FullMap_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullMap*"></a>
   <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FullMap__2_System_Func__0___0__System_Func__1___1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullMap``2(System.Func{`0,``0},System.Func{`1,``1})">FullMap&lt;TResult, TErrorResult&gt;(Func&lt;T, TResult&gt;, Func&lt;TError, TErrorResult&gt;)</h4>
@@ -1251,13 +1809,13 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FullMap__2_System_Func__0___0__System_Func__1_System_Threading_Tasks_Task___1___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FullMap%60%602(System.Func%7B%600%2C%60%600%7D%2CSystem.Func%7B%601%2CSystem.Threading.Tasks.Task%7B%60%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FullMapAsync__2_System_Func__0___0__System_Func__1_System_Threading_Tasks_Task___1___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FullMapAsync%60%602(System.Func%7B%600%2C%60%600%7D%2CSystem.Func%7B%601%2CSystem.Threading.Tasks.Task%7B%60%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L187">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L225">View Source</a>
   </span>
-  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FullMap_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullMap*"></a>
-  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FullMap__2_System_Func__0___0__System_Func__1_System_Threading_Tasks_Task___1___" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullMap``2(System.Func{`0,``0},System.Func{`1,System.Threading.Tasks.Task{``1}})">FullMap&lt;TResult, TErrorResult&gt;(Func&lt;T, TResult&gt;, Func&lt;TError, Task&lt;TErrorResult&gt;&gt;)</h4>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FullMapAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullMapAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FullMapAsync__2_System_Func__0___0__System_Func__1_System_Threading_Tasks_Task___1___" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullMapAsync``2(System.Func{`0,``0},System.Func{`1,System.Threading.Tasks.Task{``1}})">FullMapAsync&lt;TResult, TErrorResult&gt;(Func&lt;T, TResult&gt;, Func&lt;TError, Task&lt;TErrorResult&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>An asynchronous version of
 <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html#Lemonad_ErrorHandling_IResult_2_FullMap__2_System_Func__0___0__System_Func__1___1__">FullMap&lt;TResult, TErrorResult&gt;(Func&lt;T, TResult&gt;, Func&lt;TError, TErrorResult&gt;)</a>
 who expects <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span> for <code data-dev-comment-type="paramref" class="paramref">errorSelector</code>.</p>
@@ -1265,7 +1823,7 @@ who expects <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TErrorResult&gt; FullMap&lt;TResult, TErrorResult&gt;(Func&lt;T, TResult&gt; selector, Func&lt;TError, Task&lt;TErrorResult&gt;&gt; errorSelector)</code></pre>
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TErrorResult&gt; FullMapAsync&lt;TResult, TErrorResult&gt;(Func&lt;T, TResult&gt; selector, Func&lt;TError, Task&lt;TErrorResult&gt;&gt; errorSelector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1325,13 +1883,13 @@ who expects <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FullMap__2_System_Func__0_System_Threading_Tasks_Task___0___System_Func__1___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FullMap%60%602(System.Func%7B%600%2CSystem.Threading.Tasks.Task%7B%60%600%7D%7D%2CSystem.Func%7B%601%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FullMapAsync__2_System_Func__0_System_Threading_Tasks_Task___0___System_Func__1___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FullMapAsync%60%602(System.Func%7B%600%2CSystem.Threading.Tasks.Task%7B%60%600%7D%7D%2CSystem.Func%7B%601%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L177">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L215">View Source</a>
   </span>
-  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FullMap_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullMap*"></a>
-  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FullMap__2_System_Func__0_System_Threading_Tasks_Task___0___System_Func__1___1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullMap``2(System.Func{`0,System.Threading.Tasks.Task{``0}},System.Func{`1,``1})">FullMap&lt;TResult, TErrorResult&gt;(Func&lt;T, Task&lt;TResult&gt;&gt;, Func&lt;TError, TErrorResult&gt;)</h4>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FullMapAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullMapAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FullMapAsync__2_System_Func__0_System_Threading_Tasks_Task___0___System_Func__1___1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullMapAsync``2(System.Func{`0,System.Threading.Tasks.Task{``0}},System.Func{`1,``1})">FullMapAsync&lt;TResult, TErrorResult&gt;(Func&lt;T, Task&lt;TResult&gt;&gt;, Func&lt;TError, TErrorResult&gt;)</h4>
   <div class="markdown level1 summary"><p>An asynchronous version of
 <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html#Lemonad_ErrorHandling_IResult_2_FullMap__2_System_Func__0___0__System_Func__1___1__">FullMap&lt;TResult, TErrorResult&gt;(Func&lt;T, TResult&gt;, Func&lt;TError, TErrorResult&gt;)</a>
 who expects <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span> for <code data-dev-comment-type="paramref" class="paramref">selector</code>.</p>
@@ -1339,7 +1897,7 @@ who expects <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TErrorResult&gt; FullMap&lt;TResult, TErrorResult&gt;(Func&lt;T, Task&lt;TResult&gt;&gt; selector, Func&lt;TError, TErrorResult&gt; errorSelector)</code></pre>
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TErrorResult&gt; FullMapAsync&lt;TResult, TErrorResult&gt;(Func&lt;T, Task&lt;TResult&gt;&gt; selector, Func&lt;TError, TErrorResult&gt; errorSelector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1399,13 +1957,13 @@ who expects <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FullMap__2_System_Func__0_System_Threading_Tasks_Task___0___System_Func__1_System_Threading_Tasks_Task___1___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FullMap%60%602(System.Func%7B%600%2CSystem.Threading.Tasks.Task%7B%60%600%7D%7D%2CSystem.Func%7B%601%2CSystem.Threading.Tasks.Task%7B%60%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_FullMapAsync__2_System_Func__0_System_Threading_Tasks_Task___0___System_Func__1_System_Threading_Tasks_Task___1___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.FullMapAsync%60%602(System.Func%7B%600%2CSystem.Threading.Tasks.Task%7B%60%600%7D%7D%2CSystem.Func%7B%601%2CSystem.Threading.Tasks.Task%7B%60%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L167">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L205">View Source</a>
   </span>
-  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FullMap_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullMap*"></a>
-  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FullMap__2_System_Func__0_System_Threading_Tasks_Task___0___System_Func__1_System_Threading_Tasks_Task___1___" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullMap``2(System.Func{`0,System.Threading.Tasks.Task{``0}},System.Func{`1,System.Threading.Tasks.Task{``1}})">FullMap&lt;TResult, TErrorResult&gt;(Func&lt;T, Task&lt;TResult&gt;&gt;, Func&lt;TError, Task&lt;TErrorResult&gt;&gt;)</h4>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_FullMapAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullMapAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_FullMapAsync__2_System_Func__0_System_Threading_Tasks_Task___0___System_Func__1_System_Threading_Tasks_Task___1___" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.FullMapAsync``2(System.Func{`0,System.Threading.Tasks.Task{``0}},System.Func{`1,System.Threading.Tasks.Task{``1}})">FullMapAsync&lt;TResult, TErrorResult&gt;(Func&lt;T, Task&lt;TResult&gt;&gt;, Func&lt;TError, Task&lt;TErrorResult&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>An asynchronous version of
 <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html#Lemonad_ErrorHandling_IResult_2_FullMap__2_System_Func__0___0__System_Func__1___1__">FullMap&lt;TResult, TErrorResult&gt;(Func&lt;T, TResult&gt;, Func&lt;TError, TErrorResult&gt;)</a>
 who expects <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span> for <code data-dev-comment-type="paramref" class="paramref">selector</code> and <code data-dev-comment-type="paramref" class="paramref">errorSelector</code>.</p>
@@ -1413,7 +1971,7 @@ who expects <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TErrorResult&gt; FullMap&lt;TResult, TErrorResult&gt;(Func&lt;T, Task&lt;TResult&gt;&gt; selector, Func&lt;TError, Task&lt;TErrorResult&gt;&gt; errorSelector)</code></pre>
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TErrorResult&gt; FullMapAsync&lt;TResult, TErrorResult&gt;(Func&lt;T, Task&lt;TResult&gt;&gt; selector, Func&lt;TError, Task&lt;TErrorResult&gt;&gt; errorSelector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1476,7 +2034,7 @@ who expects <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_IsErrorWhen_System_Func__0_System_Boolean__System_Func__0__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.IsErrorWhen(System.Func%7B%600%2CSystem.Boolean%7D%2CSystem.Func%7B%600%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L196">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L234">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IAsyncResult_2_IsErrorWhen_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.IsErrorWhen*"></a>
   <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_IsErrorWhen_System_Func__0_System_Boolean__System_Func__0__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.IsErrorWhen(System.Func{`0,System.Boolean},System.Func{`0,`1})">IsErrorWhen(Func&lt;T, Boolean&gt;, Func&lt;T, TError&gt;)</h4>
@@ -1527,13 +2085,13 @@ who expects <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_IsErrorWhen_System_Func__0_System_Threading_Tasks_Task_System_Boolean___System_Func__0__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.IsErrorWhen(System.Func%7B%600%2CSystem.Threading.Tasks.Task%7BSystem.Boolean%7D%7D%2CSystem.Func%7B%600%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_IsErrorWhenAsync_System_Func__0_System_Threading_Tasks_Task_System_Boolean___System_Func__0__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.IsErrorWhenAsync(System.Func%7B%600%2CSystem.Threading.Tasks.Task%7BSystem.Boolean%7D%7D%2CSystem.Func%7B%600%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L206">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L244">View Source</a>
   </span>
-  <a id="Lemonad_ErrorHandling_IAsyncResult_2_IsErrorWhen_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.IsErrorWhen*"></a>
-  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_IsErrorWhen_System_Func__0_System_Threading_Tasks_Task_System_Boolean___System_Func__0__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.IsErrorWhen(System.Func{`0,System.Threading.Tasks.Task{System.Boolean}},System.Func{`0,`1})">IsErrorWhen(Func&lt;T, Task&lt;Boolean&gt;&gt;, Func&lt;T, TError&gt;)</h4>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_IsErrorWhenAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.IsErrorWhenAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_IsErrorWhenAsync_System_Func__0_System_Threading_Tasks_Task_System_Boolean___System_Func__0__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.IsErrorWhenAsync(System.Func{`0,System.Threading.Tasks.Task{System.Boolean}},System.Func{`0,`1})">IsErrorWhenAsync(Func&lt;T, Task&lt;Boolean&gt;&gt;, Func&lt;T, TError&gt;)</h4>
   <div class="markdown level1 summary"><p>An asynchronous version of
 <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html#Lemonad_ErrorHandling_IResult_2_IsErrorWhen_System_Func__0_System_Boolean__System_Func__0__1__">IsErrorWhen(Func&lt;T, Boolean&gt;, Func&lt;T, TError&gt;)</a>
 with an predicate expecting a Task&lt;bool&gt;.</p>
@@ -1541,7 +2099,7 @@ with an predicate expecting a Task&lt;bool&gt;.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IAsyncResult&lt;T, TError&gt; IsErrorWhen(Func&lt;T, Task&lt;bool&gt;&gt; predicate, Func&lt;T, TError&gt; errorSelector)</code></pre>
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;T, TError&gt; IsErrorWhenAsync(Func&lt;T, Task&lt;bool&gt;&gt; predicate, Func&lt;T, TError&gt; errorSelector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1582,13 +2140,198 @@ with an predicate expecting a Task&lt;bool&gt;.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_Join__3_Lemonad_ErrorHandling_IAsyncResult___0__1__System_Func__0___1__System_Func___0___1__System_Func__0___0___2__System_Func__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.Join%60%603(Lemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%601%7D%2CSystem.Func%7B%600%2C%60%601%7D%2CSystem.Func%7B%60%600%2C%60%601%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%602%7D%2CSystem.Func%7B%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_Join__3_Lemonad_ErrorHandling_IResult___0__1__System_Func__0___1__System_Func___0___1__System_Func__0___0___2__System_Func__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.Join%60%603(Lemonad.ErrorHandling.IResult%7B%60%600%2C%601%7D%2CSystem.Func%7B%600%2C%60%601%7D%2CSystem.Func%7B%60%600%2C%60%601%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%602%7D%2CSystem.Func%7B%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L231">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L246">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IAsyncResult_2_Join_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Join*"></a>
-  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_Join__3_Lemonad_ErrorHandling_IAsyncResult___0__1__System_Func__0___1__System_Func___0___1__System_Func__0___0___2__System_Func__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Join``3(Lemonad.ErrorHandling.IAsyncResult{``0,`1},System.Func{`0,``1},System.Func{``0,``1},System.Func{`0,``0,``2},System.Func{`1})">Join&lt;TInner, TKey, TResult&gt;(IAsyncResult&lt;TInner, TError&gt;, Func&lt;T, TKey&gt;, Func&lt;TInner, TKey&gt;, Func&lt;T, TInner, TResult&gt;, Func&lt;TError&gt;)</h4>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_Join__3_Lemonad_ErrorHandling_IResult___0__1__System_Func__0___1__System_Func___0___1__System_Func__0___0___2__System_Func__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Join``3(Lemonad.ErrorHandling.IResult{``0,`1},System.Func{`0,``1},System.Func{``0,``1},System.Func{`0,``0,``2},System.Func{`1})">Join&lt;TInner, TKey, TResult&gt;(IResult&lt;TInner, TError&gt;, Func&lt;T, TKey&gt;, Func&lt;TInner, TKey&gt;, Func&lt;T, TInner, TResult&gt;, Func&lt;TError&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; Join&lt;TInner, TKey, TResult&gt;(IResult&lt;TInner, TError&gt; inner, Func&lt;T, TKey&gt; outerKeySelector, Func&lt;TInner, TKey&gt; innerKeySelector, Func&lt;T, TInner, TResult&gt; resultSelector, Func&lt;TError&gt; errorSelector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult</a>&lt;TInner, TError&gt;</td>
+        <td><span class="parametername">inner</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;T, TKey&gt;</td>
+        <td><span class="parametername">outerKeySelector</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TInner, TKey&gt;</td>
+        <td><span class="parametername">innerKeySelector</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;T, TInner, TResult&gt;</td>
+        <td><span class="parametername">resultSelector</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TError&gt;</td>
+        <td><span class="parametername">errorSelector</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult</a>&lt;TResult, TError&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TInner</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TKey</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_Join__3_Lemonad_ErrorHandling_IResult___0__1__System_Func__0___1__System_Func___0___1__System_Func__0___0___2__System_Func__1__System_Collections_Generic_IEqualityComparer___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.Join%60%603(Lemonad.ErrorHandling.IResult%7B%60%600%2C%601%7D%2CSystem.Func%7B%600%2C%60%601%7D%2CSystem.Func%7B%60%600%2C%60%601%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%602%7D%2CSystem.Func%7B%601%7D%2CSystem.Collections.Generic.IEqualityComparer%7B%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L253">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_Join_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Join*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_Join__3_Lemonad_ErrorHandling_IResult___0__1__System_Func__0___1__System_Func___0___1__System_Func__0___0___2__System_Func__1__System_Collections_Generic_IEqualityComparer___1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Join``3(Lemonad.ErrorHandling.IResult{``0,`1},System.Func{`0,``1},System.Func{``0,``1},System.Func{`0,``0,``2},System.Func{`1},System.Collections.Generic.IEqualityComparer{``1})">Join&lt;TInner, TKey, TResult&gt;(IResult&lt;TInner, TError&gt;, Func&lt;T, TKey&gt;, Func&lt;TInner, TKey&gt;, Func&lt;T, TInner, TResult&gt;, Func&lt;TError&gt;, IEqualityComparer&lt;TKey&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; Join&lt;TInner, TKey, TResult&gt;(IResult&lt;TInner, TError&gt; inner, Func&lt;T, TKey&gt; outerKeySelector, Func&lt;TInner, TKey&gt; innerKeySelector, Func&lt;T, TInner, TResult&gt; resultSelector, Func&lt;TError&gt; errorSelector, IEqualityComparer&lt;TKey&gt; comparer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult</a>&lt;TInner, TError&gt;</td>
+        <td><span class="parametername">inner</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;T, TKey&gt;</td>
+        <td><span class="parametername">outerKeySelector</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TInner, TKey&gt;</td>
+        <td><span class="parametername">innerKeySelector</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;T, TInner, TResult&gt;</td>
+        <td><span class="parametername">resultSelector</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TError&gt;</td>
+        <td><span class="parametername">errorSelector</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEqualityComparer</span>&lt;TKey&gt;</td>
+        <td><span class="parametername">comparer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult</a>&lt;TResult, TError&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TInner</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TKey</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_JoinAsync__3_Lemonad_ErrorHandling_IAsyncResult___0__1__System_Func__0___1__System_Func___0___1__System_Func__0___0___2__System_Func__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.JoinAsync%60%603(Lemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%601%7D%2CSystem.Func%7B%600%2C%60%601%7D%2CSystem.Func%7B%60%600%2C%60%601%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%602%7D%2CSystem.Func%7B%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L284">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_JoinAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.JoinAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_JoinAsync__3_Lemonad_ErrorHandling_IAsyncResult___0__1__System_Func__0___1__System_Func___0___1__System_Func__0___0___2__System_Func__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.JoinAsync``3(Lemonad.ErrorHandling.IAsyncResult{``0,`1},System.Func{`0,``1},System.Func{``0,``1},System.Func{`0,``0,``2},System.Func{`1})">JoinAsync&lt;TInner, TKey, TResult&gt;(IAsyncResult&lt;TInner, TError&gt;, Func&lt;T, TKey&gt;, Func&lt;TInner, TKey&gt;, Func&lt;T, TInner, TResult&gt;, Func&lt;TError&gt;)</h4>
   <div class="markdown level1 summary"><p>An asynchronous version of
 <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html#Lemonad_ErrorHandling_IResult_2_Join__3_Lemonad_ErrorHandling_IResult___0__1__System_Func__0___1__System_Func___0___1__System_Func__0___0___2__System_Func__1__">Join&lt;TInner, TKey, TResult&gt;(IResult&lt;TInner, TError&gt;, Func&lt;T, TKey&gt;, Func&lt;TInner, TKey&gt;, Func&lt;T, TInner, TResult&gt;, Func&lt;TError&gt;)</a>
 .
@@ -1597,7 +2340,7 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; Join&lt;TInner, TKey, TResult&gt;(IAsyncResult&lt;TInner, TError&gt; inner, Func&lt;T, TKey&gt; outerKeySelector, Func&lt;TInner, TKey&gt; innerKeySelector, Func&lt;T, TInner, TResult&gt; resultSelector, Func&lt;TError&gt; errorSelector)</code></pre>
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; JoinAsync&lt;TInner, TKey, TResult&gt;(IAsyncResult&lt;TInner, TError&gt; inner, Func&lt;T, TKey&gt; outerKeySelector, Func&lt;TInner, TKey&gt; innerKeySelector, Func&lt;T, TInner, TResult&gt; resultSelector, Func&lt;TError&gt; errorSelector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1676,13 +2419,13 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_Join__3_Lemonad_ErrorHandling_IAsyncResult___0__1__System_Func__0___1__System_Func___0___1__System_Func__0___0___2__System_Func__1__System_Collections_Generic_IEqualityComparer___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.Join%60%603(Lemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%601%7D%2CSystem.Func%7B%600%2C%60%601%7D%2CSystem.Func%7B%60%600%2C%60%601%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%602%7D%2CSystem.Func%7B%601%7D%2CSystem.Collections.Generic.IEqualityComparer%7B%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_JoinAsync__3_Lemonad_ErrorHandling_IAsyncResult___0__1__System_Func__0___1__System_Func___0___1__System_Func__0___0___2__System_Func__1__System_Collections_Generic_IEqualityComparer___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.JoinAsync%60%603(Lemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%601%7D%2CSystem.Func%7B%600%2C%60%601%7D%2CSystem.Func%7B%60%600%2C%60%601%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%602%7D%2CSystem.Func%7B%601%7D%2CSystem.Collections.Generic.IEqualityComparer%7B%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L215">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L268">View Source</a>
   </span>
-  <a id="Lemonad_ErrorHandling_IAsyncResult_2_Join_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Join*"></a>
-  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_Join__3_Lemonad_ErrorHandling_IAsyncResult___0__1__System_Func__0___1__System_Func___0___1__System_Func__0___0___2__System_Func__1__System_Collections_Generic_IEqualityComparer___1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Join``3(Lemonad.ErrorHandling.IAsyncResult{``0,`1},System.Func{`0,``1},System.Func{``0,``1},System.Func{`0,``0,``2},System.Func{`1},System.Collections.Generic.IEqualityComparer{``1})">Join&lt;TInner, TKey, TResult&gt;(IAsyncResult&lt;TInner, TError&gt;, Func&lt;T, TKey&gt;, Func&lt;TInner, TKey&gt;, Func&lt;T, TInner, TResult&gt;, Func&lt;TError&gt;, IEqualityComparer&lt;TKey&gt;)</h4>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_JoinAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.JoinAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_JoinAsync__3_Lemonad_ErrorHandling_IAsyncResult___0__1__System_Func__0___1__System_Func___0___1__System_Func__0___0___2__System_Func__1__System_Collections_Generic_IEqualityComparer___1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.JoinAsync``3(Lemonad.ErrorHandling.IAsyncResult{``0,`1},System.Func{`0,``1},System.Func{``0,``1},System.Func{`0,``0,``2},System.Func{`1},System.Collections.Generic.IEqualityComparer{``1})">JoinAsync&lt;TInner, TKey, TResult&gt;(IAsyncResult&lt;TInner, TError&gt;, Func&lt;T, TKey&gt;, Func&lt;TInner, TKey&gt;, Func&lt;T, TInner, TResult&gt;, Func&lt;TError&gt;, IEqualityComparer&lt;TKey&gt;)</h4>
   <div class="markdown level1 summary"><p>An asynchronous version of
 <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html#Lemonad_ErrorHandling_IResult_2_Join__3_Lemonad_ErrorHandling_IResult___0__1__System_Func__0___1__System_Func___0___1__System_Func__0___0___2__System_Func__1__System_Collections_Generic_IEqualityComparer___1__">Join&lt;TInner, TKey, TResult&gt;(IResult&lt;TInner, TError&gt;, Func&lt;T, TKey&gt;, Func&lt;TInner, TKey&gt;, Func&lt;T, TInner, TResult&gt;, Func&lt;TError&gt;, IEqualityComparer&lt;TKey&gt;)</a>
 .
@@ -1691,7 +2434,7 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; Join&lt;TInner, TKey, TResult&gt;(IAsyncResult&lt;TInner, TError&gt; inner, Func&lt;T, TKey&gt; outerKeySelector, Func&lt;TInner, TKey&gt; innerKeySelector, Func&lt;T, TInner, TResult&gt; resultSelector, Func&lt;TError&gt; errorSelector, IEqualityComparer&lt;TKey&gt; comparer)</code></pre>
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; JoinAsync&lt;TInner, TKey, TResult&gt;(IAsyncResult&lt;TInner, TError&gt; inner, Func&lt;T, TKey&gt; outerKeySelector, Func&lt;TInner, TKey&gt; innerKeySelector, Func&lt;T, TInner, TResult&gt; resultSelector, Func&lt;TError&gt; errorSelector, IEqualityComparer&lt;TKey&gt; comparer)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1778,7 +2521,7 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_Map__1_System_Func__0___0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.Map%60%601(System.Func%7B%600%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L243">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L296">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IAsyncResult_2_Map_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Map*"></a>
   <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_Map__1_System_Func__0___0__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Map``1(System.Func{`0,``0})">Map&lt;TResult&gt;(Func&lt;T, TResult&gt;)</h4>
@@ -1839,13 +2582,13 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_Map__1_System_Func__0_System_Threading_Tasks_Task___0___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.Map%60%601(System.Func%7B%600%2CSystem.Threading.Tasks.Task%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_MapAsync__1_System_Func__0_System_Threading_Tasks_Task___0___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.MapAsync%60%601(System.Func%7B%600%2CSystem.Threading.Tasks.Task%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L250">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L303">View Source</a>
   </span>
-  <a id="Lemonad_ErrorHandling_IAsyncResult_2_Map_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Map*"></a>
-  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_Map__1_System_Func__0_System_Threading_Tasks_Task___0___" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Map``1(System.Func{`0,System.Threading.Tasks.Task{``0}})">Map&lt;TResult&gt;(Func&lt;T, Task&lt;TResult&gt;&gt;)</h4>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_MapAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.MapAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_MapAsync__1_System_Func__0_System_Threading_Tasks_Task___0___" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.MapAsync``1(System.Func{`0,System.Threading.Tasks.Task{``0}})">MapAsync&lt;TResult&gt;(Func&lt;T, Task&lt;TResult&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>An asynchronous version of
 <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html#Lemonad_ErrorHandling_IResult_2_Map__1_System_Func__0___0__">Map&lt;TResult&gt;(Func&lt;T, TResult&gt;)</a>.
 with an function expecting a <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span>.</p>
@@ -1853,7 +2596,7 @@ with an function expecting a <span class="xref">System.Threading.Tasks.Task&lt;T
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; Map&lt;TResult&gt;(Func&lt;T, Task&lt;TResult&gt;&gt; selector)</code></pre>
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; MapAsync&lt;TResult&gt;(Func&lt;T, Task&lt;TResult&gt;&gt; selector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1907,7 +2650,7 @@ with an function expecting a <span class="xref">System.Threading.Tasks.Task&lt;T
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_MapError__1_System_Func__1___0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.MapError%60%601(System.Func%7B%601%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L256">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L309">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IAsyncResult_2_MapError_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.MapError*"></a>
   <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_MapError__1_System_Func__1___0__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.MapError``1(System.Func{`1,``0})">MapError&lt;TErrorResult&gt;(Func&lt;TError, TErrorResult&gt;)</h4>
@@ -1968,13 +2711,13 @@ with an function expecting a <span class="xref">System.Threading.Tasks.Task&lt;T
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_MapError__1_System_Func__1_System_Threading_Tasks_Task___0___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.MapError%60%601(System.Func%7B%601%2CSystem.Threading.Tasks.Task%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_MapErrorAsync__1_System_Func__1_System_Threading_Tasks_Task___0___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.MapErrorAsync%60%601(System.Func%7B%601%2CSystem.Threading.Tasks.Task%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L263">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L316">View Source</a>
   </span>
-  <a id="Lemonad_ErrorHandling_IAsyncResult_2_MapError_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.MapError*"></a>
-  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_MapError__1_System_Func__1_System_Threading_Tasks_Task___0___" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.MapError``1(System.Func{`1,System.Threading.Tasks.Task{``0}})">MapError&lt;TErrorResult&gt;(Func&lt;TError, Task&lt;TErrorResult&gt;&gt;)</h4>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_MapErrorAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.MapErrorAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_MapErrorAsync__1_System_Func__1_System_Threading_Tasks_Task___0___" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.MapErrorAsync``1(System.Func{`1,System.Threading.Tasks.Task{``0}})">MapErrorAsync&lt;TErrorResult&gt;(Func&lt;TError, Task&lt;TErrorResult&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>An asynchronous version of
 <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html#Lemonad_ErrorHandling_IResult_2_MapError__1_System_Func__1___0__">MapError&lt;TErrorResult&gt;(Func&lt;TError, TErrorResult&gt;)</a>.
 with an function expecting a <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span>.</p>
@@ -1982,7 +2725,7 @@ with an function expecting a <span class="xref">System.Threading.Tasks.Task&lt;T
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IAsyncResult&lt;T, TErrorResult&gt; MapError&lt;TErrorResult&gt;(Func&lt;TError, Task&lt;TErrorResult&gt;&gt; selector)</code></pre>
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;T, TErrorResult&gt; MapErrorAsync&lt;TErrorResult&gt;(Func&lt;TError, Task&lt;TErrorResult&gt;&gt; selector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2036,7 +2779,7 @@ with an function expecting a <span class="xref">System.Threading.Tasks.Task&lt;T
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_Match_System_Action__0__System_Action__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.Match(System.Action%7B%600%7D%2CSystem.Action%7B%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L277">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L330">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IAsyncResult_2_Match_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Match*"></a>
   <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_Match_System_Action__0__System_Action__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Match(System.Action{`0},System.Action{`1})">Match(Action&lt;T&gt;, Action&lt;TError&gt;)</h4>
@@ -2091,7 +2834,7 @@ who returns <span class="xref">System.Threading.Tasks.Task</span></p>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_Match__1_System_Func__0___0__System_Func__1___0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.Match%60%601(System.Func%7B%600%2C%60%600%7D%2CSystem.Func%7B%601%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L270">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L323">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IAsyncResult_2_Match_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Match*"></a>
   <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_Match__1_System_Func__0___0__System_Func__1___0__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Match``1(System.Func{`0,``0},System.Func{`1,``0})">Match&lt;TResult&gt;(Func&lt;T, TResult&gt;, Func&lt;TError, TResult&gt;)</h4>
@@ -2161,7 +2904,7 @@ who returns <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_SafeCast__1_System_Func__0__1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.SafeCast%60%601(System.Func%7B%600%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L283">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L336">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IAsyncResult_2_SafeCast_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.SafeCast*"></a>
   <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_SafeCast__1_System_Func__0__1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.SafeCast``1(System.Func{`0,`1})">SafeCast&lt;TResult&gt;(Func&lt;T, TError&gt;)</h4>
@@ -2222,13 +2965,84 @@ who returns <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_Zip__2_Lemonad_ErrorHandling_IAsyncResult___0__1__System_Func__0___0___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.Zip%60%602(Lemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%601%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_Zip__2_Lemonad_ErrorHandling_IResult___0__1__System_Func__0___0___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.Zip%60%602(Lemonad.ErrorHandling.IResult%7B%60%600%2C%601%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L290">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L338">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IAsyncResult_2_Zip_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Zip*"></a>
-  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_Zip__2_Lemonad_ErrorHandling_IAsyncResult___0__1__System_Func__0___0___1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Zip``2(Lemonad.ErrorHandling.IAsyncResult{``0,`1},System.Func{`0,``0,``1})">Zip&lt;TOther, TResult&gt;(IAsyncResult&lt;TOther, TError&gt;, Func&lt;T, TOther, TResult&gt;)</h4>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_Zip__2_Lemonad_ErrorHandling_IResult___0__1__System_Func__0___0___1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.Zip``2(Lemonad.ErrorHandling.IResult{``0,`1},System.Func{`0,``0,``1})">Zip&lt;TOther, TResult&gt;(IResult&lt;TOther, TError&gt;, Func&lt;T, TOther, TResult&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; Zip&lt;TOther, TResult&gt;(IResult&lt;TOther, TError&gt; other, Func&lt;T, TOther, TResult&gt; resultSelector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult</a>&lt;TOther, TError&gt;</td>
+        <td><span class="parametername">other</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;T, TOther, TResult&gt;</td>
+        <td><span class="parametername">resultSelector</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult</a>&lt;TResult, TError&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TOther</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IAsyncResult_2_ZipAsync__2_Lemonad_ErrorHandling_IAsyncResult___0__1__System_Func__0___0___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IAsyncResult%602.ZipAsync%60%602(Lemonad.ErrorHandling.IAsyncResult%7B%60%600%2C%601%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IAsyncResult.cs/#L348">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_IAsyncResult_2_ZipAsync_" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.ZipAsync*"></a>
+  <h4 id="Lemonad_ErrorHandling_IAsyncResult_2_ZipAsync__2_Lemonad_ErrorHandling_IAsyncResult___0__1__System_Func__0___0___1__" data-uid="Lemonad.ErrorHandling.IAsyncResult`2.ZipAsync``2(Lemonad.ErrorHandling.IAsyncResult{``0,`1},System.Func{`0,``0,``1})">ZipAsync&lt;TOther, TResult&gt;(IAsyncResult&lt;TOther, TError&gt;, Func&lt;T, TOther, TResult&gt;)</h4>
   <div class="markdown level1 summary"><p>An asynchronous version of
 <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html#Lemonad_ErrorHandling_IResult_2_Zip__2_Lemonad_ErrorHandling_IResult___0__1__System_Func__0___0___1__">Zip&lt;TOther, TResult&gt;(IResult&lt;TOther, TError&gt;, Func&lt;T, TOther, TResult&gt;)</a>.
 who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">IAsyncResult&lt;T, TError&gt;</a> instead of <a class="xref" href="Lemonad.ErrorHandling.IResult-2.html">IResult&lt;T, TError&gt;</a>.</p>
@@ -2236,7 +3050,7 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; Zip&lt;TOther, TResult&gt;(IAsyncResult&lt;TOther, TError&gt; other, Func&lt;T, TOther, TResult&gt; resultSelector)</code></pre>
+    <pre><code class="lang-csharp hljs">IAsyncResult&lt;TResult, TError&gt; ZipAsync&lt;TOther, TResult&gt;(IAsyncResult&lt;TOther, TError&gt; other, Func&lt;T, TOther, TResult&gt; resultSelector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2296,31 +3110,31 @@ who expects an <a class="xref" href="Lemonad.ErrorHandling.IAsyncResult-2.html">
   </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="Lemonad.ErrorHandling.AsyncResult.html#Lemonad_ErrorHandling_AsyncResult_GetAwaiter__2_Lemonad_ErrorHandling_IAsyncResult___0___1__">AsyncResult.GetAwaiter&lt;T, TError&gt;(IAsyncResult&lt;T, TError&gt;)</a>
+      <a class="xref" href="Lemonad.ErrorHandling.Extensions.Index.html#Lemonad_ErrorHandling_Extensions_Index_ToMaybe__1___0_System_Func___0_System_Boolean__">Index.ToMaybe&lt;TSource&gt;(TSource, Func&lt;TSource, Boolean&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="Lemonad.ErrorHandling.AsyncResult.html#Lemonad_ErrorHandling_AsyncResult_Multiple__2_Lemonad_ErrorHandling_IAsyncResult___0___1__System_Func_Lemonad_ErrorHandling_IAsyncResult___0___1__Lemonad_ErrorHandling_IAsyncResult___0___1_____">AsyncResult.Multiple&lt;T, TError&gt;(IAsyncResult&lt;T, TError&gt;, Func&lt;IAsyncResult&lt;T, TError&gt;, IAsyncResult&lt;T, TError&gt;&gt;[])</a>
+      <a class="xref" href="Lemonad.ErrorHandling.Extensions.Index.html#Lemonad_ErrorHandling_Extensions_Index_ToMaybeNone__1___0_">Index.ToMaybeNone&lt;TSource&gt;(TSource)</a>
   </div>
   <div>
-      <a class="xref" href="Lemonad.ErrorHandling.AsyncResult.html#Lemonad_ErrorHandling_AsyncResult_ToEnumerable__2_Lemonad_ErrorHandling_IAsyncResult___0___1__">AsyncResult.ToEnumerable&lt;T, TError&gt;(IAsyncResult&lt;T, TError&gt;)</a>
+      <a class="xref" href="Lemonad.ErrorHandling.Extensions.Index.html#Lemonad_ErrorHandling_Extensions_Index_ToMaybeNone__1___0_System_Func___0_System_Boolean__">Index.ToMaybeNone&lt;TSource&gt;(TSource, Func&lt;TSource, Boolean&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="Lemonad.ErrorHandling.AsyncResult.html#Lemonad_ErrorHandling_AsyncResult_ToErrorEnumerable__2_Lemonad_ErrorHandling_IAsyncResult___0___1__">AsyncResult.ToErrorEnumerable&lt;T, TError&gt;(IAsyncResult&lt;T, TError&gt;)</a>
+      <a class="xref" href="Lemonad.ErrorHandling.Extensions.Index.html#Lemonad_ErrorHandling_Extensions_Index_ToResult__2___0_System_Func___0_System_Boolean__System_Func___0___1__">Index.ToResult&lt;T, TError&gt;(T, Func&lt;T, Boolean&gt;, Func&lt;T, TError&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToMaybe__1___0_System_Func___0_System_Boolean__">Maybe.ToMaybe&lt;TSource&gt;(TSource, Func&lt;TSource, Boolean&gt;)</a>
+      <a class="xref" href="Lemonad.ErrorHandling.Extensions.Index.html#Lemonad_ErrorHandling_Extensions_Index_ToResultError__2___1_System_Func___1_System_Boolean__System_Func___1___0__">Index.ToResultError&lt;T, TError&gt;(TError, Func&lt;TError, Boolean&gt;, Func&lt;TError, T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToMaybeNone__1___0_">Maybe.ToMaybeNone&lt;TSource&gt;(TSource)</a>
+      <a class="xref" href="Lemonad.ErrorHandling.Extensions.AsyncResult.Index.html#Lemonad_ErrorHandling_Extensions_AsyncResult_Index_GetAwaiter__2_Lemonad_ErrorHandling_IAsyncResult___0___1__">Index.GetAwaiter&lt;T, TError&gt;(IAsyncResult&lt;T, TError&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="Lemonad.ErrorHandling.Maybe.html#Lemonad_ErrorHandling_Maybe_ToMaybeNone__1___0_System_Func___0_System_Boolean__">Maybe.ToMaybeNone&lt;TSource&gt;(TSource, Func&lt;TSource, Boolean&gt;)</a>
+      <a class="xref" href="Lemonad.ErrorHandling.Extensions.AsyncResult.Index.html#Lemonad_ErrorHandling_Extensions_AsyncResult_Index_Multiple__2_Lemonad_ErrorHandling_IAsyncResult___0___1__System_Func_Lemonad_ErrorHandling_IAsyncResult___0___1__Lemonad_ErrorHandling_IAsyncResult___0___1_____">Index.Multiple&lt;T, TError&gt;(IAsyncResult&lt;T, TError&gt;, Func&lt;IAsyncResult&lt;T, TError&gt;, IAsyncResult&lt;T, TError&gt;&gt;[])</a>
   </div>
   <div>
-      <a class="xref" href="Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ToResult__2___0_System_Func___0_System_Boolean__System_Func___0___1__">Result.ToResult&lt;T, TError&gt;(T, Func&lt;T, Boolean&gt;, Func&lt;T, TError&gt;)</a>
+      <a class="xref" href="Lemonad.ErrorHandling.Extensions.AsyncResult.Index.html#Lemonad_ErrorHandling_Extensions_AsyncResult_Index_ToEnumerable__2_Lemonad_ErrorHandling_IAsyncResult___0___1__">Index.ToEnumerable&lt;T, TError&gt;(IAsyncResult&lt;T, TError&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="Lemonad.ErrorHandling.Result.html#Lemonad_ErrorHandling_Result_ToResultError__2___1_System_Func___1_System_Boolean__System_Func___1___0__">Result.ToResultError&lt;T, TError&gt;(TError, Func&lt;TError, Boolean&gt;, Func&lt;TError, T&gt;)</a>
+      <a class="xref" href="Lemonad.ErrorHandling.Extensions.AsyncResult.Index.html#Lemonad_ErrorHandling_Extensions_AsyncResult_Index_ToErrorEnumerable__2_Lemonad_ErrorHandling_IAsyncResult___0___1__">Index.ToErrorEnumerable&lt;T, TError&gt;(IAsyncResult&lt;T, TError&gt;)</a>
   </div>
 </article>
           </div>
