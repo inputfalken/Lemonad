@@ -70,7 +70,6 @@ namespace Lemonad.ErrorHandling.Extensions {
                     ? ErrorHandling.Maybe.None<TSource>()
                     : ErrorHandling.Maybe.Value(source);
 
-
         /// <summary>
         ///     Converts an <see cref="Nullable{T}" /> to an <see cref="IResult{T,TError}" /> with the value
         ///     <typeparamref name="T" />.
@@ -127,6 +126,12 @@ namespace Lemonad.ErrorHandling.Extensions {
                 : ErrorHandling.Result.Error<T, TError>(errorSelector(source));
         }
 
+        public static IResult<T, TError> ToResult<T, TError>(
+            this T source,
+            Func<T, bool> predicate,
+            TError error
+        ) => ToResult(source, predicate, _ => error);
+
         /// <summary>
         ///     Creates an <see cref="IResult{T,TError}" /> based on a predicate function combined with an
         ///     <paramref name="valueSelector" /> for <typeparamref name="T" />.
@@ -149,13 +154,22 @@ namespace Lemonad.ErrorHandling.Extensions {
         public static IResult<T, TError> ToResultError<T, TError>(
             this TError source,
             Func<TError, bool> predicate,
-            Func<TError, T> valueSelector) {
+            Func<TError, T> valueSelector
+        ) {
             if (predicate is null) throw new ArgumentNullException(nameof(predicate));
             if (valueSelector is null) throw new ArgumentNullException(nameof(valueSelector));
             return predicate(source)
                 ? ErrorHandling.Result.Error<T, TError>(source)
                 : ErrorHandling.Result.Value<T, TError>(valueSelector(source));
+        }
 
+        public static IResult<T, TError> ToResultError<T, TError>(
+            this TError source,
+            Func<TError, bool> predicate,
+            T value
+        ) {
+            if (predicate is null) throw new ArgumentNullException(nameof(predicate));
+            return ToResultError(source, predicate, _ => value);
         }
     }
 }
