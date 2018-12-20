@@ -126,6 +126,25 @@ namespace Lemonad.ErrorHandling.Extensions {
                 : ErrorHandling.Result.Error<T, TError>(errorSelector(source));
         }
 
+        /// <summary>
+        ///     Creates an <see cref="IResult{T,TError}" /> based on a predicate function combined with a
+        ///     <paramref name="error" /> for the <see cref="TError" /> type.
+        /// </summary>
+        /// <typeparam name="T">
+        ///     The value type in <see cref="IResult{T,TError}" />.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        ///     The error type in the <see cref="IResult{T,TError}" />.
+        /// </typeparam>
+        /// <param name="source">
+        ///     The starting value which will be passed into the <paramref name="predicate" />function.
+        /// </param>
+        /// <param name="predicate">
+        ///     A function to test <typeparamref name="T" />.
+        /// </param>
+        /// <param name="error">
+        ///     Is used when the predicate fails.
+        /// </param>
         public static IResult<T, TError> ToResult<T, TError>(
             this T source,
             Func<T, bool> predicate,
@@ -134,7 +153,7 @@ namespace Lemonad.ErrorHandling.Extensions {
 
         /// <summary>
         ///     Creates an <see cref="IResult{T,TError}" /> based on a predicate function combined with an
-        ///     <paramref name="valueSelector" /> for <typeparamref name="T" />.
+        ///     <paramref name="valueSelector" /> for <typeparamref name="T" /> type.
         /// </summary>
         /// <typeparam name="T">
         ///     The value type in <see cref="IResult{T,TError}" />.
@@ -163,6 +182,25 @@ namespace Lemonad.ErrorHandling.Extensions {
                 : ErrorHandling.Result.Value<T, TError>(valueSelector(source));
         }
 
+        /// <summary>
+        ///     Creates an <see cref="IResult{T,TError}" /> based on a predicate function combined with an
+        ///     <paramref name="value" /> for <typeparamref name="T" /> type.
+        /// </summary>
+        /// <typeparam name="T">
+        ///     The value type in <see cref="IResult{T,TError}" />.
+        /// </typeparam>
+        /// <typeparam name="TError">
+        ///     The error type in the <see cref="IResult{T,TError}" />.
+        /// </typeparam>
+        /// <param name="source">
+        ///     The starting value which will be passed into the <paramref name="predicate" />function.
+        /// </param>
+        /// <param name="predicate">
+        ///     A function to test <typeparamref name="TError" />.
+        /// </param>
+        /// <param name="value">
+        ///     Is used when the predicate fails.
+        /// </param>
         public static IResult<T, TError> ToResultError<T, TError>(
             this TError source,
             Func<TError, bool> predicate,
