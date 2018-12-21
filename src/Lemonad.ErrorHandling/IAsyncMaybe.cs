@@ -17,7 +17,7 @@ namespace Lemonad.ErrorHandling {
         IAsyncMaybe<TResult> FlatMapAsync<TResult>(Func<T, IAsyncMaybe<TResult>> flatMapSelector);
         IAsyncMaybe<TResult> Map<TResult>(Func<T, TResult> selector);
         Task Match(Action<T> someAction, Action noneAction);
-        TResult Match<TResult>(Func<T, TResult> someSelector, Func<TResult> noneSelector);
+        Task<TResult> Match<TResult>(Func<T, TResult> someSelector, Func<TResult> noneSelector);
 
         IAsyncMaybe<TResult> FlatMapAsync<TFlatMap, TResult>(
             Func<T, IAsyncMaybe<TFlatMap>> flatMapSelector,
