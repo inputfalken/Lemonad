@@ -7,7 +7,6 @@
     <RepositoryUrl>https://github.com/inputfalken/Lemonad</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/inputfalken/Lemonad/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://inputfalken.github.io/Lemonad/</PackageProjectUrl>
-    <PackageReleaseNotes>Initial version</PackageReleaseNotes>
     <PackageDescription>
       A functional C# library with data structures and functions whose main goal is to have an declarative approach to problem solving by using various HOF's to achieve cleaner code bases &amp; code which is easier to think about.
 
