@@ -8,6 +8,13 @@
     <PackageLicenseUrl>https://github.com/inputfalken/Lemonad/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://inputfalken.github.io/Lemonad/</PackageProjectUrl>
     <PackageReleaseNotes>Initial version</PackageReleaseNotes>
+    <PackageDescription>
+      A functional C# library with data structures and functions whose main goal is to have an declarative approach to problem solving by using various HOF's to achieve cleaner code bases &amp; code which is easier to think about.
+
+      For example the IResult&lt;T, TError&gt; type, which enables you to skip using exceptions for error handling. The way IResult&lt;T, TError&gt; works is that there's always one value present. Either it's the value to the left or the value to the right (TError). In this library, the value to the Left is considered successfull and the right value is considered to be a failure.
+
+      The following example illustrates how you can perform a division and return a string with an error message rather than throwing an exception using a similiar message.
+    </PackageDescription>
     <AssemblyName>Lemonad.ErrorHandling</AssemblyName>
     <Authors>Robert Andersson</Authors>
     <Product>Lemonad.ErrorHandling</Product>
