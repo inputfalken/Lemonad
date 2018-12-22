@@ -75,7 +75,7 @@ namespace Lemonad.ErrorHandling {
         );
 
         /// <summary>
-        ///     An asynchronous version of <see cref="Result{T,TError}.FlatMap{TResult}" />
+        ///     An asynchronous version of <see cref="Result{T,TError}.FlatMap{TResult}(System.Func{T,Lemonad.ErrorHandling.IResult{TResult,TError}})" />
         ///     who expects an
         ///     <see cref="IAsyncResult{T,TError}" /> instead of <see cref="IResult{T,TError}" />.
         /// </summary>

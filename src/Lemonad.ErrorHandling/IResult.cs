@@ -194,6 +194,28 @@ namespace Lemonad.ErrorHandling {
             Func<TErrorResult, TError> errorSelector
         );
 
+        IResult<TResult, TError> FlatMap<TResult>(
+            Func<T, TResult?> flatMapSelector,
+            Func<TError> errorSelector
+        ) where TResult : struct;
+
+        IAsyncResult<TResult, TError> FlatMapAsync<TResult>(
+            Func<T, Task<TResult?>> flatMapSelector,
+            Func<TError> errorSelector
+        ) where TResult : struct;
+
+        IResult<TResult, TError> FlatMap<TFlatMap, TResult>(
+            Func<T, TFlatMap?> flatMapSelector,
+            Func<T, TFlatMap, TResult> resultSelector,
+            Func<TError> errorSelector
+        ) where TFlatMap : struct where TResult : struct;
+
+        IAsyncResult<TResult, TError> FlatMapAsync<TFlatMap, TResult>(
+            Func<T, Task<TFlatMap?>> flatMapSelector,
+            Func<T, TFlatMap, TResult> resultSelector,
+            Func<TError> errorSelector
+        ) where TFlatMap : struct where TResult : struct;
+
         /// <summary>
         ///     Flatmaps another <see cref="Result{T,TError}" /> but the <typeparamref name="TError" /> remains as the same type.
         /// </summary>

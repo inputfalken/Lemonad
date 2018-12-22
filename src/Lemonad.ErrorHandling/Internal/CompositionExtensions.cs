@@ -14,4 +14,13 @@ namespace Lemonad.ErrorHandling.Internal {
             return x => selector(source(x));
         }
     }
+
+    public static class NullableExtensions {
+        public static TResult? Map<T, TResult>(this T? source, Func<T, TResult> selector)
+            where T : struct where TResult : struct => selector is null
+            ? throw new ArgumentNullException(nameof(selector))
+            : source.HasValue
+                ? (TResult?) selector(source.Value)
+                : null;
+    }
 }
