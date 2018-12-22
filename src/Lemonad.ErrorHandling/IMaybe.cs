@@ -74,7 +74,8 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         IMaybe<TResult> FlatMap<TFlatMap, TResult>(
             Func<T, IMaybe<TFlatMap>> flatMapSelector,
-            Func<T, TFlatMap, TResult> resultSelector);
+            Func<T, TFlatMap, TResult> resultSelector
+        );
 
         /// <summary>
         ///     Flatmaps another <see cref="Maybe{T}" />.

@@ -19,7 +19,6 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         public void Maybe_With_No_Value_Null_Action__Expects_Exception() {
             Action<string> argument = null;
             Assert.Throws<ArgumentNullException>(
-                "someAction",
                 () => ErrorHandling.Maybe.Value("foobar").DoWith(argument)
             );
         }
@@ -42,7 +41,6 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         public void Maybe_With_Value_Null_Action__Expects_Exception() {
             Action<string> argument = null;
             Assert.Throws<ArgumentNullException>(
-                "someAction",
                 () => ErrorHandling.Maybe.Value("foobar").DoWith(argument)
             );
         }
