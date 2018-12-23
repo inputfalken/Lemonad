@@ -194,27 +194,95 @@ namespace Lemonad.ErrorHandling {
             Func<TErrorResult, TError> errorSelector
         );
 
+        /// <summary>
+        ///     Flatten a <see cref="Nullable{T}" /> 
+        ///     And maps <typeparamref name="T" /> to <typeparamref name="TResult" />.
+        /// </summary>
+        /// <param name="flatMapSelector">
+        ///     A function who expects a <see cref="Nullable{T}" /> as an return type.
+        /// </param>
+        /// <param name="errorSelector">
+        /// The error selector if <see cref="Nullable{T}"/> is null.
+        /// </param>
+        /// <typeparam name="TResult">
+        /// The type of <see cref="Nullable{T}"/>.
+        /// </typeparam>
         IResult<TResult, TError> FlatMap<TResult>(
             Func<T, TResult?> flatMapSelector,
             Func<TError> errorSelector
         ) where TResult : struct;
 
+        /// <summary>
+        ///     Flatten a <see cref="Nullable{T}" />  wrapped in a <see cref="Task{TResult}"/>
+        ///     And maps <typeparamref name="T" /> to <typeparamref name="TResult" />.
+        /// </summary>
+        /// <param name="flatMapSelector">
+        ///     A function who expects a <see cref="Nullable{T}" /> as an return type.
+        /// </param>
+        /// <param name="errorSelector">
+        /// The error selector if <see cref="Nullable{T}"/> is null.
+        /// </param>
+        /// <typeparam name="TResult">
+        /// The type of <see cref="Nullable{T}"/>.
+        /// </typeparam>
         IAsyncResult<TResult, TError> FlatMapAsync<TResult>(
             Func<T, Task<TResult?>> flatMapSelector,
             Func<TError> errorSelector
         ) where TResult : struct;
 
-        IResult<TResult, TError> FlatMap<TFlatMap, TResult>(
-            Func<T, TFlatMap?> flatMapSelector,
-            Func<T, TFlatMap, TResult> resultSelector,
+        /// <summary>
+        ///     Flatten a <see cref="Nullable{T}" /> 
+        ///     And maps <typeparamref name="T" /> together with <typeparamref name="TSelector" /> to
+        ///     <typeparamref name="TResult" />.
+        /// </summary>
+        /// <param name="flatMapSelector">
+        ///     A function who expects a <see cref="Nullable{T}" /> as an return type.
+        /// </param>
+        /// <param name="resultSelector">
+        ///     A function whose in-parameters are <typeparamref name="T" /> and  <typeparamref name="TSelector" />  which can
+        ///     return any type.
+        /// </param>
+        /// <param name="errorSelector">
+        /// The error selector if <see cref="Nullable{T}"/> is null.
+        /// </param>
+        /// <typeparam name="TSelector">
+        ///     The value retrieved from the the <see cref="Result{T,TError}" /> given by the <paramref name="flatMapSelector" />.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        ///     The return type of the function  <paramref name="resultSelector" />.
+        /// </typeparam>
+        IResult<TResult, TError> FlatMap<TSelector, TResult>(
+            Func<T, TSelector?> flatMapSelector,
+            Func<T, TSelector, TResult> resultSelector,
             Func<TError> errorSelector
-        ) where TFlatMap : struct;
+        ) where TSelector : struct;
 
-        IAsyncResult<TResult, TError> FlatMapAsync<TFlatMap, TResult>(
-            Func<T, Task<TFlatMap?>> flatMapSelector,
-            Func<T, TFlatMap, TResult> resultSelector,
+        /// <summary>
+        ///     Flatten a <see cref="Nullable{T}" /> wrapped in a <see cref="Task{TResult}"/>
+        ///     And maps <typeparamref name="T" /> together with <typeparamref name="TSelector" /> to
+        ///     <typeparamref name="TResult" />.
+        /// </summary>
+        /// <param name="flatMapSelector">
+        ///     A function who expects a <see cref="Nullable{T}" /> as an return type.
+        /// </param>
+        /// <param name="resultSelector">
+        ///     A function whose in-parameters are <typeparamref name="T" /> and  <typeparamref name="TSelector" />  which can
+        ///     return any type.
+        /// </param>
+        /// <param name="errorSelector">
+        /// The error selector if <see cref="Nullable{T}"/> is null.
+        /// </param>
+        /// <typeparam name="TSelector">
+        ///     The value retrieved from the the <see cref="Result{T,TError}" /> given by the <paramref name="flatMapSelector" />.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        ///     The return type of the function  <paramref name="resultSelector" />.
+        /// </typeparam>
+        IAsyncResult<TResult, TError> FlatMapAsync<TSelector, TResult>(
+            Func<T, Task<TSelector?>> flatMapSelector,
+            Func<T, TSelector, TResult> resultSelector,
             Func<TError> errorSelector
-        ) where TFlatMap : struct;
+        ) where TSelector : struct;
 
         /// <summary>
         ///     Flatmaps another <see cref="Result{T,TError}" /> but the <typeparamref name="TError" /> remains as the same type.
