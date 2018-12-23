@@ -7,17 +7,13 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
         public void Create_Result_From_Value_With_False_Predicate() {
             var predicateExecuted = false;
             var valueSelectorExecuted = false;
-            var result = "ERROR".ToResultError(x => {
+            "ERROR".ToResultError(x => {
                 predicateExecuted = true;
                 return string.IsNullOrWhiteSpace(x);
             }, x => {
                 valueSelectorExecuted = true;
                 return "value";
-            });
-            Assert.Equal(default, result.Either.Error);
-            Assert.Equal("value", result.Either.Value);
-            Assert.True(result.Either.HasValue);
-            Assert.False(result.Either.HasError);
+            }).AssertValue("value");
             Assert.True(predicateExecuted);
             Assert.True(valueSelectorExecuted);
         }
@@ -26,17 +22,13 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
         public void Create_Result_From_Value_With_True_Predicate() {
             var predicateExecuted = false;
             var valueSelectorExecuted = false;
-            var result = "ERROR".ToResultError(x => {
+            "ERROR".ToResultError(x => {
                 predicateExecuted = true;
                 return string.IsNullOrWhiteSpace(x) == false;
             }, x => {
                 valueSelectorExecuted = true;
                 return "value";
-            });
-            Assert.Equal("ERROR", result.Either.Error);
-            Assert.Equal(default, result.Either.Value);
-            Assert.False(result.Either.HasValue);
-            Assert.True(result.Either.HasError);
+            }).AssertError("ERROR");
             Assert.True(predicateExecuted);
             Assert.False(valueSelectorExecuted);
         }

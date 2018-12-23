@@ -8,13 +8,13 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
             var resultSelectorInvoked = false;
             var outer = new {Id = 1, Text = "Hello"}.ToResult(x => false, x => "ERROR 1");
             var inner = new {Id = 1, Text = "world"}.ToResult(x => false, x => "ERROR 2");
-            var result = outer.Zip(inner, (x, y) => {
-                resultSelectorInvoked = true;
-                return $"{x.Text} {y.Text}";
-            });
+            outer
+                .Zip(inner, (x, y) => {
+                    resultSelectorInvoked = true;
+                    return $"{x.Text} {y.Text}";
+                })
+                .AssertError("ERROR 1");
 
-            Assert.Equal(default, result.Either.Value);
-            Assert.Equal("ERROR 1", result.Either.Error);
             Assert.False(resultSelectorInvoked, "resultSelectorInvoked");
         }
 
@@ -23,13 +23,13 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
             var resultSelectorInvoked = false;
             var outer = new {Id = 1, Text = "Hello"}.ToResult(x => false, x => "ERROR 1");
             var inner = new {Id = 1, Text = "world"}.ToResult(x => true, x => "ERROR 2");
-            var result = outer.Zip(inner, (x, y) => {
-                resultSelectorInvoked = true;
-                return $"{x.Text} {y.Text}";
-            });
+            outer
+                .Zip(inner, (x, y) => {
+                    resultSelectorInvoked = true;
+                    return $"{x.Text} {y.Text}";
+                })
+                .AssertError("ERROR 1");
 
-            Assert.Equal(default, result.Either.Value);
-            Assert.Equal("ERROR 1", result.Either.Error);
             Assert.False(resultSelectorInvoked, "resultSelectorInvoked");
         }
 
@@ -38,13 +38,13 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
             var resultSelectorInvoked = false;
             var outer = new {Id = 1, Text = "Hello"}.ToResult(x => true, x => "ERROR 1");
             var inner = new {Id = 1, Text = "world"}.ToResult(x => false, x => "ERROR 2");
-            var result = outer.Zip(inner, (x, y) => {
-                resultSelectorInvoked = true;
-                return $"{x.Text} {y.Text}";
-            });
+            outer
+                .Zip(inner, (x, y) => {
+                    resultSelectorInvoked = true;
+                    return $"{x.Text} {y.Text}";
+                })
+                .AssertError("ERROR 2");
 
-            Assert.Equal(default, result.Either.Value);
-            Assert.Equal("ERROR 2", result.Either.Error);
             Assert.False(resultSelectorInvoked, "resultSelectorInvoked");
         }
 
@@ -53,13 +53,13 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
             var resultSelectorInvoked = false;
             var outer = new {Id = 1, Text = "Hello"}.ToResult(x => true, x => "ERROR 1");
             var inner = new {Id = 1, Text = "world"}.ToResult(x => true, x => "ERROR 2");
-            var result = outer.Zip(inner, (x, y) => {
-                resultSelectorInvoked = true;
-                return $"{x.Text} {y.Text}";
-            });
+            outer
+                .Zip(inner, (x, y) => {
+                    resultSelectorInvoked = true;
+                    return $"{x.Text} {y.Text}";
+                })
+                .AssertValue("Hello world");
 
-            Assert.Equal("Hello world", result.Either.Value);
-            Assert.Equal(default, result.Either.Error);
             Assert.True(resultSelectorInvoked, "resultSelectorInvoked");
         }
     }

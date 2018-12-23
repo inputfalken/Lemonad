@@ -10,7 +10,7 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
             var resultSelectorInvoked = false;
             var outer = new {Id = 1, Text = "Hello"}.ToResult(x => false, x => "ERROR 1");
             var inner = new {Id = 1, Text = "world"}.ToResult(x => false, x => "ERROR 2");
-            var result = outer.Join(inner, x => {
+            outer.Join(inner, x => {
                 outerSelectorInvoked = true;
                 return x.Id;
             }, x => {
@@ -19,10 +19,7 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
             }, (x, y) => {
                 resultSelectorInvoked = true;
                 return $"{x.Text} {y.Text}";
-            }, () => string.Empty);
-
-            Assert.Equal(default, result.Either.Value);
-            Assert.Equal("ERROR 1", result.Either.Error);
+            }, () => string.Empty).AssertError("ERROR 1");
 
             Assert.False(outerSelectorInvoked, "outerSelectorInvoked");
             Assert.False(innerSelectorInvoked, "innerSelectorInvoked");
@@ -36,19 +33,18 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
             var resultSelectorInvoked = false;
             var outer = new {Id = 1, Text = "Hello"}.ToResult(x => false, x => "ERROR 1");
             var inner = new {Id = 1, Text = "world"}.ToResult(x => true, x => "ERROR 2");
-            var result = outer.Join(inner, x => {
-                outerSelectorInvoked = true;
-                return x.Id;
-            }, x => {
-                innerSelectorInvoked = true;
-                return x.Id;
-            }, (x, y) => {
-                resultSelectorInvoked = true;
-                return $"{x.Text} {y.Text}";
-            }, () => string.Empty);
-
-            Assert.Equal(default, result.Either.Value);
-            Assert.Equal("ERROR 1", result.Either.Error);
+            outer
+                .Join(inner, x => {
+                    outerSelectorInvoked = true;
+                    return x.Id;
+                }, x => {
+                    innerSelectorInvoked = true;
+                    return x.Id;
+                }, (x, y) => {
+                    resultSelectorInvoked = true;
+                    return $"{x.Text} {y.Text}";
+                }, () => string.Empty)
+                .AssertError("ERROR 1");
 
             Assert.False(outerSelectorInvoked, "outerSelectorInvoked");
             Assert.False(innerSelectorInvoked, "innerSelectorInvoked");
@@ -62,19 +58,18 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
             var resultSelectorInvoked = false;
             var outer = new {Id = 1, Text = "Hello"}.ToResult(x => true, x => "ERROR 1");
             var inner = new {Id = 1, Text = "world"}.ToResult(x => false, x => "ERROR 2");
-            var result = outer.Join(inner, x => {
-                outerSelectorInvoked = true;
-                return x.Id;
-            }, x => {
-                innerSelectorInvoked = true;
-                return x.Id;
-            }, (x, y) => {
-                resultSelectorInvoked = true;
-                return $"{x.Text} {y.Text}";
-            }, () => string.Empty);
-
-            Assert.Equal(default, result.Either.Value);
-            Assert.Equal("ERROR 2", result.Either.Error);
+            outer
+                .Join(inner, x => {
+                    outerSelectorInvoked = true;
+                    return x.Id;
+                }, x => {
+                    innerSelectorInvoked = true;
+                    return x.Id;
+                }, (x, y) => {
+                    resultSelectorInvoked = true;
+                    return $"{x.Text} {y.Text}";
+                }, () => string.Empty)
+                .AssertError("ERROR 2");
 
             Assert.False(outerSelectorInvoked, "outerSelectorInvoked");
             Assert.False(innerSelectorInvoked, "innerSelectorInvoked");
@@ -88,19 +83,18 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
             var resultSelectorInvoked = false;
             var outer = new {Id = 1, Text = "Hello"}.ToResult(x => true, x => "ERROR 1");
             var inner = new {Id = 1, Text = "world"}.ToResult(x => true, x => "ERROR 2");
-            var result = outer.Join(inner, x => {
-                outerSelectorInvoked = true;
-                return x.Id;
-            }, x => {
-                innerSelectorInvoked = true;
-                return x.Id;
-            }, (x, y) => {
-                resultSelectorInvoked = true;
-                return $"{x.Text} {y.Text}";
-            }, () => "");
-
-            Assert.Equal("Hello world", result.Either.Value);
-            Assert.Equal(default, result.Either.Error);
+            outer
+                .Join(inner, x => {
+                    outerSelectorInvoked = true;
+                    return x.Id;
+                }, x => {
+                    innerSelectorInvoked = true;
+                    return x.Id;
+                }, (x, y) => {
+                    resultSelectorInvoked = true;
+                    return $"{x.Text} {y.Text}";
+                }, () => "")
+                .AssertValue("Hello world");
 
             Assert.True(outerSelectorInvoked, "outerSelectorInvoked");
             Assert.True(innerSelectorInvoked, "innerSelectorInvoked");
@@ -114,7 +108,7 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
             var resultSelectorInvoked = false;
             var outer = new {Id = 2, Text = "Hello"}.ToResult(x => true, x => "ERROR 1");
             var inner = new {Id = 1, Text = "world"}.ToResult(x => true, x => "ERROR 2");
-            var result = outer.Join(inner, x => {
+            outer.Join(inner, x => {
                 outerSelectorInvoked = true;
                 return x.Id;
             }, x => {
@@ -123,10 +117,7 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
             }, (x, y) => {
                 resultSelectorInvoked = true;
                 return $"{x.Text} {y.Text}";
-            }, () => "No key match");
-
-            Assert.Equal(default, result.Either.Value);
-            Assert.Equal("No key match", result.Either.Error);
+            }, () => "No key match").AssertError("No key match");
 
             Assert.True(outerSelectorInvoked, "outerSelectorInvoked");
             Assert.True(innerSelectorInvoked, "innerSelectorInvoked");
