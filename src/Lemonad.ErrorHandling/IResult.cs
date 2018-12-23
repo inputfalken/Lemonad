@@ -725,9 +725,7 @@ namespace Lemonad.ErrorHandling {
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
-        ///     <see
-        ///         cref="IAsyncResult{T,TError}.ZipAsync{TOther,TResult}" />
-        ///     .
+        ///     <see cref="IAsyncResult{T,TError}.ZipAsync{TOther,TResult}" />.
         /// </summary>
         IAsyncResult<TResult, TError> ZipAsync<TOther, TResult>(
             IAsyncResult<TOther, TError> other,
