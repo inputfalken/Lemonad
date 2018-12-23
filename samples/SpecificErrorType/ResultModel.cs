@@ -61,12 +61,12 @@ namespace SpecificErrorType {
 
         public IResult<TResult, ErrorModel> FlatMap<TFlatMap, TResult>(Func<T, TFlatMap?> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector, Func<ErrorModel> errorSelector)
-            where TFlatMap : struct where TResult : struct =>
+            where TFlatMap : struct =>
             _resultImplementation.FlatMap(flatMapSelector, resultSelector, errorSelector);
 
         public IAsyncResult<TResult, ErrorModel> FlatMapAsync<TFlatMap, TResult>(
             Func<T, Task<TFlatMap?>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
-            Func<ErrorModel> errorSelector) where TFlatMap : struct where TResult : struct =>
+            Func<ErrorModel> errorSelector) where TFlatMap : struct =>
             _resultImplementation.FlatMapAsync(flatMapSelector, resultSelector, errorSelector);
 
         public IResult<TResult, ErrorModel> FlatMap<TFlatMap, TResult, TErrorResult>(

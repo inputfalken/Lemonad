@@ -56,12 +56,12 @@ namespace ImplicitResult {
 
         public IResult<TResult, TError> FlatMap<TFlatMap, TResult>(Func<T, TFlatMap?> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector, Func<TError> errorSelector)
-            where TFlatMap : struct where TResult : struct =>
+            where TFlatMap : struct =>
             _resultImplementation.FlatMap(flatMapSelector, resultSelector, errorSelector);
 
         public IAsyncResult<TResult, TError> FlatMapAsync<TFlatMap, TResult>(Func<T, Task<TFlatMap?>> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector, Func<TError> errorSelector)
-            where TFlatMap : struct where TResult : struct =>
+            where TFlatMap : struct =>
             _resultImplementation.FlatMapAsync(flatMapSelector, resultSelector, errorSelector);
 
         public IAsyncResult<TFlatMap, TError> FlatMapAsync<TFlatMap, TResult>(Func<T, Task<TFlatMap?>> flatMapSelector,
