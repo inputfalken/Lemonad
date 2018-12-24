@@ -1,4 +1,5 @@
 ﻿using System;
+using Assertion;
 using Lemonad.ErrorHandling.Extensions;
 using Xunit;
 
@@ -23,14 +24,12 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
 
         [Fact]
         public void When_Predicate_Returns_False__Maybe_Is_Expected_To_HaveValue() {
-            var noneWhen = "".ToMaybeNone(s => false);
-            Assert.True(noneWhen.HasValue, "Maybe should have value.");
+             "".ToMaybeNone(s => false).AssertValue("");
         }
 
         [Fact]
         public void When_Predicate_Returns_True__Maybe_Is_Expected_To_HaveValue() {
-            var noneWhen = "".ToMaybeNone(s => true);
-            Assert.False(noneWhen.HasValue, "Maybe should not have value.");
+             "".ToMaybeNone(s => true).AssertNone();
         }
     }
 }

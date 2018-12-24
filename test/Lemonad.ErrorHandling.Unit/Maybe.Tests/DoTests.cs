@@ -1,4 +1,5 @@
 using System;
+using Assertion;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
@@ -6,11 +7,12 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         [Fact]
         public void Maybe_With_No_Value__Expects_Action_Executed() {
             var actionExecuted = false;
-            var value = ErrorHandling.Maybe.None<string>().Do(() => actionExecuted = true);
+            ErrorHandling.Maybe
+                .None<string>()
+                .Do(() => actionExecuted = true)
+                .AssertNone();
 
             Assert.True(actionExecuted);
-            Assert.False(value.HasValue);
-            Assert.Equal(default, value.Value);
         }
 
         [Fact]
@@ -25,11 +27,11 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         [Fact]
         public void Maybe_With_Value__Expects_Action_Executed() {
             var actionExecuted = false;
-            var value = ErrorHandling.Maybe.Value("foobar").Do(() => actionExecuted = true);
+            ErrorHandling.Maybe.Value("foobar")
+                .Do(() => actionExecuted = true)
+                .AssertValue("foobar");
 
             Assert.True(actionExecuted);
-            Assert.True(value.HasValue);
-            Assert.Equal("foobar", value.Value);
         }
 
         [Fact]

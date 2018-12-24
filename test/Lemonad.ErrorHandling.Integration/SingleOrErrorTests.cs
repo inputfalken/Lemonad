@@ -73,7 +73,7 @@ namespace Lemonad.ErrorHandling.Integration {
             MovieContext.Users
                 .Where(x => x.Email == "athanasios-radu@hotmail.com")
                 .SingleOrError()
-                .AssertValue(MovieContext.Users.SingleOrDefault(x => x.Email == "athanasios-radu@hotmail.com"));
+                .AssertValue(MovieContext.Users.Where(x => x.Email == "athanasios-radu@hotmail.com").SingleOrDefault());
         }
     }
 }
