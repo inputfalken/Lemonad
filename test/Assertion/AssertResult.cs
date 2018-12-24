@@ -1,7 +1,8 @@
-﻿using Xunit;
+﻿using Lemonad.ErrorHandling;
+using Xunit;
 
-namespace Lemonad.ErrorHandling.Unit {
-    internal static class AssertResult {
+namespace Assertion {
+    public static class AssertResult {
         public static IResult<T, TError> AssertValue<T, TError>(this IResult<T, TError> result, T expected) {
             Assert.True(result.Either.HasValue);
             Assert.False(result.Either.HasError);

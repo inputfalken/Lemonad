@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using Assertion;
+using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.Result.Tests {
     public class FlatMapTests {

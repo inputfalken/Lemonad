@@ -1,4 +1,5 @@
 using System;
+using Assertion;
 using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Extensions.Maybe;
 using Xunit;
