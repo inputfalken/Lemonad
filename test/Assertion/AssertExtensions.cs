@@ -34,6 +34,14 @@ namespace Assertion {
             return source;
         }
 
+        public static IResult<T, string> AssertErrorContains<T>(this IResult<T, string> source, string expected) {
+            Assert.False(source.Either.HasValue);
+            Assert.True(source.Either.HasError);
+            Assert.Contains(expected, source.Either.Error);
+            Assert.Equal(default, source.Either.Value);
+            return source;
+        }
+
         public static IAsyncResult<T, TError> AssertValue<T, TError>(this IAsyncResult<T, TError> source, T expected) {
             async Task<IResult<T, TError>> Resolve() {
                 var result = await source;

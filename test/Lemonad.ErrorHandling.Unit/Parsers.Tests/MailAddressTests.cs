@@ -34,15 +34,9 @@ namespace Lemonad.ErrorHandling.Unit.Parsers.Tests {
 
         [Fact]
         public void Mail_With_More_Than_One_At_Symbol_Before_Domain() {
-            ResultParsers.MailAddress("foo@bar@.com").AssertError(@"Failed parsing input 'foo@bar@.com'. Exception:
-System.FormatException: An invalid character was found in the mail header: '.'.
-   at System.Net.Mail.DotAtomReader.ReadReverse(String data, Int32 index)
-   at System.Net.Mail.MailAddressParser.ParseDomain(String data, Int32& index)
-   at System.Net.Mail.MailAddressParser.ParseAddress(String data, Boolean expectMultipleAddresses, Int32& index)
-   at System.Net.Mail.MailAddressParser.ParseAddress(String data)
-   at System.Net.Mail.MailAddress..ctor(String address, String displayName, Encoding displayNameEncoding)
-   at System.Net.Mail.MailAddress..ctor(String address)
-   at Lemonad.ErrorHandling.Parsers.ResultParsers.<>c.<MailAddress>b__17_12(String x) in C:\Users\Robert\source\repos\Lemonad\src\Lemonad.ErrorHandling\Parsers\ResultParsers.cs:line 137");
+            ResultParsers
+                .MailAddress("foo@bar@.com")
+                .AssertErrorContains("Failed parsing input 'foo@bar@.com'. Exception:");
         }
 
         [Fact]
