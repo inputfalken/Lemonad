@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Assertion;
 using Lemonad.ErrorHandling.Extensions.Result.Enumerable;
 using Lemonad.ErrorHandling.Integration.EntityFramework;
 using Xunit;
@@ -19,13 +20,11 @@ namespace Lemonad.ErrorHandling.Integration {
             var expected = MovieContext.Users
                 .Where(x => x.Email == string.Empty)
                 .FirstOrDefault();
-            var result = MovieContext.Users
+            MovieContext.Users
                 .Where(x => x.Email == string.Empty)
-                .FirstOrError(() => "Could not find any user.");
+                .FirstOrError(() => "Could not find any user.")
+                .AssertError("Could not find any user.");
 
-            Assert.False(result.Either.HasValue);
-            Assert.True(result.Either.HasError);
-            Assert.Equal("Could not find any user.", result.Either.Error);
             Assert.Null(expected);
         }
 
@@ -33,69 +32,56 @@ namespace Lemonad.ErrorHandling.Integration {
         public void Behaves_Like_FirstOrDefault_With_False_Predicate() {
             const string title = "test";
             var expected = MovieContext.Movies.FirstOrDefault(x => x.Title == title);
-            var result = MovieContext.Movies.FirstOrError(
-                x => x.Title == title,
-                () => $"Could not find a movie with the name '{title}'."
-            );
+            MovieContext.Movies
+                .FirstOrError(
+                    x => x.Title == title,
+                    () => $"Could not find a movie with the name '{title}'."
+                )
+                .AssertError($"Could not find a movie with the name '{title}'.");
 
-            Assert.False(result.Either.HasValue);
-            Assert.True(result.Either.HasError);
             Assert.Null(expected);
-            Assert.Equal($"Could not find a movie with the name '{title}'.", result.Either.Error);
         }
 
         [Fact]
         public void Behaves_Like_FirstOrDefault_With_False_Predicate_Using_Value_Type() {
             const int score = 20;
-            var result = MovieContext.Ratings
+            MovieContext.Ratings
                 .Select(x => x.Score)
                 .FirstOrError(
                     x => x == score,
                     () => $"Could not find a score that's equal to '{score}'."
-                );
-
-            Assert.False(result.Either.HasValue);
-            Assert.True(result.Either.HasError);
-            Assert.Equal($"Could not find a score that's equal to '{score}'.", result.Either.Error);
+                )
+                .AssertError($"Could not find a score that's equal to '{score}'.");
         }
 
         [Fact]
         public void Behaves_Like_FirstOrDefault_With_True_Predicate() {
             const string title = "Fury";
             var expected = MovieContext.Movies.FirstOrDefault(x => x.Title == title);
-            var result = MovieContext.Movies.FirstOrError(
+            MovieContext.Movies.FirstOrError(
                 x => x.Title == title,
                 () => $"Could not find a movie with the name '{title}'."
-            );
-
-            Assert.True(result.Either.HasValue);
-            Assert.False(result.Either.HasError);
-            Assert.Equal(expected, result.Either.Value);
+            ).AssertValue(expected);
         }
 
         [Fact]
         public void Behaves_Like_FirstOrDefault_With_True_Predicate_Using_Value_Type() {
             const int score = 5;
-            var result = MovieContext.Ratings
+            MovieContext.Ratings
                 .Select(x => x.Score)
                 .FirstOrError(
                     x => x == score,
                     () => $"Could not find a score that's equal to '{score}'."
-                );
-
-            Assert.True(result.Either.HasValue);
-            Assert.False(result.Either.HasError);
-            Assert.Equal(score, result.Either.Value);
+                )
+                .AssertValue(score);
         }
 
         [Fact]
         public void Behaves_Like_FirstOrDefault_Without_Predicate() {
             var expected = MovieContext.Users.FirstOrDefault();
-            var result = MovieContext.Users.FirstOrError(() => "Could not find any user.");
-
-            Assert.True(result.Either.HasValue);
-            Assert.False(result.Either.HasError);
-            Assert.Equal(expected, result.Either.Value);
+            MovieContext.Users
+                .FirstOrError(() => "Could not find any user.")
+                .AssertValue(expected);
         }
 
         [Fact]
@@ -108,16 +94,14 @@ namespace Lemonad.ErrorHandling.Integration {
             // There's no scores equal to 0 available in the database.
             // Using FirstOrDefault would give a 0 even tho it does not exist.
             // Meanwhile this implementation understands that an error should be created instead of giving a value with 0.
-            var result = MovieContext.Ratings
+            MovieContext.Ratings
                 .Select(x => x.Score)
                 .FirstOrError(
                     x => x == score,
                     () => $"Could not find a score that's equal to '{score}'."
-                );
+                )
+                .AssertError($"Could not find a score that's equal to '{score}'.");
 
-            Assert.False(result.Either.HasValue);
-            Assert.True(result.Either.HasError);
-            Assert.Equal($"Could not find a score that's equal to '{score}'.", result.Either.Error);
             Assert.Equal(0, firstOrDefault);
         }
     }
