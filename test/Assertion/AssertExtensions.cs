@@ -5,7 +5,19 @@ using Lemonad.ErrorHandling.Extensions.Result.Task;
 using Xunit;
 
 namespace Assertion {
-    public static class AssertResult {
+    public static class AssertExtensions {
+        public static IMaybe<T> AssertValue<T>(this IMaybe<T> source, T expected) {
+            Assert.True(source.HasValue);
+            Assert.Equal(expected, source.Value);
+            return source;
+        }
+
+        public static IMaybe<T> AssertNone<T>(this IMaybe<T> source) {
+            Assert.False(source.HasValue);
+            Assert.Equal(default, source.Value);
+            return source;
+        }
+
         public static IResult<T, TError> AssertValue<T, TError>(this IResult<T, TError> source, T expected) {
             Assert.True(source.Either.HasValue);
             Assert.False(source.Either.HasError);
