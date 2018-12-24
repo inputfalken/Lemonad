@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Assertion;
 using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Xunit;
 
@@ -13,15 +14,14 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             });
 
             var selectorInvoked = false;
-            var result = await ErrorHandling.Result.Value<int, string>(2).FlatMapAsync(_ => {
-                selectorInvoked = true;
-                return number;
-            }, () => "ERROR");
+            await ErrorHandling.Result
+                .Value<int, string>(2)
+                .FlatMapAsync(_ => {
+                    selectorInvoked = true;
+                    return number;
+                }, () => "ERROR")
+                .AssertValue(2);
 
-            Assert.True(result.Either.HasValue);
-            Assert.False(result.Either.HasError);
-            Assert.Equal(2, result.Either.Value);
-            Assert.Equal(default, result.Either.Error);
             Assert.True(selectorInvoked);
         }
 
@@ -34,19 +34,17 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             });
             var selectorInvoked = false;
             var resultSelectorInvoked = false;
-            var result = await ErrorHandling.Result.Value<int, string>(2)
+            await ErrorHandling.Result
+                .Value<int, string>(2)
                 .FlatMapAsync(_ => {
                     selectorInvoked = true;
                     return number;
                 }, (x, y) => {
                     resultSelectorInvoked = true;
                     return x + y;
-                }, () => "ERROR");
+                }, () => "ERROR")
+                .AssertValue(4);
 
-            Assert.True(result.Either.HasValue);
-            Assert.False(result.Either.HasError);
-            Assert.Equal(4, result.Either.Value);
-            Assert.Equal(default, result.Either.Error);
             Assert.True(selectorInvoked);
             Assert.True(resultSelectorInvoked);
         }
@@ -59,15 +57,14 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
                 return nullable;
             });
             var selectorInvoked = false;
-            var result = await ErrorHandling.Result.Value<int, string>(2).FlatMapAsync(_ => {
-                selectorInvoked = true;
-                return number;
-            }, () => "ERROR");
+            await ErrorHandling.Result
+                .Value<int, string>(2)
+                .FlatMapAsync(_ => {
+                    selectorInvoked = true;
+                    return number;
+                }, () => "ERROR")
+                .AssertError("ERROR");
 
-            Assert.False(result.Either.HasValue);
-            Assert.True(result.Either.HasError);
-            Assert.Equal(default, result.Either.Value);
-            Assert.Equal("ERROR", result.Either.Error);
             Assert.True(selectorInvoked);
         }
 
@@ -80,19 +77,17 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             });
             var selectorInvoked = false;
             var resultSelectorInvoked = false;
-            var result = await ErrorHandling.Result.Value<int, string>(2)
+            await ErrorHandling.Result
+                .Value<int, string>(2)
                 .FlatMapAsync(_ => {
                     selectorInvoked = true;
                     return number;
                 }, (x, y) => {
                     resultSelectorInvoked = true;
                     return x + y;
-                }, () => "ERROR");
+                }, () => "ERROR")
+                .AssertError("ERROR");
 
-            Assert.False(result.Either.HasValue);
-            Assert.True(result.Either.HasError);
-            Assert.Equal(default, result.Either.Value);
-            Assert.Equal("ERROR", result.Either.Error);
             Assert.True(selectorInvoked);
             Assert.False(resultSelectorInvoked);
         }
