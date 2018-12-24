@@ -19,8 +19,7 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
 
             Assert.False(errorSelectorExecuted,
                 "Errorselector should not get exeuted since there is an error in the source.");
-            Assert.False(flatSelectorExecuted,
-                "The flatmap selector should not get exectued if the sourcegeiEither. Result<T, TError> contains error.");
+            Assert.False(flatSelectorExecuted);
         }
 
         [Fact]

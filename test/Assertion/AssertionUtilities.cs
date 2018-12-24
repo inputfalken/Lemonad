@@ -11,7 +11,7 @@ namespace Assertion {
 
         public static string EitherValueName { get; } = nameof(IEither<object, object>.Value);
         public static string EitherErrorName { get; } = nameof(IEither<object, object>.Error);
-        public static string MaybeValueName { get; } = nameof(Maybe<object>.Value);
+        public static string MaybeValueName { get; } = nameof(IMaybe<object>.Value);
 
         public static IResult<double, string> Division(double left, double right) => (left, right).ToResult(
                 x => right != 0,
