@@ -5,7 +5,6 @@ using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Extensions.Result;
 using Lemonad.ErrorHandling.Extensions.Result.Task;
 using Lemonad.ErrorHandling.Internal.Either;
-using Lemonad.ErrorHandling.Internal.TaskExtensions;
 
 namespace Lemonad.ErrorHandling.Internal {
     internal readonly struct Result<T, TError> : IResult<T, TError> {
@@ -274,19 +273,21 @@ namespace Lemonad.ErrorHandling.Internal {
         public IResult<TResult, TError> FlatMap<TResult>(
             Func<T, TResult?> flatMapSelector,
             Func<TError> errorSelector
-        ) where TResult : struct => new Result<TResult, TError>(
-            EitherMethods.FlatMap(Either,
-                flatMapSelector.Compose(x =>
-                    x.ToResult(y => y.HasValue, _ => errorSelector()).Map(y => y.Value).Either
+        ) where TResult : struct
+            => new Result<TResult, TError>(
+                EitherMethods.FlatMap(
+                    Either,
+                    flatMapSelector.Compose(x => x.FromNullable(errorSelector))
                 )
-            )
-        );
+            );
 
         public IAsyncResult<TResult, TError> FlatMapAsync<TResult>(Func<T, Task<TResult?>> flatMapSelector,
-            Func<TError> errorSelector) where TResult : struct => MapAsync(async x => {
-            var result = await flatMapSelector(x).ConfigureAwait(false);
-            return result.ToResult(y => y.HasValue, _ => errorSelector()).Map(y => y.Value);
-        }).FlatMap(x => x);
+            Func<TError> errorSelector) where TResult : struct {
+            return MapAsync(async x => {
+                var result = await flatMapSelector(x).ConfigureAwait(false);
+                return result.ToResult(y => y.HasValue, _ => errorSelector()).Map(y => y.Value);
+            }).FlatMap(x => x);
+        }
 
         public IResult<TResult, TError> FlatMap<TFlatMap, TResult>(
             Func<T, TFlatMap?> flatMapSelector,

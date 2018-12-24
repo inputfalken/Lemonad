@@ -12,6 +12,20 @@ namespace Lemonad.ErrorHandling.Internal {
     internal readonly struct AsyncResult<T, TError> : IAsyncResult<T, TError> {
         private AsyncResult(Task<IEither<T, TError>> either) => Either = either.ToAsyncEither();
 
+        public IAsyncResult<TResult, TError> FlatMap<TResult>(Func<T, TResult?> flatMapSelector,
+            Func<TError> errorSelector) where TResult : struct => throw new NotImplementedException();
+
+        public IAsyncResult<TResult, TError> FlatMapAsync<TResult>(Func<T, Task<TResult?>> flatMapSelector,
+            Func<TError> errorSelector) where TResult : struct => throw new NotImplementedException();
+
+        public IAsyncResult<TResult, TError> FlatMap<TSelector, TResult>(Func<T, TSelector?> flatMapSelector,
+            Func<T, TSelector, TResult> resultSelector, Func<TError> errorSelector) where TSelector : struct =>
+            throw new NotImplementedException();
+
+        public IAsyncResult<TResult, TError> FlatMapAsync<TSelector, TResult>(Func<T, Task<TSelector?>> flatMapSelector,
+            Func<T, TSelector, TResult> resultSelector, Func<TError> errorSelector) where TSelector : struct =>
+            throw new NotImplementedException();
+
         public IAsyncEither<T, TError> Either { get; }
 
         public static AsyncResult<T, TError> Factory(Task<IEither<T, TError>> result)
