@@ -1,4 +1,5 @@
 ﻿using System;
+using Assertion;
 using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Extensions.Maybe;
 using Xunit;
@@ -9,16 +10,13 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         public void
             Flattening_From_String_Maybe_With_value_To_Nullable_Int_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
-            var lengthMaybe = input.ToMaybe(s => s.Length > 4);
             int? nullabelInt = 2;
 
-            var flatMappedMaybe = lengthMaybe.FlatMap(x => nullabelInt);
-
-            Assert.True(lengthMaybe.HasValue, "Maybe should have value.");
-            Assert.True(nullabelInt.HasValue, "Maybe should have value.");
-            Assert.True(flatMappedMaybe.HasValue,
-                "Maybe should have a value since both maybes will pass with the input supplied.");
-            Assert.Equal(nullabelInt.Value, flatMappedMaybe.Value);
+            input
+                .ToMaybe(s => s.Length > 4)
+                .AssertValue("hello")
+                .FlatMap(x => nullabelInt)
+                .AssertValue(nullabelInt.Value);
         }
 
         [Fact]
@@ -26,47 +24,32 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
             Flattening_From_String_Maybe_With_value_To_Nullable_Int_Without_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
             int? nullableInt = null;
-            var stringMaybe = input.ToMaybeNone(string.IsNullOrEmpty);
 
-            var flatMappedMaybe = stringMaybe.FlatMap(x => nullableInt);
-
-            Assert.True(stringMaybe.HasValue, "Maybe should have value.");
-            Assert.False(nullableInt.HasValue, "Maybe should not have value");
-            Assert.False(flatMappedMaybe.HasValue,
-                "Maybe should not have a value since one of the maybes will not pass.");
-            Assert.Equal(default, flatMappedMaybe.Value);
+            input
+                .ToMaybeNone(string.IsNullOrEmpty)
+                .AssertValue("hello")
+                .FlatMap(x => nullableInt)
+                .AssertNone();
         }
 
         [Fact]
         public void
             Flattening_From_String_Maybe_With_value_To_String_Maybe_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
-            var lengthMaybe = input.ToMaybe(s => s.Length > 4);
-            var stringMaybe = input.ToMaybeNone(string.IsNullOrEmpty);
-
-            var flatMappedMaybe = lengthMaybe.FlatMap(_ => stringMaybe);
-
-            Assert.True(lengthMaybe.HasValue, "Maybe should have value.");
-            Assert.True(stringMaybe.HasValue, "Maybe should have value.");
-            Assert.True(flatMappedMaybe.HasValue,
-                "Maybe should have a value since both maybes will pass with the input supplied.");
-            Assert.Equal(input, flatMappedMaybe.Value);
+            input.ToMaybe(s => s.Length > 4)
+                .AssertValue("hello")
+                .FlatMap(x => input.ToMaybeNone(string.IsNullOrEmpty).AssertValue("hello"))
+                .AssertValue("hello");
         }
 
         [Fact]
         public void
             Flattening_From_String_Maybe_With_value_To_String_Maybe_Without_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
-            var lengthMaybe = input.ToMaybe(s => s.Length > 5);
-            var stringMaybe = input.ToMaybeNone(string.IsNullOrEmpty);
-
-            var flatMappedMaybe = stringMaybe.FlatMap(_ => lengthMaybe);
-
-            Assert.True(stringMaybe.HasValue, "Maybe should have value.");
-            Assert.False(lengthMaybe.HasValue, "Maybe should not have value");
-            Assert.False(flatMappedMaybe.HasValue,
-                "Maybe should not have a value since one of the maybes will not pass.");
-            Assert.Equal(default, flatMappedMaybe.Value);
+            input.ToMaybeNone(string.IsNullOrEmpty)
+                .AssertValue("hello")
+                .FlatMap(x => input.ToMaybe(s => s.Length > 5).AssertNone())
+                .AssertNone();
         }
 
         [Fact]
@@ -109,16 +92,14 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         public void
             ResultSelector_Overload__Flattening_From_String_Maybe_With_value_To_Nullable_Int_Maybe_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
-            var lengthMaybe = input.ToMaybe(s => s.Length > 4);
+
             int? nullabelInt = 2;
 
-            var flatMappedMaybe = lengthMaybe.FlatMap(x => nullabelInt, (s, s1) => s.Length + s1);
-
-            Assert.True(lengthMaybe.HasValue, "Maybe should have value.");
-            Assert.True(nullabelInt.HasValue, "Maybe should have value.");
-            Assert.True(flatMappedMaybe.HasValue,
-                "Maybe should have a value since both maybes will pass with the input supplied.");
-            Assert.Equal(input.Length + nullabelInt, flatMappedMaybe.Value);
+            input
+                .ToMaybe(s => s.Length > 4)
+                .AssertValue("hello")
+                .FlatMap(x => nullabelInt, (x, y) => x.Length + y)
+                .AssertValue(input.Length + nullabelInt.Value);
         }
 
         [Fact]
@@ -126,62 +107,48 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
             ResultSelector_Overload__Flattening_From_String_Maybe_With_value_To_Nullable_Int_Without_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
             int? nullableInt = null;
-            var stringMaybe = input.ToMaybeNone(string.IsNullOrEmpty);
 
-            var flatMappedMaybe = stringMaybe.FlatMap(x => nullableInt, (s, s1) => s.Length + s1);
-
-            Assert.True(stringMaybe.HasValue, "Maybe should have value.");
-            Assert.False(nullableInt.HasValue, "Maybe should not have value");
-            Assert.False(flatMappedMaybe.HasValue,
-                "Maybe should not have a value since one of the maybes will not pass.");
-            Assert.Equal(default, flatMappedMaybe.Value);
+            input
+                .ToMaybeNone(string.IsNullOrEmpty)
+                .AssertValue("hello")
+                .FlatMap(x => nullableInt, (x, y) => x.Length + y)
+                .AssertNone();
         }
 
         [Fact]
         public void
             ResultSelector_Overload__Flattening_From_String_Maybe_With_value_To_String_Maybe_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
-            var lengthMaybe = input.ToMaybe(s => s.Length > 4);
             var stringMaybe = input.ToMaybeNone(string.IsNullOrEmpty);
 
-            var flatMappedMaybe = lengthMaybe.FlatMap(x => stringMaybe, (s, s1) => s.Length + s1.Length);
-
-            Assert.True(lengthMaybe.HasValue, "Maybe should have value.");
-            Assert.True(stringMaybe.HasValue, "Maybe should have value.");
-            Assert.True(flatMappedMaybe.HasValue,
-                "Maybe should have a value since both maybes will pass with the input supplied.");
-            Assert.Equal(input.Length * 2, flatMappedMaybe.Value);
+            input
+                .ToMaybe(s => s.Length > 4)
+                .AssertValue("hello")
+                .FlatMap(x => stringMaybe.AssertValue("hello"), (x, y) => x.Length + y.Length)
+                .AssertValue(input.Length * 2);
         }
 
         [Fact]
         public void
             ResultSelector_Overload__Flattening_From_String_Maybe_With_value_To_String_Maybe_Without_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
-            var lengthMaybe = input.ToMaybe(s => s.Length > 5);
-            var stringMaybe = input.ToMaybeNone(string.IsNullOrEmpty);
 
-            var flatMappedMaybe = stringMaybe.FlatMap(x => lengthMaybe, (x, y) => x.Length + y.Length);
-
-            Assert.True(stringMaybe.HasValue, "Maybe should have value.");
-            Assert.False(lengthMaybe.HasValue, "Maybe should not have value");
-            Assert.False(flatMappedMaybe.HasValue,
-                "Maybe should not have a value since one of the maybes will not pass.");
-            Assert.Equal(default, flatMappedMaybe.Value);
+            input
+                .ToMaybeNone(string.IsNullOrEmpty)
+                .AssertValue("hello")
+                .FlatMap(x => input.ToMaybe(s => s.Length > 5).AssertNone(), (x, y) => x.Length + y.Length);
         }
 
         [Fact]
         public void
             ResultSelector_Overload__Flattening_From_String_Maybe_Without_value_To_Nullable_Int_With_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
-            var lengthMaybe = input.ToMaybe(s => s.Length > 5);
             int? nullableInt = 2;
-            var flatMappedMaybe = lengthMaybe.FlatMap(x => nullableInt, (s, s1) => s.Length + s1);
-
-            Assert.True(nullableInt.HasValue, "Maybe should have value");
-            Assert.False(lengthMaybe.HasValue, "Maybe should not have value");
-            Assert.False(flatMappedMaybe.HasValue,
-                "Maybe should not have a value since one of the maybes will not pass.");
-            Assert.Equal(default, flatMappedMaybe.Value);
+            input
+                .ToMaybe(s => s.Length > 5)
+                .AssertNone()
+                .FlatMap(x => nullableInt, (x, y) => x.Length + y)
+                .AssertNone();
         }
 
         [Fact]
@@ -189,46 +156,33 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
             ResultSelector_Overload__Flattening_From_String_Maybe_Without_value_To_Nullable_int_Without_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
             int? nullableInt = null;
-            var stringMaybe = input.ToMaybe(string.IsNullOrEmpty);
 
-            var flatMappedMaybe = stringMaybe.FlatMap(x => nullableInt, (s, s1) => s.Length + s1);
-
-            Assert.False(stringMaybe.HasValue, "Maybe should have value");
-            Assert.False(nullableInt.HasValue, "Maybe should not have value");
-            Assert.False(flatMappedMaybe.HasValue,
-                "Maybe should not have a value since both of the maybes will not pass.");
-            Assert.Equal(default, flatMappedMaybe.Value);
+            input
+                .ToMaybe(string.IsNullOrEmpty)
+                .AssertNone()
+                .FlatMap(x => nullableInt)
+                .AssertNone();
         }
 
         [Fact]
         public void
             ResultSelector_Overload__Flattening_From_String_Maybe_Without_value_To_String_Maybe_With_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
-            var lengthMaybe = input.ToMaybe(s => s.Length > 5);
-            var stringMaybe = input.ToMaybeNone(string.IsNullOrEmpty);
-            var flatMappedMaybe = lengthMaybe.FlatMap(x => stringMaybe, (x, y) => x.Length + y.Length);
-
-            Assert.True(stringMaybe.HasValue, "Maybe should have value");
-            Assert.False(lengthMaybe.HasValue, "Maybe should not have value");
-            Assert.False(flatMappedMaybe.HasValue,
-                "Maybe should not have a value since one of the maybes will not pass.");
-            Assert.Equal(default, flatMappedMaybe.Value);
+            input.ToMaybe(s => s.Length > 5)
+                .AssertNone()
+                .FlatMap(x => input.ToMaybeNone(string.IsNullOrEmpty).AssertValue("hello"),
+                    (x, y) => x.Length + y.Length);
         }
 
         [Fact]
         public void
             ResultSelector_Overload__Flattening_From_String_Maybe_Without_value_To_String_Maybe_Without_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
-            var lengthMaybe = input.ToMaybe(s => s.Length > 5);
-            var stringMaybe = input.ToMaybe(string.IsNullOrEmpty);
 
-            var flatMappedMaybe = stringMaybe.FlatMap(x => lengthMaybe, (s, s1) => s.Length + s1.Length);
-
-            Assert.False(stringMaybe.HasValue, "Maybe should have value");
-            Assert.False(lengthMaybe.HasValue, "Maybe should not have value");
-            Assert.False(flatMappedMaybe.HasValue,
-                "Maybe should not have a value since both of the maybes will not pass.");
-            Assert.Equal(default, flatMappedMaybe.Value);
+            input
+                .ToMaybe(string.IsNullOrEmpty).AssertNone()
+                .FlatMap(x => input.ToMaybe(s => s.Length > 5).AssertNone())
+                .AssertNone();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Assertion;
 using Lemonad.ErrorHandling.Exceptions;
 using Lemonad.ErrorHandling.Extensions;
 using Xunit;
@@ -7,10 +8,7 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
     public class ToMaybeNoneTests {
         [Fact]
         public void Empty_String() {
-            var noneWhenStringIsNullOrEmpty = string.Empty.ToMaybeNone(string.IsNullOrWhiteSpace);
-
-            Assert.False(noneWhenStringIsNullOrEmpty.HasValue);
-            Assert.Equal(default, noneWhenStringIsNullOrEmpty.Value);
+            string.Empty.ToMaybeNone(string.IsNullOrWhiteSpace).AssertNone();
         }
 
         [Fact]
@@ -26,10 +24,7 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
 
         [Fact]
         public void String_With_Content() {
-            var noneWhenStringIsNullOrEmpty = "hello".ToMaybeNone(string.IsNullOrWhiteSpace);
-
-            Assert.True(noneWhenStringIsNullOrEmpty.HasValue);
-            Assert.Equal("hello", noneWhenStringIsNullOrEmpty.Value);
+            "hello".ToMaybeNone(string.IsNullOrWhiteSpace).AssertValue("hello");
         }
     }
 }

@@ -1,24 +1,17 @@
 ﻿using System;
+using Assertion;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
     public class MapTests {
         [Fact]
         public void Mapping_Integer_With_Multiplication() {
-            var maybe = ErrorHandling.Maybe.Value(20).Map(s => s * 2);
-
-            Assert.True(maybe.HasValue,
-                "Should have value since value is not null and no failed predicates has been used.");
-            Assert.Equal(40, maybe.Value);
+            ErrorHandling.Maybe.Value(20).Map(s => s * 2).AssertValue(40);
         }
 
         [Fact]
         public void Mapping_String_Length() {
-            var maybe = ErrorHandling.Maybe.Value("hello").Map(s => s.Length);
-
-            Assert.True(maybe.HasValue,
-                "Should have value since value is not null and no failed predicates has been used.");
-            Assert.Equal(5, maybe.Value);
+            ErrorHandling.Maybe.Value("hello").Map(s => s.Length).AssertValue(5);
         }
 
         [Fact]

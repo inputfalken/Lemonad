@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Assertion;
 using Lemonad.ErrorHandling.Extensions.Result.Enumerable;
 using Xunit;
 
