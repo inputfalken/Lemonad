@@ -7,14 +7,18 @@ namespace Lemonad.ErrorHandling {
         T Value { get; }
         IAsyncMaybe<T> Do(Action action);
         IAsyncMaybe<T> DoAsync(Func<Task> action);
-        IAsyncMaybe<T> DoWith(Action<T> someAction);
+        IAsyncMaybe<T> DoWith(Action<T> action);
         IAsyncMaybe<T> DoWithAsync(Func<T, Task> someAction);
         IAsyncMaybe<T> Filter(Func<T, bool> predicate);
         IAsyncMaybe<T> Flatten<TResult>(Func<T, IMaybe<TResult>> selector);
         IAsyncMaybe<T> FlattenAsync<TResult>(Func<T, IAsyncMaybe<TResult>> selector);
         IAsyncMaybe<T> IsNoneWhen(Func<T, bool> predicate);
-        IAsyncMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> flatMapSelector);
-        IAsyncMaybe<TResult> FlatMapAsync<TResult>(Func<T, IAsyncMaybe<TResult>> flatMapSelector);
+        IAsyncMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> selector);
+        IAsyncMaybe<TResult> FlatMap<TResult>(Func<T, TResult?> selector) where TResult : struct;
+        IAsyncMaybe<TResult> FlatMapAsync<TResult>(Func<T, Task<TResult?>> selector) where TResult : struct;
+        IAsyncMaybe<TResult> FlatMap<TSelector,TResult>(Func<T, TSelector?> selector, Func<T, TSelector, TResult> resultSelector) where TSelector : struct;
+        IAsyncMaybe<TResult> FlatMapAsync<TSelector, TResult>(Func<T, Task<TSelector?>> selector, Func<T, TSelector, TResult> resultSelector) where TSelector : struct;
+        IAsyncMaybe<TResult> FlatMapAsync<TResult>(Func<T, IAsyncMaybe<TResult>> selector);
         IAsyncMaybe<TResult> Map<TResult>(Func<T, TResult> selector);
         Task Match(Action<T> someAction, Action noneAction);
         Task<TResult> Match<TResult>(Func<T, TResult> someSelector, Func<TResult> noneSelector);
