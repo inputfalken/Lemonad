@@ -17,47 +17,79 @@ namespace Lemonad.ErrorHandling.Internal {
         public IAsyncResult<TResult, TError> FlatMap<TResult>(
             Func<T, TResult?> flatMapSelector,
             Func<TError> errorSelector
-        ) where TResult : struct => FlatMap(flatMapSelector.Compose(x => x.ToResult(errorSelector)));
+        ) where TResult : struct {
+            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return FlatMap(flatMapSelector.Compose(x => x.ToResult(errorSelector)));
+        }
 
         public IAsyncResult<TResult, TError> FlatMapAsync<TResult>(
             Func<T, Task<TResult?>> flatMapSelector,
             Func<TError> errorSelector
-        ) where TResult : struct => FlatMapAsync(flatMapSelector.Compose(x => x.ToAsyncResult(errorSelector)));
+        ) where TResult : struct {
+            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return FlatMapAsync(flatMapSelector.Compose(x => x.ToAsyncResult(errorSelector)));
+        }
 
         public IAsyncResult<TResult, TError> FlatMap<TSelector, TResult>(
             Func<T, TSelector?> flatMapSelector,
             Func<T, TSelector, TResult> resultSelector,
             Func<TError> errorSelector
-        ) where TSelector : struct =>
-            FlatMap(x => flatMapSelector.Compose(y => y.ToResult(errorSelector))(x).Map(y => resultSelector(x, y)));
+        ) where TSelector : struct {
+            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return FlatMap(x =>
+                flatMapSelector.Compose(y => y.ToResult(errorSelector))(x).Map(y => resultSelector(x, y)));
+        }
 
-        public IAsyncResult<TResult, TError> FlatMapAsync<TSelector, TResult>(Func<T, Task<TSelector?>> flatMapSelector,
-            Func<T, TSelector, TResult> resultSelector, Func<TError> errorSelector) where TSelector : struct =>
-            FlatMapAsync(x =>
+        public IAsyncResult<TResult, TError> FlatMapAsync<TSelector, TResult>(
+            Func<T, Task<TSelector?>> flatMapSelector,
+            Func<T, TSelector, TResult> resultSelector,
+            Func<TError> errorSelector
+        ) where TSelector : struct {
+            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return FlatMapAsync(x =>
                 flatMapSelector.Compose(y => y.ToAsyncResult(errorSelector))(x).Map(y => resultSelector(x, y)));
+        }
 
         public IAsyncEither<T, TError> Either { get; }
 
-        public static AsyncResult<T, TError> Factory(Task<IEither<T, TError>> result)
-            => new AsyncResult<T, TError>(FactoryInternal(result));
+        public static AsyncResult<T, TError> Factory(Task<IEither<T, TError>> result) {
+            if (result is null) throw new ArgumentNullException(nameof(result));
+            return new AsyncResult<T, TError>(FactoryInternal(result));
+        }
 
         public static AsyncResult<T, TError> ValueFactory(in T value)
             => new AsyncResult<T, TError>(Task.FromResult(Result.Value<T, TError>(value).Either));
 
-        private static async Task<IEither<T, TError>> FactoryInternal(Task<IEither<T, TError>> value)
-            => await value.ConfigureAwait(false);
+        private static async Task<IEither<T, TError>> FactoryInternal(Task<IEither<T, TError>> value) {
+            if (value is null) throw new ArgumentNullException(nameof(value));
+            return await value.ConfigureAwait(false);
+        }
 
-        private static async Task<IEither<T, TError>> ValueFactoryInternal(Task<T> value)
-            => Result.Value<T, TError>(await value.ConfigureAwait(false)).Either;
+        private static async Task<IEither<T, TError>> ValueFactoryInternal(Task<T> value) {
+            if (value is null) throw new ArgumentNullException(nameof(value));
+            return Result.Value<T, TError>(await value.ConfigureAwait(false)).Either;
+        }
 
-        private static async Task<IEither<T, TError>> ErrorFactoryInternal(Task<TError> error)
-            => Result.Error<T, TError>(await error.ConfigureAwait(false)).Either;
+        private static async Task<IEither<T, TError>> ErrorFactoryInternal(Task<TError> error) {
+            if (error is null) throw new ArgumentNullException(nameof(error));
+            return Result.Error<T, TError>(await error.ConfigureAwait(false)).Either;
+        }
 
-        public static AsyncResult<T, TError> ValueFactory(Task<T> value)
-            => new AsyncResult<T, TError>(ValueFactoryInternal(value));
+        public static AsyncResult<T, TError> ValueFactory(Task<T> value) {
+            if (value is null) throw new ArgumentNullException(nameof(value));
+            return new AsyncResult<T, TError>(ValueFactoryInternal(value));
+        }
 
-        public static AsyncResult<T, TError> ErrorFactory(Task<TError> error)
-            => new AsyncResult<T, TError>(ErrorFactoryInternal(error));
+        public static AsyncResult<T, TError> ErrorFactory(Task<TError> error) {
+            if (error is null) throw new ArgumentNullException(nameof(error));
+            return new AsyncResult<T, TError>(ErrorFactoryInternal(error));
+        }
 
         public static AsyncResult<T, TError> ErrorFactory(in TError error)
             => new AsyncResult<T, TError>(Task.FromResult(Result.Error<T, TError>(error).Either));
@@ -69,17 +101,25 @@ namespace Lemonad.ErrorHandling.Internal {
             Func<T, TInner, TResult> resultSelector,
             Func<TError> errorSelector,
             IEqualityComparer<TKey> comparer
-        ) => new AsyncResult<TResult, TError>(
-            EitherMethods.JoinAsync(
-                Either.ToTaskEither(),
-                inner.Either.ToTaskEither(),
-                outerKeySelector,
-                innerKeySelector,
-                resultSelector,
-                errorSelector,
-                comparer
-            )
-        );
+        ) {
+            if (inner is null) throw new ArgumentNullException(nameof(inner));
+            if (outerKeySelector is null) throw new ArgumentNullException(nameof(outerKeySelector));
+            if (innerKeySelector is null) throw new ArgumentNullException(nameof(innerKeySelector));
+            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            if (comparer is null) throw new ArgumentNullException(nameof(comparer));
+            return new AsyncResult<TResult, TError>(
+                EitherMethods.JoinAsync(
+                    Either.ToTaskEither(),
+                    inner.Either.ToTaskEither(),
+                    outerKeySelector,
+                    innerKeySelector,
+                    resultSelector,
+                    errorSelector,
+                    comparer
+                )
+            );
+        }
 
         public IAsyncResult<TResult, TError> JoinAsync<TInner, TKey, TResult>(
             IAsyncResult<TInner, TError> inner,
@@ -87,33 +127,55 @@ namespace Lemonad.ErrorHandling.Internal {
             Func<TInner, TKey> innerKeySelector,
             Func<T, TInner, TResult> resultSelector,
             Func<TError> errorSelector
-        ) => new AsyncResult<TResult, TError>(
-            EitherMethods.JoinAsync(
-                Either.ToTaskEither(),
-                inner.Either.ToTaskEither(),
-                outerKeySelector,
-                innerKeySelector,
-                resultSelector,
-                errorSelector
-            )
-        );
+        ) {
+            if (inner is null) throw new ArgumentNullException(nameof(inner));
+            if (outerKeySelector is null) throw new ArgumentNullException(nameof(outerKeySelector));
+            if (innerKeySelector is null) throw new ArgumentNullException(nameof(innerKeySelector));
+            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return new AsyncResult<TResult, TError>(
+                EitherMethods.JoinAsync(
+                    Either.ToTaskEither(),
+                    inner.Either.ToTaskEither(),
+                    outerKeySelector,
+                    innerKeySelector,
+                    resultSelector,
+                    errorSelector
+                )
+            );
+        }
 
         public IAsyncResult<TResult, TError> ZipAsync<TOther, TResult>(
             IAsyncResult<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector
-        ) => new AsyncResult<TResult, TError>(EitherMethods.ZipAsync(Either.ToTaskEither(), other.Either.ToTaskEither(),
-            resultSelector));
+        ) {
+            if (other is null) throw new ArgumentNullException(nameof(other));
+            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+            return new AsyncResult<TResult, TError>(EitherMethods.ZipAsync(Either.ToTaskEither(),
+                other.Either.ToTaskEither(),
+                resultSelector));
+        }
 
-        public IAsyncResult<TResult, TError> Join<TInner, TKey, TResult>(IResult<TInner, TError> inner,
-            Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
-            Func<T, TInner, TResult> resultSelector, Func<TError> errorSelector)
-            => JoinAsync(
+        public IAsyncResult<TResult, TError> Join<TInner, TKey, TResult>(
+            IResult<TInner, TError> inner,
+            Func<T, TKey> outerKeySelector, 
+            Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector, 
+            Func<TError> errorSelector
+        ) {
+            if (inner is null) throw new ArgumentNullException(nameof(inner));
+            if (outerKeySelector is null) throw new ArgumentNullException(nameof(outerKeySelector));
+            if (innerKeySelector is null) throw new ArgumentNullException(nameof(innerKeySelector));
+            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return JoinAsync(
                 inner.ToAsyncResult(),
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
                 errorSelector
             );
+        }
 
         public IAsyncResult<TResult, TError> Join<TInner, TKey, TResult>(
             IResult<TInner, TError> inner,
@@ -122,8 +184,14 @@ namespace Lemonad.ErrorHandling.Internal {
             Func<T, TInner, TResult> resultSelector,
             Func<TError> errorSelector,
             IEqualityComparer<TKey> comparer
-        )
-            => JoinAsync(
+        ) {
+            if (inner is null) throw new ArgumentNullException(nameof(inner));
+            if (outerKeySelector is null) throw new ArgumentNullException(nameof(outerKeySelector));
+            if (innerKeySelector is null) throw new ArgumentNullException(nameof(innerKeySelector));
+            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            if (comparer is null) throw new ArgumentNullException(nameof(comparer));
+            return JoinAsync(
                 inner.ToAsyncResult(),
                 outerKeySelector,
                 innerKeySelector,
@@ -131,149 +199,244 @@ namespace Lemonad.ErrorHandling.Internal {
                 errorSelector,
                 comparer
             );
+        }
 
         public IAsyncResult<TResult, TError> Zip<TOther, TResult>(
             IResult<TOther, TError> other,
             Func<T, TOther, TResult> resultSelector
-        ) => ZipAsync(other.ToAsyncResult(), resultSelector);
+        ) {
+            if (other is null) throw new ArgumentNullException(nameof(other));
+            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+            return ZipAsync(other.ToAsyncResult(), resultSelector);
+        }
 
         public IAsyncResult<T, TError> Flatten<TResult, TErrorResult>(
             Func<T, IResult<TResult, TErrorResult>> selector,
             Func<TErrorResult, TError> errorSelector
-        ) => FlattenAsync(selector.Compose(Index.ToAsyncResult), errorSelector);
+        ) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return FlattenAsync(selector.Compose(Index.ToAsyncResult), errorSelector);
+        }
 
         public IAsyncResult<T, TError> Flatten<TResult>(
             Func<T, IResult<TResult, TError>> selector
-        ) => FlattenAsync(selector.Compose(Index.ToAsyncResult));
+        ) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            return FlattenAsync(selector.Compose(Index.ToAsyncResult));
+        }
 
         public IAsyncResult<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
             Func<T, IResult<TResult, TErrorResult>> flatMapSelector,
             Func<TError, TErrorResult> errorSelector
-        ) => FullFlatMapAsync(flatMapSelector.Compose(Index.ToAsyncResult), errorSelector);
+        ) {
+            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return FullFlatMapAsync(flatMapSelector.Compose(Index.ToAsyncResult), errorSelector);
+        }
 
         public IAsyncResult<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
             Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector
-        ) => FullFlatMapAsync(flatMapSelector.Compose(Index.ToAsyncResult), resultSelector, errorSelector);
+        ) {
+            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return FullFlatMapAsync(flatMapSelector.Compose(Index.ToAsyncResult), resultSelector, errorSelector);
+        }
 
         public IAsyncResult<TResult, TError> FlatMap<TResult>(
             Func<T, IResult<TResult, TError>> flatSelector
-        ) => FlatMapAsync(flatSelector.Compose(Index.ToAsyncResult));
+        ) {
+            if (flatSelector is null) throw new ArgumentNullException(nameof(flatSelector));
+            return FlatMapAsync(flatSelector.Compose(Index.ToAsyncResult));
+        }
 
         public IAsyncResult<TResult, TError> FlatMap<TSelector, TResult>(
             Func<T, IResult<TSelector, TError>> flatSelector,
             Func<T, TSelector, TResult> resultSelector
-        ) => FlatMapAsync(flatSelector.Compose(Index.ToAsyncResult), resultSelector);
+        ) {
+            if (flatSelector is null) throw new ArgumentNullException(nameof(flatSelector));
+            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+            return FlatMapAsync(flatSelector.Compose(Index.ToAsyncResult), resultSelector);
+        }
 
-        public IAsyncResult<T, TError> Filter(Func<T, bool> predicate, Func<T, TError> errorSelector)
-            => new AsyncResult<T, TError>(EitherMethods.FilterAsync(Either.ToTaskEither(), predicate, errorSelector));
+        public IAsyncResult<T, TError> Filter(Func<T, bool> predicate, Func<T, TError> errorSelector) {
+            if (predicate is null) throw new ArgumentNullException(nameof(predicate));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return new AsyncResult<T, TError>(
+                EitherMethods.FilterAsync(Either.ToTaskEither(), predicate, errorSelector));
+        }
 
-        public IAsyncResult<T, TError> FilterAsync(Func<T, Task<bool>> predicate, Func<T, TError> errorSelector)
-            => new AsyncResult<T, TError>(
+        public IAsyncResult<T, TError> FilterAsync(Func<T, Task<bool>> predicate, Func<T, TError> errorSelector) {
+            if (predicate is null) throw new ArgumentNullException(nameof(predicate));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return new AsyncResult<T, TError>(
                 EitherMethods.FilterAsyncPredicate(Either.ToTaskEither(), predicate, errorSelector));
+        }
 
         public IAsyncResult<T, TError> IsErrorWhen(
             Func<T, bool> predicate,
             Func<T, TError> errorSelector
-        ) => new AsyncResult<T, TError>(EitherMethods.IsErrorWhenAsync(Either.ToTaskEither(), predicate,
-            errorSelector));
+        ) {
+            if (predicate is null) throw new ArgumentNullException(nameof(predicate));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return new AsyncResult<T, TError>(EitherMethods.IsErrorWhenAsync(Either.ToTaskEither(), predicate,
+                errorSelector));
+        }
 
         public IAsyncResult<T, TError> IsErrorWhenAsync(
             Func<T, Task<bool>> predicate,
-            Func<T, TError> errorSelector)
-            => new AsyncResult<T, TError>(
+            Func<T, TError> errorSelector
+            ) {
+            if (predicate is null) throw new ArgumentNullException(nameof(predicate));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return new AsyncResult<T, TError>(
                 EitherMethods.IsErrorWhenAsyncPredicate(Either.ToTaskEither(), predicate, errorSelector));
+        }
 
-        public IAsyncResult<TResult, TError> Map<TResult>(Func<T, TResult> selector)
-            => new AsyncResult<TResult, TError>(EitherMethods.MapAsync(Either.ToTaskEither(), selector));
+        public IAsyncResult<TResult, TError> Map<TResult>(Func<T, TResult> selector) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            return new AsyncResult<TResult, TError>(EitherMethods.MapAsync(Either.ToTaskEither(), selector));
+        }
 
-        public IAsyncResult<TResult, TError> MapAsync<TResult>(Func<T, Task<TResult>> selector)
-            => new AsyncResult<TResult, TError>(EitherMethods.MapAsyncSelector(Either.ToTaskEither(), selector));
+        public IAsyncResult<TResult, TError> MapAsync<TResult>(Func<T, Task<TResult>> selector) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            return new AsyncResult<TResult, TError>(EitherMethods.MapAsyncSelector(Either.ToTaskEither(), selector));
+        }
 
-        public IAsyncResult<T, TErrorResult> MapError<TErrorResult>(Func<TError, TErrorResult> selector)
-            => new AsyncResult<T, TErrorResult>(EitherMethods.MapErrorAsync(Either.ToTaskEither(), selector));
+        public IAsyncResult<T, TErrorResult> MapError<TErrorResult>(Func<TError, TErrorResult> selector) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            return new AsyncResult<T, TErrorResult>(EitherMethods.MapErrorAsync(Either.ToTaskEither(), selector));
+        }
 
-        public IAsyncResult<T, TErrorResult> MapErrorAsync<TErrorResult>(Func<TError, Task<TErrorResult>> selector)
-            => new AsyncResult<T, TErrorResult>(EitherMethods.MapErrorAsyncSelector(Either.ToTaskEither(), selector));
+        public IAsyncResult<T, TErrorResult> MapErrorAsync<TErrorResult>(Func<TError, Task<TErrorResult>> selector) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            return new AsyncResult<T, TErrorResult>(
+                EitherMethods.MapErrorAsyncSelector(Either.ToTaskEither(), selector));
+        }
 
         /// <inheritdoc cref="Result{T,TError}.Do" />
-        public IAsyncResult<T, TError> Do(Action action)
-            => new AsyncResult<T, TError>(EitherMethods.Do(Either.ToTaskEither(), action));
+        public IAsyncResult<T, TError> Do(Action action) {
+            if (action is null) throw new ArgumentNullException(nameof(action));
+            return new AsyncResult<T, TError>(EitherMethods.Do(Either.ToTaskEither(), action));
+        }
 
-        public IAsyncResult<T, TError> DoAsync(Func<Task> selector)
-            => new AsyncResult<T, TError>(EitherMethods.DoAsync(Either.ToTaskEither(), selector));
+        public IAsyncResult<T, TError> DoAsync(Func<Task> selector) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            return new AsyncResult<T, TError>(EitherMethods.DoAsync(Either.ToTaskEither(), selector));
+        }
 
-        public IAsyncResult<T, TError> DoWithAsync(Func<T, Task> selector) =>
-            new AsyncResult<T, TError>(EitherMethods.DoWithAsync(Either.ToTaskEither(), selector));
+        public IAsyncResult<T, TError> DoWithAsync(Func<T, Task> selector) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            return new AsyncResult<T, TError>(EitherMethods.DoWithAsync(Either.ToTaskEither(), selector));
+        }
 
-        public IAsyncResult<T, TError> DoWithErrorAsync(Func<TError, Task> action)
-            => new AsyncResult<T, TError>(EitherMethods.DoWithErrorAsync(Either.ToTaskEither(), action));
+        public IAsyncResult<T, TError> DoWithErrorAsync(Func<TError, Task> action) {
+            if (action is null) throw new ArgumentNullException(nameof(action));
+            return new AsyncResult<T, TError>(EitherMethods.DoWithErrorAsync(Either.ToTaskEither(), action));
+        }
 
         /// <inheritdoc cref="Result{T,TError}.DoWithError" />
-        public IAsyncResult<T, TError> DoWithError(Action<TError> action)
-            => new AsyncResult<T, TError>(EitherMethods.DoWithError(Either.ToTaskEither(), action));
+        public IAsyncResult<T, TError> DoWithError(Action<TError> action) {
+            if (action is null) throw new ArgumentNullException(nameof(action));
+            return new AsyncResult<T, TError>(EitherMethods.DoWithError(Either.ToTaskEither(), action));
+        }
 
         /// <inheritdoc cref="Result{T,TError}.DoWith" />
-        public IAsyncResult<T, TError> DoWith(Action<T> action)
-            => new AsyncResult<T, TError>(EitherMethods.DoWithAsync(Either.ToTaskEither(), action));
+        public IAsyncResult<T, TError> DoWith(Action<T> action) {
+            if (action is null) throw new ArgumentNullException(nameof(action));
+            return new AsyncResult<T, TError>(EitherMethods.DoWithAsync(Either.ToTaskEither(), action));
+        }
 
         /// <inheritdoc cref="Result{T,TError}.FullMap{TResult,TErrorResult}" />
         public IAsyncResult<TResult, TErrorResult> FullMap<TResult, TErrorResult>(
             Func<T, TResult> selector,
             Func<TError, TErrorResult> errorSelector
-        ) => new AsyncResult<TResult, TErrorResult>(EitherMethods.FullMapAsync(Either.ToTaskEither(), selector,
-            errorSelector));
+        ) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return new AsyncResult<TResult, TErrorResult>(EitherMethods.FullMapAsync(Either.ToTaskEither(), selector,
+                errorSelector));
+        }
 
         public IAsyncResult<TResult, TErrorResult> FullMapAsync<TResult, TErrorResult>(
             Func<T, TResult> selector,
             Func<TError, Task<TErrorResult>> errorSelector
-        ) => new AsyncResult<TResult, TErrorResult>(EitherMethods.FullMapAsync(Either.ToTaskEither(), selector,
-            errorSelector));
+        ) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return new AsyncResult<TResult, TErrorResult>(EitherMethods.FullMapAsync(Either.ToTaskEither(), selector,
+                errorSelector));
+        }
 
         public IAsyncResult<TResult, TErrorResult> FullMapAsync<TResult, TErrorResult>(
             Func<T, Task<TResult>> selector,
             Func<TError, Task<TErrorResult>> errorSelector
-        ) => new AsyncResult<TResult, TErrorResult>(EitherMethods.FullMapAsync(Either.ToTaskEither(), selector,
-            errorSelector));
+        ) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return new AsyncResult<TResult, TErrorResult>(EitherMethods.FullMapAsync(Either.ToTaskEither(), selector,
+                errorSelector));
+        }
 
         public IAsyncResult<TResult, TErrorResult> FullMapAsync<TResult, TErrorResult>(
             Func<T, Task<TResult>> selector,
             Func<TError, TErrorResult> errorSelector
-        ) => new AsyncResult<TResult, TErrorResult>(EitherMethods.FullMapAsync(Either.ToTaskEither(), selector,
-            errorSelector));
+        ) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return new AsyncResult<TResult, TErrorResult>(EitherMethods.FullMapAsync(Either.ToTaskEither(), selector,
+                errorSelector));
+        }
 
         /// <inheritdoc cref="Result{T,TError}.Match{TResult}" />
         public Task<TResult> Match<TResult>(
             Func<T, TResult> selector,
             Func<TError, TResult> errorSelector
-        ) => EitherMethods.MatchAsync(Either.ToTaskEither(), selector, errorSelector);
+        ) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return EitherMethods.MatchAsync(Either.ToTaskEither(), selector, errorSelector);
+        }
 
         /// <inheritdoc cref="Result{T,TError}.Match" />
-        public Task Match(Action<T> action, Action<TError> errorAction)
-            => EitherMethods.MatchAsync(Either.ToTaskEither(), action, errorAction);
+        public Task Match(Action<T> action, Action<TError> errorAction) {
+            if (action is null) throw new ArgumentNullException(nameof(action));
+            if (errorAction is null) throw new ArgumentNullException(nameof(errorAction));
+            return EitherMethods.MatchAsync(Either.ToTaskEither(), action, errorAction);
+        }
 
-        public IAsyncResult<TResult, TError> FlatMapAsync<TResult>(Func<T, IAsyncResult<TResult, TError>> flatSelector)
-            => new AsyncResult<TResult, TError>(
+        public IAsyncResult<TResult, TError> FlatMapAsync<TResult>(Func<T, IAsyncResult<TResult, TError>> flatSelector) {
+            if (flatSelector is null) throw new ArgumentNullException(nameof(flatSelector));
+            return new AsyncResult<TResult, TError>(
                 EitherMethods.FlatMapAsync(
                     Either.ToTaskEither(),
                     flatSelector.Compose(y => y.Either.ToTaskEither())
                 )
             );
+        }
 
         public IAsyncResult<TResult, TError> FlatMapAsync<TSelector, TResult>(
             Func<T, IAsyncResult<TSelector, TError>> flatSelector,
             Func<T, TSelector, TResult> resultSelector
-        ) => new AsyncResult<TResult, TError>(
-            EitherMethods.FlatMapAsync(
-                Either.ToTaskEither(),
-                flatSelector.Compose(y => y.Either.ToTaskEither()),
-                resultSelector
-            )
-        );
+        ) {
+            if (flatSelector is null) throw new ArgumentNullException(nameof(flatSelector));
+            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+            return new AsyncResult<TResult, TError>(
+                EitherMethods.FlatMapAsync(
+                    Either.ToTaskEither(),
+                    flatSelector.Compose(y => y.Either.ToTaskEither()),
+                    resultSelector
+                )
+            );
+        }
 
         public IAsyncResult<TResult, TError> FlatMapAsync<TResult, TErrorResult>(
             Func<T, IAsyncResult<TResult, TErrorResult>> flatMapSelector, Func<TErrorResult, TError> errorSelector) {
+            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
             return new AsyncResult<TResult, TError>(
                 EitherMethods.FlatMapAsync(Either.ToTaskEither(),
                     flatMapSelector.Compose(x => x.Either.ToTaskEither()),
@@ -285,14 +448,19 @@ namespace Lemonad.ErrorHandling.Internal {
             Func<T, IAsyncResult<TFlatMap, TErrorResult>> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TErrorResult, TError> errorSelector
-        ) => new AsyncResult<TResult, TError>(
-            EitherMethods.FlatMapAsync(
-                Either.ToTaskEither(),
-                flatMapSelector.Compose(y => y.Either.ToTaskEither()),
-                resultSelector,
-                errorSelector
-            )
-        );
+        ) {
+            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return new AsyncResult<TResult, TError>(
+                EitherMethods.FlatMapAsync(
+                    Either.ToTaskEither(),
+                    flatMapSelector.Compose(y => y.Either.ToTaskEither()),
+                    resultSelector,
+                    errorSelector
+                )
+            );
+        }
 
         /// <inheritdoc cref="Result{T,TError}.Cast{TResult}" />
         public IAsyncResult<TResult, TError> Cast<TResult>()
@@ -301,17 +469,23 @@ namespace Lemonad.ErrorHandling.Internal {
         public IAsyncResult<T, TError> FlattenAsync<TResult, TErrorResult>(
             Func<T, IAsyncResult<TResult, TErrorResult>> selector,
             Func<TErrorResult, TError> errorSelector
-        ) => new AsyncResult<T, TError>(
-            EitherMethods.FlattenAsync(
-                Either.ToTaskEither(),
-                selector.Compose(y => y.Either.ToTaskEither()),
-                errorSelector
-            )
-        );
+        ) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return new AsyncResult<T, TError>(
+                EitherMethods.FlattenAsync(
+                    Either.ToTaskEither(),
+                    selector.Compose(y => y.Either.ToTaskEither()),
+                    errorSelector
+                )
+            );
+        }
 
-        public IAsyncResult<T, TError> FlattenAsync<TResult>(Func<T, IAsyncResult<TResult, TError>> selector)
-            => new AsyncResult<T, TError>(EitherMethods.FlattenAsync(Either.ToTaskEither(),
+        public IAsyncResult<T, TError> FlattenAsync<TResult>(Func<T, IAsyncResult<TResult, TError>> selector) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            return new AsyncResult<T, TError>(EitherMethods.FlattenAsync(Either.ToTaskEither(),
                 selector.Compose(y => y.Either.ToTaskEither())));
+        }
 
         /// <inheritdoc cref="Result{T,TError}.FullCast{TResult,TErrorResult}" />
         public IAsyncResult<TResult, TErrorResult> FullCast<TResult, TErrorResult>()
@@ -330,32 +504,43 @@ namespace Lemonad.ErrorHandling.Internal {
             => new AsyncResult<T, TResult>(EitherMethods.CastErrorAsync<T, TResult, TError>(Either.ToTaskEither()));
 
         /// <inheritdoc cref="Result{T,TError}.SafeCast{TResult}" />
-        public IAsyncResult<TResult, TError> SafeCast<TResult>(Func<T, TError> errorSelector)
-            => new AsyncResult<TResult, TError>(
+        public IAsyncResult<TResult, TError> SafeCast<TResult>(Func<T, TError> errorSelector) {
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return new AsyncResult<TResult, TError>(
                 EitherMethods.SafeCastAsync<T, TResult, TError>(Either.ToTaskEither(), errorSelector));
+        }
 
         public IAsyncResult<TResult, TErrorResult> FullFlatMapAsync<TFlatMap, TResult, TErrorResult>(
             Func<T, IAsyncResult<TFlatMap, TErrorResult>> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector
-        ) => new AsyncResult<TResult, TErrorResult>(
-            EitherMethods.FullFlatMapAsync(
-                Either.ToTaskEither(),
-                flatMapSelector.Compose(y => y.Either.ToTaskEither()),
-                resultSelector,
-                errorSelector
-            )
-        );
+        ) {
+            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return new AsyncResult<TResult, TErrorResult>(
+                EitherMethods.FullFlatMapAsync(
+                    Either.ToTaskEither(),
+                    flatMapSelector.Compose(y => y.Either.ToTaskEither()),
+                    resultSelector,
+                    errorSelector
+                )
+            );
+        }
 
         public IAsyncResult<TResult, TErrorResult> FullFlatMapAsync<TResult, TErrorResult>(
             Func<T, IAsyncResult<TResult, TErrorResult>> flatMapSelector,
             Func<TError, TErrorResult> errorSelector
-        ) => new AsyncResult<TResult, TErrorResult>(
-            EitherMethods.FullFlatMapAsync(
-                Either.ToTaskEither(),
-                flatMapSelector.Compose(y => y.Either.ToTaskEither()),
-                errorSelector
-            )
-        );
+        ) {
+            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return new AsyncResult<TResult, TErrorResult>(
+                EitherMethods.FullFlatMapAsync(
+                    Either.ToTaskEither(),
+                    flatMapSelector.Compose(y => y.Either.ToTaskEither()),
+                    errorSelector
+                )
+            );
+        }
     }
 }

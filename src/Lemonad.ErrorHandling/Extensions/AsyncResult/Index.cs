@@ -94,8 +94,10 @@ namespace Lemonad.ErrorHandling.Extensions.AsyncResult {
             return source.Match(selector, x => selector((T) x));
         }
 
-        public static IAsyncResult<T, IReadOnlyList<TError>> Multiple<T, TError>(this IAsyncResult<T, TError> source,
-            params Func<IAsyncResult<T, TError>, IAsyncResult<T, TError>>[] validations) {
+        public static IAsyncResult<T, IReadOnlyList<TError>> Multiple<T, TError>(
+            this IAsyncResult<T, TError> source,
+            params Func<IAsyncResult<T, TError>, IAsyncResult<T, TError>>[] validations
+        ) {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (validations is null) throw new ArgumentNullException(nameof(validations));
             return AsyncResult<T, IReadOnlyList<TError>>.Factory(EitherMethods.MultipleAsync(
