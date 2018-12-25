@@ -22,7 +22,7 @@ phases:
         dotnet test /p:CollectCoverage=true /p:CoverletOutput="$(Build.SourcesDirectory)\results\coverage" test\Lemonad.ErrorHandling.Unit 
         dotnet test /p:CollectCoverage=true /p:CoverletOutput="$(Build.SourcesDirectory)\results\coverage" /p:MergeWith="$(Build.SourcesDirectory)\results\coverage.json" /p:CoverletOutputFormat="opencover" .\test\Lemonad.ErrorHandling.Integration
         dotnet tool install dotnet-reportgenerator-globaltool --tool-path . --version 4.0.4
-        .\reportgenerator -reports:$(Build.SourcesDirectory)\results\coverage.opencover.xml '-targetdir:results' '-reporttypes:HtmlInline_AzurePipelines'
+        .\reportgenerator -reports:$(Build.SourcesDirectory)\results\coverage.opencover.xml '-targetdir:results' '-reporttypes:HTMLInline;HTMLChart'
     displayName: 'Unit testing'
   - task: PublishTestResults@2
     inputs:
