@@ -1,4 +1,6 @@
 using System;
+using System.Threading.Tasks;
+using Lemonad.ErrorHandling.Extensions.Task;
 using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling.Extensions {

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Extensions.Result;
 using Lemonad.ErrorHandling.Extensions.Result.Task;
+using Lemonad.ErrorHandling.Extensions.Task;
 using Lemonad.ErrorHandling.Internal.Either;
 
 namespace Lemonad.ErrorHandling.Internal {
@@ -261,7 +262,8 @@ namespace Lemonad.ErrorHandling.Internal {
 
         public IResult<TResult, TError> FlatMap<TResult, TErrorResult>(
             Func<T, IResult<TResult, TErrorResult>> flatMapSelector,
-            Func<TErrorResult, TError> errorSelector)
+            Func<TErrorResult, TError> errorSelector
+        )
             => new Result<TResult, TError>(
                 EitherMethods.FlatMap(
                     Either,
@@ -273,51 +275,27 @@ namespace Lemonad.ErrorHandling.Internal {
         public IResult<TResult, TError> FlatMap<TResult>(
             Func<T, TResult?> flatMapSelector,
             Func<TError> errorSelector
-        ) where TResult : struct
-            => new Result<TResult, TError>(
-                EitherMethods.FlatMap(
-                    Either,
-                    flatMapSelector.Compose(x => x.FromNullable(errorSelector))
-                )
-            );
+        ) where TResult : struct => FlatMap(flatMapSelector.Compose(x => x.ToResult(errorSelector)));
 
-        public IAsyncResult<TResult, TError> FlatMapAsync<TResult>(Func<T, Task<TResult?>> flatMapSelector,
-            Func<TError> errorSelector) where TResult : struct {
-            return MapAsync(async x => {
-                var result = await flatMapSelector(x).ConfigureAwait(false);
-                return result.ToResult(y => y.HasValue, _ => errorSelector()).Map(y => y.Value);
-            }).FlatMap(x => x);
-        }
+        public IAsyncResult<TResult, TError> FlatMapAsync<TResult>(
+            Func<T, Task<TResult?>> flatMapSelector,
+            Func<TError> errorSelector
+        ) where TResult : struct => FlatMapAsync(flatMapSelector.Compose(x => x.ToAsyncResult(errorSelector)));
 
         public IResult<TResult, TError> FlatMap<TFlatMap, TResult>(
             Func<T, TFlatMap?> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TError> errorSelector
-        ) where TFlatMap : struct {
-            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
-            var tmpThis = this;
-            if (!tmpThis.Either.HasValue) return Result.Error<TResult, TError>(tmpThis.Either.Error);
-            var result = FlatMap(flatMapSelector, errorSelector);
-            return result.Match(
-                x => Result.Value<TResult, TError>(resultSelector(tmpThis.Either.Value, x)),
-                Result.Error<TResult, TError>
-            );
-        }
+        ) where TFlatMap : struct =>
+            FlatMap(x => flatMapSelector.Compose(y => y.ToResult(errorSelector))(x).Map(y => resultSelector(x, y)));
 
         public IAsyncResult<TResult, TError> FlatMapAsync<TFlatMap, TResult>(
             Func<T, Task<TFlatMap?>> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TError> errorSelector
-        ) where TFlatMap : struct {
-            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
-            var tmpThis = this;
-            if (!tmpThis.Either.HasValue) return Result.Error<TResult, TError>(tmpThis.Either.Error).ToAsyncResult();
-            var result = FlatMapAsync(flatMapSelector, errorSelector);
-            return result.Match(
-                x => Result.Value<TResult, TError>(resultSelector(tmpThis.Either.Value, x)),
-                Result.Error<TResult, TError>
-            ).ToAsyncResult();
-        }
+        ) where TFlatMap : struct =>
+            FlatMapAsync(x =>
+                flatMapSelector.Compose(y => y.ToAsyncResult(errorSelector))(x).Map(y => resultSelector(x, y)));
 
         public IResult<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
             Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector,
