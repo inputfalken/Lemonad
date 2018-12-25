@@ -47,7 +47,7 @@ namespace Lemonad.ErrorHandling {
         IResult<T, TResult> CastError<TResult>();
 
         /// <summary>
-        ///     Executes  <paramref name="action" />.
+        ///     Executes <paramref name="action" />.
         /// </summary>
         /// <param name="action">
         ///     Is executed no matter what state <see cref="Result{T,TError}" /> is in.
@@ -78,9 +78,6 @@ namespace Lemonad.ErrorHandling {
         /// <returns>
         ///     <see cref="Result{T,TError}" /> with side effects.
         /// </returns>
-        /// <exception cref="ArgumentNullException">
-        ///     When <paramref name="action" /> is null and needs to be executed.
-        /// </exception>
         /// <returns>
         ///     A <see cref="Result{T,TError}" /> whom may have invoked the <paramref name="action" /> if the current
         ///     <see cref="Result{T,TError}" /> is in a valid state.

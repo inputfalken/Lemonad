@@ -31,7 +31,7 @@ namespace Lemonad.ErrorHandling.Internal {
             _result.Match(someAction, _ => noneAction());
         }
 
-        public IMaybe<T> DoWith(Action<T> someAction) => _result.DoWith(someAction).ToMaybe();
+        public IMaybe<T> DoWith(Action<T> action) => _result.DoWith(action).ToMaybe();
 
         public IMaybe<T> Do(Action action) => _result.Do(action).ToMaybe();
 
@@ -44,19 +44,19 @@ namespace Lemonad.ErrorHandling.Internal {
 
         public IMaybe<T> Filter(Func<T, bool> predicate) => _result.Filter(predicate, arg => Unit.Default).ToMaybe();
 
-        public IMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> flatMapSelector) => flatMapSelector is null
-            ? throw new ArgumentNullException(nameof(flatMapSelector))
+        public IMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> selector) => selector is null
+            ? throw new ArgumentNullException(nameof(selector))
             : _result
-                .FlatMap(x => Index.ToResult(flatMapSelector(x), () => Unit.Default)).ToMaybe();
+                .FlatMap(x => Index.ToResult(selector(x), () => Unit.Default)).ToMaybe();
 
         public IMaybe<TResult> FlatMap<TFlatMap, TResult>(
-            Func<T, IMaybe<TFlatMap>> flatMapSelector,
+            Func<T, IMaybe<TFlatMap>> selector,
             Func<T, TFlatMap, TResult> resultSelector
         ) {
-            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
             if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
             return _result.FlatMap(x =>
-                    flatMapSelector.Compose(y => y.ToResult(() => Unit.Default))(x).Map(y => resultSelector(x, y)))
+                    selector.Compose(y => y.ToResult(() => Unit.Default))(x).Map(y => resultSelector(x, y)))
                 .ToMaybe();
         }
 
@@ -74,11 +74,13 @@ namespace Lemonad.ErrorHandling.Internal {
             : _result.Flatten(x =>
                 Index.ToResult(selector(x), () => Unit.Default)).ToMaybe();
 
-        public IMaybe<TResult> FlatMap<TFlatMap, TResult>(Func<T, TFlatMap?> flatMapSelector,
-            Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct {
-            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+        public IMaybe<TResult> FlatMap<TSelector, TResult>(
+            Func<T, TSelector?> selector,
+            Func<T, TSelector, TResult> resultSelector
+        ) where TSelector : struct {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
             if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
-            return _result.FlatMap(flatMapSelector, resultSelector, () => Unit.Default).ToMaybe();
+            return _result.FlatMap(selector, resultSelector, () => Unit.Default).ToMaybe();
         }
     }
 }

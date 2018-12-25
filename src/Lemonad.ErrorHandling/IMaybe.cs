@@ -33,9 +33,15 @@ namespace Lemonad.ErrorHandling {
         /// </example>
         T Value { get; }
 
+        /// <summary>
+        ///     Executes <paramref name="action" /> no matter what state <see cref="IMaybe{T}"/> is in.
+        /// </summary>
         IMaybe<T> Do(Action action);
 
-        IMaybe<T> DoWith(Action<T> someAction);
+        /// <summary>
+        ///     Executes the <paramref name="action" /> when property <see cref="HasValue"/> is true.
+        /// </summary>
+        IMaybe<T> DoWith(Action<T> action);
 
         /// <summary>
         ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
@@ -48,54 +54,55 @@ namespace Lemonad.ErrorHandling {
         /// <summary>
         ///     Flatmaps another <see cref="Maybe{T}" />.
         /// </summary>
-        /// <param name="flatMapSelector">
+        /// <param name="selector">
         ///     A function who expects a <see cref="Maybe{T}" /> as its return type.
         /// </param>
         /// <typeparam name="TResult">
-        ///     The type <typeparamref name="T" /> returned from the <paramref name="flatMapSelector" /> function.
+        ///     The type <typeparamref name="T" /> returned from the <paramref name="selector" /> function.
         /// </typeparam>
-        IMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> flatMapSelector);
+        IMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> selector);
 
         /// <summary>
         ///     Flatmaps another <see cref="Maybe{T}" />.
         /// </summary>
-        /// <param name="flatMapSelector">
+        /// <param name="selector">
         ///     A function who expects a <see cref="Maybe{T}" /> as its return type.
         /// </param>
         /// <param name="resultSelector">
-        ///     A function whose in-parameters are <typeparamref name="T" /> and <typeparamref name="TFlatMap" /> which can return
+        ///     A function whose in-parameters are <typeparamref name="T" /> and <typeparamref name="TSelector" /> which can return
         ///     any type.
         /// </param>
-        /// <typeparam name="TFlatMap">
-        ///     The value type of the <see cref="Result{T,TError}" /> returned by the <paramref name="flatMapSelector" />.
+        /// <typeparam name="TSelector">
+        ///     The value type of the <see cref="Result{T,TError}" /> returned by the <paramref name="selector" />.
         /// </typeparam>
         /// <typeparam name="TResult">
         ///     The type returned by the function <paramref name="resultSelector" />.
         /// </typeparam>
-        IMaybe<TResult> FlatMap<TFlatMap, TResult>(
-            Func<T, IMaybe<TFlatMap>> flatMapSelector,
-            Func<T, TFlatMap, TResult> resultSelector
+        IMaybe<TResult> FlatMap<TSelector, TResult>(
+            Func<T, IMaybe<TSelector>> selector,
+            Func<T, TSelector, TResult> resultSelector
         );
 
         /// <summary>
         ///     Flatmaps another <see cref="Maybe{T}" />.
         /// </summary>
-        /// <param name="flatMapSelector">
+        /// <param name="selector">
         ///     A function who expects a <see cref="Nullable{T}" /> as its return type.
         /// </param>
         /// <param name="resultSelector">
-        ///     A function whose in-parameters are <typeparamref name="T" /> and <typeparamref name="TFlatMap" /> which can return
+        ///     A function whose in-parameters are <typeparamref name="T" /> and <typeparamref name="TSelector" /> which can return
         ///     any type.
         /// </param>
-        /// <typeparam name="TFlatMap">
-        ///     The value type of the <see cref="Nullable{T}" /> returned by the <paramref name="flatMapSelector" />.
+        /// <typeparam name="TSelector">
+        ///     The value type of the <see cref="Nullable{T}" /> returned by the <paramref name="selector" />.
         /// </typeparam>
         /// <typeparam name="TResult">
         ///     The type returned by the function <paramref name="resultSelector" />.
         /// </typeparam>
-        IMaybe<TResult> FlatMap<TFlatMap, TResult>(
-            Func<T, TFlatMap?> flatMapSelector,
-            Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct;
+        IMaybe<TResult> FlatMap<TSelector, TResult>(
+            Func<T, TSelector?> selector,
+            Func<T, TSelector, TResult> resultSelector
+        ) where TSelector : struct;
 
         IMaybe<T> Flatten<TResult>(Func<T, IMaybe<TResult>> selector);
 
