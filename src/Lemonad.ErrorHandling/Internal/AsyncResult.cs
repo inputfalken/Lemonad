@@ -11,7 +11,7 @@ namespace Lemonad.ErrorHandling.Internal {
     /// <summary>
     ///     An asynchronous version of <see cref="Result{T,TError}" /> with the same functionality.
     /// </summary>
-    internal readonly struct AsyncResult<T, TError> : IAsyncResult<T, TError> {
+    internal class AsyncResult<T, TError> : IAsyncResult<T, TError> {
         private AsyncResult(Task<IEither<T, TError>> either) => Either = either.ToAsyncEither();
 
         public IAsyncResult<TResult, TError> FlatMap<TResult>(

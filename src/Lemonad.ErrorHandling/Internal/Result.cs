@@ -7,7 +7,7 @@ using Lemonad.ErrorHandling.Extensions.Task;
 using Lemonad.ErrorHandling.Internal.Either;
 
 namespace Lemonad.ErrorHandling.Internal {
-    internal readonly struct Result<T, TError> : IResult<T, TError> {
+    internal class Result<T, TError> : IResult<T, TError> {
         internal static IResult<T, TError> ValueFactory(in T element)
             => new Result<T, TError>(
                 in element,
