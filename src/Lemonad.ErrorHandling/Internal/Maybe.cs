@@ -72,7 +72,7 @@ namespace Lemonad.ErrorHandling.Internal {
         public IMaybe<T> Flatten<TResult>(Func<T, IMaybe<TResult>> selector) => selector is null
             ? throw new ArgumentNullException(nameof(selector))
             : _result.Flatten(x =>
-                Lemonad.ErrorHandling.Extensions.Maybe.Index.ToResult(selector(x), () => Unit.Default)).ToMaybe();
+                Index.ToResult(selector(x), () => Unit.Default)).ToMaybe();
 
         public IMaybe<TResult> FlatMap<TFlatMap, TResult>(Func<T, TFlatMap?> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct {
