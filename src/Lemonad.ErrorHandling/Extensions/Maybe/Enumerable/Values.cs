@@ -18,9 +18,10 @@ namespace Lemonad.ErrorHandling.Extensions.Maybe.Enumerable {
         /// <returns>
         ///     A sequence which can contain 0-n amount of values.
         /// </returns>
-        public static IEnumerable<TSource> Values<TSource>(this IEnumerable<IMaybe<TSource>> source) =>
-            source is null
-                ? throw new ArgumentNullException(nameof(source))
-                : source.SelectMany(x => x.ToEnumerable());
+        public static IEnumerable<TSource> Values<TSource>(
+            this IEnumerable<IMaybe<TSource>> source
+        ) => source is null
+            ? throw new ArgumentNullException(nameof(source))
+            : source.SelectMany(x => x.ToEnumerable());
     }
 }
