@@ -1,19 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 using Assertion;
+using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests
-{
-    public class FlatMapNullableTests {
+namespace Lemonad.ErrorHandling.Unit.Result.Tests {
+    public class FlatMapAsyncNullableTests {
         [Fact]
-        public void None_Null_Int__Expects_Result_With_Value() {
-            int? number = 2;
+        public async Task None_Null_Int__Expects_Result_With_Value() {
+            var number = Task.Run(async () => {
+                await Task.Delay(200);
+                int? nullable = 2;
+                return nullable;
+            });
+
             var selectorInvoked = false;
-            ErrorHandling.AsyncResult
+            await ErrorHandling.Result
                 .Value<int, string>(2)
-                .FlatMap(_ => {
+                .FlatMapAsync(_ => {
                     selectorInvoked = true;
                     return number;
                 }, () => "ERROR")
@@ -23,13 +26,17 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests
         }
 
         [Fact]
-        public void None_Null_Int_Using_ResultSelector__Expects_Result_With_Value() {
-            int? number = 2;
+        public async Task None_Null_Int_Using_ResultSelector__Expects_Result_With_Value() {
+            var number = Task.Run(async () => {
+                await Task.Delay(200);
+                int? nullable = 2;
+                return nullable;
+            });
             var selectorInvoked = false;
             var resultSelectorInvoked = false;
-            ErrorHandling.AsyncResult
+            await ErrorHandling.Result
                 .Value<int, string>(2)
-                .FlatMap(_ => {
+                .FlatMapAsync(_ => {
                     selectorInvoked = true;
                     return number;
                 }, (x, y) => {
@@ -43,11 +50,16 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests
         }
 
         [Fact]
-        public void Null_Int__Expects_Result_With_Value() {
-            int? number = null;
+        public async Task Null_Int__Expects_Result_With_Value() {
+            var number = Task.Run(async () => {
+                await Task.Delay(200);
+                int? nullable = null;
+                return nullable;
+            });
             var selectorInvoked = false;
-            ErrorHandling.AsyncResult.Value<int, string>(2)
-                .FlatMap(_ => {
+            await ErrorHandling.Result
+                .Value<int, string>(2)
+                .FlatMapAsync(_ => {
                     selectorInvoked = true;
                     return number;
                 }, () => "ERROR")
@@ -57,13 +69,17 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests
         }
 
         [Fact]
-        public void Null_Int_Using_ResultSelector__Expects_Result_With_Value() {
-            int? number = null;
+        public async Task Null_Int_Using_ResultSelector__Expects_Result_With_Value() {
+            var number = Task.Run(async () => {
+                await Task.Delay(200);
+                int? nullable = null;
+                return nullable;
+            });
             var selectorInvoked = false;
             var resultSelectorInvoked = false;
-            ErrorHandling.AsyncResult
+            await ErrorHandling.Result
                 .Value<int, string>(2)
-                .FlatMap(_ => {
+                .FlatMapAsync(_ => {
                     selectorInvoked = true;
                     return number;
                 }, (x, y) => {
