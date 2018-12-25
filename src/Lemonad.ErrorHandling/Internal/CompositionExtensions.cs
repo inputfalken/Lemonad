@@ -14,8 +14,9 @@ namespace Lemonad.ErrorHandling.Internal {
             if (selector is null) throw new ArgumentNullException(nameof(selector));
             return x => selector(source(x));
         }
-        
-        public static Func<T1, Task<T3>> ComposeAsync<T1, T2, T3>(this Func<T1, Task<T2>> source, Func<T2, T3> selector) {
+
+        public static Func<T1, Task<T3>>
+            ComposeAsync<T1, T2, T3>(this Func<T1, Task<T2>> source, Func<T2, T3> selector) {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (selector is null) throw new ArgumentNullException(nameof(selector));
             return async x => selector(await source(x).ConfigureAwait(false));

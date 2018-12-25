@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Extensions.Result;
-using Lemonad.ErrorHandling.Extensions.Result.Task;
 using Lemonad.ErrorHandling.Extensions.Task;
 using Lemonad.ErrorHandling.Internal.Either;
 

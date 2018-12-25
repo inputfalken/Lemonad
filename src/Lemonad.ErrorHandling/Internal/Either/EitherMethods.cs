@@ -132,7 +132,9 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Func<T, IEither<TResult, TError>> flatSelector) {
             if (flatSelector is null) throw new ArgumentNullException(nameof(flatSelector));
 
-            return either.HasValue ? flatSelector(either.Value) : EitherFactory.CreateError<TResult, TError>(either.Error);
+            return either.HasValue
+                ? flatSelector(either.Value)
+                : EitherFactory.CreateError<TResult, TError>(either.Error);
         }
 
         internal static IEither<TResult, TError> FlatMap<T, TSelector, TResult, TError>(IEither<T, TError> either,
@@ -355,7 +357,8 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             var either = await source.ConfigureAwait(false);
 
             return either.HasError
-                ? EitherFactory.CreateError<TResult, TErrorResult>(await errorSelector(either.Error).ConfigureAwait(false))
+                ? EitherFactory.CreateError<TResult, TErrorResult>(await errorSelector(either.Error)
+                    .ConfigureAwait(false))
                 : EitherFactory.CreateValue<TResult, TErrorResult>(selector(either.Value));
         }
 

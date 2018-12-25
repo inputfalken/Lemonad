@@ -60,6 +60,5 @@ namespace Lemonad.ErrorHandling.Extensions.Maybe {
                 ? throw new ArgumentNullException(nameof(errorSelector))
                 : source.ToResult(x => x.HasValue, x => errorSelector()).Map(x => x.Value);
         }
-
     }
 }

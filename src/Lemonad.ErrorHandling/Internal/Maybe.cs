@@ -1,6 +1,7 @@
 ﻿using System;
 using Lemonad.ErrorHandling.Exceptions;
 using Lemonad.ErrorHandling.Extensions.Result;
+using Index = Lemonad.ErrorHandling.Extensions.Maybe.Index;
 
 namespace Lemonad.ErrorHandling.Internal {
     internal readonly struct Maybe<T> : IMaybe<T> {
@@ -45,7 +46,7 @@ namespace Lemonad.ErrorHandling.Internal {
         public IMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> flatMapSelector) {
             if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
             return _result
-                .FlatMap(x => Extensions.Maybe.Index.ToResult(flatMapSelector(x), () => Unit.Default)).ToMaybe();
+                .FlatMap(x => Index.ToResult(flatMapSelector(x), () => Unit.Default)).ToMaybe();
         }
 
         public IMaybe<TResult> FlatMap<TFlatMap, TResult>(
@@ -53,7 +54,7 @@ namespace Lemonad.ErrorHandling.Internal {
             Func<T, TFlatMap, TResult> resultSelector
         ) {
             if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
-            return _result.FlatMap(x => Extensions.Maybe.Index.ToResult(flatMapSelector(x), () => Unit.Default),
+            return _result.FlatMap(x => Index.ToResult(flatMapSelector(x), () => Unit.Default),
                 resultSelector).ToMaybe();
         }
 
@@ -69,7 +70,7 @@ namespace Lemonad.ErrorHandling.Internal {
             _result.IsErrorWhen(predicate, _ => Unit.Default).ToMaybe();
 
         public IMaybe<T> Flatten<TResult>(Func<T, IMaybe<TResult>> selector) => _result
-            .Flatten(x => Extensions.Maybe.Index.ToResult(selector(x), () => Unit.Default)).ToMaybe();
+            .Flatten(x => Index.ToResult(selector(x), () => Unit.Default)).ToMaybe();
 
         public IMaybe<TResult> FlatMap<TFlatMap, TResult>(Func<T, TFlatMap?> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct {
