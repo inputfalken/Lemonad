@@ -47,7 +47,7 @@ namespace Lemonad.ErrorHandling {
         IResult<T, TResult> CastError<TResult>();
 
         /// <summary>
-        ///     Executes  <paramref name="action" />.
+        ///     Executes <paramref name="action" />.
         /// </summary>
         /// <param name="action">
         ///     Is executed no matter what state <see cref="Result{T,TError}" /> is in.
@@ -78,9 +78,6 @@ namespace Lemonad.ErrorHandling {
         /// <returns>
         ///     <see cref="Result{T,TError}" /> with side effects.
         /// </returns>
-        /// <exception cref="ArgumentNullException">
-        ///     When <paramref name="action" /> is null and needs to be executed.
-        /// </exception>
         /// <returns>
         ///     A <see cref="Result{T,TError}" /> whom may have invoked the <paramref name="action" /> if the current
         ///     <see cref="Result{T,TError}" /> is in a valid state.
@@ -195,6 +192,51 @@ namespace Lemonad.ErrorHandling {
         );
 
         /// <summary>
+        ///     Flatten a <see cref="Nullable{T}" />
+        ///     And maps <typeparamref name="T" /> to <typeparamref name="TResult" />.
+        /// </summary>
+        /// <param name="flatMapSelector">
+        ///     A function who expects a <see cref="Nullable{T}" /> as an return type.
+        /// </param>
+        /// <param name="errorSelector">
+        ///     The error selector if <see cref="Nullable{T}" /> is null.
+        /// </param>
+        /// <typeparam name="TResult">
+        ///     The type of <see cref="Nullable{T}" />.
+        /// </typeparam>
+        IResult<TResult, TError> FlatMap<TResult>(
+            Func<T, TResult?> flatMapSelector,
+            Func<TError> errorSelector
+        ) where TResult : struct;
+
+        /// <summary>
+        ///     Flatten a <see cref="Nullable{T}" />
+        ///     And maps <typeparamref name="T" /> together with <typeparamref name="TSelector" /> to
+        ///     <typeparamref name="TResult" />.
+        /// </summary>
+        /// <param name="flatMapSelector">
+        ///     A function who expects a <see cref="Nullable{T}" /> as an return type.
+        /// </param>
+        /// <param name="resultSelector">
+        ///     A function whose in-parameters are <typeparamref name="T" /> and  <typeparamref name="TSelector" />  which can
+        ///     return any type.
+        /// </param>
+        /// <param name="errorSelector">
+        ///     The error selector if <see cref="Nullable{T}" /> is null.
+        /// </param>
+        /// <typeparam name="TSelector">
+        ///     The value retrieved from the the <see cref="Result{T,TError}" /> given by the <paramref name="flatMapSelector" />.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        ///     The return type of the function  <paramref name="resultSelector" />.
+        /// </typeparam>
+        IResult<TResult, TError> FlatMap<TSelector, TResult>(
+            Func<T, TSelector?> flatMapSelector,
+            Func<T, TSelector, TResult> resultSelector,
+            Func<TError> errorSelector
+        ) where TSelector : struct;
+
+        /// <summary>
         ///     Flatmaps another <see cref="Result{T,TError}" /> but the <typeparamref name="TError" /> remains as the same type.
         /// </summary>
         /// <param name="flatMapSelector">
@@ -221,6 +263,51 @@ namespace Lemonad.ErrorHandling {
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TErrorResult, TError> errorSelector
         );
+
+        /// <summary>
+        ///     Flatten a <see cref="Nullable{T}" />  wrapped in a <see cref="Task{TResult}" />
+        ///     And maps <typeparamref name="T" /> to <typeparamref name="TResult" />.
+        /// </summary>
+        /// <param name="flatMapSelector">
+        ///     A function who expects a <see cref="Nullable{T}" /> as an return type.
+        /// </param>
+        /// <param name="errorSelector">
+        ///     The error selector if <see cref="Nullable{T}" /> is null.
+        /// </param>
+        /// <typeparam name="TResult">
+        ///     The type of <see cref="Nullable{T}" />.
+        /// </typeparam>
+        IAsyncResult<TResult, TError> FlatMapAsync<TResult>(
+            Func<T, Task<TResult?>> flatMapSelector,
+            Func<TError> errorSelector
+        ) where TResult : struct;
+
+        /// <summary>
+        ///     Flatten a <see cref="Nullable{T}" /> wrapped in a <see cref="Task{TResult}" />
+        ///     And maps <typeparamref name="T" /> together with <typeparamref name="TSelector" /> to
+        ///     <typeparamref name="TResult" />.
+        /// </summary>
+        /// <param name="flatMapSelector">
+        ///     A function who expects a <see cref="Nullable{T}" /> as an return type.
+        /// </param>
+        /// <param name="resultSelector">
+        ///     A function whose in-parameters are <typeparamref name="T" /> and  <typeparamref name="TSelector" />  which can
+        ///     return any type.
+        /// </param>
+        /// <param name="errorSelector">
+        ///     The error selector if <see cref="Nullable{T}" /> is null.
+        /// </param>
+        /// <typeparam name="TSelector">
+        ///     The value retrieved from the the <see cref="Result{T,TError}" /> given by the <paramref name="flatMapSelector" />.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        ///     The return type of the function  <paramref name="resultSelector" />.
+        /// </typeparam>
+        IAsyncResult<TResult, TError> FlatMapAsync<TSelector, TResult>(
+            Func<T, Task<TSelector?>> flatMapSelector,
+            Func<T, TSelector, TResult> resultSelector,
+            Func<TError> errorSelector
+        ) where TSelector : struct;
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
@@ -635,9 +722,7 @@ namespace Lemonad.ErrorHandling {
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
-        ///     <see
-        ///         cref="IAsyncResult{T,TError}.ZipAsync{TOther,TResult}" />
-        ///     .
+        ///     <see cref="IAsyncResult{T,TError}.ZipAsync{TOther,TResult}" />.
         /// </summary>
         IAsyncResult<TResult, TError> ZipAsync<TOther, TResult>(
             IAsyncResult<TOther, TError> other,

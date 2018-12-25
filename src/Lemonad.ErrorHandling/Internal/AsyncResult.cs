@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Extensions.Result;
+using Lemonad.ErrorHandling.Extensions.Task;
 using Lemonad.ErrorHandling.Internal.Either;
 using Index = Lemonad.ErrorHandling.Extensions.Result.Index;
 
@@ -11,6 +13,28 @@ namespace Lemonad.ErrorHandling.Internal {
     /// </summary>
     internal readonly struct AsyncResult<T, TError> : IAsyncResult<T, TError> {
         private AsyncResult(Task<IEither<T, TError>> either) => Either = either.ToAsyncEither();
+
+        public IAsyncResult<TResult, TError> FlatMap<TResult>(
+            Func<T, TResult?> flatMapSelector,
+            Func<TError> errorSelector
+        ) where TResult : struct => FlatMap(flatMapSelector.Compose(x => x.ToResult(errorSelector)));
+
+        public IAsyncResult<TResult, TError> FlatMapAsync<TResult>(
+            Func<T, Task<TResult?>> flatMapSelector,
+            Func<TError> errorSelector
+        ) where TResult : struct => FlatMapAsync(flatMapSelector.Compose(x => x.ToAsyncResult(errorSelector)));
+
+        public IAsyncResult<TResult, TError> FlatMap<TSelector, TResult>(
+            Func<T, TSelector?> flatMapSelector,
+            Func<T, TSelector, TResult> resultSelector,
+            Func<TError> errorSelector
+        ) where TSelector : struct =>
+            FlatMap(x => flatMapSelector.Compose(y => y.ToResult(errorSelector))(x).Map(y => resultSelector(x, y)));
+
+        public IAsyncResult<TResult, TError> FlatMapAsync<TSelector, TResult>(Func<T, Task<TSelector?>> flatMapSelector,
+            Func<T, TSelector, TResult> resultSelector, Func<TError> errorSelector) where TSelector : struct =>
+            FlatMapAsync(x =>
+                flatMapSelector.Compose(y => y.ToAsyncResult(errorSelector))(x).Map(y => resultSelector(x, y)));
 
         public IAsyncEither<T, TError> Either { get; }
 

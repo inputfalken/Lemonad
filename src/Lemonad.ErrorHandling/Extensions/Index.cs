@@ -70,7 +70,6 @@ namespace Lemonad.ErrorHandling.Extensions {
                     ? ErrorHandling.Maybe.None<TSource>()
                     : ErrorHandling.Maybe.Value(source);
 
-
         /// <summary>
         ///     Converts an <see cref="Nullable{T}" /> to an <see cref="IResult{T,TError}" /> with the value
         ///     <typeparamref name="T" />.
@@ -155,7 +154,6 @@ namespace Lemonad.ErrorHandling.Extensions {
             return predicate(source)
                 ? ErrorHandling.Result.Error<T, TError>(source)
                 : ErrorHandling.Result.Value<T, TError>(valueSelector(source));
-
         }
     }
 }

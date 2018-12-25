@@ -47,6 +47,27 @@ namespace ImplicitResult {
             Func<T, IResult<TResult, TErrorResult>> flatMapSelector, Func<TErrorResult, TError> errorSelector) =>
             _resultImplementation.FlatMap(flatMapSelector, errorSelector);
 
+        public IResult<TResult, TError> FlatMap<TResult>(Func<T, TResult?> flatMapSelector, Func<TError> errorSelector)
+            where TResult : struct => _resultImplementation.FlatMap(flatMapSelector, errorSelector);
+
+        public IAsyncResult<TResult, TError> FlatMapAsync<TResult>(Func<T, Task<TResult?>> flatMapSelector,
+            Func<TError> errorSelector) where TResult : struct =>
+            _resultImplementation.FlatMapAsync(flatMapSelector, errorSelector);
+
+        public IResult<TResult, TError> FlatMap<TFlatMap, TResult>(Func<T, TFlatMap?> flatMapSelector,
+            Func<T, TFlatMap, TResult> resultSelector, Func<TError> errorSelector)
+            where TFlatMap : struct =>
+            _resultImplementation.FlatMap(flatMapSelector, resultSelector, errorSelector);
+
+        public IAsyncResult<TResult, TError> FlatMapAsync<TFlatMap, TResult>(Func<T, Task<TFlatMap?>> flatMapSelector,
+            Func<T, TFlatMap, TResult> resultSelector, Func<TError> errorSelector)
+            where TFlatMap : struct =>
+            _resultImplementation.FlatMapAsync(flatMapSelector, resultSelector, errorSelector);
+
+        public IAsyncResult<TFlatMap, TError> FlatMapAsync<TFlatMap, TResult>(Func<T, Task<TFlatMap?>> flatMapSelector,
+            Func<TError> errorSelector, Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct =>
+            throw new NotImplementedException();
+
         public IResult<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
             Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
             Func<TErrorResult, TError> errorSelector) =>

@@ -32,61 +32,61 @@ namespace Assertion {
         }
 
         public static IResult<Gender, string> GetGender(int identity) {
-            return Lemonad.ErrorHandling.Result.Value<int, string>(identity)
+            return Result.Value<int, string>(identity)
                 .Map(i => {
                     switch (identity) {
                         case 0:
-                            return Lemonad.ErrorHandling.Result.Value<Gender, string>(Gender.Male);
+                            return Result.Value<Gender, string>(Gender.Male);
                         case 1:
-                            return Lemonad.ErrorHandling.Result.Value<Gender, string>(Gender.Female);
+                            return Result.Value<Gender, string>(Gender.Female);
                         default:
-                            return Lemonad.ErrorHandling.Result.Error<Gender, string>("Could not determine gender.");
+                            return Result.Error<Gender, string>("Could not determine gender.");
                     }
                 }).FlatMap(x => x);
         }
 
         public static IAsyncResult<Gender, string> GetGenderAsync(int identity) {
-            return Lemonad.ErrorHandling.Result.Value<int, string>(identity)
+            return Result.Value<int, string>(identity)
                 .ToAsyncResult()
                 .MapAsync(async i => {
                     await Delay;
                     switch (identity) {
                         case 0:
-                            return Lemonad.ErrorHandling.Result.Value<Gender, string>(Gender.Male);
+                            return Result.Value<Gender, string>(Gender.Male);
                         case 1:
-                            return Lemonad.ErrorHandling.Result.Value<Gender, string>(Gender.Female);
+                            return Result.Value<Gender, string>(Gender.Female);
                         default:
-                            return Lemonad.ErrorHandling.Result.Error<Gender, string>("Could not determine gender");
+                            return Result.Error<Gender, string>("Could not determine gender");
                     }
                 }).FlatMapAsync(x => x.ToAsyncResult());
         }
 
         public static IResult<string, ExitCodes> Program(int code) {
-            return Lemonad.ErrorHandling.Result.Value<int, ExitCodes>(code)
+            return Result.Value<int, ExitCodes>(code)
                 .Map(i => {
                     switch (code) {
                         case 0:
-                            return Lemonad.ErrorHandling.Result.Value<string, ExitCodes>("Success");
+                            return Result.Value<string, ExitCodes>("Success");
                         case 1:
-                            return Lemonad.ErrorHandling.Result.Error<string, ExitCodes>(ExitCodes.Fail);
+                            return Result.Error<string, ExitCodes>(ExitCodes.Fail);
                         default:
-                            return Lemonad.ErrorHandling.Result.Error<string, ExitCodes>(ExitCodes.Unhandled);
+                            return Result.Error<string, ExitCodes>(ExitCodes.Unhandled);
                     }
                 }).FlatMap(x => x);
         }
 
         public static IAsyncResult<string, ExitCodes> ProgramAsync(int code) {
-            return Lemonad.ErrorHandling.Result.Value<int, ExitCodes>(code)
+            return Result.Value<int, ExitCodes>(code)
                 .ToAsyncResult()
                 .MapAsync(async i => {
                     await Delay;
                     switch (code) {
                         case 0:
-                            return Lemonad.ErrorHandling.Result.Value<string, ExitCodes>("Success");
+                            return Result.Value<string, ExitCodes>("Success");
                         case 1:
-                            return Lemonad.ErrorHandling.Result.Error<string, ExitCodes>(ExitCodes.Fail);
+                            return Result.Error<string, ExitCodes>(ExitCodes.Fail);
                         default:
-                            return Lemonad.ErrorHandling.Result.Error<string, ExitCodes>(ExitCodes.Unhandled);
+                            return Result.Error<string, ExitCodes>(ExitCodes.Unhandled);
                     }
                 }).FlatMapAsync(x => x.ToAsyncResult());
         }

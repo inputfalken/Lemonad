@@ -44,6 +44,13 @@ namespace Lemonad.ErrorHandling.Extensions.AsyncResult {
         public static TaskAwaiter<IEither<T, TError>> GetAwaiter<T, TError>(this IAsyncEither<T, TError> source) =>
             source?.ToTaskEither().GetAwaiter() ?? throw new ArgumentNullException(nameof(source));
 
+        private static async Task<IResult<T, TError>> Mapper<T, TError>(IAsyncResult<T, TError> source) =>
+            source is null
+                ? throw new ArgumentNullException(nameof(source))
+                : await source.Either.HasValue.ConfigureAwait(false)
+                    ? ErrorHandling.Result.Value<T, TError>(source.Either.Value)
+                    : ErrorHandling.Result.Error<T, TError>(source.Either.Error);
+
         /// <summary>
         ///     Evaluates the <see cref="IAsyncResult{T,TError}" />.
         /// </summary>
@@ -110,12 +117,5 @@ namespace Lemonad.ErrorHandling.Extensions.AsyncResult {
             => source is null
                 ? throw new ArgumentNullException(nameof(source))
                 : EitherMethods.YieldErrors(await source.Either.ToTaskEither().ConfigureAwait(false));
-
-        private static async Task<IResult<T, TError>> Mapper<T, TError>(IAsyncResult<T, TError> source) =>
-            source is null
-                ? throw new ArgumentNullException(nameof(source))
-                : await source.Either.HasValue.ConfigureAwait(false)
-                    ? Lemonad.ErrorHandling.Result.Value<T, TError>(source.Either.Value)
-                    : Lemonad.ErrorHandling.Result.Error<T, TError>(source.Either.Error);
     }
 }

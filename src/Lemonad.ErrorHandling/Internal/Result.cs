@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Extensions.Result;
+using Lemonad.ErrorHandling.Extensions.Task;
 using Lemonad.ErrorHandling.Internal.Either;
 
 namespace Lemonad.ErrorHandling.Internal {
@@ -259,7 +261,8 @@ namespace Lemonad.ErrorHandling.Internal {
 
         public IResult<TResult, TError> FlatMap<TResult, TErrorResult>(
             Func<T, IResult<TResult, TErrorResult>> flatMapSelector,
-            Func<TErrorResult, TError> errorSelector)
+            Func<TErrorResult, TError> errorSelector
+        )
             => new Result<TResult, TError>(
                 EitherMethods.FlatMap(
                     Either,
@@ -267,6 +270,31 @@ namespace Lemonad.ErrorHandling.Internal {
                     errorSelector
                 )
             );
+
+        public IResult<TResult, TError> FlatMap<TResult>(
+            Func<T, TResult?> flatMapSelector,
+            Func<TError> errorSelector
+        ) where TResult : struct => FlatMap(flatMapSelector.Compose(x => x.ToResult(errorSelector)));
+
+        public IAsyncResult<TResult, TError> FlatMapAsync<TResult>(
+            Func<T, Task<TResult?>> flatMapSelector,
+            Func<TError> errorSelector
+        ) where TResult : struct => FlatMapAsync(flatMapSelector.Compose(x => x.ToAsyncResult(errorSelector)));
+
+        public IResult<TResult, TError> FlatMap<TFlatMap, TResult>(
+            Func<T, TFlatMap?> flatMapSelector,
+            Func<T, TFlatMap, TResult> resultSelector,
+            Func<TError> errorSelector
+        ) where TFlatMap : struct =>
+            FlatMap(x => flatMapSelector.Compose(y => y.ToResult(errorSelector))(x).Map(y => resultSelector(x, y)));
+
+        public IAsyncResult<TResult, TError> FlatMapAsync<TFlatMap, TResult>(
+            Func<T, Task<TFlatMap?>> flatMapSelector,
+            Func<T, TFlatMap, TResult> resultSelector,
+            Func<TError> errorSelector
+        ) where TFlatMap : struct =>
+            FlatMapAsync(x =>
+                flatMapSelector.Compose(y => y.ToAsyncResult(errorSelector))(x).Map(y => resultSelector(x, y)));
 
         public IResult<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
             Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector,

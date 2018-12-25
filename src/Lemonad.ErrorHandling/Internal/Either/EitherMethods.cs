@@ -12,6 +12,12 @@ namespace Lemonad.ErrorHandling.Internal.Either {
     ///     share as much logic as possible.
     /// </summary>
     internal static class EitherMethods {
+        private static IEither<T1, T2> CreateError<T1, T2>(in T2 error) =>
+            new NonNullableEither<T1, T2>(default, error, true, false);
+
+        private static IEither<T1, T2> CreateValue<T1, T2>(in T1 value) =>
+            new NonNullableEither<T1, T2>(value, default, false, true);
+
         internal static IEither<TResult, TError> Cast<T, TResult, TError>(IEither<T, TError> either) => either.HasError
             ? CreateError<TResult, TError>(either.Error)
             : CreateValue<TResult, TError>((TResult) (object) either.Value);
@@ -26,12 +32,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
 
         internal static async Task<IEither<T, TResult>> CastErrorAsync<T, TResult, TError>(
             Task<IEither<T, TError>> either) => CastError<T, TResult, TError>(await either.ConfigureAwait(false));
-
-        private static IEither<T1, T2> CreateError<T1, T2>(in T2 error) =>
-            new NonNullableEither<T1, T2>(default, error, true, false);
-
-        private static IEither<T1, T2> CreateValue<T1, T2>(in T1 value) =>
-            new NonNullableEither<T1, T2>(value, default, false, true);
 
         internal static IEither<T, TError> Do<T, TError>(IEither<T, TError> either, Action action) {
             if (action is null)
@@ -138,7 +138,9 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Func<T, IEither<TResult, TError>> flatSelector) {
             if (flatSelector is null) throw new ArgumentNullException(nameof(flatSelector));
 
-            return either.HasValue ? flatSelector(either.Value) : CreateError<TResult, TError>(either.Error);
+            return either.HasValue
+                ? flatSelector(either.Value)
+                : CreateError<TResult, TError>(either.Error);
         }
 
         internal static IEither<TResult, TError> FlatMap<T, TSelector, TResult, TError>(IEither<T, TError> either,
@@ -361,7 +363,8 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             var either = await source.ConfigureAwait(false);
 
             return either.HasError
-                ? CreateError<TResult, TErrorResult>(await errorSelector(either.Error).ConfigureAwait(false))
+                ? CreateError<TResult, TErrorResult>(await errorSelector(either.Error)
+                    .ConfigureAwait(false))
                 : CreateValue<TResult, TErrorResult>(selector(either.Value));
         }
 
