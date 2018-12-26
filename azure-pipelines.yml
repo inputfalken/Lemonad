@@ -19,11 +19,10 @@ phases:
     displayName: 'Dotnet $(buildConfiguration) Build'
   - script: |
         mkdir $(Build.SourcesDirectory)\results
-        dotnet test --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura test\Lemonad.ErrorHandling.Unit
-        dotnet test --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:MergeWith=$(Build.SourcesDirectory)\test\Lemonad.ErrorHandling.Unit\coverage.cobertura.xml $(Build.SourcesDirectory)\test\Lemonad.ErrorHandling.Integration
-        copy $(Build.SourcesDirectory)\test\Lemonad.ErrorHandling.Unit\coverage.cobertura.xml $(Build.SourcesDirectory)\results
-        dotnet tool install dotnet-reportgenerator-globaltool --tool-path . --version 4.0.0-rc4
-        .\reportgenerator "-reports:$(Build.SourcesDirectory)\test\Lemonad.ErrorHandling.Unit\coverage.cobertura.xml" "-targetdir:results" "-reporttypes:HTMLInline;HTMLChart"
+        dotnet test -l trx -r "$(Build.SourcesDirectory)\results" /p:CollectCoverage=true /p:CoverletOutput="$(Build.SourcesDirectory)\results\coverage" test\Lemonad.ErrorHandling.Unit 
+        dotnet test -l trx -r "$(Build.SourcesDirectory)\results" /p:CollectCoverage=true /p:CoverletOutput="$(Build.SourcesDirectory)\results\coverage" /p:MergeWith="$(Build.SourcesDirectory)\results\coverage.json" /p:CoverletOutputFormat="cobertura" .\test\Lemonad.ErrorHandling.Integration
+        dotnet tool install dotnet-reportgenerator-globaltool --tool-path . --version 4.0.4
+        .\reportgenerator "-reports:$(Build.SourcesDirectory)\results\coverage.cobertura.xml" "-targetdir:results" "-reporttypes:HTMLInline;HTMLChart"
     displayName: 'Unit testing'
   - task: PublishTestResults@2
     inputs:
