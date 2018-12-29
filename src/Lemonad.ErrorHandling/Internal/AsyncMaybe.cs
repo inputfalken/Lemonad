@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lemonad.ErrorHandling.Exceptions;
 using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Index = Lemonad.ErrorHandling.Extensions.Maybe.Index;
 
 namespace Lemonad.ErrorHandling.Internal {
     internal class AsyncMaybe<T> : IAsyncMaybe<T> {
+        // TODO check if HasValue has been awaited.
+        // Using this class wrong will expose the exceptions of the IAsyncResult<T, Unit>.
+        // Which is confusing for the consumer, even tho AsyncMaybe<T> could be seen as a subset of IAsyncResult<T, TError>.
         public T Value => _asyncResult.Either.Value;
 
         public Task<bool> HasValue => _asyncResult.Either.HasValue;
