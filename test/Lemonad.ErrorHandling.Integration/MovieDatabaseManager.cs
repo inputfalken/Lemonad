@@ -10,7 +10,7 @@ using Sharpy.Core.Linq;
 using Xunit;
 
 // If this is not disabled, all the connection pools will be used up for the database.
-[assembly: CollectionBehavior(DisableTestParallelization = true)]
+[assembly: CollectionBehavior(MaxParallelThreads = 10)]
 
 namespace Lemonad.ErrorHandling.Integration {
     public interface IDatabaseManager {
