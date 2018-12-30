@@ -8,7 +8,7 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.ExtensionTests.Maybe.Enumerable {
     public class NonesTests {
         [Fact]
-        public void Passing_Null_Maybe_When_Getting_Errors_From_Maybe_Enumerable() {
+        public void Passing_Null_Maybe_When_Getting_Errors_From_Maybe_Enumerable_Throws() {
             IEnumerable<IMaybe<int>> maybes = null;
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.ExtensionParameterName,
