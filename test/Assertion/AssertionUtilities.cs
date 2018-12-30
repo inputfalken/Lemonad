@@ -15,6 +15,8 @@ namespace Assertion {
         public const string PredicateName = "predicate";
 
         public const string ExtensionParameterName = "source";
+        public const string MaybeValueSelector = "valueSelector";
+        public const string MaybeNoneSelector = "noneSelector";
         public const string SelectorName = "selector";
 
         public static IMaybe<int> DivisionMaybe(int left, int right) =>

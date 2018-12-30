@@ -9,13 +9,13 @@ namespace Lemonad.ErrorHandling.Extensions.Maybe.Enumerable {
         /// </summary>
         public static IEnumerable<TResult> Match<TSource, TResult>(
             this IEnumerable<IMaybe<TSource>> source,
-            Func<TSource, TResult> someSelector,
+            Func<TSource, TResult> valueSelector,
             Func<TResult> noneSelector
         ) {
             if (source is null) throw new ArgumentNullException(nameof(source));
-            if (someSelector is null) throw new ArgumentNullException(nameof(someSelector));
+            if (valueSelector is null) throw new ArgumentNullException(nameof(valueSelector));
             if (noneSelector is null) throw new ArgumentNullException(nameof(noneSelector));
-            return source.Select(x => x.Match(someSelector, noneSelector));
+            return source.Select(x => x.Match(valueSelector, noneSelector));
         }
     }
 }
