@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
 using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Extensions.Result;
-using Lemonad.ErrorHandling.Internal;
 
 namespace Assertion {
     public static class AssertionUtilities {
@@ -12,6 +11,11 @@ namespace Assertion {
         public static string EitherValueName { get; } = nameof(IEither<object, object>.Value);
         public static string EitherErrorName { get; } = nameof(IEither<object, object>.Error);
         public static string MaybeValueName { get; } = nameof(IMaybe<object>.Value);
+        public const string ExtensionParameterName = "source";
+        public const string SelectorName = "selector";
+
+        public static IMaybe<int> DivisionMaybe(int left, int right) =>
+            right != 0 ? Maybe.Value(left / right) : Maybe.None<int>();
 
         public static IResult<double, string> Division(double left, double right) => (left, right).ToResult(
                 x => right != 0,

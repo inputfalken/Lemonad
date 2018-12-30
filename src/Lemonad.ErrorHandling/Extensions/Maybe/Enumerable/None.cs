@@ -20,7 +20,7 @@ namespace Lemonad.ErrorHandling.Extensions.Maybe.Enumerable {
         /// <typeparam name="TResult">
         ///     The return type returned by the function <paramref name="selector" />.
         /// </typeparam>
-        public static IEnumerable<TResult> None<TSource, TResult>(
+        public static IEnumerable<TResult> Nones<TSource, TResult>(
             this IEnumerable<IMaybe<TSource>> source,
             Func<TResult> selector
         ) {
