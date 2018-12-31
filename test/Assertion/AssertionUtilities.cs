@@ -28,6 +28,11 @@ namespace Assertion {
             )
             .Map(x => x.left / x.right);
 
+        public static string FormatStringParserMessage<T>(string input) =>
+            input is null
+                ? $"Could not parse type {typeof(string).Name} (null) into {typeof(T).Name}."
+                : $"Could not parse type {typeof(string).Name} (\"{input}\") into {typeof(T).Name}.";
+
         public static IAsyncResult<double, string> DivisionAsync(double left, double right) {
             return (left, right).ToResult(
                     x => right != 0,

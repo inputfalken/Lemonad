@@ -68,7 +68,9 @@ namespace Lemonad.ErrorHandling.Parsers {
                 : Result.Error<TEnum, string>(FormatStringParserMessage<TEnum>(input));
 
         private static string FormatStringParserMessage<T>(string input) =>
-            $"Could not parse type {typeof(string)}(\"{input}\") into {typeof(T)}.";
+            input is null
+                ? $"Could not parse type {typeof(string).Name} (null) into {typeof(T).Name}."
+                : $"Could not parse type {typeof(string).Name} (\"{input}\") into {typeof(T).Name}.";
 
         public static IResult<int, string> Int(string input, NumberStyles style, IFormatProvider provider) =>
             int.TryParse(input, style, provider, out var number)
