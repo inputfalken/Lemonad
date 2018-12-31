@@ -567,7 +567,7 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             IEnumerable<IEither<T, TError>> validations
         ) {
             var all = validations.ToArray();
-            if (all.Length > 0)
+            if (all.Length == 0)
                 throw new ArgumentException("An element must be provided for the array.", nameof(validations));
 
             var errors = all.Where(x => x.HasError).Select(x => x.Error).ToArray();

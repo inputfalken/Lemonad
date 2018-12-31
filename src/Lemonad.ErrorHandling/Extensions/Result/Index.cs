@@ -59,6 +59,7 @@ namespace Lemonad.ErrorHandling.Extensions.Result {
             this IResult<T, TError> source,
             params Func<IResult<T, TError>, IResult<T, TError>>[] validations
         ) {
+            //TODO add an argument with IResult<T, TError>, IResult<T, TError>, in order to force atleast one argument to be provided except the source parameter.
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (validations is null) throw new ArgumentNullException(nameof(validations));
             var either = EitherMethods.Multiple(
