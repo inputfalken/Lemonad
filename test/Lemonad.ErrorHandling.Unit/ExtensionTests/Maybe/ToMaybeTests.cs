@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using Assertion;
 using Lemonad.ErrorHandling.Exceptions;
 using Lemonad.ErrorHandling.Extensions;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
+namespace Lemonad.ErrorHandling.Unit.ExtensionTests.Maybe {
     public class ToMaybeTests {
         [Fact]
         public void Passing_Null_Value_With_Null_Check_Predicate_Does_Not_Throw() {
@@ -16,14 +16,14 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         }
 
         [Fact]
-        public void Predicate_Overload__Empty_String__Length_Is_Greather_Than_5__Expects_HasValue_To_Be_False() {
+        public void Predicate_Overload__Falsy_Predicate__Expects_None() {
             string.Empty.ToMaybe(s => s.Length > 5).AssertNone();
         }
 
         [Fact]
-        public void Predicate_Overload__Nullable_Bool_Whose_Value_Is_Null__Expects_HasValue_To_Be_True() {
+        public void Passing_Null_Value_With_Invalid_Null_Check_Throws() {
             Assert.Throws<InvalidMaybeStateException>(() => {
-                bool? foo = null;
+                string foo = null;
                 foo.ToMaybe(_ => true).AssertValue(default);
             });
         }
@@ -37,8 +37,7 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         }
 
         [Fact]
-        public void
-            Predicate_Overload__String_With_Content__Length_Is_Greather_Than_5__Expects_HasValue_To_Be_True() {
+        public void Predicate_Overload__Truthy_Predicate__Expects_Value() {
             "Foobar".ToMaybe(s => s.Length > 5).AssertValue("Foobar");
         }
     }
