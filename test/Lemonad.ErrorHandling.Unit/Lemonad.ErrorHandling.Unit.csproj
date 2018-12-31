@@ -12,7 +12,4 @@
     <ProjectReference Include="..\..\src\Lemonad.ErrorHandling\Lemonad.ErrorHandling.csproj" />
     <ProjectReference Include="..\Assertion\Assertion.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ParserTests\Maybe" />
-  </ItemGroup>
 </Project>
