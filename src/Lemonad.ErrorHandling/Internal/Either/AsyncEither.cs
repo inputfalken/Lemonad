@@ -56,12 +56,12 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             _isAssigned = true;
         }
 
-        // A SemaphoreSlim might not be needed for this...
         private async Task<bool> Resolve(bool returnHasValue) {
-            await _semaphoreSlim.WaitAsync().ConfigureAwait(false);
             if (_isAssigned) return returnHasValue ? _hasValue : _hasError;
+            await _semaphoreSlim.WaitAsync().ConfigureAwait(false);
             try {
-                await AssignProperties().ConfigureAwait(false);
+                await AssignProperties()
+                    .ConfigureAwait(false);
             }
             finally {
                 _semaphoreSlim.Release();

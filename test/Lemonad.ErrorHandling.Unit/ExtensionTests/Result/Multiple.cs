@@ -20,6 +20,7 @@ namespace Lemonad.ErrorHandling.Unit.ExtensionTests.Result {
             ).AssertError(new[] {"Value is not equal to 0."});
         }
 
+        
         [Fact]
         public void Two_Failed_Predicates() {
             AssertionUtilities.Division(10, 2).Multiple(
