@@ -14,6 +14,15 @@ namespace Lemonad.ErrorHandling.Parsers {
             ? Result.Value<bool, string>(boolean)
             : Result.Error<bool, string>(FormatStringParserMessage<bool>(input));
 
+        public static IResult<Guid, string> Guid(string input) => System.Guid.TryParse(input, out var guid)
+            ? Result.Value<Guid, string>(guid)
+            : Result.Error<Guid, string>(FormatStringParserMessage<Guid>(input));
+
+        public static IResult<Guid, string> GuidExact(string input, string format, out Guid result) =>
+            System.Guid.TryParseExact(input, format, out var guid)
+                ? Result.Value<Guid, string>(guid)
+                : Result.Error<Guid, string>(FormatStringParserMessage<Guid>(input));
+
         public static IResult<DateTime, string> DateTime(string input, DateTimeStyles style,
             IFormatProvider provider) =>
             System.DateTime.TryParse(input, provider, style, out var date)
