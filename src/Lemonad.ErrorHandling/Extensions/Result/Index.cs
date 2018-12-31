@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Lemonad.ErrorHandling.Internal;
@@ -96,6 +97,11 @@ namespace Lemonad.ErrorHandling.Extensions.Result {
         /// <param name="source"></param>
         public static IEnumerable<T> ToEnumerable<T, TError>(this IResult<T, TError> source) {
             if (source is null) throw new ArgumentNullException(nameof(source));
+            // This extra method is needed in order to perform exception check.
+            return YieldValue(source);
+        }
+
+        private static IEnumerable<T> YieldValue<T, TError>(IResult<T, TError> source) {
             if (source.Either.HasValue)
                 yield return source.Either.Value;
         }
@@ -107,6 +113,11 @@ namespace Lemonad.ErrorHandling.Extensions.Result {
         /// <param name="source"></param>
         public static IEnumerable<TError> ToErrorEnumerable<T, TError>(this IResult<T, TError> source) {
             if (source is null) throw new ArgumentNullException(nameof(source));
+            // This extra method is needed in order to perform exception check.
+            return YieldError(source);
+        }
+
+        private static IEnumerable<TError> YieldError<T, TError>(IResult<T, TError> source) {
             if (source.Either.HasError)
                 yield return source.Either.Error;
         }
