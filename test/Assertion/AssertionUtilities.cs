@@ -12,6 +12,11 @@ namespace Assertion {
         public static string EitherErrorName { get; } = nameof(IEither<object, object>.Error);
         public static string MaybeValueName { get; } = nameof(IMaybe<object>.Value);
 
+        public const string ErrorParamName = "error";
+        public const string ValueParamName = "value";
+        
+            
+
         public const string PredicateName = "predicate";
 
         public const string ExtensionParameterName = "source";
