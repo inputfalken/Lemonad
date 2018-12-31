@@ -14,6 +14,9 @@ namespace Lemonad.ErrorHandling.Unit.ExtensionTests.String {
         public void String_With_Word() => "foobar".IsNullOrWhiteSpace().AssertValue("foobar");
 
         [Fact]
+        public void String_Mixed_With_Word_And_WhiteSpace() => " foobar ".IsNullOrWhiteSpace().AssertValue(" foobar ");
+
+        [Fact]
         public void String_With_Space() => " ".IsNullOrWhiteSpace().AssertError(IsNullOrWhiteSpaceCase.WhiteSpace);
 
         [Fact]

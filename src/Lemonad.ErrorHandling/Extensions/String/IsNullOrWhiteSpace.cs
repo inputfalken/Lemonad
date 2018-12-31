@@ -8,7 +8,7 @@ namespace Lemonad.ErrorHandling.Extensions.String {
             if (value == string.Empty)
                 return ErrorHandling.Result.Error<string, IsNullOrWhiteSpaceCase>(IsNullOrWhiteSpaceCase.Empty);
 
-            return value.Any(char.IsWhiteSpace)
+            return value.All(char.IsWhiteSpace)
                 ? ErrorHandling.Result.Error<string, IsNullOrWhiteSpaceCase>(IsNullOrWhiteSpaceCase.WhiteSpace)
                 : ErrorHandling.Result.Value<string, IsNullOrWhiteSpaceCase>(value);
         }
