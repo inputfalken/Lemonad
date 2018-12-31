@@ -40,13 +40,13 @@ namespace Lemonad.ErrorHandling.Internal.Either {
 
             if (Value.IsNull() && hasValue)
                 throw new ArgumentNullException(
-                    nameof(Value),
+                    nameof(value),
                     $"{nameof(IEither<T, TError>)} property \"{nameof(Value)}\" cannot be null when property \"{nameof(HasValue)}\" is expected to be true."
                 );
 
             if (Error.IsNull() && hasError)
                 throw new ArgumentNullException(
-                    nameof(Error),
+                    nameof(error),
                     $"{nameof(IEither<T, TError>)} property \"{nameof(Error)}\" cannot be null when property \"{nameof(hasError)}\" is expected to be true."
                 );
 

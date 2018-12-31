@@ -33,7 +33,7 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
 
         [Fact]
         public void Convert_Maybe_String_With_Null_Whose_Property_HasValue_Is_False__Expects_Result_With_error_Value() {
-            Assert.Throws<ArgumentNullException>(AssertionUtilities.EitherErrorName, () => {
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.ErrorParamName, () => {
                 string str = null;
                 2.ToMaybeNone().ToResult(() => str);
             });
