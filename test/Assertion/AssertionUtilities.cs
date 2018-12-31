@@ -18,6 +18,8 @@ namespace Assertion {
         public const string MaybeValueSelector = "valueSelector";
         public const string MaybeNoneSelector = "noneSelector";
         public const string SelectorName = "selector";
+        public const string ErrorSelectorName = "errorSelector";
+        public const string ValueSelectorName = "valueSelector";
 
         public static IMaybe<int> DivisionMaybe(int left, int right) =>
             right != 0 ? Maybe.Value(left / right) : Maybe.None<int>();
