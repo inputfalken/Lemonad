@@ -1,11 +1,34 @@
 ﻿using System;
 using Assertion;
 using Lemonad.ErrorHandling.Extensions;
-using Lemonad.ErrorHandling.Extensions.Maybe;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
     public class FlatMapResultSelectorTests {
+        [Fact]
+        public void Passing_Null_To_Nullable_Selector_Throws() {
+            const string input = "hello";
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () =>
+                    input
+                        .ToMaybe(s => s.Length > 4)
+                        .FlatMap((Func<string, int?>) null, (s, i) => s)
+            );
+        }
+
+        [Fact]
+        public void Passing_Null_To_Nullable_ResultSelector_Throws() {
+            const string input = "hello";
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ResultSelector,
+                () =>
+                    input
+                        .ToMaybe(s => s.Length > 4)
+                        .FlatMap(x => (int?) 2, (Func<string, int, string>) null)
+            );
+        }
+
         [Fact]
         public void
             Flattening_From_String_Maybe_With_value_To_Nullable_Int_With_Value__Expects_String_Maybe_With_Value() {

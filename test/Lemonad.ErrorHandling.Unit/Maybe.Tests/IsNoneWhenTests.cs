@@ -6,30 +6,18 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
     public class NoneWhenTests {
         [Fact]
-        public void
-            Maybe_String_Whose_Property_HasValue_Is_True__Pasing_Null_Predicate__ArgumentNullReferenceException_Thrown() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, bool> predicate = null;
-                ErrorHandling.Maybe.Value("foo").IsNoneWhen(predicate);
-            });
-        }
+        public void Passing_Null_Predicate_Throws() =>
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.PredicateName,
+                () => ErrorHandling.Maybe.Value("foo").IsNoneWhen(null)
+            );
 
         [Fact]
-        public void Null_Predicate__Throws_ArgumentNullException() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, bool> predicate = null;
-                "foo".ToMaybeNone(predicate);
-            });
-        }
+        public void With_Truthy_Predicate__Expects_None() =>
+            ErrorHandling.Maybe.Value("foo").IsNoneWhen(s => s.Length > 0).AssertNone();
 
         [Fact]
-        public void When_Predicate_Returns_False__Maybe_Is_Expected_To_HaveValue() {
-             "".ToMaybeNone(s => false).AssertValue("");
-        }
-
-        [Fact]
-        public void When_Predicate_Returns_True__Maybe_Is_Expected_To_HaveValue() {
-             "".ToMaybeNone(s => true).AssertNone();
-        }
+        public void With_Falsy_Predicate__Expects_Value() =>
+            ErrorHandling.Maybe.Value("foo").IsNoneWhen(s => s.Length > 20).AssertValue("foo");
     }
 }

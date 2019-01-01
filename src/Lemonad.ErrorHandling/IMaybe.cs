@@ -104,6 +104,8 @@ namespace Lemonad.ErrorHandling {
             Func<T, TSelector, TResult> resultSelector
         ) where TSelector : struct;
 
+        IMaybe<TResult> FlatMap< TResult>(Func<T, TResult?> selector) where TResult : struct;
+
         IMaybe<T> Flatten<TResult>(Func<T, IMaybe<TResult>> selector);
 
         /// <summary>
