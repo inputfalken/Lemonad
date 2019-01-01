@@ -12,6 +12,15 @@ namespace Lemonad.ErrorHandling.Parsers {
                 ? Maybe.Value(date)
                 : Maybe.None<DateTime>();
 
+        public static IMaybe<Guid> Guid(string input) => System.Guid.TryParse(input, out var guid)
+            ? Maybe.Value(guid)
+            : Maybe.None<Guid>();
+
+        public static IMaybe<Guid> GuidExact(string input, GuidFormat format) =>
+            System.Guid.TryParseExact(input, char.ToString((char) format), out var guid)
+                ? Maybe.Value(guid)
+                : Maybe.None<Guid>();
+
         public static IMaybe<DateTime> DateTime(string input) => System.DateTime.TryParse(input, out var date)
             ? Maybe.Value(date)
             : Maybe.None<DateTime>();
