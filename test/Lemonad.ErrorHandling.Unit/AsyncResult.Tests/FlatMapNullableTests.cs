@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Assertion;
+﻿using Assertion;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests

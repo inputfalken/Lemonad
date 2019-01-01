@@ -4,7 +4,7 @@ using Lemonad.ErrorHandling.Internal;
 using Lemonad.ErrorHandling.Internal.TaskExtensions;
 
 namespace Lemonad.ErrorHandling.Extensions.Result.Task {
-    public static class Index {
+    public static partial class Index {
         /// <summary>
         ///     Converts the <see cref="Task" /> with <see cref="IAsyncResult{T,TError}" /> into
         ///     <see cref="IAsyncResult{T,TError}" />.

@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using Assertion;
 using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Lemonad.ErrorHandling.Extensions.Result;
