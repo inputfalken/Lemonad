@@ -2,46 +2,7 @@ using System.Globalization;
 using Assertion;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Unit.ParserTests.Maybe {
-    public class DateTime {
-        [Fact]
-        public void With_Valid_String()
-            => Parsers.MaybeParsers
-                .DateTime(System.DateTime.Today.ToString(CultureInfo.InvariantCulture))
-                .AssertValue(System.DateTime.Today);
-
-        [Fact]
-        public void With_Invalid_String()
-            => Parsers.MaybeParsers
-                .DateTime("foobar")
-                .AssertNone();
-
-        [Fact]
-        public void With_Null_String()
-            => Parsers.MaybeParsers
-                .DateTime(null)
-                .AssertNone();
-
-        [Fact]
-        public void With_Valid_String_With_DateTimeStyle()
-            => Parsers.MaybeParsers
-                .DateTime(System.DateTime.Today.ToString(CultureInfo.InvariantCulture), DateTimeStyles.None,
-                    CultureInfo.InvariantCulture)
-                .AssertValue(System.DateTime.Today);
-
-        [Fact]
-        public void With_Invalid_String_With_DateTimeStyle()
-            => Parsers.MaybeParsers
-                .DateTime("foobar", DateTimeStyles.None, CultureInfo.InvariantCulture)
-                .AssertNone();
-
-        [Fact]
-        public void With_Null_String_With_DateTimeStyle()
-            => Parsers.MaybeParsers
-                .DateTime(null, DateTimeStyles.None, CultureInfo.InvariantCulture)
-                .AssertNone();
-    }
-
+namespace Lemonad.ErrorHandling.Unit.ParserTests.Result {
     public class DateTimeExact {
         private static readonly string[] Formats = {
             "M/d/yyyy h:mm:ss tt", "M/d/yyyy h:mm tt",
@@ -55,7 +16,7 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Maybe {
 
         [Fact]
         public void With_Valid_String_Using_Single_Format()
-            => Parsers.MaybeParsers
+            => Parsers.ResultParsers
                 .DateTimeExact(
                     System.DateTime.Today.ToString(Format),
                     Format,
@@ -66,29 +27,37 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Maybe {
 
         [Fact]
         public void With_Invalid_String_Using_Single_Format()
-            => Parsers.MaybeParsers
+            => Parsers.ResultParsers
                 .DateTimeExact(
                     "foobar",
                     Format,
                     DateTimeStyles.None,
                     CultureInfo.InvariantCulture
                 )
-                .AssertNone();
+                .AssertError(
+                    AssertionUtilities.FormatStringParserMessage<System.DateTime>(
+                        "foobar"
+                    )
+                );
 
         [Fact]
         public void With_Null_String_Using_Single_Format()
-            => Parsers.MaybeParsers
+            => Parsers.ResultParsers
                 .DateTimeExact(
                     null,
                     Format,
                     DateTimeStyles.None,
                     CultureInfo.InvariantCulture
                 )
-                .AssertNone();
+                .AssertError(
+                    AssertionUtilities.FormatStringParserMessage<System.DateTime>(
+                        null
+                    )
+                );
 
         [Fact]
         public void With_Valid_String_Using_Multiple_Formats()
-            => Parsers.MaybeParsers
+            => Parsers.ResultParsers
                 .DateTimeExact(
                     System.DateTime.Today.ToString(CultureInfo.InvariantCulture),
                     Formats,
@@ -99,24 +68,32 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Maybe {
 
         [Fact]
         public void With_Invalid_String_Using_Multiple_Formats()
-            => Parsers.MaybeParsers
+            => Parsers.ResultParsers
                 .DateTimeExact(
                     "foobar",
                     Formats,
                     DateTimeStyles.None,
                     CultureInfo.InvariantCulture
                 )
-                .AssertNone();
+                .AssertError(
+                    AssertionUtilities.FormatStringParserMessage<System.DateTime>(
+                        "foobar"
+                    )
+                );
 
         [Fact]
         public void With_Null_String_Using_Multiple_Formats()
-            => Parsers.MaybeParsers
+            => Parsers.ResultParsers
                 .DateTimeExact(
                     null,
                     Formats,
                     DateTimeStyles.None,
                     CultureInfo.InvariantCulture
                 )
-                .AssertNone();
+                .AssertError(
+                    AssertionUtilities.FormatStringParserMessage<System.DateTime>(
+                        null
+                    )
+                );
     }
 }
