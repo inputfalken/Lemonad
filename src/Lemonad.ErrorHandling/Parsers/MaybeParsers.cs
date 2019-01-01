@@ -66,8 +66,6 @@ namespace Lemonad.ErrorHandling.Parsers {
                 ? Maybe.Value(value)
                 : Maybe.None<TEnum>();
 
-        private static string FormatMessage(string input) => $"Could not parse string '{input}'.";
-
         public static IMaybe<int> Int(string input, NumberStyles style, IFormatProvider provider) =>
             int.TryParse(input, style, provider, out var number)
                 ? Maybe.Value(number)
