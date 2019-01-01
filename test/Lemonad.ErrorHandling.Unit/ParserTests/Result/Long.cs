@@ -5,13 +5,13 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Result {
     public class Long {
         [Fact]
         public void With_Valid_String()
-            => Lemonad.ErrorHandling.Parsers.ResultParsers
+            => Parsers.ResultParsers
                 .Long(long.MaxValue.ToString())
                 .AssertValue(long.MaxValue);
 
         [Fact]
         public void With_Invalid_String()
-            => Lemonad.ErrorHandling.Parsers.ResultParsers
+            => Parsers.ResultParsers
                 .Long("foobar")
                 .AssertError(
                     AssertionUtilities.FormatStringParserMessage<long>(
@@ -21,7 +21,7 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Result {
 
         [Fact]
         public void With_Null_String()
-            => Lemonad.ErrorHandling.Parsers.ResultParsers
+            => Parsers.ResultParsers
                 .Long(null)
                 .AssertError(
                     AssertionUtilities.FormatStringParserMessage<long>(

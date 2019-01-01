@@ -5,19 +5,19 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Result {
     public class Enum {
         [Fact]
         public void With_Valid_String()
-            => Lemonad.ErrorHandling.Parsers.ResultParsers
+            => Parsers.ResultParsers
                 .Enum<AssertionUtilities.Gender>("Male")
                 .AssertValue(AssertionUtilities.Gender.Male);
 
         [Fact]
         public void With_Valid_String_With_Ignore_Case()
-            => Lemonad.ErrorHandling.Parsers.ResultParsers
+            => Parsers.ResultParsers
                 .Enum<AssertionUtilities.Gender>("malE", ignoreCase: true)
                 .AssertValue(AssertionUtilities.Gender.Male);
 
         [Fact]
         public void With_Invalid_String()
-            => Lemonad.ErrorHandling.Parsers.ResultParsers
+            => Parsers.ResultParsers
                 .Enum<AssertionUtilities.Gender>("foobar")
                 .AssertError(
                     AssertionUtilities.FormatStringParserMessage<AssertionUtilities.Gender>(
@@ -27,7 +27,7 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Result {
 
         [Fact]
         public void With_Valid_String_With_Ignore_Case_Set_To_False()
-            => Lemonad.ErrorHandling.Parsers.ResultParsers
+            => Parsers.ResultParsers
                 .Enum<AssertionUtilities.Gender>("malE", ignoreCase: false)
                 .AssertError(
                     AssertionUtilities.FormatStringParserMessage<AssertionUtilities.Gender>(
@@ -37,7 +37,7 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Result {
 
         [Fact]
         public void With_Invalid_String_With_Ignore_Case_Set_To_False()
-            => Lemonad.ErrorHandling.Parsers.ResultParsers
+            => Parsers.ResultParsers
                 .Enum<AssertionUtilities.Gender>("foobar", ignoreCase: false)
                 .AssertError(
                     AssertionUtilities.FormatStringParserMessage<AssertionUtilities.Gender>(
@@ -47,7 +47,7 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Result {
 
         [Fact]
         public void With_Invalid_String_With_Ignore_Case()
-            => Lemonad.ErrorHandling.Parsers.ResultParsers
+            => Parsers.ResultParsers
                 .Enum<AssertionUtilities.Gender>("foobar", ignoreCase: true)
                 .AssertError(
                     AssertionUtilities.FormatStringParserMessage<AssertionUtilities.Gender>(
@@ -57,7 +57,7 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Result {
 
         [Fact]
         public void With_Null_String()
-            => Lemonad.ErrorHandling.Parsers.ResultParsers
+            => Parsers.ResultParsers
                 .Enum<AssertionUtilities.Gender>(null)
                 .AssertError(
                     AssertionUtilities.FormatStringParserMessage<AssertionUtilities.Gender>(
