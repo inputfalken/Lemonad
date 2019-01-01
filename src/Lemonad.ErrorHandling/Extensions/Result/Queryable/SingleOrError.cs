@@ -1,10 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Lemonad.ErrorHandling.Extensions.Result.Enumerable;
 
-namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
-    public static partial class ResultEnumerable {
+namespace Lemonad.ErrorHandling.Extensions.Result.Queryable {
+    public static partial class ResultQueryable {
         /// <summary>
         ///     Returns the only element of a sequence, or a <see cref="SingleOrErrorCase.NoElement" /> if the sequence is empty
         ///     and returns <see cref="SingleOrErrorCase.ManyElements" /> if more than one element was found.
@@ -19,7 +19,7 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
         ///     The single element of the input sequence, or <see cref="SingleOrErrorCase" /> otherwise inside a
         ///     <see cref="IResult{T,TError}" />.
         /// </returns>
-        public static IResult<TSource, SingleOrErrorCase> SingleOrError<TSource>(this IEnumerable<TSource> source) {
+        public static IResult<TSource, SingleOrErrorCase> SingleOrError<TSource>(this IQueryable<TSource> source) {
             if (source is null) throw new ArgumentNullException(nameof(source));
             var sources = source
                 .Take(2)
@@ -39,7 +39,7 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
         ///     A <see cref="IQueryable{T}" /> to return an <see cref="IResult{T,TError}" /> from.
         /// </param>
         /// <param name="predicate">
-        ///     A function to test each element for a condition.
+        ///     A <see cref="Expression{TDelegate}" /> to test each element for a condition.
         /// </param>
         /// <typeparam name="TSource">
         ///     The type of the elements in <see cref="IQueryable{T}" />.
@@ -49,13 +49,12 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
         ///     <see cref="IResult{T,TError}" />.
         /// </returns>
         public static IResult<TSource, SingleOrErrorCase> SingleOrError<TSource>(
-            this IEnumerable<TSource> source,
-            Func<TSource, bool> predicate
+            this IQueryable<TSource> source,
+            Expression<Func<TSource, bool>> predicate
         ) {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (predicate is null) throw new ArgumentNullException(nameof(predicate));
             return source.Where(predicate).SingleOrError();
         }
     }
-
 }

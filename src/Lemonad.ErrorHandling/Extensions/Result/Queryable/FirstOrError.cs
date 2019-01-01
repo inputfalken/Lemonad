@@ -1,15 +1,15 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Lemonad.ErrorHandling.Internal;
 
-namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
-    public static partial class ResultEnumerable {
+namespace Lemonad.ErrorHandling.Extensions.Result.Queryable {
+    public static partial class ResultQueryable {
         /// <summary>
         ///     Returns the first element of the sequence or a <typeparamref name="TError" /> if no such element is found.
         /// </summary>
         /// <param name="source">
-        ///     The <see cref="IEnumerable{T}" /> to iterate in.
+        ///     The <see cref="IQueryable{T}" /> to search in.
         /// </param>
         /// <param name="errorSelector">
         ///     A function that is invoked if either no element is found.
@@ -24,11 +24,12 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
         ///     When any of the parameters are null.
         /// </exception>
         public static IResult<TSource, TError> FirstOrError<TSource, TError>(
-            this IEnumerable<TSource> source,
+            this IQueryable<TSource> source,
             Func<TError> errorSelector
         ) {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+
             // Since anonymous types are reference types, It's possible to wrap the value type in an anonymous type and perform a null check.
             return default(TSource).IsValueType()
                 ? source
@@ -46,7 +47,7 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
         ///     element is found.
         /// </summary>
         /// <param name="source">
-        ///     The <see cref="IEnumerable{T}" /> to iterate in.
+        ///     The <see cref="IQueryable{T}" /> to search in.
         /// </param>
         /// <param name="predicate">
         ///     A function to test each element until the condition is fulfilled.
@@ -63,15 +64,14 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
         /// <exception cref="ArgumentNullException">
         ///     When any of the parameters are null.
         /// </exception>
-        public static IResult<TSource, TError>
-            FirstOrError<TSource, TError>(
-                this IEnumerable<TSource> source, Func<TSource, bool> predicate,
-                Func<TError> errorSelector
-            ) {
+        public static IResult<TSource, TError> FirstOrError<TSource, TError>(
+            this IQueryable<TSource> source,
+            Expression<Func<TSource, bool>> predicate,
+            Func<TError> errorSelector
+        ) {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
             if (predicate is null) throw new ArgumentNullException(nameof(predicate));
-
             return source.Where(predicate).FirstOrError(errorSelector);
         }
     }
