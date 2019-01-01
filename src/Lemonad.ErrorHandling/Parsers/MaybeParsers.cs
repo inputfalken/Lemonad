@@ -16,8 +16,8 @@ namespace Lemonad.ErrorHandling.Parsers {
             ? Maybe.Value(guid)
             : Maybe.None<Guid>();
 
-        public static IMaybe<Guid> GuidExact(string input, string format, out Guid result) =>
-            System.Guid.TryParseExact(input, format, out var guid)
+        public static IMaybe<Guid> GuidExact(string input, GuidFormat format) =>
+            System.Guid.TryParseExact(input, char.ToString((char) format), out var guid)
                 ? Maybe.Value(guid)
                 : Maybe.None<Guid>();
 

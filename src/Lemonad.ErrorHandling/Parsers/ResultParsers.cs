@@ -18,8 +18,8 @@ namespace Lemonad.ErrorHandling.Parsers {
             ? Result.Value<Guid, string>(guid)
             : Result.Error<Guid, string>(FormatStringParserMessage<Guid>(input));
 
-        public static IResult<Guid, string> GuidExact(string input, string format, out Guid result) =>
-            System.Guid.TryParseExact(input, format, out var guid)
+        public static IResult<Guid, string> GuidExact(string input, GuidFormat format) =>
+            System.Guid.TryParseExact(input, char.ToString((char) format), out var guid)
                 ? Result.Value<Guid, string>(guid)
                 : Result.Error<Guid, string>(FormatStringParserMessage<Guid>(input));
 

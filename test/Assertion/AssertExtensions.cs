@@ -19,10 +19,10 @@ namespace Assertion {
         }
 
         public static IResult<T, TError> AssertValue<T, TError>(this IResult<T, TError> source, T expected) {
-            Assert.True(source.Either.HasValue);
-            Assert.False(source.Either.HasError);
             Assert.Equal(default, source.Either.Error);
             Assert.Equal(expected, source.Either.Value);
+            Assert.True(source.Either.HasValue);
+            Assert.False(source.Either.HasError);
             return source;
         }
 
