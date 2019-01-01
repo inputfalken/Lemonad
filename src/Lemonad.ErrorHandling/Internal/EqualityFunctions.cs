@@ -9,24 +9,6 @@ namespace Lemonad.ErrorHandling.Internal {
     /// </summary>
     internal static class EqualityFunctions {
         /// <summary>
-        ///     Returns true if the value is equal to this type's
-        ///     default value.
-        /// </summary>
-        /// <example>
-        ///     0.IsDefault()  // true
-        ///     1.IsDefault()  // false
-        /// </example>
-        /// <returns>
-        ///     True if the value is equal to this type's
-        ///     default value
-        /// </returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsDefault<T>(this T value) =>
-            Check<T>.IsDefault(value);
-
-        public static bool IsNotNull<T>(this T value) => !IsNull(value);
-
-        /// <summary>
         ///     Returns true if the value is null, and does so without
         ///     boxing of any value-types.  Value-types will always
         ///     return false.
@@ -60,16 +42,12 @@ namespace Lemonad.ErrorHandling.Internal {
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal static bool IsDefault(T value) =>
-                DefaultEqualityComparer.Equals(value, default);
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal static bool IsNull(T value) =>
                 IsNullable
                     ? value.Equals(default(T))
                     : IsReferenceType && DefaultEqualityComparer.Equals(value, default);
 
-            internal static bool IsValueType(T value) => IsReferenceType == false;
+            internal static bool IsValueType(T _) => IsReferenceType == false;
         }
     }
 }
