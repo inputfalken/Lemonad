@@ -1,5 +1,4 @@
-﻿using System;
-using Assertion;
+﻿using Assertion;
 using Lemonad.ErrorHandling.Exceptions;
 using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Internal;

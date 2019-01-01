@@ -1,5 +1,4 @@
-﻿using System;
-using Assertion;
+﻿using Assertion;
 using Lemonad.ErrorHandling.Parsers;
 using Xunit;
 

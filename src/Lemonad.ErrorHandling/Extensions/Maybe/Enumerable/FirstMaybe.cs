@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling.Extensions.Maybe.Enumerable {
     public static partial class MaybeEnumerable {

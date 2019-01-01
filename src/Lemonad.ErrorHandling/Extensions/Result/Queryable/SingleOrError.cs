@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
-using Lemonad.ErrorHandling.Extensions.Result.Enumerable;
 
 namespace Lemonad.ErrorHandling.Extensions.Result.Queryable {
     public static partial class ResultQueryable {
