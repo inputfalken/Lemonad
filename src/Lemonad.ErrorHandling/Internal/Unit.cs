@@ -18,18 +18,6 @@ namespace Lemonad.ErrorHandling.Internal {
 
         public bool Equals(Unit other) => true;
 
-        public static bool operator ==(Unit left, Unit right) => true;
-
-        public static bool operator !=(Unit left, Unit right) => false;
-
-        public static bool operator >(Unit left, Unit right) => false;
-
-        public static bool operator >=(Unit left, Unit right) => true;
-
-        public static bool operator <(Unit left, Unit right) => false;
-
-        public static bool operator <=(Unit left, Unit right) => true;
-
         /// <summary>
         ///     Is Always equal
         /// </summary>
