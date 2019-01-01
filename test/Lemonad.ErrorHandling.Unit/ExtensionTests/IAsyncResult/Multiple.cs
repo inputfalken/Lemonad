@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Assertion;
 using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Xunit;
@@ -70,6 +71,17 @@ namespace Lemonad.ErrorHandling.Unit.ExtensionTests.IAsyncResult {
                 x => x.Filter(y => y == 5, _ => "Value is not equal to 4."),
                 x => x.Filter(y => true, _ => "This should never happen!"),
                 x => x.Filter(y => true, _ => "This should never happen!")
+            ).AssertValue(5);
+        }
+
+        [Fact(Timeout = 2000)]
+        public async System.Threading.Tasks.Task Hundred_Thousand_Does_Not_Take_Long_Time() {
+            await AssertionUtilities.DivisionAsync(10, 2).Multiple(
+                Enumerable.Range(0, 100000).Select(x =>
+                    new Func<IAsyncResult<double, string>, IAsyncResult<double, string>>(
+                        y => y.Filter(d => true, _ => "This should never happen!")
+                    )
+                ).ToArray()
             ).AssertValue(5);
         }
 
