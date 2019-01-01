@@ -1,19 +1,22 @@
+using System.Linq;
+
 namespace Lemonad.ErrorHandling.Extensions.String {
     public static partial class ResultString {
         public static IResult<string, IsNullOrWhiteSpaceCase> IsNullOrWhiteSpace(this string value) {
             if (value is null)
                 return ErrorHandling.Result.Error<string, IsNullOrWhiteSpaceCase>(IsNullOrWhiteSpaceCase.Null);
-            foreach (var character in value)
-                if (!char.IsWhiteSpace(character))
-                    return ErrorHandling.Result.Error<string, IsNullOrWhiteSpaceCase>(IsNullOrWhiteSpaceCase
-                        .WhiteSpace);
+            if (value == string.Empty)
+                return ErrorHandling.Result.Error<string, IsNullOrWhiteSpaceCase>(IsNullOrWhiteSpaceCase.Empty);
 
-            return ErrorHandling.Result.Value<string, IsNullOrWhiteSpaceCase>(value);
+            return value.All(char.IsWhiteSpace)
+                ? ErrorHandling.Result.Error<string, IsNullOrWhiteSpaceCase>(IsNullOrWhiteSpaceCase.WhiteSpace)
+                : ErrorHandling.Result.Value<string, IsNullOrWhiteSpaceCase>(value);
         }
     }
 
     public enum IsNullOrWhiteSpaceCase {
         Null,
-        WhiteSpace
+        WhiteSpace,
+        Empty
     }
 }

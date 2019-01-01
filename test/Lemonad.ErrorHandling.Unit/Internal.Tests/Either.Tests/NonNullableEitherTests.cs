@@ -31,7 +31,7 @@ namespace Lemonad.ErrorHandling.Unit.Internal.Tests.Either.Tests {
         /// </summary>
         [Fact]
         public void String_Int_Either_With_Null_Error() {
-            Assert.Throws<ArgumentNullException>(AssertionUtilities.EitherErrorName, () => {
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.ErrorParamName, () => {
                 var value = "foo";
                 int? error = null;
                 var either =

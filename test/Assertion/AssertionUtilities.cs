@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
 using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Extensions.Result;
-using Lemonad.ErrorHandling.Internal;
 
 namespace Assertion {
     public static class AssertionUtilities {
@@ -13,11 +12,33 @@ namespace Assertion {
         public static string EitherErrorName { get; } = nameof(IEither<object, object>.Error);
         public static string MaybeValueName { get; } = nameof(IMaybe<object>.Value);
 
+        public const string ErrorParamName = "error";
+        public const string ValueParamName = "value";
+        
+            
+
+        public const string PredicateName = "predicate";
+
+        public const string ExtensionParameterName = "source";
+        public const string MaybeValueSelector = "valueSelector";
+        public const string MaybeNoneSelector = "noneSelector";
+        public const string SelectorName = "selector";
+        public const string ErrorSelectorName = "errorSelector";
+        public const string ValueSelectorName = "valueSelector";
+
+        public static IMaybe<int> DivisionMaybe(int left, int right) =>
+            right != 0 ? Maybe.Value(left / right) : Maybe.None<int>();
+
         public static IResult<double, string> Division(double left, double right) => (left, right).ToResult(
                 x => right != 0,
                 x => $"Can not divide '{x.left}' with '{x.right}'."
             )
             .Map(x => x.left / x.right);
+
+        public static string FormatStringParserMessage<T>(string input) =>
+            input is null
+                ? $"Could not parse type {typeof(string).Name} (null) into {typeof(T).Name}."
+                : $"Could not parse type {typeof(string).Name} (\"{input}\") into {typeof(T).Name}.";
 
         public static IAsyncResult<double, string> DivisionAsync(double left, double right) {
             return (left, right).ToResult(

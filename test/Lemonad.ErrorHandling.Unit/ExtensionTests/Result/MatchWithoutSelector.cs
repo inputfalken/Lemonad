@@ -1,11 +1,19 @@
-﻿using Assertion;
+using System;
+using Assertion;
 using Lemonad.ErrorHandling.Extensions.Result;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Unit.Result.Tests {
-    public class MatchExtensionTests {
+namespace Lemonad.ErrorHandling.Unit.ExtensionTests.Result {
+    public class MatchWithoutSelector {
         private static double Division(double left, double second) =>
             AssertionUtilities.Division(left, second).MapError(x => -1d).Match();
+
+        [Fact]
+        public void Passing_Null_Result_Throws() =>
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ExtensionParameterName,
+                () => ((IResult<int, int>) null).Match()
+            );
 
         [Fact]
         public void Result_With_Error() {

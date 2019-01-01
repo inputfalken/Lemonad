@@ -26,6 +26,7 @@ namespace Lemonad.ErrorHandling.Extensions.Task {
             Func<TError, bool> predicate,
             Func<TError, T> valueSelector) {
             if (source is null) throw new ArgumentNullException(nameof(source));
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             if (valueSelector is null) throw new ArgumentNullException(nameof(valueSelector));
             return AsyncResult<T, TError>.Factory(source.Map(x => x.ToResultError(predicate, valueSelector).Either));
         }

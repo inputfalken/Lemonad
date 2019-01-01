@@ -45,11 +45,9 @@ namespace Lemonad.ErrorHandling.Extensions.AsyncResult {
             source?.ToTaskEither().GetAwaiter() ?? throw new ArgumentNullException(nameof(source));
 
         private static async Task<IResult<T, TError>> Mapper<T, TError>(IAsyncResult<T, TError> source) =>
-            source is null
-                ? throw new ArgumentNullException(nameof(source))
-                : await source.Either.HasValue.ConfigureAwait(false)
-                    ? ErrorHandling.Result.Value<T, TError>(source.Either.Value)
-                    : ErrorHandling.Result.Error<T, TError>(source.Either.Error);
+            await source.Either.HasValue.ConfigureAwait(false)
+                ? ErrorHandling.Result.Value<T, TError>(source.Either.Value)
+                : ErrorHandling.Result.Error<T, TError>(source.Either.Error);
 
         /// <summary>
         ///     Evaluates the <see cref="IAsyncResult{T,TError}" />.

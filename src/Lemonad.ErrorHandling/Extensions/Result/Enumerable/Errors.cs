@@ -18,7 +18,7 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
         /// <typeparam name="TError">
         ///     The type of the errors in <see cref="IResult{T,TError}" />.
         /// </typeparam>
-        public static IEnumerable<TError> Errors<T, TError>(this IEnumerable<IResult<T, TError>> source)
+        public static IEnumerable<TError> Errors<T, TError>(this IEnumerable<IResult<T, TError>> source) 
             => source is null
                 ? throw new ArgumentNullException(nameof(source))
                 : source.SelectMany(x => x.ToErrorEnumerable());

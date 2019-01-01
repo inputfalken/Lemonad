@@ -158,9 +158,9 @@ namespace Lemonad.ErrorHandling.Internal {
 
         public IAsyncResult<TResult, TError> Join<TInner, TKey, TResult>(
             IResult<TInner, TError> inner,
-            Func<T, TKey> outerKeySelector, 
+            Func<T, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
-            Func<T, TInner, TResult> resultSelector, 
+            Func<T, TInner, TResult> resultSelector,
             Func<TError> errorSelector
         ) {
             if (inner is null) throw new ArgumentNullException(nameof(inner));
@@ -289,7 +289,7 @@ namespace Lemonad.ErrorHandling.Internal {
         public IAsyncResult<T, TError> IsErrorWhenAsync(
             Func<T, Task<bool>> predicate,
             Func<T, TError> errorSelector
-            ) {
+        ) {
             if (predicate is null) throw new ArgumentNullException(nameof(predicate));
             if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
             return new AsyncResult<T, TError>(
@@ -408,7 +408,8 @@ namespace Lemonad.ErrorHandling.Internal {
             return EitherMethods.MatchAsync(Either.ToTaskEither(), action, errorAction);
         }
 
-        public IAsyncResult<TResult, TError> FlatMapAsync<TResult>(Func<T, IAsyncResult<TResult, TError>> flatSelector) {
+        public IAsyncResult<TResult, TError>
+            FlatMapAsync<TResult>(Func<T, IAsyncResult<TResult, TError>> flatSelector) {
             if (flatSelector is null) throw new ArgumentNullException(nameof(flatSelector));
             return new AsyncResult<TResult, TError>(
                 EitherMethods.FlatMapAsync(
