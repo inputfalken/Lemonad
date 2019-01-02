@@ -7,6 +7,7 @@ using Lemonad.ErrorHandling.Extensions.Result;
 namespace Assertion {
     public static class AssertionUtilities {
         private static Task Delay => Task.Delay(200);
+        public const string ActionParamName = "action";
         public const string ErrorParamName = "error";
         public const string ValueParamName = "value";
         public const string PredicateName = "predicate";
