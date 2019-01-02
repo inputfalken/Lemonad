@@ -28,8 +28,8 @@ namespace SpecificErrorType {
         public IResult<T, ErrorModel> DoWithError(Action<ErrorModel> action) =>
             _resultImplementation.DoWithError(action);
 
-        public IAsyncResult<T, ErrorModel> DoWithErrorAsync(Func<ErrorModel, Task> selector) =>
-            _resultImplementation.DoWithErrorAsync(selector);
+        public IAsyncResult<T, ErrorModel> DoWithErrorAsync(Func<ErrorModel, Task> action) =>
+            _resultImplementation.DoWithErrorAsync(action);
 
         public IEither<T, ErrorModel> Either => _resultImplementation.Either;
 
