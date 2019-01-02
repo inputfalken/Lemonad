@@ -64,6 +64,26 @@ namespace Lemonad.ErrorHandling.Internal {
             return this.ToAsyncResult().FlatMapAsync(flatSelector, resultSelector);
         }
 
+        public IAsyncResult<TResult, TError> FlatMapAsync<TResult, TErrorResult>(
+            Func<T, IAsyncResult<TResult, TErrorResult>> selector,
+            Func<TErrorResult, TError> errorSelector
+        ) {
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
+            if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
+            return this.ToAsyncResult().FlatMapAsync(selector, errorSelector);
+        }
+
+        public IAsyncResult<TResult, TError> FlatMapAsync<TFlatMap, TResult, TErrorResult>(
+            Func<T, IAsyncResult<TFlatMap, TErrorResult>> flatMapSelector,
+            Func<T, TFlatMap, TResult> resultSelector,
+            Func<TErrorResult, TError> errorSelector
+        ) {
+            if (flatMapSelector == null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (resultSelector == null) throw new ArgumentNullException(nameof(resultSelector));
+            if (errorSelector == null) throw new ArgumentNullException(nameof(errorSelector));
+            return this.ToAsyncResult().FlatMapAsync(flatMapSelector, resultSelector, errorSelector);
+        }
+
         public IAsyncResult<T, TError> FlattenAsync<TResult, TErrorResult>(
             Func<T, IAsyncResult<TResult, TErrorResult>> selector,
             Func<TErrorResult, TError> errorSelector
