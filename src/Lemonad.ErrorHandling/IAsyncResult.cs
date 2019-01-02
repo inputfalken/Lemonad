@@ -41,7 +41,7 @@ namespace Lemonad.ErrorHandling {
         ///     An asynchronous version of
         ///     <see cref="IResult{T,TError}.DoWith" />.
         /// </summary>
-        IAsyncResult<T, TError> DoWithAsync(Func<T, Task> selector);
+        IAsyncResult<T, TError> DoWithAsync(Func<T, Task> action);
 
         /// <inheritdoc cref="IResult{T,TError}.DoWithError" />
         IAsyncResult<T, TError> DoWithError(Action<TError> action);

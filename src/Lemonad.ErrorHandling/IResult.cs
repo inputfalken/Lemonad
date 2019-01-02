@@ -88,7 +88,7 @@ namespace Lemonad.ErrorHandling {
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
         ///     <see cref="IAsyncResult{T,TError}.DoWith(Action{T})" />.
         /// </summary>
-        IAsyncResult<T, TError> DoWithAsync(Func<T, Task> selector);
+        IAsyncResult<T, TError> DoWithAsync(Func<T, Task> action);
 
         /// <summary>
         ///     Executes the <paramref name="action" /> if <typeparamref name="TError" /> is the active type.

@@ -4,14 +4,14 @@ using Assertion;
 using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
+namespace Lemonad.ErrorHandling.Unit.Result.Tests {
     public class DoWithAsyncTests {
         [Fact]
         public void Passing_Null_Action_Throws() {
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.ActionParamName,
                 () => AssertionUtilities
-                    .DivisionAsync(10, 0)
+                    .Division(10, 0)
                     .DoWithAsync(null)
             );
         }
@@ -20,7 +20,7 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
         public async Task Result_With_Error__Expects_Action__Not_To_Be_Invoked() {
             var actionExectued = false;
             await AssertionUtilities
-                .DivisionAsync(10, 0)
+                .Division(10, 0)
                 .DoWithAsync(async d => {
                     await Task.Delay(200);
                     actionExectued = true;
@@ -34,7 +34,7 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
         public async Task Result_With_Value__Expects_Action_To_Be_Invoked() {
             var actionExectued = false;
             await AssertionUtilities
-                .DivisionAsync(10, 2)
+                .Division(10, 2)
                 .DoWithAsync(async d => {
                     await Task.Delay(200);
                     actionExectued = true;
