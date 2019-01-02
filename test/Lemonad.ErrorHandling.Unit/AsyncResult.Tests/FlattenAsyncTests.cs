@@ -1,39 +1,42 @@
-﻿using System;
+using System;
+using System.Threading.Tasks;
 using Assertion;
+using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Unit.Result.Tests {
-    public class FlattenTests {
+namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
+    public class FlattenAsyncTests {
         [Fact]
-        public void Passing_Null_Selector_Throws() =>
+        public async Task Passing_Null_Selector_Throws() =>
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.SelectorName,
-                () => AssertionUtilities.Division(20, 2).Flatten<string>(null)
+                () => AssertionUtilities.DivisionAsync(20, 2).FlattenAsync<string>(null)
             );
 
         [Fact]
-        public void Passing_Null_Selector_With_ErrorSelector_Overload_Throws() =>
+        public async Task Passing_Null_Selector_With_ErrorSelector_Overload_Throws() =>
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.SelectorName,
-                () => AssertionUtilities.Division(20, 2).Flatten<string, int>(null, i => $"{i}")
+                () => AssertionUtilities.DivisionAsync(20, 2).FlattenAsync<string, int>(null, i => $"{i}")
             );
 
         [Fact]
-        public void Passing_Null_ErrorSelector() =>
+        public async Task Passing_Null_ErrorSelector() =>
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.ErrorSelectorName,
-                () => AssertionUtilities.Division(20, 2).Flatten(d => AssertionUtilities.Division(d, 2), null)
+                () => AssertionUtilities.DivisionAsync(20, 2)
+                    .FlattenAsync(d => AssertionUtilities.DivisionAsync(d, 2), null)
             );
 
         [Fact]
-        public void Result_With_Error_Flatmaps_Result_with_Error__Expects_Result_With_Error() {
+        public async Task Result_With_Error_Flatmaps_Result_with_Error__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
-            AssertionUtilities
-                .Division(2, 0)
-                .Flatten(x => {
+            await AssertionUtilities
+                .DivisionAsync(2, 0)
+                .FlattenAsync(x => {
                     flatSelectorExecuted = true;
-                    return AssertionUtilities.Division(x, 0);
+                    return AssertionUtilities.DivisionAsync(x, 0);
                 }, s => {
                     errorSelectorExecuted = true;
                     return s;
@@ -45,13 +48,14 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Error_Flatmaps_Result_with_Error_Without_ErrorSelector__Expects_Result_With_Error() {
+        public async Task
+            Result_With_Error_Flatmaps_Result_with_Error_Without_ErrorSelector__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
-            AssertionUtilities
-                .Division(2, 0)
-                .Flatten(x => {
+            await AssertionUtilities
+                .DivisionAsync(2, 0)
+                .FlattenAsync(x => {
                     flatSelectorExecuted = true;
-                    return AssertionUtilities.Division(x, 0);
+                    return AssertionUtilities.DivisionAsync(x, 0);
                 })
                 .AssertError("Can not divide '2' with '0'.");
 
@@ -60,14 +64,14 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Error_Flatmaps_Result_with_Value__Expects_Result_With_Error() {
+        public async Task Result_With_Error_Flatmaps_Result_with_Value__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
-            AssertionUtilities
-                .Division(2, 0)
-                .Flatten(x => {
+            await AssertionUtilities
+                .DivisionAsync(2, 0)
+                .FlattenAsync(x => {
                     flatSelectorExecuted = true;
-                    return AssertionUtilities.Division(x, 2);
+                    return AssertionUtilities.DivisionAsync(x, 2);
                 }, s => {
                     errorSelectorExecuted = true;
                     return s;
@@ -81,13 +85,14 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Error_Flattens_Result_with_Value_Without_ErrorSelector__Expects_Result_With_Error() {
+        public async Task
+            Result_With_Error_Flattens_Result_with_Value_Without_ErrorSelector__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
-            AssertionUtilities
-                .Division(2, 0)
-                .Flatten(x => {
+            await AssertionUtilities
+                .DivisionAsync(2, 0)
+                .FlattenAsync(x => {
                     flatSelectorExecuted = true;
-                    return AssertionUtilities.Division(x, 2);
+                    return AssertionUtilities.DivisionAsync(x, 2);
                 })
                 .AssertError("Can not divide '2' with '0'.");
 
@@ -96,27 +101,28 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Value_Flatten_Result_with_Error_Without_ErrorSelector__Expects_Result_With_Error() {
+        public async Task
+            Result_With_Value_Flatten_Result_with_Error_Without_ErrorSelector__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
-            AssertionUtilities
-                .Division(2, 2)
-                .Flatten(x => {
+            await AssertionUtilities
+                .DivisionAsync(2, 2)
+                .FlattenAsync(x => {
                     flatSelectorExecuted = true;
-                    return AssertionUtilities.Division(x, 0);
+                    return AssertionUtilities.DivisionAsync(x, 0);
                 }).AssertError("Can not divide '1' with '0'.");
 
             Assert.True(flatSelectorExecuted, "The flatmapSelector should get exectued.");
         }
 
         [Fact]
-        public void Result_With_Value_Flatmaps_Result_with_Value__Expects_Result_With_Value() {
+        public async Task Result_With_Value_Flatmaps_Result_with_Value__Expects_Result_With_Value() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
-            AssertionUtilities
-                .Division(2, 2)
-                .Flatten(x => {
+            await AssertionUtilities
+                .DivisionAsync(2, 2)
+                .FlattenAsync(x => {
                     flatSelectorExecuted = true;
-                    return AssertionUtilities.Division(x, 2);
+                    return AssertionUtilities.DivisionAsync(x, 2);
                 }, s => {
                     errorSelectorExecuted = true;
                     return s;
@@ -127,27 +133,28 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Value_Flatmaps_Result_with_Value_Without_ErrorSelector__Expects_Result_With_Value() {
+        public async Task
+            Result_With_Value_Flatmaps_Result_with_Value_Without_ErrorSelector__Expects_Result_With_Value() {
             var flatSelectorExecuted = false;
-            AssertionUtilities
-                .Division(2, 2)
-                .Flatten(x => {
+            await AssertionUtilities
+                .DivisionAsync(2, 2)
+                .FlattenAsync(x => {
                     flatSelectorExecuted = true;
-                    return AssertionUtilities.Division(x, 2);
+                    return AssertionUtilities.DivisionAsync(x, 2);
                 })
                 .AssertValue(1);
             Assert.True(flatSelectorExecuted, "flatmapselector should get executed.");
         }
 
         [Fact]
-        public void Result_With_Value_Flattens_Result_with_Error__Expects_Result_With_Error() {
+        public async Task Result_With_Value_Flattens_Result_with_Error__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
-            AssertionUtilities
-                .Division(2, 2)
-                .Flatten(x => {
+            await AssertionUtilities
+                .DivisionAsync(2, 2)
+                .FlattenAsync(x => {
                     flatSelectorExecuted = true;
-                    return AssertionUtilities.Division(x, 0);
+                    return AssertionUtilities.DivisionAsync(x, 0);
                 }, s => {
                     errorSelectorExecuted = true;
                     return s;
@@ -161,13 +168,14 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
         }
 
         [Fact]
-        public void Result_With_Value_Flattens_Result_with_Error_Without_ErrorSelector__Expects_Result_With_Error() {
+        public async Task
+            Result_With_Value_Flattens_Result_with_Error_Without_ErrorSelector__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
-            AssertionUtilities
-                .Division(2, 2)
-                .Flatten(x => {
+            await AssertionUtilities
+                .DivisionAsync(2, 2)
+                .FlattenAsync(x => {
                     flatSelectorExecuted = true;
-                    return AssertionUtilities.Division(x, 0);
+                    return AssertionUtilities.DivisionAsync(x, 0);
                 })
                 .AssertError("Can not divide '1' with '0'.");
 
