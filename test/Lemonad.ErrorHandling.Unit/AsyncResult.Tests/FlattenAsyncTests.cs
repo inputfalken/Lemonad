@@ -7,21 +7,21 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
     public class FlattenAsyncTests {
         [Fact]
-        public async Task Passing_Null_Selector_Throws() =>
+        public void Passing_Null_Selector_Throws() =>
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.SelectorName,
                 () => AssertionUtilities.DivisionAsync(20, 2).FlattenAsync<string>(null)
             );
 
         [Fact]
-        public async Task Passing_Null_Selector_With_ErrorSelector_Overload_Throws() =>
+        public void Passing_Null_Selector_With_ErrorSelector_Overload_Throws() =>
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.SelectorName,
                 () => AssertionUtilities.DivisionAsync(20, 2).FlattenAsync<string, int>(null, i => $"{i}")
             );
 
         [Fact]
-        public async Task Passing_Null_ErrorSelector() =>
+        public void Passing_Null_ErrorSelector() =>
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.ErrorSelectorName,
                 () => AssertionUtilities.DivisionAsync(20, 2)
