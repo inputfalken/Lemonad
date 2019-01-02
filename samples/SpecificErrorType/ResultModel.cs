@@ -75,8 +75,8 @@ namespace SpecificErrorType {
             _resultImplementation.FlatMap(flatMapSelector, resultSelector, errorSelector);
 
         public IAsyncResult<TResult, ErrorModel> FlatMapAsync<TResult>(
-            Func<T, IAsyncResult<TResult, ErrorModel>> flatSelector) =>
-            _resultImplementation.FlatMapAsync(flatSelector);
+            Func<T, IAsyncResult<TResult, ErrorModel>> selector) =>
+            _resultImplementation.FlatMapAsync(selector);
 
         public IAsyncResult<TResult, ErrorModel> FlatMapAsync<TSelector, TResult>(
             Func<T, IAsyncResult<TSelector, ErrorModel>> flatSelector,

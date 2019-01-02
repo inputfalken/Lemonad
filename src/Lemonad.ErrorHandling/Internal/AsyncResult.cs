@@ -409,12 +409,12 @@ namespace Lemonad.ErrorHandling.Internal {
         }
 
         public IAsyncResult<TResult, TError>
-            FlatMapAsync<TResult>(Func<T, IAsyncResult<TResult, TError>> flatSelector) {
-            if (flatSelector is null) throw new ArgumentNullException(nameof(flatSelector));
+            FlatMapAsync<TResult>(Func<T, IAsyncResult<TResult, TError>> selector) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
             return new AsyncResult<TResult, TError>(
                 EitherMethods.FlatMapAsync(
                     Either.ToTaskEither(),
-                    flatSelector.Compose(y => y.Either.ToTaskEither())
+                    selector.Compose(y => y.Either.ToTaskEither())
                 )
             );
         }

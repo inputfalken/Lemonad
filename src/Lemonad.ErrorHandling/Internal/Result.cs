@@ -49,10 +49,10 @@ namespace Lemonad.ErrorHandling.Internal {
         }
 
         public IAsyncResult<TResult, TError> FlatMapAsync<TResult>(
-            Func<T, IAsyncResult<TResult, TError>> flatSelector
+            Func<T, IAsyncResult<TResult, TError>> selector
         ) {
-            if (flatSelector is null) throw new ArgumentNullException(nameof(flatSelector));
-            return this.ToAsyncResult().FlatMapAsync(flatSelector);
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            return this.ToAsyncResult().FlatMapAsync(selector);
         }
 
         public IAsyncResult<TResult, TError> FlatMapAsync<TSelector, TResult>(

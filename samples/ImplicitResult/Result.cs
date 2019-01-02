@@ -74,8 +74,8 @@ namespace ImplicitResult {
             _resultImplementation.FlatMap(flatMapSelector, resultSelector, errorSelector);
 
         public IAsyncResult<TResult, TError>
-            FlatMapAsync<TResult>(Func<T, IAsyncResult<TResult, TError>> flatSelector) =>
-            _resultImplementation.FlatMapAsync(flatSelector);
+            FlatMapAsync<TResult>(Func<T, IAsyncResult<TResult, TError>> selector) =>
+            _resultImplementation.FlatMapAsync(selector);
 
         public IAsyncResult<TResult, TError> FlatMapAsync<TSelector, TResult>(
             Func<T, IAsyncResult<TSelector, TError>> flatSelector, Func<T, TSelector, TResult> resultSelector) =>

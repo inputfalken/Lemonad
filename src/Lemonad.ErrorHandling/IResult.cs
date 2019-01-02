@@ -313,7 +313,7 @@ namespace Lemonad.ErrorHandling {
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
         ///     <see cref="IAsyncResult{T,TError}.FlatMapAsync{TResult}" />.
         /// </summary>
-        IAsyncResult<TResult, TError> FlatMapAsync<TResult>(Func<T, IAsyncResult<TResult, TError>> flatSelector);
+        IAsyncResult<TResult, TError> FlatMapAsync<TResult>(Func<T, IAsyncResult<TResult, TError>> selector);
 
         /// <summary>
         ///     Lifts <see cref="IResult{T,TError}" /> into <see cref="IAsyncResult{T,TError}" /> and performs
