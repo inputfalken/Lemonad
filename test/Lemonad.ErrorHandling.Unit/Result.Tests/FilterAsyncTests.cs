@@ -1,17 +1,38 @@
-﻿using System.Threading.Tasks;
+using System;
+using System.Threading.Tasks;
 using Assertion;
 using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
-    public class FilterTests {
+namespace Lemonad.ErrorHandling.Unit.Result.Tests {
+    public class FilterAsyncTests {
+        [Fact]
+        public void Passing_Null_Predicate_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.PredicateName,
+                () => AssertionUtilities.Division(10, 0).FilterAsync(null, x => "This should never happen!")
+            );
+        }
+
+        [Fact]
+        public void Passing_Null_ErrorSelector_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ErrorSelectorName, () => AssertionUtilities
+                    .Division(10, 0).FilterAsync(async d => {
+                        await Task.Delay(50);
+                        return d == 2;
+                    }, null)
+            );
+        }
+
         [Fact]
         public async Task
             Result_With_Error__Expects_Predicate_Never_To_Be_Executed_And_ErrorSelector_Never_To_Be_Invoked_With_Parameter_ErrorSelector() {
             var predicateExectued = false;
             var errorSelectorExectued = false;
-            await AssertionUtilities.DivisionAsync(10, 0).Filter(d => {
+            await AssertionUtilities.Division(10, 0).FilterAsync(async d => {
                 predicateExectued = true;
+                await Task.Delay(50);
                 return d == 2;
             }, x => {
                 errorSelectorExectued = true;
@@ -29,7 +50,8 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             Result_With_Value_With_Falsy_Predicate__Expects_Predicate_To_Be_Executed_And_ErrorSelector_To_Be_Invoked_With_Parameter_ErrorSelector() {
             var predicateExectued = false;
             var errorSelectorExectued = false;
-            await AssertionUtilities.DivisionAsync(10, 2).Filter(d => {
+            await AssertionUtilities.Division(10, 2).FilterAsync(async d => {
+                await Task.Delay(50);
                 predicateExectued = true;
                 return false;
             }, x => {
@@ -48,8 +70,9 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             var predicateExectued = false;
             var errorSelectorExectued = false;
             await AssertionUtilities
-                .DivisionAsync(10, 2)
-                .Filter(d => {
+                .Division(10, 2)
+                .FilterAsync(async d => {
+                    await Task.Delay(50);
                     predicateExectued = true;
                     return true;
                 }, x => {
