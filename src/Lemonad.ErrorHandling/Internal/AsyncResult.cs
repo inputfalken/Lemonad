@@ -323,9 +323,9 @@ namespace Lemonad.ErrorHandling.Internal {
             return new AsyncResult<T, TError>(EitherMethods.Do(Either.ToTaskEither(), action));
         }
 
-        public IAsyncResult<T, TError> DoAsync(Func<Task> selector) {
-            if (selector is null) throw new ArgumentNullException(nameof(selector));
-            return new AsyncResult<T, TError>(EitherMethods.DoAsync(Either.ToTaskEither(), selector));
+        public IAsyncResult<T, TError> DoAsync(Func<Task> action) {
+            if (action is null) throw new ArgumentNullException(nameof(action));
+            return new AsyncResult<T, TError>(EitherMethods.DoAsync(Either.ToTaskEither(), action));
         }
 
         public IAsyncResult<T, TError> DoWithAsync(Func<T, Task> selector) {

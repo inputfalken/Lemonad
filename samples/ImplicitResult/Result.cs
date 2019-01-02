@@ -15,7 +15,7 @@ namespace ImplicitResult {
 
         public IResult<T, TError> Do(Action action) => _resultImplementation.Do(action);
 
-        public IAsyncResult<T, TError> DoAsync(Func<Task> selector) => _resultImplementation.DoAsync(selector);
+        public IAsyncResult<T, TError> DoAsync(Func<Task> action) => _resultImplementation.DoAsync(action);
 
         public IResult<T, TError> DoWith(Action<T> action) => _resultImplementation.DoWith(action);
 

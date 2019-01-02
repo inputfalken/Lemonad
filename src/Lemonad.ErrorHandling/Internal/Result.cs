@@ -24,9 +24,9 @@ namespace Lemonad.ErrorHandling.Internal {
                 false
             );
 
-        public IAsyncResult<T, TError> DoAsync(Func<Task> selector) {
-            if (selector is null) throw new ArgumentNullException(nameof(selector));
-            return this.ToAsyncResult().DoAsync(selector);
+        public IAsyncResult<T, TError> DoAsync(Func<Task> action) {
+            if (action is null) throw new ArgumentNullException(nameof(action));
+            return this.ToAsyncResult().DoAsync(action);
         }
 
         public IAsyncResult<T, TError> DoWithAsync(Func<T, Task> selector) {

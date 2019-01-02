@@ -18,7 +18,7 @@ namespace SpecificErrorType {
 
         public IResult<T, ErrorModel> Do(Action action) => _resultImplementation.Do(action);
 
-        public IAsyncResult<T, ErrorModel> DoAsync(Func<Task> selector) => _resultImplementation.DoAsync(selector);
+        public IAsyncResult<T, ErrorModel> DoAsync(Func<Task> action) => _resultImplementation.DoAsync(action);
 
         public IResult<T, ErrorModel> DoWith(Action<T> action) => _resultImplementation.DoWith(action);
 
