@@ -201,7 +201,7 @@ namespace Lemonad.ErrorHandling {
         ///     who expects an <see cref="IAsyncResult{T,TError}" /> instead of <see cref="IResult{T,TError}" />.
         /// </summary>
         IAsyncResult<TResult, TError> FlatMapAsync<TFlatMap, TResult, TErrorResult>(
-            Func<T, IAsyncResult<TFlatMap, TErrorResult>> flatMapSelector,
+            Func<T, IAsyncResult<TFlatMap, TErrorResult>> selector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TErrorResult, TError> errorSelector
         );

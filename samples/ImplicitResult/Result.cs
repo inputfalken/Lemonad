@@ -78,8 +78,8 @@ namespace ImplicitResult {
             _resultImplementation.FlatMapAsync(selector);
 
         public IAsyncResult<TResult, TError> FlatMapAsync<TSelector, TResult>(
-            Func<T, IAsyncResult<TSelector, TError>> flatSelector, Func<T, TSelector, TResult> resultSelector) =>
-            _resultImplementation.FlatMapAsync(flatSelector, resultSelector);
+            Func<T, IAsyncResult<TSelector, TError>> selector, Func<T, TSelector, TResult> resultSelector) =>
+            _resultImplementation.FlatMapAsync(selector, resultSelector);
 
         public IAsyncResult<TResult, TError> FlatMapAsync<TResult, TErrorResult>(
             Func<T, IAsyncResult<TResult, TErrorResult>> selector,
@@ -87,10 +87,10 @@ namespace ImplicitResult {
         ) => _resultImplementation.FlatMapAsync(selector, errorSelector);
 
         public IAsyncResult<TResult, TError> FlatMapAsync<TFlatMap, TResult, TErrorResult>(
-            Func<T, IAsyncResult<TFlatMap, TErrorResult>> flatMapSelector,
+            Func<T, IAsyncResult<TFlatMap, TErrorResult>> selector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TErrorResult, TError> errorSelector
-        ) => _resultImplementation.FlatMapAsync(flatMapSelector, resultSelector, errorSelector);
+        ) => _resultImplementation.FlatMapAsync(selector, resultSelector, errorSelector);
 
         public IResult<T, TError> Flatten<TResult, TErrorResult>(Func<T, IResult<TResult, TErrorResult>> selector,
             Func<TErrorResult, TError> errorSelector) => _resultImplementation.Flatten(selector, errorSelector);
