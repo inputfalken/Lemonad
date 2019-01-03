@@ -512,17 +512,17 @@ namespace Lemonad.ErrorHandling.Internal {
         }
 
         public IAsyncResult<TResult, TErrorResult> FullFlatMapAsync<TFlatMap, TResult, TErrorResult>(
-            Func<T, IAsyncResult<TFlatMap, TErrorResult>> flatMapSelector,
+            Func<T, IAsyncResult<TFlatMap, TErrorResult>> selector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector
         ) {
-            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
             if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
             if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
             return new AsyncResult<TResult, TErrorResult>(
                 EitherMethods.FullFlatMapAsync(
                     Either.ToTaskEither(),
-                    flatMapSelector.Compose(y => y.Either.ToTaskEither()),
+                    selector.Compose(y => y.Either.ToTaskEither()),
                     resultSelector,
                     errorSelector
                 )
@@ -530,15 +530,15 @@ namespace Lemonad.ErrorHandling.Internal {
         }
 
         public IAsyncResult<TResult, TErrorResult> FullFlatMapAsync<TResult, TErrorResult>(
-            Func<T, IAsyncResult<TResult, TErrorResult>> flatMapSelector,
+            Func<T, IAsyncResult<TResult, TErrorResult>> selector,
             Func<TError, TErrorResult> errorSelector
         ) {
-            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
             if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
             return new AsyncResult<TResult, TErrorResult>(
                 EitherMethods.FullFlatMapAsync(
                     Either.ToTaskEither(),
-                    flatMapSelector.Compose(y => y.Either.ToTaskEither()),
+                    selector.Compose(y => y.Either.ToTaskEither()),
                     errorSelector
                 )
             );
