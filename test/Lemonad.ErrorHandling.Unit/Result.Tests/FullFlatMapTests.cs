@@ -1,8 +1,55 @@
-﻿using Assertion;
+﻿using System;
+using Assertion;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.Result.Tests {
     public class FullFlatMapTests {
+        [Fact]
+        public void Passing_Null_Selector_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => AssertionUtilities
+                    .Division(2, 0)
+                    .FullFlatMap((Func<double, IResult<double, string>>) null, s => s)
+            );
+        }
+
+        [Fact]
+        public void Passing_Null_Selector_With_ResultSelector_Overload_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => AssertionUtilities
+                    .Division(2, 0)
+                    .FullFlatMap((Func<double, IResult<double, string>>) null, (d, d1) => d + d1, s => s));
+        }
+
+        [Fact]
+        public void Passing_Null_ErrorSelector_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ErrorSelectorName,
+                () => AssertionUtilities
+                    .Division(2, 0)
+                    .FullFlatMap(x => AssertionUtilities.Division(x, 2), null));
+        }
+
+        [Fact]
+        public void Passing_Null_ErrorSelector_With_ResultSelector_Overload_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ErrorSelectorName,
+                () => AssertionUtilities
+                    .Division(2, 0)
+                    .FullFlatMap(x => AssertionUtilities.Division(x, 2), (d, d1) => d + d1, null));
+        }
+
+        [Fact]
+        public void Passing_Null_ResultSelector_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ResultSelector,
+                () => AssertionUtilities
+                    .Division(2, 0)
+                    .FullFlatMap(x => AssertionUtilities.Division(x, 2), (Func<double, double, double>) null, s => s));
+        }
+
         [Fact]
         public void Result_With_Error_Flatmaps_Result_with_Error__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;

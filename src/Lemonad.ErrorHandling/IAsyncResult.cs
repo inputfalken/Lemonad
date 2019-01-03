@@ -246,12 +246,12 @@ namespace Lemonad.ErrorHandling {
         IAsyncResult<TResult, TResult> FullCast<TResult>();
 
         IAsyncResult<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
-            Func<T, IResult<TResult, TErrorResult>> flatMapSelector,
+            Func<T, IResult<TResult, TErrorResult>> selector,
             Func<TError, TErrorResult> errorSelector
         );
 
         IAsyncResult<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector,
+            Func<T, IResult<TFlatMap, TErrorResult>> selector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector
         );

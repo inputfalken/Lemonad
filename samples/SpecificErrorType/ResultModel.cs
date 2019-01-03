@@ -114,14 +114,14 @@ namespace SpecificErrorType {
         public IResult<TResult, TResult> FullCast<TResult>() => _resultImplementation.FullCast<TResult>();
 
         public IResult<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
-            Func<T, IResult<TResult, TErrorResult>> flatMapSelector,
+            Func<T, IResult<TResult, TErrorResult>> selector,
             Func<ErrorModel, TErrorResult> errorSelector) =>
-            _resultImplementation.FullFlatMap(flatMapSelector, errorSelector);
+            _resultImplementation.FullFlatMap(selector, errorSelector);
 
         public IResult<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
+            Func<T, IResult<TFlatMap, TErrorResult>> selector, Func<T, TFlatMap, TResult> resultSelector,
             Func<ErrorModel, TErrorResult> errorSelector) =>
-            _resultImplementation.FullFlatMap(flatMapSelector, resultSelector, errorSelector);
+            _resultImplementation.FullFlatMap(selector, resultSelector, errorSelector);
 
         public IAsyncResult<TResult, TErrorResult> FullFlatMapAsync<TFlatMap, TResult, TErrorResult>(
             Func<T, IAsyncResult<TFlatMap, TErrorResult>> flatMapSelector,

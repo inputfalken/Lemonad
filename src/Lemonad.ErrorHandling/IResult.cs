@@ -419,30 +419,30 @@ namespace Lemonad.ErrorHandling {
         /// <summary>
         ///     Fully flatmaps another <see cref="Result{T,TError}" />.
         /// </summary>
-        /// <param name="flatMapSelector">
+        /// <param name="selector">
         ///     A function who expects a <see cref="Result{T,TError}" /> as its return type.
         /// </param>
         /// <param name="errorSelector">
         ///     A function which maps <typeparamref name="TError" /> to <typeparamref name="TErrorResult" />.
         /// </param>
         /// <typeparam name="TErrorResult">
-        ///     The error type of the <see cref="Result{T,TError}" /> returned by the <paramref name="flatMapSelector" />.
+        ///     The error type of the <see cref="Result{T,TError}" /> returned by the <paramref name="selector" />.
         /// </typeparam>
         /// <typeparam name="TResult">
-        ///     The value type of the <see cref="Result{T,TError}" /> returned by the <paramref name="flatMapSelector" />.
+        ///     The value type of the <see cref="Result{T,TError}" /> returned by the <paramref name="selector" />.
         /// </typeparam>
         /// <exception cref="ArgumentNullException">
         ///     When any of the function parameters are null and needs to be executed.
         /// </exception>
         IResult<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
-            Func<T, IResult<TResult, TErrorResult>> flatMapSelector,
+            Func<T, IResult<TResult, TErrorResult>> selector,
             Func<TError, TErrorResult> errorSelector
         );
 
         /// <summary>
         ///     Fully flatmaps another <see cref="Result{T,TError}" />.
         /// </summary>
-        /// <param name="flatMapSelector">
+        /// <param name="selector">
         ///     A function who expects a <see cref="Result{T,TError}" /> as its return type.
         /// </param>
         /// <param name="resultSelector">
@@ -453,17 +453,17 @@ namespace Lemonad.ErrorHandling {
         ///     A function which maps <typeparamref name="TError" /> to <typeparamref name="TErrorResult" />.
         /// </param>
         /// <typeparam name="TErrorResult">
-        ///     The error type of the <see cref="Result{T,TError}" /> returned by the <paramref name="flatMapSelector" />.
+        ///     The error type of the <see cref="Result{T,TError}" /> returned by the <paramref name="selector" />.
         /// </typeparam>
         /// <typeparam name="TFlatMap">
-        ///     The value type of the <see cref="Result{T,TError}" /> returned by the <paramref name="flatMapSelector" />.
+        ///     The value type of the <see cref="Result{T,TError}" /> returned by the <paramref name="selector" />.
         /// </typeparam>
         /// <typeparam name="TResult">
         ///     The type returned by the function <paramref name="resultSelector" />.
         /// </typeparam>
         /// <returns></returns>
         IResult<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector,
+            Func<T, IResult<TFlatMap, TErrorResult>> selector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector
         );
