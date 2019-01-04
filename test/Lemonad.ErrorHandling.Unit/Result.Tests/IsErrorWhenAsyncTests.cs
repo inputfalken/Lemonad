@@ -1,14 +1,16 @@
-﻿using System;
+using System;
+using System.Threading.Tasks;
 using Assertion;
+using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.Result.Tests {
-    public class IsErrorWhenTests {
+    public class IsErrorWhenAsyncTests {
         [Fact]
         public void Passing_Null_Predicate_Throws() {
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.PredicateName,
-                () => AssertionUtilities.Division(10, 2).IsErrorWhen(null, d => "")
+                () => AssertionUtilities.Division(10, 2).IsErrorWhenAsync(null, d => "")
             );
         }
 
@@ -16,19 +18,20 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
         public void Passing_Null_ErrorSelector_Throws() {
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.ErrorSelectorName,
-                () => AssertionUtilities.Division(10, 2).IsErrorWhen(x => true, null)
+                () => AssertionUtilities.Division(10, 2).IsErrorWhenAsync(x => AssertionUtilities.GetTask(true), null)
             );
         }
 
         [Fact]
-        public void
+        public async Task
             Result_With_Error__Expects_Predicate_Never_To_Be_Executed_And_ErrorSelector_Never_To_Be_Invoked() {
             var predicateExectued = false;
             var errorSelectorExectued = false;
-            AssertionUtilities
+            await AssertionUtilities
                 .Division(10, 0)
-                .IsErrorWhen(d => {
+                .IsErrorWhenAsync(async d => {
                     predicateExectued = true;
+                    await AssertionUtilities.Delay;
                     return d == 2;
                 }, x => {
                     errorSelectorExectued = true;
@@ -43,13 +46,14 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
         }
 
         [Fact]
-        public void
+        public async Task
             Result_With_Value_With_Falsy_Predicate__Expects_Predicate_To_Be_Executed_And_ErrorSelector_To_Never_Be_Invoked() {
             var predicateExectued = false;
             var errorSelectorExectued = false;
-            AssertionUtilities
+            await AssertionUtilities
                 .Division(10, 2)
-                .IsErrorWhen(d => {
+                .IsErrorWhenAsync(async d => {
+                    await AssertionUtilities.Delay;
                     predicateExectued = true;
                     return false;
                 }, x => {
@@ -65,13 +69,14 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
         }
 
         [Fact]
-        public void
+        public async  Task
             Result_With_Value_With_Truthy_Predicate__Expects_Predicate_To_Be_Executed_And_ErrorSelector_To_Be_Invoked() {
             var predicateExectued = false;
             var errorSelectorExectued = false;
-            AssertionUtilities
+            await AssertionUtilities
                 .Division(10, 2)
-                .IsErrorWhen(d => {
+                .IsErrorWhenAsync(async d => {
+                    await AssertionUtilities.Delay;
                     predicateExectued = true;
                     return true;
                 }, x => {

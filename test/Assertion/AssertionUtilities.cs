@@ -5,7 +5,7 @@ using Lemonad.ErrorHandling.Extensions.Result;
 
 namespace Assertion {
     public static class AssertionUtilities {
-        private static Task Delay => Task.Delay(200);
+        public static Task Delay => Task.Delay(200);
         public const string ActionParamName = "action";
         public const string ErrorParamName = "error";
         public const string ValueParamName = "value";
@@ -24,6 +24,11 @@ namespace Assertion {
         public static async Task<string> GetTask(string message) {
             await Delay;
             return message;
+        }
+        
+        public static async Task<bool> GetTask(bool input) {
+            await Delay;
+            return input;
         }
 
         public static IResult<double, string> Division(double left, double right) => (left, right).ToResult(
