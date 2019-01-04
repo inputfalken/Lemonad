@@ -30,7 +30,7 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
             await AssertionUtilities
-                .DivisionAsync(2, 0)
+                .Division(2, 0)
                 .FullFlatMapAsync(x => {
                     flatSelectorExecuted = true;
                     return AssertionUtilities.DivisionAsync(x, 0);
@@ -51,7 +51,7 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
             await AssertionUtilities
-                .DivisionAsync(2, 0)
+                .Division(2, 0)
                 .FullFlatMapAsync(x => {
                     flatSelectorExecuted = true;
                     return AssertionUtilities.DivisionAsync(x, 2);
@@ -72,7 +72,7 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
             await AssertionUtilities
-                .DivisionAsync(2, 2)
+                .Division(2, 2)
                 .FullFlatMapAsync(x => {
                     flatSelectorExecuted = true;
                     return AssertionUtilities.DivisionAsync(x, 0);
@@ -91,7 +91,7 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
             await AssertionUtilities
-                .DivisionAsync(2, 2)
+                .Division(2, 2)
                 .FullFlatMapAsync(x => {
                     flatSelectorExecuted = true;
                     return AssertionUtilities.DivisionAsync(x, 2);
