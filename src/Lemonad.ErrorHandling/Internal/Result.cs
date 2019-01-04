@@ -553,6 +553,7 @@ namespace Lemonad.ErrorHandling.Internal {
             Func<TError> errorSelector,
             IEqualityComparer<TKey> comparer
         ) {
+            if (inner == null) throw new ArgumentNullException(nameof(inner));
             if (outerKeySelector is null) throw new ArgumentNullException(nameof(outerKeySelector));
             if (innerKeySelector is null) throw new ArgumentNullException(nameof(innerKeySelector));
             if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));

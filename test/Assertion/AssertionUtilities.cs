@@ -6,6 +6,12 @@ using Lemonad.ErrorHandling.Extensions.Result;
 namespace Assertion {
     public static class AssertionUtilities {
         public static Task Delay => Task.Delay(200);
+
+        public const string JoinInnerParameter = "inner";
+        public const string JoinOuterKeyParameter = "outerKeySelector";
+        public const string JoinCompareParameter = "comparer";
+        public const string JoinInnerKeyParameter = "innerKeySelector";
+
         public const string ActionParamName = "action";
         public const string ErrorParamName = "error";
         public const string ValueParamName = "value";
