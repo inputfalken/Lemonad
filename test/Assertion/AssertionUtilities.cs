@@ -21,6 +21,11 @@ namespace Assertion {
         public static IMaybe<int> DivisionMaybe(int left, int right) =>
             right != 0 ? Maybe.Value(left / right) : Maybe.None<int>();
 
+        public static async Task<string> GetTask(string message) {
+            await Delay;
+            return message;
+        }
+
         public static IResult<double, string> Division(double left, double right) => (left, right).ToResult(
                 x => right != 0,
                 x => $"Can not divide '{x.left}' with '{x.right}'."
