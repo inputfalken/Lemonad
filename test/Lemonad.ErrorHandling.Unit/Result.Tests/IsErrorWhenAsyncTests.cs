@@ -18,7 +18,10 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
         public void Passing_Null_ErrorSelector_Throws() {
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.ErrorSelectorName,
-                () => AssertionUtilities.Division(10, 2).IsErrorWhenAsync(x => AssertionUtilities.GetTask(true), null)
+                () => AssertionUtilities.Division(10, 2).IsErrorWhenAsync(async x => {
+                    await AssertionUtilities.Delay;
+                    return true;
+                }, null)
             );
         }
 

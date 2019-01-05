@@ -11,7 +11,10 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             => Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.SelectorName,
                 () => AssertionUtilities.DivisionAsync(10, 2).FullMapAsync((Func<double, Task<string>>) null,
-                    s => AssertionUtilities.GetTask(string.Empty))
+                    async s => {
+                        await AssertionUtilities.Delay;
+                        return s;
+                    })
             );
 
         [Fact]
@@ -19,7 +22,10 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             => Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.ErrorSelectorName,
                 () => AssertionUtilities.DivisionAsync(10, 2)
-                    .FullMapAsync(d => AssertionUtilities.GetTask(string.Empty), (Func<string, Task<string>>) null)
+                    .FullMapAsync(async d => {
+                        await AssertionUtilities.Delay;
+                        return string.Empty;
+                    }, (Func<string, Task<string>>) null)
             );
 
         [Fact]
@@ -34,7 +40,10 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             => Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.ErrorSelectorName,
                 () => AssertionUtilities.DivisionAsync(10, 2)
-                    .FullMapAsync(d => AssertionUtilities.GetTask(string.Empty), (Func<string, string>) null)
+                    .FullMapAsync(async d => {
+                        await AssertionUtilities.Delay;
+                        return string.Empty;
+                    }, (Func<string, string>) null)
             );
 
         [Fact]
@@ -44,8 +53,10 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
                 () => AssertionUtilities.DivisionAsync(10, 2)
                     .FullMapAsync(
                         (Func<double, string>) null,
-                        s => AssertionUtilities.GetTask(string.Empty)
-                    )
+                        async s => {
+                            await AssertionUtilities.Delay;
+                            return string.Empty;
+                        })
             );
 
         [Fact]
@@ -109,7 +120,8 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
                     return d * 10;
                 }, async s => {
                     errorSelectorExectued = true;
-                    return (await AssertionUtilities.GetTask(s)).ToUpper();
+                    await AssertionUtilities.Delay;
+                    return s.ToUpper();
                 }).AssertValue(50);
 
             Assert.True(selectorExectued, "Should get exectued since there's an value from the result.");
@@ -129,7 +141,8 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
                     return d * 2;
                 }, async s => {
                     errorSelectorExectued = true;
-                    return (await AssertionUtilities.GetTask(s)).ToUpper();
+                    await AssertionUtilities.Delay;
+                    return s.ToUpper();
                 }).AssertError("CAN NOT DIVIDE '10' WITH '0'.");
 
             Assert.False(selectorExectued, "Should not get exectued since there's an error from the result.");
@@ -146,9 +159,10 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
                 .FullMapAsync(d => {
                     selectorExectued = true;
                     return d * 10;
-                }, s => {
+                }, async s => {
                     errorSelectorExectued = true;
-                    return AssertionUtilities.GetTask(s);
+                    await AssertionUtilities.Delay;
+                    return s;
                 }).AssertValue(50);
 
             Assert.True(selectorExectued, "Should get exectued since there's an value from the result.");
