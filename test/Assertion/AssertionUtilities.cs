@@ -15,6 +15,7 @@ namespace Assertion {
         public const string JoinInnerKeyParameter = "innerKeySelector";
 
         public const string ActionParamName = "action";
+        public const string ErrorActionParamName = "errorAction";
         public const string ErrorParamName = "error";
         public const string ValueParamName = "value";
         public const string PredicateName = "predicate";
