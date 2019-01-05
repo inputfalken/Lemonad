@@ -9,7 +9,6 @@
     <PackageReference Include="coverlet.msbuild" Version="2.4.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Lemonad.ErrorHandling\Lemonad.ErrorHandling.csproj" />
     <ProjectReference Include="..\Assertion\Assertion.csproj" />
   </ItemGroup>
   <ItemGroup>
