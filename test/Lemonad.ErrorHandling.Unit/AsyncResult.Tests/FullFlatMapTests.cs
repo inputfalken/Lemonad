@@ -11,7 +11,7 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.ErrorSelectorName,
                 () => AssertionUtilities
-                    .Division(2, 0)
+                    .DivisionAsync(2, 0)
                     .FullFlatMap(x => AssertionUtilities.Division(x, 2), null));
         }
 
@@ -20,7 +20,7 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.SelectorName,
                 () => AssertionUtilities
-                    .Division(2, 0)
+                    .DivisionAsync(2, 0)
                     .FullFlatMap((Func<double, IResult<double, string>>) null, s => s)
             );
         }
