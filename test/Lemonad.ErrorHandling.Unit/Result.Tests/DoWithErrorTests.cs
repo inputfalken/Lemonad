@@ -1,8 +1,19 @@
+using System;
 using Assertion;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.Result.Tests {
     public class DoWithErrorTests {
+        [Fact]
+        public void Passing_Null_Action_Throws() {
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.ActionParamName, () => {
+                AssertionUtilities
+                    .Division(10, 0)
+                    .DoWithError(null)
+                    .AssertError("Can not divide '10' with '0'.");
+            });
+        }
+
         [Fact]
         public void Result_With_Error__Expects_Action_To_Be_Invoked() {
             var actionExectued = false;
