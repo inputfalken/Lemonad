@@ -39,12 +39,12 @@ namespace SpecificErrorType {
         public IAsyncResult<T, ErrorModel> FilterAsync(Func<T, Task<bool>> predicate,
             Func<T, ErrorModel> errorSelector) => _resultImplementation.FilterAsync(predicate, errorSelector);
 
-        public IResult<TResult, ErrorModel> FlatMap<TResult>(Func<T, IResult<TResult, ErrorModel>> flatSelector) =>
-            _resultImplementation.FlatMap(flatSelector);
+        public IResult<TResult, ErrorModel> FlatMap<TResult>(Func<T, IResult<TResult, ErrorModel>> selector) =>
+            _resultImplementation.FlatMap(selector);
 
         public IResult<TResult, ErrorModel> FlatMap<TSelector, TResult>(
-            Func<T, IResult<TSelector, ErrorModel>> flatSelector, Func<T, TSelector, TResult> resultSelector) =>
-            _resultImplementation.FlatMap(flatSelector, resultSelector);
+            Func<T, IResult<TSelector, ErrorModel>> selector, Func<T, TSelector, TResult> resultSelector) =>
+            _resultImplementation.FlatMap(selector, resultSelector);
 
         public IResult<TResult, ErrorModel> FlatMap<TResult, TErrorResult>(
             Func<T, IResult<TResult, TErrorResult>> flatMapSelector,

@@ -355,27 +355,27 @@ namespace Lemonad.ErrorHandling.Internal {
             );
         }
 
-        public IResult<TResult, TError> FlatMap<TResult>(Func<T, IResult<TResult, TError>> flatSelector) {
-            if (flatSelector is null) throw new ArgumentNullException(nameof(flatSelector));
+        public IResult<TResult, TError> FlatMap<TResult>(Func<T, IResult<TResult, TError>> selector) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
             return new Result<TResult, TError>(
                 EitherMethods.FlatMap(
                     Either,
-                    flatSelector.Compose(x => x.Either
+                    selector.Compose(x => x.Either
                     )
                 )
             );
         }
 
         public IResult<TResult, TError> FlatMap<TSelector, TResult>(
-            Func<T, IResult<TSelector, TError>> flatSelector,
+            Func<T, IResult<TSelector, TError>> selector,
             Func<T, TSelector, TResult> resultSelector
         ) {
-            if (flatSelector is null) throw new ArgumentNullException(nameof(flatSelector));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
             if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
             return new Result<TResult, TError>(
                 EitherMethods.FlatMap(
                     Either,
-                    flatSelector.Compose(x => x.Either),
+                    selector.Compose(x => x.Either),
                     resultSelector
                 )
             );

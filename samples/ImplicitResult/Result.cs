@@ -35,13 +35,13 @@ namespace ImplicitResult {
         public IAsyncResult<T, TError> FilterAsync(Func<T, Task<bool>> predicate, Func<T, TError> errorSelector) =>
             _resultImplementation.FilterAsync(predicate, errorSelector);
 
-        public IResult<TResult, TError> FlatMap<TResult>(Func<T, IResult<TResult, TError>> flatSelector) =>
-            _resultImplementation.FlatMap(flatSelector);
+        public IResult<TResult, TError> FlatMap<TResult>(Func<T, IResult<TResult, TError>> selector) =>
+            _resultImplementation.FlatMap(selector);
 
         public IResult<TResult, TError> FlatMap<TSelector, TResult>(
-            Func<T, IResult<TSelector, TError>> flatSelector,
+            Func<T, IResult<TSelector, TError>> selector,
             Func<T, TSelector, TResult> resultSelector) =>
-            _resultImplementation.FlatMap(flatSelector, resultSelector);
+            _resultImplementation.FlatMap(selector, resultSelector);
 
         public IResult<TResult, TError> FlatMap<TResult, TErrorResult>(
             Func<T, IResult<TResult, TErrorResult>> flatMapSelector, Func<TErrorResult, TError> errorSelector) =>

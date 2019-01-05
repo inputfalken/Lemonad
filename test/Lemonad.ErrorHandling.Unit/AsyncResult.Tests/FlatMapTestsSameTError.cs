@@ -1,10 +1,31 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Assertion;
 using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
     public class FlatMapTestsSameTError {
+        [Fact]
+        public void Passing_Null_Selector_With_Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => { AssertionUtilities.Division(2, 0).FlatMapAsync<double>(null); });
+
+        [Fact]
+        public void Passing_Null_Selector_With_ResultSelector_Overload_Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => AssertionUtilities.Division(2, 0).FlatMapAsync<double, double>(null, (d, d1) => d + d1));
+
+        [Fact]
+        public void Passing_Null_ResultSelector__Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ResultSelector,
+                () => AssertionUtilities.Division(2, 0)
+                    .FlatMapAsync<double, double>(d => AssertionUtilities.DivisionAsync(d, 2), null)
+            );
+
         [Fact]
         public async Task Result_With_Error_Flatmaps_Result_with_Error__Expects_Result_With_Value() {
             var flatSelectorExecuted = false;

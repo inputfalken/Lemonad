@@ -137,20 +137,20 @@ namespace Lemonad.ErrorHandling {
         ///     Flatten another <see cref="Result{T,TError}" /> who shares the same <typeparamref name="TError" />.
         ///     And maps <typeparamref name="T" /> to <typeparamref name="TResult" />.
         /// </summary>
-        /// <param name="flatSelector">
+        /// <param name="selector">
         ///     A function who expects a <see cref="Result{T,TError}" /> as an return type.
         /// </param>
         /// <typeparam name="TResult">
-        ///     The return type of the function <paramref name="flatSelector" />.
+        ///     The return type of the function <paramref name="selector" />.
         /// </typeparam>
-        IResult<TResult, TError> FlatMap<TResult>(Func<T, IResult<TResult, TError>> flatSelector);
+        IResult<TResult, TError> FlatMap<TResult>(Func<T, IResult<TResult, TError>> selector);
 
         /// <summary>
         ///     Flatten another <see cref="Result{T,TError}" /> who shares the same <typeparamref name="TError" />.
         ///     And maps <typeparamref name="T" /> together with <typeparamref name="TSelector" /> to
         ///     <typeparamref name="TResult" />.
         /// </summary>
-        /// <param name="flatSelector">
+        /// <param name="selector">
         ///     A function who expects a <see cref="Result{T,TError}" /> as an return type.
         /// </param>
         /// <param name="resultSelector">
@@ -158,13 +158,13 @@ namespace Lemonad.ErrorHandling {
         ///     return any type.
         /// </param>
         /// <typeparam name="TSelector">
-        ///     The value retrieved from the the <see cref="Result{T,TError}" /> given by the <paramref name="flatSelector" />.
+        ///     The value retrieved from the the <see cref="Result{T,TError}" /> given by the <paramref name="selector" />.
         /// </typeparam>
         /// <typeparam name="TResult">
         ///     The return type of the function  <paramref name="resultSelector" />.
         /// </typeparam>
         IResult<TResult, TError> FlatMap<TSelector, TResult>(
-            Func<T, IResult<TSelector, TError>> flatSelector,
+            Func<T, IResult<TSelector, TError>> selector,
             Func<T, TSelector, TResult> resultSelector
         );
 
