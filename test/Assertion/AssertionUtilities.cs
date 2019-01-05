@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
 using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Extensions.Result;
@@ -8,6 +9,11 @@ namespace Assertion {
         public enum Gender {
             Male = 0,
             Female = 1
+        }
+
+        public enum Error {
+            First = 0,
+            Second = 1
         }
 
         public const string ActionParamName = "action";
@@ -57,6 +63,8 @@ namespace Assertion {
                 ? $"Could not parse type {typeof(string).Name} (null) into {typeof(T).Name}."
                 : $"Could not parse type {typeof(string).Name} (\"{input}\") into {typeof(T).Name}.";
 
+        public static IAsyncResult<Gender, string> GetGenderAsync(int identity) => GetGender(identity).ToAsyncResult();
+
         public static IResult<Gender, string> GetGender(int identity) {
             return Result.Value<int, string>(identity)
                 .Map(i => {
@@ -70,5 +78,6 @@ namespace Assertion {
                     }
                 }).FlatMap(x => x);
         }
+
     }
 }
