@@ -541,40 +541,13 @@ namespace Lemonad.ErrorHandling.Internal {
                 selector));
         }
 
-        public static AsyncResult<T, TError> ErrorFactory(Task<TError> error) {
-            if (error is null) throw new ArgumentNullException(nameof(error));
-            return new AsyncResult<T, TError>(ErrorFactoryInternal(error));
-        }
+        internal static AsyncResult<T, TError> Factory(Task<IEither<T, TError>> result) =>
+            new AsyncResult<T, TError>(result);
 
-        public static AsyncResult<T, TError> ErrorFactory(in TError error)
+        internal static AsyncResult<T, TError> ErrorFactory(in TError error)
             => new AsyncResult<T, TError>(Task.FromResult(Result.Error<T, TError>(error).Either));
 
-        private static async Task<IEither<T, TError>> ErrorFactoryInternal(Task<TError> error) {
-            if (error is null) throw new ArgumentNullException(nameof(error));
-            return Result.Error<T, TError>(await error.ConfigureAwait(false)).Either;
-        }
-
-        public static AsyncResult<T, TError> Factory(Task<IEither<T, TError>> result) {
-            if (result is null) throw new ArgumentNullException(nameof(result));
-            return new AsyncResult<T, TError>(FactoryInternal(result));
-        }
-
-        private static async Task<IEither<T, TError>> FactoryInternal(Task<IEither<T, TError>> value) {
-            if (value is null) throw new ArgumentNullException(nameof(value));
-            return await value.ConfigureAwait(false);
-        }
-
-        public static AsyncResult<T, TError> ValueFactory(in T value)
+        internal static AsyncResult<T, TError> ValueFactory(in T value)
             => new AsyncResult<T, TError>(Task.FromResult(Result.Value<T, TError>(value).Either));
-
-        public static AsyncResult<T, TError> ValueFactory(Task<T> value) {
-            if (value is null) throw new ArgumentNullException(nameof(value));
-            return new AsyncResult<T, TError>(ValueFactoryInternal(value));
-        }
-
-        private static async Task<IEither<T, TError>> ValueFactoryInternal(Task<T> value) {
-            if (value is null) throw new ArgumentNullException(nameof(value));
-            return Result.Value<T, TError>(await value.ConfigureAwait(false)).Either;
-        }
     }
 }
