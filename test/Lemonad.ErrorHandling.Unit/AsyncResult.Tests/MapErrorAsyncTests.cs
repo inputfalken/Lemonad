@@ -1,18 +1,18 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Assertion;
 using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
-    public class MapErrorTests {
+    public class MapErrorAsyncTests {
         [Fact]
         public void Passing_Null_Selector_Throws() {
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.SelectorName,
                 () => AssertionUtilities
                     .DivisionAsync(2, 0)
-                    .MapError<string>(null)
+                    .MapErrorAsync<string>(null)
             );
         }
 
@@ -21,7 +21,8 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             var errorSelectorInvoked = false;
             await AssertionUtilities
                 .DivisionAsync(10, 0)
-                .MapError(s => {
+                .MapErrorAsync(async s => {
+                    await AssertionUtilities.Delay;
                     errorSelectorInvoked = true;
                     return s.ToUpper();
                 }).AssertError("CAN NOT DIVIDE '10' WITH '0'.");
@@ -35,7 +36,8 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             var errorSelectorInvoked = false;
             await AssertionUtilities
                 .DivisionAsync(10, 2)
-                .MapError(s => {
+                .MapErrorAsync(async s => {
+                    await AssertionUtilities.Delay;
                     errorSelectorInvoked = true;
                     return s.ToUpper();
                 })

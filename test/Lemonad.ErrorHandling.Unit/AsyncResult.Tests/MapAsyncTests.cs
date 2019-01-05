@@ -1,18 +1,18 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Assertion;
 using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
-    public class MapTests {
+    public class MapAsyncTests {
         [Fact]
         public void Passing_Null_Selector_Throws() {
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.SelectorName,
                 () => AssertionUtilities
                     .DivisionAsync(2, 0)
-                    .Map<string>(null)
+                    .MapAsync<string>(null)
             );
         }
 
@@ -21,7 +21,8 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             var selectorExectued = false;
             await AssertionUtilities
                 .DivisionAsync(2, 0)
-                .Map(x => {
+                .MapAsync(async x => {
+                    await AssertionUtilities.Delay;
                     selectorExectued = true;
                     return x * 8;
                 })
@@ -36,7 +37,8 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             var selectorExectued = false;
             await AssertionUtilities
                 .DivisionAsync(10, 2)
-                .Map(x => {
+                .MapAsync(async x => {
+                    await AssertionUtilities.Delay;
                     selectorExectued = true;
                     return x * 4;
                 })
