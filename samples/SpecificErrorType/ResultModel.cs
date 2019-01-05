@@ -51,23 +51,23 @@ namespace SpecificErrorType {
             Func<TErrorResult, ErrorModel> errorSelector) =>
             _resultImplementation.FlatMap(selector, errorSelector);
 
-        public IResult<TResult, ErrorModel> FlatMap<TResult>(Func<T, TResult?> flatMapSelector,
+        public IResult<TResult, ErrorModel> FlatMap<TResult>(Func<T, TResult?> selector,
             Func<ErrorModel> errorSelector) where TResult : struct =>
-            _resultImplementation.FlatMap(flatMapSelector, errorSelector);
+            _resultImplementation.FlatMap(selector, errorSelector);
 
-        public IAsyncResult<TResult, ErrorModel> FlatMapAsync<TResult>(Func<T, Task<TResult?>> flatMapSelector,
+        public IAsyncResult<TResult, ErrorModel> FlatMapAsync<TResult>(Func<T, Task<TResult?>> selector,
             Func<ErrorModel> errorSelector) where TResult : struct =>
-            _resultImplementation.FlatMapAsync(flatMapSelector, errorSelector);
+            _resultImplementation.FlatMapAsync(selector, errorSelector);
 
-        public IResult<TResult, ErrorModel> FlatMap<TFlatMap, TResult>(Func<T, TFlatMap?> flatMapSelector,
+        public IResult<TResult, ErrorModel> FlatMap<TFlatMap, TResult>(Func<T, TFlatMap?> selector,
             Func<T, TFlatMap, TResult> resultSelector, Func<ErrorModel> errorSelector)
             where TFlatMap : struct =>
-            _resultImplementation.FlatMap(flatMapSelector, resultSelector, errorSelector);
+            _resultImplementation.FlatMap(selector, resultSelector, errorSelector);
 
         public IAsyncResult<TResult, ErrorModel> FlatMapAsync<TFlatMap, TResult>(
-            Func<T, Task<TFlatMap?>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
+            Func<T, Task<TFlatMap?>> selector, Func<T, TFlatMap, TResult> resultSelector,
             Func<ErrorModel> errorSelector) where TFlatMap : struct =>
-            _resultImplementation.FlatMapAsync(flatMapSelector, resultSelector, errorSelector);
+            _resultImplementation.FlatMapAsync(selector, resultSelector, errorSelector);
 
         public IResult<TResult, ErrorModel> FlatMap<TFlatMap, TResult, TErrorResult>(
             Func<T, IResult<TFlatMap, TErrorResult>> selector, Func<T, TFlatMap, TResult> resultSelector,

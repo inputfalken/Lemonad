@@ -397,45 +397,45 @@ namespace Lemonad.ErrorHandling.Internal {
         }
 
         public IResult<TResult, TError> FlatMap<TResult>(
-            Func<T, TResult?> flatMapSelector,
+            Func<T, TResult?> selector,
             Func<TError> errorSelector
         ) where TResult : struct {
-            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
             if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
-            return FlatMap(flatMapSelector.Compose(x => x.ToResult(errorSelector)));
+            return FlatMap(selector.Compose(x => x.ToResult(errorSelector)));
         }
 
         public IAsyncResult<TResult, TError> FlatMapAsync<TResult>(
-            Func<T, Task<TResult?>> flatMapSelector,
+            Func<T, Task<TResult?>> selector,
             Func<TError> errorSelector
         ) where TResult : struct {
-            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
             if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
-            return FlatMapAsync(flatMapSelector.Compose(x => x.ToAsyncResult(errorSelector)));
+            return FlatMapAsync(selector.Compose(x => x.ToAsyncResult(errorSelector)));
         }
 
         public IResult<TResult, TError> FlatMap<TFlatMap, TResult>(
-            Func<T, TFlatMap?> flatMapSelector,
+            Func<T, TFlatMap?> selector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TError> errorSelector
         ) where TFlatMap : struct {
-            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
             if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
             if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
             return FlatMap(x =>
-                flatMapSelector.Compose(y => y.ToResult(errorSelector))(x).Map(y => resultSelector(x, y)));
+                selector.Compose(y => y.ToResult(errorSelector))(x).Map(y => resultSelector(x, y)));
         }
 
         public IAsyncResult<TResult, TError> FlatMapAsync<TFlatMap, TResult>(
-            Func<T, Task<TFlatMap?>> flatMapSelector,
+            Func<T, Task<TFlatMap?>> selector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TError> errorSelector
         ) where TFlatMap : struct {
-            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
             if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
             if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
             return FlatMapAsync(x =>
-                flatMapSelector.Compose(y => y.ToAsyncResult(errorSelector))(x).Map(y => resultSelector(x, y)));
+                selector.Compose(y => y.ToAsyncResult(errorSelector))(x).Map(y => resultSelector(x, y)));
         }
 
         public IResult<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(

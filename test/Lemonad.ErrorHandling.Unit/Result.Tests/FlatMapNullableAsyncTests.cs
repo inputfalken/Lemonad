@@ -1,58 +1,69 @@
-﻿using System;
+using System;
+using System.Threading.Tasks;
 using Assertion;
+using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
-    public class FlatMapNullableTests {
+namespace Lemonad.ErrorHandling.Unit.Result.Tests {
+    public class FlatMapNullableAsyncTests {
         [Fact]
         public void Passing_Null_Selector_Throws()
             => Assert.Throws<ArgumentNullException>(AssertionUtilities.SelectorName, () =>
-                ErrorHandling.AsyncResult
+                ErrorHandling.Result
                     .Value<int, string>(2)
-                    .FlatMap<int>(null, () => "ERROR")
+                    .FlatMapAsync<int>(null, () => "ERROR")
             );
 
         [Fact]
         public void Passing_Null_ErrorSelector_Throws()
             => Assert.Throws<ArgumentNullException>(AssertionUtilities.ErrorSelectorName, () =>
-                ErrorHandling.AsyncResult
+                ErrorHandling.Result
                     .Value<int, string>(2)
-                    .FlatMap(i => (int?) 2, null)
+                    .FlatMapAsync(async i => {
+                        await AssertionUtilities.Delay;
+                        return (int?) 2;
+                    }, null)
             );
 
         [Fact]
         public void Passing_Null_Selector_ResultSelector_Overload_Throws()
             => Assert.Throws<ArgumentNullException>(AssertionUtilities.SelectorName, () =>
-                ErrorHandling.AsyncResult
+                ErrorHandling.Result
                     .Value<int, string>(2)
-                    .FlatMap<int, string>(null, (i, i1) => "", () => "")
+                    .FlatMapAsync<int, string>(null, (i, i1) => "", () => "")
             );
 
         [Fact]
         public void Passing_Null_ResultSelector_Throws()
             => Assert.Throws<ArgumentNullException>(AssertionUtilities.ResultSelector, () =>
-                ErrorHandling.AsyncResult
+                ErrorHandling.Result
                     .Value<int, string>(2)
-                    .FlatMap<int, string>(i => (int?) 2, null, () => "")
+                    .FlatMapAsync<int, string>(async i => {
+                        await AssertionUtilities.Delay;
+                        return (int?) 2;
+                    }, null, () => "")
             );
 
         [Fact]
         public void Passing_Null_ErrorSelector_ResultSelector_Overload_Throws()
             => Assert.Throws<ArgumentNullException>(AssertionUtilities.ErrorSelectorName, () =>
-                ErrorHandling.AsyncResult
+                ErrorHandling.Result
                     .Value<int, string>(2)
-                    .FlatMap(i => (int?) 2, (i, i1) => "", null)
+                    .FlatMapAsync(async i => {
+                        await AssertionUtilities.Delay;
+                        return (int?) 2;
+                    }, (i, i1) => "", null)
             );
 
         [Fact]
-        public void None_Null_Int__Expects_Result_With_Value() {
-            int? number = 2;
+        public async Task None_Null_Int__Expects_Result_With_Value() {
             var selectorInvoked = false;
-            ErrorHandling.AsyncResult
+            await ErrorHandling.Result
                 .Value<int, string>(2)
-                .FlatMap(_ => {
+                .FlatMapAsync(async _ => {
+                    await AssertionUtilities.Delay;
                     selectorInvoked = true;
-                    return number;
+                    return (int?) 2;
                 }, () => "ERROR")
                 .AssertValue(2);
 
@@ -60,15 +71,15 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
         }
 
         [Fact]
-        public void None_Null_Int_Using_ResultSelector__Expects_Result_With_Value() {
-            int? number = 2;
+        public async Task None_Null_Int_Using_ResultSelector__Expects_Result_With_Value() {
             var selectorInvoked = false;
             var resultSelectorInvoked = false;
-            ErrorHandling.AsyncResult
+            await ErrorHandling.Result
                 .Value<int, string>(2)
-                .FlatMap(_ => {
+                .FlatMapAsync(async _ => {
+                    await AssertionUtilities.Delay;
                     selectorInvoked = true;
-                    return number;
+                    return (int?) 2;
                 }, (x, y) => {
                     resultSelectorInvoked = true;
                     return x + y;
@@ -80,13 +91,14 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
         }
 
         [Fact]
-        public void Null_Int__Expects_Result_With_Value() {
-            int? number = null;
+        public async Task Null_Int__Expects_Result_With_Error() {
             var selectorInvoked = false;
-            ErrorHandling.AsyncResult.Value<int, string>(2)
-                .FlatMap(_ => {
+            await ErrorHandling.Result
+                .Value<int, string>(2)
+                .FlatMapAsync(async _ => {
+                    await AssertionUtilities.Delay;
                     selectorInvoked = true;
-                    return number;
+                    return (int?) null;
                 }, () => "ERROR")
                 .AssertError("ERROR");
 
@@ -94,15 +106,15 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
         }
 
         [Fact]
-        public void Null_Int_Using_ResultSelector__Expects_Result_With_Value() {
-            int? number = null;
+        public async Task Null_Int_Using_ResultSelector__Expects_Result_With_Null() {
             var selectorInvoked = false;
             var resultSelectorInvoked = false;
-            ErrorHandling.AsyncResult
+            await ErrorHandling.Result
                 .Value<int, string>(2)
-                .FlatMap(_ => {
+                .FlatMapAsync(async _ => {
+                    await AssertionUtilities.Delay;
                     selectorInvoked = true;
-                    return number;
+                    return (int?) null;
                 }, (x, y) => {
                     resultSelectorInvoked = true;
                     return x + y;
