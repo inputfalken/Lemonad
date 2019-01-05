@@ -1,45 +1,46 @@
 using System.Globalization;
 using Assertion;
+using Lemonad.ErrorHandling.Parsers;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.ParserTests.Maybe {
     public class DateTime {
         [Fact]
-        public void With_Valid_String()
-            => Parsers.MaybeParsers
-                .DateTime(System.DateTime.Today.ToString(CultureInfo.InvariantCulture))
-                .AssertValue(System.DateTime.Today);
-
-        [Fact]
         public void With_Invalid_String()
-            => Parsers.MaybeParsers
+            => MaybeParsers
                 .DateTime("foobar")
                 .AssertNone();
 
         [Fact]
-        public void With_Null_String()
-            => Parsers.MaybeParsers
-                .DateTime(null)
-                .AssertNone();
-
-        [Fact]
-        public void With_Valid_String_With_DateTimeStyle()
-            => Parsers.MaybeParsers
-                .DateTime(System.DateTime.Today.ToString(CultureInfo.InvariantCulture), DateTimeStyles.None,
-                    CultureInfo.InvariantCulture)
-                .AssertValue(System.DateTime.Today);
-
-        [Fact]
         public void With_Invalid_String_With_DateTimeStyle()
-            => Parsers.MaybeParsers
+            => MaybeParsers
                 .DateTime("foobar", DateTimeStyles.None, CultureInfo.InvariantCulture)
                 .AssertNone();
 
         [Fact]
+        public void With_Null_String()
+            => MaybeParsers
+                .DateTime(null)
+                .AssertNone();
+
+        [Fact]
         public void With_Null_String_With_DateTimeStyle()
-            => Parsers.MaybeParsers
+            => MaybeParsers
                 .DateTime(null, DateTimeStyles.None, CultureInfo.InvariantCulture)
                 .AssertNone();
+
+        [Fact]
+        public void With_Valid_String()
+            => MaybeParsers
+                .DateTime(System.DateTime.Today.ToString(CultureInfo.InvariantCulture))
+                .AssertValue(System.DateTime.Today);
+
+        [Fact]
+        public void With_Valid_String_With_DateTimeStyle()
+            => MaybeParsers
+                .DateTime(System.DateTime.Today.ToString(CultureInfo.InvariantCulture), DateTimeStyles.None,
+                    CultureInfo.InvariantCulture)
+                .AssertValue(System.DateTime.Today);
     }
 
     public class DateTimeExact {
@@ -54,19 +55,19 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Maybe {
         private const string Format = "G";
 
         [Fact]
-        public void With_Valid_String_Using_Single_Format()
-            => Parsers.MaybeParsers
+        public void With_Invalid_String_Using_Multiple_Formats()
+            => MaybeParsers
                 .DateTimeExact(
-                    System.DateTime.Today.ToString(Format),
-                    Format,
+                    "foobar",
+                    Formats,
                     DateTimeStyles.None,
-                    CultureInfo.CurrentCulture
+                    CultureInfo.InvariantCulture
                 )
-                .AssertValue(System.DateTime.Today);
+                .AssertNone();
 
         [Fact]
         public void With_Invalid_String_Using_Single_Format()
-            => Parsers.MaybeParsers
+            => MaybeParsers
                 .DateTimeExact(
                     "foobar",
                     Format,
@@ -76,8 +77,19 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Maybe {
                 .AssertNone();
 
         [Fact]
+        public void With_Null_String_Using_Multiple_Formats()
+            => MaybeParsers
+                .DateTimeExact(
+                    null,
+                    Formats,
+                    DateTimeStyles.None,
+                    CultureInfo.InvariantCulture
+                )
+                .AssertNone();
+
+        [Fact]
         public void With_Null_String_Using_Single_Format()
-            => Parsers.MaybeParsers
+            => MaybeParsers
                 .DateTimeExact(
                     null,
                     Format,
@@ -88,7 +100,7 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Maybe {
 
         [Fact]
         public void With_Valid_String_Using_Multiple_Formats()
-            => Parsers.MaybeParsers
+            => MaybeParsers
                 .DateTimeExact(
                     System.DateTime.Today.ToString(CultureInfo.InvariantCulture),
                     Formats,
@@ -98,25 +110,14 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Maybe {
                 .AssertValue(System.DateTime.Today);
 
         [Fact]
-        public void With_Invalid_String_Using_Multiple_Formats()
-            => Parsers.MaybeParsers
+        public void With_Valid_String_Using_Single_Format()
+            => MaybeParsers
                 .DateTimeExact(
-                    "foobar",
-                    Formats,
+                    System.DateTime.Today.ToString(Format),
+                    Format,
                     DateTimeStyles.None,
-                    CultureInfo.InvariantCulture
+                    CultureInfo.CurrentCulture
                 )
-                .AssertNone();
-
-        [Fact]
-        public void With_Null_String_Using_Multiple_Formats()
-            => Parsers.MaybeParsers
-                .DateTimeExact(
-                    null,
-                    Formats,
-                    DateTimeStyles.None,
-                    CultureInfo.InvariantCulture
-                )
-                .AssertNone();
+                .AssertValue(System.DateTime.Today);
     }
 }

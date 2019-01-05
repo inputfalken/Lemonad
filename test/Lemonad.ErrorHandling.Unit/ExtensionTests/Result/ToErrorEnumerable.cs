@@ -6,9 +6,11 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.ExtensionTests.Result {
     public class ToErrorEnumerable {
         [Fact]
-        public void With_Value_Expects_Empty_Enumerable() {
-            Assert.Empty(AssertionUtilities.Division(10, 2).ToErrorEnumerable());
-        }
+        public void Null_Source_Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ExtensionParameterName,
+                () => ((IResult<int, string>) null).ToErrorEnumerable()
+            );
 
         [Fact]
         public void With_Error_Expects_Enumerable_With_Element() {
@@ -19,10 +21,8 @@ namespace Lemonad.ErrorHandling.Unit.ExtensionTests.Result {
         }
 
         [Fact]
-        public void Null_Source_Throws()
-            => Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.ExtensionParameterName,
-                () => ((IResult<int, string>) null).ToErrorEnumerable()
-            );
+        public void With_Value_Expects_Empty_Enumerable() {
+            Assert.Empty(AssertionUtilities.Division(10, 2).ToErrorEnumerable());
+        }
     }
 }

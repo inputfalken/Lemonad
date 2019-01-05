@@ -16,8 +16,6 @@ namespace ImplicitResult {
                     Console.WriteLine($"Only numbers '{x.NumberOnly}'.");
                 })
                 .Match(_ => 0, x => x);
-            
-            
         }
     }
 

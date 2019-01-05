@@ -1,5 +1,6 @@
 using System.Globalization;
 using Assertion;
+using Lemonad.ErrorHandling.Parsers;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.ParserTests.Result {
@@ -15,19 +16,23 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Result {
         private const string Format = "G";
 
         [Fact]
-        public void With_Valid_String_Using_Single_Format()
-            => Parsers.ResultParsers
+        public void With_Invalid_String_Using_Multiple_Formats()
+            => ResultParsers
                 .DateTimeExact(
-                    System.DateTime.Today.ToString(Format),
-                    Format,
+                    "foobar",
+                    Formats,
                     DateTimeStyles.None,
-                    CultureInfo.CurrentCulture
+                    CultureInfo.InvariantCulture
                 )
-                .AssertValue(System.DateTime.Today);
+                .AssertError(
+                    AssertionUtilities.FormatStringParserMessage<System.DateTime>(
+                        "foobar"
+                    )
+                );
 
         [Fact]
         public void With_Invalid_String_Using_Single_Format()
-            => Parsers.ResultParsers
+            => ResultParsers
                 .DateTimeExact(
                     "foobar",
                     Format,
@@ -41,8 +46,23 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Result {
                 );
 
         [Fact]
+        public void With_Null_String_Using_Multiple_Formats()
+            => ResultParsers
+                .DateTimeExact(
+                    null,
+                    Formats,
+                    DateTimeStyles.None,
+                    CultureInfo.InvariantCulture
+                )
+                .AssertError(
+                    AssertionUtilities.FormatStringParserMessage<System.DateTime>(
+                        null
+                    )
+                );
+
+        [Fact]
         public void With_Null_String_Using_Single_Format()
-            => Parsers.ResultParsers
+            => ResultParsers
                 .DateTimeExact(
                     null,
                     Format,
@@ -57,7 +77,7 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Result {
 
         [Fact]
         public void With_Valid_String_Using_Multiple_Formats()
-            => Parsers.ResultParsers
+            => ResultParsers
                 .DateTimeExact(
                     System.DateTime.Today.ToString(CultureInfo.InvariantCulture),
                     Formats,
@@ -67,33 +87,14 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Result {
                 .AssertValue(System.DateTime.Today);
 
         [Fact]
-        public void With_Invalid_String_Using_Multiple_Formats()
-            => Parsers.ResultParsers
+        public void With_Valid_String_Using_Single_Format()
+            => ResultParsers
                 .DateTimeExact(
-                    "foobar",
-                    Formats,
+                    System.DateTime.Today.ToString(Format),
+                    Format,
                     DateTimeStyles.None,
-                    CultureInfo.InvariantCulture
+                    CultureInfo.CurrentCulture
                 )
-                .AssertError(
-                    AssertionUtilities.FormatStringParserMessage<System.DateTime>(
-                        "foobar"
-                    )
-                );
-
-        [Fact]
-        public void With_Null_String_Using_Multiple_Formats()
-            => Parsers.ResultParsers
-                .DateTimeExact(
-                    null,
-                    Formats,
-                    DateTimeStyles.None,
-                    CultureInfo.InvariantCulture
-                )
-                .AssertError(
-                    AssertionUtilities.FormatStringParserMessage<System.DateTime>(
-                        null
-                    )
-                );
+                .AssertValue(System.DateTime.Today);
     }
 }

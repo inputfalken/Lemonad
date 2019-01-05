@@ -7,14 +7,6 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
     public class FilterAsyncTests {
         [Fact]
-        public void Passing_Null_Predicate_Throws() {
-            Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.PredicateName,
-                () => AssertionUtilities.DivisionAsync(10, 0).FilterAsync(null, x => "This should never happen!")
-            );
-        }
-
-        [Fact]
         public void Passing_Null_ErrorSelector_Throws() {
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.ErrorSelectorName, () => AssertionUtilities
@@ -22,6 +14,14 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
                         await Task.Delay(50);
                         return d == 2;
                     }, null)
+            );
+        }
+
+        [Fact]
+        public void Passing_Null_Predicate_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.PredicateName,
+                () => AssertionUtilities.DivisionAsync(10, 0).FilterAsync(null, x => "This should never happen!")
             );
         }
 

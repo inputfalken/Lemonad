@@ -7,6 +7,13 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.ExtensionTests.Maybe.Enumerable {
     public class FirstMaybeTests {
         [Fact]
+        public void No_Predicate_Passing_Null_Enumerable_Throws() =>
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ExtensionParameterName,
+                () => ((IEnumerable<int>) null).FirstMaybe()
+            );
+
+        [Fact]
         public void No_Predicate_With_Enumerable_Who_Has_Elements() {
             const int first = 2;
             const int second = 2;
@@ -17,11 +24,7 @@ namespace Lemonad.ErrorHandling.Unit.ExtensionTests.Maybe.Enumerable {
         }
 
         [Fact]
-        public void No_Predicate_Passing_Null_Enumerable_Throws() =>
-            Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.ExtensionParameterName,
-                () => ((IEnumerable<int>) null).FirstMaybe()
-            );
+        public void No_Predicate_With_Enumerable_Who_Has_No_Elements() => new List<int>().FirstMaybe().AssertNone();
 
         [Fact]
         public void Passing_Null_Predicate_Throws() {
@@ -36,13 +39,6 @@ namespace Lemonad.ErrorHandling.Unit.ExtensionTests.Maybe.Enumerable {
         }
 
         [Fact]
-        public void With_Truthy_Predicate_Passing_Null_Enumerable_Throws() =>
-            Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.ExtensionParameterName,
-                () => ((IEnumerable<int>) null).FirstMaybe(_ => true)
-            );
-
-        [Fact]
         public void With_Falsy_Predicate_Passing_Null_Enumerable_Throws() =>
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.ExtensionParameterName,
@@ -50,15 +46,25 @@ namespace Lemonad.ErrorHandling.Unit.ExtensionTests.Maybe.Enumerable {
             );
 
         [Fact]
-        public void No_Predicate_With_Enumerable_Who_Has_No_Elements() => new List<int>().FirstMaybe().AssertNone();
-
-        [Fact]
-        public void With_Truthy_Predicate_With_Enumerable_Who_Has_No_Elements() =>
-            new List<int>().FirstMaybe(i => i == 4).AssertNone();
+        public void With_Falsy_Predicate_With_Enumerable_Who_Has_Elements() {
+            const int first = 2;
+            const int second = 4;
+            new List<int> {
+                first,
+                second
+            }.FirstMaybe(i => i == 1337).AssertNone();
+        }
 
         [Fact]
         public void With_Falsy_Predicate_With_Enumerable_Who_Has_No_Elements() =>
             new List<int>().FirstMaybe(i => i == 1337).AssertNone();
+
+        [Fact]
+        public void With_Truthy_Predicate_Passing_Null_Enumerable_Throws() =>
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ExtensionParameterName,
+                () => ((IEnumerable<int>) null).FirstMaybe(_ => true)
+            );
 
         [Fact]
         public void With_Truthy_Predicate_With_Enumerable_Who_Has_Elements() {
@@ -71,13 +77,7 @@ namespace Lemonad.ErrorHandling.Unit.ExtensionTests.Maybe.Enumerable {
         }
 
         [Fact]
-        public void With_Falsy_Predicate_With_Enumerable_Who_Has_Elements() {
-            const int first = 2;
-            const int second = 4;
-            new List<int> {
-                first,
-                second
-            }.FirstMaybe(i => i == 1337).AssertNone();
-        }
+        public void With_Truthy_Predicate_With_Enumerable_Who_Has_No_Elements() =>
+            new List<int>().FirstMaybe(i => i == 4).AssertNone();
     }
 }

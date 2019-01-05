@@ -7,15 +7,6 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
     public class FullFlatMapAsyncResultSelectorTests {
         [Fact]
-        public void Passing_Null_Selector_Throws() {
-            Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.SelectorName,
-                () => AssertionUtilities
-                    .DivisionAsync(2, 0)
-                    .FullFlatMapAsync((Func<double, IAsyncResult<double, string>>) null, (d, d1) => d + d1, s => s));
-        }
-
-        [Fact]
         public void Passing_Null_ErrorSelector_Throws() {
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.ErrorSelectorName,
@@ -32,6 +23,15 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
                     .DivisionAsync(2, 0)
                     .FullFlatMapAsync(x => AssertionUtilities.DivisionAsync(x, 2), (Func<double, double, double>) null,
                         s => s));
+        }
+
+        [Fact]
+        public void Passing_Null_Selector_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => AssertionUtilities
+                    .DivisionAsync(2, 0)
+                    .FullFlatMapAsync((Func<double, IAsyncResult<double, string>>) null, (d, d1) => d + d1, s => s));
         }
 
         [Fact]

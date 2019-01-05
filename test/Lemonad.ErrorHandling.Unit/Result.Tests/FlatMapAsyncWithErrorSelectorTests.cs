@@ -7,34 +7,24 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.Result.Tests {
     public class FlatMapAsyncWithErrorSelectorTests {
         [Fact]
-        public void Passing_Null_Selector_With_ResultSelector_Overload_Throws()
-            => Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.SelectorName,
-                () => AssertionUtilities.Division(10, 2)
-                    .FlatMapAsync(
-                        (Func<double, IAsyncResult<double, string>>) null,
-                        (d, d1) => d + d1
-                        ,s => s
-                    )
-            );
-        [Fact]
-        public void Passing_Null_Selector_Throws()
-            => Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.SelectorName,
-                () => AssertionUtilities.Division(10, 2)
-                    .FlatMapAsync(
-                        (Func<double, IAsyncResult<double, string>>) null,
-                        s => s
-                    )
-            );
-
-        [Fact]
         public void Passing_Null_ErrorSelector_Throws()
             => Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.ErrorSelectorName,
                 () => AssertionUtilities.Division(10, 2)
                     .FlatMapAsync(
                         d => AssertionUtilities.DivisionAsync(d, 2),
+                        null
+                    )
+            );
+
+        [Fact]
+        public void Passing_Null_ErrorSelector_With_ResultSelector_Overload_Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ErrorSelectorName,
+                () => AssertionUtilities.Division(10, 2)
+                    .FlatMapAsync(
+                        s => AssertionUtilities.DivisionAsync(s, 2),
+                        (d, d1) => d + d1,
                         null
                     )
             );
@@ -52,14 +42,25 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
             );
 
         [Fact]
-        public void Passing_Null_ErrorSelector_With_ResultSelector_Overload_Throws()
+        public void Passing_Null_Selector_Throws()
             => Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.ErrorSelectorName,
+                AssertionUtilities.SelectorName,
                 () => AssertionUtilities.Division(10, 2)
                     .FlatMapAsync(
-                        s => AssertionUtilities.DivisionAsync(s, 2),
-                        (d, d1) => d + d1,
-                        null
+                        (Func<double, IAsyncResult<double, string>>) null,
+                        s => s
+                    )
+            );
+
+        [Fact]
+        public void Passing_Null_Selector_With_ResultSelector_Overload_Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => AssertionUtilities.Division(10, 2)
+                    .FlatMapAsync(
+                        (Func<double, IAsyncResult<double, string>>) null,
+                        (d, d1) => d + d1
+                        , s => s
                     )
             );
 

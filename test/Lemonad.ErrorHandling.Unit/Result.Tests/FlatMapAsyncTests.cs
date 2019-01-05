@@ -7,13 +7,13 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.Result.Tests {
     public class FlatMapAsyncTests {
         [Fact]
-        public void Passing_Null_Selector_With_ResultSelector_Overload_Throws()
+        public void Passing_Null_ResultSelector_Throws()
             => Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.SelectorName,
+                AssertionUtilities.ResultSelector,
                 () => AssertionUtilities.Division(10, 2)
                     .FlatMapAsync(
-                        (Func<double, IAsyncResult<double, string>>) null,
-                        (d, d1) => d + d1
+                        s => AssertionUtilities.DivisionAsync(s, 2),
+                        (Func<double, double, double>) null
                     )
             );
 
@@ -28,13 +28,13 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
             );
 
         [Fact]
-        public void Passing_Null_ResultSelector_Throws()
+        public void Passing_Null_Selector_With_ResultSelector_Overload_Throws()
             => Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.ResultSelector,
+                AssertionUtilities.SelectorName,
                 () => AssertionUtilities.Division(10, 2)
                     .FlatMapAsync(
-                        s => AssertionUtilities.DivisionAsync(s, 2),
-                        (Func<double, double, double>) null
+                        (Func<double, IAsyncResult<double, string>>) null,
+                        (d, d1) => d + d1
                     )
             );
 

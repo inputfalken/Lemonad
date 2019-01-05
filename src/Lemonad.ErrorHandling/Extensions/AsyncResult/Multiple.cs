@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Internal;
 using Lemonad.ErrorHandling.Internal.Either;
 
@@ -16,8 +15,8 @@ namespace Lemonad.ErrorHandling.Extensions.AsyncResult {
             return AsyncResult<T, IReadOnlyList<TError>>.Factory(EitherMethods.MultipleAsync(
                 source.Either.ToTaskEither(),
                 validations.Select(x =>
-                    x.Compose<IAsyncResult<T, TError>, IAsyncResult<T, TError>, Task<IEither<T, TError>>>(y =>
-                        y.Either.ToTaskEither<T, TError>())(source)).ToArray()));
+                    x.Compose(y =>
+                        y.Either.ToTaskEither())(source)).ToArray()));
         }
     }
 }

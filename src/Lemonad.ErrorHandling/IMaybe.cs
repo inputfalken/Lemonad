@@ -34,12 +34,12 @@ namespace Lemonad.ErrorHandling {
         T Value { get; }
 
         /// <summary>
-        ///     Executes <paramref name="action" /> no matter what state <see cref="IMaybe{T}"/> is in.
+        ///     Executes <paramref name="action" /> no matter what state <see cref="IMaybe{T}" /> is in.
         /// </summary>
         IMaybe<T> Do(Action action);
 
         /// <summary>
-        ///     Executes the <paramref name="action" /> when property <see cref="HasValue"/> is true.
+        ///     Executes the <paramref name="action" /> when property <see cref="HasValue" /> is true.
         /// </summary>
         IMaybe<T> DoWith(Action<T> action);
 
@@ -104,7 +104,7 @@ namespace Lemonad.ErrorHandling {
             Func<T, TSelector, TResult> resultSelector
         ) where TSelector : struct;
 
-        IMaybe<TResult> FlatMap< TResult>(Func<T, TResult?> selector) where TResult : struct;
+        IMaybe<TResult> FlatMap<TResult>(Func<T, TResult?> selector) where TResult : struct;
 
         IMaybe<T> Flatten<TResult>(Func<T, IMaybe<TResult>> selector);
 

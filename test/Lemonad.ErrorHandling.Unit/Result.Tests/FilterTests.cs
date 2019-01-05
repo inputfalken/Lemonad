@@ -5,16 +5,16 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.Result.Tests {
     public class FilterTests {
         [Fact]
-        public void Passing_Null_Predicate_Throws() {
-            Assert.Throws<ArgumentNullException>(AssertionUtilities.PredicateName, () => AssertionUtilities
-                .Division(10, 0).Filter(null, d => "")
+        public void Passing_Null_ErrorSelector_Throws() {
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.ErrorSelectorName, () => AssertionUtilities
+                .Division(10, 0).Filter(d => true, null)
             );
         }
 
         [Fact]
-        public void Passing_Null_ErrorSelector_Throws() {
-            Assert.Throws<ArgumentNullException>(AssertionUtilities.ErrorSelectorName, () => AssertionUtilities
-                .Division(10, 0).Filter(d => true, null)
+        public void Passing_Null_Predicate_Throws() {
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.PredicateName, () => AssertionUtilities
+                .Division(10, 0).Filter(null, d => "")
             );
         }
 

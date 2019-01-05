@@ -5,46 +5,6 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
     public class FlatMapNullableTests {
         [Fact]
-        public void Passing_Null_Selector_Throws()
-            => Assert.Throws<ArgumentNullException>(AssertionUtilities.SelectorName, () =>
-                ErrorHandling.AsyncResult
-                    .Value<int, string>(2)
-                    .FlatMap<int>(null, () => "ERROR")
-            );
-
-        [Fact]
-        public void Passing_Null_ErrorSelector_Throws()
-            => Assert.Throws<ArgumentNullException>(AssertionUtilities.ErrorSelectorName, () =>
-                ErrorHandling.AsyncResult
-                    .Value<int, string>(2)
-                    .FlatMap(i => (int?) 2, null)
-            );
-
-        [Fact]
-        public void Passing_Null_Selector_ResultSelector_Overload_Throws()
-            => Assert.Throws<ArgumentNullException>(AssertionUtilities.SelectorName, () =>
-                ErrorHandling.AsyncResult
-                    .Value<int, string>(2)
-                    .FlatMap<int, string>(null, (i, i1) => "", () => "")
-            );
-
-        [Fact]
-        public void Passing_Null_ResultSelector_Throws()
-            => Assert.Throws<ArgumentNullException>(AssertionUtilities.ResultSelector, () =>
-                ErrorHandling.AsyncResult
-                    .Value<int, string>(2)
-                    .FlatMap<int, string>(i => (int?) 2, null, () => "")
-            );
-
-        [Fact]
-        public void Passing_Null_ErrorSelector_ResultSelector_Overload_Throws()
-            => Assert.Throws<ArgumentNullException>(AssertionUtilities.ErrorSelectorName, () =>
-                ErrorHandling.AsyncResult
-                    .Value<int, string>(2)
-                    .FlatMap(i => (int?) 2, (i, i1) => "", null)
-            );
-
-        [Fact]
         public void None_Null_Int__Expects_Result_With_Value() {
             int? number = 2;
             var selectorInvoked = false;
@@ -112,5 +72,45 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             Assert.True(selectorInvoked);
             Assert.False(resultSelectorInvoked);
         }
+
+        [Fact]
+        public void Passing_Null_ErrorSelector_ResultSelector_Overload_Throws()
+            => Assert.Throws<ArgumentNullException>(AssertionUtilities.ErrorSelectorName, () =>
+                ErrorHandling.AsyncResult
+                    .Value<int, string>(2)
+                    .FlatMap(i => (int?) 2, (i, i1) => "", null)
+            );
+
+        [Fact]
+        public void Passing_Null_ErrorSelector_Throws()
+            => Assert.Throws<ArgumentNullException>(AssertionUtilities.ErrorSelectorName, () =>
+                ErrorHandling.AsyncResult
+                    .Value<int, string>(2)
+                    .FlatMap(i => (int?) 2, null)
+            );
+
+        [Fact]
+        public void Passing_Null_ResultSelector_Throws()
+            => Assert.Throws<ArgumentNullException>(AssertionUtilities.ResultSelector, () =>
+                ErrorHandling.AsyncResult
+                    .Value<int, string>(2)
+                    .FlatMap<int, string>(i => (int?) 2, null, () => "")
+            );
+
+        [Fact]
+        public void Passing_Null_Selector_ResultSelector_Overload_Throws()
+            => Assert.Throws<ArgumentNullException>(AssertionUtilities.SelectorName, () =>
+                ErrorHandling.AsyncResult
+                    .Value<int, string>(2)
+                    .FlatMap<int, string>(null, (i, i1) => "", () => "")
+            );
+
+        [Fact]
+        public void Passing_Null_Selector_Throws()
+            => Assert.Throws<ArgumentNullException>(AssertionUtilities.SelectorName, () =>
+                ErrorHandling.AsyncResult
+                    .Value<int, string>(2)
+                    .FlatMap<int>(null, () => "ERROR")
+            );
     }
 }

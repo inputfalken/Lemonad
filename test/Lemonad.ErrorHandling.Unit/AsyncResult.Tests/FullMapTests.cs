@@ -7,17 +7,17 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
     public class FullMapTests {
         [Fact]
-        public void Passing_Null_Selector_Throws()
-            => Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.SelectorName,
-                () => AssertionUtilities.Division(10, 2).FullMap<string, string>(null, s => s)
-            );
-
-        [Fact]
         public void Passing_Null_ErrorSelector_Throws()
             => Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.ErrorSelectorName,
                 () => AssertionUtilities.Division(10, 2).FullMap<string, string>(_ => string.Empty, null)
+            );
+
+        [Fact]
+        public void Passing_Null_Selector_Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => AssertionUtilities.Division(10, 2).FullMap<string, string>(null, s => s)
             );
 
         [Fact]

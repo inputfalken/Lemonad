@@ -5,15 +5,6 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.Result.Tests {
     public class FullFlatMapResultSelectorTests {
         [Fact]
-        public void Passing_Null_Selector_Throws() {
-            Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.SelectorName,
-                () => AssertionUtilities
-                    .Division(2, 0)
-                    .FullFlatMap((Func<double, IResult<double, string>>) null, (d, d1) => d + d1, s => s));
-        }
-
-        [Fact]
         public void Passing_Null_ErrorSelector_Throws() {
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.ErrorSelectorName,
@@ -29,6 +20,15 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
                 () => AssertionUtilities
                     .Division(2, 0)
                     .FullFlatMap(x => AssertionUtilities.Division(x, 2), (Func<double, double, double>) null, s => s));
+        }
+
+        [Fact]
+        public void Passing_Null_Selector_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => AssertionUtilities
+                    .Division(2, 0)
+                    .FullFlatMap((Func<double, IResult<double, string>>) null, (d, d1) => d + d1, s => s));
         }
 
         [Fact]

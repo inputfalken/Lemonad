@@ -7,14 +7,6 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.Result.Tests {
     public class IsErrorWhenAsyncTests {
         [Fact]
-        public void Passing_Null_Predicate_Throws() {
-            Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.PredicateName,
-                () => AssertionUtilities.Division(10, 2).IsErrorWhenAsync(null, d => "")
-            );
-        }
-
-        [Fact]
         public void Passing_Null_ErrorSelector_Throws() {
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.ErrorSelectorName,
@@ -22,6 +14,14 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
                     await AssertionUtilities.Delay;
                     return true;
                 }, null)
+            );
+        }
+
+        [Fact]
+        public void Passing_Null_Predicate_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.PredicateName,
+                () => AssertionUtilities.Division(10, 2).IsErrorWhenAsync(null, d => "")
             );
         }
 
@@ -72,7 +72,7 @@ namespace Lemonad.ErrorHandling.Unit.Result.Tests {
         }
 
         [Fact]
-        public async  Task
+        public async Task
             Result_With_Value_With_Truthy_Predicate__Expects_Predicate_To_Be_Executed_And_ErrorSelector_To_Be_Invoked() {
             var predicateExectued = false;
             var errorSelectorExectued = false;

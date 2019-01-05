@@ -6,17 +6,10 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
     public class MatchTests {
         [Fact]
-        public async Task Void_Passing_Null_Selector_Throws()
+        public async Task Passing_Null_ErrorSelector_Throws()
             => await Assert.ThrowsAsync<ArgumentNullException>(
-                AssertionUtilities.ActionParamName,
-                () => AssertionUtilities.DivisionAsync(10, 0).Match(null, s => { })
-            );
-
-        [Fact]
-        public async Task Void_Passing_Null_ErrorSelector_Throws()
-            => await Assert.ThrowsAsync<ArgumentNullException>(
-                AssertionUtilities.ErrorActionParamName,
-                () => AssertionUtilities.DivisionAsync(10, 0).Match(d => { }, null)
+                AssertionUtilities.ErrorSelectorName,
+                () => AssertionUtilities.DivisionAsync(10, 0).Match(d => "", null)
             );
 
         [Fact]
@@ -24,13 +17,6 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             => await Assert.ThrowsAsync<ArgumentNullException>(
                 AssertionUtilities.SelectorName,
                 () => AssertionUtilities.DivisionAsync(10, 0).Match(null, s => s)
-            );
-
-        [Fact]
-        public async Task Passing_Null_ErrorSelector_Throws()
-            => await Assert.ThrowsAsync<ArgumentNullException>(
-                AssertionUtilities.ErrorSelectorName,
-                () => AssertionUtilities.DivisionAsync(10, 0).Match(d => "", null)
             );
 
         [Fact]
@@ -90,5 +76,19 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             Assert.False(errorSelectorExectued, "Error selector not should get exectued.");
             Assert.Equal(5, result);
         }
+
+        [Fact]
+        public async Task Void_Passing_Null_ErrorSelector_Throws()
+            => await Assert.ThrowsAsync<ArgumentNullException>(
+                AssertionUtilities.ErrorActionParamName,
+                () => AssertionUtilities.DivisionAsync(10, 0).Match(d => { }, null)
+            );
+
+        [Fact]
+        public async Task Void_Passing_Null_Selector_Throws()
+            => await Assert.ThrowsAsync<ArgumentNullException>(
+                AssertionUtilities.ActionParamName,
+                () => AssertionUtilities.DivisionAsync(10, 0).Match(null, s => { })
+            );
     }
 }

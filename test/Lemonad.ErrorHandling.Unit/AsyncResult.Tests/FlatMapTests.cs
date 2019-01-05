@@ -7,14 +7,21 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
     public class FlatMapTests {
         [Fact]
-        public void Passing_Null_Selector_ResultSelector_Overload_Selector_Throws() {
+        public void Passing_Null_ErrorSelector_Throws() {
             Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.SelectorName,
-                () => {
-                    AssertionUtilities
-                        .DivisionAsync(2, 0)
-                        .FlatMap<double, double, string>(null, (d, d1) => d + d1, s => s);
-                });
+                AssertionUtilities.ErrorSelectorName,
+                () => AssertionUtilities
+                    .DivisionAsync(2, 0)
+                    .FlatMap(x => AssertionUtilities.Division(x, 0), null));
+        }
+
+        [Fact]
+        public void Passing_Null_ResultSelector_Overload_ErrorSelector_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ErrorSelectorName,
+                () => AssertionUtilities
+                    .DivisionAsync(2, 0)
+                    .FlatMap(x => AssertionUtilities.Division(x, 0), (d, d1) => d + d1, null));
         }
 
         [Fact]
@@ -33,12 +40,14 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
         }
 
         [Fact]
-        public void Passing_Null_ResultSelector_Overload_ErrorSelector_Throws() {
+        public void Passing_Null_Selector_ResultSelector_Overload_Selector_Throws() {
             Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.ErrorSelectorName,
-                () => AssertionUtilities
-                    .DivisionAsync(2, 0)
-                    .FlatMap(x => AssertionUtilities.Division(x, 0), (d, d1) => d + d1, null));
+                AssertionUtilities.SelectorName,
+                () => {
+                    AssertionUtilities
+                        .DivisionAsync(2, 0)
+                        .FlatMap<double, double, string>(null, (d, d1) => d + d1, s => s);
+                });
         }
 
         [Fact]
@@ -50,15 +59,6 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
                         .DivisionAsync(2, 0)
                         .FlatMap<double, string>(null, s => s);
                 });
-        }
-
-        [Fact]
-        public void Passing_Null_ErrorSelector_Throws() {
-            Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.ErrorSelectorName,
-                () => AssertionUtilities
-                    .DivisionAsync(2, 0)
-                    .FlatMap(x => AssertionUtilities.Division(x, 0), null));
         }
 
         [Fact]
