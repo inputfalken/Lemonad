@@ -116,11 +116,11 @@ namespace Lemonad.ErrorHandling {
         ) where TSelector : struct;
 
         IAsyncResult<TResult, TError> FlatMap<TResult>(
-            Func<T, IResult<TResult, TError>> flatSelector
+            Func<T, IResult<TResult, TError>> selector
         );
 
         IAsyncResult<TResult, TError> FlatMap<TSelector, TResult>(
-            Func<T, IResult<TSelector, TError>> flatSelector,
+            Func<T, IResult<TSelector, TError>> selector,
             Func<T, TSelector, TResult> resultSelector
         );
 
