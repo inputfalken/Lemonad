@@ -147,13 +147,13 @@ namespace Lemonad.ErrorHandling.Internal {
 
         public IAsyncResult<TResult, TError> ZipAsync<TOther, TResult>(
             IAsyncResult<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector
+            Func<T, TOther, TResult> selector
         ) {
             if (other is null) throw new ArgumentNullException(nameof(other));
-            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
             return new AsyncResult<TResult, TError>(EitherMethods.ZipAsync(Either.ToTaskEither(),
                 other.Either.ToTaskEither(),
-                resultSelector));
+                selector));
         }
 
         public IAsyncResult<TResult, TError> Join<TInner, TKey, TResult>(
@@ -203,11 +203,11 @@ namespace Lemonad.ErrorHandling.Internal {
 
         public IAsyncResult<TResult, TError> Zip<TOther, TResult>(
             IResult<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector
+            Func<T, TOther, TResult> selector
         ) {
             if (other is null) throw new ArgumentNullException(nameof(other));
-            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
-            return ZipAsync(other.ToAsyncResult(), resultSelector);
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            return ZipAsync(other.ToAsyncResult(), selector);
         }
 
         public IAsyncResult<T, TError> Flatten<TResult, TErrorResult>(

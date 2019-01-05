@@ -213,11 +213,11 @@ namespace Lemonad.ErrorHandling.Internal {
 
         public IAsyncResult<TResult, TError> ZipAsync<TOther, TResult>(
             IAsyncResult<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector
+            Func<T, TOther, TResult> selector
         ) {
             if (other is null) throw new ArgumentNullException(nameof(other));
-            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
-            return this.ToAsyncResult().ZipAsync(other, resultSelector);
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            return this.ToAsyncResult().ZipAsync(other, selector);
         }
 
         public IEither<T, TError> Either { get; }
@@ -592,15 +592,15 @@ namespace Lemonad.ErrorHandling.Internal {
 
         public IResult<TResult, TError> Zip<TOther, TResult>(
             IResult<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector
+            Func<T, TOther, TResult> selector
         ) {
             if (other is null) throw new ArgumentNullException(nameof(other));
-            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
             return new Result<TResult, TError>(
                 EitherMethods.Zip(
                     Either,
                     other.Either,
-                    resultSelector
+                    selector
                 )
             );
         }

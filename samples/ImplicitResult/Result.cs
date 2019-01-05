@@ -204,10 +204,10 @@ namespace ImplicitResult {
             _resultImplementation.SafeCast<TResult>(errorSelector);
 
         public IResult<TResult, TError> Zip<TOther, TResult>(IResult<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector) => _resultImplementation.Zip(other, resultSelector);
+            Func<T, TOther, TResult> selector) => _resultImplementation.Zip(other, selector);
 
         public IAsyncResult<TResult, TError> ZipAsync<TOther, TResult>(IAsyncResult<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector) => _resultImplementation.ZipAsync(other, resultSelector);
+            Func<T, TOther, TResult> selector) => _resultImplementation.ZipAsync(other, selector);
 
         public static implicit operator Result<T, TError>(T value) =>
             new Result<T, TError>(Result.Value<T, TError>(value));

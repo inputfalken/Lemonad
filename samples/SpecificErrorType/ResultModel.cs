@@ -203,10 +203,10 @@ namespace SpecificErrorType {
             _resultImplementation.SafeCast<TResult>(errorSelector);
 
         public IResult<TResult, ErrorModel> Zip<TOther, TResult>(IResult<TOther, ErrorModel> other,
-            Func<T, TOther, TResult> resultSelector) => _resultImplementation.Zip(other, resultSelector);
+            Func<T, TOther, TResult> selector) => _resultImplementation.Zip(other, selector);
 
         public IAsyncResult<TResult, ErrorModel> ZipAsync<TOther, TResult>(IAsyncResult<TOther, ErrorModel> other,
-            Func<T, TOther, TResult> resultSelector) => _resultImplementation.ZipAsync(other, resultSelector);
+            Func<T, TOther, TResult> selector) => _resultImplementation.ZipAsync(other, selector);
     }
 
     public class ErrorModel {

@@ -428,7 +428,7 @@ namespace Lemonad.ErrorHandling {
 
         IAsyncResult<TResult, TError> Zip<TOther, TResult>(
             IResult<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector
+            Func<T, TOther, TResult> selector
         );
 
         /// <summary>
@@ -438,7 +438,7 @@ namespace Lemonad.ErrorHandling {
         /// </summary>
         IAsyncResult<TResult, TError> ZipAsync<TOther, TResult>(
             IAsyncResult<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector
+            Func<T, TOther, TResult> selector
         );
     }
 }

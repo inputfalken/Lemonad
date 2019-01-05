@@ -718,7 +718,7 @@ namespace Lemonad.ErrorHandling {
         /// <param name="other">
         ///     The other <see cref="Result{T,TError}" />.
         /// </param>
-        /// <param name="resultSelector">
+        /// <param name="selector">
         ///     The selector which will determine the type of the returning <see cref="Result{T,TError}" />.
         /// </param>
         /// <typeparam name="TOther">The type of the other <see cref="Result{T,TError}" />.</typeparam>
@@ -729,7 +729,7 @@ namespace Lemonad.ErrorHandling {
         /// </returns>
         IResult<TResult, TError> Zip<TOther, TResult>(
             IResult<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector
+            Func<T, TOther, TResult> selector
         );
 
         /// <summary>
@@ -738,7 +738,7 @@ namespace Lemonad.ErrorHandling {
         /// </summary>
         IAsyncResult<TResult, TError> ZipAsync<TOther, TResult>(
             IAsyncResult<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector
+            Func<T, TOther, TResult> selector
         );
     }
 }

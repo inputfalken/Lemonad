@@ -7,6 +7,8 @@ namespace Assertion {
     public static class AssertionUtilities {
         public static Task Delay => Task.Delay(200);
 
+        public const string ZipOtherParameter = "other";
+
         public const string JoinInnerParameter = "inner";
         public const string JoinOuterKeyParameter = "outerKeySelector";
         public const string JoinCompareParameter = "comparer";
