@@ -23,6 +23,39 @@ namespace Lemonad.ErrorHandling.Internal {
             return FlatMap(flatMapSelector.Compose(x => x.ToResult(errorSelector)));
         }
 
+        public IAsyncResult<TResult, TError> FlatMap<TResult, TErrorResult>(
+            Func<T, IResult<TResult, TErrorResult>> selector,
+            Func<TErrorResult, TError> errorSelector
+        ) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return new AsyncResult<TResult, TError>(
+                EitherMethods.FlatMapAsync(
+                    Either.ToTaskEither(),
+                    selector.Compose(x => x.Either),
+                    errorSelector
+                )
+            );
+        }
+
+        public IAsyncResult<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
+            Func<T, IResult<TFlatMap, TErrorResult>> selector,
+            Func<T, TFlatMap, TResult> resultSelector,
+            Func<TErrorResult, TError> errorSelector
+        ) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+            if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
+            return new AsyncResult<TResult, TError>(
+                EitherMethods.FlatMapAsync(
+                    Either.ToTaskEither(),
+                    selector.Compose(x => x.Either),
+                    resultSelector,
+                    errorSelector
+                )
+            );
+        }
+
         public IAsyncResult<TResult, TError> FlatMapAsync<TResult>(
             Func<T, Task<TResult?>> flatMapSelector,
             Func<TError> errorSelector

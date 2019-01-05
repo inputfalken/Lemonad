@@ -47,9 +47,9 @@ namespace SpecificErrorType {
             _resultImplementation.FlatMap(selector, resultSelector);
 
         public IResult<TResult, ErrorModel> FlatMap<TResult, TErrorResult>(
-            Func<T, IResult<TResult, TErrorResult>> flatMapSelector,
+            Func<T, IResult<TResult, TErrorResult>> selector,
             Func<TErrorResult, ErrorModel> errorSelector) =>
-            _resultImplementation.FlatMap(flatMapSelector, errorSelector);
+            _resultImplementation.FlatMap(selector, errorSelector);
 
         public IResult<TResult, ErrorModel> FlatMap<TResult>(Func<T, TResult?> flatMapSelector,
             Func<ErrorModel> errorSelector) where TResult : struct =>
@@ -70,9 +70,9 @@ namespace SpecificErrorType {
             _resultImplementation.FlatMapAsync(flatMapSelector, resultSelector, errorSelector);
 
         public IResult<TResult, ErrorModel> FlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
+            Func<T, IResult<TFlatMap, TErrorResult>> selector, Func<T, TFlatMap, TResult> resultSelector,
             Func<TErrorResult, ErrorModel> errorSelector) =>
-            _resultImplementation.FlatMap(flatMapSelector, resultSelector, errorSelector);
+            _resultImplementation.FlatMap(selector, resultSelector, errorSelector);
 
         public IAsyncResult<TResult, ErrorModel> FlatMapAsync<TResult>(
             Func<T, IAsyncResult<TResult, ErrorModel>> selector) =>

@@ -382,15 +382,15 @@ namespace Lemonad.ErrorHandling.Internal {
         }
 
         public IResult<TResult, TError> FlatMap<TResult, TErrorResult>(
-            Func<T, IResult<TResult, TErrorResult>> flatMapSelector,
+            Func<T, IResult<TResult, TErrorResult>> selector,
             Func<TErrorResult, TError> errorSelector
         ) {
-            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
             if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
             return new Result<TResult, TError>(
                 EitherMethods.FlatMap(
                     Either,
-                    flatMapSelector.Compose(x => x.Either),
+                    selector.Compose(x => x.Either),
                     errorSelector
                 )
             );
@@ -439,16 +439,16 @@ namespace Lemonad.ErrorHandling.Internal {
         }
 
         public IResult<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector,
+            Func<T, IResult<TFlatMap, TErrorResult>> selector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TErrorResult, TError> errorSelector) {
-            if (flatMapSelector is null) throw new ArgumentNullException(nameof(flatMapSelector));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
             if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
             if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
             return new Result<TResult, TError>(
                 EitherMethods.FlatMap(
                     Either,
-                    flatMapSelector.Compose(x => x.Either), resultSelector,
+                    selector.Compose(x => x.Either), resultSelector,
                     errorSelector
                 )
             );

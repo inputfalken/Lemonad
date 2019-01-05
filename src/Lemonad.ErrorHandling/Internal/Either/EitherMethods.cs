@@ -156,12 +156,67 @@ namespace Lemonad.ErrorHandling.Internal.Either {
         }
 
         internal static IEither<TResult, TError> FlatMap<T, TResult, TError, TErrorResult>(
-            IEither<T, TError> either,
+            IEither<T, TError> source,
             Func<T, IEither<TResult, TErrorResult>> flatMapSelector,
             Func<TErrorResult, TError> errorSelector
         ) {
+            if (source.HasError) return CreateError<TResult, TError>(source.Error);
+            var okSelector = flatMapSelector(source.Value);
+            return okSelector.HasValue
+                ? CreateValue<TResult, TError>(okSelector.Value)
+                : CreateError<TResult, TError>(errorSelector(okSelector.Error));
+        }
+
+        internal static async Task<IEither<TResult, TError>> FlatMapAsync<T, TResult, TError, TErrorResult>(
+            Task<IEither<T, TError>> source,
+            Func<T, IEither<TResult, TErrorResult>> flatMapSelector,
+            Func<TErrorResult, TError> errorSelector
+        ) {
+            var either = await source.ConfigureAwait(false);
             if (either.HasError) return CreateError<TResult, TError>(either.Error);
             var okSelector = flatMapSelector(either.Value);
+            return okSelector.HasValue
+                ? CreateValue<TResult, TError>(okSelector.Value)
+                : CreateError<TResult, TError>(errorSelector(okSelector.Error));
+        }
+
+        internal static async Task<IEither<TResult, TError>> FlatMapAsync<T, TResult, TFlatMap, TError, TErrorResult>(
+            Task<IEither<T, TError>> source,
+            Func<T, IEither<TFlatMap, TErrorResult>> flatMapSelector,
+            Func<T, TFlatMap, TResult> resultSelector,
+            Func<TErrorResult, TError> errorSelector
+        ) {
+            var either = await source.ConfigureAwait(false);
+            if (either.HasError) return CreateError<TResult, TError>(either.Error);
+            var okSelector = flatMapSelector(either.Value);
+            return okSelector.HasValue
+                ? CreateValue<TResult, TError>(resultSelector(either.Value, okSelector.Value))
+                : CreateError<TResult, TError>(errorSelector(okSelector.Error));
+        }
+
+        internal static async Task<IEither<TResult, TError>> FlatMapAsyncSelector<T, TResult, TFlatMap, TError,
+            TErrorResult>(
+            Task<IEither<T, TError>> source,
+            Func<T, Task<IEither<TFlatMap, TErrorResult>>> flatMapSelector,
+            Func<T, TFlatMap, TResult> resultSelector,
+            Func<TErrorResult, TError> errorSelector
+        ) {
+            var either = await source.ConfigureAwait(false);
+            if (either.HasError) return CreateError<TResult, TError>(either.Error);
+            var okSelector = await flatMapSelector(either.Value).ConfigureAwait(false);
+            return okSelector.HasValue
+                ? CreateValue<TResult, TError>(resultSelector(either.Value, okSelector.Value))
+                : CreateError<TResult, TError>(errorSelector(okSelector.Error));
+        }
+
+        internal static async Task<IEither<TResult, TError>> FlatMapAsyncSelector<T, TResult, TError, TErrorResult>(
+            Task<IEither<T, TError>> source,
+            Func<T, Task<IEither<TResult, TErrorResult>>> flatMapSelector,
+            Func<TErrorResult, TError> errorSelector
+        ) {
+            var either = await source.ConfigureAwait(false);
+            if (either.HasError) return CreateError<TResult, TError>(either.Error);
+            var okSelector = await flatMapSelector(either.Value).ConfigureAwait(false);
             return okSelector.HasValue
                 ? CreateValue<TResult, TError>(okSelector.Value)
                 : CreateError<TResult, TError>(errorSelector(okSelector.Error));

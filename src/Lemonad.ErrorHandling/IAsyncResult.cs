@@ -83,6 +83,11 @@ namespace Lemonad.ErrorHandling {
             Func<TError> errorSelector
         ) where TResult : struct;
 
+        IAsyncResult<TResult, TError> FlatMap<TResult, TErrorResult>(
+            Func<T, IResult<TResult, TErrorResult>> selector,
+            Func<TErrorResult, TError> errorSelector
+        );
+
         /// <summary>
         ///     Flatten a <see cref="Nullable{T}" />
         ///     And maps <typeparamref name="T" /> together with <typeparamref name="TSelector" /> to
@@ -117,6 +122,12 @@ namespace Lemonad.ErrorHandling {
         IAsyncResult<TResult, TError> FlatMap<TSelector, TResult>(
             Func<T, IResult<TSelector, TError>> flatSelector,
             Func<T, TSelector, TResult> resultSelector
+        );
+
+        IAsyncResult<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
+            Func<T, IResult<TFlatMap, TErrorResult>> selector,
+            Func<T, TFlatMap, TResult> resultSelector,
+            Func<TErrorResult, TError> errorSelector
         );
 
         /// <summary>
