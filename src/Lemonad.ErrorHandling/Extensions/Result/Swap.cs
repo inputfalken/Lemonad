@@ -17,9 +17,9 @@ namespace Lemonad.ErrorHandling.Extensions.Result {
         /// <exception cref="ArgumentNullException">
         /// When <paramref name="source"/> is null.
         /// </exception>
-        public static IResult<TError, T> Swap<T, TError>(this IResult<T, TError> source) {
-            if (source is null) throw new ArgumentNullException(nameof(source));
-            return source.Match(ErrorHandling.Result.Error<TError, T>, ErrorHandling.Result.Value<TError, T>);
-        }
+        public static IResult<TError, T> Swap<T, TError>(this IResult<T, TError> source)
+            => source is null
+                ? throw new ArgumentNullException(nameof(source))
+                : source.Match(ErrorHandling.Result.Error<TError, T>, ErrorHandling.Result.Value<TError, T>);
     }
 }
