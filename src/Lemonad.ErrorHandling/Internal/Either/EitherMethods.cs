@@ -644,8 +644,8 @@ namespace Lemonad.ErrorHandling.Internal.Either {
         ) {
             if (either.HasError) return CreateError<TResult, TError>(either.Error);
 
-            return either.Value is TResult result
-                ? CreateValue<TResult, TError>(result)
+            return either.Value is TResult value
+                ? CreateValue<TResult, TError>(value)
                 : CreateError<TResult, TError>(errorSelector(either.Value));
         }
 
