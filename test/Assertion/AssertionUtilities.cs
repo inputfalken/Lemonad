@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
 using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Extensions.Result;
+using Lemonad.ErrorHandling.Extensions.Result.Task;
 
 namespace Assertion {
     public static class AssertionUtilities {
@@ -12,8 +13,9 @@ namespace Assertion {
         }
 
         public enum Error {
-            First = 0,
-            Second = 1
+            First = 1,
+            Second = 2,
+            Unhandled = 3
         }
 
         public const string ActionParamName = "action";
@@ -63,7 +65,14 @@ namespace Assertion {
                 ? $"Could not parse type {typeof(string).Name} (null) into {typeof(T).Name}."
                 : $"Could not parse type {typeof(string).Name} (\"{input}\") into {typeof(T).Name}.";
 
-        public static IAsyncResult<Gender, string> GetGenderAsync(int identity) => GetGender(identity).ToAsyncResult();
+        public static IAsyncResult<Gender, string> GetGenderAsync(int identity) {
+            async Task<IResult<Gender, string>> AddDelay() {
+                await Delay;
+                return GetGender(identity);
+            }
+
+            return AddDelay().ToAsyncResult();
+        }
 
         public static IResult<Gender, string> GetGender(int identity) {
             return Result.Value<int, string>(identity)
@@ -79,5 +88,22 @@ namespace Assertion {
                 }).FlatMap(x => x);
         }
 
+        public static IAsyncResult<int, Error> GetProgramAsync(int identity) {
+            async Task<IResult<int, Error>> AddDelay() {
+                await Delay;
+                return GetProgram(identity);
+            }
+
+            return AddDelay().ToAsyncResult();
+        }
+
+        public static IResult<int, Error> GetProgram(int identity) {
+            switch (identity) {
+                case 0: return Result.Value<int, Error>(identity);
+                case 1: return Result.Error<int, Error>(Error.First);
+                case 2: return Result.Error<int, Error>(Error.Second);
+                default: return Result.Error<int, Error>(Error.Unhandled);
+            }
+        }
     }
 }
