@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Assertion;
 using Lemonad.ErrorHandling.Extensions.Result.Queryable;
 using Lemonad.ErrorHandling.Integration.EntityFramework;
@@ -14,6 +15,41 @@ namespace Lemonad.ErrorHandling.Integration {
         }
 
         private static MovieContext MovieContext { get; }
+
+        [Fact]
+        public void Passing_Null_Source_Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ExtensionParameterName,
+                () => ((IQueryable<string>) null).FirstOrError(() => "")
+            );
+
+        [Fact]
+        public void Passing_Null_ErrorSelector_Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ErrorSelectorName,
+                () => MovieContext.Users.FirstOrError<User, string>(null)
+            );
+
+        [Fact]
+        public void Predicate_Overload_Passing_Null_ErrorSelector_Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ErrorSelectorName,
+                () => MovieContext.Users.FirstOrError<User, string>(u => true, null)
+            );
+
+        [Fact]
+        public void Predicate_Overload_Passing_Null_Source_Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ExtensionParameterName,
+                () => ((IQueryable<string>) null).FirstOrError(x => true, () => "")
+            );
+
+        [Fact]
+        public void Passing_Null_Predicate_Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.PredicateName,
+                () => MovieContext.Users.FirstOrError(null, () => "")
+            );
 
         [Fact]
         public void Behaves_Like_FirstOrDefault_On_Empty_IQueryable_Without_Predicate() {
