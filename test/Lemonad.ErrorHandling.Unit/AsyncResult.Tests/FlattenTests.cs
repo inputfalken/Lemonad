@@ -1,10 +1,32 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Assertion;
 using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
     public class FlattenTests {
+        [Fact]
+        public void Passing_Null_ErrorSelector() =>
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ErrorSelectorName,
+                () => AssertionUtilities.DivisionAsync(20, 2).Flatten(d => AssertionUtilities.Division(d, 2), null)
+            );
+
+        [Fact]
+        public void Passing_Null_Selector_Throws() =>
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => AssertionUtilities.DivisionAsync(20, 2).Flatten<string>(null)
+            );
+
+        [Fact]
+        public void Passing_Null_Selector_With_ErrorSelector_Overload_Throws() =>
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => AssertionUtilities.DivisionAsync(20, 2).Flatten<string, int>(null, i => $"{i}")
+            );
+
         [Fact]
         public async Task Result_With_Error_Flatmaps_Result_with_Error__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
