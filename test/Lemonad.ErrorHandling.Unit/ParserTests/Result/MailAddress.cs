@@ -4,8 +4,8 @@ using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.ParserTests.Result {
     public class MailAddress {
-            [Fact]
-            public void Double_White_Space() {
+        [Fact]
+        public void Double_White_Space() {
             ResultParsers.MailAddress("  ")
                 .AssertError("Failed parsing input '  '. Mail with white spaces are not allowed.");
         }

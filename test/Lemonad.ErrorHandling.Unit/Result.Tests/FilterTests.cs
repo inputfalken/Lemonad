@@ -1,8 +1,23 @@
-﻿using Assertion;
+﻿using System;
+using Assertion;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.Result.Tests {
-    public class OkWhenTests {
+    public class FilterTests {
+        [Fact]
+        public void Passing_Null_ErrorSelector_Throws() {
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.ErrorSelectorName, () => AssertionUtilities
+                .Division(10, 0).Filter(d => true, null)
+            );
+        }
+
+        [Fact]
+        public void Passing_Null_Predicate_Throws() {
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.PredicateName, () => AssertionUtilities
+                .Division(10, 0).Filter(null, d => "")
+            );
+        }
+
         [Fact]
         public void
             Result_With_Error__Expects_Predicate_Never_To_Be_Executed_And_ErrorSelector_Never_To_Be_Invoked_With_Parameter_ErrorSelector() {

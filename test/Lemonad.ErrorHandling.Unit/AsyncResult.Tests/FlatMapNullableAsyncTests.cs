@@ -1,25 +1,20 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Assertion;
 using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests
-{
+namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
     public class FlatMapNullableAsyncTests {
         [Fact]
         public async Task None_Null_Int__Expects_Result_With_Value() {
-            var number = Task.Run(async () => {
-                await Task.Delay(200);
-                int? nullable = 2;
-                return nullable;
-            });
-
             var selectorInvoked = false;
             await ErrorHandling.AsyncResult
                 .Value<int, string>(2)
-                .FlatMapAsync(_ => {
+                .FlatMapAsync(async _ => {
+                    await AssertionUtilities.Delay;
                     selectorInvoked = true;
-                    return number;
+                    return (int?) 2;
                 }, () => "ERROR")
                 .AssertValue(2);
 
@@ -28,18 +23,14 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests
 
         [Fact]
         public async Task None_Null_Int_Using_ResultSelector__Expects_Result_With_Value() {
-            var number = Task.Run(async () => {
-                await Task.Delay(200);
-                int? nullable = 2;
-                return nullable;
-            });
             var selectorInvoked = false;
             var resultSelectorInvoked = false;
             await ErrorHandling.AsyncResult
                 .Value<int, string>(2)
-                .FlatMapAsync(_ => {
+                .FlatMapAsync(async _ => {
+                    await AssertionUtilities.Delay;
                     selectorInvoked = true;
-                    return number;
+                    return (int?) 2;
                 }, (x, y) => {
                     resultSelectorInvoked = true;
                     return x + y;
@@ -51,18 +42,14 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests
         }
 
         [Fact]
-        public async Task Null_Int__Expects_Result_With_Value() {
-            var number = Task.Run(async () => {
-                await Task.Delay(200);
-                int? nullable = null;
-                return nullable;
-            });
+        public async Task Null_Int__Expects_Result_With_Error() {
             var selectorInvoked = false;
             await ErrorHandling.AsyncResult
                 .Value<int, string>(2)
-                .FlatMapAsync(_ => {
+                .FlatMapAsync(async _ => {
+                    await AssertionUtilities.Delay;
                     selectorInvoked = true;
-                    return number;
+                    return (int?) null;
                 }, () => "ERROR")
                 .AssertError("ERROR");
 
@@ -70,19 +57,15 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests
         }
 
         [Fact]
-        public async Task Null_Int_Using_ResultSelector__Expects_Result_With_Value() {
-            var number = Task.Run(async () => {
-                await Task.Delay(200);
-                int? nullable = null;
-                return nullable;
-            });
+        public async Task Null_Int_Using_ResultSelector__Expects_Result_With_Null() {
             var selectorInvoked = false;
             var resultSelectorInvoked = false;
             await ErrorHandling.AsyncResult
                 .Value<int, string>(2)
-                .FlatMapAsync(_ => {
+                .FlatMapAsync(async _ => {
+                    await AssertionUtilities.Delay;
                     selectorInvoked = true;
-                    return number;
+                    return (int?) null;
                 }, (x, y) => {
                     resultSelectorInvoked = true;
                     return x + y;
@@ -92,5 +75,54 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests
             Assert.True(selectorInvoked);
             Assert.False(resultSelectorInvoked);
         }
+
+        [Fact]
+        public void Passing_Null_ErrorSelector_ResultSelector_Overload_Throws()
+            => Assert.Throws<ArgumentNullException>(AssertionUtilities.ErrorSelectorName, () =>
+                ErrorHandling.AsyncResult
+                    .Value<int, string>(2)
+                    .FlatMapAsync(async i => {
+                        await AssertionUtilities.Delay;
+                        return (int?) 2;
+                    }, (i, i1) => "", null)
+            );
+
+        [Fact]
+        public void Passing_Null_ErrorSelector_Throws()
+            => Assert.Throws<ArgumentNullException>(AssertionUtilities.ErrorSelectorName, () =>
+                ErrorHandling.AsyncResult
+                    .Value<int, string>(2)
+                    .FlatMapAsync(async i => {
+                        await AssertionUtilities.Delay;
+                        return (int?) 2;
+                    }, null)
+            );
+
+        [Fact]
+        public void Passing_Null_ResultSelector_Throws()
+            => Assert.Throws<ArgumentNullException>(AssertionUtilities.ResultSelector, () =>
+                ErrorHandling.AsyncResult
+                    .Value<int, string>(2)
+                    .FlatMapAsync<int, string>(async i => {
+                        await AssertionUtilities.Delay;
+                        return (int?) 2;
+                    }, null, () => "")
+            );
+
+        [Fact]
+        public void Passing_Null_Selector_ResultSelector_Overload_Throws()
+            => Assert.Throws<ArgumentNullException>(AssertionUtilities.SelectorName, () =>
+                ErrorHandling.AsyncResult
+                    .Value<int, string>(2)
+                    .FlatMapAsync<int, string>(null, (i, i1) => "", () => "")
+            );
+
+        [Fact]
+        public void Passing_Null_Selector_Throws()
+            => Assert.Throws<ArgumentNullException>(AssertionUtilities.SelectorName, () =>
+                ErrorHandling.AsyncResult
+                    .Value<int, string>(2)
+                    .FlatMapAsync<int>(null, () => "ERROR")
+            );
     }
 }

@@ -23,7 +23,7 @@ namespace Lemonad.ErrorHandling.Extensions.Result {
             var either = EitherMethods.Multiple(
                 source.Either,
                 validations.Select(x =>
-                    x.Compose<IResult<T, TError>, IResult<T, TError>, IEither<T, TError>>(y => y.Either)(source)
+                    x.Compose(y => y.Either)(source)
                 )
             );
             return either.HasValue

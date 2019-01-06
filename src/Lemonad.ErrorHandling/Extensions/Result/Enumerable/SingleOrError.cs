@@ -56,5 +56,4 @@ namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
             return source.Where(predicate).SingleOrError();
         }
     }
-
 }

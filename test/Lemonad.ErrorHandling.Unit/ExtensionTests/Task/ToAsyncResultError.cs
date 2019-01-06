@@ -8,14 +8,6 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.ExtensionTests.Task {
     public class ToAsyncResultError {
         [Fact]
-        public void Passing_Null_Source_Throws() {
-            Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.ExtensionParameterName,
-                () => ((Task<string>) null).ToAsyncResultError(s => false, _ => "ERROR")
-            );
-        }
-
-        [Fact]
         public void Passing_Null_Predicate_Throws() {
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.PredicateName,
@@ -32,11 +24,11 @@ namespace Lemonad.ErrorHandling.Unit.ExtensionTests.Task {
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task Task_With_Truthy_Predicate__Expects_Value() {
-            await System.Threading.Tasks.Task
-                .FromResult("foobar")
-                .ToAsyncResultError(x => x == "foobar", _ => "ERROR")
-                .AssertError("foobar");
+        public void Passing_Null_Source_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ExtensionParameterName,
+                () => ((Task<string>) null).ToAsyncResultError(s => false, _ => "ERROR")
+            );
         }
 
         [Fact]
@@ -45,6 +37,14 @@ namespace Lemonad.ErrorHandling.Unit.ExtensionTests.Task {
                 .FromResult("foobar")
                 .ToAsyncResultError(x => x != "foobar", _ => "VALUE")
                 .AssertValue("VALUE");
+        }
+
+        [Fact]
+        public async System.Threading.Tasks.Task Task_With_Truthy_Predicate__Expects_Value() {
+            await System.Threading.Tasks.Task
+                .FromResult("foobar")
+                .ToAsyncResultError(x => x == "foobar", _ => "ERROR")
+                .AssertError("foobar");
         }
     }
 }

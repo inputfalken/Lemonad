@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Assertion;
 using Lemonad.ErrorHandling.Internal.TaskExtensions;
 using Xunit;
 
@@ -13,6 +14,11 @@ namespace Lemonad.ErrorHandling.Unit.Internal.Tests.TaskExtensions.Tests {
         });
 
         private static Task VoidTask => Task.Run(async () => { await Task.Delay(100); });
+
+        [Fact]
+        public Task Null_Action_Throws() =>
+            Assert.ThrowsAsync<ArgumentNullException>(AssertionUtilities.ActionParamName, () => StringTask.Do(null)
+            );
 
         [Fact]
         public Task Null_String_Task_Throws() {

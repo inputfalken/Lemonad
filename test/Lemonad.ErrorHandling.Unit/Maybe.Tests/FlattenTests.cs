@@ -1,4 +1,5 @@
-﻿using Assertion;
+﻿using System;
+using Assertion;
 using Lemonad.ErrorHandling.Extensions;
 using Xunit;
 
@@ -39,5 +40,10 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
                 .Flatten(x => ErrorHandling.Maybe.Value(2).AssertValue(2))
                 .AssertValue("hello");
         }
+
+        [Fact]
+        public void Passing_Null_Selector_Throws() =>
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.SelectorName,
+                () => ErrorHandling.Maybe.Value(2).Flatten((Func<int, IMaybe<int>>) null));
     }
 }

@@ -15,17 +15,17 @@ namespace ImplicitResult {
 
         public IResult<T, TError> Do(Action action) => _resultImplementation.Do(action);
 
-        public IAsyncResult<T, TError> DoAsync(Func<Task> selector) => _resultImplementation.DoAsync(selector);
+        public IAsyncResult<T, TError> DoAsync(Func<Task> action) => _resultImplementation.DoAsync(action);
 
         public IResult<T, TError> DoWith(Action<T> action) => _resultImplementation.DoWith(action);
 
-        public IAsyncResult<T, TError> DoWithAsync(Func<T, Task> selector) =>
-            _resultImplementation.DoWithAsync(selector);
+        public IAsyncResult<T, TError> DoWithAsync(Func<T, Task> action) =>
+            _resultImplementation.DoWithAsync(action);
 
         public IResult<T, TError> DoWithError(Action<TError> action) => _resultImplementation.DoWithError(action);
 
-        public IAsyncResult<T, TError> DoWithErrorAsync(Func<TError, Task> selector) =>
-            _resultImplementation.DoWithErrorAsync(selector);
+        public IAsyncResult<T, TError> DoWithErrorAsync(Func<TError, Task> action) =>
+            _resultImplementation.DoWithErrorAsync(action);
 
         public IEither<T, TError> Either => _resultImplementation.Either;
 
@@ -35,51 +35,58 @@ namespace ImplicitResult {
         public IAsyncResult<T, TError> FilterAsync(Func<T, Task<bool>> predicate, Func<T, TError> errorSelector) =>
             _resultImplementation.FilterAsync(predicate, errorSelector);
 
-        public IResult<TResult, TError> FlatMap<TResult>(Func<T, IResult<TResult, TError>> flatSelector) =>
-            _resultImplementation.FlatMap(flatSelector);
+        public IResult<TResult, TError> FlatMap<TResult>(Func<T, IResult<TResult, TError>> selector) =>
+            _resultImplementation.FlatMap(selector);
 
         public IResult<TResult, TError> FlatMap<TSelector, TResult>(
-            Func<T, IResult<TSelector, TError>> flatSelector,
+            Func<T, IResult<TSelector, TError>> selector,
             Func<T, TSelector, TResult> resultSelector) =>
-            _resultImplementation.FlatMap(flatSelector, resultSelector);
+            _resultImplementation.FlatMap(selector, resultSelector);
 
         public IResult<TResult, TError> FlatMap<TResult, TErrorResult>(
-            Func<T, IResult<TResult, TErrorResult>> flatMapSelector, Func<TErrorResult, TError> errorSelector) =>
-            _resultImplementation.FlatMap(flatMapSelector, errorSelector);
+            Func<T, IResult<TResult, TErrorResult>> selector, Func<TErrorResult, TError> errorSelector) =>
+            _resultImplementation.FlatMap(selector, errorSelector);
 
-        public IResult<TResult, TError> FlatMap<TResult>(Func<T, TResult?> flatMapSelector, Func<TError> errorSelector)
-            where TResult : struct => _resultImplementation.FlatMap(flatMapSelector, errorSelector);
+        public IResult<TResult, TError> FlatMap<TResult>(Func<T, TResult?> selector, Func<TError> errorSelector)
+            where TResult : struct => _resultImplementation.FlatMap(selector, errorSelector);
 
-        public IAsyncResult<TResult, TError> FlatMapAsync<TResult>(Func<T, Task<TResult?>> flatMapSelector,
-            Func<TError> errorSelector) where TResult : struct =>
-            _resultImplementation.FlatMapAsync(flatMapSelector, errorSelector);
-
-        public IResult<TResult, TError> FlatMap<TFlatMap, TResult>(Func<T, TFlatMap?> flatMapSelector,
+        public IResult<TResult, TError> FlatMap<TFlatMap, TResult>(Func<T, TFlatMap?> selector,
             Func<T, TFlatMap, TResult> resultSelector, Func<TError> errorSelector)
             where TFlatMap : struct =>
-            _resultImplementation.FlatMap(flatMapSelector, resultSelector, errorSelector);
-
-        public IAsyncResult<TResult, TError> FlatMapAsync<TFlatMap, TResult>(Func<T, Task<TFlatMap?>> flatMapSelector,
-            Func<T, TFlatMap, TResult> resultSelector, Func<TError> errorSelector)
-            where TFlatMap : struct =>
-            _resultImplementation.FlatMapAsync(flatMapSelector, resultSelector, errorSelector);
-
-        public IAsyncResult<TFlatMap, TError> FlatMapAsync<TFlatMap, TResult>(Func<T, Task<TFlatMap?>> flatMapSelector,
-            Func<TError> errorSelector, Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct =>
-            throw new NotImplementedException();
+            _resultImplementation.FlatMap(selector, resultSelector, errorSelector);
 
         public IResult<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
+            Func<T, IResult<TFlatMap, TErrorResult>> selector, Func<T, TFlatMap, TResult> resultSelector,
             Func<TErrorResult, TError> errorSelector) =>
-            _resultImplementation.FlatMap(flatMapSelector, resultSelector, errorSelector);
+            _resultImplementation.FlatMap(selector, resultSelector, errorSelector);
+
+        public IAsyncResult<TResult, TError> FlatMapAsync<TResult>(Func<T, Task<TResult?>> selector,
+            Func<TError> errorSelector) where TResult : struct =>
+            _resultImplementation.FlatMapAsync(selector, errorSelector);
+
+        public IAsyncResult<TResult, TError> FlatMapAsync<TFlatMap, TResult>(Func<T, Task<TFlatMap?>> selector,
+            Func<T, TFlatMap, TResult> resultSelector, Func<TError> errorSelector)
+            where TFlatMap : struct =>
+            _resultImplementation.FlatMapAsync(selector, resultSelector, errorSelector);
 
         public IAsyncResult<TResult, TError>
-            FlatMapAsync<TResult>(Func<T, IAsyncResult<TResult, TError>> flatSelector) =>
-            _resultImplementation.FlatMapAsync(flatSelector);
+            FlatMapAsync<TResult>(Func<T, IAsyncResult<TResult, TError>> selector) =>
+            _resultImplementation.FlatMapAsync(selector);
 
         public IAsyncResult<TResult, TError> FlatMapAsync<TSelector, TResult>(
-            Func<T, IAsyncResult<TSelector, TError>> flatSelector, Func<T, TSelector, TResult> resultSelector) =>
-            _resultImplementation.FlatMapAsync(flatSelector, resultSelector);
+            Func<T, IAsyncResult<TSelector, TError>> selector, Func<T, TSelector, TResult> resultSelector) =>
+            _resultImplementation.FlatMapAsync(selector, resultSelector);
+
+        public IAsyncResult<TResult, TError> FlatMapAsync<TResult, TErrorResult>(
+            Func<T, IAsyncResult<TResult, TErrorResult>> selector,
+            Func<TErrorResult, TError> errorSelector
+        ) => _resultImplementation.FlatMapAsync(selector, errorSelector);
+
+        public IAsyncResult<TResult, TError> FlatMapAsync<TFlatMap, TResult, TErrorResult>(
+            Func<T, IAsyncResult<TFlatMap, TErrorResult>> selector,
+            Func<T, TFlatMap, TResult> resultSelector,
+            Func<TErrorResult, TError> errorSelector
+        ) => _resultImplementation.FlatMapAsync(selector, resultSelector, errorSelector);
 
         public IResult<T, TError> Flatten<TResult, TErrorResult>(Func<T, IResult<TResult, TErrorResult>> selector,
             Func<TErrorResult, TError> errorSelector) => _resultImplementation.Flatten(selector, errorSelector);
@@ -100,24 +107,24 @@ namespace ImplicitResult {
         public IResult<TResult, TResult> FullCast<TResult>() => _resultImplementation.FullCast<TResult>();
 
         public IResult<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
-            Func<T, IResult<TResult, TErrorResult>> flatMapSelector, Func<TError, TErrorResult> errorSelector) =>
-            _resultImplementation.FullFlatMap(flatMapSelector, errorSelector);
+            Func<T, IResult<TResult, TErrorResult>> selector, Func<TError, TErrorResult> errorSelector) =>
+            _resultImplementation.FullFlatMap(selector, errorSelector);
 
         public IResult<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector, Func<T, TFlatMap, TResult> resultSelector,
+            Func<T, IResult<TFlatMap, TErrorResult>> selector, Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector) =>
-            _resultImplementation.FullFlatMap(flatMapSelector, resultSelector, errorSelector);
+            _resultImplementation.FullFlatMap(selector, resultSelector, errorSelector);
 
         public IAsyncResult<TResult, TErrorResult> FullFlatMapAsync<TFlatMap, TResult, TErrorResult>(
-            Func<T, IAsyncResult<TFlatMap, TErrorResult>> flatMapSelector,
+            Func<T, IAsyncResult<TFlatMap, TErrorResult>> selector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector) =>
-            _resultImplementation.FullFlatMapAsync(flatMapSelector, resultSelector, errorSelector);
+            _resultImplementation.FullFlatMapAsync(selector, resultSelector, errorSelector);
 
         public IAsyncResult<TResult, TErrorResult> FullFlatMapAsync<TResult, TErrorResult>(
-            Func<T, IAsyncResult<TResult, TErrorResult>> flatMapSelector,
+            Func<T, IAsyncResult<TResult, TErrorResult>> selector,
             Func<TError, TErrorResult> errorSelector) =>
-            _resultImplementation.FullFlatMapAsync(flatMapSelector, errorSelector);
+            _resultImplementation.FullFlatMapAsync(selector, errorSelector);
 
         public IResult<TResult, TErrorResult> FullMap<TResult, TErrorResult>(Func<T, TResult> selector,
             Func<TError, TErrorResult> errorSelector) => _resultImplementation.FullMap(selector, errorSelector);
@@ -193,10 +200,14 @@ namespace ImplicitResult {
             _resultImplementation.SafeCast<TResult>(errorSelector);
 
         public IResult<TResult, TError> Zip<TOther, TResult>(IResult<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector) => _resultImplementation.Zip(other, resultSelector);
+            Func<T, TOther, TResult> selector) => _resultImplementation.Zip(other, selector);
 
         public IAsyncResult<TResult, TError> ZipAsync<TOther, TResult>(IAsyncResult<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector) => _resultImplementation.ZipAsync(other, resultSelector);
+            Func<T, TOther, TResult> selector) => _resultImplementation.ZipAsync(other, selector);
+
+        public IAsyncResult<TFlatMap, TError> FlatMapAsync<TFlatMap, TResult>(Func<T, Task<TFlatMap?>> flatMapSelector,
+            Func<TError> errorSelector, Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct =>
+            throw new NotImplementedException();
 
         public static implicit operator Result<T, TError>(T value) =>
             new Result<T, TError>(Result.Value<T, TError>(value));

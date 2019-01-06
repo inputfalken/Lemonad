@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Assertion;
 using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Xunit;
@@ -6,8 +7,12 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
     public class DoTests {
         [Fact]
-        public async Task
-            Result_With_Error__Expects_Action_To_Be_Invoked() {
+        public void Passing_Null_Task_Throws()
+            => Assert.Throws<ArgumentNullException>(AssertionUtilities.ActionParamName,
+                () => AssertionUtilities.DivisionAsync(10, 2).Do(null));
+
+        [Fact]
+        public async Task Result_With_Error__Expects_Action_To_Be_Invoked() {
             var actionExectued = false;
             await AssertionUtilities
                 .DivisionAsync(10, 0)

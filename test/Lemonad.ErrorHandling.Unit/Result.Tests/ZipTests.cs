@@ -1,9 +1,31 @@
-﻿using Assertion;
+﻿using System;
+using Assertion;
 using Lemonad.ErrorHandling.Extensions;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.Result.Tests {
     public class ZipTests {
+        [Fact]
+        public void Passing_Null_IResult_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ZipOtherParameter,
+                () => new {Id = 1, Text = "Hello"}
+                    .ToResult(x => false, x => "ERROR 1")
+                    .Zip<string, string>(null, (x, y) => $"{x.Text} {y}")
+            );
+        }
+
+        [Fact]
+        public void Passing_Null_Selector_Throws() {
+            var inner = "world".ToResult(x => false, x => "ERROR 2");
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => "hello"
+                    .ToResult(x => false, x => "ERROR 1")
+                    .Zip<string, string>(inner, null)
+            );
+        }
+
         [Fact]
         public void Result_With_No_Value_Zips_Result_With_No_Value__Expects_Result_With_No_Value() {
             var resultSelectorInvoked = false;

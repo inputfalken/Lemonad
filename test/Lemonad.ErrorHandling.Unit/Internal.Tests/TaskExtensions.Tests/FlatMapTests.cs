@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Assertion;
 using Lemonad.ErrorHandling.Internal.TaskExtensions;
 using Xunit;
 
@@ -18,6 +19,38 @@ namespace Lemonad.ErrorHandling.Unit.Internal.Tests.TaskExtensions.Tests {
             await Task.Delay(100);
             _flatMapCounter++;
         });
+
+        [Fact]
+        public Task Null_Selector_Throws() {
+            return Assert.ThrowsAsync<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => StringTask.FlatMap((Func<string, Task<string>>) null)
+            );
+        }
+
+        [Fact]
+        public Task Null_Selector_With_ResultSelector_Throws() {
+            return Assert.ThrowsAsync<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => StringTask.FlatMap((Func<string, Task<string>>) null, (s, y) => y)
+            );
+        }
+
+        [Fact]
+        public Task Null_Source_Throws() {
+            return Assert.ThrowsAsync<ArgumentNullException>(
+                AssertionUtilities.ExtensionParameterName,
+                () => ((Task<string>) null).FlatMap(x => Task.FromResult(""))
+            );
+        }
+
+        [Fact]
+        public Task Null_Source_With_ResultSelector_Throws() {
+            return Assert.ThrowsAsync<ArgumentNullException>(
+                AssertionUtilities.ExtensionParameterName,
+                () => ((Task<string>) null).FlatMap(x => Task.FromResult(""), (s, y) => y)
+            );
+        }
 
         [Fact]
         public async Task String_Task_Catch_Exception() {
@@ -152,6 +185,46 @@ namespace Lemonad.ErrorHandling.Unit.Internal.Tests.TaskExtensions.Tests {
             Assert.Equal(0, _flatMapCounter);
             Assert.Equal("Hello", await flatMapped);
             Assert.Equal(2, _flatMapCounter);
+        }
+
+        [Fact]
+        public Task Void_Task_OverLoad_Null_ResultSelector_Throws_With_ResultSelector() {
+            return Assert.ThrowsAsync<ArgumentNullException>(
+                AssertionUtilities.ResultSelector,
+                () => StringTask.FlatMap(() => Task.FromResult("foo"), (Func<string, string>) null)
+            );
+        }
+
+        [Fact]
+        public Task Void_Task_OverLoad_Null_ResultSelector_Throws_With_Single_ResultSelector() {
+            return Assert.ThrowsAsync<ArgumentNullException>(
+                AssertionUtilities.ResultSelector,
+                () => StringTask.FlatMap(() => Task.FromResult("foo"), (Func<string>) null)
+            );
+        }
+
+        [Fact]
+        public Task Void_Task_OverLoad_Null_Selector_Throws() {
+            return Assert.ThrowsAsync<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => StringTask.FlatMap((Func<Task<string>>) null)
+            );
+        }
+
+        [Fact]
+        public Task Void_Task_OverLoad_Null_Selector_Throws_With_ResultSelector() {
+            return Assert.ThrowsAsync<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => StringTask.FlatMap(null, () => "")
+            );
+        }
+
+        [Fact]
+        public Task Void_Task_OverLoad_Null_Source_Throws() {
+            return Assert.ThrowsAsync<ArgumentNullException>(
+                AssertionUtilities.ExtensionParameterName,
+                () => ((Task<string>) null).FlatMap(() => Task.FromResult(""))
+            );
         }
 
         [Fact]

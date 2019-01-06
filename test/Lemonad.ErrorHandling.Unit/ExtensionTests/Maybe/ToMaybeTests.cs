@@ -7,6 +7,14 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.ExtensionTests.Maybe {
     public class ToMaybeTests {
         [Fact]
+        public void Passing_Null_Value_With_Invalid_Null_Check_Throws() {
+            Assert.Throws<InvalidMaybeStateException>(() => {
+                string foo = null;
+                foo.ToMaybe(_ => true).AssertValue(default);
+            });
+        }
+
+        [Fact]
         public void Passing_Null_Value_With_Null_Check_Predicate_Does_Not_Throw() {
             var exception = Record.Exception(() => {
                 string x = null;
@@ -18,14 +26,6 @@ namespace Lemonad.ErrorHandling.Unit.ExtensionTests.Maybe {
         [Fact]
         public void Predicate_Overload__Falsy_Predicate__Expects_None() {
             string.Empty.ToMaybe(s => s.Length > 5).AssertNone();
-        }
-
-        [Fact]
-        public void Passing_Null_Value_With_Invalid_Null_Check_Throws() {
-            Assert.Throws<InvalidMaybeStateException>(() => {
-                string foo = null;
-                foo.ToMaybe(_ => true).AssertValue(default);
-            });
         }
 
         [Fact]

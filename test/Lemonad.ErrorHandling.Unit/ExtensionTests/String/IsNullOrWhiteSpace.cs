@@ -11,18 +11,18 @@ namespace Lemonad.ErrorHandling.Unit.ExtensionTests.String {
         public void Null_String() => ((string) null).IsNullOrWhiteSpace().AssertError(IsNullOrWhiteSpaceCase.Null);
 
         [Fact]
-        public void String_With_Word() => "foobar".IsNullOrWhiteSpace().AssertValue("foobar");
-
-        [Fact]
         public void String_Mixed_With_Word_And_WhiteSpace() => " foobar ".IsNullOrWhiteSpace().AssertValue(" foobar ");
-
-        [Fact]
-        public void String_With_Space() => " ".IsNullOrWhiteSpace().AssertError(IsNullOrWhiteSpaceCase.WhiteSpace);
 
         [Fact]
         public void String_With_Newline() => "\n".IsNullOrWhiteSpace().AssertError(IsNullOrWhiteSpaceCase.WhiteSpace);
 
         [Fact]
+        public void String_With_Space() => " ".IsNullOrWhiteSpace().AssertError(IsNullOrWhiteSpaceCase.WhiteSpace);
+
+        [Fact]
         public void String_With_Tab() => "\n".IsNullOrWhiteSpace().AssertError(IsNullOrWhiteSpaceCase.WhiteSpace);
+
+        [Fact]
+        public void String_With_Word() => "foobar".IsNullOrWhiteSpace().AssertValue("foobar");
     }
 }

@@ -1,8 +1,19 @@
-﻿using Assertion;
+﻿using System;
+using Assertion;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.Result.Tests {
     public class MapTests {
+        [Fact]
+        public void Passing_Null_Selector_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => AssertionUtilities
+                    .Division(2, 0)
+                    .Map<string>(null)
+            );
+        }
+
         [Fact]
         public void Result_With_Error_Maps__Expects_Selector_Never_Be_Executed() {
             var selectorExectued = false;

@@ -14,15 +14,6 @@ namespace Lemonad.ErrorHandling.Parsers {
             ? Result.Value<bool, string>(boolean)
             : Result.Error<bool, string>(FormatStringParserMessage<bool>(input));
 
-        public static IResult<Guid, string> Guid(string input) => System.Guid.TryParse(input, out var guid)
-            ? Result.Value<Guid, string>(guid)
-            : Result.Error<Guid, string>(FormatStringParserMessage<Guid>(input));
-
-        public static IResult<Guid, string> GuidExact(string input, GuidFormat format) =>
-            System.Guid.TryParseExact(input, char.ToString((char) format), out var guid)
-                ? Result.Value<Guid, string>(guid)
-                : Result.Error<Guid, string>(FormatStringParserMessage<Guid>(input));
-
         public static IResult<DateTime, string> DateTime(string input, DateTimeStyles style,
             IFormatProvider provider) =>
             System.DateTime.TryParse(input, provider, style, out var date)
@@ -80,6 +71,15 @@ namespace Lemonad.ErrorHandling.Parsers {
             input is null
                 ? $"Could not parse type {typeof(string).Name} (null) into {typeof(T).Name}."
                 : $"Could not parse type {typeof(string).Name} (\"{input}\") into {typeof(T).Name}.";
+
+        public static IResult<Guid, string> Guid(string input) => System.Guid.TryParse(input, out var guid)
+            ? Result.Value<Guid, string>(guid)
+            : Result.Error<Guid, string>(FormatStringParserMessage<Guid>(input));
+
+        public static IResult<Guid, string> GuidExact(string input, GuidFormat format) =>
+            System.Guid.TryParseExact(input, char.ToString((char) format), out var guid)
+                ? Result.Value<Guid, string>(guid)
+                : Result.Error<Guid, string>(FormatStringParserMessage<Guid>(input));
 
         public static IResult<int, string> Int(string input, NumberStyles style, IFormatProvider provider) =>
             int.TryParse(input, style, provider, out var number)

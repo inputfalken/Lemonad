@@ -1,8 +1,23 @@
-﻿using Assertion;
+﻿using System;
+using Assertion;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.Result.Tests {
     public class FullMapTests {
+        [Fact]
+        public void Passing_Null_ErrorSelector_Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ErrorSelectorName,
+                () => AssertionUtilities.Division(10, 2).FullMap<string, string>(_ => string.Empty, null)
+            );
+
+        [Fact]
+        public void Passing_Null_Selector_Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => AssertionUtilities.Division(10, 2).FullMap<string, string>(null, s => s)
+            );
+
         [Fact]
         public void Result_With_Error_Expects__Selector_Never__To_Be_Executed_And_ErrorSelector_To_Be_Invoked() {
             var selectorExectued = false;

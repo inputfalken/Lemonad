@@ -5,18 +5,10 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.ParserTests.Result {
     public class GuidExact {
         [Fact]
-        public void With_Valid_String_Digits_With_Four_HexaDecimals() {
-            var guid = System.Guid.NewGuid().ToString("X");
+        public void With_Invalid_String_Digits_Only() =>
             ResultParsers
-                .GuidExact(guid, GuidFormat.FourHexadecimalWrappedInBrackets)
-                .AssertValue(System.Guid.Parse(guid));
-        }
-
-        [Fact]
-        public void With_Null_String_Digits_With_Four_HexaDecimals() =>
-            ResultParsers
-                .GuidExact(null, GuidFormat.FourHexadecimalWrappedInBrackets)
-                .AssertError(AssertionUtilities.FormatStringParserMessage<Guid>(null));
+                .GuidExact("foobar", GuidFormat.DigitsOnly)
+                .AssertError(AssertionUtilities.FormatStringParserMessage<Guid>("foobar"));
 
         [Fact]
         public void With_Invalid_String_Digits_With_Four_HexaDecimals() =>
@@ -25,18 +17,18 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Result {
                 .AssertError(AssertionUtilities.FormatStringParserMessage<Guid>("foobar"));
 
         [Fact]
-        public void With_Valid_String_Digits_With_Hyphens_Wrapped_In_Parentheses() {
-            var guid = System.Guid.NewGuid().ToString("P");
+        public void With_Invalid_String_Digits_With_Hyphens() =>
             ResultParsers
-                .GuidExact(guid, GuidFormat.DigitsWithHyphensWrappedInParentheses)
-                .AssertValue(System.Guid.Parse(guid));
-        }
+                .GuidExact("foobar", GuidFormat.DigitsWithHyphens)
+                .AssertError(AssertionUtilities.FormatStringParserMessage<Guid>("foobar"));
 
         [Fact]
-        public void With_Null_String_Digits_With_Hyphens_Wrapped_In_Parentheses() =>
+        public void With_Invalid_String_Digits_With_Hyphens_Wrapped_In_Brackets() {
+            var guid = "foobar";
             ResultParsers
-                .GuidExact(null, GuidFormat.DigitsWithHyphensWrappedInParentheses)
-                .AssertError(AssertionUtilities.FormatStringParserMessage<Guid>(null));
+                .GuidExact(guid, GuidFormat.DigitsWithHyphensWrappedInBrackets)
+                .AssertError(AssertionUtilities.FormatStringParserMessage<Guid>("foobar"));
+        }
 
         [Fact]
         public void With_Invalid_String_Digits_With_Hyphens_Wrapped_In_Parentheses() {
@@ -47,12 +39,22 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Result {
         }
 
         [Fact]
-        public void With_Valid_String_Digits_With_Hyphens_Wrapped_In_Brackets() {
-            var guid = System.Guid.NewGuid().ToString("B");
+        public void With_Null_String_Digits_Only() =>
             ResultParsers
-                .GuidExact(guid, GuidFormat.DigitsWithHyphensWrappedInBrackets)
-                .AssertValue(System.Guid.Parse(guid));
-        }
+                .GuidExact(null, GuidFormat.DigitsOnly)
+                .AssertError(AssertionUtilities.FormatStringParserMessage<Guid>(null));
+
+        [Fact]
+        public void With_Null_String_Digits_With_Four_HexaDecimals() =>
+            ResultParsers
+                .GuidExact(null, GuidFormat.FourHexadecimalWrappedInBrackets)
+                .AssertError(AssertionUtilities.FormatStringParserMessage<Guid>(null));
+
+        [Fact]
+        public void With_Null_String_Digits_With_Hyphens() =>
+            ResultParsers
+                .GuidExact(null, GuidFormat.DigitsWithHyphens)
+                .AssertError(AssertionUtilities.FormatStringParserMessage<Guid>(null));
 
         [Fact]
         public void With_Null_String_Digits_With_Hyphens_Wrapped_In_Brackets() =>
@@ -61,11 +63,25 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Result {
                 .AssertError(AssertionUtilities.FormatStringParserMessage<Guid>(null));
 
         [Fact]
-        public void With_Invalid_String_Digits_With_Hyphens_Wrapped_In_Brackets() {
-            var guid = "foobar";
+        public void With_Null_String_Digits_With_Hyphens_Wrapped_In_Parentheses() =>
             ResultParsers
-                .GuidExact(guid, GuidFormat.DigitsWithHyphensWrappedInBrackets)
-                .AssertError(AssertionUtilities.FormatStringParserMessage<Guid>("foobar"));
+                .GuidExact(null, GuidFormat.DigitsWithHyphensWrappedInParentheses)
+                .AssertError(AssertionUtilities.FormatStringParserMessage<Guid>(null));
+
+        [Fact]
+        public void With_Valid_String_Digits_Only() {
+            var guid = System.Guid.NewGuid().ToString("N");
+            ResultParsers
+                .GuidExact(guid, GuidFormat.DigitsOnly)
+                .AssertValue(System.Guid.Parse(guid));
+        }
+
+        [Fact]
+        public void With_Valid_String_Digits_With_Four_HexaDecimals() {
+            var guid = System.Guid.NewGuid().ToString("X");
+            ResultParsers
+                .GuidExact(guid, GuidFormat.FourHexadecimalWrappedInBrackets)
+                .AssertValue(System.Guid.Parse(guid));
         }
 
         [Fact]
@@ -77,35 +93,19 @@ namespace Lemonad.ErrorHandling.Unit.ParserTests.Result {
         }
 
         [Fact]
-        public void With_Null_String_Digits_With_Hyphens() =>
+        public void With_Valid_String_Digits_With_Hyphens_Wrapped_In_Brackets() {
+            var guid = System.Guid.NewGuid().ToString("B");
             ResultParsers
-                .GuidExact(null, GuidFormat.DigitsWithHyphens)
-                .AssertError(AssertionUtilities.FormatStringParserMessage<Guid>(null));
-
-        [Fact]
-        public void With_Invalid_String_Digits_With_Hyphens() =>
-            ResultParsers
-                .GuidExact("foobar", GuidFormat.DigitsWithHyphens)
-                .AssertError(AssertionUtilities.FormatStringParserMessage<Guid>("foobar"));
-
-        [Fact]
-        public void With_Valid_String_Digits_Only() {
-            var guid = System.Guid.NewGuid().ToString("N");
-            ResultParsers
-                .GuidExact(guid, GuidFormat.DigitsOnly)
+                .GuidExact(guid, GuidFormat.DigitsWithHyphensWrappedInBrackets)
                 .AssertValue(System.Guid.Parse(guid));
         }
 
         [Fact]
-        public void With_Invalid_String_Digits_Only() =>
+        public void With_Valid_String_Digits_With_Hyphens_Wrapped_In_Parentheses() {
+            var guid = System.Guid.NewGuid().ToString("P");
             ResultParsers
-                .GuidExact("foobar", GuidFormat.DigitsOnly)
-                .AssertError(AssertionUtilities.FormatStringParserMessage<Guid>("foobar"));
-
-        [Fact]
-        public void With_Null_String_Digits_Only() =>
-            ResultParsers
-                .GuidExact(null, GuidFormat.DigitsOnly)
-                .AssertError(AssertionUtilities.FormatStringParserMessage<Guid>(null));
+                .GuidExact(guid, GuidFormat.DigitsWithHyphensWrappedInParentheses)
+                .AssertValue(System.Guid.Parse(guid));
+        }
     }
 }

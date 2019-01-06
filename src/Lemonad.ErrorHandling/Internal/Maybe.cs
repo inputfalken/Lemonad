@@ -60,10 +60,10 @@ namespace Lemonad.ErrorHandling.Internal {
                 .ToMaybe();
         }
 
-        public IMaybe<TResult> FlatMap<TResult>(Func<T, TResult?> flatSelector) where TResult : struct =>
-            flatSelector is null
-                ? throw new ArgumentNullException(nameof(flatSelector))
-                : _result.FlatMap(flatSelector, () => Unit.Default).ToMaybe();
+        public IMaybe<TResult> FlatMap<TResult>(Func<T, TResult?> selector) where TResult : struct =>
+            selector is null
+                ? throw new ArgumentNullException(nameof(selector))
+                : _result.FlatMap(selector, () => Unit.Default).ToMaybe();
 
         public IMaybe<T> IsNoneWhen(Func<T, bool> predicate) => predicate is null
             ? throw new ArgumentNullException(nameof(predicate))

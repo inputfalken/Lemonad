@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+using System;
+using System.Threading.Tasks;
 using Assertion;
 using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Xunit;
@@ -6,18 +7,74 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
     public class FlatMapTests {
         [Fact]
+        public void Passing_Null_ErrorSelector_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ErrorSelectorName,
+                () => AssertionUtilities
+                    .DivisionAsync(2, 0)
+                    .FlatMap(x => AssertionUtilities.Division(x, 0), null));
+        }
+
+        [Fact]
+        public void Passing_Null_ResultSelector_Overload_ErrorSelector_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ErrorSelectorName,
+                () => AssertionUtilities
+                    .DivisionAsync(2, 0)
+                    .FlatMap(x => AssertionUtilities.Division(x, 0), (d, d1) => d + d1, null));
+        }
+
+        [Fact]
+        public void Passing_Null_ResultSelector_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ResultSelector,
+                () => {
+                    AssertionUtilities
+                        .DivisionAsync(2, 0)
+                        .FlatMap<double, double, string>(
+                            x => AssertionUtilities.Division(x, 0),
+                            null,
+                            s => s
+                        );
+                });
+        }
+
+        [Fact]
+        public void Passing_Null_Selector_ResultSelector_Overload_Selector_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => {
+                    AssertionUtilities
+                        .DivisionAsync(2, 0)
+                        .FlatMap<double, double, string>(null, (d, d1) => d + d1, s => s);
+                });
+        }
+
+        [Fact]
+        public void Passing_Null_Selector_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => {
+                    AssertionUtilities
+                        .DivisionAsync(2, 0)
+                        .FlatMap<double, string>(null, s => s);
+                });
+        }
+
+        [Fact]
         public async Task Result_With_Error_Flatmaps_Result_with_Error__Expects_Result_With_Error() {
             var flatSelectorExecuted = false;
             var errorSelectorExecuted = false;
             await AssertionUtilities
                 .DivisionAsync(2, 0)
-                .FlatMapAsync(x => {
+                .FlatMap(x => {
                     flatSelectorExecuted = true;
-                    return AssertionUtilities.DivisionAsync(x, 0);
+                    return AssertionUtilities.Division(x, 0);
                 }, s => {
                     errorSelectorExecuted = true;
                     return s;
-                }).AssertError("Can not divide '2' with '0'.");
+                })
+                .AssertError("Can not divide '2' with '0'.");
 
             Assert.False(errorSelectorExecuted,
                 "Errorselector should not get exeuted since there is an error in the source.");
@@ -31,9 +88,9 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             var errorSelectorExecuted = false;
             await AssertionUtilities
                 .DivisionAsync(2, 0)
-                .FlatMapAsync(x => {
+                .FlatMap(x => {
                     flatSelectorExecuted = true;
-                    return AssertionUtilities.DivisionAsync(x, 2);
+                    return AssertionUtilities.Division(x, 2);
                 }, s => {
                     errorSelectorExecuted = true;
                     return s;
@@ -53,9 +110,9 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             var errorSelectorExecuted = false;
             await AssertionUtilities
                 .DivisionAsync(2, 0)
-                .FlatMapAsync(x => {
+                .FlatMap(x => {
                     flatSelectorExecuted = true;
-                    return AssertionUtilities.DivisionAsync(x, 0);
+                    return AssertionUtilities.Division(x, 0);
                 }, (y, x) => {
                     resultSelectorExectued = true;
                     return y + x;
@@ -80,9 +137,9 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             var errorSelectorExecuted = false;
             await AssertionUtilities
                 .DivisionAsync(2, 0)
-                .FlatMapAsync(x => {
+                .FlatMap(x => {
                     flatSelectorExecuted = true;
-                    return AssertionUtilities.DivisionAsync(x, 2);
+                    return AssertionUtilities.Division(x, 2);
                 }, (y, x) => {
                     resultSelectorExectued = true;
                     return y + x;
@@ -105,9 +162,9 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             var errorSelectorExecuted = false;
             await AssertionUtilities
                 .DivisionAsync(2, 2)
-                .FlatMapAsync(x => {
+                .FlatMap(x => {
                     flatSelectorExecuted = true;
-                    return AssertionUtilities.DivisionAsync(x, 0);
+                    return AssertionUtilities.Division(x, 0);
                 }, s => {
                     errorSelectorExecuted = true;
                     return s;
@@ -116,8 +173,7 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
 
             Assert.True(errorSelectorExecuted,
                 "Errorselector should not exeuted since the errror came from the result given to the flatselector.");
-            Assert.True(flatSelectorExecuted,
-                "The flatmapSelector should get exectued.");
+            Assert.True(flatSelectorExecuted, "The flatmapSelector should get exectued.");
         }
 
         [Fact]
@@ -126,9 +182,9 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             var errorSelectorExecuted = false;
             await AssertionUtilities
                 .DivisionAsync(2, 2)
-                .FlatMapAsync(x => {
+                .FlatMap(x => {
                     flatSelectorExecuted = true;
-                    return AssertionUtilities.DivisionAsync(x, 2);
+                    return AssertionUtilities.Division(x, 2);
                 }, s => {
                     errorSelectorExecuted = true;
                     return s;
@@ -143,16 +199,18 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
             var errorSelectorExecuted = false;
-            await AssertionUtilities.DivisionAsync(2, 2).FlatMapAsync(x => {
-                flatSelectorExecuted = true;
-                return AssertionUtilities.DivisionAsync(x, 0);
-            }, (y, x) => {
-                resultSelectorExectued = true;
-                return y + x;
-            }, s => {
-                errorSelectorExecuted = true;
-                return s;
-            }).AssertError("Can not divide '1' with '0'.");
+            await AssertionUtilities
+                .DivisionAsync(2, 2)
+                .FlatMap(x => {
+                    flatSelectorExecuted = true;
+                    return AssertionUtilities.Division(x, 0);
+                }, (y, x) => {
+                    resultSelectorExectued = true;
+                    return y + x;
+                }, s => {
+                    errorSelectorExecuted = true;
+                    return s;
+                }).AssertError("Can not divide '1' with '0'.");
 
             Assert.True(errorSelectorExecuted,
                 "Errorselector should get exeuted since the errror came from the result given to the flatselector.");
@@ -167,19 +225,16 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             var flatSelectorExecuted = false;
             var resultSelectorExectued = false;
             var errorSelectorExecuted = false;
-            await AssertionUtilities
-                .DivisionAsync(2, 2)
-                .FlatMapAsync(x => {
-                    flatSelectorExecuted = true;
-                    return AssertionUtilities.DivisionAsync(x, 2);
-                }, (y, x) => {
-                    resultSelectorExectued = true;
-                    return y + x;
-                }, s => {
-                    errorSelectorExecuted = true;
-                    return s;
-                })
-                .AssertValue(1.5d);
+            await AssertionUtilities.DivisionAsync(2, 2).FlatMap(x => {
+                flatSelectorExecuted = true;
+                return AssertionUtilities.Division(x, 2);
+            }, (y, x) => {
+                resultSelectorExectued = true;
+                return y + x;
+            }, s => {
+                errorSelectorExecuted = true;
+                return s;
+            }).AssertValue(1.5d);
             Assert.True(flatSelectorExecuted, "Flatmapselecotr should get executed.");
             Assert.True(resultSelectorExectued,
                 "ResultSelector should get executed since both source and the result from flatmapselector contains values.");

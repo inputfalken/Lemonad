@@ -1,10 +1,25 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Assertion;
 using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
-    public class OkWhenTests {
+    public class FilterTests {
+        [Fact]
+        public void Passing_Null_ErrorSelector_Throws() {
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.ErrorSelectorName, () => AssertionUtilities
+                .DivisionAsync(10, 0).Filter(d => true, null)
+            );
+        }
+
+        [Fact]
+        public void Passing_Null_Predicate_Throws() {
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.PredicateName, () => AssertionUtilities
+                .DivisionAsync(10, 0).Filter(null, d => "")
+            );
+        }
+
         [Fact]
         public async Task
             Result_With_Error__Expects_Predicate_Never_To_Be_Executed_And_ErrorSelector_Never_To_Be_Invoked_With_Parameter_ErrorSelector() {

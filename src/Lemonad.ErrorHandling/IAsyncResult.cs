@@ -32,7 +32,7 @@ namespace Lemonad.ErrorHandling {
         ///     An asynchronous version of
         ///     <see cref="IResult{T,TError}.Do" />.
         /// </summary>
-        IAsyncResult<T, TError> DoAsync(Func<Task> selector);
+        IAsyncResult<T, TError> DoAsync(Func<Task> action);
 
         /// <inheritdoc cref="IResult{T,TError}.DoWith" />
         IAsyncResult<T, TError> DoWith(Action<T> action);
@@ -41,7 +41,7 @@ namespace Lemonad.ErrorHandling {
         ///     An asynchronous version of
         ///     <see cref="IResult{T,TError}.DoWith" />.
         /// </summary>
-        IAsyncResult<T, TError> DoWithAsync(Func<T, Task> selector);
+        IAsyncResult<T, TError> DoWithAsync(Func<T, Task> action);
 
         /// <inheritdoc cref="IResult{T,TError}.DoWithError" />
         IAsyncResult<T, TError> DoWithError(Action<TError> action);
@@ -69,7 +69,7 @@ namespace Lemonad.ErrorHandling {
         ///     Flatten a <see cref="Nullable{T}" />
         ///     And maps <typeparamref name="T" /> to <typeparamref name="TResult" />.
         /// </summary>
-        /// <param name="flatMapSelector">
+        /// <param name="selector">
         ///     A function who expects a <see cref="Nullable{T}" /> as an return type.
         /// </param>
         /// <param name="errorSelector">
@@ -79,16 +79,21 @@ namespace Lemonad.ErrorHandling {
         ///     The type of <see cref="Nullable{T}" />.
         /// </typeparam>
         IAsyncResult<TResult, TError> FlatMap<TResult>(
-            Func<T, TResult?> flatMapSelector,
+            Func<T, TResult?> selector,
             Func<TError> errorSelector
         ) where TResult : struct;
+
+        IAsyncResult<TResult, TError> FlatMap<TResult, TErrorResult>(
+            Func<T, IResult<TResult, TErrorResult>> selector,
+            Func<TErrorResult, TError> errorSelector
+        );
 
         /// <summary>
         ///     Flatten a <see cref="Nullable{T}" />
         ///     And maps <typeparamref name="T" /> together with <typeparamref name="TSelector" /> to
         ///     <typeparamref name="TResult" />.
         /// </summary>
-        /// <param name="flatMapSelector">
+        /// <param name="selector">
         ///     A function who expects a <see cref="Nullable{T}" /> as an return type.
         /// </param>
         /// <param name="resultSelector">
@@ -99,31 +104,37 @@ namespace Lemonad.ErrorHandling {
         ///     The error selector if <see cref="Nullable{T}" /> is null.
         /// </param>
         /// <typeparam name="TSelector">
-        ///     The value retrieved from the the <see cref="Result{T,TError}" /> given by the <paramref name="flatMapSelector" />.
+        ///     The value retrieved from the the <see cref="Result{T,TError}" /> given by the <paramref name="selector" />.
         /// </typeparam>
         /// <typeparam name="TResult">
         ///     The return type of the function  <paramref name="resultSelector" />.
         /// </typeparam>
         IAsyncResult<TResult, TError> FlatMap<TSelector, TResult>(
-            Func<T, TSelector?> flatMapSelector,
+            Func<T, TSelector?> selector,
             Func<T, TSelector, TResult> resultSelector,
             Func<TError> errorSelector
         ) where TSelector : struct;
 
         IAsyncResult<TResult, TError> FlatMap<TResult>(
-            Func<T, IResult<TResult, TError>> flatSelector
+            Func<T, IResult<TResult, TError>> selector
         );
 
         IAsyncResult<TResult, TError> FlatMap<TSelector, TResult>(
-            Func<T, IResult<TSelector, TError>> flatSelector,
+            Func<T, IResult<TSelector, TError>> selector,
             Func<T, TSelector, TResult> resultSelector
+        );
+
+        IAsyncResult<TResult, TError> FlatMap<TFlatMap, TResult, TErrorResult>(
+            Func<T, IResult<TFlatMap, TErrorResult>> selector,
+            Func<T, TFlatMap, TResult> resultSelector,
+            Func<TErrorResult, TError> errorSelector
         );
 
         /// <summary>
         ///     Flatten a <see cref="Nullable{T}" />  wrapped in a <see cref="Task{TResult}" />
         ///     And maps <typeparamref name="T" /> to <typeparamref name="TResult" />.
         /// </summary>
-        /// <param name="flatMapSelector">
+        /// <param name="selector">
         ///     A function who expects a <see cref="Nullable{T}" /> as an return type.
         /// </param>
         /// <param name="errorSelector">
@@ -133,7 +144,7 @@ namespace Lemonad.ErrorHandling {
         ///     The type of <see cref="Nullable{T}" />.
         /// </typeparam>
         IAsyncResult<TResult, TError> FlatMapAsync<TResult>(
-            Func<T, Task<TResult?>> flatMapSelector,
+            Func<T, Task<TResult?>> selector,
             Func<TError> errorSelector
         ) where TResult : struct;
 
@@ -142,7 +153,7 @@ namespace Lemonad.ErrorHandling {
         ///     And maps <typeparamref name="T" /> together with <typeparamref name="TSelector" /> to
         ///     <typeparamref name="TResult" />.
         /// </summary>
-        /// <param name="flatMapSelector">
+        /// <param name="selector">
         ///     A function who expects a <see cref="Nullable{T}" /> as an return type.
         /// </param>
         /// <param name="resultSelector">
@@ -153,13 +164,13 @@ namespace Lemonad.ErrorHandling {
         ///     The error selector if <see cref="Nullable{T}" /> is null.
         /// </param>
         /// <typeparam name="TSelector">
-        ///     The value retrieved from the the <see cref="Result{T,TError}" /> given by the <paramref name="flatMapSelector" />.
+        ///     The value retrieved from the the <see cref="Result{T,TError}" /> given by the <paramref name="selector" />.
         /// </typeparam>
         /// <typeparam name="TResult">
         ///     The return type of the function  <paramref name="resultSelector" />.
         /// </typeparam>
         IAsyncResult<TResult, TError> FlatMapAsync<TSelector, TResult>(
-            Func<T, Task<TSelector?>> flatMapSelector,
+            Func<T, Task<TSelector?>> selector,
             Func<T, TSelector, TResult> resultSelector,
             Func<TError> errorSelector
         ) where TSelector : struct;
@@ -170,7 +181,7 @@ namespace Lemonad.ErrorHandling {
         ///     who expects an
         ///     <see cref="IAsyncResult{T,TError}" /> instead of <see cref="IResult{T,TError}" />.
         /// </summary>
-        IAsyncResult<TResult, TError> FlatMapAsync<TResult>(Func<T, IAsyncResult<TResult, TError>> flatSelector);
+        IAsyncResult<TResult, TError> FlatMapAsync<TResult>(Func<T, IAsyncResult<TResult, TError>> selector);
 
         /// <summary>
         ///     An asynchronous version of
@@ -179,7 +190,7 @@ namespace Lemonad.ErrorHandling {
         ///     who expects an <see cref="IAsyncResult{T,TError}" /> instead of <see cref="IResult{T,TError}" />.
         /// </summary>
         IAsyncResult<TResult, TError> FlatMapAsync<TSelector, TResult>(
-            Func<T, IAsyncResult<TSelector, TError>> flatSelector,
+            Func<T, IAsyncResult<TSelector, TError>> selector,
             Func<T, TSelector, TResult> resultSelector
         );
 
@@ -190,7 +201,7 @@ namespace Lemonad.ErrorHandling {
         ///     who expects an <see cref="IAsyncResult{T,TError}" /> instead of <see cref="IResult{T,TError}" />.
         /// </summary>
         IAsyncResult<TResult, TError> FlatMapAsync<TResult, TErrorResult>(
-            Func<T, IAsyncResult<TResult, TErrorResult>> flatMapSelector,
+            Func<T, IAsyncResult<TResult, TErrorResult>> selector,
             Func<TErrorResult, TError> errorSelector
         );
 
@@ -201,7 +212,7 @@ namespace Lemonad.ErrorHandling {
         ///     who expects an <see cref="IAsyncResult{T,TError}" /> instead of <see cref="IResult{T,TError}" />.
         /// </summary>
         IAsyncResult<TResult, TError> FlatMapAsync<TFlatMap, TResult, TErrorResult>(
-            Func<T, IAsyncResult<TFlatMap, TErrorResult>> flatMapSelector,
+            Func<T, IAsyncResult<TFlatMap, TErrorResult>> selector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TErrorResult, TError> errorSelector
         );
@@ -246,12 +257,12 @@ namespace Lemonad.ErrorHandling {
         IAsyncResult<TResult, TResult> FullCast<TResult>();
 
         IAsyncResult<TResult, TErrorResult> FullFlatMap<TResult, TErrorResult>(
-            Func<T, IResult<TResult, TErrorResult>> flatMapSelector,
+            Func<T, IResult<TResult, TErrorResult>> selector,
             Func<TError, TErrorResult> errorSelector
         );
 
         IAsyncResult<TResult, TErrorResult> FullFlatMap<TFlatMap, TResult, TErrorResult>(
-            Func<T, IResult<TFlatMap, TErrorResult>> flatMapSelector,
+            Func<T, IResult<TFlatMap, TErrorResult>> selector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector
         );
@@ -263,7 +274,7 @@ namespace Lemonad.ErrorHandling {
         ///     who expects an <see cref="IAsyncResult{T,TError}" /> instead of <see cref="IResult{T,TError}" />.
         /// </summary>
         IAsyncResult<TResult, TErrorResult> FullFlatMapAsync<TFlatMap, TResult, TErrorResult>(
-            Func<T, IAsyncResult<TFlatMap, TErrorResult>> flatMapSelector,
+            Func<T, IAsyncResult<TFlatMap, TErrorResult>> selector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector
         );
@@ -275,7 +286,7 @@ namespace Lemonad.ErrorHandling {
         ///     who expects an <see cref="IAsyncResult{T,TError}" /> instead of <see cref="IResult{T,TError}" />.
         /// </summary>
         IAsyncResult<TResult, TErrorResult> FullFlatMapAsync<TResult, TErrorResult>(
-            Func<T, IAsyncResult<TResult, TErrorResult>> flatMapSelector,
+            Func<T, IAsyncResult<TResult, TErrorResult>> selector,
             Func<TError, TErrorResult> errorSelector
         );
 
@@ -428,7 +439,7 @@ namespace Lemonad.ErrorHandling {
 
         IAsyncResult<TResult, TError> Zip<TOther, TResult>(
             IResult<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector
+            Func<T, TOther, TResult> selector
         );
 
         /// <summary>
@@ -438,7 +449,7 @@ namespace Lemonad.ErrorHandling {
         /// </summary>
         IAsyncResult<TResult, TError> ZipAsync<TOther, TResult>(
             IAsyncResult<TOther, TError> other,
-            Func<T, TOther, TResult> resultSelector
+            Func<T, TOther, TResult> selector
         );
     }
 }

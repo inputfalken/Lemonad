@@ -12,7 +12,7 @@ namespace Lemonad.ErrorHandling.Extensions.Task {
             if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
 
             return AsyncResult<T, TError>.Factory(
-                source.Map(x => x.ToResult<T, TError>(predicate, errorSelector).Either));
+                source.Map(x => x.ToResult(predicate, errorSelector).Either));
         }
 
         public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(this Task<T?> source,
@@ -20,7 +20,7 @@ namespace Lemonad.ErrorHandling.Extensions.Task {
             where T : struct {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
-            return AsyncResult<T, TError>.Factory(source.Map(x => x.ToResult<T, TError>(errorSelector).Either));
+            return AsyncResult<T, TError>.Factory(source.Map(x => x.ToResult(errorSelector).Either));
         }
     }
 }

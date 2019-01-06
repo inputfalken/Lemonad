@@ -1,10 +1,21 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Assertion;
 using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
     public class MapTests {
+        [Fact]
+        public void Passing_Null_Selector_Throws() {
+            Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => AssertionUtilities
+                    .DivisionAsync(2, 0)
+                    .Map<string>(null)
+            );
+        }
+
         [Fact]
         public async Task Result_With_Error_Maps__Expects_Selector_Never_Be_Executed() {
             var selectorExectued = false;
