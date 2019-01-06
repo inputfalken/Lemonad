@@ -1,5 +1,7 @@
 using System;
+using System.Threading.Tasks;
 using Assertion;
+using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
@@ -23,9 +25,9 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
         }
 
         [Fact]
-        public void Result_With_Error_Using_Invalid_Cast_Expects_Cast_Exception() {
+        public Task Result_With_Error_Using_Invalid_Cast_Expects_Cast_Exception() {
             const int identity = 1;
-            Assert.Throws<InvalidCastException>(() => AssertionUtilities.GetProgramAsync(identity).CastError<string>());
+            return Assert.ThrowsAsync<InvalidCastException>(async () => await AssertionUtilities.GetProgramAsync(identity).CastError<string>());
         }
 
         [Fact]
