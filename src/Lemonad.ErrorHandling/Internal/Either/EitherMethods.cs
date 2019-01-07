@@ -615,25 +615,44 @@ namespace Lemonad.ErrorHandling.Internal.Either {
         ) => Match(await taskResult.ConfigureAwait(false), selector, errorSelector);
 
         internal static IEither<T, IReadOnlyList<TError>> Multiple<T, TError>(
-            IEither<T, TError> either,
-            IEnumerable<IEither<T, TError>> validations
+            IEither<T, TError> initial,
+            IEither<T, TError> first,
+            IEither<T, TError> second,
+            IEnumerable<IEither<T, TError>> additional
         ) {
-            var all = validations.ToArray();
-            if (all.Length == 0)
-                throw new ArgumentException("An element must be provided for the array.", nameof(validations));
+            List<TError> list = null;
+            if (first.HasError) list = new List<TError> {first.Error};
+            if (second.HasError) {
+                if (list != null) list.Add(second.Error);
+                else list = new List<TError> {second.Error};
+            }
 
-            var errors = all.Where(x => x.HasError).Select(x => x.Error).ToArray();
+            var errors = additional
+                .Where(x => x.HasError)
+                .Select(x => x.Error);
 
-            return errors.Any()
-                ? CreateError<T, IReadOnlyList<TError>>(errors)
-                : CreateValue<T, IReadOnlyList<TError>>(either.Value);
+            if (list != null) {
+                list.AddRange(errors);
+                return list.Any()
+                    ? CreateError<T, IReadOnlyList<TError>>(list)
+                    : CreateValue<T, IReadOnlyList<TError>>(initial.Value);
+            }
+
+            var array = errors.ToArray();
+            return array.Length > 0
+                ? CreateError<T, IReadOnlyList<TError>>(array)
+                : CreateValue<T, IReadOnlyList<TError>>(initial.Value);
         }
 
         internal static async Task<IEither<T, IReadOnlyList<TError>>> MultipleAsync<T, TError>(
             Task<IEither<T, TError>> source,
+            Task<IEither<T, TError>> first,
+            Task<IEither<T, TError>> second,
             IEnumerable<Task<IEither<T, TError>>> validations
         ) => Multiple(
             await source.ConfigureAwait(false),
+            await first.ConfigureAwait(false),
+            await second.ConfigureAwait(false),
             await Task.WhenAll(validations).ConfigureAwait(false)
         );
 

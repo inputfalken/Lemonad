@@ -9,26 +9,38 @@ namespace Lemonad.ErrorHandling.Extensions.Result {
         /// <summary>
         ///     Executes each function and saves all potential errors to a list which will be the <typeparamref name="TError" />.
         /// </summary>
-        /// <param name="source"></param>
-        /// <param name="validations">
+        /// <param name="source">
+        /// The <see cref="IResult{T,TError}"/> to be sent into each function.
+        /// </param>
+        /// <param name="first">
+        /// The first function check.
+        /// </param>
+        /// <param name="second">
+        /// The second function check.
+        /// </param>
+        /// <param name="additional">
         ///     A <see cref="IReadOnlyList{T}" /> containing <typeparamref name="TError" />.
         /// </param>
         public static IResult<T, IReadOnlyList<TError>> Multiple<T, TError>(
             this IResult<T, TError> source,
-            params Func<IResult<T, TError>, IResult<T, TError>>[] validations
+            Func<IResult<T, TError>, IResult<T, TError>> first,
+            Func<IResult<T, TError>, IResult<T, TError>> second,
+            params Func<IResult<T, TError>, IResult<T, TError>>[] additional
         ) {
-            //TODO add an argument with IResult<T, TError>, IResult<T, TError>, in order to force atleast one argument to be provided except the source parameter.
             if (source is null) throw new ArgumentNullException(nameof(source));
-            if (validations is null) throw new ArgumentNullException(nameof(validations));
-            var either = EitherMethods.Multiple(
-                source.Either,
-                validations.Select(x =>
-                    x.Compose(y => y.Either)(source)
+            if (first is null) throw new ArgumentNullException(nameof(first));
+            if (second is null) throw new ArgumentNullException(nameof(second));
+            if (additional is null) throw new ArgumentNullException(nameof(additional));
+
+            return Result<T, IReadOnlyList<TError>>.Factory(
+                EitherMethods.Multiple(
+                    source.Either,
+                    first.Compose(x => x.Either)(source),
+                    second.Compose(x => x.Either)(source),
+                    additional.Select(x => x.Compose(y => y.Either)(source)
+                    )
                 )
             );
-            return either.HasValue
-                ? ErrorHandling.Result.Value<T, IReadOnlyList<TError>>(either.Value)
-                : ErrorHandling.Result.Error<T, IReadOnlyList<TError>>(either.Error);
         }
     }
 }

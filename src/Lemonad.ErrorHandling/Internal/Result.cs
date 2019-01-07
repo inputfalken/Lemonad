@@ -594,9 +594,6 @@ namespace Lemonad.ErrorHandling.Internal {
                 false
             );
 
-        public override string ToString() =>
-            $"{(Either.HasValue ? "Ok" : "Error")} ==> {typeof(Result<T, TError>).ToHumanString()}{StringFunctions.PrettyTypeString(Either.HasValue ? (object) Either.Value : Either.Error)}";
-
         internal static IResult<T, TError> ValueFactory(in T element)
             => new Result<T, TError>(
                 in element,
@@ -604,5 +601,10 @@ namespace Lemonad.ErrorHandling.Internal {
                 false,
                 true
             );
+
+        internal static IResult<T, TError> Factory(IEither<T, TError> either) => new Result<T, TError>(either);
+
+        public override string ToString() =>
+            $"{(Either.HasValue ? "Ok" : "Error")} ==> {typeof(Result<T, TError>).ToHumanString()}{StringFunctions.PrettyTypeString(Either.HasValue ? (object) Either.Value : Either.Error)}";
     }
 }
