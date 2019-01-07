@@ -9,12 +9,18 @@ namespace Lemonad.ErrorHandling.Extensions.Result {
         /// <summary>
         ///     Executes each function and saves all potential errors to a list which will be the <typeparamref name="TError" />.
         /// </summary>
-        /// <param name="source"></param>
-        /// <param name="second"></param>
+        /// <param name="source">
+        /// The <see cref="IResult{T,TError}"/> to be sent into each function.
+        /// </param>
+        /// <param name="first">
+        /// The first function check.
+        /// </param>
+        /// <param name="second">
+        /// The second function check.
+        /// </param>
         /// <param name="additional">
         ///     A <see cref="IReadOnlyList{T}" /> containing <typeparamref name="TError" />.
         /// </param>
-        /// <param name="first"></param>
         public static IResult<T, IReadOnlyList<TError>> Multiple<T, TError>(
             this IResult<T, TError> source,
             Func<IResult<T, TError>, IResult<T, TError>> first,
@@ -26,16 +32,15 @@ namespace Lemonad.ErrorHandling.Extensions.Result {
             if (second is null) throw new ArgumentNullException(nameof(second));
             if (additional is null) throw new ArgumentNullException(nameof(additional));
 
-            var either = EitherMethods.Multiple(
-                initial: source.Either,
-                first: first.Compose(x => x.Either)(source),
-                second: second.Compose(x => x.Either)(source),
-                additional: additional.Select(x => x.Compose(y => y.Either)(source)
+            return Result<T, IReadOnlyList<TError>>.Factory(
+                EitherMethods.Multiple(
+                    initial: source.Either,
+                    first: first.Compose(x => x.Either)(source),
+                    second: second.Compose(x => x.Either)(source),
+                    additional: additional.Select(x => x.Compose(y => y.Either)(source)
+                    )
                 )
             );
-            return either.HasValue
-                ? ErrorHandling.Result.Value<T, IReadOnlyList<TError>>(either.Value)
-                : ErrorHandling.Result.Error<T, IReadOnlyList<TError>>(either.Error);
         }
     }
 }
