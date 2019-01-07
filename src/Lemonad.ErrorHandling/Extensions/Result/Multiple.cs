@@ -10,20 +10,27 @@ namespace Lemonad.ErrorHandling.Extensions.Result {
         ///     Executes each function and saves all potential errors to a list which will be the <typeparamref name="TError" />.
         /// </summary>
         /// <param name="source"></param>
-        /// <param name="validations">
+        /// <param name="second"></param>
+        /// <param name="additional">
         ///     A <see cref="IReadOnlyList{T}" /> containing <typeparamref name="TError" />.
         /// </param>
+        /// <param name="first"></param>
         public static IResult<T, IReadOnlyList<TError>> Multiple<T, TError>(
             this IResult<T, TError> source,
-            params Func<IResult<T, TError>, IResult<T, TError>>[] validations
+            Func<IResult<T, TError>, IResult<T, TError>> first,
+            Func<IResult<T, TError>, IResult<T, TError>> second,
+            params Func<IResult<T, TError>, IResult<T, TError>>[] additional
         ) {
-            //TODO add an argument with IResult<T, TError>, IResult<T, TError>, in order to force atleast one argument to be provided except the source parameter.
             if (source is null) throw new ArgumentNullException(nameof(source));
-            if (validations is null) throw new ArgumentNullException(nameof(validations));
+            if (first is null) throw new ArgumentNullException(nameof(first));
+            if (second is null) throw new ArgumentNullException(nameof(second));
+            if (additional is null) throw new ArgumentNullException(nameof(additional));
+
             var either = EitherMethods.Multiple(
-                source.Either,
-                validations.Select(x =>
-                    x.Compose(y => y.Either)(source)
+                initial: source.Either,
+                first: first.Compose(x => x.Either)(source),
+                second: second.Compose(x => x.Either)(source),
+                additional: additional.Select(x => x.Compose(y => y.Either)(source)
                 )
             );
             return either.HasValue
