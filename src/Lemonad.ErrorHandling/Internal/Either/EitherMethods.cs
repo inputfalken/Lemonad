@@ -570,7 +570,6 @@ namespace Lemonad.ErrorHandling.Internal.Either {
         internal static IEither<T, TErrorResult> MapError<T, TError, TErrorResult>(
             IEither<T, TError> either,
             Func<TError, TErrorResult> selector) {
-            if (selector is null) throw new ArgumentNullException(nameof(selector));
             return either.HasError
                 ? CreateError<T, TErrorResult>(selector(either.Error))
                 : CreateValue<T, TErrorResult>(either.Value);
