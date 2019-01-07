@@ -639,7 +639,7 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             }
 
             var array = errors.ToArray();
-            return array.Any()
+            return array.Length > 0
                 ? CreateError<T, IReadOnlyList<TError>>(array)
                 : CreateValue<T, IReadOnlyList<TError>>(initial.Value);
         }

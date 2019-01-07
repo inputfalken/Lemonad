@@ -34,10 +34,10 @@ namespace Lemonad.ErrorHandling.Extensions.Result {
 
             return Result<T, IReadOnlyList<TError>>.Factory(
                 EitherMethods.Multiple(
-                    initial: source.Either,
-                    first: first.Compose(x => x.Either)(source),
-                    second: second.Compose(x => x.Either)(source),
-                    additional: additional.Select(x => x.Compose(y => y.Either)(source)
+                    source.Either,
+                    first.Compose(x => x.Either)(source),
+                    second.Compose(x => x.Either)(source),
+                    additional.Select(x => x.Compose(y => y.Either)(source)
                     )
                 )
             );
