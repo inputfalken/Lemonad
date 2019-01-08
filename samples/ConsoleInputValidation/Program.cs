@@ -6,12 +6,6 @@ using Lemonad.ErrorHandling.Extensions.Result;
 
 namespace ConsoleInputValidation {
     internal static class Program {
-        private static IResult<int, string> Divide(int left, int right) {
-            return (left: left, right: right)
-                .ToResult(x => x.right == 0, x => $"Cannot divide '{x.left}' with '{x.right}'.")
-                .Map(x => x.left / x.right);
-        }
-
         private static int Main(string[] args) {
             Console.WriteLine("Please supply your name.");
 
