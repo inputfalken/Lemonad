@@ -35,17 +35,14 @@ than throwing an exception using a similiar message.
 
 ```csharp
 
-// NOTE The type specifikation of the lambda parameters are not necessary.
-// They are there to make the example clearer.
 private static IResult<int, string> Divide(int left, int right) {
-    return (left: left, right: right)
-        .ToResult(((int left, int right) x) => x.right == 0, ((int left, int right) x) => $"Can not divide '{x.left}' with '{x.right}'.")
-        .Map(((int left, int right) x) => x.left / x.right);
+    return left != 0
+        ? Result.Value<int, string>(left / right)
+        : Result.Error<int, string>($"Can not divide '{left}' with '{right}'.");
 }
 
 
-
-List<IResult<int, string>> eithers = new List<IResult<int, string>> {
+var results = new List<IResult<int, string>> {
   Divide(4, 2),
   Divide(3, 0),
   Divide(3, 3),
@@ -56,8 +53,8 @@ List<IResult<int, string>> eithers = new List<IResult<int, string>> {
   Divide(8, 0),
   Divide(10, 2)
 };
-List<int> successFulDivisions = eithers.Values().ToList();
-IEnumerable<string> failedDivisions = eithers.Errors();
+List<int> successFulDivisions = results.Values().ToList();
+IEnumerable<string> failedDivisions = results.Errors();
 
 // Prints all the numbers where the 'y' parameter from the function is not 0.
 // 2
