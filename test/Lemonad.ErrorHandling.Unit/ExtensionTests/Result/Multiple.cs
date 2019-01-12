@@ -46,6 +46,78 @@ namespace Lemonad.ErrorHandling.Unit.ExtensionTests.Result {
             );
 
         [Fact]
+        public void With_Error_First_True()
+            => AssertionUtilities
+                .Division(10, 0)
+                .Multiple(
+                    x => x.Filter(y => true, d => "Should never happen!"),
+                    x => x.Filter(y => false, d => "Should happen!")
+                ).AssertError(new[] {"Can not divide '10' with '0'."});
+
+        [Fact]
+        public void With_Error_First_False()
+            => AssertionUtilities
+                .Division(10, 0)
+                .Multiple(
+                    x => x.Filter(y => false, d => "Should happen!"),
+                    x => x.Filter(y => true, d => "Should never happen!")
+                ).AssertError(new[] {"Can not divide '10' with '0'."});
+
+        [Fact]
+        public void With_Error_First_And_Second_False()
+            => AssertionUtilities
+                .Division(10, 0)
+                .Multiple(
+                    x => x.Filter(y => false, d => "Should happen!"),
+                    x => x.Filter(y => false, d => "Should happen2!")
+                ).AssertError(new[] {"Can not divide '10' with '0'."});
+
+        [Fact]
+        public void With_Error_First_And_Second_True()
+            => AssertionUtilities
+                .Division(10, 0)
+                .Multiple(
+                    x => x.Filter(y => true, d => "Should never happen!"),
+                    x => x.Filter(y => true, d => "Should never happen!")
+                ).AssertError(new[] {"Can not divide '10' with '0'."});
+
+        [Fact]
+        public void With_Error_First_And_Second_True_Additional_True()
+            => AssertionUtilities
+                .Division(10, 0)
+                .Multiple(
+                    x => x.Filter(y => true, d => "Should never happen!"),
+                    x => x.Filter(y => true, d => "Should never happen!"),
+                    x => x.Filter(y => true, d => "Should never happen!"),
+                    x => x.Filter(y => true, d => "Should never happen!"),
+                    x => x.Filter(y => true, d => "Should never happen!")
+                ).AssertError(new[] {"Can not divide '10' with '0'."});
+
+        [Fact]
+        public void With_Error_First_And_Second_True_Additional_False()
+            => AssertionUtilities
+                .Division(10, 0)
+                .Multiple(
+                    x => x.Filter(y => true, d => "Should never happen!"),
+                    x => x.Filter(y => true, d => "Should never happen!"),
+                    x => x.Filter(y => false, d => "Should happen1!"),
+                    x => x.Filter(y => false, d => "Should happen2!"),
+                    x => x.Filter(y => false, d => "Should happen3!")
+                ).AssertError(new[] {"Can not divide '10' with '0'."});
+
+        [Fact]
+        public void With_Error_First_And_Second_True_Mixed_True_And_False()
+            => AssertionUtilities
+                .Division(10, 0)
+                .Multiple(
+                    x => x.Filter(y => true, d => "Should never happen!"),
+                    x => x.Filter(y => true, d => "Should never happen!"),
+                    x => x.Filter(y => false, d => "Should happen1!"),
+                    x => x.Filter(y => true, d => "Should happen2!"),
+                    x => x.Filter(y => false, d => "Should happen3!")
+                ).AssertError(new[] {"Can not divide '10' with '0'."});
+
+        [Fact]
         public void First_True()
             => AssertionUtilities
                 .Division(10, 2)

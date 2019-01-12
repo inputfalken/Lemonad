@@ -620,12 +620,15 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             IEither<T, TError> second,
             IEnumerable<IEither<T, TError>> additional
         ) {
+            if (initial.HasError) return CreateError<T, IReadOnlyList<TError>>(new[] {initial.Error});
+
             List<TError> list = null;
             if (first.HasError) list = new List<TError> {first.Error};
-            if (second.HasError) {
-                if (list != null) list.Add(second.Error);
-                else list = new List<TError> {second.Error};
-            }
+            if (second.HasError)
+                if (list == null)
+                    list = new List<TError> {second.Error};
+                else
+                    list.Add(second.Error);
 
             var errors = additional
                 .Where(x => x.HasError)
@@ -633,7 +636,7 @@ namespace Lemonad.ErrorHandling.Internal.Either {
 
             if (list != null) {
                 list.AddRange(errors);
-                return list.Any()
+                return list.Count > 0
                     ? CreateError<T, IReadOnlyList<TError>>(list)
                     : CreateValue<T, IReadOnlyList<TError>>(initial.Value);
             }
