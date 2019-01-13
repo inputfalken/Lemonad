@@ -3,7 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 
 namespace Lemonad.ErrorHandling.Extensions.Result.Queryable {
-    public static partial class ResultQueryable {
+    public static partial class Index {
         /// <summary>
         ///     Returns the only element of a sequence, or a <see cref="SingleOrErrorCase.NoElement" /> if the sequence is empty
         ///     and returns <see cref="SingleOrErrorCase.ManyElements" /> if more than one element was found.

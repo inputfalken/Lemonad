@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling.Extensions.Result.Queryable {
-    public static partial class ResultQueryable {
+    public static partial class Index {
         /// <summary>
         ///     Returns the first element of the sequence or a <typeparamref name="TError" /> if no such element is found.
         /// </summary>
