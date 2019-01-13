@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Lemonad.ErrorHandling.Extensions.Maybe.Enumerable {
-    public static partial class MaybeEnumerable {
+    public static partial class Index {
         /// <summary>
         ///     Works just like
         ///     <see cref="System.Linq.Enumerable.FirstOrDefault{TSource}(System.Collections.Generic.IEnumerable{TSource})" />

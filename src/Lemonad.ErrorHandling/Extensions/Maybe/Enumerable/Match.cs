@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Lemonad.ErrorHandling.Extensions.Maybe.Enumerable {
-    public static partial class MaybeEnumerable {
+    public static partial class Index {
         /// <summary>
         ///     Executes <see cref="IMaybe{T}.Match" /> for each element in the sequence.
         /// </summary>

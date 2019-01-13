@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
-    public static partial class ResultEnumerable {
+    public static partial class Index {
         /// <summary>
         ///     Returns the only element of a sequence, or a <see cref="SingleOrErrorCase.NoElement" /> if the sequence is empty
         ///     and returns <see cref="SingleOrErrorCase.ManyElements" /> if more than one element was found.

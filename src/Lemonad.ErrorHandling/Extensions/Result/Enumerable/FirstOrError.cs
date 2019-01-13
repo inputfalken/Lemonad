@@ -4,7 +4,7 @@ using System.Linq;
 using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
-    public static partial class ResultEnumerable {
+    public static partial class Index {
         /// <summary>
         ///     Returns the first element of the sequence or a <typeparamref name="TError" /> if no such element is found.
         /// </summary>

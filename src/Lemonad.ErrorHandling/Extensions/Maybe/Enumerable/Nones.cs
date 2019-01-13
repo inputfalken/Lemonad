@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Lemonad.ErrorHandling.Extensions.Maybe.Enumerable {
-    public static partial class MaybeEnumerable {
+    public static partial class Index {
         /// <summary>
         ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="IMaybe{T}" /> into an <see cref="IEnumerable{T}" /> of
         ///     <typeparamref name="TResult" /> for each element which do not have a value.

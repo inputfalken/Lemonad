@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Lemonad.ErrorHandling.Extensions.Result.Enumerable {
-    public partial class ResultEnumerable {
+    public partial class Index {
         /// <summary>
         ///     Converts an <see cref="IEnumerable{T}" /> of <see cref="IResult{T,TError}" /> to an <see cref="IEnumerable{T}" />
         ///     of
