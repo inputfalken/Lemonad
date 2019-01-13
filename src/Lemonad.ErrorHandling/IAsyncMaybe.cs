@@ -28,18 +28,52 @@ namespace Lemonad.ErrorHandling {
         /// </example>
         T Value { get; }
 
+        /// <summary>
+        /// An asynchronous version of <see cref="IMaybe{T}.Do"/>.
+        /// </summary>
         IAsyncMaybe<T> Do(Action action);
+
         IAsyncMaybe<T> DoAsync(Func<Task> action);
+
+        /// <summary>
+        /// An asynchronous version of <see cref="IMaybe{T}.DoWith"/>.
+        /// </summary>
         IAsyncMaybe<T> DoWith(Action<T> action);
+
         IAsyncMaybe<T> DoWithAsync(Func<T, Task> someAction);
+
+        /// <summary>
+        /// An asynchronous version of <see cref="IMaybe{T}.Filter"/>.
+        /// </summary>
         IAsyncMaybe<T> Filter(Func<T, bool> predicate);
+
+        /// <summary>
+        /// An asynchronous version of <see cref="IMaybe{T}.Flatten{TResult}"/>.
+        /// </summary>
         IAsyncMaybe<T> Flatten<TResult>(Func<T, IMaybe<TResult>> selector);
+
         IAsyncMaybe<T> FlattenAsync<TResult>(Func<T, IAsyncMaybe<TResult>> selector);
+
+        /// <summary>
+        /// An asynchronous version of <see cref="IMaybe{T}.IsNoneWhen"/>.
+        /// </summary>
         IAsyncMaybe<T> IsNoneWhen(Func<T, bool> predicate);
+
+        /// <summary>
+        /// An asynchronous version of <see cref="IMaybe{T}.FlatMap{TResult}(Func{T, IMaybe{TResult}})"/>.
+        /// </summary>
         IAsyncMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> selector);
+
+        /// <summary>
+        /// An asynchronous version of <see cref="IMaybe{T}.FlatMap{TResult}(Func{T, Nullable{TResult}})"/>.
+        /// </summary>
         IAsyncMaybe<TResult> FlatMap<TResult>(Func<T, TResult?> selector) where TResult : struct;
+
         IAsyncMaybe<TResult> FlatMapAsync<TResult>(Func<T, Task<TResult?>> selector) where TResult : struct;
 
+        /// <summary>
+        /// An asynchronous version of <see cref="IMaybe{T}.FlatMap{TFlatMap, TResult}(Func{T, Nullable{TFlatMap}}, Func{T,TFlatMap, TResult})"/>.
+        /// </summary>
         IAsyncMaybe<TResult> FlatMap<TSelector, TResult>(
             Func<T, TSelector?> selector,
             Func<T, TSelector, TResult> resultSelector
@@ -60,6 +94,9 @@ namespace Lemonad.ErrorHandling {
             Func<T, TFlatMap, TResult> resultSelector
         );
 
+        /// <summary>
+        /// An asynchronous version of <see cref="IMaybe{T}.FlatMap{TFlatMap, TResult}(Func{T, IMaybe{TFlatMap}}, Func{T,TFlatMap, TResult})"/>.
+        /// </summary>
         IAsyncMaybe<TResult> FlatMap<TFlatMap, TResult>(
             Func<T, IMaybe<TFlatMap>> flatMapSelector,
             Func<T, TFlatMap, TResult> resultSelector
