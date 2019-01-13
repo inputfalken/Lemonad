@@ -43,13 +43,13 @@ internal static class Program {
               // The failed validation case
               const string message = "Error: ";
               switch (x) {
-                  case ExitCode.NullOrEmpty:
+                  case ExitCode.IsNullOrEmpty:
                       Console.WriteLine(message + "Input cannot be null or empty string.");
                       break;
                   case ExitCode.IsUpperCase:
                       Console.WriteLine(message + "Input cannot contain upper cased letters.");
                       break;
-                  case ExitCode.Symbol:
+                  case ExitCode.IsSymbol:
                       Console.WriteLine(message + "Input cannot contain symbols.");
                       break;
                   default:
@@ -59,19 +59,20 @@ internal static class Program {
               return (int) x;
           });
   }
-
+  // Validate the input.
   private static IResult<string, ExitCode> Validate(string input) {
-      return Result.Value<string, ExitCode>(input)
-          .Filter(string.IsNullOrWhiteSpace, (string _) => ExitCode.NullOrEmpty)
-          .Map((string x) => x.Trim())
-          .IsErrorWhen((string s) => s.Any(char.IsUpper), s => ExitCode.IsUpperCase)
-          .IsErrorWhen((string x) => x.Any(char.IsSymbol), s => ExitCode.Symbol);
+      // These expression will be executed as long as the input is considered ok.
+      return Result.Value<string, ExitCode>(input) // Initialize an IResult<T, TError>
+          .IsErrorWhen(string.IsNullOrWhiteSpace, (string _) => ExitCode.IsNullOrEmpty) // Verify that input is not null or white space, return an error as exitcode otherwise.
+          .Map((string x) => x.Trim()) // Trim the potential input
+          .IsErrorWhen((string s) => s.Any(char.IsUpper), s => ExitCode.IsUpperCase) // Verify that input does not have any uppercased letter, return an error as exitcode otherwise.
+          .IsErrorWhen((string x) => x.Any(char.IsSymbol), s => ExitCode.IsSymbol); // Verify that input does not have any symbols, return an error as exitcode otherwise.
   }
 
   private enum ExitCode {
-      NullOrEmpty = 1,
+      IsNullOrEmpty = 1,
       IsUpperCase = 2,
-      Symbol = 3
+      IsSymbol = 3
   }
 }
 ```
@@ -98,13 +99,14 @@ internal static class Program {
                 return 1;
             });
     }
-
+    // Validate the input
     private static IMaybe<string> Validate(string input) {
+        // These expression will be executed as long as the input is considered ok.
         return Maybe.Value(input)
-            .Filter(string.IsNullOrWhiteSpace)
-            .Map((string x) => x.Trim())
-            .IsNoneWhen((string s) => s.Any(char.IsUpper))
-            .IsNoneWhen((string x) => x.Any(char.IsSymbol));
+            .IsNoneWhen(string.IsNullOrWhiteSpace) // Verify that input is not null or white space.
+            .Map((string x) => x.Trim()) // Trim the potential input
+            .IsNoneWhen((string s) => s.Any(char.IsUpper)) // Verify that input does not have any uppercased
+            .IsNoneWhen((string x) => x.Any(char.IsSymbol));  // Verify that input does not have any symbols.
     }
 }
 
