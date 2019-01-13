@@ -29,46 +29,51 @@ value to the **left** or the value to the **right** (`TError`).
 In this library, the value to the Left is considered **successfull**
 and the right value is considered to be a **failure**.
 
-The following example illustrates how you can perform a division
-and return a string with an error message rather
-than throwing an exception using a similiar message.
+## Example program 
 
 ```csharp
+internal static class Program {
+  private static int Main(string[] args) {
+      return Validate(Console.ReadLine())
+          .Match((string x) => {
+              // The successful validation case
+              Console.WriteLine($"Approved input '{x}'");
+              return 0;
+          }, (ExitCode x) => {
+              // The failed validation case
+              const string message = "Error: ";
+              switch (x) {
+                  case ExitCode.NullOrEmpty:
+                      Console.WriteLine(message + "Input cannot be null or empty string.");
+                      break;
+                  case ExitCode.IsUpperCase:
+                      Console.WriteLine(message + "Input cannot contain upper cased letters.");
+                      break;
+                  case ExitCode.Symbol:
+                      Console.WriteLine(message + "Input cannot contain symbols.");
+                      break;
+                  default:
+                      throw new ArgumentOutOfRangeException(nameof(x), x, null);
+              }
 
-private static IResult<int, string> Divide(int left, int right) {
-    return left != 0
-        ? Result.Value<int, string>(left / right)
-        : Result.Error<int, string>($"Can not divide '{left}' with '{right}'.");
+              return (int) x;
+          });
+  }
+
+  private static IResult<string, ExitCode> Validate(string input) {
+      return Result.Value<string, ExitCode>(input)
+          .Filter(string.IsNullOrWhiteSpace, (string _) => ExitCode.NullOrEmpty)
+          .Map((string x) => x.Trim())
+          .IsErrorWhen((string s) => s.Any(char.IsUpper), s => ExitCode.IsUpperCase)
+          .IsErrorWhen((string x) => x.Any(char.IsSymbol), s => ExitCode.Symbol);
+  }
+
+  private enum ExitCode {
+      NullOrEmpty = 1,
+      IsUpperCase = 2,
+      Symbol = 3
+  }
 }
-
-
-var results = new List<IResult<int, string>> {
-  Divide(4, 2),
-  Divide(3, 0),
-  Divide(3, 3),
-  Divide(4, 0),
-  Divide(5, 0),
-  Divide(6, 0),
-  Divide(7, 0),
-  Divide(8, 0),
-  Divide(10, 2)
-};
-List<int> successFulDivisions = results.Values().ToList();
-IEnumerable<string> failedDivisions = results.Errors();
-
-// Prints all the numbers where the 'y' parameter from the function is not 0.
-// 2
-// 1
-// 5
-foreach (int division in successFulDivisions) { Console.WriteLine(division); }
-
-// Prints all the messages where the parameter 'right' is equal to 0.
-// Can not divide {left} with {right}
-// Can not divide {left} with {right}
-// …
-foreach (int message in failedDivisions) { Console.WriteLine(message); }
-
-
 ```
 
 Or if you do not care about handling a **failure** type,
@@ -79,38 +84,29 @@ It's works exactly as `Nullable<T>` (aka `T?`)
 does except that you can use this with reference
 types (`string`, `object`…) as well.
 
-The following example illustrates how you can perform a division
-and instead of throwing an exception; you could return `IMaybe<T>.None`
-
 ``` csharp
-IMaybe<int> Divide(int x, int y) {
-    if (y != 0)
-        return Maybe.Value(x / y);
-    else {
-        return Maybe.None<int>();
+internal static class Program {
+    private static int Main(string[] args) {
+        return Validate(Console.ReadLine())
+            .Match((string x) => {
+                // The successful validation case
+                Console.WriteLine($"Approved input '{x}'");
+                return 0;
+            }, () => {
+                // The failed validation case
+                Console.WriteLine("Error: Something went wrong");
+                return 1;
+            });
+    }
+
+    private static IMaybe<string> Validate(string input) {
+        return Maybe.Value(input)
+            .Filter(string.IsNullOrWhiteSpace)
+            .Map((string x) => x.Trim())
+            .IsNoneWhen((string s) => s.Any(char.IsUpper))
+            .IsNoneWhen((string x) => x.Any(char.IsSymbol));
     }
 }
-
-List<IMaybe<int>> maybes = new List<IMaybe<int>> {
-    Divide(4, 2),
-    Divide(3, 0),
-    Divide(3, 3),
-    Divide(4, 0),
-    Divide(5, 0),
-    Divide(6, 0),
-    Divide(7, 0),
-    Divide(8, 0),
-    Divide(10, 2)
-};
-
-List<int> successFulDivisions = maybes.MaybeSome().ToList();
-
-// Prints all the numbers where the 'y' parameter from the function is not 0.
-// 2
-// 1
-// 5
-foreach (int division in successFulDivisions) { Console.WriteLine(division); }
-
 
 ```
 
