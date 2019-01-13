@@ -26,7 +26,7 @@ to achieve cleaner code bases & code which is easier to think about.
 Enables you to skip using exceptions for error handling.
 The way `IResult<T, TError>` works is that there's
 always one value present. Either it's the
-value to the **left** or the value to the **right** (`TError`).
+value to the **left** (`T`) or the value to the **right** (`TError`).
 In this library, the value to the Left is considered **successfull**
 and the right value is considered to be a **failure**.
 
