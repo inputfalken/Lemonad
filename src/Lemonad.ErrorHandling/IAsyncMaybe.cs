@@ -33,6 +33,7 @@ namespace Lemonad.ErrorHandling {
         /// </summary>
         IAsyncMaybe<T> Do(Action action);
 
+        
         IAsyncMaybe<T> DoAsync(Func<Task> action);
 
         /// <summary>
@@ -40,6 +41,7 @@ namespace Lemonad.ErrorHandling {
         /// </summary>
         IAsyncMaybe<T> DoWith(Action<T> action);
 
+        /// <inheritdoc cref="IMaybe{T}.DoWithAsync"/>
         IAsyncMaybe<T> DoWithAsync(Func<T, Task> someAction);
 
         /// <summary>

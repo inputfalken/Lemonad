@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Exceptions;
+using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Lemonad.ErrorHandling.Extensions.Maybe;
 using Lemonad.ErrorHandling.Extensions.Result;
 using Index = Lemonad.ErrorHandling.Extensions.Maybe.Index;
@@ -31,9 +33,20 @@ namespace Lemonad.ErrorHandling.Internal {
             _result.Match(someAction, _ => noneAction());
         }
 
-        public IMaybe<T> DoWith(Action<T> action) => _result.DoWith(action).ToMaybe();
+        public IMaybe<T> DoWith(Action<T> action) {
+            if (action is null) throw new ArgumentNullException(nameof(action));
+            return _result.DoWith(action).ToMaybe();
+        }
 
-        public IMaybe<T> Do(Action action) => _result.Do(action).ToMaybe();
+        public IAsyncMaybe<T> DoWithAsync(Func<T, Task> action) {
+            if (action is null) throw new ArgumentNullException(nameof(action));
+            return _result.DoWithAsync(action).ToAsyncMaybe();
+        }
+
+        public IMaybe<T> Do(Action action) {
+            if (action is null) throw new ArgumentNullException(nameof(action));
+            return _result.Do(action).ToMaybe();
+        }
 
         public TResult Match<TResult>(Func<T, TResult> someSelector, Func<TResult> noneSelector) {
             if (noneSelector is null) throw new ArgumentNullException(nameof(noneSelector));

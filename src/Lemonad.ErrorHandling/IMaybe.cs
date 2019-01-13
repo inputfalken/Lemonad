@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
@@ -42,6 +43,11 @@ namespace Lemonad.ErrorHandling {
         ///     Executes the <paramref name="action" /> when property <see cref="HasValue" /> is true.
         /// </summary>
         IMaybe<T> DoWith(Action<T> action);
+
+        /// <summary>
+        ///  An asynchronous version of <see cref="DoWith"/>.
+        /// </summary>
+        IAsyncMaybe<T> DoWithAsync(Func<T, Task> action);
 
         /// <summary>
         ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
