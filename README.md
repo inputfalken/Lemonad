@@ -21,15 +21,16 @@ approach to problem solving by using various
 [HOF's](https://en.wikipedia.org/wiki/Higher-order_function#C#)
 to achieve cleaner code bases & code which is easier to think about.
 
-For example the `IResult<T, TError>` type,
-which enables you to skip using exceptions for error handling.
+## `IResult<T, TError>`
+
+Enables you to skip using exceptions for error handling.
 The way `IResult<T, TError>` works is that there's
 always one value present. Either it's the
 value to the **left** or the value to the **right** (`TError`).
 In this library, the value to the Left is considered **successfull**
 and the right value is considered to be a **failure**.
 
-## Example program 
+### Example program 
 
 ```csharp
 internal static class Program {
@@ -61,7 +62,7 @@ internal static class Program {
   }
   // Validate the input.
   private static IResult<string, ExitCode> Validate(string input) {
-      // These expression will be executed as long as the input is considered ok.
+      // These expressions will be executed as long as the input is considered ok.
       return Result.Value<string, ExitCode>(input) // Initialize an IResult<T, TError>
           .IsErrorWhen(string.IsNullOrWhiteSpace, (string _) => ExitCode.IsNullOrEmpty) // Verify that input is not null or white space, return an error as exitcode otherwise.
           .Map((string x) => x.Trim()) // Trim the potential input
@@ -77,14 +78,18 @@ internal static class Program {
 }
 ```
 
-Or if you do not care about handling a **failure** type,
+## `IMaybe<T>`
+
+if you do not care about handling a **failure** type,
 you could use the `IMaybe<T>` type. The maybe type works
 just like `IResult<T, TError>` except that there's
 no **failure** (TError) type available.
-It's works exactly as `Nullable<T>` (aka `T?`)
+It works exactly as `Nullable<T>` (aka `T?`)
 does except that you can use this with reference
 types (`string`, `object`…) as well.
-
+  
+### Example program 
+  
 ``` csharp
 internal static class Program {
     private static int Main(string[] args) {
@@ -101,7 +106,7 @@ internal static class Program {
     }
     // Validate the input
     private static IMaybe<string> Validate(string input) {
-        // These expression will be executed as long as the input is considered ok.
+        // These expressions will be executed as long as the input is considered ok.
         return Maybe.Value(input)
             .IsNoneWhen(string.IsNullOrWhiteSpace) // Verify that input is not null or white space.
             .Map((string x) => x.Trim()) // Trim the potential input
