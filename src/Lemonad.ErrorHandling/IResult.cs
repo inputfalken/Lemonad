@@ -566,7 +566,7 @@ namespace Lemonad.ErrorHandling {
         ///     A <see cref="Result{T,TError}" />.
         /// </returns>
         IResult<TResult, TError> Join<TInner, TKey, TResult>(
-            IResult<TInner, TError> inner,
+            in IResult<TInner, TError> inner,
             Func<T, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<T, TInner, TResult> resultSelector,
@@ -589,7 +589,7 @@ namespace Lemonad.ErrorHandling {
         ///     A <see cref="Result{T,TError}" />.
         /// </returns>
         IResult<TResult, TError> Join<TInner, TKey, TResult>(
-            IResult<TInner, TError> inner,
+            in IResult<TInner, TError> inner,
             Func<T, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<T, TInner, TResult> resultSelector,
@@ -728,7 +728,7 @@ namespace Lemonad.ErrorHandling {
         ///     together.
         /// </returns>
         IResult<TResult, TError> Zip<TOther, TResult>(
-            IResult<TOther, TError> other,
+            in IResult<TOther, TError> other,
             Func<T, TOther, TResult> selector
         );
 

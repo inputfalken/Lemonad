@@ -8,7 +8,7 @@ using Lemonad.ErrorHandling.Internal.Either;
 
 namespace Lemonad.ErrorHandling.Internal {
     internal class Result<T, TError> : IResult<T, TError> {
-        private Result(in T value, in TError error, bool hasError, bool hasValue)
+        private Result(in T value, in TError error, in bool hasError, in bool hasValue)
             => Either = new NonNullableEither<T, TError>(
                 in value,
                 in error,
@@ -406,7 +406,7 @@ namespace Lemonad.ErrorHandling.Internal {
         }
 
         public IResult<TResult, TError> Join<TInner, TKey, TResult>(
-            IResult<TInner, TError> inner,
+            in IResult<TInner, TError> inner,
             Func<T, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<T, TInner, TResult> resultSelector,
@@ -430,7 +430,7 @@ namespace Lemonad.ErrorHandling.Internal {
         }
 
         public IResult<TResult, TError> Join<TInner, TKey, TResult>(
-            IResult<TInner, TError> inner,
+            in IResult<TInner, TError> inner,
             Func<T, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<T, TInner, TResult> resultSelector,
@@ -563,7 +563,7 @@ namespace Lemonad.ErrorHandling.Internal {
         }
 
         public IResult<TResult, TError> Zip<TOther, TResult>(
-            IResult<TOther, TError> other,
+            in IResult<TOther, TError> other,
             Func<T, TOther, TResult> selector
         ) {
             if (other is null) throw new ArgumentNullException(nameof(other));
@@ -602,7 +602,7 @@ namespace Lemonad.ErrorHandling.Internal {
                 true
             );
 
-        internal static IResult<T, TError> Factory(IEither<T, TError> either) => new Result<T, TError>(either);
+        internal static IResult<T, TError> Factory(in IEither<T, TError> either) => new Result<T, TError>(either);
 
         public override string ToString() =>
             $"{(Either.HasValue ? "Ok" : "Error")} ==> {typeof(Result<T, TError>).ToHumanString()}{StringFunctions.PrettyTypeString(Either.HasValue ? (object) Either.Value : Either.Error)}";

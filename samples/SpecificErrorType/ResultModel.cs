@@ -155,16 +155,20 @@ namespace SpecificErrorType {
         public IAsyncResult<T, ErrorModel> IsErrorWhenAsync(Func<T, Task<bool>> predicate,
             Func<T, ErrorModel> errorSelector) => _resultImplementation.IsErrorWhenAsync(predicate, errorSelector);
 
-        public IResult<TResult, ErrorModel> Join<TInner, TKey, TResult>(IResult<TInner, ErrorModel> inner,
+        public IResult<TResult, ErrorModel> Join<TInner, TKey, TResult>(
+            in IResult<TInner, ErrorModel> inner,
             Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
             Func<T, TInner, TResult> resultSelector,
-            Func<ErrorModel> errorSelector) => _resultImplementation.Join(inner, outerKeySelector, innerKeySelector,
+            Func<ErrorModel> errorSelector
+        ) => _resultImplementation.Join(inner, outerKeySelector, innerKeySelector,
             resultSelector, errorSelector);
 
-        public IResult<TResult, ErrorModel> Join<TInner, TKey, TResult>(IResult<TInner, ErrorModel> inner,
+        public IResult<TResult, ErrorModel> Join<TInner, TKey, TResult>(
+            in IResult<TInner, ErrorModel> inner,
             Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
             Func<T, TInner, TResult> resultSelector,
-            Func<ErrorModel> errorSelector, IEqualityComparer<TKey> comparer) => _resultImplementation.Join(inner,
+            Func<ErrorModel> errorSelector, IEqualityComparer<TKey> comparer
+        ) => _resultImplementation.Join(inner,
             outerKeySelector, innerKeySelector, resultSelector, errorSelector, comparer);
 
         public IAsyncResult<TResult, ErrorModel> JoinAsync<TInner, TKey, TResult>(
@@ -202,8 +206,10 @@ namespace SpecificErrorType {
         public IResult<TResult, ErrorModel> SafeCast<TResult>(Func<T, ErrorModel> errorSelector) =>
             _resultImplementation.SafeCast<TResult>(errorSelector);
 
-        public IResult<TResult, ErrorModel> Zip<TOther, TResult>(IResult<TOther, ErrorModel> other,
-            Func<T, TOther, TResult> selector) => _resultImplementation.Zip(other, selector);
+        public IResult<TResult, ErrorModel> Zip<TOther, TResult>(
+            in IResult<TOther, ErrorModel> other,
+            Func<T, TOther, TResult> selector
+        ) => _resultImplementation.Zip(other, selector);
 
         public IAsyncResult<TResult, ErrorModel> ZipAsync<TOther, TResult>(IAsyncResult<TOther, ErrorModel> other,
             Func<T, TOther, TResult> selector) => _resultImplementation.ZipAsync(other, selector);

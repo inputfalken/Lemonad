@@ -150,17 +150,22 @@ namespace ImplicitResult {
             Func<T, TError> errorSelector) =>
             _resultImplementation.IsErrorWhenAsync(predicate, errorSelector);
 
-        public IResult<TResult, TError> Join<TInner, TKey, TResult>(IResult<TInner, TError> inner,
+        public IResult<TResult, TError> Join<TInner, TKey, TResult>(
+            in IResult<TInner, TError> inner,
             Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
             Func<T, TInner, TResult> resultSelector,
-            Func<TError> errorSelector) => _resultImplementation.Join(inner, outerKeySelector, innerKeySelector,
+            Func<TError> errorSelector
+        ) => _resultImplementation.Join(inner, outerKeySelector, innerKeySelector,
             resultSelector, errorSelector);
 
-        public IResult<TResult, TError> Join<TInner, TKey, TResult>(IResult<TInner, TError> inner,
-            Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
+        public IResult<TResult, TError> Join<TInner, TKey, TResult>(
+            in IResult<TInner, TError> inner,
+            Func<T, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
             Func<T, TInner, TResult> resultSelector,
-            Func<TError> errorSelector, IEqualityComparer<TKey> comparer) => _resultImplementation.Join(inner,
-            outerKeySelector, innerKeySelector, resultSelector, errorSelector, comparer);
+            Func<TError> errorSelector, IEqualityComparer<TKey> comparer
+        ) => _resultImplementation.Join(inner, outerKeySelector, innerKeySelector, resultSelector, errorSelector,
+            comparer);
 
         public IAsyncResult<TResult, TError> JoinAsync<TInner, TKey, TResult>(IAsyncResult<TInner, TError> inner,
             Func<T, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
@@ -199,8 +204,10 @@ namespace ImplicitResult {
         public IResult<TResult, TError> SafeCast<TResult>(Func<T, TError> errorSelector) =>
             _resultImplementation.SafeCast<TResult>(errorSelector);
 
-        public IResult<TResult, TError> Zip<TOther, TResult>(IResult<TOther, TError> other,
-            Func<T, TOther, TResult> selector) => _resultImplementation.Zip(other, selector);
+        public IResult<TResult, TError> Zip<TOther, TResult>(
+            in IResult<TOther, TError> other,
+            Func<T, TOther, TResult> selector
+        ) => _resultImplementation.Zip(other, selector);
 
         public IAsyncResult<TResult, TError> ZipAsync<TOther, TResult>(IAsyncResult<TOther, TError> other,
             Func<T, TOther, TResult> selector) => _resultImplementation.ZipAsync(other, selector);
