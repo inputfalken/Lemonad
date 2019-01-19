@@ -58,6 +58,11 @@ namespace Lemonad.ErrorHandling {
         IMaybe<T> Filter(Func<T, bool> predicate);
 
         /// <summary>
+        /// An asynchronous version of <see cref="Filter(Func{T, bool})"/>.
+        /// </summary>
+        IAsyncMaybe<T> FilterAsync(Func<T, Task<bool>> predicate);
+
+        /// <summary>
         ///     Flatmaps another <see cref="Maybe{T}" />.
         /// </summary>
         /// <param name="selector">

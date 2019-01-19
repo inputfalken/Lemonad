@@ -33,7 +33,6 @@ namespace Lemonad.ErrorHandling {
         /// </summary>
         IAsyncMaybe<T> Do(Action action);
 
-        
         IAsyncMaybe<T> DoAsync(Func<Task> action);
 
         /// <summary>
@@ -48,6 +47,9 @@ namespace Lemonad.ErrorHandling {
         /// An asynchronous version of <see cref="IMaybe{T}.Filter"/>.
         /// </summary>
         IAsyncMaybe<T> Filter(Func<T, bool> predicate);
+        
+        /// <inheritdoc cref="IMaybe{T}.FilterAsync(Func{T, Task{bool}})"/>
+        IAsyncMaybe<T> FilterAsync(Func<T, Task<bool>> predicate);
 
         /// <summary>
         /// An asynchronous version of <see cref="IMaybe{T}.Flatten{TResult}"/>.

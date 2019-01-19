@@ -57,6 +57,10 @@ namespace Lemonad.ErrorHandling.Internal {
 
         public IMaybe<T> Filter(Func<T, bool> predicate) => _result.Filter(predicate, arg => Unit.Default).ToMaybe();
 
+        public IAsyncMaybe<T> FilterAsync(Func<T, Task<bool>> predicate) => predicate is null
+            ? throw new ArgumentNullException(nameof(predicate))
+            : _result.FilterAsync(predicate, _ => Unit.Default).ToAsyncMaybe();
+
         public IMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> selector) => selector is null
             ? throw new ArgumentNullException(nameof(selector))
             : _result

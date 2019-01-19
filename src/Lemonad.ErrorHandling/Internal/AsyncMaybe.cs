@@ -14,7 +14,7 @@ namespace Lemonad.ErrorHandling.Internal {
 
         private readonly IAsyncResult<T, Unit> _asyncResult;
 
-        public AsyncMaybe(IAsyncResult<T, Unit> result) => _asyncResult = result;
+        internal AsyncMaybe(in IAsyncResult<T, Unit> result) => _asyncResult = result;
 
         public IAsyncMaybe<T> Do(Action action) => _asyncResult.Do(action).ToAsyncMaybe();
 
@@ -29,6 +29,10 @@ namespace Lemonad.ErrorHandling.Internal {
         public IAsyncMaybe<T> Filter(Func<T, bool> predicate) => predicate is null
             ? throw new ArgumentNullException(nameof(predicate))
             : _asyncResult.Filter(predicate, _ => Unit.Default).ToAsyncMaybe();
+
+        public IAsyncMaybe<T> FilterAsync(Func<T, Task<bool>> predicate) => predicate is null
+            ? throw new ArgumentNullException(nameof(predicate))
+            : _asyncResult.FilterAsync(predicate, _ => Unit.Default).ToAsyncMaybe();
 
         public IAsyncMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> selector) => selector is null
             ? throw new ArgumentNullException(nameof(selector))
