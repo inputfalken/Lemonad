@@ -23,11 +23,9 @@ to achieve cleaner code bases & code which is easier to think about.
 
 ## `IResult<T, TError>`
 
-Enables you to skip using exceptions for error handling.
-The way `IResult<T, TError>` works is that there's
-always one value present. Either it's the
+One value will always be present. Either it's the
 value to the **left** (`T`) or the value to the **right** (`TError`).
-In this library, the value to the Left is considered **successfull**
+The value to the Left is considered **successfull**
 and the right value is considered to be a **failure**.
 
 ### Example program 
@@ -80,13 +78,8 @@ internal static class Program {
 
 ## `IMaybe<T>`
 
-if you do not care about handling a **failure** type,
-you could use the `IMaybe<T>` type. The maybe type works
-just like `IResult<T, TError>` except that there's
-no **failure** (TError) type available.
-It works exactly as `Nullable<T>` (aka `T?`)
-does except that you can use this with reference
-types (`string`, `object`…) as well.
+Works like `IResult<T, TError>` but there's no `TError` available.
+So you might have a value (`T`) present.
   
 ### Example program 
   
