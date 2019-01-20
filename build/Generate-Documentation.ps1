@@ -9,7 +9,7 @@ function Install-Documentation {
     [Parameter(Position = 0, Mandatory = 1)] [System.IO.FileSystemInfo] $Directory
   )
   if (!(Get-Command -Name 'DocFx' -ErrorAction SilentlyContinue)) {
-    choco install docfx -y --version 2.37
+    choco install docfx -y --version 2.40.7
     if (!$?) { throw 'Could not install DocFx by chocolatey.' }
   }
   Push-Location $Directory
