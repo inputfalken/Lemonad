@@ -1,17 +1,9 @@
 <p align="center"><img src="https://s8.postimg.cc/mbxqv2gx1/LOGO_LEMONAD_README.jpg"></p>
 
-
 [Logo](https://s8.postimg.cc/mbxqv2gx1/LOGO_LEMONAD_README.jpg) by [area55git](https://github.com/area55git) is licensed under [CC 4.0 International License.](https://creativecommons.org/licenses/by/4.0/)
 
-## Status
-
 [![Build status](https://lemonad-ci.visualstudio.com/Lemonad/_apis/build/status/Release?branchName=master)](https://lemonad-ci.visualstudio.com/Lemonad/_build/latest?definitionId=6)
-
-### WIP (A lot may change)
-
 [![NuGet](https://img.shields.io/nuget/v/Lemonad.ErrorHandling.svg)](https://www.nuget.org/packages/Lemonad.ErrorHandling/)
-[![Build Status](https://lemonad-ci.vsrm.visualstudio.com/_apis/public/Release/badge/99c63ac5-7b1f-436d-b755-fbfa106c1853/2/2)](https://lemonad-ci.vsrm.visualstudio.com/_apis/public/Release/badge/99c63ac5-7b1f-436d-b755-fbfa106c1853/2/2)
-
 
 ## Summary
 
@@ -64,8 +56,8 @@ internal static class Program {
       return Result.Value<string, ExitCode>(input) // Initialize an IResult<T, TError>
           .IsErrorWhen(string.IsNullOrWhiteSpace, (string _) => ExitCode.IsNullOrEmpty) // Verify that input is not null or white space, return an error as exitcode otherwise.
           .Map((string x) => x.Trim()) // Trim the potential input
-          .IsErrorWhen((string s) => s.Any(char.IsUpper), s => ExitCode.IsUpperCase) // Verify that input does not have any uppercased letter, return an error as exitcode otherwise.
-          .IsErrorWhen((string x) => x.Any(char.IsSymbol), s => ExitCode.IsSymbol); // Verify that input does not have any symbols, return an error as exitcode otherwise.
+          .IsErrorWhen((string s) => s.Any(char.IsUpper), (string _) => ExitCode.IsUpperCase) // Verify that input does not have any uppercased letter, return an error as exitcode otherwise.
+          .IsErrorWhen((string x) => x.Any(char.IsSymbol), (string _) => ExitCode.IsSymbol); // Verify that input does not have any symbols, return an error as exitcode otherwise.
   }
 
   private enum ExitCode {
@@ -80,9 +72,9 @@ internal static class Program {
 
 Works like `IResult<T, TError>` but there's no `TError` available.
 So you might have a value (`T`) present.
-  
+
 ### Example program 
-  
+
 ``` csharp
 internal static class Program {
     private static int Main(string[] args) {
