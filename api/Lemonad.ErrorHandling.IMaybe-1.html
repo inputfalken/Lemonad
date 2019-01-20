@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Interface IMaybe&lt;T&gt;
    ">
-    <meta name="generator" content="docfx 2.39.2.0">
+    <meta name="generator" content="docfx 2.40.7.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -166,7 +166,7 @@ its underlying type.</p>
     </tbody>
   </table>
   <h5 id="Lemonad_ErrorHandling_IMaybe_1_Value_examples">Examples</h5>
-  <pre><code class="c#">if (Either.HasValue)
+  <pre><code class="lang-c#">if (Either.HasValue)
 {
  // Safe to use.
  Console.WriteLine(Either.Value)
@@ -179,11 +179,12 @@ its underlying type.</p>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IMaybe_1_Do_System_Action_.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IMaybe%601.Do(System.Action)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L36">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L39">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IMaybe_1_Do_" data-uid="Lemonad.ErrorHandling.IMaybe`1.Do*"></a>
   <h4 id="Lemonad_ErrorHandling_IMaybe_1_Do_System_Action_" data-uid="Lemonad.ErrorHandling.IMaybe`1.Do(System.Action)">Do(Action)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Executes <code data-dev-comment-type="paramref" class="paramref">action</code> no matter what state <a class="xref" href="Lemonad.ErrorHandling.IMaybe-1.html">IMaybe&lt;T&gt;</a> is in.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -226,15 +227,16 @@ its underlying type.</p>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IMaybe_1_DoWith_System_Action__0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IMaybe%601.DoWith(System.Action%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L38">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L44">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IMaybe_1_DoWith_" data-uid="Lemonad.ErrorHandling.IMaybe`1.DoWith*"></a>
   <h4 id="Lemonad_ErrorHandling_IMaybe_1_DoWith_System_Action__0__" data-uid="Lemonad.ErrorHandling.IMaybe`1.DoWith(System.Action{`0})">DoWith(Action&lt;T&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Executes the <code data-dev-comment-type="paramref" class="paramref">action</code> when property <a class="xref" href="Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_HasValue">HasValue</a> is true.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IMaybe&lt;T&gt; DoWith(Action&lt;T&gt; someAction)</code></pre>
+    <pre><code class="lang-csharp hljs">IMaybe&lt;T&gt; DoWith(Action&lt;T&gt; action)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -248,7 +250,7 @@ its underlying type.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Action</span>&lt;T&gt;</td>
-        <td><span class="parametername">someAction</span></td>
+        <td><span class="parametername">action</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -273,7 +275,7 @@ its underlying type.</p>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IMaybe_1_Filter_System_Func__0_System_Boolean__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IMaybe%601.Filter(System.Func%7B%600%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L46">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L52">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IMaybe_1_Filter_" data-uid="Lemonad.ErrorHandling.IMaybe`1.Filter*"></a>
   <h4 id="Lemonad_ErrorHandling_IMaybe_1_Filter_System_Func__0_System_Boolean__" data-uid="Lemonad.ErrorHandling.IMaybe`1.Filter(System.Func{`0,System.Boolean})">Filter(Func&lt;T, Boolean&gt;)</h4>
@@ -322,7 +324,7 @@ its underlying type.</p>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IMaybe_1_FlatMap__1_System_Func__0_Lemonad_ErrorHandling_IMaybe___0___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IMaybe%601.FlatMap%60%601(System.Func%7B%600%2CLemonad.ErrorHandling.IMaybe%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L57">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L63">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IMaybe_1_FlatMap_" data-uid="Lemonad.ErrorHandling.IMaybe`1.FlatMap*"></a>
   <h4 id="Lemonad_ErrorHandling_IMaybe_1_FlatMap__1_System_Func__0_Lemonad_ErrorHandling_IMaybe___0___" data-uid="Lemonad.ErrorHandling.IMaybe`1.FlatMap``1(System.Func{`0,Lemonad.ErrorHandling.IMaybe{``0}})">FlatMap&lt;TResult&gt;(Func&lt;T, IMaybe&lt;TResult&gt;&gt;)</h4>
@@ -331,7 +333,7 @@ its underlying type.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IMaybe&lt;TResult&gt; FlatMap&lt;TResult&gt;(Func&lt;T, IMaybe&lt;TResult&gt;&gt; flatMapSelector)</code></pre>
+    <pre><code class="lang-csharp hljs">IMaybe&lt;TResult&gt; FlatMap&lt;TResult&gt;(Func&lt;T, IMaybe&lt;TResult&gt;&gt; selector)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -345,7 +347,7 @@ its underlying type.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Func</span>&lt;T, <a class="xref" href="Lemonad.ErrorHandling.IMaybe-1.html">IMaybe</a>&lt;TResult&gt;&gt;</td>
-        <td><span class="parametername">flatMapSelector</span></td>
+        <td><span class="parametername">selector</span></td>
         <td><p>A function who expects a <span class="xref">Lemonad.ErrorHandling.Internal.Maybe`1</span> as its return type.</p>
 </td>
       </tr>
@@ -377,26 +379,26 @@ its underlying type.</p>
     <tbody>
       <tr>
         <td><span class="parametername">TResult</span></td>
-        <td><p>The type <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> returned from the <code data-dev-comment-type="paramref" class="paramref">flatMapSelector</code> function.</p>
+        <td><p>The type <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> returned from the <code data-dev-comment-type="paramref" class="paramref">selector</code> function.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IMaybe_1_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_IMaybe___0___System_Func__0___0___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IMaybe%601.FlatMap%60%602(System.Func%7B%600%2CLemonad.ErrorHandling.IMaybe%7B%60%600%7D%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IMaybe_1_FlatMap__1_System_Func__0_System_Nullable___0___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IMaybe%601.FlatMap%60%601(System.Func%7B%600%2CSystem.Nullable%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L75">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L107">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IMaybe_1_FlatMap_" data-uid="Lemonad.ErrorHandling.IMaybe`1.FlatMap*"></a>
-  <h4 id="Lemonad_ErrorHandling_IMaybe_1_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_IMaybe___0___System_Func__0___0___1__" data-uid="Lemonad.ErrorHandling.IMaybe`1.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.IMaybe{``0}},System.Func{`0,``0,``1})">FlatMap&lt;TFlatMap, TResult&gt;(Func&lt;T, IMaybe&lt;TFlatMap&gt;&gt;, Func&lt;T, TFlatMap, TResult&gt;)</h4>
-  <div class="markdown level1 summary"><p>Flatmaps another <span class="xref">Lemonad.ErrorHandling.Internal.Maybe`1</span>.</p>
-</div>
+  <h4 id="Lemonad_ErrorHandling_IMaybe_1_FlatMap__1_System_Func__0_System_Nullable___0___" data-uid="Lemonad.ErrorHandling.IMaybe`1.FlatMap``1(System.Func{`0,System.Nullable{``0}})">FlatMap&lt;TResult&gt;(Func&lt;T, Nullable&lt;TResult&gt;&gt;)</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IMaybe&lt;TResult&gt; FlatMap&lt;TFlatMap, TResult&gt;(Func&lt;T, IMaybe&lt;TFlatMap&gt;&gt; flatMapSelector, Func&lt;T, TFlatMap, TResult&gt; resultSelector)</code></pre>
+    <pre><code class="lang-csharp hljs">IMaybe&lt;TResult&gt; FlatMap&lt;TResult&gt;(Func&lt;T, TResult? &gt; selector)
+    where TResult : struct</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -409,15 +411,78 @@ its underlying type.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;T, <a class="xref" href="Lemonad.ErrorHandling.IMaybe-1.html">IMaybe</a>&lt;TFlatMap&gt;&gt;</td>
-        <td><span class="parametername">flatMapSelector</span></td>
+        <td><span class="xref">System.Func</span>&lt;T, <span class="xref">System.Nullable</span>&lt;TResult&gt;&gt;</td>
+        <td><span class="parametername">selector</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Lemonad.ErrorHandling.IMaybe-1.html">IMaybe</a>&lt;TResult&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IMaybe_1_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_IMaybe___0___System_Func__0___0___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IMaybe%601.FlatMap%60%602(System.Func%7B%600%2CLemonad.ErrorHandling.IMaybe%7B%60%600%7D%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L81">View Source</a>
+  </span>
+  <a id="Lemonad_ErrorHandling_IMaybe_1_FlatMap_" data-uid="Lemonad.ErrorHandling.IMaybe`1.FlatMap*"></a>
+  <h4 id="Lemonad_ErrorHandling_IMaybe_1_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_IMaybe___0___System_Func__0___0___1__" data-uid="Lemonad.ErrorHandling.IMaybe`1.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.IMaybe{``0}},System.Func{`0,``0,``1})">FlatMap&lt;TSelector, TResult&gt;(Func&lt;T, IMaybe&lt;TSelector&gt;&gt;, Func&lt;T, TSelector, TResult&gt;)</h4>
+  <div class="markdown level1 summary"><p>Flatmaps another <span class="xref">Lemonad.ErrorHandling.Internal.Maybe`1</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IMaybe&lt;TResult&gt; FlatMap&lt;TSelector, TResult&gt;(Func&lt;T, IMaybe&lt;TSelector&gt;&gt; selector, Func&lt;T, TSelector, TResult&gt; resultSelector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;T, <a class="xref" href="Lemonad.ErrorHandling.IMaybe-1.html">IMaybe</a>&lt;TSelector&gt;&gt;</td>
+        <td><span class="parametername">selector</span></td>
         <td><p>A function who expects a <span class="xref">Lemonad.ErrorHandling.Internal.Maybe`1</span> as its return type.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;T, TFlatMap, TResult&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;T, TSelector, TResult&gt;</td>
         <td><span class="parametername">resultSelector</span></td>
-        <td><p>A function whose in-parameters are <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> and <code data-dev-comment-type="typeparamref" class="typeparamref">TFlatMap</code> which can return
+        <td><p>A function whose in-parameters are <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> and <code data-dev-comment-type="typeparamref" class="typeparamref">TSelector</code> which can return
 any type.</p>
 </td>
       </tr>
@@ -448,8 +513,8 @@ any type.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">TFlatMap</span></td>
-        <td><p>The value type of the <span class="xref">Lemonad.ErrorHandling.Internal.Result`2</span> returned by the <code data-dev-comment-type="paramref" class="paramref">flatMapSelector</code>.</p>
+        <td><span class="parametername">TSelector</span></td>
+        <td><p>The value type of the <span class="xref">Lemonad.ErrorHandling.Internal.Result`2</span> returned by the <code data-dev-comment-type="paramref" class="paramref">selector</code>.</p>
 </td>
       </tr>
       <tr>
@@ -464,17 +529,17 @@ any type.</p>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IMaybe_1_FlatMap__2_System_Func__0_System_Nullable___0___System_Func__0___0___1__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IMaybe%601.FlatMap%60%602(System.Func%7B%600%2CSystem.Nullable%7B%60%600%7D%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L95">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L102">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IMaybe_1_FlatMap_" data-uid="Lemonad.ErrorHandling.IMaybe`1.FlatMap*"></a>
-  <h4 id="Lemonad_ErrorHandling_IMaybe_1_FlatMap__2_System_Func__0_System_Nullable___0___System_Func__0___0___1__" data-uid="Lemonad.ErrorHandling.IMaybe`1.FlatMap``2(System.Func{`0,System.Nullable{``0}},System.Func{`0,``0,``1})">FlatMap&lt;TFlatMap, TResult&gt;(Func&lt;T, Nullable&lt;TFlatMap&gt;&gt;, Func&lt;T, TFlatMap, TResult&gt;)</h4>
+  <h4 id="Lemonad_ErrorHandling_IMaybe_1_FlatMap__2_System_Func__0_System_Nullable___0___System_Func__0___0___1__" data-uid="Lemonad.ErrorHandling.IMaybe`1.FlatMap``2(System.Func{`0,System.Nullable{``0}},System.Func{`0,``0,``1})">FlatMap&lt;TSelector, TResult&gt;(Func&lt;T, Nullable&lt;TSelector&gt;&gt;, Func&lt;T, TSelector, TResult&gt;)</h4>
   <div class="markdown level1 summary"><p>Flatmaps another <span class="xref">Lemonad.ErrorHandling.Internal.Maybe`1</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IMaybe&lt;TResult&gt; FlatMap&lt;TFlatMap, TResult&gt;(Func&lt;T, TFlatMap? &gt; flatMapSelector, Func&lt;T, TFlatMap, TResult&gt; resultSelector)
-    where TFlatMap : struct</code></pre>
+    <pre><code class="lang-csharp hljs">IMaybe&lt;TResult&gt; FlatMap&lt;TSelector, TResult&gt;(Func&lt;T, TSelector? &gt; selector, Func&lt;T, TSelector, TResult&gt; resultSelector)
+    where TSelector : struct</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -487,15 +552,15 @@ any type.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;T, <span class="xref">System.Nullable</span>&lt;TFlatMap&gt;&gt;</td>
-        <td><span class="parametername">flatMapSelector</span></td>
+        <td><span class="xref">System.Func</span>&lt;T, <span class="xref">System.Nullable</span>&lt;TSelector&gt;&gt;</td>
+        <td><span class="parametername">selector</span></td>
         <td><p>A function who expects a <span class="xref">System.Nullable&lt;T&gt;</span> as its return type.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;T, TFlatMap, TResult&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;T, TSelector, TResult&gt;</td>
         <td><span class="parametername">resultSelector</span></td>
-        <td><p>A function whose in-parameters are <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> and <code data-dev-comment-type="typeparamref" class="typeparamref">TFlatMap</code> which can return
+        <td><p>A function whose in-parameters are <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> and <code data-dev-comment-type="typeparamref" class="typeparamref">TSelector</code> which can return
 any type.</p>
 </td>
       </tr>
@@ -526,8 +591,8 @@ any type.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">TFlatMap</span></td>
-        <td><p>The value type of the <span class="xref">System.Nullable&lt;T&gt;</span> returned by the <code data-dev-comment-type="paramref" class="paramref">flatMapSelector</code>.</p>
+        <td><span class="parametername">TSelector</span></td>
+        <td><p>The value type of the <span class="xref">System.Nullable&lt;T&gt;</span> returned by the <code data-dev-comment-type="paramref" class="paramref">selector</code>.</p>
 </td>
       </tr>
       <tr>
@@ -542,7 +607,7 @@ any type.</p>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IMaybe_1_Flatten__1_System_Func__0_Lemonad_ErrorHandling_IMaybe___0___.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IMaybe%601.Flatten%60%601(System.Func%7B%600%2CLemonad.ErrorHandling.IMaybe%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L99">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L109">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IMaybe_1_Flatten_" data-uid="Lemonad.ErrorHandling.IMaybe`1.Flatten*"></a>
   <h4 id="Lemonad_ErrorHandling_IMaybe_1_Flatten__1_System_Func__0_Lemonad_ErrorHandling_IMaybe___0___" data-uid="Lemonad.ErrorHandling.IMaybe`1.Flatten``1(System.Func{`0,Lemonad.ErrorHandling.IMaybe{``0}})">Flatten&lt;TResult&gt;(Func&lt;T, IMaybe&lt;TResult&gt;&gt;)</h4>
@@ -604,7 +669,7 @@ any type.</p>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IMaybe_1_IsNoneWhen_System_Func__0_System_Boolean__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IMaybe%601.IsNoneWhen(System.Func%7B%600%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L107">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L117">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IMaybe_1_IsNoneWhen_" data-uid="Lemonad.ErrorHandling.IMaybe`1.IsNoneWhen*"></a>
   <h4 id="Lemonad_ErrorHandling_IMaybe_1_IsNoneWhen_System_Func__0_System_Boolean__" data-uid="Lemonad.ErrorHandling.IMaybe`1.IsNoneWhen(System.Func{`0,System.Boolean})">IsNoneWhen(Func&lt;T, Boolean&gt;)</h4>
@@ -653,7 +718,7 @@ any type.</p>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IMaybe_1_Map__1_System_Func__0___0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IMaybe%601.Map%60%601(System.Func%7B%600%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L118">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L128">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IMaybe_1_Map_" data-uid="Lemonad.ErrorHandling.IMaybe`1.Map*"></a>
   <h4 id="Lemonad_ErrorHandling_IMaybe_1_Map__1_System_Func__0___0__" data-uid="Lemonad.ErrorHandling.IMaybe`1.Map``1(System.Func{`0,``0})">Map&lt;TResult&gt;(Func&lt;T, TResult&gt;)</h4>
@@ -718,7 +783,7 @@ any type.</p>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IMaybe_1_Match_System_Action__0__System_Action_.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IMaybe%601.Match(System.Action%7B%600%7D%2CSystem.Action)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L132">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L142">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IMaybe_1_Match_" data-uid="Lemonad.ErrorHandling.IMaybe`1.Match*"></a>
   <h4 id="Lemonad_ErrorHandling_IMaybe_1_Match_System_Action__0__System_Action_" data-uid="Lemonad.ErrorHandling.IMaybe`1.Match(System.Action{`0},System.Action)">Match(Action&lt;T&gt;, Action)</h4>
@@ -774,7 +839,7 @@ any type.</p>
     <a href="https://github.com/inputfalken/Lemonad/new/master/apiSpec/new?filename=Lemonad_ErrorHandling_IMaybe_1_Match__1_System_Func__0___0__System_Func___0__.md&amp;value=---%0Auid%3A%20Lemonad.ErrorHandling.IMaybe%601.Match%60%601(System.Func%7B%600%2C%60%600%7D%2CSystem.Func%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L146">View Source</a>
+    <a href="https://github.com/inputfalken/Lemonad/blob/master/src/Lemonad.ErrorHandling/IMaybe.cs/#L156">View Source</a>
   </span>
   <a id="Lemonad_ErrorHandling_IMaybe_1_Match_" data-uid="Lemonad.ErrorHandling.IMaybe`1.Match*"></a>
   <h4 id="Lemonad_ErrorHandling_IMaybe_1_Match__1_System_Func__0___0__System_Func___0__" data-uid="Lemonad.ErrorHandling.IMaybe`1.Match``1(System.Func{`0,``0},System.Func{``0})">Match&lt;TResult&gt;(Func&lt;T, TResult&gt;, Func&lt;TResult&gt;)</h4>
