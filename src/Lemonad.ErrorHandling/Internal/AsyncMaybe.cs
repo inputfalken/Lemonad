@@ -34,6 +34,9 @@ namespace Lemonad.ErrorHandling.Internal {
             ? throw new ArgumentNullException(nameof(predicate))
             : _asyncResult.FilterAsync(predicate, _ => Unit.Default).ToAsyncMaybe();
 
+        public IAsyncMaybe<T> IsNoneWhenAsync(Func<T, Task<bool>> predicate) =>
+            _asyncResult.IsErrorWhenAsync(predicate, _ => Unit.Default).ToAsyncMaybe();
+
         public IAsyncMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> selector) => selector is null
             ? throw new ArgumentNullException(nameof(selector))
             : _asyncResult.FlatMap(x => Index.ToResult(selector(x), Unit.Selector)).ToAsyncMaybe();

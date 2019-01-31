@@ -126,6 +126,8 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         IMaybe<T> IsNoneWhen(Func<T, bool> predicate);
+        
+        IAsyncMaybe<T> IsNoneWhenAsync(Func<T, Task<bool>> predicate);
 
         /// <summary>
         ///     Maps <typeparamref name="T" />.

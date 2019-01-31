@@ -53,6 +53,9 @@ namespace Lemonad.ErrorHandling.Internal {
             return _result.Match(someSelector, _ => noneSelector());
         }
 
+        public IAsyncMaybe<T> IsNoneWhenAsync(Func<T, Task<bool>> predicate) =>
+            _result.IsErrorWhenAsync(predicate, _ => Unit.Default).ToAsyncMaybe();
+
         public IMaybe<TResult> Map<TResult>(Func<T, TResult> selector) => _result.Map(selector).ToMaybe();
 
         public IMaybe<T> Filter(Func<T, bool> predicate) => _result.Filter(predicate, arg => Unit.Default).ToMaybe();

@@ -62,6 +62,11 @@ namespace Lemonad.ErrorHandling {
         /// An asynchronous version of <see cref="IMaybe{T}.IsNoneWhen"/>.
         /// </summary>
         IAsyncMaybe<T> IsNoneWhen(Func<T, bool> predicate);
+        
+        /// <summary>
+        /// An asynchronous version of <see cref="IMaybe{T}.IsNoneWhen"/>.
+        /// </summary>
+        IAsyncMaybe<T> IsNoneWhenAsync(Func<T, Task<bool>> predicate);
 
         /// <summary>
         /// An asynchronous version of <see cref="IMaybe{T}.FlatMap{TResult}(Func{T, IMaybe{TResult}})"/>.
