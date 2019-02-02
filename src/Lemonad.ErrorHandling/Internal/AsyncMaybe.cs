@@ -19,6 +19,8 @@ namespace Lemonad.ErrorHandling.Internal {
             }
         }
 
+        public static IAsyncMaybe<T> Create(in T element) => new AsyncMaybe<T>(AsyncResult.Value<T, Unit>(element));
+        public static IAsyncMaybe<T> None = new AsyncMaybe<T>(AsyncResult.Error<T, Unit>(Unit.Default));
         public Task<bool> HasValue => _asyncResult.Either.HasValue;
 
         private readonly IAsyncResult<T, Unit> _asyncResult;
