@@ -119,6 +119,9 @@ namespace Lemonad.ErrorHandling.Internal {
             ? throw new ArgumentNullException(nameof(selector))
             : _asyncResult.Map(selector).ToAsyncMaybe();
 
+        public IAsyncMaybe<TResult> MapAsync<TResult>(Func<T, Task<TResult>> selector) =>
+            _asyncResult.MapAsync(selector).ToAsyncMaybe();
+
         public Task Match(Action<T> someAction, Action noneAction) {
             if (someAction is null) throw new ArgumentNullException(nameof(someAction));
             if (noneAction is null) throw new ArgumentNullException(nameof(noneAction));

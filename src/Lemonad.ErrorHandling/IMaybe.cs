@@ -126,7 +126,7 @@ namespace Lemonad.ErrorHandling {
         ///     A function to test <typeparamref name="T" />.
         /// </param>
         IMaybe<T> IsNoneWhen(Func<T, bool> predicate);
-        
+
         IAsyncMaybe<T> IsNoneWhenAsync(Func<T, Task<bool>> predicate);
 
         /// <summary>
@@ -139,6 +139,8 @@ namespace Lemonad.ErrorHandling {
         ///     The type returned from the function <paramref name="selector" />.
         /// </typeparam>
         IMaybe<TResult> Map<TResult>(Func<T, TResult> selector);
+
+        IAsyncMaybe<TResult> MapAsync<TResult>(Func<T, Task<TResult>> selector);
 
         /// <summary>
         ///     Evaluates the <see cref="Maybe{T}" />.

@@ -109,6 +109,7 @@ namespace Lemonad.ErrorHandling {
         ) where TSelector : struct;
 
         IAsyncMaybe<TResult> Map<TResult>(Func<T, TResult> selector);
+        IAsyncMaybe<TResult> MapAsync<TResult>(Func<T, Task<TResult>> selector);
         Task Match(Action<T> someAction, Action noneAction);
         Task<TResult> Match<TResult>(Func<T, TResult> someSelector, Func<TResult> noneSelector);
     }

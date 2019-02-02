@@ -28,6 +28,9 @@ namespace Lemonad.ErrorHandling.Internal {
         public override string ToString() =>
             $"{(HasValue ? "Some" : "None")} ==> {typeof(Maybe<T>).ToHumanString()}{StringFunctions.PrettyTypeString(Value)}";
 
+        public IAsyncMaybe<TResult> MapAsync<TResult>(Func<T, Task<TResult>> selector) =>
+            _result.MapAsync(selector).ToAsyncMaybe();
+
         public void Match(Action<T> someAction, Action noneAction) {
             if (noneAction is null) throw new ArgumentNullException(nameof(noneAction));
             _result.Match(someAction, _ => noneAction());
