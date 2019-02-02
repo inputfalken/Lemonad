@@ -44,7 +44,7 @@ internal static class Program {
                       Console.WriteLine(message + "Input cannot contain symbols.");
                       break;
                   default:
-                      throw new ArgumentOutOfRangeException(nameof(x), x, null);
+                      return (int) ExitCode.Unhandled;
               }
 
               return (int) x;
@@ -63,7 +63,8 @@ internal static class Program {
   private enum ExitCode {
       IsNullOrEmpty = 1,
       IsUpperCase = 2,
-      IsSymbol = 3
+      IsSymbol = 3,
+      Unhandled = 4
   }
 }
 ```
