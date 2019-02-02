@@ -43,8 +43,9 @@ internal static class Program {
                   case ExitCode.IsSymbol:
                       Console.WriteLine(message + "Input cannot contain symbols.");
                       break;
-                  default:
-                      return (int) ExitCode.Unhandled;
+                  case ExitCode.Unhandled:
+                      Console.WriteLine("Unhandled error.");
+                      break;
               }
 
               return (int) x;
