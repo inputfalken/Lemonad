@@ -25,11 +25,20 @@ namespace Lemonad.ErrorHandling.Internal {
 
         internal AsyncMaybe(in IAsyncResult<T, Unit> result) => _asyncResult = result;
 
-        public IAsyncMaybe<T> Do(Action action) => _asyncResult.Do(action).ToAsyncMaybe();
+        public IAsyncMaybe<T> Do(Action action) =>
+            action == null
+                ? throw new ArgumentNullException(nameof(action))
+                : _asyncResult.Do(action).ToAsyncMaybe();
 
-        public IAsyncMaybe<T> DoAsync(Func<Task> action) => _asyncResult.DoAsync(action).ToAsyncMaybe();
+        public IAsyncMaybe<T> DoAsync(Func<Task> action) =>
+            action == null
+                ? throw new ArgumentNullException(nameof(action))
+                : _asyncResult.DoAsync(action).ToAsyncMaybe();
 
-        public IAsyncMaybe<T> DoWith(Action<T> action) => _asyncResult.DoWith(action).ToAsyncMaybe();
+        public IAsyncMaybe<T> DoWith(Action<T> action) =>
+            action == null
+                ? throw new ArgumentNullException(nameof(action))
+                : _asyncResult.DoWith(action).ToAsyncMaybe();
 
         public IAsyncMaybe<T> DoWithAsync(Func<T, Task> someAction) => someAction is null
             ? throw new ArgumentNullException(nameof(someAction))
@@ -44,7 +53,9 @@ namespace Lemonad.ErrorHandling.Internal {
             : _asyncResult.FilterAsync(predicate, _ => Unit.Default).ToAsyncMaybe();
 
         public IAsyncMaybe<T> IsNoneWhenAsync(Func<T, Task<bool>> predicate) =>
-            _asyncResult.IsErrorWhenAsync(predicate, _ => Unit.Default).ToAsyncMaybe();
+            predicate == null
+                ? throw new ArgumentNullException(nameof(predicate))
+                : _asyncResult.IsErrorWhenAsync(predicate, _ => Unit.Default).ToAsyncMaybe();
 
         public IAsyncMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> selector) => selector is null
             ? throw new ArgumentNullException(nameof(selector))
@@ -129,7 +140,9 @@ namespace Lemonad.ErrorHandling.Internal {
             : _asyncResult.Map(selector).ToAsyncMaybe();
 
         public IAsyncMaybe<TResult> MapAsync<TResult>(Func<T, Task<TResult>> selector) =>
-            _asyncResult.MapAsync(selector).ToAsyncMaybe();
+            selector == null
+                ? throw new ArgumentNullException(nameof(selector))
+                : _asyncResult.MapAsync(selector).ToAsyncMaybe();
 
         public Task Match(Action<T> someAction, Action noneAction) {
             if (someAction is null) throw new ArgumentNullException(nameof(someAction));
