@@ -73,6 +73,8 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         IMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> selector);
 
+        IAsyncMaybe<TResult> FlatMapAsync<TResult>(Func<T, IAsyncMaybe<TResult>> selector);
+
         /// <summary>
         ///     Flatmaps another <see cref="Maybe{T}" />.
         /// </summary>
@@ -91,6 +93,11 @@ namespace Lemonad.ErrorHandling {
         /// </typeparam>
         IMaybe<TResult> FlatMap<TSelector, TResult>(
             Func<T, IMaybe<TSelector>> selector,
+            Func<T, TSelector, TResult> resultSelector
+        );
+
+        IAsyncMaybe<TResult> FlatMapAsync<TSelector, TResult>(
+            Func<T, IAsyncMaybe<TSelector>> selector,
             Func<T, TSelector, TResult> resultSelector
         );
 
@@ -115,9 +122,16 @@ namespace Lemonad.ErrorHandling {
             Func<T, TSelector, TResult> resultSelector
         ) where TSelector : struct;
 
+        IAsyncMaybe<TResult> FlatMapAsync<TSelector, TResult>(
+            Func<T, Task<TSelector?>> selector,
+            Func<T, TSelector, TResult> resultSelector
+        ) where TSelector : struct;
+
         IMaybe<TResult> FlatMap<TResult>(Func<T, TResult?> selector) where TResult : struct;
+        IAsyncMaybe<TResult> FlatMapAsync<TResult>(Func<T, Task<TResult?>> selector) where TResult : struct;
 
         IMaybe<T> Flatten<TResult>(Func<T, IMaybe<TResult>> selector);
+        IAsyncMaybe<T> FlattenAsync<TResult>(Func<T, IAsyncMaybe<TResult>> selector);
 
         /// <summary>
         ///     Filters the <typeparamref name="T" /> if <see cref="Maybe{T}" /> has a value.
