@@ -31,10 +31,10 @@ namespace Lemonad.ErrorHandling.Internal.Either {
             Task<IEither<T, TError>> either
         ) => CastError<T, TResult, TError>(await either.ConfigureAwait(false));
 
-        private static IEither<T1, T2> CreateError<T1, T2>(in T2 error)
+        internal static IEither<T1, T2> CreateError<T1, T2>(in T2 error)
             => new NonNullableEither<T1, T2>(default, error, true, false);
 
-        private static IEither<T1, T2> CreateValue<T1, T2>(in T1 value)
+        internal static IEither<T1, T2> CreateValue<T1, T2>(in T1 value)
             => new NonNullableEither<T1, T2>(value, default, false, true);
 
         internal static IEither<T, TError> Do<T, TError>(

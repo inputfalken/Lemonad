@@ -4,162 +4,168 @@ using Lemonad.ErrorHandling.Internal.Either;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.Internal.Tests.EitherAsyncTests {
-    // TODO remove dependency to IResult from tests
     public class EitherAsyncTests {
         [Fact]
         public async Task Accessing_Error_After_Awaiting_HasError_Does_Not_Throw() {
-            var either = Task.Run(async () => {
-                await Task.Delay(100);
-                return ErrorHandling.Result.Value<int, string>(20).Either;
-            });
-            var eitherAsync = new AsyncEither<int, string>(either);
+            var either = new AsyncEither<int, string>(
+                Task.Run(async () => {
+                    await Task.Delay(100);
+                    return EitherMethods.CreateValue<int, string>(20);
+                })
+            );
 
-            await eitherAsync.HasError;
-            var exception = Record.Exception(() => eitherAsync.Error);
+            await either.HasError;
+            var exception = Record.Exception(() => either.Error);
             Assert.Null(exception);
         }
 
         [Fact]
         public async Task Accessing_Error_After_Awaiting_HasValue_Does_Not_Throw() {
-            var either = Task.Run(async () => {
-                await Task.Delay(100);
-                return ErrorHandling.Result.Value<int, string>(20).Either;
-            });
-            var eitherAsync = new AsyncEither<int, string>(either);
+            var either = new AsyncEither<int, string>(
+                Task.Run(async () => {
+                    await Task.Delay(100);
+                    return EitherMethods.CreateValue<int, string>(20);
+                })
+            );
 
-            await eitherAsync.HasValue;
-            var exception = Record.Exception(() => eitherAsync.Error);
+            await either.HasValue;
+            var exception = Record.Exception(() => either.Error);
             Assert.Null(exception);
         }
 
         [Fact]
         public void Accessing_Error_Before_Await_Throws() {
-            var either = Task.Run(async () => {
-                await Task.Delay(100);
-                return ErrorHandling.Result.Value<int, string>(20).Either;
-            });
-            var eitherAsync = new AsyncEither<int, string>(either);
-            Assert.Throws<InvalidEitherStateException>(() => eitherAsync.Error);
+            var either = new AsyncEither<int, string>(
+                Task.Run(async () => {
+                    await Task.Delay(100);
+                    return EitherMethods.CreateValue<int, string>(20);
+                })
+            );
+            Assert.Throws<InvalidEitherStateException>(() => either.Error);
         }
 
         [Fact]
         public async Task Accessing_Value_Before_After_Awaiting_HasError_Does_Not_Throw() {
-            var either = Task.Run(async () => {
-                await Task.Delay(100);
-                return ErrorHandling.Result.Value<int, string>(20).Either;
-            });
-            var eitherAsync = new AsyncEither<int, string>(either);
-            await eitherAsync.HasError;
-            var exception = Record.Exception(() => eitherAsync.Value);
+            var either = new AsyncEither<int, string>(
+                Task.Run(async () => {
+                    await Task.Delay(100);
+                    return EitherMethods.CreateValue<int, string>(20);
+                })
+            );
+            await either.HasError;
+            var exception = Record.Exception(() => either.Value);
             Assert.Null(exception);
         }
 
         [Fact]
         public async Task Accessing_Value_Before_After_Awaiting_HasValue_Does_Not_Throw() {
-            var either = Task.Run(async () => {
-                await Task.Delay(100);
-                return ErrorHandling.Result.Value<int, string>(20).Either;
-            });
-            var eitherAsync = new AsyncEither<int, string>(either);
-            await eitherAsync.HasValue;
-            var exception = Record.Exception(() => eitherAsync.Value);
+            var either = new AsyncEither<int, string>(
+                Task.Run(async () => {
+                    await Task.Delay(100);
+                    return EitherMethods.CreateValue<int, string>(20);
+                })
+            );
+            await either.HasValue;
+            var exception = Record.Exception(() => either.Value);
             Assert.Null(exception);
         }
 
         [Fact]
         public void Accessing_Value_Before_Await_Throws() {
-            var either = Task.Run(async () => {
-                await Task.Delay(100);
-                return ErrorHandling.Result.Value<int, string>(20).Either;
-            });
-            var eitherAsync = new AsyncEither<int, string>(either);
-            Assert.Throws<InvalidEitherStateException>(() => eitherAsync.Value);
+            var either = new AsyncEither<int, string>(
+                Task.Run(async () => {
+                    await Task.Delay(100);
+                    return EitherMethods.CreateValue<int, string>(20);
+                })
+            );
+            Assert.Throws<InvalidEitherStateException>(() => either.Value);
         }
 
         [Fact]
         public async Task Creating_Either_With_Error_After_Delay_Await_Both() {
-            var either = Task.Run(async () => {
-                await Task.Delay(100);
-                return ErrorHandling.Result.Error<int, string>("ERROR").Either;
-            });
+            var either = new AsyncEither<int, string>(
+                Task.Run(async () => {
+                    await Task.Delay(100);
+                    return EitherMethods.CreateError<int, string>("ERROR");
+                })
+            );
+            Assert.True(await either.HasError);
+            Assert.False(await either.HasValue);
 
-            var eitherAsync = new AsyncEither<int, string>(either);
-            Assert.True(await eitherAsync.HasError);
-            Assert.False(await eitherAsync.HasValue);
-
-            Assert.Equal(default, eitherAsync.Value);
-            Assert.Equal("ERROR", eitherAsync.Error);
+            Assert.Equal(default, either.Value);
+            Assert.Equal("ERROR", either.Error);
         }
 
         [Fact]
         public async Task Creating_Either_With_Error_After_Delay_Awaiting_HasError() {
-            var either = Task.Run(async () => {
-                await Task.Delay(100);
-                return ErrorHandling.Result.Error<int, string>("ERROR").Either;
-            });
-            var eitherAsync = new AsyncEither<int, string>(either);
+            var either = new AsyncEither<int, string>(
+                Task.Run(async () => {
+                    await Task.Delay(100);
+                    return EitherMethods.CreateError<int, string>("ERROR");
+                })
+            );
 
-            Assert.False(await eitherAsync.HasValue);
-
-            Assert.Equal(default, eitherAsync.Value);
-            Assert.Equal("ERROR", eitherAsync.Error);
+            Assert.False(await either.HasValue);
+            Assert.Equal(default, either.Value);
+            Assert.Equal("ERROR", either.Error);
         }
 
         [Fact]
         public async Task Creating_Either_With_Error_After_Delay_Awaiting_HasValue() {
-            var either = Task.Run(async () => {
-                await Task.Delay(100);
-                return ErrorHandling.Result.Error<int, string>("ERROR").Either;
-            });
-            var eitherAsync = new AsyncEither<int, string>(either);
+            var either = new AsyncEither<int, string>(
+                Task.Run(async () => {
+                    await Task.Delay(100);
+                    return EitherMethods.CreateError<int, string>("ERROR");
+                })
+            );
 
-            Assert.True(await eitherAsync.HasError);
+            Assert.True(await either.HasError);
 
-            Assert.Equal(default, eitherAsync.Value);
-            Assert.Equal("ERROR", eitherAsync.Error);
+            Assert.Equal(default, either.Value);
+            Assert.Equal("ERROR", either.Error);
         }
 
         [Fact]
         public async Task Creating_Either_With_Value_After_Delay_Await_Both() {
-            var either = Task.Run(async () => {
-                await Task.Delay(100);
-                return ErrorHandling.Result.Value<int, string>(20).Either;
-            });
-            var eitherAsync = new AsyncEither<int, string>(either);
+            var either = new AsyncEither<int, string>(
+                Task.Run(async () => {
+                    await Task.Delay(100);
+                    return EitherMethods.CreateValue<int, string>(20);
+                })
+            );
 
-            Assert.True(await eitherAsync.HasValue);
-            Assert.False(await eitherAsync.HasError);
+            Assert.True(await either.HasValue);
+            Assert.False(await either.HasError);
 
-            Assert.Equal(20, eitherAsync.Value);
-            Assert.Equal(default, eitherAsync.Error);
+            Assert.Equal(20, either.Value);
+            Assert.Equal(default, either.Error);
         }
 
         [Fact]
         public async Task Creating_Either_With_Value_After_Delay_Awaiting_HasError() {
-            var either = Task.Run(async () => {
-                await Task.Delay(100);
-                return ErrorHandling.Result.Value<int, string>(20).Either;
-            });
-            var eitherAsync = new AsyncEither<int, string>(either);
-
-            Assert.False(await eitherAsync.HasError);
-
-            Assert.Equal(20, eitherAsync.Value);
-            Assert.Equal(default, eitherAsync.Error);
+            var either = new AsyncEither<int, string>(
+                Task.Run(async () => {
+                    await Task.Delay(100);
+                    return EitherMethods.CreateValue<int, string>(20);
+                })
+            );
+            Assert.False(await either.HasError);
+            Assert.Equal(20, either.Value);
+            Assert.Equal(default, either.Error);
         }
 
         [Fact]
         public async Task Creating_Either_With_Value_After_Delay_Awaiting_HasValue() {
-            var either = Task.Run(async () => {
-                await Task.Delay(100);
-                return ErrorHandling.Result.Value<int, string>(20).Either;
-            });
-            var eitherAsync = new AsyncEither<int, string>(either);
+            var either = new AsyncEither<int, string>(
+                Task.Run(async () => {
+                    await Task.Delay(100);
+                    return EitherMethods.CreateValue<int, string>(20);
+                })
+            );
 
-            Assert.True(await eitherAsync.HasValue);
-
-            Assert.Equal(20, eitherAsync.Value);
-            Assert.Equal(default, eitherAsync.Error);
+            Assert.True(await either.HasValue);
+            Assert.Equal(20, either.Value);
+            Assert.Equal(default, either.Error);
         }
     }
 }
