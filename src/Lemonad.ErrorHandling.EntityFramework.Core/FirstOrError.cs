@@ -50,7 +50,7 @@ namespace Lemonad.ErrorHandling.EntityFramework.Core {
         /// <exception cref="ArgumentNullException">
         ///     When any of the parameters are null.
         /// </exception>
-        public static IAsyncResult<TSource, TError> FirstOrError<TSource, TError>(
+        public static IAsyncResult<TSource, TError> FirstOrErrorAsync<TSource, TError>(
             this IQueryable<TSource> source,
             Func<TError> errorSelector
         ) {
@@ -91,7 +91,7 @@ namespace Lemonad.ErrorHandling.EntityFramework.Core {
         /// <exception cref="ArgumentNullException">
         ///     When any of the parameters are null.
         /// </exception>
-        public static IAsyncResult<TSource, TError> FirstOrError<TSource, TError>(
+        public static IAsyncResult<TSource, TError> FirstOrErrorAsync<TSource, TError>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, bool>> predicate,
             Func<TError> errorSelector
@@ -99,7 +99,7 @@ namespace Lemonad.ErrorHandling.EntityFramework.Core {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
             if (predicate is null) throw new ArgumentNullException(nameof(predicate));
-            return source.Where(predicate).FirstOrError(errorSelector);
+            return source.Where(predicate).FirstOrErrorAsync(errorSelector);
         }
     }
 }

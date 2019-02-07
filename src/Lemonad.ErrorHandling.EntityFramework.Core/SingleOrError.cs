@@ -21,7 +21,7 @@ namespace Lemonad.ErrorHandling.EntityFramework.Core {
         ///     The single element of the input sequence, or <see cref="SingleOrErrorCase" /> otherwise inside a
         ///     <see cref="IResult{T,TError}" />.
         /// </returns>
-        public static IAsyncResult<TSource[], SingleOrErrorCase> SingleOrError<TSource>(this IQueryable<TSource> source) {
+        public static IAsyncResult<TSource[], SingleOrErrorCase> SingleOrErrorAsync<TSource>(this IQueryable<TSource> source) {
             if (source is null) throw new ArgumentNullException(nameof(source));
             return source
                 .Take(2)
@@ -49,13 +49,13 @@ namespace Lemonad.ErrorHandling.EntityFramework.Core {
         ///     The single element of the input sequence, or <see cref="SingleOrErrorCase" /> otherwise inside a
         ///     <see cref="IResult{T,TError}" />.
         /// </returns>
-        public static IAsyncResult<TSource[], SingleOrErrorCase> SingleOrError<TSource>(
+        public static IAsyncResult<TSource[], SingleOrErrorCase> SingleOrErrorAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, bool>> predicate
         ) {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (predicate is null) throw new ArgumentNullException(nameof(predicate));
-            return source.Where(predicate).SingleOrError();
+            return source.Where(predicate).SingleOrErrorAsync();
         }
     }
 }
