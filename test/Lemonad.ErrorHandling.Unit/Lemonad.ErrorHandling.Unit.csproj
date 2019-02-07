@@ -11,4 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Assertion\Assertion.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AsyncMaybe.Tests" />
+  </ItemGroup>
 </Project>
