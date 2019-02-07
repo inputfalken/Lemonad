@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Extensions.Result.Task;
 
 namespace Lemonad.ErrorHandling.Extensions.AsyncMaybe {
-    public static class Index {
+    public static partial class Index {
         public static IAsyncResult<T, TError> ToAsyncResult<T, TError>(
             this IAsyncMaybe<T> source,
             Func<TError> errorSelector

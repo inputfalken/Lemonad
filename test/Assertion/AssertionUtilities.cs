@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
 using Lemonad.ErrorHandling.Extensions;
+using Lemonad.ErrorHandling.Extensions.Maybe;
 using Lemonad.ErrorHandling.Extensions.Result;
 using Lemonad.ErrorHandling.Extensions.Result.Task;
 
@@ -50,7 +51,6 @@ namespace Assertion {
                     x => right != 0,
                     x => $"Can not divide '{x.left}' with '{x.right}'."
                 )
-                .ToAsyncResult()
                 .MapAsync(async x => {
                     await Delay;
                     return x.left / x.right;
@@ -59,6 +59,14 @@ namespace Assertion {
 
         public static IMaybe<int> DivisionMaybe(int left, int right) =>
             right != 0 ? Maybe.Value(left / right) : Maybe.None<int>();
+
+        public static IAsyncMaybe<int> DivisionMaybeAsync(int left, int right) {
+            return (left, right).ToMaybe(x => x.right != 0)
+                .MapAsync(async x => {
+                    await Delay;
+                    return x.left / x.right;
+                });
+        }
 
         public static string FormatStringParserMessage<T>(string input) =>
             input is null
