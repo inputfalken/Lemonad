@@ -226,5 +226,7 @@ namespace Lemonad.ErrorHandling {
         ///     The type returned by the functions <paramref name="someSelector" /> and <paramref name="noneSelector" />.
         /// </typeparam>
         TResult Match<TResult>(Func<T, TResult> someSelector, Func<TResult> noneSelector);
+
+        IAsyncMaybe<T> DoAsync(Func<Task> func);
     }
 }
