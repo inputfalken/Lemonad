@@ -10,24 +10,12 @@ using Microsoft.EntityFrameworkCore;
 namespace Lemonad.ErrorHandling.EntityFramework.Core {
     public static partial class Index {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsValueType<T>(this T value) => Check<T>.IsValueType(value);
+        private static bool IsValueType<T>(T value) => Check<T>.IsValueType(value);
 
         private static class Check<T> {
-            private static readonly EqualityComparer<T> DefaultEqualityComparer;
-            private static readonly bool IsNullable;
             private static readonly bool IsReferenceType;
 
-            static Check() {
-                IsNullable = Nullable.GetUnderlyingType(typeof(T)) is null == false;
-                IsReferenceType = !typeof(T).GetTypeInfo().IsValueType;
-                DefaultEqualityComparer = EqualityComparer<T>.Default;
-            }
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal static bool IsNull(T value) =>
-                IsNullable
-                    ? value.Equals(default(T))
-                    : IsReferenceType && DefaultEqualityComparer.Equals(value, default);
+            static Check() => IsReferenceType = !typeof(T).GetTypeInfo().IsValueType;
 
             internal static bool IsValueType(T _) => IsReferenceType == false;
         }
@@ -58,7 +46,7 @@ namespace Lemonad.ErrorHandling.EntityFramework.Core {
             if (errorSelector is null) throw new ArgumentNullException(nameof(errorSelector));
 
             // Since anonymous types are reference types, It's possible to wrap the value type in an anonymous type and perform a null check.
-            return default(TSource).IsValueType()
+            return IsValueType(default(TSource))
                 ? source
                     .Select(x => new {LemonadValueTypeWrapper = x})
                     .FirstOrDefaultAsync()
