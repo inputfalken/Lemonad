@@ -6,10 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Lemonad.ErrorHandling\Lemonad.ErrorHandling.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
+      <PackageReference Include="Lemonad.ErrorHandling" Version="0.9.4" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.1" />
     </ItemGroup>
 
