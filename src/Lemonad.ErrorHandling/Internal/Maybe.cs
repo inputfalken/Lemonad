@@ -94,11 +94,15 @@ namespace Lemonad.ErrorHandling.Internal {
         public IAsyncMaybe<TResult> FlatMapAsync<TSelector, TResult>(
             Func<T, IAsyncMaybe<TSelector>> selector,
             Func<T, TSelector, TResult> resultSelector
-        ) => _result
-            .FlatMapAsync(
-                selector.Compose(y => Extensions.AsyncMaybe.Index.ToAsyncResult(y, Unit.Selector)),
-                resultSelector
-            ).ToAsyncMaybe();
+        ) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+            return _result
+                .FlatMapAsync(
+                    selector.Compose(y => Extensions.AsyncMaybe.Index.ToAsyncResult(y, Unit.Selector)),
+                    resultSelector
+                ).ToAsyncMaybe();
+        }
 
         public IAsyncMaybe<TResult> FlatMapAsync<TSelector, TResult>(Func<T, Task<TSelector?>> selector,
             Func<T, TSelector, TResult> resultSelector) where TSelector : struct
