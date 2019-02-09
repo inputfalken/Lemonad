@@ -28,8 +28,10 @@ namespace Lemonad.ErrorHandling.Internal {
         public override string ToString() =>
             $"{(HasValue ? "Some" : "None")} ==> {typeof(Maybe<T>).ToHumanString()}{StringFunctions.PrettyTypeString(Value)}";
 
-        public IAsyncMaybe<TResult> MapAsync<TResult>(Func<T, Task<TResult>> selector) =>
-            _result.MapAsync(selector).ToAsyncMaybe();
+        public IAsyncMaybe<TResult> MapAsync<TResult>(Func<T, Task<TResult>> selector) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            return _result.MapAsync(selector).ToAsyncMaybe();
+        }
 
         public void Match(Action<T> someAction, Action noneAction) {
             if (noneAction is null) throw new ArgumentNullException(nameof(noneAction));
@@ -113,13 +115,17 @@ namespace Lemonad.ErrorHandling.Internal {
                 ? throw new ArgumentNullException(nameof(selector))
                 : _result.FlatMap(selector, Unit.Selector).ToMaybe();
 
-        public IAsyncMaybe<TResult> FlatMapAsync<TResult>(Func<T, Task<TResult?>> selector) where TResult : struct
-            => _result.FlatMapAsync(selector, Unit.Selector).ToAsyncMaybe();
+        public IAsyncMaybe<TResult> FlatMapAsync<TResult>(Func<T, Task<TResult?>> selector) where TResult : struct {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            return _result.FlatMapAsync(selector, Unit.Selector).ToAsyncMaybe();
+        }
 
-        public IAsyncMaybe<T> FlattenAsync<TResult>(Func<T, IAsyncMaybe<TResult>> selector)
-            => _result.FlattenAsync(
+        public IAsyncMaybe<T> FlattenAsync<TResult>(Func<T, IAsyncMaybe<TResult>> selector) {
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            return _result.FlattenAsync(
                 selector.Compose(x => Extensions.AsyncMaybe.Index.ToAsyncResult(x, Unit.Selector))
             ).ToAsyncMaybe();
+        }
 
         public IMaybe<T> IsNoneWhen(Func<T, bool> predicate) => predicate is null
             ? throw new ArgumentNullException(nameof(predicate))

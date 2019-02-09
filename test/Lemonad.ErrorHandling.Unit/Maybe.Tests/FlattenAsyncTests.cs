@@ -1,49 +1,51 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Assertion;
 using Lemonad.ErrorHandling.Extensions;
+using Lemonad.ErrorHandling.Extensions.AsyncMaybe;
 using Xunit;
 
 namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
-    public class FlattenTests {
+    public class FlattenAsyncTests {
         [Fact]
-        public void
+        public async Task
             Flattening_From_String_Maybe_With_No_Value_To_Maybe_Int_With_No_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
-            input.ToMaybeNone().AssertNone().Flatten(x => 2.ToMaybeNone().AssertNone()).AssertNone();
+            await input.ToMaybeNone().AssertNone().FlattenAsync(x => AsyncMaybe.None<int>().AssertNone()).AssertNone();
         }
 
         [Fact]
-        public void
+        public async Task
             Flattening_From_String_Maybe_With_No_Value_To_Maybe_Int_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
 
-            input.ToMaybeNone().AssertNone().Flatten(x => ErrorHandling.Maybe.Value(2).AssertValue(2)).AssertNone();
+            await input.ToMaybeNone().AssertNone().FlattenAsync(x => AsyncMaybe.Value(2).AssertValue(2)).AssertNone();
         }
 
         [Fact]
-        public void
+        public async Task
             Flattening_From_String_Maybe_With_Value_To_Maybe_Int_With_No_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
 
-            input.ToMaybe(s => s.Length > 4)
+            await input.ToMaybe(s => s.Length > 4)
                 .AssertValue("hello")
-                .Flatten(x => 2.ToMaybeNone().AssertNone())
+                .FlattenAsync(x => AsyncMaybe.None<int>().AssertNone())
                 .AssertNone();
         }
 
         [Fact]
-        public void
+        public async Task
             Flattening_From_String_Maybe_With_Value_To_Maybe_Int_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
-            input.ToMaybe(s => s.Length > 4)
+            await input.ToMaybe(s => s.Length > 4)
                 .AssertValue("hello")
-                .Flatten(x => ErrorHandling.Maybe.Value(2).AssertValue(2))
+                .FlattenAsync(x => AsyncMaybe.Value(2).AssertValue(2))
                 .AssertValue("hello");
         }
 
         [Fact]
         public void Passing_Null_Selector_Throws() =>
             Assert.Throws<ArgumentNullException>(AssertionUtilities.SelectorName,
-                () => ErrorHandling.Maybe.Value(2).Flatten((Func<int, IMaybe<int>>) null));
+                () => ErrorHandling.Maybe.Value(2).FlattenAsync((Func<int, IAsyncMaybe<int>>) null));
     }
 }

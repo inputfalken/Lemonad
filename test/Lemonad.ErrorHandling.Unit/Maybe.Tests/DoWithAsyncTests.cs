@@ -8,17 +8,17 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
     public class DoWithAsyncTests {
         [Fact]
         public void Maybe_With_No_Value_Null_Action__Expects_Exception() {
-            Action<string> argument = null;
+            Func<string, Task> argument = null;
             Assert.Throws<ArgumentNullException>(
-                () => ErrorHandling.Maybe.Value("foobar").DoWith(argument)
+                () => ErrorHandling.Maybe.Value("foobar").DoWithAsync(argument)
             );
         }
 
         [Fact]
         public void Maybe_With_Value_Null_Action__Expects_Exception() {
-            Action<string> argument = null;
+            Func<string, Task> argument = null;
             Assert.Throws<ArgumentNullException>(
-                () => ErrorHandling.Maybe.Value("foobar").DoWith(argument)
+                () => ErrorHandling.Maybe.Value("foobar").DoWithAsync(argument)
             );
         }
 
