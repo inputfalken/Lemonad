@@ -19,13 +19,15 @@ namespace Lemonad.ErrorHandling.Extensions {
         ///     The type returned by the <paramref name="errorSelector" /> function.
         /// </typeparam>
         public static IResult<T, TError> ToResult<T, TError>(this T? source, Func<TError> errorSelector)
-            where T : struct => source.ToResult(
-                x => x.HasValue,
-                x => errorSelector is null
-                    ? throw new ArgumentNullException(nameof(errorSelector))
-                    : errorSelector()
-            )
-            .Map(x => x.Value);
+            where T : struct
+            => errorSelector is null
+                ? throw new ArgumentNullException(nameof(errorSelector))
+                : source.ToResult(
+                        x => x.HasValue,
+                        x =>
+                            errorSelector()
+                    )
+                    .Map(x => x.Value);
 
         /// <summary>
         ///     Creates an <see cref="IResult{T,TError}" /> based on a predicate function combined with a
