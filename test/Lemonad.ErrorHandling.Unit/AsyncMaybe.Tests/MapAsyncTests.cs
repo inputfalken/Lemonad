@@ -4,11 +4,11 @@ using Assertion;
 using Lemonad.ErrorHandling.Extensions.AsyncMaybe;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
+namespace Lemonad.ErrorHandling.Unit.AsyncMaybe.Tests {
     public class MapAsyncTests {
         [Fact]
         public async Task Mapping_Integer_With_Multiplication() {
-            await Lemonad.ErrorHandling.Maybe.Value(20)
+            await Lemonad.ErrorHandling.AsyncMaybe.Value(20)
                 .MapAsync(async x => {
                     await AssertionUtilities.Delay;
                     return x * 2;
@@ -18,7 +18,7 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
 
         [Fact]
         public async Task Mapping_String_Length() {
-            await ErrorHandling.Maybe.Value("hello")
+            await ErrorHandling.AsyncMaybe.Value("hello")
                 .MapAsync(async s => {
                     await AssertionUtilities.Delay;
                     return s.Length;
@@ -31,7 +31,7 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
             Maybe_String_Whose_Property_HasValue_Is_True__Pasing_Null_Predicate__ArgumentNullReferenceException_Thrown() {
             await Assert.ThrowsAsync<ArgumentNullException>(async () => {
                 Func<string, Task<bool>> function = null;
-                await ErrorHandling.Maybe.Value("foo").MapAsync(function);
+                await ErrorHandling.AsyncMaybe.Value("foo").MapAsync(function);
             });
         }
     }
