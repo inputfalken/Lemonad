@@ -3,22 +3,18 @@ using System.Threading.Tasks;
 using Assertion;
 using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Extensions.AsyncMaybe;
-using Lemonad.ErrorHandling.Extensions.Maybe;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
-    public class FlatMapAsyncResultSelectorAsyncTests {
+namespace Lemonad.ErrorHandling.Unit.AsyncMaybe.Tests {
+    public class FlatMapResultSelectorTests {
         [Fact]
         public async Task
             Flattening_From_String_Maybe_With_value_To_Nullable_Int_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
-            int? nullableInt = 2;
-            await ErrorHandling.Maybe.Value(input)
-                .FlatMapAsync(async x => {
-                    await AssertionUtilities.Delay;
-                    return nullableInt;
-                })
-                .AssertValue(nullableInt.Value);
+            int? nullable = 2;
+            await ErrorHandling.AsyncMaybe.Value(input)
+                .FlatMap(x => nullable)
+                .AssertValue(nullable.Value);
         }
 
         [Fact]
@@ -26,11 +22,8 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
             Flattening_From_String_Maybe_With_value_To_Nullable_Int_Without_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
             int? nullableInt = null;
-            await ErrorHandling.Maybe.Value(input)
-                .FlatMapAsync(async x => {
-                    await AssertionUtilities.Delay;
-                    return nullableInt;
-                })
+            await ErrorHandling.AsyncMaybe.Value(input)
+                .FlatMap(x => nullableInt)
                 .AssertNone();
         }
 
@@ -38,8 +31,8 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         public async Task
             Flattening_From_String_Maybe_With_value_To_String_Maybe_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
-            await ErrorHandling.Maybe.Value(input)
-                .FlatMapAsync(x => { return input.ToMaybe(s => s.Length > 4).ToMaybeAsync(); })
+            await ErrorHandling.AsyncMaybe.Value(input)
+                .FlatMap(x => input.ToMaybe(s => s.Length > 4))
                 .AssertValue(input);
         }
 
@@ -47,8 +40,8 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         public async Task
             Flattening_From_String_Maybe_With_value_To_String_Maybe_Without_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
-            await ErrorHandling.Maybe.Value(input)
-                .FlatMapAsync(x => input.ToMaybe(s => s.Length > 5).ToMaybeAsync())
+            await ErrorHandling.AsyncMaybe.Value(input)
+                .FlatMap(x => input.ToMaybe(s => s.Length > 5))
                 .AssertNone();
         }
 
@@ -57,7 +50,7 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
             Passing_Both_Null_ResultSelector_Function_And_SelectorFunction__Throws_ArgumentNullException() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, string, string> function = null;
-                ErrorHandling.Maybe.Value("foo").FlatMapAsync(Lemonad.ErrorHandling.AsyncMaybe.Value, function);
+                ErrorHandling.AsyncMaybe.Value("foo").FlatMap(ErrorHandling.Maybe.Value, function);
             });
         }
 
@@ -65,15 +58,15 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         public void Passing_Null_ResultSelector_Function__Throws_ArgumentNullException() {
             Assert.Throws<ArgumentNullException>(() => {
                 Func<string, string, string> function = null;
-                ErrorHandling.Maybe.Value("foo").FlatMapAsync(Lemonad.ErrorHandling.AsyncMaybe.Value, function);
+                ErrorHandling.AsyncMaybe.Value("foo").FlatMap(ErrorHandling.Maybe.Value, function);
             });
         }
 
         [Fact]
         public void Passing_Null_Selector_Function__Throws_ArgumentNullException() {
             Assert.Throws<ArgumentNullException>(() => {
-                Func<string, IAsyncMaybe<bool>> function = null;
-                ErrorHandling.Maybe.Value("foo").FlatMapAsync(function, (s, b) => s);
+                Func<string, IMaybe<bool>> function = null;
+                ErrorHandling.AsyncMaybe.Value("foo").FlatMap(function, (s, b) => s);
             });
         }
 
@@ -83,11 +76,8 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.ResultSelector,
                 () =>
-                    Lemonad.ErrorHandling.Maybe.Value(input)
-                        .FlatMapAsync(async x => {
-                            await AssertionUtilities.Delay;
-                            return (int?) 2;
-                        }, (Func<string, int, string>) null)
+                    ErrorHandling.AsyncMaybe.Value(input)
+                        .FlatMap(x => (int?) 2, (Func<string, int, string>) null)
             );
         }
 
@@ -97,8 +87,8 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
             Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.SelectorName,
                 () =>
-                    Lemonad.ErrorHandling.Maybe.Value(input)
-                        .FlatMapAsync((Func<string, Task<int?>>) null, (s, i) => s)
+                    ErrorHandling.AsyncMaybe.Value(input)
+                        .FlatMap((Func<string, int?>) null, (s, i) => s)
             );
         }
 
@@ -107,11 +97,8 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
             ResultSelector_Overload__Flattening_From_String_Maybe_With_value_To_Nullable_Int_Maybe_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
             int? nullabelInt = 2;
-            await Lemonad.ErrorHandling.Maybe.Value(input)
-                .FlatMapAsync(async x => {
-                    await AssertionUtilities.Delay;
-                    return nullabelInt;
-                }, (x, y) => x.Length + y)
+            await ErrorHandling.AsyncMaybe.Value(input)
+                .FlatMap(x => nullabelInt, (x, y) => x.Length + y)
                 .AssertValue(input.Length + nullabelInt.Value);
         }
 
@@ -120,11 +107,8 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
             ResultSelector_Overload__Flattening_From_String_Maybe_With_value_To_Nullable_Int_Without_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
             int? nullableInt = null;
-            await Lemonad.ErrorHandling.Maybe.Value(input)
-                .FlatMapAsync(async x => {
-                    await AssertionUtilities.Delay;
-                    return nullableInt;
-                }, (x, y) => x.Length + y)
+            await ErrorHandling.AsyncMaybe.Value(input)
+                .FlatMap(x => nullableInt, (x, y) => x.Length + y)
                 .AssertNone();
         }
 
@@ -132,9 +116,8 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         public async Task
             ResultSelector_Overload__Flattening_From_String_Maybe_With_value_To_String_Maybe_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
-            await Lemonad.ErrorHandling.Maybe.Value(input)
-                .FlatMapAsync(x => input.ToMaybeNone(string.IsNullOrEmpty).ToMaybeAsync(),
-                    (x, y) => x.Length + y.Length)
+            await ErrorHandling.AsyncMaybe.Value(input)
+                .FlatMap(x => input.ToMaybeNone(string.IsNullOrEmpty), (x, y) => x.Length + y.Length)
                 .AssertValue(input.Length * 2);
         }
 
@@ -142,8 +125,8 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         public async Task
             ResultSelector_Overload__Flattening_From_String_Maybe_With_value_To_String_Maybe_Without_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
-            await Lemonad.ErrorHandling.Maybe.Value(input)
-                .FlatMapAsync(x => input.ToMaybe(s => s.Length > 5).ToMaybeAsync(), (x, y) => x.Length + y.Length)
+            await ErrorHandling.AsyncMaybe.Value(input)
+                .FlatMap(x => input.ToMaybe(s => s.Length > 5), (x, y) => x.Length + y.Length)
                 .AssertNone();
         }
 
@@ -151,12 +134,8 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         public async Task
             ResultSelector_Overload__Flattening_From_String_Maybe_Without_value_To_Nullable_Int_With_Value__Expects_String_Maybe_Without_Value() {
             int? nullableInt = 2;
-            await ErrorHandling.Maybe.None<string>()
-                .AssertNone()
-                .FlatMapAsync(async x => {
-                    await AssertionUtilities.Delay;
-                    return nullableInt;
-                }, (x, y) => x.Length + y)
+            await ErrorHandling.AsyncMaybe.None<string>()
+                .FlatMap(x => nullableInt, (x, y) => x.Length + y)
                 .AssertNone();
         }
 
@@ -164,11 +143,8 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         public async Task
             ResultSelector_Overload__Flattening_From_String_Maybe_Without_value_To_Nullable_int_Without_Value__Expects_String_Maybe_Without_Value() {
             int? nullableInt = null;
-            await ErrorHandling.Maybe.None<string>()
-                .FlatMapAsync(async x => {
-                    await AssertionUtilities.Delay;
-                    return nullableInt;
-                }, (x, y) => x.Length + y)
+            await ErrorHandling.AsyncMaybe.None<string>()
+                .FlatMap(x => nullableInt, (x, y) => x.Length + y)
                 .AssertNone();
         }
 
@@ -176,8 +152,8 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         public async Task
             ResultSelector_Overload__Flattening_From_String_Maybe_Without_value_To_String_Maybe_With_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
-            await ErrorHandling.Maybe.None<string>()
-                .FlatMapAsync(x => input.ToMaybeNone(string.IsNullOrEmpty).ToMaybeAsync().AssertValue("hello"),
+            await ErrorHandling.AsyncMaybe.None<string>()
+                .FlatMap(x => input.ToMaybeNone(string.IsNullOrEmpty).AssertValue("hello"),
                     (x, y) => x.Length + y.Length)
                 .AssertNone();
         }
@@ -187,9 +163,8 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
             ResultSelector_Overload__Flattening_From_String_Maybe_Without_value_To_String_Maybe_Without_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
 
-            await ErrorHandling.Maybe.None<string>()
-                .FlatMapAsync(x => input.ToMaybe(s => s.Length > 5).ToMaybeAsync().AssertNone(),
-                    (x, y) => x.Length + y.Length)
+            await ErrorHandling.AsyncMaybe.None<string>()
+                .FlatMap(x => input.ToMaybe(s => s.Length > 5).AssertNone(), (x, y) => x.Length + y.Length)
                 .AssertNone();
         }
     }

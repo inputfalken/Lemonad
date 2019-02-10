@@ -6,7 +6,7 @@ using Lemonad.ErrorHandling.Extensions.AsyncMaybe;
 using Lemonad.ErrorHandling.Extensions.Maybe;
 using Xunit;
 
-namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
+namespace Lemonad.ErrorHandling.Unit.AsyncMaybe.Tests {
     public class FlatMapAsyncResultSelectorAsyncTests {
         [Fact]
         public async Task
