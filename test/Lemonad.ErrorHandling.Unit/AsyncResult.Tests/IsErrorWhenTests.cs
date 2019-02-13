@@ -7,17 +7,17 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
     public class ErrorWhenTests {
         [Fact]
-        public void Passing_Null_Predicate_Throws()
-            => Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.PredicateName,
-                () => AssertionUtilities.DivisionAsync(10, 2).IsErrorWhen(null, d => "")
-            );
-
-        [Fact]
         public void Passing_Null_ErrorSelector_Throws()
             => Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.ErrorSelectorName,
                 () => AssertionUtilities.DivisionAsync(10, 2).IsErrorWhen(d => true, null)
+            );
+
+        [Fact]
+        public void Passing_Null_Predicate_Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.PredicateName,
+                () => AssertionUtilities.DivisionAsync(10, 2).IsErrorWhen(null, d => "")
             );
 
         [Fact]

@@ -64,7 +64,7 @@ namespace Lemonad.ErrorHandling {
         /// </returns>
         IResult<T, TError> Do(Action action);
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.DoAsync"/>
+        /// <inheritdoc cref="IAsyncResult{T,TError}.DoAsync" />
         IAsyncResult<T, TError> DoAsync(Func<Task> action);
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Lemonad.ErrorHandling {
         /// </returns>
         IResult<T, TError> DoWith(Action<T> action);
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.DoWithAsync"/>
+        /// <inheritdoc cref="IAsyncResult{T,TError}.DoWithAsync" />
         IAsyncResult<T, TError> DoWithAsync(Func<T, Task> action);
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Lemonad.ErrorHandling {
         /// </returns>
         IResult<T, TError> DoWithError(Action<TError> action);
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.DoWithErrorAsync"/>
+        /// <inheritdoc cref="IAsyncResult{T,TError}.DoWithErrorAsync" />
         IAsyncResult<T, TError> DoWithErrorAsync(Func<TError, Task> action);
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace Lemonad.ErrorHandling {
         /// </returns>
         IResult<T, TError> Filter(Func<T, bool> predicate, Func<T, TError> errorSelector);
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.FilterAsync"/>
+        /// <inheritdoc cref="IAsyncResult{T,TError}.FilterAsync" />
         IAsyncResult<T, TError> FilterAsync(Func<T, Task<bool>> predicate, Func<T, TError> errorSelector);
 
         /// <summary>
@@ -252,35 +252,39 @@ namespace Lemonad.ErrorHandling {
             Func<TErrorResult, TError> errorSelector
         );
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.FlatMapAsync{TResult}(Func{T, Task{TResult?}}, Func{TError})"/>
+        /// <inheritdoc cref="IAsyncResult{T,TError}.FlatMapAsync{TResult}(Func{T, Task{TResult?}}, Func{TError})" />
         IAsyncResult<TResult, TError> FlatMapAsync<TResult>(
             Func<T, Task<TResult?>> selector,
             Func<TError> errorSelector
         ) where TResult : struct;
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.FlatMapAsync{TSelector,TResult}(Func{T, Task{TSelector?}}, Func{T,TSelector, TResult},Func{TError})"/>
+        /// <inheritdoc
+        ///     cref="IAsyncResult{T,TError}.FlatMapAsync{TSelector,TResult}(Func{T, Task{TSelector?}}, Func{T,TSelector, TResult},Func{TError})" />
         IAsyncResult<TResult, TError> FlatMapAsync<TSelector, TResult>(
             Func<T, Task<TSelector?>> selector,
             Func<T, TSelector, TResult> resultSelector,
             Func<TError> errorSelector
         ) where TSelector : struct;
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.FlatMapAsync{TResult}(Func{T, IAsyncResult{TResult, TError}})"/>
+        /// <inheritdoc cref="IAsyncResult{T,TError}.FlatMapAsync{TResult}(Func{T, IAsyncResult{TResult, TError}})" />
         IAsyncResult<TResult, TError> FlatMapAsync<TResult>(Func<T, IAsyncResult<TResult, TError>> selector);
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.FlatMapAsync{TSelector, TResult}(Func{T, IAsyncResult{TSelector, TError}}, Func{T, TSelector, TResult})"/>
+        /// <inheritdoc
+        ///     cref="IAsyncResult{T,TError}.FlatMapAsync{TSelector, TResult}(Func{T, IAsyncResult{TSelector, TError}}, Func{T, TSelector, TResult})" />
         IAsyncResult<TResult, TError> FlatMapAsync<TSelector, TResult>(
             Func<T, IAsyncResult<TSelector, TError>> selector,
             Func<T, TSelector, TResult> resultSelector
         );
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.FlatMapAsync{TResult, TErrorResult}(Func{T, IAsyncResult{TResult, TErrorResult}}, Func{TErrorResult, TError})"/>
+        /// <inheritdoc
+        ///     cref="IAsyncResult{T,TError}.FlatMapAsync{TResult, TErrorResult}(Func{T, IAsyncResult{TResult, TErrorResult}}, Func{TErrorResult, TError})" />
         IAsyncResult<TResult, TError> FlatMapAsync<TResult, TErrorResult>(
             Func<T, IAsyncResult<TResult, TErrorResult>> selector,
             Func<TErrorResult, TError> errorSelector
         );
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.FlatMapAsync{TFlatMap, TResult, TErrorResult}(Func{T, IAsyncResult{TFlatMap, TErrorResult}}, Func{T, TFlatMap, TResult}, Func{TErrorResult, TError})"/>
+        /// <inheritdoc
+        ///     cref="IAsyncResult{T,TError}.FlatMapAsync{TFlatMap, TResult, TErrorResult}(Func{T, IAsyncResult{TFlatMap, TErrorResult}}, Func{T, TFlatMap, TResult}, Func{TErrorResult, TError})" />
         IAsyncResult<TResult, TError> FlatMapAsync<TFlatMap, TResult, TErrorResult>(
             Func<T, IAsyncResult<TFlatMap, TErrorResult>> selector,
             Func<T, TFlatMap, TResult> resultSelector,
@@ -329,13 +333,14 @@ namespace Lemonad.ErrorHandling {
         /// <exception cref="ArgumentNullException"></exception>
         IResult<T, TError> Flatten<TResult>(Func<T, IResult<TResult, TError>> selector);
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.FlattenAsync{TResult,TErrorResult}(Func{T, IAsyncResult{TResult, TErrorResult}}, Func{TErrorResult, TError})"/>
+        /// <inheritdoc
+        ///     cref="IAsyncResult{T,TError}.FlattenAsync{TResult,TErrorResult}(Func{T, IAsyncResult{TResult, TErrorResult}}, Func{TErrorResult, TError})" />
         IAsyncResult<T, TError> FlattenAsync<TResult, TErrorResult>(
             Func<T, IAsyncResult<TResult, TErrorResult>> selector,
             Func<TErrorResult, TError> errorSelector
         );
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.FlattenAsync{TResult}(Func{T, IAsyncResult{TResult,TError}})"/>
+        /// <inheritdoc cref="IAsyncResult{T,TError}.FlattenAsync{TResult}(Func{T, IAsyncResult{TResult,TError}})" />
         IAsyncResult<T, TError> FlattenAsync<TResult>(Func<T, IAsyncResult<TResult, TError>> selector);
 
         /// <summary>
@@ -412,14 +417,16 @@ namespace Lemonad.ErrorHandling {
             Func<TError, TErrorResult> errorSelector
         );
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.FullFlatMapAsync{TFlatMap,TResult,TErrorResult}(Func{T, IAsyncResult{TFlatMap, TErrorResult}}, Func{T, TFlatMap, TResult}, Func{TError, TErrorResult})"/>
+        /// <inheritdoc
+        ///     cref="IAsyncResult{T,TError}.FullFlatMapAsync{TFlatMap,TResult,TErrorResult}(Func{T, IAsyncResult{TFlatMap, TErrorResult}}, Func{T, TFlatMap, TResult}, Func{TError, TErrorResult})" />
         IAsyncResult<TResult, TErrorResult> FullFlatMapAsync<TFlatMap, TResult, TErrorResult>(
             Func<T, IAsyncResult<TFlatMap, TErrorResult>> selector,
             Func<T, TFlatMap, TResult> resultSelector,
             Func<TError, TErrorResult> errorSelector
         );
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.FullFlatMapAsync{TResult,TErrorResult}(Func{T, IAsyncResult{TResult, TErrorResult}}, Func{TError, TErrorResult})"/>
+        /// <inheritdoc
+        ///     cref="IAsyncResult{T,TError}.FullFlatMapAsync{TResult,TErrorResult}(Func{T, IAsyncResult{TResult, TErrorResult}}, Func{TError, TErrorResult})" />
         IAsyncResult<TResult, TErrorResult> FullFlatMapAsync<TResult, TErrorResult>(
             Func<T, IAsyncResult<TResult, TErrorResult>> selector,
             Func<TError, TErrorResult> errorSelector
@@ -448,19 +455,22 @@ namespace Lemonad.ErrorHandling {
             Func<TError, TErrorResult> errorSelector
         );
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.FullMapAsync{TResult,TErrorResult}(Func{T, Task{TResult}}, Func{TError, Task{TErrorResult}})"/>
+        /// <inheritdoc
+        ///     cref="IAsyncResult{T,TError}.FullMapAsync{TResult,TErrorResult}(Func{T, Task{TResult}}, Func{TError, Task{TErrorResult}})" />
         IAsyncResult<TResult, TErrorResult> FullMapAsync<TResult, TErrorResult>(
             Func<T, Task<TResult>> selector,
             Func<TError, Task<TErrorResult>> errorSelector
         );
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.FullMapAsync{TResult,TErrorResult}(Func{T, Task{TResult}}, Func{TError, TErrorResult})"/>
+        /// <inheritdoc
+        ///     cref="IAsyncResult{T,TError}.FullMapAsync{TResult,TErrorResult}(Func{T, Task{TResult}}, Func{TError, TErrorResult})" />
         IAsyncResult<TResult, TErrorResult> FullMapAsync<TResult, TErrorResult>(
             Func<T, Task<TResult>> selector,
             Func<TError, TErrorResult> errorSelector
         );
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.FullMapAsync{TResult,TErrorResult}(Func{T, TResult}, Func{TError, Task{TErrorResult}})"/>
+        /// <inheritdoc
+        ///     cref="IAsyncResult{T,TError}.FullMapAsync{TResult,TErrorResult}(Func{T, TResult}, Func{TError, Task{TErrorResult}})" />
         IAsyncResult<TResult, TErrorResult> FullMapAsync<TResult, TErrorResult>(
             Func<T, TResult> selector,
             Func<TError, Task<TErrorResult>> errorSelector
@@ -468,7 +478,7 @@ namespace Lemonad.ErrorHandling {
 
         IResult<T, TError> IsErrorWhen(Func<T, bool> predicate, Func<T, TError> errorSelector);
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.IsErrorWhenAsync(Func{T, Task{bool}}, Func{T, TError})"/>
+        /// <inheritdoc cref="IAsyncResult{T,TError}.IsErrorWhenAsync(Func{T, Task{bool}}, Func{T, TError})" />
         IAsyncResult<T, TError> IsErrorWhenAsync(Func<T, Task<bool>> predicate, Func<T, TError> errorSelector);
 
         /// <summary>
@@ -517,7 +527,8 @@ namespace Lemonad.ErrorHandling {
             IEqualityComparer<TKey> comparer
         );
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.JoinAsync{TInner,TKey,TResult}(IAsyncResult{TInner,TError}, Func{T,TKey}, Func{TInner,TKey}, Func{T,TInner,TResult}, Func{TError}, IEqualityComparer{TKey})"/>
+        /// <inheritdoc
+        ///     cref="IAsyncResult{T,TError}.JoinAsync{TInner,TKey,TResult}(IAsyncResult{TInner,TError}, Func{T,TKey}, Func{TInner,TKey}, Func{T,TInner,TResult}, Func{TError}, IEqualityComparer{TKey})" />
         IAsyncResult<TResult, TError> JoinAsync<TInner, TKey, TResult>(
             IAsyncResult<TInner, TError> inner,
             Func<T, TKey> outerKeySelector,
@@ -527,7 +538,8 @@ namespace Lemonad.ErrorHandling {
             IEqualityComparer<TKey> comparer
         );
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.JoinAsync{TInner,TKey,TResult}(IAsyncResult{TInner,TError}, Func{T,TKey}, Func{TInner,TKey}, Func{T,TInner,TResult}, Func{TError})"/>
+        /// <inheritdoc
+        ///     cref="IAsyncResult{T,TError}.JoinAsync{TInner,TKey,TResult}(IAsyncResult{TInner,TError}, Func{T,TKey}, Func{TInner,TKey}, Func{T,TInner,TResult}, Func{TError})" />
         IAsyncResult<TResult, TError> JoinAsync<TInner, TKey, TResult>(
             IAsyncResult<TInner, TError> inner,
             Func<T, TKey> outerKeySelector,
@@ -550,7 +562,7 @@ namespace Lemonad.ErrorHandling {
         /// </returns>
         IResult<TResult, TError> Map<TResult>(Func<T, TResult> selector);
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.MapAsync{TResult}(Func{T, Task{TResult}})"/>
+        /// <inheritdoc cref="IAsyncResult{T,TError}.MapAsync{TResult}(Func{T, Task{TResult}})" />
         IAsyncResult<TResult, TError> MapAsync<TResult>(Func<T, Task<TResult>> selector);
 
         /// <summary>
@@ -567,7 +579,7 @@ namespace Lemonad.ErrorHandling {
         /// </returns>
         IResult<T, TErrorResult> MapError<TErrorResult>(Func<TError, TErrorResult> selector);
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.MapErrorAsync{TErrorResult}(Func{TError, Task{TErrorResult}})"/>
+        /// <inheritdoc cref="IAsyncResult{T,TError}.MapErrorAsync{TErrorResult}(Func{TError, Task{TErrorResult}})" />
         IAsyncResult<T, TErrorResult> MapErrorAsync<TErrorResult>(Func<TError, Task<TErrorResult>> selector);
 
         /// <summary>
@@ -636,7 +648,8 @@ namespace Lemonad.ErrorHandling {
             Func<T, TOther, TResult> selector
         );
 
-        /// <inheritdoc cref="IAsyncResult{T,TError}.ZipAsync{TOther,TResult}(IAsyncResult{TOther, TError}, Func{T, TOther, TResult})"/>
+        /// <inheritdoc
+        ///     cref="IAsyncResult{T,TError}.ZipAsync{TOther,TResult}(IAsyncResult{TOther, TError}, Func{T, TOther, TResult})" />
         IAsyncResult<TResult, TError> ZipAsync<TOther, TResult>(
             IAsyncResult<TOther, TError> other,
             Func<T, TOther, TResult> selector

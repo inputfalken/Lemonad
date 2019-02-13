@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {

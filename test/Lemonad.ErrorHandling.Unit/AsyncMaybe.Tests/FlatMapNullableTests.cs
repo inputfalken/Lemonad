@@ -7,13 +7,6 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.AsyncMaybe.Tests {
     public class FlatMapNullableTests {
         [Fact]
-        public void Passing_Null_Selector_Throws()
-            => Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.SelectorName,
-                () => ErrorHandling.Maybe.Value(2).FlatMap((Func<int, int?>) null)
-            );
-
-        [Fact]
         public async Task None_Null_Int__Expects_Result_With_Value() {
             var selectorInvoked = false;
             await ErrorHandling.AsyncMaybe
@@ -76,5 +69,12 @@ namespace Lemonad.ErrorHandling.Unit.AsyncMaybe.Tests {
             Assert.True(selectorInvoked);
             Assert.False(resultSelectorInvoked);
         }
+
+        [Fact]
+        public void Passing_Null_Selector_Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.SelectorName,
+                () => ErrorHandling.Maybe.Value(2).FlatMap((Func<int, int?>) null)
+            );
     }
 }

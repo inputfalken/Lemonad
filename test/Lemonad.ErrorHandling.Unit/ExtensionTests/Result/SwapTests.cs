@@ -13,9 +13,10 @@ namespace Lemonad.ErrorHandling.Unit.ExtensionTests.Result {
             );
 
         [Fact]
-        public void Result_With_Value() => AssertionUtilities.Division(10, 2).Swap().AssertError(5);
+        public void Result_With_Error() =>
+            AssertionUtilities.Division(10, 0).Swap().AssertValue("Can not divide '10' with '0'.");
 
         [Fact]
-        public void Result_With_Error() => AssertionUtilities.Division(10, 0).Swap().AssertValue("Can not divide '10' with '0'.");
+        public void Result_With_Value() => AssertionUtilities.Division(10, 2).Swap().AssertError(5);
     }
 }

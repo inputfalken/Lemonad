@@ -8,7 +8,7 @@ namespace Lemonad.ErrorHandling.Unit.AsyncMaybe.Tests {
     public class MapAsyncTests {
         [Fact]
         public async Task Mapping_Integer_With_Multiplication() {
-            await Lemonad.ErrorHandling.AsyncMaybe.Value(20)
+            await ErrorHandling.AsyncMaybe.Value(20)
                 .MapAsync(async x => {
                     await AssertionUtilities.Delay;
                     return x * 2;

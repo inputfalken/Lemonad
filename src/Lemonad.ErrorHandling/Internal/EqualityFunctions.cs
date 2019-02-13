@@ -49,6 +49,5 @@ namespace Lemonad.ErrorHandling.Internal {
 
             internal static bool IsValueType(T _) => IsReferenceType == false;
         }
-
     }
 }

@@ -10,21 +10,21 @@ namespace Lemonad.ErrorHandling.Unit.AsyncMaybe.Tests {
         public async Task
             Flattening_From_String_Maybe_With_No_Value_To_Maybe_Int_With_No_Value__Expects_String_Maybe_With_Value() {
             await ErrorHandling.AsyncMaybe.None<string>()
-                .FlattenAsync(x => Lemonad.ErrorHandling.AsyncMaybe.None<int>()).AssertNone();
+                .FlattenAsync(x => ErrorHandling.AsyncMaybe.None<int>()).AssertNone();
         }
 
         [Fact]
         public async Task
             Flattening_From_String_Maybe_With_No_Value_To_Maybe_Int_With_Value__Expects_String_Maybe_With_Value() {
             await ErrorHandling.AsyncMaybe.None<string>()
-                .FlattenAsync(x => Lemonad.ErrorHandling.AsyncMaybe.Value(2)).AssertNone();
+                .FlattenAsync(x => ErrorHandling.AsyncMaybe.Value(2)).AssertNone();
         }
 
         [Fact]
         public async Task
             Flattening_From_String_Maybe_With_Value_To_Maybe_Int_With_No_Value__Expects_String_Maybe_With_Value() {
             await ErrorHandling.AsyncMaybe.Value("hello")
-                .FlattenAsync(x => Lemonad.ErrorHandling.AsyncMaybe.None<int>())
+                .FlattenAsync(x => ErrorHandling.AsyncMaybe.None<int>())
                 .AssertNone();
         }
 
@@ -33,7 +33,7 @@ namespace Lemonad.ErrorHandling.Unit.AsyncMaybe.Tests {
             Flattening_From_String_Maybe_With_Value_To_Maybe_Int_With_Value__Expects_String_Maybe_With_Value() {
             const string input = "hello";
             await ErrorHandling.AsyncMaybe.Value(input)
-                .FlattenAsync(x => Lemonad.ErrorHandling.AsyncMaybe.Value(2))
+                .FlattenAsync(x => ErrorHandling.AsyncMaybe.Value(2))
                 .AssertValue(input);
         }
 

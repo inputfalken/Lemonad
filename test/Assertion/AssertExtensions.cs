@@ -46,6 +46,16 @@ namespace Assertion {
             return source;
         }
 
+        public static IAsyncMaybe<T> AssertNone<T>(this IAsyncMaybe<T> source) {
+            async Task<IMaybe<T>> Resolve() {
+                var maybe = await source;
+                Assert.False(await source.HasValue);
+                return maybe;
+            }
+
+            return Resolve().ToAsyncMaybe();
+        }
+
         public static IMaybe<T> AssertValue<T>(this IMaybe<T> source, T expected) {
             Assert.True(source.HasValue);
             Assert.Equal(expected, source.Value);
@@ -57,16 +67,6 @@ namespace Assertion {
                 var maybe = await source;
                 Assert.True(await source.HasValue);
                 Assert.Equal(expected, source.Value);
-                return maybe;
-            }
-
-            return Resolve().ToAsyncMaybe();
-        }
-
-        public static IAsyncMaybe<T> AssertNone<T>(this IAsyncMaybe<T> source) {
-            async Task<IMaybe<T>> Resolve() {
-                var maybe = await source;
-                Assert.False(await source.HasValue);
                 return maybe;
             }
 

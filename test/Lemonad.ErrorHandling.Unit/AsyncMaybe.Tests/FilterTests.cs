@@ -15,14 +15,6 @@ namespace Lemonad.ErrorHandling.Unit.AsyncMaybe.Tests {
         }
 
         [Fact]
-        public void Maybe_With_Value_Null_Predicate__Throws_ArgumentNullException() {
-            Assert.Throws<ArgumentNullException>(() => {
-                Func<string, bool> predicate = null;
-                ErrorHandling.Maybe.Value("foo").Filter(predicate);
-            });
-        }
-
-        [Fact]
         public async Task Maybe_With_No_Value_With_True_Predicate__Expects_Maybe_No_With_Value() {
             var predicateExecuted = false;
             await ErrorHandling.AsyncMaybe.None<string>()
@@ -32,6 +24,14 @@ namespace Lemonad.ErrorHandling.Unit.AsyncMaybe.Tests {
                 })
                 .AssertNone();
             Assert.False(predicateExecuted);
+        }
+
+        [Fact]
+        public void Maybe_With_Value_Null_Predicate__Throws_ArgumentNullException() {
+            Assert.Throws<ArgumentNullException>(() => {
+                Func<string, bool> predicate = null;
+                ErrorHandling.Maybe.Value("foo").Filter(predicate);
+            });
         }
 
         [Fact]

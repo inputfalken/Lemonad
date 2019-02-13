@@ -17,8 +17,7 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TError">
         ///     The <typeparamref name="TError" /> of <see cref="IResult{T,TError}" />.
         /// </typeparam>
-        public static IResult<T, TError> Error<T, TError>(TError error)
-            => Result<T, TError>.ErrorFactory(in error);
+        public static IResult<T, TError> Error<T, TError>(TError error) => Result<T, TError>.ErrorFactory(in error);
 
         /// <summary>
         ///     Creates a <see cref="IResult{T,TError}" /> with <typeparamref name="T" />.

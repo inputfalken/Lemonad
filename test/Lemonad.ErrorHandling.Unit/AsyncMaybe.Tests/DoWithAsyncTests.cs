@@ -7,22 +7,6 @@ using Xunit;
 namespace Lemonad.ErrorHandling.Unit.AsyncMaybe.Tests {
     public class DoWithAsyncTests {
         [Fact]
-        public void Maybe_With_No_Value_Null_Action__Expects_Exception() {
-            Func<string, Task> argument = null;
-            Assert.Throws<ArgumentNullException>(
-                () => ErrorHandling.AsyncMaybe.Value("foobar").DoWithAsync(argument)
-            );
-        }
-
-        [Fact]
-        public void Maybe_With_Value_Null_Action__Expects_Exception() {
-            Func<string, Task> argument = null;
-            Assert.Throws<ArgumentNullException>(
-                () => ErrorHandling.AsyncMaybe.Value("foobar").DoWithAsync(argument)
-            );
-        }
-
-        [Fact]
         public async Task Maybe_With_No_Value__Expects_Action_Executed() {
             var actionExecuted = false;
             await ErrorHandling.AsyncMaybe
@@ -34,6 +18,14 @@ namespace Lemonad.ErrorHandling.Unit.AsyncMaybe.Tests {
                 .AssertNone();
 
             Assert.False(actionExecuted);
+        }
+
+        [Fact]
+        public void Maybe_With_No_Value_Null_Action__Expects_Exception() {
+            Func<string, Task> argument = null;
+            Assert.Throws<ArgumentNullException>(
+                () => ErrorHandling.AsyncMaybe.Value("foobar").DoWithAsync(argument)
+            );
         }
 
         [Fact]
@@ -49,6 +41,14 @@ namespace Lemonad.ErrorHandling.Unit.AsyncMaybe.Tests {
                 .AssertValue("foobar");
 
             Assert.True(actionExecuted);
+        }
+
+        [Fact]
+        public void Maybe_With_Value_Null_Action__Expects_Exception() {
+            Func<string, Task> argument = null;
+            Assert.Throws<ArgumentNullException>(
+                () => ErrorHandling.AsyncMaybe.Value("foobar").DoWithAsync(argument)
+            );
         }
     }
 }

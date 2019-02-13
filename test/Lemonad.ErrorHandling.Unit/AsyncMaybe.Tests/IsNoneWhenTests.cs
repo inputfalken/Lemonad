@@ -14,11 +14,11 @@ namespace Lemonad.ErrorHandling.Unit.AsyncMaybe.Tests {
             );
 
         [Fact]
-        public async Task With_Falsy_Predicate__Expects_Value() =>
-            await ErrorHandling.AsyncMaybe.Value("foo").IsNoneWhen(s => s.Length > 20).AssertValue("foo");
-
-        [Fact]
         public async Task TaskWith_Truthy_Predicate__Expects_None() =>
             await ErrorHandling.AsyncMaybe.Value("foo").IsNoneWhen(s => s.Length > 0).AssertNone();
+
+        [Fact]
+        public async Task With_Falsy_Predicate__Expects_Value() =>
+            await ErrorHandling.AsyncMaybe.Value("foo").IsNoneWhen(s => s.Length > 20).AssertValue("foo");
     }
 }

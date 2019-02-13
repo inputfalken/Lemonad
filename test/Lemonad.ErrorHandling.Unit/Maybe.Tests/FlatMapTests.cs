@@ -154,7 +154,8 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         }
 
         [Fact]
-        public void ResultSelector_Overload__Flattening_From_String_Maybe_Without_value_To_String_Maybe_Without_Value__Expects_String_Maybe_Without_Value() {
+        public void
+            ResultSelector_Overload__Flattening_From_String_Maybe_Without_value_To_String_Maybe_Without_Value__Expects_String_Maybe_Without_Value() {
             const string input = "hello";
             ErrorHandling.Maybe.None<string>()
                 .FlatMap(x => input.ToMaybe(s => s.Length > 5).AssertNone())

@@ -541,11 +541,11 @@ namespace Lemonad.ErrorHandling.Internal {
                 selector));
         }
 
-        internal static AsyncResult<T, TError> Factory(Task<IEither<T, TError>> result) =>
-            new AsyncResult<T, TError>(result);
-
         internal static AsyncResult<T, TError> ErrorFactory(in TError error)
             => new AsyncResult<T, TError>(Task.FromResult(Result.Error<T, TError>(error).Either));
+
+        internal static AsyncResult<T, TError> Factory(Task<IEither<T, TError>> result) =>
+            new AsyncResult<T, TError>(result);
 
         internal static AsyncResult<T, TError> ValueFactory(in T value)
             => new AsyncResult<T, TError>(Task.FromResult(Result.Value<T, TError>(value).Either));

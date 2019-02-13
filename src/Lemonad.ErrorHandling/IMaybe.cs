@@ -39,13 +39,15 @@ namespace Lemonad.ErrorHandling {
         /// </summary>
         IMaybe<T> Do(Action action);
 
+        IAsyncMaybe<T> DoAsync(Func<Task> func);
+
         /// <summary>
         ///     Executes the <paramref name="action" /> when property <see cref="HasValue" /> is true.
         /// </summary>
         IMaybe<T> DoWith(Action<T> action);
 
         /// <summary>
-        ///  An asynchronous version of <see cref="DoWith"/>.
+        ///     An asynchronous version of <see cref="DoWith" />.
         /// </summary>
         IAsyncMaybe<T> DoWithAsync(Func<T, Task> action);
 
@@ -58,7 +60,7 @@ namespace Lemonad.ErrorHandling {
         IMaybe<T> Filter(Func<T, bool> predicate);
 
         /// <summary>
-        /// An asynchronous version of <see cref="Filter(Func{T, bool})"/>.
+        ///     An asynchronous version of <see cref="Filter(Func{T, bool})" />.
         /// </summary>
         IAsyncMaybe<T> FilterAsync(Func<T, Task<bool>> predicate);
 
@@ -72,11 +74,6 @@ namespace Lemonad.ErrorHandling {
         ///     The type <typeparamref name="T" /> returned from the <paramref name="selector" /> function.
         /// </typeparam>
         IMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> selector);
-
-        /// <summary>
-        ///    An asynchronous version of <see cref="IMaybe{T}.FlatMap{TResult}(Func{T, IMaybe{TResult}})"/>.
-        /// </summary>
-        IAsyncMaybe<TResult> FlatMapAsync<TResult>(Func<T, IAsyncMaybe<TResult>> selector);
 
         /// <summary>
         ///     Flatmaps another <see cref="Maybe{T}" />.
@@ -100,15 +97,7 @@ namespace Lemonad.ErrorHandling {
         );
 
         /// <summary>
-        ///    An asynchronous version of <see cref="IMaybe{T}.FlatMap{TSelector, TResult}(Func{T, IMaybe{TSelector}}, Func{T, TSelector, TResult})"/>.
-        /// </summary>
-        IAsyncMaybe<TResult> FlatMapAsync<TSelector, TResult>(
-            Func<T, IAsyncMaybe<TSelector>> selector,
-            Func<T, TSelector, TResult> resultSelector
-        );
-
-        /// <summary>
-        ///     Flatmaps a <see cref="Nullable{T}"/>
+        ///     Flatmaps a <see cref="Nullable{T}" />
         /// </summary>
         /// <param name="selector">
         ///     A function who expects a <see cref="Nullable{T}" /> as its return type.
@@ -129,15 +118,7 @@ namespace Lemonad.ErrorHandling {
         ) where TSelector : struct;
 
         /// <summary>
-        ///    An asynchronous version of <see cref="IMaybe{T}.FlatMap{TSelector, TResult}(Func{T, Nullable{TSelector}}, Func{T, TSelector, TResult})"/>.
-        /// </summary>
-        IAsyncMaybe<TResult> FlatMapAsync<TSelector, TResult>(
-            Func<T, Task<TSelector?>> selector,
-            Func<T, TSelector, TResult> resultSelector
-        ) where TSelector : struct;
-
-        /// <summary>
-        ///     Flatmaps a <see cref="Nullable{T}"/>
+        ///     Flatmaps a <see cref="Nullable{T}" />
         /// </summary>
         /// <param name="selector">
         ///     A function who expects a <see cref="Nullable{T}" /> as its return type.
@@ -149,7 +130,30 @@ namespace Lemonad.ErrorHandling {
         IMaybe<TResult> FlatMap<TResult>(Func<T, TResult?> selector) where TResult : struct;
 
         /// <summary>
-        ///    An asynchronous version of <see cref="IMaybe{T}.FlatMap{TResult}(Func{T, Nullable{TResult}})"/>.
+        ///     An asynchronous version of <see cref="IMaybe{T}.FlatMap{TResult}(Func{T, IMaybe{TResult}})" />.
+        /// </summary>
+        IAsyncMaybe<TResult> FlatMapAsync<TResult>(Func<T, IAsyncMaybe<TResult>> selector);
+
+        /// <summary>
+        ///     An asynchronous version of
+        ///     <see cref="IMaybe{T}.FlatMap{TSelector, TResult}(Func{T, IMaybe{TSelector}}, Func{T, TSelector, TResult})" />.
+        /// </summary>
+        IAsyncMaybe<TResult> FlatMapAsync<TSelector, TResult>(
+            Func<T, IAsyncMaybe<TSelector>> selector,
+            Func<T, TSelector, TResult> resultSelector
+        );
+
+        /// <summary>
+        ///     An asynchronous version of
+        ///     <see cref="IMaybe{T}.FlatMap{TSelector, TResult}(Func{T, Nullable{TSelector}}, Func{T, TSelector, TResult})" />.
+        /// </summary>
+        IAsyncMaybe<TResult> FlatMapAsync<TSelector, TResult>(
+            Func<T, Task<TSelector?>> selector,
+            Func<T, TSelector, TResult> resultSelector
+        ) where TSelector : struct;
+
+        /// <summary>
+        ///     An asynchronous version of <see cref="IMaybe{T}.FlatMap{TResult}(Func{T, Nullable{TResult}})" />.
         /// </summary>
         IAsyncMaybe<TResult> FlatMapAsync<TResult>(Func<T, Task<TResult?>> selector) where TResult : struct;
 
@@ -166,7 +170,7 @@ namespace Lemonad.ErrorHandling {
         IMaybe<T> Flatten<TResult>(Func<T, IMaybe<TResult>> selector);
 
         /// <summary>
-        ///    An asynchronous version of <see cref="IMaybe{T}.Flatten{TResult}(Func{T, IMaybe{TResult}})"/>.
+        ///     An asynchronous version of <see cref="IMaybe{T}.Flatten{TResult}(Func{T, IMaybe{TResult}})" />.
         /// </summary>
         IAsyncMaybe<T> FlattenAsync<TResult>(Func<T, IAsyncMaybe<TResult>> selector);
 
@@ -179,7 +183,7 @@ namespace Lemonad.ErrorHandling {
         IMaybe<T> IsNoneWhen(Func<T, bool> predicate);
 
         /// <summary>
-        ///    An asynchronous version of <see cref="IsNoneWhen(Func{T, bool})"/>.
+        ///     An asynchronous version of <see cref="IsNoneWhen(Func{T, bool})" />.
         /// </summary>
         IAsyncMaybe<T> IsNoneWhenAsync(Func<T, Task<bool>> predicate);
 
@@ -195,7 +199,7 @@ namespace Lemonad.ErrorHandling {
         IMaybe<TResult> Map<TResult>(Func<T, TResult> selector);
 
         /// <summary>
-        ///    An asynchronous version of <see cref="IMaybe{T}.Map{TResult}(Func{T, TResult})"/>.
+        ///     An asynchronous version of <see cref="IMaybe{T}.Map{TResult}(Func{T, TResult})" />.
         /// </summary>
         IAsyncMaybe<TResult> MapAsync<TResult>(Func<T, Task<TResult>> selector);
 
@@ -226,7 +230,5 @@ namespace Lemonad.ErrorHandling {
         ///     The type returned by the functions <paramref name="someSelector" /> and <paramref name="noneSelector" />.
         /// </typeparam>
         TResult Match<TResult>(Func<T, TResult> someSelector, Func<TResult> noneSelector);
-
-        IAsyncMaybe<T> DoAsync(Func<Task> func);
     }
 }

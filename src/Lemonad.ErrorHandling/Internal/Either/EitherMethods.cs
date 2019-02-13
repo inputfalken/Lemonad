@@ -569,11 +569,9 @@ namespace Lemonad.ErrorHandling.Internal.Either {
 
         internal static IEither<T, TErrorResult> MapError<T, TError, TErrorResult>(
             IEither<T, TError> either,
-            Func<TError, TErrorResult> selector) {
-            return either.HasError
-                ? CreateError<T, TErrorResult>(selector(either.Error))
-                : CreateValue<T, TErrorResult>(either.Value);
-        }
+            Func<TError, TErrorResult> selector) => either.HasError
+            ? CreateError<T, TErrorResult>(selector(either.Error))
+            : CreateValue<T, TErrorResult>(either.Value);
 
         internal static async Task<IEither<T, TErrorResult>> MapErrorAsync<T, TError, TErrorResult>(
             Task<IEither<T, TError>> either,

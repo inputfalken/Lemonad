@@ -10,13 +10,13 @@ namespace Lemonad.ErrorHandling.Extensions.Result {
         ///     Executes each function and saves all potential errors to a list which will be the <typeparamref name="TError" />.
         /// </summary>
         /// <param name="source">
-        /// The <see cref="IResult{T,TError}"/> to be sent into each function.
+        ///     The <see cref="IResult{T,TError}" /> to be sent into each function.
         /// </param>
         /// <param name="first">
-        /// The first function check.
+        ///     The first function check.
         /// </param>
         /// <param name="second">
-        /// The second function check.
+        ///     The second function check.
         /// </param>
         /// <param name="additional">
         ///     A <see cref="IReadOnlyList{T}" /> containing <typeparamref name="TError" />.

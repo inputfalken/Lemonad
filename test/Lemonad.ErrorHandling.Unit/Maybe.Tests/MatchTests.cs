@@ -45,14 +45,16 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         [Fact]
         public void Null_NoneSelector__Throws() {
             Func<int> noneSelector = null;
-            Assert.Throws<ArgumentNullException>(() => ErrorHandling.Maybe.None<string>().Match(s => s.Length, noneSelector));
+            Assert.Throws<ArgumentNullException>(() =>
+                ErrorHandling.Maybe.None<string>().Match(s => s.Length, noneSelector));
         }
 
         [Fact]
         public void Null_NoneSelector_And_SomeSelector__Throws() {
             Func<int> noneSelector = null;
             Func<string, int> someSelector = null;
-            Assert.Throws<ArgumentNullException>(() => ErrorHandling.Maybe.None<string>().Match(someSelector, noneSelector));
+            Assert.Throws<ArgumentNullException>(() =>
+                ErrorHandling.Maybe.None<string>().Match(someSelector, noneSelector));
         }
     }
 }

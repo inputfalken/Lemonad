@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace Lemonad.ErrorHandling.Extensions.AsyncMaybe {
     public static partial class Index {
@@ -19,7 +20,7 @@ namespace Lemonad.ErrorHandling.Extensions.AsyncMaybe {
                 ? throw new ArgumentNullException(nameof(source))
                 : Mapper(source).GetAwaiter();
 
-        private static async System.Threading.Tasks.Task<IMaybe<T>> Mapper<T>(IAsyncMaybe<T> source) =>
+        private static async Task<IMaybe<T>> Mapper<T>(IAsyncMaybe<T> source) =>
             await source.HasValue.ConfigureAwait(false)
                 ? ErrorHandling.Maybe.Value(source.Value)
                 : ErrorHandling.Maybe.None<T>();

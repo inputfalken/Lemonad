@@ -7,7 +7,7 @@ namespace Lemonad.ErrorHandling.Parsers {
         ///     32 digits:
         /// </summary>
         /// <para>
-        /// Example: 00000000000000000000000000000000
+        ///     Example: 00000000000000000000000000000000
         /// </para>
         DigitsOnly = 'N',
 
@@ -15,7 +15,7 @@ namespace Lemonad.ErrorHandling.Parsers {
         ///     32 digits separated by hyphens:
         /// </summary>
         /// <para>
-        /// Example: 00000000-0000-0000-0000-000000000000
+        ///     Example: 00000000-0000-0000-0000-000000000000
         /// </para>
         DigitsWithHyphens = 'D',
 
@@ -23,7 +23,7 @@ namespace Lemonad.ErrorHandling.Parsers {
         ///     32 digits separated by hyphens, enclosed in braces:
         /// </summary>
         /// <para>
-        /// Example: {00000000-0000-0000-0000-000000000000}
+        ///     Example: {00000000-0000-0000-0000-000000000000}
         /// </para>
         DigitsWithHyphensWrappedInBrackets = 'B',
 
@@ -31,7 +31,7 @@ namespace Lemonad.ErrorHandling.Parsers {
         ///     32 digits separated by hyphens, enclosed in parentheses:
         /// </summary>
         /// <para>
-        /// Example: (00000000-0000-0000-0000-000000000000)
+        ///     Example: (00000000-0000-0000-0000-000000000000)
         /// </para>
         DigitsWithHyphensWrappedInParentheses = 'P',
 
@@ -40,7 +40,7 @@ namespace Lemonad.ErrorHandling.Parsers {
         ///     also enclosed in braces:
         /// </summary>
         /// <para>
-        /// Example: {0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}
+        ///     Example: {0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}
         /// </para>
         FourHexadecimalWrappedInBrackets = 'X'
     }

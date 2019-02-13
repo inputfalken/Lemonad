@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lemonad.ErrorHandling.Extensions.Result;
 using Lemonad.ErrorHandling.Internal;
 using Lemonad.ErrorHandling.Internal.Either;
 
 namespace Lemonad.ErrorHandling.Extensions.AsyncResult {
     public static partial class Index {
         /// <summary>
-        /// An asynchronous version of <see cref="Extensions.Result.Index.Multiple{T,TError}"/>.
+        ///     An asynchronous version of <see cref="Extensions.Result.Index.Multiple{T,TError}" />.
         /// </summary>
         public static IAsyncResult<T, IReadOnlyList<TError>> Multiple<T, TError>(
             this IAsyncResult<T, TError> source,

@@ -18,27 +18,6 @@ namespace Lemonad.ErrorHandling.Integration {
         private static MovieContext MovieContext { get; }
 
         [Fact]
-        public void Passing_Null_Source_Throws()
-            => Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.ExtensionParameterName,
-                () => ((IQueryable<string>) null).SingleOrError()
-            );
-
-        [Fact]
-        public void Predicate_Overload_Passing_Null_Source_Throws()
-            => Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.ExtensionParameterName,
-                () => ((IQueryable<string>) null).SingleOrError(x => true)
-            );
-
-        [Fact]
-        public void Passing_Null_Predicate_Throws()
-            => Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.PredicateName,
-                () => MovieContext.Users.SingleOrError(null)
-            );
-
-        [Fact]
         public void Empty_Collection_Behaves_Like_SingleOrDefault_No_Predicate() {
             var expected = MovieContext.Movies
                 .SingleOrDefault(x => x.Id == Guid.Empty);
@@ -74,6 +53,27 @@ namespace Lemonad.ErrorHandling.Integration {
                 .SingleOrError(y => y.Score == 2)
                 .AssertError(SingleOrErrorCase.ManyElements);
         }
+
+        [Fact]
+        public void Passing_Null_Predicate_Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.PredicateName,
+                () => MovieContext.Users.SingleOrError(null)
+            );
+
+        [Fact]
+        public void Passing_Null_Source_Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ExtensionParameterName,
+                () => ((IQueryable<string>) null).SingleOrError()
+            );
+
+        [Fact]
+        public void Predicate_Overload_Passing_Null_Source_Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ExtensionParameterName,
+                () => ((IQueryable<string>) null).SingleOrError(x => true)
+            );
 
         [Fact]
         public void Single_Element_Behaves_Like_SingleOrDefault_With_Predicate() {

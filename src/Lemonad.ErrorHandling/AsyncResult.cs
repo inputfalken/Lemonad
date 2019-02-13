@@ -17,8 +17,8 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TError">
         ///     The <typeparamref name="TError" /> of <see cref="IAsyncResult{T,TError}" />.
         /// </typeparam>
-        public static IAsyncResult<T, TError> Error<T, TError>(TError error)
-            => AsyncResult<T, TError>.ErrorFactory(in error);
+        public static IAsyncResult<T, TError> Error<T, TError>(TError error) =>
+            AsyncResult<T, TError>.ErrorFactory(in error);
 
         /// <summary>
         ///     Creates a <see cref="IAsyncResult{T,TError}" /> with <typeparamref name="T" />.

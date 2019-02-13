@@ -13,9 +13,11 @@ namespace Lemonad.ErrorHandling.Unit.ExtensionTests.IAsyncResult {
             );
 
         [Fact]
-        public async System.Threading.Tasks.Task Result_With_Value() => await AssertionUtilities.DivisionAsync(10, 2).Swap().AssertError(5);
+        public async System.Threading.Tasks.Task Result_With_Error() => await AssertionUtilities.DivisionAsync(10, 0)
+            .Swap().AssertValue("Can not divide '10' with '0'.");
 
         [Fact]
-        public async System.Threading.Tasks.Task Result_With_Error() => await AssertionUtilities.DivisionAsync(10, 0).Swap().AssertValue("Can not divide '10' with '0'.");
+        public async System.Threading.Tasks.Task Result_With_Value() =>
+            await AssertionUtilities.DivisionAsync(10, 2).Swap().AssertError(5);
     }
 }

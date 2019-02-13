@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Assertion;
-using Lemonad.ErrorHandling.Extensions;
 using Lemonad.ErrorHandling.Extensions.AsyncMaybe;
 using Xunit;
 

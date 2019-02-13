@@ -6,22 +6,7 @@ using Index = Lemonad.ErrorHandling.Extensions.Maybe.Index;
 
 namespace Lemonad.ErrorHandling.Internal {
     internal class AsyncMaybe<T> : IAsyncMaybe<T> {
-        public T Value {
-            get {
-                try {
-                    return _asyncResult.Either.Value;
-                }
-                catch (InvalidEitherStateException) {
-                    throw new InvalidMaybeStateException(
-                        $"Can not access property '{nameof(IAsyncMaybe<T>.Value)}' of '{nameof(IAsyncMaybe<T>)}' before property '{nameof(IAsyncMaybe<T>.HasValue)}' has been awaited."
-                    );
-                }
-            }
-        }
-
-        public static IAsyncMaybe<T> Create(in T element) => new AsyncMaybe<T>(AsyncResult.Value<T, Unit>(element));
         public static IAsyncMaybe<T> None = new AsyncMaybe<T>(AsyncResult.Error<T, Unit>(Unit.Default));
-        public Task<bool> HasValue => _asyncResult.Either.HasValue;
 
         private readonly IAsyncResult<T, Unit> _asyncResult;
 
@@ -53,11 +38,6 @@ namespace Lemonad.ErrorHandling.Internal {
         public IAsyncMaybe<T> FilterAsync(Func<T, Task<bool>> predicate) => predicate is null
             ? throw new ArgumentNullException(nameof(predicate))
             : _asyncResult.FilterAsync(predicate, _ => Unit.Default).ToAsyncMaybe();
-
-        public IAsyncMaybe<T> IsNoneWhenAsync(Func<T, Task<bool>> predicate) =>
-            predicate == null
-                ? throw new ArgumentNullException(nameof(predicate))
-                : _asyncResult.IsErrorWhenAsync(predicate, _ => Unit.Default).ToAsyncMaybe();
 
         public IAsyncMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> selector) => selector is null
             ? throw new ArgumentNullException(nameof(selector))
@@ -133,9 +113,16 @@ namespace Lemonad.ErrorHandling.Internal {
                 .FlattenAsync(x => Extensions.AsyncMaybe.Index.ToAsyncResult(selector(x), Unit.Selector))
                 .ToAsyncMaybe();
 
+        public Task<bool> HasValue => _asyncResult.Either.HasValue;
+
         public IAsyncMaybe<T> IsNoneWhen(Func<T, bool> predicate) => predicate is null
             ? throw new ArgumentNullException(nameof(predicate))
             : _asyncResult.IsErrorWhen(predicate, _ => Unit.Default).ToAsyncMaybe();
+
+        public IAsyncMaybe<T> IsNoneWhenAsync(Func<T, Task<bool>> predicate) =>
+            predicate == null
+                ? throw new ArgumentNullException(nameof(predicate))
+                : _asyncResult.IsErrorWhenAsync(predicate, _ => Unit.Default).ToAsyncMaybe();
 
         public IAsyncMaybe<TResult> Map<TResult>(Func<T, TResult> selector) => selector is null
             ? throw new ArgumentNullException(nameof(selector))
@@ -160,5 +147,20 @@ namespace Lemonad.ErrorHandling.Internal {
             if (noneSelector is null) throw new ArgumentNullException(nameof(noneSelector));
             return _asyncResult.Match(someSelector, x => noneSelector());
         }
+
+        public T Value {
+            get {
+                try {
+                    return _asyncResult.Either.Value;
+                }
+                catch (InvalidEitherStateException) {
+                    throw new InvalidMaybeStateException(
+                        $"Can not access property '{nameof(IAsyncMaybe<T>.Value)}' of '{nameof(IAsyncMaybe<T>)}' before property '{nameof(IAsyncMaybe<T>.HasValue)}' has been awaited."
+                    );
+                }
+            }
+        }
+
+        public static IAsyncMaybe<T> Create(in T element) => new AsyncMaybe<T>(AsyncResult.Value<T, Unit>(element));
     }
 }

@@ -1,5 +1,4 @@
-﻿
-using Lemonad.ErrorHandling.Internal;
+﻿using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
     /// <summary>

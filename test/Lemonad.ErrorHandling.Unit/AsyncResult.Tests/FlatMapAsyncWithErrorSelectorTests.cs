@@ -18,6 +18,18 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
             );
 
         [Fact]
+        public void Passing_Null_ErrorSelector_With_ResultSelector_Overload_Throws()
+            => Assert.Throws<ArgumentNullException>(
+                AssertionUtilities.ErrorSelectorName,
+                () => AssertionUtilities.DivisionAsync(10, 2)
+                    .FlatMapAsync(
+                        s => AssertionUtilities.DivisionAsync(s, 2),
+                        (d, d1) => d + d1,
+                        null
+                    )
+            );
+
+        [Fact]
         public void Passing_Null_ResultSelector_Throws()
             => Assert.Throws<ArgumentNullException>(
                 AssertionUtilities.ResultSelector,
@@ -40,17 +52,6 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
                     )
             );
 
-        [Fact]
-        public void Passing_Null_ErrorSelector_With_ResultSelector_Overload_Throws()
-            => Assert.Throws<ArgumentNullException>(
-                AssertionUtilities.ErrorSelectorName,
-                () => AssertionUtilities.DivisionAsync(10, 2)
-                    .FlatMapAsync(
-                        s => AssertionUtilities.DivisionAsync(s, 2),
-                        (d, d1) => d + d1 , 
-                        null
-                    )
-            );
         [Fact]
         public void Passing_Null_Selector_With_ResultSelector_Overload_Throws()
             => Assert.Throws<ArgumentNullException>(

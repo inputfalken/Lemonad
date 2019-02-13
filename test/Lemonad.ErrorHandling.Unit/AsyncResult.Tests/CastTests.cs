@@ -27,7 +27,8 @@ namespace Lemonad.ErrorHandling.Unit.AsyncResult.Tests {
         [Fact]
         public async Task Result_With_Value_Using_Invalid_Cast_Expects_Cast_Exception() {
             const int identity = 0;
-            await Assert.ThrowsAsync<InvalidCastException>(async () => await AssertionUtilities.GetGenderAsync(identity).Cast<string>());
+            await Assert.ThrowsAsync<InvalidCastException>(async () =>
+                await AssertionUtilities.GetGenderAsync(identity).Cast<string>());
         }
 
         [Fact]

@@ -1,22 +1,19 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
 using Lemonad.ErrorHandling.Extensions;
-using Lemonad.ErrorHandling.Extensions.Maybe;
-using Lemonad.ErrorHandling.Extensions.Result;
 using Lemonad.ErrorHandling.Extensions.Result.Task;
 
 namespace Assertion {
     public static class AssertionUtilities {
-        public enum Gender {
-            Male = 0,
-            Female = 1
-        }
-
         public enum Error {
             First = 1,
             Second = 2,
             Unhandled = 3
+        }
+
+        public enum Gender {
+            Male = 0,
+            Female = 1
         }
 
         public const string ActionParamName = "action";
@@ -48,11 +45,6 @@ namespace Assertion {
                 )
                 .Map(x => x.left / x.right);
 
-        private static string DivisionResultErrorSelector((double left, double right) x) =>
-            $"Can not divide '{x.left}' with '{x.right}'.";
-
-        private static bool DivisionResultPredicate((double left, double right) x) => x.right != 0;
-
         public static IAsyncResult<double, string> DivisionAsync(double left, double right)
             => (left, right)
                 .ToResult(
@@ -73,19 +65,15 @@ namespace Assertion {
                 .DoAsync(() => Delay)
                 .Map(x => x.left / x.right);
 
+        private static string DivisionResultErrorSelector((double left, double right) x) =>
+            $"Can not divide '{x.left}' with '{x.right}'.";
+
+        private static bool DivisionResultPredicate((double left, double right) x) => x.right != 0;
+
         public static string FormatStringParserMessage<T>(string input) =>
             input is null
                 ? $"Could not parse type {typeof(string).Name} (null) into {typeof(T).Name}."
                 : $"Could not parse type {typeof(string).Name} (\"{input}\") into {typeof(T).Name}.";
-
-        public static IAsyncResult<Gender, string> GetGenderAsync(int identity) {
-            async Task<IResult<Gender, string>> AddDelay() {
-                await Delay;
-                return GetGender(identity);
-            }
-
-            return AddDelay().ToAsyncResult();
-        }
 
         public static IResult<Gender, string> GetGender(int identity) {
             return Result.Value<int, string>(identity)
@@ -101,10 +89,10 @@ namespace Assertion {
                 }).FlatMap(x => x);
         }
 
-        public static IAsyncResult<int, Error> GetProgramAsync(int identity) {
-            async Task<IResult<int, Error>> AddDelay() {
+        public static IAsyncResult<Gender, string> GetGenderAsync(int identity) {
+            async Task<IResult<Gender, string>> AddDelay() {
                 await Delay;
-                return GetProgram(identity);
+                return GetGender(identity);
             }
 
             return AddDelay().ToAsyncResult();
@@ -117,6 +105,15 @@ namespace Assertion {
                 case 2: return Result.Error<int, Error>(Error.Second);
                 default: return Result.Error<int, Error>(Error.Unhandled);
             }
+        }
+
+        public static IAsyncResult<int, Error> GetProgramAsync(int identity) {
+            async Task<IResult<int, Error>> AddDelay() {
+                await Delay;
+                return GetProgram(identity);
+            }
+
+            return AddDelay().ToAsyncResult();
         }
     }
 }
