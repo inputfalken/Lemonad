@@ -26,31 +26,28 @@ and the right value is considered to be a **failure**.
 internal static class Program {
   private static int Main(string[] args) {
       return Validate(Console.ReadLine())
-          .Match((string x) => {
-              // The successful validation case
-              Console.WriteLine($"Approved input '{x}'");
-              return 0;
-          }, (ExitCode x) => {
-              // The failed validation case
-              const string message = "Error: ";
-              switch (x) {
-                  case ExitCode.IsNullOrEmpty:
-                      Console.WriteLine(message + "Input cannot be null or empty string.");
-                      break;
-                  case ExitCode.IsUpperCase:
-                      Console.WriteLine(message + "Input cannot contain upper cased letters.");
-                      break;
-                  case ExitCode.IsSymbol:
-                      Console.WriteLine(message + "Input cannot contain symbols.");
-                      break;
-                  case ExitCode.Unhandled:
-                      Console.WriteLine("Unhandled error.");
-                      break;
-              }
-
-              return (int) x;
-          });
+          .Match(
+              x => (ExitCode: 0, Message: x),
+              x => (ExitCode: (int) x, Message: ResolveErrorMessage(x))
+          );
   }
+
+  // Create the error message
+  private static string ResolveErrorMessage(ExitCode code) {
+      switch (code) {
+          case ExitCode.FileNotFound:
+              return "File not found.";
+          case ExitCode.InvalidFileContent:
+              return "Invalid file content.";
+          case ExitCode.InvalidFileExtension:
+              return "Invalid file extension.";
+          case ExitCode.FailedWritingText:
+              return "Could not write to file, try running again.";
+          default:
+              throw new ArgumentOutOfRangeException(nameof(code), code, null);
+      }
+  }
+
   // Validate the input.
   private static IResult<string, ExitCode> Validate(string input) {
       // These expressions will be executed as long as the input is considered ok.
