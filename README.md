@@ -67,6 +67,8 @@ internal static class Program {
 }
 ```
 
+For more information about how to use `Result<T, TError`, visit [this](https://fsharpforfunandprofit.com/rop/) article about **railway oriented programming**.
+
 ## `IMaybe<T>`
 
 Works like `IResult<T, TError>` but there's no `TError` available.
