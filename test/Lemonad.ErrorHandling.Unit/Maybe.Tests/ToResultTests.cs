@@ -68,14 +68,12 @@ namespace Lemonad.ErrorHandling.Unit.Maybe.Tests {
         }
 
         [Fact]
-        public void
-            Convert_Nullable_Int_Whose_Property_HasValue_Is_True_Pass_Null_error_Selector__Expects_No_ArgumentNullException_Thrown() {
-            var exception = Record.Exception(() => {
+        public void Null_ErrorSelector_Throws() {
+            Assert.Throws<ArgumentNullException>(AssertionUtilities.ErrorSelectorName, () => {
                 Func<int> errorSelector = null;
                 int? nullable = 2;
                 nullable.ToResult(errorSelector).AssertValue(2);
             });
-            Assert.Null(exception);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
+using Lemonad.ErrorHandling.Extensions.AsyncMaybe;
 using Lemonad.ErrorHandling.Extensions.AsyncResult;
+using Lemonad.ErrorHandling.Extensions.Maybe.Task;
 using Lemonad.ErrorHandling.Extensions.Result.Task;
 using Xunit;
 
@@ -48,6 +50,27 @@ namespace Assertion {
             Assert.True(source.HasValue);
             Assert.Equal(expected, source.Value);
             return source;
+        }
+
+        public static IAsyncMaybe<T> AssertValue<T>(this IAsyncMaybe<T> source, T expected) {
+            async Task<IMaybe<T>> Resolve() {
+                var maybe = await source;
+                Assert.True(await source.HasValue);
+                Assert.Equal(expected, source.Value);
+                return maybe;
+            }
+
+            return Resolve().ToAsyncMaybe();
+        }
+
+        public static IAsyncMaybe<T> AssertNone<T>(this IAsyncMaybe<T> source) {
+            async Task<IMaybe<T>> Resolve() {
+                var maybe = await source;
+                Assert.False(await source.HasValue);
+                return maybe;
+            }
+
+            return Resolve().ToAsyncMaybe();
         }
 
         public static IResult<T, TError> AssertValue<T, TError>(this IResult<T, TError> source, T expected) {

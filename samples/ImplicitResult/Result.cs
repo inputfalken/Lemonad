@@ -205,10 +205,6 @@ namespace ImplicitResult {
         public IAsyncResult<TResult, TError> ZipAsync<TOther, TResult>(IAsyncResult<TOther, TError> other,
             Func<T, TOther, TResult> selector) => _resultImplementation.ZipAsync(other, selector);
 
-        public IAsyncResult<TFlatMap, TError> FlatMapAsync<TFlatMap, TResult>(Func<T, Task<TFlatMap?>> flatMapSelector,
-            Func<TError> errorSelector, Func<T, TFlatMap, TResult> resultSelector) where TFlatMap : struct =>
-            throw new NotImplementedException();
-
         public static implicit operator Result<T, TError>(T value) =>
             new Result<T, TError>(Result.Value<T, TError>(value));
 

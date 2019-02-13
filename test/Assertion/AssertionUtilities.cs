@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Lemonad.ErrorHandling;
 using Lemonad.ErrorHandling.Extensions;
+using Lemonad.ErrorHandling.Extensions.Maybe;
 using Lemonad.ErrorHandling.Extensions.Result;
 using Lemonad.ErrorHandling.Extensions.Result.Task;
 
@@ -39,26 +40,38 @@ namespace Assertion {
         public const string ZipOtherParameter = "other";
         public static Task Delay => Task.Delay(200);
 
-        public static IResult<double, string> Division(double left, double right) => (left, right).ToResult(
-                x => right != 0,
-                x => $"Can not divide '{x.left}' with '{x.right}'."
-            )
-            .Map(x => x.left / x.right);
-
-        public static IAsyncResult<double, string> DivisionAsync(double left, double right) {
-            return (left, right).ToResult(
-                    x => right != 0,
-                    x => $"Can not divide '{x.left}' with '{x.right}'."
+        public static IResult<double, string> Division(double left, double right)
+            => (left, right)
+                .ToResult(
+                    DivisionResultPredicate,
+                    DivisionResultErrorSelector
                 )
-                .ToAsyncResult()
-                .MapAsync(async x => {
-                    await Delay;
-                    return x.left / x.right;
-                });
-        }
+                .Map(x => x.left / x.right);
 
-        public static IMaybe<int> DivisionMaybe(int left, int right) =>
-            right != 0 ? Maybe.Value(left / right) : Maybe.None<int>();
+        private static string DivisionResultErrorSelector((double left, double right) x) =>
+            $"Can not divide '{x.left}' with '{x.right}'.";
+
+        private static bool DivisionResultPredicate((double left, double right) x) => x.right != 0;
+
+        public static IAsyncResult<double, string> DivisionAsync(double left, double right)
+            => (left, right)
+                .ToResult(
+                    DivisionResultPredicate,
+                    DivisionResultErrorSelector
+                )
+                .DoAsync(() => Delay)
+                .Map(x => x.left / x.right);
+
+        public static IMaybe<int> DivisionMaybe(int left, int right)
+            => (left, right)
+                .ToMaybe(x => x.right != 0)
+                .Map(x => x.left / x.right);
+
+        public static IAsyncMaybe<int> DivisionMaybeAsync(int left, int right)
+            => (left, right)
+                .ToMaybe(x => x.right != 0)
+                .DoAsync(() => Delay)
+                .Map(x => x.left / x.right);
 
         public static string FormatStringParserMessage<T>(string input) =>
             input is null
