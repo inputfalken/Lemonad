@@ -12,7 +12,7 @@ namespace Lemonad.ErrorHandling.Internal {
     ///     An asynchronous version of <see cref="Result{T,TError}" /> with the same functionality.
     /// </summary>
     internal class AsyncResult<T, TError> : IAsyncResult<T, TError> {
-        internal AsyncResult(Task<IEither<T, TError>> either) => Either = either.ToAsyncEither();
+        private AsyncResult(Task<IEither<T, TError>> either) => Either = either.ToAsyncEither();
 
         /// <inheritdoc cref="Result{T,TError}.Cast{TResult}" />
         public IAsyncResult<TResult, TError> Cast<TResult>()
