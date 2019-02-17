@@ -12,7 +12,7 @@ namespace Lemonad.ErrorHandling.Internal {
     ///     An asynchronous version of <see cref="Result{T,TError}" /> with the same functionality.
     /// </summary>
     internal class AsyncResult<T, TError> : IAsyncResult<T, TError> {
-        private AsyncResult(Task<IEither<T, TError>> either) => Either = either.ToAsyncEither();
+        internal AsyncResult(Task<IEither<T, TError>> either) => Either = either.ToAsyncEither();
 
         /// <inheritdoc cref="Result{T,TError}.Cast{TResult}" />
         public IAsyncResult<TResult, TError> Cast<TResult>()
@@ -541,13 +541,7 @@ namespace Lemonad.ErrorHandling.Internal {
                 selector));
         }
 
-        internal static AsyncResult<T, TError> ErrorFactory(in TError error)
-            => new AsyncResult<T, TError>(Task.FromResult(Result.Error<T, TError>(error).Either));
-
-        internal static AsyncResult<T, TError> Factory(Task<IEither<T, TError>> result) =>
-            new AsyncResult<T, TError>(result);
-
-        internal static AsyncResult<T, TError> ValueFactory(in T value)
-            => new AsyncResult<T, TError>(Task.FromResult(Result.Value<T, TError>(value).Either));
+        internal static AsyncResult<T, TError> Factory(Task<IEither<T, TError>> result)
+            => new AsyncResult<T, TError>(result);
     }
 }
