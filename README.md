@@ -108,9 +108,6 @@ internal static class Program {
 * `IResult<out T, TError>`
 * `IAsyncResult<out T, TError>`
 * `IMaybe<out T>`
-
-## To be added
-
 * `IAsyncMaybe<out T>`
 
 The out word means that they are covariant.
