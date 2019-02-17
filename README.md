@@ -103,7 +103,7 @@ internal static class Program {
 
 ```
 
-## Current supported data types
+## Supported data types
 
 * `IResult<out T, TError>`
 * `IAsyncResult<out T, TError>`
