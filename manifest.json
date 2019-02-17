@@ -12,6 +12,18 @@
           "hash": "bry7R3EfducO9E5jk6DQ7Q=="
         }
       },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.AsyncMaybe.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.AsyncMaybe.html",
+          "hash": "dudpTII5CDU6gu8+nLNm2w=="
+        }
+      },
       "is_incremental": false,
       "version": ""
     },
@@ -21,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.AsyncResult.html",
-          "hash": "Jtc5KNgxuMOwxbATY248/Q=="
+          "hash": "MHalXrVnggeif5LNWlN+vA=="
         }
       },
       "is_incremental": false,
@@ -65,11 +77,35 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.html",
+          "hash": "wjp6yKkjaGlNMvV1c78Q0g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.Extensions.AsyncMaybe.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.Extensions.AsyncMaybe.html",
+          "hash": "CqB3+ok6mhBCvlkHtUKHFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Lemonad.ErrorHandling.Extensions.AsyncResult.Index.yml",
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Extensions.AsyncResult.Index.html",
-          "hash": "bQhXHqt/Haekm2bUOYMpYw=="
+          "hash": "0EODeU39KoedYKC7cclTUw=="
         }
       },
       "is_incremental": false,
@@ -93,7 +129,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Extensions.Index.html",
-          "hash": "imizMRoV8wZnEE0zi3EXvw=="
+          "hash": "hWJiJLQwYVSp/v7hvqpKMw=="
         }
       },
       "is_incremental": false,
@@ -129,7 +165,31 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Extensions.Maybe.Index.html",
-          "hash": "D6mNM45b8y7F6i3aj3U89A=="
+          "hash": "sAoKPrzAOy9B5anzRni4ZQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.Extensions.Maybe.Task.Index.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.Extensions.Maybe.Task.Index.html",
+          "hash": "xxBZqmJhXJ/oBnERQf712w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.Extensions.Maybe.Task.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.Extensions.Maybe.Task.html",
+          "hash": "M8Qrsbleu+K0UPAOJcLaOw=="
         }
       },
       "is_incremental": false,
@@ -353,11 +413,23 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Lemonad.ErrorHandling.IAsyncMaybe-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lemonad.ErrorHandling.IAsyncMaybe-1.html",
+          "hash": "futWvrIyNHUw/LH7tNwYfA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Lemonad.ErrorHandling.IAsyncResult-2.yml",
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.IAsyncResult-2.html",
-          "hash": "vbcDt1Ncj2kVORA+geBXcA=="
+          "hash": "GM0R0XLWjG/QiUeGSouWBA=="
         }
       },
       "is_incremental": false,
@@ -381,7 +453,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.IMaybe-1.html",
-          "hash": "t8LUcfQvm+toTBe6S0S3cQ=="
+          "hash": "e/u8sivjkl/T4CQMPLLulA=="
         }
       },
       "is_incremental": false,
@@ -393,7 +465,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.IResult-2.html",
-          "hash": "bA8QD9vrZKmg/IC/zPRVIQ=="
+          "hash": "krmE2O+E+UDhlV9gp13mYA=="
         }
       },
       "is_incremental": false,
@@ -405,7 +477,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Maybe.html",
-          "hash": "C+Nt5zgSGQFXJi/1jMfklw=="
+          "hash": "cGRP0hlyxqQtlRF0Pu1GFg=="
         }
       },
       "is_incremental": false,
@@ -465,7 +537,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.Result.html",
-          "hash": "TGUldPrBeQ0+kRA/kzPYzw=="
+          "hash": "gBThiBIEaMSz2sslU1dARg=="
         }
       },
       "is_incremental": false,
@@ -477,7 +549,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lemonad.ErrorHandling.html",
-          "hash": "1ue6qx1p/+rKvL8s9LI6Rw=="
+          "hash": "KMBzCxmbEX5lPi2LcyE5QA=="
         }
       },
       "is_incremental": false,
@@ -501,7 +573,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "E3FnJErysE7qIYG9awwU+g=="
+          "hash": "EpMPEVqRniruwLUCvPBueA=="
         }
       },
       "is_incremental": false,
@@ -516,7 +588,7 @@
           "hash": "e6Lq9puoIS6+qWVnJxUAag=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -540,7 +612,7 @@
           "hash": "Kjq+Gdy1xVuXsi+7+mIswQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -559,8 +631,7 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": false,
-        "details": "Cannot build incrementally because docfx version changed from 2.39.2.0 to 2.40.7.0.",
+        "can_incremental": true,
         "incrementalPhase": "build"
       },
       "processors": {
@@ -569,12 +640,12 @@
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": false,
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
           "incrementalPhase": "build"
         },
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": false,
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
           "incrementalPhase": "build"
         }
       }

@@ -7,6 +7,44 @@ references:
   commentId: N:Lemonad.ErrorHandling
   fullName: Lemonad.ErrorHandling
   nameWithType: Lemonad.ErrorHandling
+- uid: Lemonad.ErrorHandling.AsyncMaybe
+  name: AsyncMaybe
+  href: api/Lemonad.ErrorHandling.AsyncMaybe.html
+  commentId: T:Lemonad.ErrorHandling.AsyncMaybe
+  fullName: Lemonad.ErrorHandling.AsyncMaybe
+  nameWithType: AsyncMaybe
+- uid: Lemonad.ErrorHandling.AsyncMaybe.None*
+  name: None
+  href: api/Lemonad.ErrorHandling.AsyncMaybe.html#Lemonad_ErrorHandling_AsyncMaybe_None_
+  commentId: Overload:Lemonad.ErrorHandling.AsyncMaybe.None
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.AsyncMaybe.None
+  nameWithType: AsyncMaybe.None
+- uid: Lemonad.ErrorHandling.AsyncMaybe.None``1
+  name: None<TSource>()
+  href: api/Lemonad.ErrorHandling.AsyncMaybe.html#Lemonad_ErrorHandling_AsyncMaybe_None__1
+  commentId: M:Lemonad.ErrorHandling.AsyncMaybe.None``1
+  name.vb: None(Of TSource)()
+  fullName: Lemonad.ErrorHandling.AsyncMaybe.None<TSource>()
+  fullName.vb: Lemonad.ErrorHandling.AsyncMaybe.None(Of TSource)()
+  nameWithType: AsyncMaybe.None<TSource>()
+  nameWithType.vb: AsyncMaybe.None(Of TSource)()
+- uid: Lemonad.ErrorHandling.AsyncMaybe.Value*
+  name: Value
+  href: api/Lemonad.ErrorHandling.AsyncMaybe.html#Lemonad_ErrorHandling_AsyncMaybe_Value_
+  commentId: Overload:Lemonad.ErrorHandling.AsyncMaybe.Value
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.AsyncMaybe.Value
+  nameWithType: AsyncMaybe.Value
+- uid: Lemonad.ErrorHandling.AsyncMaybe.Value``1(``0)
+  name: Value<TSource>(TSource)
+  href: api/Lemonad.ErrorHandling.AsyncMaybe.html#Lemonad_ErrorHandling_AsyncMaybe_Value__1___0_
+  commentId: M:Lemonad.ErrorHandling.AsyncMaybe.Value``1(``0)
+  name.vb: Value(Of TSource)(TSource)
+  fullName: Lemonad.ErrorHandling.AsyncMaybe.Value<TSource>(TSource)
+  fullName.vb: Lemonad.ErrorHandling.AsyncMaybe.Value(Of TSource)(TSource)
+  nameWithType: AsyncMaybe.Value<TSource>(TSource)
+  nameWithType.vb: AsyncMaybe.Value(Of TSource)(TSource)
 - uid: Lemonad.ErrorHandling.AsyncResult
   name: AsyncResult
   href: api/Lemonad.ErrorHandling.AsyncResult.html
@@ -95,6 +133,50 @@ references:
   commentId: N:Lemonad.ErrorHandling.Extensions
   fullName: Lemonad.ErrorHandling.Extensions
   nameWithType: Lemonad.ErrorHandling.Extensions
+- uid: Lemonad.ErrorHandling.Extensions.AsyncMaybe
+  name: Lemonad.ErrorHandling.Extensions.AsyncMaybe
+  href: api/Lemonad.ErrorHandling.Extensions.AsyncMaybe.html
+  commentId: N:Lemonad.ErrorHandling.Extensions.AsyncMaybe
+  fullName: Lemonad.ErrorHandling.Extensions.AsyncMaybe
+  nameWithType: Lemonad.ErrorHandling.Extensions.AsyncMaybe
+- uid: Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index
+  name: Index
+  href: api/Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.html
+  commentId: T:Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index
+  fullName: Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index
+  nameWithType: Index
+- uid: Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.GetAwaiter*
+  name: GetAwaiter
+  href: api/Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.html#Lemonad_ErrorHandling_Extensions_AsyncMaybe_Index_GetAwaiter_
+  commentId: Overload:Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.GetAwaiter
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.GetAwaiter
+  nameWithType: Index.GetAwaiter
+- uid: Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.GetAwaiter``1(Lemonad.ErrorHandling.IAsyncMaybe{``0})
+  name: GetAwaiter<T>(IAsyncMaybe<T>)
+  href: api/Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.html#Lemonad_ErrorHandling_Extensions_AsyncMaybe_Index_GetAwaiter__1_Lemonad_ErrorHandling_IAsyncMaybe___0__
+  commentId: M:Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.GetAwaiter``1(Lemonad.ErrorHandling.IAsyncMaybe{``0})
+  name.vb: GetAwaiter(Of T)(IAsyncMaybe(Of T))
+  fullName: Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.GetAwaiter<T>(Lemonad.ErrorHandling.IAsyncMaybe<T>)
+  fullName.vb: Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.GetAwaiter(Of T)(Lemonad.ErrorHandling.IAsyncMaybe(Of T))
+  nameWithType: Index.GetAwaiter<T>(IAsyncMaybe<T>)
+  nameWithType.vb: Index.GetAwaiter(Of T)(IAsyncMaybe(Of T))
+- uid: Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.ToAsyncResult*
+  name: ToAsyncResult
+  href: api/Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.html#Lemonad_ErrorHandling_Extensions_AsyncMaybe_Index_ToAsyncResult_
+  commentId: Overload:Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.ToAsyncResult
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.ToAsyncResult
+  nameWithType: Index.ToAsyncResult
+- uid: Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.ToAsyncResult``2(Lemonad.ErrorHandling.IAsyncMaybe{``0},System.Func{``1})
+  name: ToAsyncResult<T, TError>(IAsyncMaybe<T>, Func<TError>)
+  href: api/Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.html#Lemonad_ErrorHandling_Extensions_AsyncMaybe_Index_ToAsyncResult__2_Lemonad_ErrorHandling_IAsyncMaybe___0__System_Func___1__
+  commentId: M:Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.ToAsyncResult``2(Lemonad.ErrorHandling.IAsyncMaybe{``0},System.Func{``1})
+  name.vb: ToAsyncResult(Of T, TError)(IAsyncMaybe(Of T), Func(Of TError))
+  fullName: Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.ToAsyncResult<T, TError>(Lemonad.ErrorHandling.IAsyncMaybe<T>, System.Func<TError>)
+  fullName.vb: Lemonad.ErrorHandling.Extensions.AsyncMaybe.Index.ToAsyncResult(Of T, TError)(Lemonad.ErrorHandling.IAsyncMaybe(Of T), System.Func(Of TError))
+  nameWithType: Index.ToAsyncResult<T, TError>(IAsyncMaybe<T>, Func<TError>)
+  nameWithType.vb: Index.ToAsyncResult(Of T, TError)(IAsyncMaybe(Of T), Func(Of TError))
 - uid: Lemonad.ErrorHandling.Extensions.AsyncResult
   name: Lemonad.ErrorHandling.Extensions.AsyncResult
   href: api/Lemonad.ErrorHandling.Extensions.AsyncResult.html
@@ -189,6 +271,22 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Extensions.AsyncResult.Index.Swap(Of T, TError)(Lemonad.ErrorHandling.IAsyncResult(Of T, TError))
   nameWithType: Index.Swap<T, TError>(IAsyncResult<T, TError>)
   nameWithType.vb: Index.Swap(Of T, TError)(IAsyncResult(Of T, TError))
+- uid: Lemonad.ErrorHandling.Extensions.AsyncResult.Index.ToAsyncMaybe*
+  name: ToAsyncMaybe
+  href: api/Lemonad.ErrorHandling.Extensions.AsyncResult.Index.html#Lemonad_ErrorHandling_Extensions_AsyncResult_Index_ToAsyncMaybe_
+  commentId: Overload:Lemonad.ErrorHandling.Extensions.AsyncResult.Index.ToAsyncMaybe
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Extensions.AsyncResult.Index.ToAsyncMaybe
+  nameWithType: Index.ToAsyncMaybe
+- uid: Lemonad.ErrorHandling.Extensions.AsyncResult.Index.ToAsyncMaybe``2(Lemonad.ErrorHandling.IAsyncResult{``0,``1})
+  name: ToAsyncMaybe<T, TError>(IAsyncResult<T, TError>)
+  href: api/Lemonad.ErrorHandling.Extensions.AsyncResult.Index.html#Lemonad_ErrorHandling_Extensions_AsyncResult_Index_ToAsyncMaybe__2_Lemonad_ErrorHandling_IAsyncResult___0___1__
+  commentId: M:Lemonad.ErrorHandling.Extensions.AsyncResult.Index.ToAsyncMaybe``2(Lemonad.ErrorHandling.IAsyncResult{``0,``1})
+  name.vb: ToAsyncMaybe(Of T, TError)(IAsyncResult(Of T, TError))
+  fullName: Lemonad.ErrorHandling.Extensions.AsyncResult.Index.ToAsyncMaybe<T, TError>(Lemonad.ErrorHandling.IAsyncResult<T, TError>)
+  fullName.vb: Lemonad.ErrorHandling.Extensions.AsyncResult.Index.ToAsyncMaybe(Of T, TError)(Lemonad.ErrorHandling.IAsyncResult(Of T, TError))
+  nameWithType: Index.ToAsyncMaybe<T, TError>(IAsyncResult<T, TError>)
+  nameWithType.vb: Index.ToAsyncMaybe(Of T, TError)(IAsyncResult(Of T, TError))
 - uid: Lemonad.ErrorHandling.Extensions.AsyncResult.Index.ToEnumerable*
   name: ToEnumerable
   href: api/Lemonad.ErrorHandling.Extensions.AsyncResult.Index.html#Lemonad_ErrorHandling_Extensions_AsyncResult_Index_ToEnumerable_
@@ -447,6 +545,22 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Extensions.Maybe.Index.ToEnumerable(Of TSource)(Lemonad.ErrorHandling.IMaybe(Of TSource))
   nameWithType: Index.ToEnumerable<TSource>(IMaybe<TSource>)
   nameWithType.vb: Index.ToEnumerable(Of TSource)(IMaybe(Of TSource))
+- uid: Lemonad.ErrorHandling.Extensions.Maybe.Index.ToMaybeAsync*
+  name: ToMaybeAsync
+  href: api/Lemonad.ErrorHandling.Extensions.Maybe.Index.html#Lemonad_ErrorHandling_Extensions_Maybe_Index_ToMaybeAsync_
+  commentId: Overload:Lemonad.ErrorHandling.Extensions.Maybe.Index.ToMaybeAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Extensions.Maybe.Index.ToMaybeAsync
+  nameWithType: Index.ToMaybeAsync
+- uid: Lemonad.ErrorHandling.Extensions.Maybe.Index.ToMaybeAsync``1(Lemonad.ErrorHandling.IMaybe{``0})
+  name: ToMaybeAsync<T>(IMaybe<T>)
+  href: api/Lemonad.ErrorHandling.Extensions.Maybe.Index.html#Lemonad_ErrorHandling_Extensions_Maybe_Index_ToMaybeAsync__1_Lemonad_ErrorHandling_IMaybe___0__
+  commentId: M:Lemonad.ErrorHandling.Extensions.Maybe.Index.ToMaybeAsync``1(Lemonad.ErrorHandling.IMaybe{``0})
+  name.vb: ToMaybeAsync(Of T)(IMaybe(Of T))
+  fullName: Lemonad.ErrorHandling.Extensions.Maybe.Index.ToMaybeAsync<T>(Lemonad.ErrorHandling.IMaybe<T>)
+  fullName.vb: Lemonad.ErrorHandling.Extensions.Maybe.Index.ToMaybeAsync(Of T)(Lemonad.ErrorHandling.IMaybe(Of T))
+  nameWithType: Index.ToMaybeAsync<T>(IMaybe<T>)
+  nameWithType.vb: Index.ToMaybeAsync(Of T)(IMaybe(Of T))
 - uid: Lemonad.ErrorHandling.Extensions.Maybe.Index.ToResult*
   name: ToResult
   href: api/Lemonad.ErrorHandling.Extensions.Maybe.Index.html#Lemonad_ErrorHandling_Extensions_Maybe_Index_ToResult_
@@ -463,6 +577,34 @@ references:
   fullName.vb: Lemonad.ErrorHandling.Extensions.Maybe.Index.ToResult(Of T, TError)(Lemonad.ErrorHandling.IMaybe(Of T), System.Func(Of TError))
   nameWithType: Index.ToResult<T, TError>(IMaybe<T>, Func<TError>)
   nameWithType.vb: Index.ToResult(Of T, TError)(IMaybe(Of T), Func(Of TError))
+- uid: Lemonad.ErrorHandling.Extensions.Maybe.Task
+  name: Lemonad.ErrorHandling.Extensions.Maybe.Task
+  href: api/Lemonad.ErrorHandling.Extensions.Maybe.Task.html
+  commentId: N:Lemonad.ErrorHandling.Extensions.Maybe.Task
+  fullName: Lemonad.ErrorHandling.Extensions.Maybe.Task
+  nameWithType: Lemonad.ErrorHandling.Extensions.Maybe.Task
+- uid: Lemonad.ErrorHandling.Extensions.Maybe.Task.Index
+  name: Index
+  href: api/Lemonad.ErrorHandling.Extensions.Maybe.Task.Index.html
+  commentId: T:Lemonad.ErrorHandling.Extensions.Maybe.Task.Index
+  fullName: Lemonad.ErrorHandling.Extensions.Maybe.Task.Index
+  nameWithType: Index
+- uid: Lemonad.ErrorHandling.Extensions.Maybe.Task.Index.ToAsyncMaybe*
+  name: ToAsyncMaybe
+  href: api/Lemonad.ErrorHandling.Extensions.Maybe.Task.Index.html#Lemonad_ErrorHandling_Extensions_Maybe_Task_Index_ToAsyncMaybe_
+  commentId: Overload:Lemonad.ErrorHandling.Extensions.Maybe.Task.Index.ToAsyncMaybe
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.Extensions.Maybe.Task.Index.ToAsyncMaybe
+  nameWithType: Index.ToAsyncMaybe
+- uid: Lemonad.ErrorHandling.Extensions.Maybe.Task.Index.ToAsyncMaybe``1(System.Threading.Tasks.Task{Lemonad.ErrorHandling.IMaybe{``0}})
+  name: ToAsyncMaybe<T>(Task<IMaybe<T>>)
+  href: api/Lemonad.ErrorHandling.Extensions.Maybe.Task.Index.html#Lemonad_ErrorHandling_Extensions_Maybe_Task_Index_ToAsyncMaybe__1_System_Threading_Tasks_Task_Lemonad_ErrorHandling_IMaybe___0___
+  commentId: M:Lemonad.ErrorHandling.Extensions.Maybe.Task.Index.ToAsyncMaybe``1(System.Threading.Tasks.Task{Lemonad.ErrorHandling.IMaybe{``0}})
+  name.vb: ToAsyncMaybe(Of T)(Task(Of IMaybe(Of T)))
+  fullName: Lemonad.ErrorHandling.Extensions.Maybe.Task.Index.ToAsyncMaybe<T>(System.Threading.Tasks.Task<Lemonad.ErrorHandling.IMaybe<T>>)
+  fullName.vb: Lemonad.ErrorHandling.Extensions.Maybe.Task.Index.ToAsyncMaybe(Of T)(System.Threading.Tasks.Task(Of Lemonad.ErrorHandling.IMaybe(Of T)))
+  nameWithType: Index.ToAsyncMaybe<T>(Task<IMaybe<T>>)
+  nameWithType.vb: Index.ToAsyncMaybe(Of T)(Task(Of IMaybe(Of T)))
 - uid: Lemonad.ErrorHandling.Extensions.Result
   name: Lemonad.ErrorHandling.Extensions.Result
   href: api/Lemonad.ErrorHandling.Extensions.Result.html
@@ -1008,6 +1150,381 @@ references:
   fullName.vb: Lemonad.ErrorHandling.IAsyncEither(Of T, TError).Value
   nameWithType: IAsyncEither<T, TError>.Value
   nameWithType.vb: IAsyncEither(Of T, TError).Value
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1
+  name: IAsyncMaybe<T>
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html
+  commentId: T:Lemonad.ErrorHandling.IAsyncMaybe`1
+  name.vb: IAsyncMaybe(Of T)
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T)
+  nameWithType: IAsyncMaybe<T>
+  nameWithType.vb: IAsyncMaybe(Of T)
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.Do(System.Action)
+  name: Do(Action)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_Do_System_Action_
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.Do(System.Action)
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.Do(System.Action)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).Do(System.Action)
+  nameWithType: IAsyncMaybe<T>.Do(Action)
+  nameWithType.vb: IAsyncMaybe(Of T).Do(Action)
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.Do*
+  name: Do
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_Do_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncMaybe`1.Do
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.Do
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).Do
+  nameWithType: IAsyncMaybe<T>.Do
+  nameWithType.vb: IAsyncMaybe(Of T).Do
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.DoAsync(System.Func{System.Threading.Tasks.Task})
+  name: DoAsync(Func<Task>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_DoAsync_System_Func_System_Threading_Tasks_Task__
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.DoAsync(System.Func{System.Threading.Tasks.Task})
+  name.vb: DoAsync(Func(Of Task))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.DoAsync(System.Func<System.Threading.Tasks.Task>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).DoAsync(System.Func(Of System.Threading.Tasks.Task))
+  nameWithType: IAsyncMaybe<T>.DoAsync(Func<Task>)
+  nameWithType.vb: IAsyncMaybe(Of T).DoAsync(Func(Of Task))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.DoAsync*
+  name: DoAsync
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_DoAsync_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncMaybe`1.DoAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.DoAsync
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).DoAsync
+  nameWithType: IAsyncMaybe<T>.DoAsync
+  nameWithType.vb: IAsyncMaybe(Of T).DoAsync
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.DoWith(System.Action{`0})
+  name: DoWith(Action<T>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_DoWith_System_Action__0__
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.DoWith(System.Action{`0})
+  name.vb: DoWith(Action(Of T))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.DoWith(System.Action<T>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).DoWith(System.Action(Of T))
+  nameWithType: IAsyncMaybe<T>.DoWith(Action<T>)
+  nameWithType.vb: IAsyncMaybe(Of T).DoWith(Action(Of T))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.DoWith*
+  name: DoWith
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_DoWith_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncMaybe`1.DoWith
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.DoWith
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).DoWith
+  nameWithType: IAsyncMaybe<T>.DoWith
+  nameWithType.vb: IAsyncMaybe(Of T).DoWith
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.DoWithAsync(System.Func{`0,System.Threading.Tasks.Task})
+  name: DoWithAsync(Func<T, Task>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_DoWithAsync_System_Func__0_System_Threading_Tasks_Task__
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.DoWithAsync(System.Func{`0,System.Threading.Tasks.Task})
+  name.vb: DoWithAsync(Func(Of T, Task))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.DoWithAsync(System.Func<T, System.Threading.Tasks.Task>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).DoWithAsync(System.Func(Of T, System.Threading.Tasks.Task))
+  nameWithType: IAsyncMaybe<T>.DoWithAsync(Func<T, Task>)
+  nameWithType.vb: IAsyncMaybe(Of T).DoWithAsync(Func(Of T, Task))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.DoWithAsync*
+  name: DoWithAsync
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_DoWithAsync_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncMaybe`1.DoWithAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.DoWithAsync
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).DoWithAsync
+  nameWithType: IAsyncMaybe<T>.DoWithAsync
+  nameWithType.vb: IAsyncMaybe(Of T).DoWithAsync
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.Filter(System.Func{`0,System.Boolean})
+  name: Filter(Func<T, Boolean>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_Filter_System_Func__0_System_Boolean__
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.Filter(System.Func{`0,System.Boolean})
+  name.vb: Filter(Func(Of T, Boolean))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.Filter(System.Func<T, System.Boolean>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).Filter(System.Func(Of T, System.Boolean))
+  nameWithType: IAsyncMaybe<T>.Filter(Func<T, Boolean>)
+  nameWithType.vb: IAsyncMaybe(Of T).Filter(Func(Of T, Boolean))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.Filter*
+  name: Filter
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_Filter_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncMaybe`1.Filter
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.Filter
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).Filter
+  nameWithType: IAsyncMaybe<T>.Filter
+  nameWithType.vb: IAsyncMaybe(Of T).Filter
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.FilterAsync(System.Func{`0,System.Threading.Tasks.Task{System.Boolean}})
+  name: FilterAsync(Func<T, Task<Boolean>>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_FilterAsync_System_Func__0_System_Threading_Tasks_Task_System_Boolean___
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.FilterAsync(System.Func{`0,System.Threading.Tasks.Task{System.Boolean}})
+  name.vb: FilterAsync(Func(Of T, Task(Of Boolean)))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.FilterAsync(System.Func<T, System.Threading.Tasks.Task<System.Boolean>>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).FilterAsync(System.Func(Of T, System.Threading.Tasks.Task(Of System.Boolean)))
+  nameWithType: IAsyncMaybe<T>.FilterAsync(Func<T, Task<Boolean>>)
+  nameWithType.vb: IAsyncMaybe(Of T).FilterAsync(Func(Of T, Task(Of Boolean)))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.FilterAsync*
+  name: FilterAsync
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_FilterAsync_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncMaybe`1.FilterAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.FilterAsync
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).FilterAsync
+  nameWithType: IAsyncMaybe<T>.FilterAsync
+  nameWithType.vb: IAsyncMaybe(Of T).FilterAsync
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMap*
+  name: FlatMap
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_FlatMap_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMap
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.FlatMap
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).FlatMap
+  nameWithType: IAsyncMaybe<T>.FlatMap
+  nameWithType.vb: IAsyncMaybe(Of T).FlatMap
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMap``1(System.Func{`0,Lemonad.ErrorHandling.IMaybe{``0}})
+  name: FlatMap<TResult>(Func<T, IMaybe<TResult>>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_FlatMap__1_System_Func__0_Lemonad_ErrorHandling_IMaybe___0___
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMap``1(System.Func{`0,Lemonad.ErrorHandling.IMaybe{``0}})
+  name.vb: FlatMap(Of TResult)(Func(Of T, IMaybe(Of TResult)))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.FlatMap<TResult>(System.Func<T, Lemonad.ErrorHandling.IMaybe<TResult>>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).FlatMap(Of TResult)(System.Func(Of T, Lemonad.ErrorHandling.IMaybe(Of TResult)))
+  nameWithType: IAsyncMaybe<T>.FlatMap<TResult>(Func<T, IMaybe<TResult>>)
+  nameWithType.vb: IAsyncMaybe(Of T).FlatMap(Of TResult)(Func(Of T, IMaybe(Of TResult)))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMap``1(System.Func{`0,System.Nullable{``0}})
+  name: FlatMap<TResult>(Func<T, Nullable<TResult>>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_FlatMap__1_System_Func__0_System_Nullable___0___
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMap``1(System.Func{`0,System.Nullable{``0}})
+  name.vb: FlatMap(Of TResult)(Func(Of T, Nullable(Of TResult)))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.FlatMap<TResult>(System.Func<T, System.Nullable<TResult>>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).FlatMap(Of TResult)(System.Func(Of T, System.Nullable(Of TResult)))
+  nameWithType: IAsyncMaybe<T>.FlatMap<TResult>(Func<T, Nullable<TResult>>)
+  nameWithType.vb: IAsyncMaybe(Of T).FlatMap(Of TResult)(Func(Of T, Nullable(Of TResult)))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.IMaybe{``0}},System.Func{`0,``0,``1})
+  name: FlatMap<TFlatMap, TResult>(Func<T, IMaybe<TFlatMap>>, Func<T, TFlatMap, TResult>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_FlatMap__2_System_Func__0_Lemonad_ErrorHandling_IMaybe___0___System_Func__0___0___1__
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMap``2(System.Func{`0,Lemonad.ErrorHandling.IMaybe{``0}},System.Func{`0,``0,``1})
+  name.vb: FlatMap(Of TFlatMap, TResult)(Func(Of T, IMaybe(Of TFlatMap)), Func(Of T, TFlatMap, TResult))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.FlatMap<TFlatMap, TResult>(System.Func<T, Lemonad.ErrorHandling.IMaybe<TFlatMap>>, System.Func<T, TFlatMap, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).FlatMap(Of TFlatMap, TResult)(System.Func(Of T, Lemonad.ErrorHandling.IMaybe(Of TFlatMap)), System.Func(Of T, TFlatMap, TResult))
+  nameWithType: IAsyncMaybe<T>.FlatMap<TFlatMap, TResult>(Func<T, IMaybe<TFlatMap>>, Func<T, TFlatMap, TResult>)
+  nameWithType.vb: IAsyncMaybe(Of T).FlatMap(Of TFlatMap, TResult)(Func(Of T, IMaybe(Of TFlatMap)), Func(Of T, TFlatMap, TResult))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMap``2(System.Func{`0,System.Nullable{``0}},System.Func{`0,``0,``1})
+  name: FlatMap<TSelector, TResult>(Func<T, Nullable<TSelector>>, Func<T, TSelector, TResult>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_FlatMap__2_System_Func__0_System_Nullable___0___System_Func__0___0___1__
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMap``2(System.Func{`0,System.Nullable{``0}},System.Func{`0,``0,``1})
+  name.vb: FlatMap(Of TSelector, TResult)(Func(Of T, Nullable(Of TSelector)), Func(Of T, TSelector, TResult))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.FlatMap<TSelector, TResult>(System.Func<T, System.Nullable<TSelector>>, System.Func<T, TSelector, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).FlatMap(Of TSelector, TResult)(System.Func(Of T, System.Nullable(Of TSelector)), System.Func(Of T, TSelector, TResult))
+  nameWithType: IAsyncMaybe<T>.FlatMap<TSelector, TResult>(Func<T, Nullable<TSelector>>, Func<T, TSelector, TResult>)
+  nameWithType.vb: IAsyncMaybe(Of T).FlatMap(Of TSelector, TResult)(Func(Of T, Nullable(Of TSelector)), Func(Of T, TSelector, TResult))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMapAsync*
+  name: FlatMapAsync
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_FlatMapAsync_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMapAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.FlatMapAsync
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).FlatMapAsync
+  nameWithType: IAsyncMaybe<T>.FlatMapAsync
+  nameWithType.vb: IAsyncMaybe(Of T).FlatMapAsync
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMapAsync``1(System.Func{`0,Lemonad.ErrorHandling.IAsyncMaybe{``0}})
+  name: FlatMapAsync<TResult>(Func<T, IAsyncMaybe<TResult>>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_FlatMapAsync__1_System_Func__0_Lemonad_ErrorHandling_IAsyncMaybe___0___
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMapAsync``1(System.Func{`0,Lemonad.ErrorHandling.IAsyncMaybe{``0}})
+  name.vb: FlatMapAsync(Of TResult)(Func(Of T, IAsyncMaybe(Of TResult)))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.FlatMapAsync<TResult>(System.Func<T, Lemonad.ErrorHandling.IAsyncMaybe<TResult>>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).FlatMapAsync(Of TResult)(System.Func(Of T, Lemonad.ErrorHandling.IAsyncMaybe(Of TResult)))
+  nameWithType: IAsyncMaybe<T>.FlatMapAsync<TResult>(Func<T, IAsyncMaybe<TResult>>)
+  nameWithType.vb: IAsyncMaybe(Of T).FlatMapAsync(Of TResult)(Func(Of T, IAsyncMaybe(Of TResult)))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMapAsync``1(System.Func{`0,System.Threading.Tasks.Task{System.Nullable{``0}}})
+  name: FlatMapAsync<TResult>(Func<T, Task<Nullable<TResult>>>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_FlatMapAsync__1_System_Func__0_System_Threading_Tasks_Task_System_Nullable___0____
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMapAsync``1(System.Func{`0,System.Threading.Tasks.Task{System.Nullable{``0}}})
+  name.vb: FlatMapAsync(Of TResult)(Func(Of T, Task(Of Nullable(Of TResult))))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.FlatMapAsync<TResult>(System.Func<T, System.Threading.Tasks.Task<System.Nullable<TResult>>>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).FlatMapAsync(Of TResult)(System.Func(Of T, System.Threading.Tasks.Task(Of System.Nullable(Of TResult))))
+  nameWithType: IAsyncMaybe<T>.FlatMapAsync<TResult>(Func<T, Task<Nullable<TResult>>>)
+  nameWithType.vb: IAsyncMaybe(Of T).FlatMapAsync(Of TResult)(Func(Of T, Task(Of Nullable(Of TResult))))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMapAsync``2(System.Func{`0,Lemonad.ErrorHandling.IAsyncMaybe{``0}},System.Func{`0,``0,``1})
+  name: FlatMapAsync<TFlatMap, TResult>(Func<T, IAsyncMaybe<TFlatMap>>, Func<T, TFlatMap, TResult>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_FlatMapAsync__2_System_Func__0_Lemonad_ErrorHandling_IAsyncMaybe___0___System_Func__0___0___1__
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMapAsync``2(System.Func{`0,Lemonad.ErrorHandling.IAsyncMaybe{``0}},System.Func{`0,``0,``1})
+  name.vb: FlatMapAsync(Of TFlatMap, TResult)(Func(Of T, IAsyncMaybe(Of TFlatMap)), Func(Of T, TFlatMap, TResult))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.FlatMapAsync<TFlatMap, TResult>(System.Func<T, Lemonad.ErrorHandling.IAsyncMaybe<TFlatMap>>, System.Func<T, TFlatMap, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).FlatMapAsync(Of TFlatMap, TResult)(System.Func(Of T, Lemonad.ErrorHandling.IAsyncMaybe(Of TFlatMap)), System.Func(Of T, TFlatMap, TResult))
+  nameWithType: IAsyncMaybe<T>.FlatMapAsync<TFlatMap, TResult>(Func<T, IAsyncMaybe<TFlatMap>>, Func<T, TFlatMap, TResult>)
+  nameWithType.vb: IAsyncMaybe(Of T).FlatMapAsync(Of TFlatMap, TResult)(Func(Of T, IAsyncMaybe(Of TFlatMap)), Func(Of T, TFlatMap, TResult))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMapAsync``2(System.Func{`0,System.Threading.Tasks.Task{System.Nullable{``0}}},System.Func{`0,``0,``1})
+  name: FlatMapAsync<TSelector, TResult>(Func<T, Task<Nullable<TSelector>>>, Func<T, TSelector, TResult>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_FlatMapAsync__2_System_Func__0_System_Threading_Tasks_Task_System_Nullable___0____System_Func__0___0___1__
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.FlatMapAsync``2(System.Func{`0,System.Threading.Tasks.Task{System.Nullable{``0}}},System.Func{`0,``0,``1})
+  name.vb: FlatMapAsync(Of TSelector, TResult)(Func(Of T, Task(Of Nullable(Of TSelector))), Func(Of T, TSelector, TResult))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.FlatMapAsync<TSelector, TResult>(System.Func<T, System.Threading.Tasks.Task<System.Nullable<TSelector>>>, System.Func<T, TSelector, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).FlatMapAsync(Of TSelector, TResult)(System.Func(Of T, System.Threading.Tasks.Task(Of System.Nullable(Of TSelector))), System.Func(Of T, TSelector, TResult))
+  nameWithType: IAsyncMaybe<T>.FlatMapAsync<TSelector, TResult>(Func<T, Task<Nullable<TSelector>>>, Func<T, TSelector, TResult>)
+  nameWithType.vb: IAsyncMaybe(Of T).FlatMapAsync(Of TSelector, TResult)(Func(Of T, Task(Of Nullable(Of TSelector))), Func(Of T, TSelector, TResult))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.Flatten*
+  name: Flatten
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_Flatten_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncMaybe`1.Flatten
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.Flatten
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).Flatten
+  nameWithType: IAsyncMaybe<T>.Flatten
+  nameWithType.vb: IAsyncMaybe(Of T).Flatten
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.Flatten``1(System.Func{`0,Lemonad.ErrorHandling.IMaybe{``0}})
+  name: Flatten<TResult>(Func<T, IMaybe<TResult>>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_Flatten__1_System_Func__0_Lemonad_ErrorHandling_IMaybe___0___
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.Flatten``1(System.Func{`0,Lemonad.ErrorHandling.IMaybe{``0}})
+  name.vb: Flatten(Of TResult)(Func(Of T, IMaybe(Of TResult)))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.Flatten<TResult>(System.Func<T, Lemonad.ErrorHandling.IMaybe<TResult>>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).Flatten(Of TResult)(System.Func(Of T, Lemonad.ErrorHandling.IMaybe(Of TResult)))
+  nameWithType: IAsyncMaybe<T>.Flatten<TResult>(Func<T, IMaybe<TResult>>)
+  nameWithType.vb: IAsyncMaybe(Of T).Flatten(Of TResult)(Func(Of T, IMaybe(Of TResult)))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.FlattenAsync*
+  name: FlattenAsync
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_FlattenAsync_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncMaybe`1.FlattenAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.FlattenAsync
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).FlattenAsync
+  nameWithType: IAsyncMaybe<T>.FlattenAsync
+  nameWithType.vb: IAsyncMaybe(Of T).FlattenAsync
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.FlattenAsync``1(System.Func{`0,Lemonad.ErrorHandling.IAsyncMaybe{``0}})
+  name: FlattenAsync<TResult>(Func<T, IAsyncMaybe<TResult>>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_FlattenAsync__1_System_Func__0_Lemonad_ErrorHandling_IAsyncMaybe___0___
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.FlattenAsync``1(System.Func{`0,Lemonad.ErrorHandling.IAsyncMaybe{``0}})
+  name.vb: FlattenAsync(Of TResult)(Func(Of T, IAsyncMaybe(Of TResult)))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.FlattenAsync<TResult>(System.Func<T, Lemonad.ErrorHandling.IAsyncMaybe<TResult>>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).FlattenAsync(Of TResult)(System.Func(Of T, Lemonad.ErrorHandling.IAsyncMaybe(Of TResult)))
+  nameWithType: IAsyncMaybe<T>.FlattenAsync<TResult>(Func<T, IAsyncMaybe<TResult>>)
+  nameWithType.vb: IAsyncMaybe(Of T).FlattenAsync(Of TResult)(Func(Of T, IAsyncMaybe(Of TResult)))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.HasValue
+  name: HasValue
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_HasValue
+  commentId: P:Lemonad.ErrorHandling.IAsyncMaybe`1.HasValue
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.HasValue
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).HasValue
+  nameWithType: IAsyncMaybe<T>.HasValue
+  nameWithType.vb: IAsyncMaybe(Of T).HasValue
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.HasValue*
+  name: HasValue
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_HasValue_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncMaybe`1.HasValue
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.HasValue
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).HasValue
+  nameWithType: IAsyncMaybe<T>.HasValue
+  nameWithType.vb: IAsyncMaybe(Of T).HasValue
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.IsNoneWhen(System.Func{`0,System.Boolean})
+  name: IsNoneWhen(Func<T, Boolean>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_IsNoneWhen_System_Func__0_System_Boolean__
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.IsNoneWhen(System.Func{`0,System.Boolean})
+  name.vb: IsNoneWhen(Func(Of T, Boolean))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.IsNoneWhen(System.Func<T, System.Boolean>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).IsNoneWhen(System.Func(Of T, System.Boolean))
+  nameWithType: IAsyncMaybe<T>.IsNoneWhen(Func<T, Boolean>)
+  nameWithType.vb: IAsyncMaybe(Of T).IsNoneWhen(Func(Of T, Boolean))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.IsNoneWhen*
+  name: IsNoneWhen
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_IsNoneWhen_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncMaybe`1.IsNoneWhen
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.IsNoneWhen
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).IsNoneWhen
+  nameWithType: IAsyncMaybe<T>.IsNoneWhen
+  nameWithType.vb: IAsyncMaybe(Of T).IsNoneWhen
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.IsNoneWhenAsync(System.Func{`0,System.Threading.Tasks.Task{System.Boolean}})
+  name: IsNoneWhenAsync(Func<T, Task<Boolean>>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_IsNoneWhenAsync_System_Func__0_System_Threading_Tasks_Task_System_Boolean___
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.IsNoneWhenAsync(System.Func{`0,System.Threading.Tasks.Task{System.Boolean}})
+  name.vb: IsNoneWhenAsync(Func(Of T, Task(Of Boolean)))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.IsNoneWhenAsync(System.Func<T, System.Threading.Tasks.Task<System.Boolean>>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).IsNoneWhenAsync(System.Func(Of T, System.Threading.Tasks.Task(Of System.Boolean)))
+  nameWithType: IAsyncMaybe<T>.IsNoneWhenAsync(Func<T, Task<Boolean>>)
+  nameWithType.vb: IAsyncMaybe(Of T).IsNoneWhenAsync(Func(Of T, Task(Of Boolean)))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.IsNoneWhenAsync*
+  name: IsNoneWhenAsync
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_IsNoneWhenAsync_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncMaybe`1.IsNoneWhenAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.IsNoneWhenAsync
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).IsNoneWhenAsync
+  nameWithType: IAsyncMaybe<T>.IsNoneWhenAsync
+  nameWithType.vb: IAsyncMaybe(Of T).IsNoneWhenAsync
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.Map*
+  name: Map
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_Map_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncMaybe`1.Map
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.Map
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).Map
+  nameWithType: IAsyncMaybe<T>.Map
+  nameWithType.vb: IAsyncMaybe(Of T).Map
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.Map``1(System.Func{`0,``0})
+  name: Map<TResult>(Func<T, TResult>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_Map__1_System_Func__0___0__
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.Map``1(System.Func{`0,``0})
+  name.vb: Map(Of TResult)(Func(Of T, TResult))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.Map<TResult>(System.Func<T, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).Map(Of TResult)(System.Func(Of T, TResult))
+  nameWithType: IAsyncMaybe<T>.Map<TResult>(Func<T, TResult>)
+  nameWithType.vb: IAsyncMaybe(Of T).Map(Of TResult)(Func(Of T, TResult))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.MapAsync*
+  name: MapAsync
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_MapAsync_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncMaybe`1.MapAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.MapAsync
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).MapAsync
+  nameWithType: IAsyncMaybe<T>.MapAsync
+  nameWithType.vb: IAsyncMaybe(Of T).MapAsync
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.MapAsync``1(System.Func{`0,System.Threading.Tasks.Task{``0}})
+  name: MapAsync<TResult>(Func<T, Task<TResult>>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_MapAsync__1_System_Func__0_System_Threading_Tasks_Task___0___
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.MapAsync``1(System.Func{`0,System.Threading.Tasks.Task{``0}})
+  name.vb: MapAsync(Of TResult)(Func(Of T, Task(Of TResult)))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.MapAsync<TResult>(System.Func<T, System.Threading.Tasks.Task<TResult>>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).MapAsync(Of TResult)(System.Func(Of T, System.Threading.Tasks.Task(Of TResult)))
+  nameWithType: IAsyncMaybe<T>.MapAsync<TResult>(Func<T, Task<TResult>>)
+  nameWithType.vb: IAsyncMaybe(Of T).MapAsync(Of TResult)(Func(Of T, Task(Of TResult)))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.Match(System.Action{`0},System.Action)
+  name: Match(Action<T>, Action)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_Match_System_Action__0__System_Action_
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.Match(System.Action{`0},System.Action)
+  name.vb: Match(Action(Of T), Action)
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.Match(System.Action<T>, System.Action)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).Match(System.Action(Of T), System.Action)
+  nameWithType: IAsyncMaybe<T>.Match(Action<T>, Action)
+  nameWithType.vb: IAsyncMaybe(Of T).Match(Action(Of T), Action)
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.Match*
+  name: Match
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_Match_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncMaybe`1.Match
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.Match
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).Match
+  nameWithType: IAsyncMaybe<T>.Match
+  nameWithType.vb: IAsyncMaybe(Of T).Match
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.Match``1(System.Func{`0,``0},System.Func{``0})
+  name: Match<TResult>(Func<T, TResult>, Func<TResult>)
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_Match__1_System_Func__0___0__System_Func___0__
+  commentId: M:Lemonad.ErrorHandling.IAsyncMaybe`1.Match``1(System.Func{`0,``0},System.Func{``0})
+  name.vb: Match(Of TResult)(Func(Of T, TResult), Func(Of TResult))
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.Match<TResult>(System.Func<T, TResult>, System.Func<TResult>)
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).Match(Of TResult)(System.Func(Of T, TResult), System.Func(Of TResult))
+  nameWithType: IAsyncMaybe<T>.Match<TResult>(Func<T, TResult>, Func<TResult>)
+  nameWithType.vb: IAsyncMaybe(Of T).Match(Of TResult)(Func(Of T, TResult), Func(Of TResult))
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.Value
+  name: Value
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_Value
+  commentId: P:Lemonad.ErrorHandling.IAsyncMaybe`1.Value
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.Value
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).Value
+  nameWithType: IAsyncMaybe<T>.Value
+  nameWithType.vb: IAsyncMaybe(Of T).Value
+- uid: Lemonad.ErrorHandling.IAsyncMaybe`1.Value*
+  name: Value
+  href: api/Lemonad.ErrorHandling.IAsyncMaybe-1.html#Lemonad_ErrorHandling_IAsyncMaybe_1_Value_
+  commentId: Overload:Lemonad.ErrorHandling.IAsyncMaybe`1.Value
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IAsyncMaybe<T>.Value
+  fullName.vb: Lemonad.ErrorHandling.IAsyncMaybe(Of T).Value
+  nameWithType: IAsyncMaybe<T>.Value
+  nameWithType.vb: IAsyncMaybe(Of T).Value
 - uid: Lemonad.ErrorHandling.IAsyncResult`2
   name: IAsyncResult<T, TError>
   href: api/Lemonad.ErrorHandling.IAsyncResult-2.html
@@ -1874,6 +2391,24 @@ references:
   fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).Do
   nameWithType: IMaybe<T>.Do
   nameWithType.vb: IMaybe(Of T).Do
+- uid: Lemonad.ErrorHandling.IMaybe`1.DoAsync(System.Func{System.Threading.Tasks.Task})
+  name: DoAsync(Func<Task>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_DoAsync_System_Func_System_Threading_Tasks_Task__
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.DoAsync(System.Func{System.Threading.Tasks.Task})
+  name.vb: DoAsync(Func(Of Task))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.DoAsync(System.Func<System.Threading.Tasks.Task>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).DoAsync(System.Func(Of System.Threading.Tasks.Task))
+  nameWithType: IMaybe<T>.DoAsync(Func<Task>)
+  nameWithType.vb: IMaybe(Of T).DoAsync(Func(Of Task))
+- uid: Lemonad.ErrorHandling.IMaybe`1.DoAsync*
+  name: DoAsync
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_DoAsync_
+  commentId: Overload:Lemonad.ErrorHandling.IMaybe`1.DoAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.DoAsync
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).DoAsync
+  nameWithType: IMaybe<T>.DoAsync
+  nameWithType.vb: IMaybe(Of T).DoAsync
 - uid: Lemonad.ErrorHandling.IMaybe`1.DoWith(System.Action{`0})
   name: DoWith(Action<T>)
   href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_DoWith_System_Action__0__
@@ -1892,6 +2427,24 @@ references:
   fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).DoWith
   nameWithType: IMaybe<T>.DoWith
   nameWithType.vb: IMaybe(Of T).DoWith
+- uid: Lemonad.ErrorHandling.IMaybe`1.DoWithAsync(System.Func{`0,System.Threading.Tasks.Task})
+  name: DoWithAsync(Func<T, Task>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_DoWithAsync_System_Func__0_System_Threading_Tasks_Task__
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.DoWithAsync(System.Func{`0,System.Threading.Tasks.Task})
+  name.vb: DoWithAsync(Func(Of T, Task))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.DoWithAsync(System.Func<T, System.Threading.Tasks.Task>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).DoWithAsync(System.Func(Of T, System.Threading.Tasks.Task))
+  nameWithType: IMaybe<T>.DoWithAsync(Func<T, Task>)
+  nameWithType.vb: IMaybe(Of T).DoWithAsync(Func(Of T, Task))
+- uid: Lemonad.ErrorHandling.IMaybe`1.DoWithAsync*
+  name: DoWithAsync
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_DoWithAsync_
+  commentId: Overload:Lemonad.ErrorHandling.IMaybe`1.DoWithAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.DoWithAsync
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).DoWithAsync
+  nameWithType: IMaybe<T>.DoWithAsync
+  nameWithType.vb: IMaybe(Of T).DoWithAsync
 - uid: Lemonad.ErrorHandling.IMaybe`1.Filter(System.Func{`0,System.Boolean})
   name: Filter(Func<T, Boolean>)
   href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_Filter_System_Func__0_System_Boolean__
@@ -1910,6 +2463,24 @@ references:
   fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).Filter
   nameWithType: IMaybe<T>.Filter
   nameWithType.vb: IMaybe(Of T).Filter
+- uid: Lemonad.ErrorHandling.IMaybe`1.FilterAsync(System.Func{`0,System.Threading.Tasks.Task{System.Boolean}})
+  name: FilterAsync(Func<T, Task<Boolean>>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_FilterAsync_System_Func__0_System_Threading_Tasks_Task_System_Boolean___
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.FilterAsync(System.Func{`0,System.Threading.Tasks.Task{System.Boolean}})
+  name.vb: FilterAsync(Func(Of T, Task(Of Boolean)))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.FilterAsync(System.Func<T, System.Threading.Tasks.Task<System.Boolean>>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).FilterAsync(System.Func(Of T, System.Threading.Tasks.Task(Of System.Boolean)))
+  nameWithType: IMaybe<T>.FilterAsync(Func<T, Task<Boolean>>)
+  nameWithType.vb: IMaybe(Of T).FilterAsync(Func(Of T, Task(Of Boolean)))
+- uid: Lemonad.ErrorHandling.IMaybe`1.FilterAsync*
+  name: FilterAsync
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_FilterAsync_
+  commentId: Overload:Lemonad.ErrorHandling.IMaybe`1.FilterAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.FilterAsync
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).FilterAsync
+  nameWithType: IMaybe<T>.FilterAsync
+  nameWithType.vb: IMaybe(Of T).FilterAsync
 - uid: Lemonad.ErrorHandling.IMaybe`1.FlatMap*
   name: FlatMap
   href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_FlatMap_
@@ -1955,6 +2526,51 @@ references:
   fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).FlatMap(Of TSelector, TResult)(System.Func(Of T, System.Nullable(Of TSelector)), System.Func(Of T, TSelector, TResult))
   nameWithType: IMaybe<T>.FlatMap<TSelector, TResult>(Func<T, Nullable<TSelector>>, Func<T, TSelector, TResult>)
   nameWithType.vb: IMaybe(Of T).FlatMap(Of TSelector, TResult)(Func(Of T, Nullable(Of TSelector)), Func(Of T, TSelector, TResult))
+- uid: Lemonad.ErrorHandling.IMaybe`1.FlatMapAsync*
+  name: FlatMapAsync
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_FlatMapAsync_
+  commentId: Overload:Lemonad.ErrorHandling.IMaybe`1.FlatMapAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.FlatMapAsync
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).FlatMapAsync
+  nameWithType: IMaybe<T>.FlatMapAsync
+  nameWithType.vb: IMaybe(Of T).FlatMapAsync
+- uid: Lemonad.ErrorHandling.IMaybe`1.FlatMapAsync``1(System.Func{`0,Lemonad.ErrorHandling.IAsyncMaybe{``0}})
+  name: FlatMapAsync<TResult>(Func<T, IAsyncMaybe<TResult>>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_FlatMapAsync__1_System_Func__0_Lemonad_ErrorHandling_IAsyncMaybe___0___
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.FlatMapAsync``1(System.Func{`0,Lemonad.ErrorHandling.IAsyncMaybe{``0}})
+  name.vb: FlatMapAsync(Of TResult)(Func(Of T, IAsyncMaybe(Of TResult)))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.FlatMapAsync<TResult>(System.Func<T, Lemonad.ErrorHandling.IAsyncMaybe<TResult>>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).FlatMapAsync(Of TResult)(System.Func(Of T, Lemonad.ErrorHandling.IAsyncMaybe(Of TResult)))
+  nameWithType: IMaybe<T>.FlatMapAsync<TResult>(Func<T, IAsyncMaybe<TResult>>)
+  nameWithType.vb: IMaybe(Of T).FlatMapAsync(Of TResult)(Func(Of T, IAsyncMaybe(Of TResult)))
+- uid: Lemonad.ErrorHandling.IMaybe`1.FlatMapAsync``1(System.Func{`0,System.Threading.Tasks.Task{System.Nullable{``0}}})
+  name: FlatMapAsync<TResult>(Func<T, Task<Nullable<TResult>>>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_FlatMapAsync__1_System_Func__0_System_Threading_Tasks_Task_System_Nullable___0____
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.FlatMapAsync``1(System.Func{`0,System.Threading.Tasks.Task{System.Nullable{``0}}})
+  name.vb: FlatMapAsync(Of TResult)(Func(Of T, Task(Of Nullable(Of TResult))))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.FlatMapAsync<TResult>(System.Func<T, System.Threading.Tasks.Task<System.Nullable<TResult>>>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).FlatMapAsync(Of TResult)(System.Func(Of T, System.Threading.Tasks.Task(Of System.Nullable(Of TResult))))
+  nameWithType: IMaybe<T>.FlatMapAsync<TResult>(Func<T, Task<Nullable<TResult>>>)
+  nameWithType.vb: IMaybe(Of T).FlatMapAsync(Of TResult)(Func(Of T, Task(Of Nullable(Of TResult))))
+- uid: Lemonad.ErrorHandling.IMaybe`1.FlatMapAsync``2(System.Func{`0,Lemonad.ErrorHandling.IAsyncMaybe{``0}},System.Func{`0,``0,``1})
+  name: FlatMapAsync<TSelector, TResult>(Func<T, IAsyncMaybe<TSelector>>, Func<T, TSelector, TResult>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_FlatMapAsync__2_System_Func__0_Lemonad_ErrorHandling_IAsyncMaybe___0___System_Func__0___0___1__
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.FlatMapAsync``2(System.Func{`0,Lemonad.ErrorHandling.IAsyncMaybe{``0}},System.Func{`0,``0,``1})
+  name.vb: FlatMapAsync(Of TSelector, TResult)(Func(Of T, IAsyncMaybe(Of TSelector)), Func(Of T, TSelector, TResult))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.FlatMapAsync<TSelector, TResult>(System.Func<T, Lemonad.ErrorHandling.IAsyncMaybe<TSelector>>, System.Func<T, TSelector, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).FlatMapAsync(Of TSelector, TResult)(System.Func(Of T, Lemonad.ErrorHandling.IAsyncMaybe(Of TSelector)), System.Func(Of T, TSelector, TResult))
+  nameWithType: IMaybe<T>.FlatMapAsync<TSelector, TResult>(Func<T, IAsyncMaybe<TSelector>>, Func<T, TSelector, TResult>)
+  nameWithType.vb: IMaybe(Of T).FlatMapAsync(Of TSelector, TResult)(Func(Of T, IAsyncMaybe(Of TSelector)), Func(Of T, TSelector, TResult))
+- uid: Lemonad.ErrorHandling.IMaybe`1.FlatMapAsync``2(System.Func{`0,System.Threading.Tasks.Task{System.Nullable{``0}}},System.Func{`0,``0,``1})
+  name: FlatMapAsync<TSelector, TResult>(Func<T, Task<Nullable<TSelector>>>, Func<T, TSelector, TResult>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_FlatMapAsync__2_System_Func__0_System_Threading_Tasks_Task_System_Nullable___0____System_Func__0___0___1__
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.FlatMapAsync``2(System.Func{`0,System.Threading.Tasks.Task{System.Nullable{``0}}},System.Func{`0,``0,``1})
+  name.vb: FlatMapAsync(Of TSelector, TResult)(Func(Of T, Task(Of Nullable(Of TSelector))), Func(Of T, TSelector, TResult))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.FlatMapAsync<TSelector, TResult>(System.Func<T, System.Threading.Tasks.Task<System.Nullable<TSelector>>>, System.Func<T, TSelector, TResult>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).FlatMapAsync(Of TSelector, TResult)(System.Func(Of T, System.Threading.Tasks.Task(Of System.Nullable(Of TSelector))), System.Func(Of T, TSelector, TResult))
+  nameWithType: IMaybe<T>.FlatMapAsync<TSelector, TResult>(Func<T, Task<Nullable<TSelector>>>, Func<T, TSelector, TResult>)
+  nameWithType.vb: IMaybe(Of T).FlatMapAsync(Of TSelector, TResult)(Func(Of T, Task(Of Nullable(Of TSelector))), Func(Of T, TSelector, TResult))
 - uid: Lemonad.ErrorHandling.IMaybe`1.Flatten*
   name: Flatten
   href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_Flatten_
@@ -1973,6 +2589,24 @@ references:
   fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).Flatten(Of TResult)(System.Func(Of T, Lemonad.ErrorHandling.IMaybe(Of TResult)))
   nameWithType: IMaybe<T>.Flatten<TResult>(Func<T, IMaybe<TResult>>)
   nameWithType.vb: IMaybe(Of T).Flatten(Of TResult)(Func(Of T, IMaybe(Of TResult)))
+- uid: Lemonad.ErrorHandling.IMaybe`1.FlattenAsync*
+  name: FlattenAsync
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_FlattenAsync_
+  commentId: Overload:Lemonad.ErrorHandling.IMaybe`1.FlattenAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.FlattenAsync
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).FlattenAsync
+  nameWithType: IMaybe<T>.FlattenAsync
+  nameWithType.vb: IMaybe(Of T).FlattenAsync
+- uid: Lemonad.ErrorHandling.IMaybe`1.FlattenAsync``1(System.Func{`0,Lemonad.ErrorHandling.IAsyncMaybe{``0}})
+  name: FlattenAsync<TResult>(Func<T, IAsyncMaybe<TResult>>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_FlattenAsync__1_System_Func__0_Lemonad_ErrorHandling_IAsyncMaybe___0___
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.FlattenAsync``1(System.Func{`0,Lemonad.ErrorHandling.IAsyncMaybe{``0}})
+  name.vb: FlattenAsync(Of TResult)(Func(Of T, IAsyncMaybe(Of TResult)))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.FlattenAsync<TResult>(System.Func<T, Lemonad.ErrorHandling.IAsyncMaybe<TResult>>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).FlattenAsync(Of TResult)(System.Func(Of T, Lemonad.ErrorHandling.IAsyncMaybe(Of TResult)))
+  nameWithType: IMaybe<T>.FlattenAsync<TResult>(Func<T, IAsyncMaybe<TResult>>)
+  nameWithType.vb: IMaybe(Of T).FlattenAsync(Of TResult)(Func(Of T, IAsyncMaybe(Of TResult)))
 - uid: Lemonad.ErrorHandling.IMaybe`1.HasValue
   name: HasValue
   href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_HasValue
@@ -2008,6 +2642,24 @@ references:
   fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).IsNoneWhen
   nameWithType: IMaybe<T>.IsNoneWhen
   nameWithType.vb: IMaybe(Of T).IsNoneWhen
+- uid: Lemonad.ErrorHandling.IMaybe`1.IsNoneWhenAsync(System.Func{`0,System.Threading.Tasks.Task{System.Boolean}})
+  name: IsNoneWhenAsync(Func<T, Task<Boolean>>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_IsNoneWhenAsync_System_Func__0_System_Threading_Tasks_Task_System_Boolean___
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.IsNoneWhenAsync(System.Func{`0,System.Threading.Tasks.Task{System.Boolean}})
+  name.vb: IsNoneWhenAsync(Func(Of T, Task(Of Boolean)))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.IsNoneWhenAsync(System.Func<T, System.Threading.Tasks.Task<System.Boolean>>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).IsNoneWhenAsync(System.Func(Of T, System.Threading.Tasks.Task(Of System.Boolean)))
+  nameWithType: IMaybe<T>.IsNoneWhenAsync(Func<T, Task<Boolean>>)
+  nameWithType.vb: IMaybe(Of T).IsNoneWhenAsync(Func(Of T, Task(Of Boolean)))
+- uid: Lemonad.ErrorHandling.IMaybe`1.IsNoneWhenAsync*
+  name: IsNoneWhenAsync
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_IsNoneWhenAsync_
+  commentId: Overload:Lemonad.ErrorHandling.IMaybe`1.IsNoneWhenAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.IsNoneWhenAsync
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).IsNoneWhenAsync
+  nameWithType: IMaybe<T>.IsNoneWhenAsync
+  nameWithType.vb: IMaybe(Of T).IsNoneWhenAsync
 - uid: Lemonad.ErrorHandling.IMaybe`1.Map*
   name: Map
   href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_Map_
@@ -2026,6 +2678,24 @@ references:
   fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).Map(Of TResult)(System.Func(Of T, TResult))
   nameWithType: IMaybe<T>.Map<TResult>(Func<T, TResult>)
   nameWithType.vb: IMaybe(Of T).Map(Of TResult)(Func(Of T, TResult))
+- uid: Lemonad.ErrorHandling.IMaybe`1.MapAsync*
+  name: MapAsync
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_MapAsync_
+  commentId: Overload:Lemonad.ErrorHandling.IMaybe`1.MapAsync
+  isSpec: "True"
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.MapAsync
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).MapAsync
+  nameWithType: IMaybe<T>.MapAsync
+  nameWithType.vb: IMaybe(Of T).MapAsync
+- uid: Lemonad.ErrorHandling.IMaybe`1.MapAsync``1(System.Func{`0,System.Threading.Tasks.Task{``0}})
+  name: MapAsync<TResult>(Func<T, Task<TResult>>)
+  href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_MapAsync__1_System_Func__0_System_Threading_Tasks_Task___0___
+  commentId: M:Lemonad.ErrorHandling.IMaybe`1.MapAsync``1(System.Func{`0,System.Threading.Tasks.Task{``0}})
+  name.vb: MapAsync(Of TResult)(Func(Of T, Task(Of TResult)))
+  fullName: Lemonad.ErrorHandling.IMaybe<T>.MapAsync<TResult>(System.Func<T, System.Threading.Tasks.Task<TResult>>)
+  fullName.vb: Lemonad.ErrorHandling.IMaybe(Of T).MapAsync(Of TResult)(System.Func(Of T, System.Threading.Tasks.Task(Of TResult)))
+  nameWithType: IMaybe<T>.MapAsync<TResult>(Func<T, Task<TResult>>)
+  nameWithType.vb: IMaybe(Of T).MapAsync(Of TResult)(Func(Of T, Task(Of TResult)))
 - uid: Lemonad.ErrorHandling.IMaybe`1.Match(System.Action{`0},System.Action)
   name: Match(Action<T>, Action)
   href: api/Lemonad.ErrorHandling.IMaybe-1.html#Lemonad_ErrorHandling_IMaybe_1_Match_System_Action__0__System_Action_
