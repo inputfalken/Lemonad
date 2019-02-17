@@ -8,13 +8,14 @@ using Lemonad.ErrorHandling.Internal.Either;
 
 namespace Lemonad.ErrorHandling.Internal {
     internal class Result<T, TError> : IResult<T, TError> {
-        private Result(in T value, in TError error, bool hasError, bool hasValue)
-            => Either = new NonNullableEither<T, TError>(
+        internal Result(in T value, in TError error, bool hasError, bool hasValue) : this(
+            new NonNullableEither<T, TError>(
                 in value,
                 in error,
                 hasError,
                 hasValue
-            );
+            )
+        ) { }
 
         private Result(in IEither<T, TError> either)
             => Either = new NonNullableEither<T, TError>(
@@ -586,25 +587,9 @@ namespace Lemonad.ErrorHandling.Internal {
             return this.ToAsyncResult().ZipAsync(other, selector);
         }
 
-        internal static IResult<T, TError> ErrorFactory(in TError error)
-            => new Result<T, TError>(
-                default,
-                in error,
-                true,
-                false
-            );
-
         internal static IResult<T, TError> Factory(IEither<T, TError> either) => new Result<T, TError>(either);
 
         public override string ToString() =>
             $"{(Either.HasValue ? "Ok" : "Error")} ==> {typeof(Result<T, TError>).ToHumanString()}{StringFunctions.PrettyTypeString(Either.HasValue ? (object) Either.Value : Either.Error)}";
-
-        internal static IResult<T, TError> ValueFactory(in T element)
-            => new Result<T, TError>(
-                in element,
-                default,
-                false,
-                true
-            );
     }
 }

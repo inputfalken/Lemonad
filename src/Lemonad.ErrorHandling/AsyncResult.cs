@@ -1,4 +1,5 @@
-﻿using Lemonad.ErrorHandling.Internal;
+﻿using System.Threading.Tasks;
+using Lemonad.ErrorHandling.Internal;
 
 namespace Lemonad.ErrorHandling {
     /// <summary>
@@ -17,8 +18,12 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TError">
         ///     The <typeparamref name="TError" /> of <see cref="IAsyncResult{T,TError}" />.
         /// </typeparam>
-        public static IAsyncResult<T, TError> Error<T, TError>(TError error) =>
-            AsyncResult<T, TError>.ErrorFactory(in error);
+        public static IAsyncResult<T, TError> Error<T, TError>(TError error)
+            => AsyncResult<T, TError>.Factory(
+                Task.FromResult(
+                    Result.Error<T, TError>(error).Either
+                )
+            );
 
         /// <summary>
         ///     Creates a <see cref="IAsyncResult{T,TError}" /> with <typeparamref name="T" />.
@@ -32,7 +37,11 @@ namespace Lemonad.ErrorHandling {
         /// <typeparam name="TError">
         ///     The <typeparamref name="TError" /> of <see cref="IAsyncResult{T,TError}" />.
         /// </typeparam>
-        public static IAsyncResult<T, TError> Value<T, TError>(T element) =>
-            AsyncResult<T, TError>.ValueFactory(in element);
+        public static IAsyncResult<T, TError> Value<T, TError>(T element)
+            => AsyncResult<T, TError>.Factory(
+                Task.FromResult(
+                    Result.Value<T, TError>(element).Either
+                )
+            );
     }
 }
