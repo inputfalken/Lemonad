@@ -4,7 +4,6 @@ using Lemonad.ErrorHandling.Exceptions;
 using Lemonad.ErrorHandling.Extensions.AsyncResult;
 using Lemonad.ErrorHandling.Extensions.Maybe;
 using Lemonad.ErrorHandling.Extensions.Result;
-using Index = Lemonad.ErrorHandling.Extensions.Maybe.Index;
 
 namespace Lemonad.ErrorHandling.Internal {
     internal readonly struct Maybe<T> : IMaybe<T> {
@@ -74,7 +73,7 @@ namespace Lemonad.ErrorHandling.Internal {
         public IMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> selector) => selector is null
             ? throw new ArgumentNullException(nameof(selector))
             : _result
-                .FlatMap(x => Index.ToResult(selector(x), Unit.Selector)).ToMaybe();
+                .FlatMap(x => Extensions.Maybe.Index.ToResult(selector(x), Unit.Selector)).ToMaybe();
 
         public IAsyncMaybe<TResult> FlatMapAsync<TResult>(Func<T, IAsyncMaybe<TResult>> selector)
             => _result.FlatMapAsync(
@@ -133,8 +132,8 @@ namespace Lemonad.ErrorHandling.Internal {
 
         public IMaybe<T> Flatten<TResult>(Func<T, IMaybe<TResult>> selector) => selector is null
             ? throw new ArgumentNullException(nameof(selector))
-            : _result.Flatten(x =>
-                Index.ToResult(selector(x), Unit.Selector)).ToMaybe();
+            : _result.Flatten(x => Lemonad.ErrorHandling.Extensions.Maybe.Index.ToResult(selector(x), Unit.Selector))
+                .ToMaybe();
 
         public IMaybe<TResult> FlatMap<TSelector, TResult>(
             Func<T, TSelector?> selector,

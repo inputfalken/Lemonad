@@ -41,7 +41,7 @@ namespace Lemonad.ErrorHandling.Internal {
 
         public IAsyncMaybe<TResult> FlatMap<TResult>(Func<T, IMaybe<TResult>> selector) => selector is null
             ? throw new ArgumentNullException(nameof(selector))
-            : _asyncResult.FlatMap(x => Index.ToResult(selector(x), Unit.Selector)).ToAsyncMaybe();
+            : _asyncResult.FlatMap(x => Extensions.Maybe.Index.ToResult(selector(x), Unit.Selector)).ToAsyncMaybe();
 
         public IAsyncMaybe<TResult> FlatMap<TResult>(Func<T, TResult?> selector) where TResult : struct =>
             selector is null
