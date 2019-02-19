@@ -17,8 +17,4 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>bin\Release\netstandard2.0\Lemonad.ErrorHandling.xml</DocumentationFile>
   </PropertyGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\AsyncMaybe\Enumerable" />
-    <Folder Include="Extensions\AsyncMaybe\Task" />
-  </ItemGroup>
 </Project>
