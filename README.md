@@ -13,14 +13,18 @@ approach to problem solving by using various
 [HOF's](https://en.wikipedia.org/wiki/Higher-order_function#C#)
 to achieve cleaner code bases & code which is easier to think about.
 
-## `IResult<T, TError>`
+## Data structures
+
+### `IResult<out T, TError>`
 
 One value will always be present. Either it's the
 value to the **left** (`T`) or the value to the **right** (`TError`).
 The value to the Left is considered **successfull**
 and the right value is considered to be a **failure**.
 
-### Example program 
+There's also an asynchronous version of `IResult<out T, TError>` available called `IAsyncResult<T out, TError>`
+
+#### Example program 
 
 ```csharp
 internal static class Program {
@@ -67,14 +71,16 @@ internal static class Program {
 }
 ```
 
-For more information about how to use `Result<T, TError`, visit [this](https://fsharpforfunandprofit.com/rop/) article about **railway oriented programming**.
+For more information about how to use `IResult<out T, TError`, visit [this](https://fsharpforfunandprofit.com/rop/) article about **railway oriented programming**.
 
-## `IMaybe<T>`
+### `IMaybe<out T>`
 
 Works like `IResult<T, TError>` but there's no `TError` available.
 So you might have a value (`T`) present.
 
-### Example program 
+There's also an asynchronous version of `IMaybe<out T>` available called `IAsyncMaybe<T out>`
+
+#### Example program 
 
 ``` csharp
 internal static class Program {
@@ -103,12 +109,6 @@ internal static class Program {
 
 ```
 
-## Supported data types
-
-* `IResult<out T, TError>`
-* `IAsyncResult<out T, TError>`
-* `IMaybe<out T>`
-* `IAsyncMaybe<out T>`
 
 The out word means that they are covariant.
 For more info please visit the article [Variance in Generic Interfaces (C#)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/covariance-contravariance/variance-in-generic-interfaces)
