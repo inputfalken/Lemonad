@@ -8,7 +8,7 @@ using Lemonad.ErrorHandling.Extensions.Result.Task;
 
 namespace ReadFileAsync {
     internal static partial class Program {
-        private static void LogFatal(string message, Exception exception) {
+        private static void LogException(string message, Exception exception) {
             // Log fatal somewhere...
         }
 
@@ -55,7 +55,7 @@ namespace ReadFileAsync {
                 return Result.Value<string, ExitCode>("Successfully precessed file.");
             }
             catch (Exception e) {
-                LogFatal($"Could not write to file {filePath}.", e);
+                LogException($"Could not write to file {filePath}.", e);
                 // Return an error indicating a failure.
                 return Result.Error<string, ExitCode>(ExitCode.FailedWritingText);
             }
