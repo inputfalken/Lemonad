@@ -24,52 +24,6 @@ and the right value is considered to be a **failure**.
 
 There's also an asynchronous version of `IResult<out T, TError>` available called `IAsyncResult<T out, TError>`
 
-#### Example program 
-
-```csharp
-internal static class Program {
-  private static int Main(string[] args) {
-      return Validate(Console.ReadLine())
-          .Match(
-              x => (ExitCode: 0, Message: x),
-              x => (ExitCode: (int) x, Message: ResolveErrorMessage(x))
-          );
-  }
-
-  // Create the error message
-  private static string ResolveErrorMessage(ExitCode code) {
-      switch (code) {
-          case ExitCode.FileNotFound:
-              return "File not found.";
-          case ExitCode.InvalidFileContent:
-              return "Invalid file content.";
-          case ExitCode.InvalidFileExtension:
-              return "Invalid file extension.";
-          case ExitCode.FailedWritingText:
-              return "Could not write to file, try running again.";
-          default:
-              throw new ArgumentOutOfRangeException(nameof(code), code, null);
-      }
-  }
-
-  // Validate the input.
-  private static IResult<string, ExitCode> Validate(string input) {
-      // These expressions will be executed as long as the input is considered ok.
-      return Result.Value<string, ExitCode>(input) // Initialize an IResult<T, TError>
-          .IsErrorWhen(string.IsNullOrWhiteSpace, (string _) => ExitCode.IsNullOrEmpty) // Verify that input is not null or white space, return an error as exitcode otherwise.
-          .Map((string x) => x.Trim()) // Trim the potential input
-          .IsErrorWhen((string s) => s.Any(char.IsUpper), (string _) => ExitCode.IsUpperCase) // Verify that input does not have any uppercased letter, return an error as exitcode otherwise.
-          .IsErrorWhen((string x) => x.Any(char.IsSymbol), (string _) => ExitCode.IsSymbol); // Verify that input does not have any symbols, return an error as exitcode otherwise.
-  }
-
-  private enum ExitCode {
-      IsNullOrEmpty = 1,
-      IsUpperCase = 2,
-      IsSymbol = 3,
-      Unhandled = 4
-  }
-}
-```
 
 For more information about how to use `IResult<out T, TError`, visit [this](https://fsharpforfunandprofit.com/rop/) article about **railway oriented programming**.
 
@@ -80,35 +34,7 @@ So you might have a value (`T`) present.
 
 There's also an asynchronous version of `IMaybe<out T>` available called `IAsyncMaybe<T out>`
 
-#### Example program 
 
-``` csharp
-internal static class Program {
-    private static int Main(string[] args) {
-        return Validate(Console.ReadLine())
-            .Match((string x) => {
-                // The successful validation case
-                Console.WriteLine($"Approved input '{x}'");
-                return 0;
-            }, () => {
-                // The failed validation case
-                Console.WriteLine("Error: Something went wrong");
-                return 1;
-            });
-    }
-    // Validate the input
-    private static IMaybe<string> Validate(string input) {
-        // These expressions will be executed as long as the input is considered ok.
-        return Maybe.Value(input)
-            .IsNoneWhen(string.IsNullOrWhiteSpace) // Verify that input is not null or white space.
-            .Map((string x) => x.Trim()) // Trim the potential input
-            .IsNoneWhen((string s) => s.Any(char.IsUpper)) // Verify that input does not have any uppercased
-            .IsNoneWhen((string x) => x.Any(char.IsSymbol));  // Verify that input does not have any symbols.
-    }
-}
+### Examples
 
-```
-
-
-The out word means that they are covariant.
-For more info please visit the article [Variance in Generic Interfaces (C#)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/covariance-contravariance/variance-in-generic-interfaces)
+Check the [samples](https://github.com/inputfalken/Lemonad/tree/master/samples)
